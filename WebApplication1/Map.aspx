@@ -49,6 +49,9 @@
             padding: 0;
             font-size: 1em;
         }
+
+    
+
     </style>
 
 
@@ -70,10 +73,20 @@
             <section class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h1>Map Location</h1>
+                        <div class="col-sm-8">
+                            <i style="font-size:16px; padding-top: 5px; color: black;">Chi tiết bàn/phòng : </i> <b style="font-size:14px; padding-top:5px; color:red" class="td_menu"></b> / Time:
+                            <b style="font-size: 14px; color: blue" class="thoigiandung"></b>..........
+                            <b style="padding-right: 10px; margin-left: 10px; margin-top: 5px;">Giờ vào:</b>
+                            <input id="checkinput1" style="width: 50px; margin-top: 10px;" name="checkinput1" value=""/>
+                            <b style="padding-right: 12px; margin-left: 10px;">Hình thức nghỉ:</b>
+                            <input id="stylerender" style="width: 50px; " name="stylerender" value="" />
+                            <b style="padding-right: 10px; margin-left: 10px;">Loại phòng:</b>
+                            <input id="styleroom" style="width: 50px; " name="styleroom" value=""/>
+                            <b style="padding-right: 10px; margin-left: 10px;">Ticket:</b>
+                            <input  style="width: 50px;margin-left: 30px;" id="songuoio" name="songuoio" />
                         </div>
-                        <div class="col-sm-6">
+
+                        <div class="col-sm-4">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
                                 <li class="breadcrumb-item active">Project Add</li>
@@ -89,8 +102,11 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="card card-primary">
+                            <%int i = 0; %>
+                                            <%foreach (System.Data.DataRow rows1 in dt_get_khuvuc0.Rows)
+                                                {%>   
                             <div class="card-header">
-                                <h3 class="card-title">Test</h3>
+                                <h3 class="card-title"><%=rows1["tenkhuvuc"].ToString() %></h3>
 
                                 <div class="card-tools">
                                     <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -99,33 +115,34 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                               
+                                
                                 <div class="wrapper" id="myList">
                                     <ul>
                                         <%int k = 0; %>
-                                        <%for (int i = 0; i < 10; i++)
+                                        <%foreach (System.Data.DataRow rows in dt_getinfo_phong.Rows)
                                             {%>
                                         <%k++;%>
                                         <li class="item" id="nametable_<%=k %>">
-                                            <p id="tenphong">P0<%=k %></p> 
-                                            <t id="trangthai" hidden>trangthai</t>
-                                            <d id="trangthaidatphong" hidden>trangthaidatphong</d>
-                                            <dp id="trangthaidonphong" hidden>trang thaidongphong</dp>
-                                            <lp id="loaiphong" style="float: left" hidden><label style="width: 100px; display: none;" name="loaiphong">loaiphong</label></lp>
-                                            <%--<img src="phongtrong" style="width:80px; height: 80px;">--%>
-
+                                             <img src="/static/images/phongtrong.png" style="float:left; margin-left:3px; margin-top:3px;width:50px; height: 50px;">
+                                            <p id="tenphong" style="float:left; margin-left: 5px; margin-top:3px;"><%=rows["tenphong"].ToString() %></p> 
+                                            <t id="trangthai" hidden><%=rows["trangthai"].ToString()%></t>
+                                            <d id="trangthaidatphong" hidden><%=rows["trangthaidatphong"].ToString() %></d>
+                                            <dp id="trangthaidonphong" hidden><%=rows["trangthaidonphong"].ToString() %></dp>
+                                            <lp id="loaiphong" style="float: left" hidden><label style="width: 100px; display: none;" name="loaiphong"><%=rows["loaiphongid"].ToString() %></label></lp>                                           
+                                            
+                                            <tc id="tiencoc" style="width: 160px; float: left" hidden> Đặt trước :<label
+                                                    style="width: 100px;display: none;" name="tiencoc">.../VNĐ</label>
+                                            </tc>
                                         </li>
+                                           
 
                                         <%} %>
                                     </ul>
                                 </div>
-
-
-
-
-
+                               
                             </div>
                             <!-- /.card-body -->
+                            <%} %>
                         </div>
                         <!-- /.card -->
                     </div>
@@ -141,9 +158,13 @@
 
                                 <i class="fa fa-times" style="font-size: 24px; padding-left: 20px;"></i><b class="delproduct" style="color: yellow; padding-left: 5px;">DELETE</b>
 
-                                <i class="fa fa-save" style="font-size: 24px; padding-left: 20px;"></i><b class="saveproduct" style="color: yellow; padding-left: 5px;">SAVE BILL</b>
+                                <i class="fa fa-save" style="font-size: 24px;color:blue; padding-left: 20px;"></i><b class="saveproduct" style="color: yellow; padding-left: 5px;">SAVE BILL</b>
 
                                 <i class="fa fa-plus-square" style="font-size: 24px; padding-left: 20px;"></i><b class="add_hanghoa" style="color: yellow; padding-left: 5px;">Add More</b>
+
+                                
+
+                               
 
                                 <div class="card-tools">
                                     <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -174,11 +195,11 @@
                                                 <label for="inmaunho" style="float: left; margin-top: 5px;">Inmaunho</label>
                                                 <input type="checkbox" id="inmaunho" name="inmaunho" checked>
                                             </td>
-                                        
+                                            
+                                            <%--<td style="padding-bottom: 10px; padding-right: 10px; padding-left: 10px;">
+                                                <input type="submit" value="Thanh toan" id="khachthanhtoan" class="btn btn-success float-right">  <%--class , id="saveproduct"
+                                            </td>--%>
                                     
-
-
-
 
                                         </tr>
                                     </tbody>
@@ -202,42 +223,51 @@
                                     </table>
                                 </div>
 
-                                <%-- <div class="row">
-                                    <div class="col-12">
-                                        <label for="tongtien">Total:</label>
-                                        <input type="text" id="tongtienid" class="form-control input-sm" name="fname" style="width: 50%" value="0">
-                                    </div>
-                                    <div class="col-12">
-                                        <input type="submit" value="Save" id="saveproduct" class="btn btn-success saveproduct float-right">
-                                    </div>
-                                </div>--%>
+                                 
 
                                 <div class="row">
-                                    <div class="col-3">
+                                    <div class="col-2">
                                         <label for="tongtien" style="float: left; margin-top: 5px;">Tong tien:</label>
                                         <input type="text" id="tongtienid" class="form-control input-sm" name="fname" style="float: left; margin-left: 10px;" value="0">
+                                                     <span style="float: left;padding-left: 20px; padding-top: 10px;">
+            <img src="/static/images/phongtrong.png" style="width:40px;height:30px;float: left;padding-right: 10px;">
+            <b style="font-size: 14px;">Bàn/Phòng trống</b>
+
+        </span>
                                     </div>
-                                    <div class="col-3">
+                                    <div class="col-2">
                                         <label for="tongtien" style="float: left; margin-top: 5px;">chiet khau</label>
                                         <input type="text" id="chietkhauid" class="form-control input-sm" name="fname" style="float: left; margin-left: 10px;" value="0">
-                                    </div>
-                                    
-                                </div>
-                                <div class="row">
-                                    <div class="col-3">
+                                         <span style="float: left;padding-left: 20px; padding-top: 10px;">
+            <img src="/static/images/cokhach.png" style="width:40px;height:30px;float: left;padding-right: 10px;">
+            <b style="font-size: 14px;">B/P có khách</b>
+        </span>
+                                    </div>                                                                    
+                                
+                                    <div class="col-2">
                                         <label for="tongtien" style="float: left; margin-top: 5px;">thanh toan</label>
-                                        <input type="text" id="thanhtoanid" class="form-control input-sm" name="fname" style="float: left; margin-left: 10px;" value="0">
+                                        <input type="text" id="thanhtoanid" class="form-control input-sm" name="fname" style="float: left; margin-left: 10px;" value="0">                                                                              
+                                         <span style="float: left;padding-left: 20px; padding-top: 10px;">
+            <img src="/static/images/phongdattruoc.png" style="width:40px;height:30px;float: left;padding-right: 10px;">
+            <b style="font-size: 14px;">B/P đặt trước</b>
+        </span>                                   
                                     </div>
-                                    <div class="col-3">
+                                    <div class="col-2">
                                         <label for="tongtien" style="float: left; margin-top: 5px; id="lblconlai" ">Conlai</label>
-                                        <input type="text" id="conlaiid" class="form-control input-sm" name="fname" style="float: left; margin-left: 10px;" value="0">
-                                    </div>
-                                    
-                                    <div class="col-3">
-                                        <input type="submit" value="Thanh toan" id="khachthanhtoan" class="btn btn-success float-right">  <%--class , id="saveproduct"--%>
+                                        <input type="text" id="conlaiid" class="form-control input-sm" name="fname" style="float: left; margin-left: 10px;" value="0">                                        
+        <span style="float: left;padding-left: 20px; padding-top: 10px;">
+            <img src="/static/images/chuadonphong.png" style="width:40px;height:30px;float: left;padding-right: 10px;">
+            <b style="font-size: 14px;">Chưa dọn B/P</b>
+        </span>
+
                                     </div>
                                      
+                                    <div class="col-2">
+                                        <input type="submit" value="Thanh toan" id="khachthanhtoan" class="btn btn-success float-right">  <%--class , id="saveproduct"--%>
+                                    </div>
+                                                                                                                                             
                                 </div>
+                                
 
 
     </div>
@@ -306,7 +336,7 @@
                                                         <div class="text-center" style="margin-bottom: 10px; margin-top: 10px;">
                                                             <mh><%=rows1["mahang"].ToString() %></mh> <br /> <dg><%=rows1["giaban"].ToString() %></dg> /VND
                                                             <input type="number" class="quantity form-control text-center" title="Số lượng" value="1" min="1" size="1" maxlength="2" id="quantity" name="quantity" ">                                                                                                                      
-                                                            <a href="#" class="btn btn-sm btn-primary button_addmenu" id="add_sanpham">
+                                                            <a href="#" class="button_addmenu btn btn-sm btn-primary" id="add_sanpham">
                                                                 Add
                                                             </a>
 
@@ -378,6 +408,25 @@
                 //$('#TOOLING_NO_ID').prop("readonly", true);
                 //$('#CustomTooling_ID').prop("readonly", true);
                 //$('#txt_ID').prop("readonly", true);
+
+                // phan render giao dien cac phong co khach va khong co khach
+                $("#myList UL LI").each(function () {
+                    //phong co khach
+                    if ($(this).find('#trangthai').text() == 1) {
+                        $(this).find("img").attr('src','/static/images/cokhach.png');
+                        //khoa chuc nang thue phong  **** xem lai chuc nang khoa
+                        //$('#myMenu').disableContextMenuItems('#thuephong');
+                    }
+                    // Trang thai dat phong
+                    if ($(this).find('#trangthai').text() == 0 && $(this).find('#trangthaidatphong').text() == 1) {
+                        $(this).find("img").attr('src','/static/images/phongdattruoc.png');
+                    }
+                    // Trang thai chua don phong
+                    if ($(this).find('#trangthaidonphong').text() == 1) {
+                        $(this).find("img").attr('src','/static/images/chuadonphong.png');
+                    }
+                });
+
                 SearchText();
 
                 $("#myList UL LI").each(function () {
@@ -465,17 +514,10 @@
                                             $('#tbnhaphang').append(newrow);
                                         }
 
-
                                         $('#tongtienid').val(tienhang);
                                         $('#thanhtoanid').val(tienhang);
                                         $('#chietkhauid').val(0);
-
-
                                     }
-
-
-
-
                                 }
                                 else {
                                     $('#tbnhaphang tr').remove();
@@ -564,8 +606,8 @@
 
             });
 
+            // nut ghi lai danh sach thuc don
             $('.saveproduct').click(function () {
-
                 //alert("ádfsa");
                 var itemdata = {};
                 var tenphong = $('#nametable').text();//dj('#name_room').text();
@@ -619,6 +661,12 @@
                         dataType: "json",
                         success: function (data) {
                             alert('Hàng hóa đã được thêm thành công!');
+                            $("#myList UL LI").each(function () {
+                                    var nameroom = $(this).find('#tenphong').text();
+                                    if (nameroom == tenphong) {
+                                        $(this).find("img").attr('src','/static/images/cokhach.png');
+                                    }
+                                })
                         },
                         error: function () {
                             //alert("No Match");
@@ -652,6 +700,38 @@
                 }
             });
 
+            // nut sua hoa don
+            $('.editproduct').click(function () {
+                        var tenphong = $('#name_room').text();
+                        var tongtienhang = parseInt($('#tongtienhang').val());
+                        $('.checkinput').each(function () {
+                            var chk = $(this).is(':checked');
+                            if (chk == true) {
+                                var mahangid = $(this).parent().parent().find('td').eq(0).text();
+                                var soluong = $(this).parent().parent().find('td').eq(1).text();
+                                var price = $(this).parent().parent().find('td').eq(3).text();
+                                tongtienhang = tongtienhang - price;
+                                $(this).parent().parent().remove();
+                                $('#tongtienhang').val(tongtienhang);
+                                $('#thanhtoanid').val(tongtienhang);
+
+                                $('#soluong').val(soluong);
+                                $('.ajax').val(mahangid);
+                                
+                                $('#soluong').focus();
+                                $('#soluong').select();
+
+                                //dj.getJSON('/modules/hotel/xulysuathucdon', {'tenphong': tenphong, 'mahang': mahangid, 'giaban': price}, function (rs) {
+                                //    if (rs.err === 0) {
+                                //        dj('#tongtienhang').val(rs.tienhang);
+                                //        dj('#soluong').val(soluong);
+                                //        dj('#ajax').val(mahangid);
+                                //   }
+                                //});
+                            }
+                        })
+                    });
+
 
             $("#MainContent_txt_doc").on('keyup', function (e) {
                 if ((e.key === 'Enter' || e.keyCode === 13)) {
@@ -659,6 +739,8 @@
                     $("#soluong").select();
                 }
             });
+
+           
 
             $('.button_addmenu').each(function () {
                 $(this).click(function () {                  
@@ -720,6 +802,7 @@
                                 tongtienhang += thanhtien;
                                 //alert(tongtienhang);
                                 $('#tongtienid').val(tongtienhang);
+                                $('#thanhtoanid').val(tongtienhang);
                                 //$("#MainContent_txt_doc").select();
                             },
                             error: function () {
@@ -751,7 +834,7 @@
                                 });
                                 //alert(tongtienhang);
                                 $('#tongtienid').val(tongtienhang);
-
+                                $('#thanhtoanid').val(tongtienhang);
                                 // _$addproduct_(soluong);
                                 debugger;
                                 $.ajax({
@@ -779,6 +862,7 @@
                                         $('#tbnhaphang').append(newrow);
                                         tongtienhang += thanhtien;
                                         $('#tongtienid').val(tongtienhang);
+                                        $('#thanhtoanid').val(tongtienhang);
                                         //$("#MainContent_txt_doc").select();
                                     },
                                     error: function () {
@@ -794,6 +878,145 @@
                 })
             });
 
+
+            $('.add_hanghoa').each(function () {
+                $(this).click(function () {                     
+                    if($("#MainContent_txt_doc").val() == '')
+                    {                       
+                          alert('ban chua nhap ma hang!');
+                          $("#MainContent_txt_doc").focus();
+                    }
+                    else
+                    {
+                        var _mahang = $("#MainContent_txt_doc").val();                    
+                        var soluong = $("#soluong").val(); 
+                        var data = { _mahang: _mahang };
+                    
+                        var tongtienhang = parseInt($('#tongtienid').val());
+
+                        //push mahang vao array
+                        var gettr = [];
+
+                       $('#tbnhaphang tr').each(function () {
+                        var mhold = $(this).find('td').eq(0).text();
+                        gettr.push(mhold);
+                            });
+                            //neu mahang = phan tu trong array thi gan 1 gia tri de so sanh
+                            var gettr_rs = 'Insert';
+                            for (var i = 0; i < gettr.length; i++) {
+                                if (_mahang == gettr[i]) {
+                                    gettr_rs = 'Remove';
+                                }
+                            }
+
+                            if (gettr_rs == 'Insert') {
+                                $.ajax({
+                                    type: "POST",
+                                    contentType: "application/json; charset=utf-8",
+                                    url: "Map.aspx/getthongtinmahang",
+                                    data: JSON.stringify(data),
+                                    dataType: "json",
+                                    success: function (data) {
+                                        //response(data.d);
+                                        var objdata = $.parseJSON(data.d);
+                                        //debugger;
+                                        var soluong = parseInt($("#soluong").val());
+                                        var dongia = parseInt(objdata['Table'][0][7]);
+                                        var thanhtien = parseInt($("#soluong").val()) * parseInt(objdata['Table'][0][7]);
+                                        //alert(thanhtien);
+
+                                        var newrow = '<tr class="themthucdon">' +
+                                            '<td id="tenhang">' + objdata['Table'][0][1] + '</td>' +
+                                            '<td id="soluong">' + soluong + '</td>' +
+                                            '<td id="giale">' + dongia + '</td>' +
+                                            '<td id="thanhtien">' + thanhtien + '</td>' +
+                                            '<td><input name="checkinput" class="checkinput" type="checkbox" value="" /></td>' +
+                                            '</tr>';
+                                        $('#tbnhaphang').append(newrow);
+                                        tongtienhang += thanhtien;
+
+                                        //alert(tongtienhang);
+                                        $('#tongtienid').val(tongtienhang);
+                                        $('#thanhtoanid').val(tongtienhang);
+
+                                        $("#MainContent_txt_doc").select();
+                                    },
+                                    error: function () {
+                                        //alert("No Match");
+                                    }
+                                });
+                            }
+
+                            //neu da co ma hang trog danh sach thi remove cai cu roi insert
+                            if (gettr_rs == 'Remove') {
+                                // xoa dong
+                                $('#tbnhaphang tr').each(function () {
+                                    var td = $(this).find('td').eq(0).text();
+
+                                    var soluongmoi = $('#soluong').val();
+                                    var soluongcu = $(this).find('td').eq(1).text();
+                                    var tong_soluong = parseInt(soluongmoi) + parseInt(soluongcu);
+
+                                    if (td == _mahang) {
+                                        $('#tbnhaphang tr').each(function () {
+                                            if ($(this).find('td').eq(0).text() == _mahang) {
+                                                var tongtiencu = parseFloat($(this).find('td').eq(3).text());
+                                                //alert(tongtiencu);
+                                                $(this).remove();
+                                                tongtienhang = tongtienhang - tongtiencu;
+                                            }
+                                        });
+                                        //alert(tongtienhang);
+                                        $('#tongtienid').val(tongtienhang);
+                                        $('#thanhtoanid').val(tongtienhang);
+                                        // _$addproduct_(soluong);
+                                        //debugger;
+                                        $.ajax({
+                                            type: "POST",
+                                            contentType: "application/json; charset=utf-8",
+                                            url: "Map.aspx/getthongtinmahang",
+                                            data: JSON.stringify(data),
+                                            dataType: "json",
+                                            success: function (data) {
+                                                //response(data.d);
+                                                var objdata = $.parseJSON(data.d);
+                                                //debugger;
+                                                var soluong = parseInt($("#soluong").val());
+                                                var dongia = parseInt(objdata['Table'][0][7]);
+                                                var thanhtien = tong_soluong * dongia;
+                                                var newrow = '<tr class="themthucdon">' +
+                                                    '<td id="tenhang">' + objdata['Table'][0][1] + '</td>' +
+                                                    '<td id="soluong">' + tong_soluong + '</td>' +
+                                                    '<td id="giale">' + dongia + '</td>' +
+                                                    '<td id="thanhtien">' + thanhtien + '</td>' +
+                                                    '<td><input name="checkinput" class="checkinput" type="checkbox" value="" /></td>' +
+                                                    '</tr>';
+                                                $('#tbnhaphang').append(newrow);
+                                                tongtienhang += thanhtien;
+                                                $('#tongtienid').val(tongtienhang);
+                                                $('#thanhtoanid').val(tongtienhang);
+
+                                                $("#MainContent_txt_doc").select();
+                                            },
+                                            error: function () {
+                                                //alert("No Match");
+                                            }
+                                        });
+
+                                        //***
+
+                                    }
+                                });
+                            }
+
+
+                        
+                    }
+                                                     
+                    
+                });               
+            });
+
            
 
             $("#soluong").on('keyup', function (e) {
@@ -801,8 +1024,6 @@
                     var tongtienhang = parseInt($('#tongtienid').val());
                     var _mahang = $("#MainContent_txt_doc").val();
                     var data = { _mahang: _mahang };
-
-
                     //push mahang vao array
                     var gettr = [];
 
@@ -845,6 +1066,8 @@
                                 tongtienhang += thanhtien;
                                 //alert(tongtienhang);
                                 $('#tongtienid').val(tongtienhang);
+                                $('#thanhtoanid').val(tongtienhang);
+
                                 $("#MainContent_txt_doc").select();
                             },
                             error: function () {
@@ -874,7 +1097,7 @@
                                 });
                                 //alert(tongtienhang);
                                 $('#tongtienid').val(tongtienhang);
-
+                                $('#thanhtoanid').val(tongtienhang);
                                 // _$addproduct_(soluong);
                                 //debugger;
                                 $.ajax({
@@ -900,6 +1123,7 @@
                                         $('#tbnhaphang').append(newrow);
                                         tongtienhang += thanhtien;
                                         $('#tongtienid').val(tongtienhang);
+                                        $('#thanhtoanid').val(tongtienhang);
 
                                         $("#MainContent_txt_doc").select();
                                     },
@@ -919,6 +1143,34 @@
 
                 }
             });
+
+            // nut xoa san pham
+        $('.delproduct').click(function () {
+            //var tenphong = dj('#name_room').text();
+            //var tongtienhang = parseInt($('#tongtienhang').val());
+            var tongtienhang = parseInt($('#tongtienid').val());
+            $('.checkinput').each(function () {
+                var chk = $(this).is(':checked');
+                if (chk == true) {
+                    var delid = $(this).parent().parent().find('td').eq(0).text();
+                    var price = parseInt($(this).parent().parent().find('td').eq(3).text());
+                    tongtienhang = tongtienhang - price;
+                    //djLog(tongtienhang);
+                    $(this).parent().parent().remove();
+                    $('#tongtienid').val(tongtienhang);
+                    $('#thanhtoanid').val(tongtienhang);
+                    // *** -> se xu ly bang cach nguoi dung nhap sua xoa -> click 2 nut (luu ban /phong) + tra phong -> save all   (xu ly sau ***** cap nhat ngay lap tuc)
+                    //dj.getJSON('/modules/hotel/xulyxoathucdon', {'tenphong': tenphong, 'mahang': delid, 'giaban': price}, function (rs) {
+                    //    if (rs.err === 0) {
+                    //        dWin.alert("Bạn xóa thành công!");
+                    //        dj('#tongtienhang').val(rs.tienhang);
+                    //    }
+                    //});
+                }
+            })
+        });
+
+
 
             function SearchText() {
                 //debugger;
