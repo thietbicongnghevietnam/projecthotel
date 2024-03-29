@@ -75,9 +75,13 @@
                     <div class="row mb-2">
                         <div class="col-sm-8">
                             <i style="font-size:16px; padding-top: 5px; color: black;">Chi tiết bàn/phòng : </i> <b style="font-size:14px; padding-top:5px; color:red" class="td_menu"></b> / Time:
-                            <b style="font-size: 14px; color: blue" class="thoigiandung"></b>..........
+                            <%--Day : <b style="font-size: 14px; color: blue" class="songaydung"></b>--%>
+                            &nbsp;&nbsp;Gio : <b style="font-size: 14px; color: blue" class="sogiodung"></b>
+                            &nbsp;&nbsp;Phut : <b style="font-size: 14px; color: blue" class="sophutdung"></b>
                             <b style="padding-right: 10px; margin-left: 10px; margin-top: 5px;">Giờ vào:</b>
-                            <input id="checkinput1" style="width: 50px; margin-top: 10px;" name="checkinput1" value=""/>
+                            <input id="checkinput1" style="width: 150px; margin-top: 10px;" name="checkinput1" value=""/>
+                            <b style="padding-right: 10px; margin-left: 10px; margin-top: 5px;">Giờ ra:</b>
+                            <input id="checkinput2" style="width: 150px; margin-top: 10px;" name="checkinput2" value=""/>
                             <b style="padding-right: 12px; margin-left: 10px;">Hình thức nghỉ:</b>
                             <input id="stylerender" style="width: 50px; " name="stylerender" value="" />
                             <b style="padding-right: 10px; margin-left: 10px;">Loại phòng:</b>
@@ -264,8 +268,13 @@
                                      
                                     <div class="col-2">
                                         <input type="submit" value="Thanh toan" id="khachthanhtoan" class="btn btn-success float-right">  <%--class , id="saveproduct"--%>
+                                       
                                     </div>
-                                                                                                                                             
+                                           
+                                    <div class="col-2">
+                                        <input type="submit" value="Thanh toan 2" id="khachthanhtoan2" class="btn btn-success float-right">  <%--class , id="saveproduct"--%>                                       
+                                    </div>
+                                     
                                 </div>
                                 
 
@@ -331,7 +340,7 @@
                                                 <div class="row" style="border: 1px solid grey;">
                                                     <div class="col-12 text-center">
                                                         <%--<img src="../../dist/img/user1-128x128.jpg" alt="user-avatar" class="img-circle img-fluid">--%>
-                                                        <img src="../../dist/img/monan.JPG" alt="user-avatar" class="img-circle img-fluid">
+                                                     <%--   <img src="../../dist/img/monan.JPG" alt="user-avatar" class="img-circle img-fluid">--%>
 
                                                         <div class="text-center" style="margin-bottom: 10px; margin-top: 10px;">
                                                             <mh><%=rows1["mahang"].ToString() %></mh> <br /> <dg><%=rows1["giaban"].ToString() %></dg> /VND
@@ -392,6 +401,59 @@
                 </div>--%>
             </section>
             <!-- /.content -->
+
+            <div class="modal" id="myModal6">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="row">
+                            <div>
+                                <h4 class="modal-title" id="headerTag" style="float: left">THONG TIN HOA DON</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="float: right; margin-left: 300px;">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                                <div style="width: 100%; height: 250px; overflow-y: scroll; float: left;">
+                                    <table class="display table table-bordered dataTable no-footer">
+                                        <thead>
+                                            <tr>
+                                                <th>Tên hàng</th>
+                                                <th>Số lượng</th>
+                                                <th>Đơn giá</th>
+                                                <th>Thành tiền</th>
+                                                <th>Chon</th>
+                                            </tr>
+                                            <tbody id="tbnhaphang_inhoadon">
+                                            </tbody>
+
+
+                                    </table>
+                                </div>                                             
+                            
+                        </div>
+                    </div>
+
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times"></i>Close</button>
+                        <button type="button" runat="server" id="Button3"  class="btn btn-primary"> <%-- onserverclick="test"--%>
+                            <i class="fas fa-download"></i>
+                            In & luu hoa don
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
         </div>
         <!-- /.content-wrapper -->
 
@@ -476,6 +538,78 @@
                                     $('#tbnhaphang tr').remove();
                                     const myArr = JSON.parse(objdata['Table'][0][0]);
                                     var tienhang = objdata['Table'][0][1];
+                                    var giovao = objdata['Table'][0][3];
+
+                                    var today = new Date();
+                                    var dd = today.getDate();
+                                    var mm = today.getMonth() + 1; //January is 0!
+                                    var yyyy = today.getFullYear();
+                                    var hour = today.getHours();
+                                    var minute = today.getMinutes();
+                                    var second = today.getSeconds();
+                                    if (hour.toString().length == 1) {
+                                        var hour = '0' + hour;
+                                    }
+                                    if (minute.toString().length == 1) {
+                                        var minute = '0' + minute;
+                                    }
+                                    if (second.toString().length == 1) {
+                                        var second = '0' + second;
+                                    }
+                                    if (dd < 10) {
+                                        dd = '0' + dd
+                                    }
+                                    if (mm < 10) {
+                                        mm = '0' + mm
+                                    }
+                                    
+                                    var giora = mm + '/' + dd + '/' + yyyy + ' ' + hour + ':' + minute + ':' + second;
+                                    var date1 = new Date(giovao);
+                                    var date2 = new Date(giora);
+
+                                    var diffMs = (date2 - date1); // milliseconds between now & date1   1giay = 1000 millisecnds 
+                                    var diffHrs = Math.round((diffMs % 86400000) / 3600000); // hours   1gio = 3600000 , 1 ngay = 86400000 mililigiay
+                                    var diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000); // minutes
+                                    //var diffDays = Math.round(diffMs / 86400000);
+
+                                    var diffHrs_check = (diffMs % 86400000) / 3600000
+                                    //var diffHrs_check2 =  parseFloat(diffMs % 86400000) / 3600000
+                                    //alert(diffHrs_check);
+                                    //alert(diffHrs_check2);
+
+                                    //console.log(diffMs);    //so ngay
+                                    //console.log(diffHrs);   //so gio
+                                    //console.log(diffMins);  //so phut                                                                      
+                                    
+                                    if(diffMs.toString() == 'NaN')
+                                    {
+                                        //$('#songaydung').val(diffMs);
+                                        $('.sogiodung').text('0');
+                                        $('.sophutdung').text('0');
+                                    }
+                                    else
+                                    {
+                                        //$('#songaydung').val(diffMs);  //nho hon 1h
+                                        if(diffHrs_check < 1)
+                                        {
+                                            $('.sogiodung').text('0');
+                                            $('.sophutdung').text(diffMins);
+                                        }
+                                        else
+                                        {
+                                            $('.sogiodung').text(diffHrs);
+                                            $('.sophutdung').text(diffMins);
+                                        }
+                                        
+                                    }
+                                   
+                                    var diffDays = 0;
+                                    if (diffHrs > 12 && diffHrs < 24) {
+                                        diffDays = 0;
+                                    } else {
+                                        diffDays = Math.round(diffMs / 86400000); // days
+                                    }
+
                                     //debugger; 
                                     if (myArr == '0') {
                                         //truong hop chua co hang ban
@@ -484,8 +618,9 @@
                                         $('#thanhtoanid').val(0);
                                         $('#chietkhauid').val(0);
 
-                                    } else {
-
+                                    } 
+                                    else 
+                                    {
                                         var blkstr = [];
                                         $.each(myArr, function (idx2, val2) {
                                             var str = idx2 + ":" + val2;
@@ -514,6 +649,11 @@
                                             $('#tbnhaphang').append(newrow);
                                         }
 
+                                        $('#checkinput1').val(giovao);
+                                        $('#checkinput2').val(giora);
+                        
+                                        
+                                        
                                         $('#tongtienid').val(tienhang);
                                         $('#thanhtoanid').val(tienhang);
                                         $('#chietkhauid').val(0);
@@ -538,6 +678,68 @@
                 });
 
             });
+
+            $('#khachthanhtoan2').click(function () {
+                  //save hoa don truoc
+                 var itemdata = {};
+                var tenphong = $('#nametable').text();//dj('#name_room').text();
+                var tienhang = $('#tongtienid').val();                 
+                if (tenphong != "") {
+                    $('.themthucdon').each(function () {
+                        //var mahang = $(this).find('td').eq(0).text();
+                        //var soluong = $(this).find('td').eq(1).text();
+                        var mahang = $(this).find('td').eq(0).text() + "," + $(this).find('td').eq(2).text() + "," + $(this).find('td').eq(3).text();
+                        var soluong = $(this).find('td').eq(1).text();
+
+                        var element = {}, cart = [];
+                        if (mahang != "") {
+                            //items.push({'a': chk ? 1 : 0, 'c': content});
+                            itemdata[mahang] = parseInt(soluong);
+                            //itemdata.mahang = mahang;
+
+                            //itemdata.soluong = soluong;
+                            //cart.push({ itemdata: itemdata });
+                            //JSON.stringify([{a: 1}, {a: 2}]) 
+                            //==> "[{"a":1},{"a":2}]" 
+                        }
+                    });
+                    var hanghoa_new = itemdata;
+                    var aaa = $('#tongtienid').val();
+                    var data = {
+                        tenphong: tenphong,
+                        tienhang: tienhang,
+                        items: JSON.stringify(itemdata)
+                    };
+                    //save hang hoa
+                    $.ajax({
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: "Map.aspx/addthongtinhanghoa",
+                        //data: JSON.stringify(data),
+                        data: JSON.stringify(data),
+                        dataType: "json",
+                        success: function (data) {
+                            alert('Hàng hóa đã được thêm thành công!');
+                            // nha du lieu len thong tin hoa don
+                            
+                        
+                        },
+                        error: function () {
+                            //alert("No Match");
+                        }
+                    });
+
+
+            
+                }
+                else
+                {
+                        alert('Bạn chưa chọn phòng thuê!')
+                }
+
+
+                  $('#myModal6').modal('show');
+            })
 
             $('#khachthanhtoan').click(function () {
                 //debugger;

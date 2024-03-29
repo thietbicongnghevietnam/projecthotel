@@ -148,6 +148,7 @@ namespace WebApplication1
             if (dtsave.Rows[0][0].ToString() == "1")
             {
                 //thongbao = "OK" + "," + dtlevel.Rows[0][1].ToString();
+                
                 thongbao = "OK";
             }
             else

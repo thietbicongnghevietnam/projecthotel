@@ -1,0 +1,1263 @@
+{% extends dglayout %}
+{% block meta %}
+<style type="text/css">
+    .themhanghoa {
+        width: 500px;
+        height: 150px;
+    }
+
+    #formthanhthoan {
+        width: 680px;
+        height: 380px;
+        overflow-y:scroll;
+    }
+
+    .dthuephong {
+        width: 660px;
+        height: 300px;
+    }
+
+    .ddatphong {
+        width: 680px;
+        height: 480px;
+    }
+
+    .dtraphong {
+        width: 660px;
+        height: 300px;
+    }
+
+    .tblm {
+        /*width: 20% !important;*/
+        border: 2px solid #222 !important;
+        margin-bottom: 22px !important;
+        padding-top: 22px !important;
+    }
+
+    .tblm td {
+        border-top: 0 solid #333;
+        border-right: 0 solid #333;
+    }
+
+    BODY,
+    HTML {
+        padding: 0px;
+        margin: 0px;
+    }
+
+    BODY {
+        font-family: Verdana, Arial, Helvetica, sans-serif;
+        font-size: 11px;
+        background: #FFF;
+        padding: 15px;
+    }
+
+    H1 {
+        font-family: Georgia, serif;
+        font-size: 20px;
+        font-weight: normal;
+    }
+
+    H2 {
+        font-family: Georgia, serif;
+        font-size: 16px;
+        font-weight: normal;
+        margin: 0px 0px 10px 0px;
+    }
+
+    #myDiv {
+        width: 150px;
+        border: solid 1px #2AA7DE;
+        background: #6CC8EF;
+        text-align: center;
+        padding: 4em .5em;
+        margin: 1em;
+        float: left;
+    }
+    #thucdon {
+        margin-top: 10px;
+        margin-left: 5px;
+        margin-right: 5px;
+        float: left;
+        width: 1130px;
+        height: 330px;
+        background: ghostwhite;
+    }
+
+    #danhsachthucdon {
+        margin-top: 15px;
+        margin-right: 5px;
+        float: left;
+        width: 500px;
+        height: 400px;
+        background: ghostwhite;
+    }
+    #myList {
+        margin-top: 10px;
+        float: left;
+        width: 600px; /* phan khung danh sach phong */
+        height: 400px; /* do cao nay cho danh sach phong len toi 9 phong */
+    }
+    #myList UL {
+        padding: 0px;
+        margin: 0em 1em;
+    }
+
+    #myList LI {
+        width: 180px;
+        height: 120px;
+        border: solid 1px #2AA7DE;
+        /*background: #6CC8EF;*/
+        padding: 5px 5px;
+        margin: 2px 0px;
+        list-style: none;
+        float: left;
+    }
+
+    #options {
+        clear: left;
+        width: 980px;
+    }
+
+    #options INPUT {
+        font-family: Verdana, Arial, Helvetica, sans-serif;
+        font-size: 11px;
+        width: 200px;
+        float: left;
+    }
+
+</style>
+<style>
+    button.accordion {
+        background-color: #eee;
+        color: #444;
+        cursor: pointer;
+        padding: 18px;
+        /*width: 100%;*/
+        width: 1120px;
+        margin-top: 5px;
+        margin-left: 5px;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 15px;
+        transition: 0.4s;
+    }
+
+    button.accordion.active, button.accordion:hover {
+        background-color: #ddd;
+    }
+
+    button.accordion:after {
+        content: '\002B';
+        color: #777;
+        font-weight: bold;
+        float: right;
+        margin-left: 5px;
+    }
+
+    button.accordion.active:after {
+        content: "\2212";
+    }
+
+    div.panel {
+        width: 1120px;
+        /*padding-left: 10px;  chinh text*/
+        margin-left: 5px;
+        background-color: ghostwhite;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.2s ease-out;
+    }
+</style>
+<script src="/static/js/jquery-1.4.2.min.js" type="text/javascript"></script>
+<script src="/static/js/jquery.contextMenu.js" type="text/javascript"></script>
+<link href="/static/css/jquery.contextMenu.css" rel="stylesheet" type="text/css"/>
+<!-- ham save vao localstorage -->
+<script src="/static/js/dlgoku.js"></script>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        // phan render giao dien cac phong co khach va khong co khach
+        $("#myList UL LI").each(function () {
+            //phong co khach
+            if ($(this).find('#trangthai').text() == 1) {
+                $(this).find("img").attr('src','/static/images/cokhach.jpg');
+                //khoa chuc nang thue phong  **** xem lai chuc nang khoa
+                //$('#myMenu').disableContextMenuItems('#thuephong');
+            }
+            // Trang thai dat phong
+            if ($(this).find('#trangthai').text() == 0 && $(this).find('#trangthaidatphong').text() == 1) {
+                $(this).find("img").attr('src','/static/images/phongdattruoc.jpg');
+            }
+            // Trang thai chua don phong
+            if ($(this).find('#trangthaidonphong').text() == 1) {
+                $(this).find("img").attr('src','/static/images/chuadonphong.jpg');
+            }
+        });
+        $("#myList UL LI").each(function () {
+                var tong = 0;
+                // khi click cac phong de chon thuc don va kiem tra da chon thuc don chua?
+                $(this).click(function () {
+                    var today = new Date();
+                    var dd = today.getDate();
+                    var mm = today.getMonth() + 1; //January is 0!
+                    var yyyy = today.getFullYear();
+                    var hour = today.getHours();
+                    var minute = today.getMinutes();
+                    var second = today.getSeconds();
+                    if (hour.toString().length == 1) {
+                        var hour = '0' + hour;
+                    }
+                    if (minute.toString().length == 1) {
+                        var minute = '0' + minute;
+                    }
+                    if (second.toString().length == 1) {
+                        var second = '0' + second;
+                    }
+                    if (dd < 10) {
+                        dd = '0' + dd
+                    }
+                    if (mm < 10) {
+                        mm = '0' + mm
+                    }
+                    //var ngayra = dd + '/' + mm + '/' + yyyy;
+                    //var giora = hour + ':' + minute + ':' + second;
+                    // var ngaygiora = dd + '/' + mm + '/' + yyyy + ' ' + hour + ':' + minute + ':' + second;
+                    //var ngaygiora = yyyy + '-' + mm + '-' + dd + ' ' + hour + ':' + minute + ':' + second;
+                    var ngaygiora2 = mm + '/' + dd + '/' + yyyy + ' ' + hour + ':' + minute + ':' + second;
+
+
+                    var tenphong = $(this).find('p').text();
+                    $('.td_menu').text(tenphong);
+                    dj('#tbnhaphang tr').remove();
+                    dj.getJSON('/modules/hotel/thongtinhanghoa', {'tenphong': tenphong}, function (rs) {
+                    if (rs.err === 0) {
+                        // xu ly thuc don da co hoac chua co
+                        var item = rs.data;
+                        var giovao = item['ngaygiothue'];
+                        var giovaonew = rs.giovaonew;
+                        var kieunghi = item['hinhthucnghi'];
+                        var loaiphong = rs.loaiphong;
+                        var ticket = rs.ticket;
+                        var mohinh = item['mohinh'];
+                        var msgkn = "";
+                        var msglp = "";
+                        if (kieunghi == 1){
+                             msgkn = "Nghỉ theo giờ"
+                        } else if(kieunghi == 2){
+                             msgkn = "Nghỉ đêm"
+                        } else if (kieunghi == 3){
+                            msgkn = "Nghỉ ngày"
+                        } else if (kieunghi == 6){
+                            msgkn = "Nghỉ cả ngày"
+                        } else if (kieunghi == 4) {
+                            msgkn = "Nghỉ tuần"
+                        }  else if (kieunghi == 5){
+                            msgkn = "Nghỉ tháng"
+                        } else {
+                            msgkn = "Cafe - massage"
+                        }
+
+                        if (loaiphong == 1){
+                            msglp = "Phòng đơn"
+                        } else if (loaiphong == 2) {
+                            msglp = "Phòng đôi"
+                        } else if (loaiphong == 3) {
+                            msglp = "P. Vip đơn"
+                        } else if (loaiphong == 4) {
+                            msglp = "P. Vip đôi"
+                        } else if (loaiphong == 5) {
+                            msglp = "P. Cao cấp"
+                        } else {
+                                msglp = "P. Tập thể"
+                        }
+                        dj('#checkinput').val(giovao);
+                        var date1 = new Date(giovaonew);
+                        var date2 = new Date(ngaygiora2);
+                        var diffMs = (date2 - date1); // milliseconds between now & date1
+                        var diffHrs = Math.round((diffMs % 86400000) / 3600000); // hours
+                        var diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000); // minutes
+                        //var diffDays = Math.round(diffMs / 86400000);
+                        var diffDays = 0;
+                        if (diffHrs > 12 && diffHrs < 24) {
+                            diffDays = 0;
+                        } else {
+                            diffDays = Math.round(diffMs / 86400000); // days
+                        }
+                        if (diffDays < 1){
+                            if (diffMins > 30 && diffMins <60){
+                                //alert('1');
+                                var thoigiandung = (diffHrs*60) + diffMins - 60;
+                                dj('.thoigiandung').text(thoigiandung + ' Phút');
+                            }else if(diffMins > 60 && diffHrs >1 ){
+                                //alert('2');
+                                var thoigiandung = (diffHrs*60) + diffMins;
+                                dj('.thoigiandung').text(thoigiandung + ' Phút');
+                            }else if (diffMins < 30){
+                                if (diffHrs < 1){
+                                    //alert('3');
+                                    dj('.thoigiandung').text(diffMins + ' Phút');
+                                //}else if (diffHrs > 1) {
+                                }else {
+                                    //alert('4');
+                                    var thoigiandung = (diffHrs*60) + diffMins;
+                                    dj('.thoigiandung').text(thoigiandung + ' Phút');
+                                }
+                            }
+                        }
+                        if (diffDays >= 1){
+                            var new_gio = (diffDays * 24) + diffHrs;
+                            var new_phut = new_gio * 60;
+                            //alert('so phut cua ngay' + new_phut);
+                            thoigiandung = diffMins + new_phut;
+                            dj('.thoigiandung').text(thoigiandung + ' Phút');
+                        }
+
+                        if(mohinh == 1){
+                            dj('#stylerender').val('CAFE - NHA HANG');
+                            dj('#styleroom').val('CAFE - NHA HANG');
+                        }else{
+                            dj('#stylerender').val(msgkn);
+                            dj('#styleroom').val(msglp);
+                        }
+                        if (item['items'] != ""){
+                            item['items'] = djson.decode(rs.data['items']);
+                            var tongtienhang = item['tienhang'];
+                            for (var i in item['items']) {
+                                var soluong = item['items'][i];
+                                var mahang = i;
+                                for (var k in item['giaban']) {
+                                    if (mahang == k) {
+                                        var giaban = item['giaban'][k];
+                                        var thanhtien = soluong * giaban;
+                                    }
+                                }
+                                var data = {
+                                    'mahang': mahang,
+                                    'soluong': soluong,
+                                    'giaban': giaban,
+                                    'thanhtien': thanhtien
+                                };
+                                var newrow = djTemplate.render('<tr class="themthucdon">' +
+                                        '<td id="tenhang">{mahang}</td>' +
+                                        '<td id="soluong">{soluong}</td>' +
+                                        '<td id="giale">{giaban}</td>' +
+                                        '<td id="thanhtien">{thanhtien}</td>' +
+                                        '<td><input name="checkinput" class="checkinput" type="checkbox" value="" /></td>' +
+                                        '</tr>', data);
+                                dj('#tbnhaphang').append(newrow);
+                            }
+                            dj('#tongtienhang').val(tongtienhang);
+                            dj('#songuoio').val(ticket);
+                        } else {
+                            dj('#tongtienhang').val(0);
+                            dj('#songuoio').val(ticket);
+                        }
+                    }
+                });
+
+            });
+        });
+
+        function addproduct() {
+            var tongtienhang = parseInt(dj('#tongtienhang').val());
+            var tenphong = dj('#name_room').text();
+            var mahang = dj('.ajax').val();
+            var soluong = dj('.soluong').val();
+            if (tenphong != "") {
+                // var rowLength = document.getElementById('tbnhaphang').rows.length;
+                //push mahang vao array
+                var gettr = [];
+                dj('#tbnhaphang tr').each(function () {
+                    var mhold = dj(this).find('td').eq(0).text();
+                    gettr.push(mhold);
+                });
+                //neu mahang = phan tu trong array thi gan 1 gia tri de so sanh
+                var gettr_rs = 'Insert';
+                for (var i = 0; i < gettr.length; i++) {
+                    if (mahang == gettr[i]) {
+                        gettr_rs = 'Remove';
+                    }
+                }
+                //neu chua co ma hang trong danh sach thi insert
+                if (gettr_rs == 'Insert') {
+                    //_$addproduct_(soluong);
+                    dj.getJSON('/modules/hotel/getprice', {'mahang': mahang}, function (rs) {
+                        if (rs.err === 0) {
+                            var giaban = parseInt(rs.data);
+                            var thanhtien = parseInt(soluong) * parseInt(giaban);
+                            var item = {
+                                'mahang': mahang,
+                                'soluong': soluong,
+                                'giaban': giaban,
+                                'thanhtien': thanhtien
+                            };
+                            var newrow = djTemplate.render('<tr class="themthucdon">' +
+                                    '<td id="tenhang">{mahang}</td>' +
+                                    '<td id="soluong">{soluong}</td>' +
+                                    '<td id="giale">{giaban}</td>' +
+                                    '<td id="thanhtien">{thanhtien}</td>' +
+                                    '<td><input name="checkinput" class="checkinput" type="checkbox" value="" /></td>' +
+                                    '</tr>', item);
+                            dj('#tbnhaphang').append(newrow);
+                            tongtienhang += thanhtien;
+                            dj('#tongtienhang').val(tongtienhang);
+                        }
+                    });
+                    // ***
+                }
+                //neu da co ma hang trog danh sach thi remove cai cu roi insert
+                if (gettr_rs == 'Remove') {
+                    // xoa dong
+                    dj('#tbnhaphang tr').each(function () {
+                        var td = dj(this).find('td').eq(0).text();
+                        var soluongmoi = dj('.soluong').val();
+                        var soluongcu = dj(this).find('td').eq(1).text();
+                        var tong_soluong = parseInt(soluongmoi) + parseInt(soluongcu);
+                        if (td == mahang) {
+                            dj('#tbnhaphang tr').each(function () {
+                                if (dj(this).find('td').eq(0).text() == mahang) {
+                                    var tongtiencu = parseFloat(dj(this).find('td').eq(3).text());
+                                    dj(this).remove();
+                                    tongtienhang = tongtienhang - tongtiencu;
+                                }
+                            });
+                            // _$addproduct_(soluong);
+                            dj.getJSON('/modules/hotel/getprice', {'mahang': mahang}, function (rs) {
+                                if (rs.err === 0) {
+                                    var giaban = parseInt(rs.data);
+                                    var thanhtien = parseInt(tong_soluong) * parseInt(giaban);
+                                    //djLog(tong_soluong);
+                                    //djLog(thanhtien);
+                                    var item = {
+                                        'mahang': mahang,
+                                        'soluong': tong_soluong,
+                                        'giaban': giaban,
+                                        'thanhtien': thanhtien
+                                    };
+                                    var newrow = djTemplate.render('<tr class="themthucdon">' +
+                                            '<td id="tenhang">{mahang}</td>' +
+                                            '<td id="soluong">{soluong}</td>' +
+                                            '<td id="giale">{giaban}</td>' +
+                                            '<td id="thanhtien">{thanhtien}</td>' +
+                                            '<td><input name="checkinput" class="checkinput" type="checkbox" value="" /></td>' +
+                                            '</tr>', item);
+                                    dj('#tbnhaphang').append(newrow);
+                                    tongtienhang += thanhtien;
+                                    dj('#tongtienhang').val(tongtienhang);
+                                }
+                            });
+
+                            //***
+
+                        }
+                    });
+                }
+            } else {
+                alert('Ban chua chon phong.');
+            }
+        }
+
+        dj('.addproduct').click(function () {
+            addproduct();
+        });
+
+        //bat phim enter
+        dj('#soluong').keydown(function (e) {
+            if (e.keyCode == 13) {
+                   addproduct();
+            }
+        });
+
+        //nut them hang hoa nhanh + hinh anh
+        dj('.button_addmenu').each(function () {
+            dj(this).click(function () {
+                if (dj('#tongtienhang').val() == ""){
+                    var tongtienhang = 0
+                } else {
+                    var tongtienhang = parseInt(dj('#tongtienhang').val());
+                }
+                var mahang = dj(this).parent().parent().find('td').eq(1).text();
+                var soluong = dj(this).parent().parent().find('td').eq(2).find("input[name='quantity']").val();
+                var dongia = dj(this).parent().parent().find('td').eq(3).text();
+                var thanhtien = parseInt(soluong) * parseInt(dongia);
+                var data = {
+                    'mahang': mahang,
+                    'soluong': soluong,
+                    'giaban': dongia,
+                    'thanhtien': thanhtien
+                };
+
+
+                //push mahang vao array
+                var gettr = [];
+                dj('#tbnhaphang tr').each(function () {
+                    var mhold = dj(this).find('td').eq(0).text();
+                    gettr.push(mhold);
+                });
+                //neu mahang = phan tu trong array thi gan 1 gia tri de so sanh
+                var gettr_rs = 'Insert';
+                for (var i = 0; i < gettr.length; i++) {
+                    if (mahang == gettr[i]) {
+                        gettr_rs = 'Remove';
+                    }
+                }
+                //neu chua co ma hang trong danh sach thi insert
+                if (gettr_rs == 'Insert') {
+                    //_$addproduct_(soluong);
+                            var newrow = djTemplate.render('<tr class="themthucdon">' +
+                                    '<td id="tenhang">{mahang}</td>' +
+                                    '<td id="soluong">{soluong}</td>' +
+                                    '<td id="giale">{giaban}</td>' +
+                                    '<td id="thanhtien">{thanhtien}</td>' +
+                                    '<td><input name="checkinput" class="checkinput" type="checkbox" value="" /></td>' +
+                                    '</tr>', data);
+                            dj('#tbnhaphang').append(newrow);
+                            tongtienhang += thanhtien;
+                            dj('#tongtienhang').val(tongtienhang);
+
+                    // ***
+                }
+                //neu da co ma hang trog danh sach thi remove cai cu roi insert
+                if (gettr_rs == 'Remove') {
+                    // xoa dong
+                    dj('#tbnhaphang tr').each(function () {
+                        var td = dj(this).find('td').eq(0).text();
+                        var soluongmoi = dj('.soluong').val();
+                        var soluongcu = dj(this).find('td').eq(1).text();
+                        var tong_soluong = parseInt(soluongmoi) + parseInt(soluongcu);
+                        if (td == mahang) {
+                            dj('#tbnhaphang tr').each(function () {
+                                if (dj(this).find('td').eq(0).text() == mahang) {
+                                    var tongtiencu = parseFloat(dj(this).find('td').eq(3).text());
+                                    dj(this).remove();
+                                    tongtienhang = tongtienhang - tongtiencu;
+                                }
+                            });
+                            // _$addproduct_(soluong);
+                            dj.getJSON('/modules/hotel/getprice', {'mahang': mahang}, function (rs) {
+                                if (rs.err === 0) {
+                                    var giaban = parseInt(rs.data);
+                                    var thanhtien = parseInt(tong_soluong) * parseInt(giaban);
+                                    //djLog(tong_soluong);
+                                    //djLog(thanhtien);
+                                    var item = {
+                                        'mahang': mahang,
+                                        'soluong': tong_soluong,
+                                        'giaban': giaban,
+                                        'thanhtien': thanhtien
+                                    };
+                                    var newrow = djTemplate.render('<tr class="themthucdon">' +
+                                            '<td id="tenhang">{mahang}</td>' +
+                                            '<td id="soluong">{soluong}</td>' +
+                                            '<td id="giale">{giaban}</td>' +
+                                            '<td id="thanhtien">{thanhtien}</td>' +
+                                            '<td><input name="checkinput" class="checkinput" type="checkbox" value="" /></td>' +
+                                            '</tr>', item);
+                                    dj('#tbnhaphang').append(newrow);
+                                    tongtienhang += thanhtien;
+                                    dj('#tongtienhang').val(tongtienhang);
+                                }
+                            });
+                            //***
+                        }
+                    });
+                }
+            })
+
+
+
+        });
+
+        // nut ghi lai danh sach thuc don
+        dj('.saveproduct').click(function () {
+            var itemdata = {};
+            var tenphong = dj('#name_room').text();
+            var tienhang = dj('#tongtienhang').val();
+            if (tenphong != "") {
+                dj('.themthucdon').each(function () {
+                    var mahang = "mahang:"+dj(this).find('td').eq(0).text();
+                    var soluong = "sl:"+dj(this).find('td').eq(1).text();
+                    if (mahang != "") {
+                        //items.push({'a': chk ? 1 : 0, 'c': content});
+                        itemdata[mahang] = parseInt(soluong);
+                    }
+                });
+                var hanghoa_new = itemdata;
+                var aaa = dj('#tongtienhang').val();
+                //djLog(itemdata);  //Object {bimbim: 1}
+                var data = {
+                    'tenphong': tenphong,
+                    'tienhang': tienhang,
+                    'items': djson.encode(itemdata)
+                };
+                //djLog(data);  //Object {tenphong: "P.101", tienhang: "10000", items: "{"ngocay":1}"}
+                // kiem tra xem phong + ban da co khach chua ?
+                dj.getJSON('/modules/hotel/testtrangthaiphong', {'tenphong': tenphong}, function (rs) {
+                    //djLog(rs.trangthai);
+                    if (rs.trangthai === 0) {
+                        //dWin.alert('ban chua chon phong de thue aaa');
+                        var action = 'thuephong';
+
+                        //*** chua ra tien hang de cap nhat vao so cai
+
+                        // djLog(tienhang); vao den day
+                        dhotel.thuephong(action, rs, tenphong, hanghoa_new, aaa);
+                    } else {
+                        // neu da thue phong cap nhat them hang hoa vao chung tu
+                        // cap nhat thong tin menu
+                        dj.getJSON('/modules/hotel/testcapnhathanghoa', data, function (rs) {
+                            if (rs.err === 0) {
+                                dWin.alert('Hàng hóa đã được thêm thành công!');
+                            }
+                        });
+                    }
+                });
+            } else {
+                alert('Bạn chưa chọn phòng thuê!')
+            }
+        });
+
+        // nut sua hoa don
+        dj('.editproduct').click(function () {
+            var tenphong = dj('#name_room').text();
+            var tongtienhang = parseInt(dj('#tongtienhang').val());
+            dj('.checkinput').each(function () {
+                var chk = dj(this).is(':checked');
+                if (chk == true) {
+                    var mahangid = dj(this).parent().parent().find('td').eq(0).text();
+                    var soluong = dj(this).parent().parent().find('td').eq(1).text();
+                    var price = dj(this).parent().parent().find('td').eq(3).text();
+                    tongtienhang = tongtienhang - price;
+                    dj(this).parent().parent().remove();
+                    dj('#tongtienhang').val(tongtienhang);
+                    dj('#soluong').val(soluong);
+                    dj('#ajax').val(mahangid);
+                    //dj.getJSON('/modules/hotel/xulysuathucdon', {'tenphong': tenphong, 'mahang': mahangid, 'giaban': price}, function (rs) {
+                    //    if (rs.err === 0) {
+                    //        dj('#tongtienhang').val(rs.tienhang);
+                    //        dj('#soluong').val(soluong);
+                    //        dj('#ajax').val(mahangid);
+                    //   }
+                    //});
+                }
+            })
+        });
+
+        // nut xoa san pham
+        dj('.delproduct').click(function () {
+            //var tenphong = dj('#name_room').text();
+            var tongtienhang = parseInt(dj('#tongtienhang').val());
+            dj('.checkinput').each(function () {
+                var chk = dj(this).is(':checked');
+                if (chk == true) {
+                    var delid = dj(this).parent().parent().find('td').eq(0).text();
+                    var price = parseInt(dj(this).parent().parent().find('td').eq(3).text());
+                    tongtienhang = tongtienhang - price;
+                    //djLog(tongtienhang);
+                    dj(this).parent().parent().remove();
+                    dj('#tongtienhang').val(tongtienhang);
+                    // *** -> se xu ly bang cach nguoi dung nhap sua xoa -> click 2 nut (luu ban /phong) + tra phong -> save all
+                    //dj.getJSON('/modules/hotel/xulyxoathucdon', {'tenphong': tenphong, 'mahang': delid, 'giaban': price}, function (rs) {
+                    //    if (rs.err === 0) {
+                    //        dWin.alert("Bạn xóa thành công!");
+                    //        dj('#tongtienhang').val(rs.tienhang);
+                    //    }
+                    //});
+                }
+            })
+        });
+
+        // nut lay cobox hang hoa
+        dj.getJSON('/modules/hotel/getdichvu', function (rs) {
+            if (rs.err === 0) {
+//                dj('.hanghoa_menu').dCbo(rs.data);
+                dj('.hanghoa').dCbo(rs.data);
+            }
+        });
+
+        // Truong hop la nha hang
+//        dj('#luuban').click(function () {
+        dj('.luuban').click(function () {
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth() + 1; //January is 0!
+            var yyyy = today.getFullYear();
+            var hour = today.getHours();
+            var minute = today.getMinutes();
+            var second = today.getSeconds();
+            if (hour.toString().length == 1) {
+                var hour = '0' + hour;
+            }
+            if (minute.toString().length == 1) {
+                var minute = '0' + minute;
+            }
+            if (second.toString().length == 1) {
+                var second = '0' + second;
+            }
+            if (dd < 10) {
+                dd = '0' + dd
+            }
+            if (mm < 10) {
+                mm = '0' + mm
+            }
+            var tenphong = dj('#name_room').text();
+            var tienhang = 0;
+            var hanghoa_new = {};
+            var trangthai = "thuephong";
+            var ngaygiothue = yyyy + '-' + mm + '-' + dd + ' ' + hour + ':' + minute + ':' + second;
+            dj('.themthucdon').each(function () {
+                var mahang = dj(this).find('td').eq(0).text();
+                var soluong = dj(this).find('td').eq(1).text();
+                var thanhtien = dj(this).find('td').eq(3).text();
+                tienhang += parseInt(thanhtien);
+                if (mahang != "") {
+                    hanghoa_new[mahang] = parseInt(soluong);
+                }
+            });
+            var data = {
+                'ngaygiothue': ngaygiothue,
+                'tenphong': tenphong,
+                'giaphong': 0,
+                'hinhthucthue': 0,
+                'tenkh': '',
+                'cmt': '',
+                'diachi': '',
+                'ghichu': '',
+                'trangthai': trangthai,
+                'tiencoc': 0,
+                'item': djson.encode(hanghoa_new),
+                'tienhang': tienhang
+            };
+            var trangthaiphong = 0;
+            // kiem tra trang thai phong o day (neu phong co khach thi khong luu ban nua)
+            // xay ra truong hop neu trong 1 phut ma click luu ban 2 lan se tang them mot hoa don -> ok (phuong thuc GET se luu cache va dulicate chung tu -> thay GET == POST)
+            dj.postJSON('/modules/hotel/laytrangthaiphong', {'tenphong': tenphong}, function (rs) {
+                // var trangthaiphong = rs.data;
+//                if(trangthaiphong == 1){
+                if(rs.data != trangthaiphong){
+                    //dWin.alert('Phòng đã được check in!');
+                    dj.postJSON('/modules/hotel/capnhatthucdon',data, function (rs2) {
+                        if (rs2.err === 0){
+                            dWin.alert('Hang hoa da duoc cap nhat thanh cong!');
+                        }
+                    })
+                }else{
+                    dj.postJSON('/modules/hotel/xulythueban', data, function (rs1) {
+                        if (rs1.err === 0) {
+                            var giovao = rs1.giovao;
+                            var kieunghi = "Nha hang - cafe";
+                            var loaiphong = "Ban an";
+                            dj('#checkinput').val(giovao);
+                            dj('#stylerender').val(kieunghi); // co the doi nhan o day -> phu hop voi nha hang
+                            dj('#styleroom').val(loaiphong);  // co the doi nhan o day -> phu hop voi nha hang
+                            // doi trang thai thue phong
+                            $("#myList UL LI").each(function () {
+                                var nameroom = dj(this).find('#tenphong').text();
+                                if (nameroom == tenphong) {
+                                    dj(this).find("img").attr('src', '/static/images/cokhach.jpg');
+                                }
+                            })
+                        }
+
+                    });
+                }
+            });
+        });
+        dj('#thanhtoan').click(function () {
+            var tenphong =  dj('#name_room').text();
+            var action = "traphong";
+            var ngaygiovao = '';
+            var giaphong = '';
+            var sohoadon = '';
+            var hinhthucnghi = '';
+            var tiencoc = '';
+            // kiem tra xem da chon thuc don hay khong + truong hop chon them -> click nut thanh toan luon ma khong phai click save
+            var itemdata = {};
+            var tienhang = dj('#tongtienhang').val();
+
+            dj.postJSON('/modules/hotel/laytrangthaiphong', {'tenphong': tenphong}, function (rs) {
+                var trangthaiphong = rs.data;
+                if(trangthaiphong == 1){
+                    dj('.themthucdon').each(function () {
+                        var mahang = dj(this).find('td').eq(0).text();
+                        var soluong = dj(this).find('td').eq(1).text();
+                        if (mahang != "") {
+                            itemdata[mahang] = parseInt(soluong);
+                        }
+                    });
+                    var data = {
+                        'tenphong': tenphong,
+                        'tienhang': tienhang,
+                        'items': djson.encode(itemdata)
+                    };
+                    dj.postJSON('/modules/hotel/testcapnhathanghoa', data, function (rs) {
+                        if (rs.err === 0) {
+                            dWin.alert('Hàng hóa đã được thêm thành công!');
+                        }
+                    });
+                    // *** end** //
+                    dj.postJSON('/modules/hotel/laythongtinthanhtoan1', {
+                        'tenphong': tenphong
+                    }, function (rs) {
+                        var item = rs.data;
+                        var tenkh = rs.tenkh;
+                        var hanghoa = rs.hanghoa;
+                        //djLog(item);
+                        for (var i in item) {
+                            sohoadon = item[i]['sohd'];
+                            ngaygiovao = item[i]['ngaygiothue'];
+                            giaphong = item[i]['giaphong'];
+                            hinhthucnghi = item[i]['hinhthucnghi'];
+                            tiencoc = item[i]['tiencoc']
+                        }
+                        return dhotel.traphong(action, rs, tenphong, sohoadon, ngaygiovao, giaphong, hinhthucnghi, tenkh,
+                                tiencoc, hanghoa);
+                    });
+                }else{
+                    dWin.alert('Bạn chưa lưu bàn phòng');
+                }
+            });
+        });
+
+        // Show menu when a list item is clicked
+        $("#myList UL LI").contextMenu({
+            menu: 'myMenu'
+        }, function (action, el, pos) {
+            if (action == 'thuephong') {
+                var tenphong = $(el).find('p').text();
+                var tienhang = 0;
+                var hanghoa_new = {}; // truong hop chon mon an rui
+                // return dhotel.thuephong(action, el, tenphong); // phien ban cu
+                return dhotel.thuephong(action, el, tenphong, hanghoa_new, tienhang);
+            }
+            if (action == 'traphong') {
+                var tenphong = $(el).find('p').text();
+                var ngaygiovao = '';
+                var giaphong = '';
+                var sohoadon = '';
+                var hinhthucnghi = '';
+                var tiencoc = '';
+                // kiem tra xem da chon thuc don hay khong + truong hop chon them -> click nut thanh toan luon ma khong phai click save
+                var itemdata = {};
+                var tienhang = dj('#tongtienhang').val();
+
+                dj.postJSON('/modules/hotel/laytrangthaiphong', {'tenphong': tenphong}, function (rs) {
+                    var trangthaiphong = rs.data;
+                    var tienphutroi = rs.tienphutroi;
+                    if (trangthaiphong == 1) {
+                        //dj('.themthucdon').each(function () {
+                        //    var mahang = dj(this).find('td').eq(0).text();
+                        //    var soluong = dj(this).find('td').eq(1).text();
+                        //    if (mahang != "") {
+                        //      itemdata[mahang] = parseInt(soluong);
+                        //    }
+                        //});
+                        //var data = {
+                        //    'tenphong': tenphong,
+                        //    'tienhang': tienhang,
+                        //    'items': djson.encode(itemdata)
+                        //};
+                        //dj.postJSON('/modules/hotel/testcapnhathanghoa', data, function (rs) {
+                        //    if (rs.err === 0) {
+                        //       dWin.alert('Hàng hóa đã được thêm thành công!');
+                        //    }
+                        //});
+                        // *** end** //
+                        dj.postJSON('/modules/hotel/laythongtinthanhtoan', {
+                            'tenphong': tenphong
+                        }, function (rs) {
+                            var item = rs.data;
+                            var tenkh = rs.tenkh;
+                            var hanghoa = rs.hanghoa;
+                            for (var i in item) {
+                                sohoadon = item[i]['sohd'];
+                                ngaygiovao = item[i]['ngaygiothue'];
+                                giaphong = item[i]['giaphong'];
+                                hinhthucnghi = item[i]['hinhthucnghi'];
+                                tiencoc = item[i]['tiencoc']
+                            }
+                            return dhotel.traphong(action, el, tenphong, sohoadon, ngaygiovao, giaphong, hinhthucnghi, tenkh,
+                                    tiencoc, hanghoa, tienphutroi);
+                        });
+                    }else{
+                        dWin.alert('Bạn chưa lưu bàn phòng');
+                    }
+                });
+            }
+
+            if (action == 'suaphong') {
+                var tenphong = $(el).find('p').text();
+                var loaiphongcu = $(el).find("label[name='loaiphong']").text();
+                return dhotel.thongtinphong(action, el, tenphong, loaiphongcu);
+            }
+
+            if (action == 'dichvu') {
+                var tenphong = $(el).find('p').text();
+                //lay thong tin hang hoa ban dau neu co
+                dj.getJSON('/modules/hotel/thongtinhanghoa', {'tenphong': tenphong}, function (rs) {
+                    if (rs.err === 0) {
+                        //djLog(rs.data);
+                        var trangthai = "";
+                        if (rs.data['items'] == "") {
+                            trangthai = "add"
+                        } else {
+                            trangthai = "edit"
+                        }
+                        return dhotel.dichvu(action, el, tenphong, rs.data, trangthai);
+                    }
+                });
+            }
+
+            if (action == 'donphong') {
+                var tenphong = $(el).find('p').text();
+                //lay thong tin hang hoa ban dau neu co
+                dj.getJSON('/modules/hotel/xulydonphong', {'tenphong': tenphong}, function (rs) {
+                    if (rs.err === 0) {
+                        dWin.alert('Bạn dòn phòng thành công!');
+                        $("#myList UL LI").each(function () {
+                            var nameroom = dj(this).find('#tenphong').text();
+                            if (nameroom == tenphong) {
+                                $(this).find("img").attr('src','/static/images/phongtrong.jpg');
+                            }
+                        })
+                    }
+                });
+            }
+            if (action == 'chuyenphong') {
+                var tenphong = $(el).find('p').text();
+                var ngaygiovao = '';
+                var giaphong = '';
+                var sohoadon = '';
+                var hinhthucnghi = '';
+                var tiencoc = '';
+                dj.getJSON('/modules/hotel/laythongtinthanhtoan', {
+                    'tenphong': tenphong
+                }, function (rs) {
+                    var item = rs.data;
+                    var tenkh = rs.tenkh;
+                    for (var i in item) {
+                        sohoadon = item[i]['sohd'];
+                        ngaygiovao = item[i]['ngaygiothue'];
+                        giaphong = item[i]['giaphong'];
+                        hinhthucnghi = item[i]['hinhthucnghi'];
+                        tiencoc = item[i]['tiencoc']
+                    }
+                    return dhotel.chuyenphong(action, el, tenphong, sohoadon, ngaygiovao, giaphong, hinhthucnghi, tenkh,
+                            tiencoc);
+                });
+            }
+        });
+
+        // Disable menus
+        $("#disableMenus").click(function () {
+            $('#myDiv, #myList UL LI').disableContextMenu();
+            $(this).attr('disabled', true);
+            $("#enableMenus").attr('disabled', false);
+        });
+
+        // Enable menus
+        $("#enableMenus").click(function () {
+            $('#myDiv, #myList UL LI').enableContextMenu();
+            $(this).attr('disabled', true);
+            $("#disableMenus").attr('disabled', false);
+        });
+
+        // Khoa chuc nang  thue phong/them dich vu
+        $("#disableItems").click(function () {
+            $('#myMenu').disableContextMenuItems('#thuephong,#dichvu');
+            $(this).attr('disabled', true);
+            $("#enableItems").attr('disabled', false);
+        });
+
+        // Mo chuc nang  thue phong/them dich vu
+        $("#enableItems").click(function () {
+            $('#myMenu').enableContextMenuItems('#thuephong,#dichvu');
+            $(this).attr('disabled', true);
+            $("#disableItems").attr('disabled', false);
+        });
+        $('#datphong').click(function () {
+            return dhotel.datphong();
+        });
+        $('#nhaphang').click(function () {
+            return dhotel.nhaphang();
+        });
+        $('#chuyenhinhthucnghi').click(function () {
+            //***** phai co chuc nang chuyen hinh thuc nghi  (doi trang thai nghi)
+            return dhinhthucnghi.hinhthucnghi();
+        });
+        $('#gopban').click(function () {
+           return dgopban.gopbanphong();
+        });
+        $('#huyphong').click(function () {
+            return dhotel.huyphong();
+        });
+        $('.add_hanghoa').click(function () {
+            return dhanghoa.themhanghoa();
+        });
+    });
+
+
+</script>
+<script type="text/javascript">
+
+</script>
+{% endblock %}
+
+
+{% block body %}
+<div id="thucdon">
+    <div style="font-family: Arial; font-size: 16px; margin-top: 10px;"><b style="color: black; padding-left: 5px;">Thực đơn bàn/phòng số : </b>
+        <b style="color: red" class="td_menu" id="name_room"></b>
+    </div>
+    <table id="add_menu">
+        <tbody>
+        <tr>
+            <td style="padding-bottom: 10px; padding-right: 10px;"><b style="color: black;">Menu:</b></td>
+            <td style="padding-bottom: 10px; padding-right: 10px; padding-top: 10px;">
+                <datalist id="json-datalist" class="hanghoa" name="hanghoa form-control input-sm"
+                          style="width: 200px; float: left">
+                </datalist>
+                 <input type="text" list="json-datalist" placeholder="Chọn tên hàng " id="ajax"
+                       style="float: left; width: 150px;" class="ajax form-control input-sm" value=""/>
+            </td>
+            <td style="padding-bottom: 10px; padding-right: 5px; padding-left:5px;"><b style="color: black;">Số lượng: </b></td>
+            <td style="padding-bottom: 10px; padding-right: 10px;">
+                <input id="soluong" name="soluong" class="soluong form-control input-sm" value="1" style="width: 50px;">
+            </td>
+            <td>
+                        <span class="addproduct" style="padding-right: 20px; cursor: pointer;">
+                        <i class="fa fa-file-o" style="font-size:25px"></i>&nbsp;<b style="color: black; padding-left: 5px;">Thêm</b></span>
+            </td>
+            <td>
+                      <span class="editproduct" style="padding-right: 20px; cursor: pointer;">
+                  <i class="fa fa-pencil fa-fw" style="font-size:25px"></i><b style="color: black; padding-left: 5px;">Sửa</b></span>
+            </td>
+            <td>
+                      <span class="delproduct" style="padding-right: 20px; cursor: pointer;">
+                  <i class="fa fa-times" style="font-size:25px"></i><b style="color: black; padding-left: 5px;">Xóa</b></span>
+            </td>
+            <td>
+                      <span class="saveproduct" style="padding-right: 20px; cursor: pointer;">
+                          <i class="fa fa-save" style="font-size:25px"></i><b style="color: black; padding-left: 5px;"> Ghi giờ vào & Ghi Thực đơn</b></span>
+            </td>
+            <td>
+                      <span class="add_hanghoa" style="padding-right: 20px; cursor: pointer;">
+                          <i class="fa fa-plus-square" style="font-size:25px"></i><b style="color: black; padding-left: 5px;">Thêm danh mục hàng hóa</b></span>
+            </td>
+            <!--<td>-->
+                <!--<span style="padding-left: 0px;">-->
+                    <!--<i style="font-size:16px">Chi tiết bàn/phòng : </i> <b style="font-size:16px;color:red" class="td_menu"></b>-->
+                <!--</span>-->
+            <!--</td>-->
+        </tr>
+        </tbody>
+    </table>
+
+    <div style="width:800px;height:250px;overflow-y:scroll; float: left;">
+        <table class="display table table-bordered dataTable no-footer">
+            <thead>
+            <tr>
+                <th>Tên hàng</th>
+                <th>Số lượng</th>
+                <th>Đơn giá</th>
+                <th>Thành tiền</th>
+                <th>Chon</th>
+            </tr>
+            <tbody id="tbnhaphang">
+
+            </tbody>
+            {{trs}}
+        </table>
+    </div>
+    <div style="float: left; width: 320px; height: 250px; background-color: yellowgreen">
+        <p>
+           <i style="font-size:16px; padding-top: 5px; color: black;">Chi tiết bàn/phòng : </i> <b style="font-size:14px; padding-top:5px; color:red" class="td_menu"></b> / Time:
+            <b style="font-size: 14px; color: blue" class="thoigiandung"></b>
+        </p>
+        <p>
+            <b style="padding-right: 50px; margin-left: 10px; margin-top: 5px;">Giờ vào:</b>
+            <input id="checkinput" style="width: 120px; margin-top: 10px;" name="checkinput" value=""/>
+        </p>
+        <!--<p>-->
+            <!--<b style="padding-right: 58px; margin-left: 10px;">Giờ ra:</b>-->
+            <!--<input id="checkoutput" style="width: 120px; " name="checkoutput" value="" />-->
+        <!--</p>-->
+        <p>
+            <b style="padding-right: 12px; margin-left: 10px;">Hình thức nghỉ:</b>
+            <input id="stylerender" style="width: 120px; " name="stylerender" value="" />
+        </p>
+        <p>
+            <b style="padding-right: 30px; margin-left: 10px;">Loại phòng:</b>
+            <input id="styleroom" style="width: 120px; " name="styleroom" value=""/>
+        </p>
+        <p>
+            <b style="padding-right: 30px; margin-left: 10px;">Ticket:</b>
+            <input  style="width: 120px;margin-left: 30px;" id="songuoio" name="songuoio" />
+        </p>
+        <p>
+            <b style="float: left; padding-right: 10px; margin-left: 10px;">Tổng tiền hàng:</b>
+            <input style="width: 140px; float: left; margin-right: 20px;" id="tongtienhang" disabled="disabled"
+                   name="tienhang" type="text" class="form-control input-sm" value="">
+        </p>
+        <p>
+            <button type="button" id="thanhtoan" class="btn w-xs btn-info" style="margin-left: 10px; margin-right: 10px;">Trả phòng (Thanh toán)</button>
+            <!--<button type="button" id="thanhtoan" style="margin-left: 10px; margin-right: 10px;"> Trả phòng (Thanh toán)</button>-->
+            <!--<button type="button" id="luuban" style="margin-left: 10px; margin-right: 10px;">Lưu bàn Cafe</button>-->
+        </p>
+
+    </div>
+</div>
+<div>
+        <span style="float: left;padding-left: 20px; padding-top: 10px;">
+            <img src="/static/images/phongtrong.jpg" style="width:40px;height:30px;float: left;padding-right: 10px;">
+            <b style="font-size: 14px;">Bàn/Phòng trống</b>
+
+        </span>
+        <span style="float: left;padding-left: 20px; padding-top: 10px;">
+            <img src="/static/images/cokhach.jpg" style="width:40px;height:30px;float: left;padding-right: 10px;">
+            <b style="font-size: 14px;">Bàn/Phòng có khách</b>
+        </span>
+        <span style="float: left;padding-left: 20px; padding-top: 10px;">
+            <img src="/static/images/phongdattruoc.jpg" style="width:40px;height:30px;float: left;padding-right: 10px;">
+            <b style="font-size: 14px;">Bàn/Phòng đặt trước</b>
+        </span>
+        <span style="float: left;padding-left: 20px; padding-top: 10px;">
+            <img src="/static/images/chuadonphong.jpg" style="width:40px;height:30px;float: left;padding-right: 10px;">
+            <b style="font-size: 14px;">Chưa dọn Bàn/Phòng</b>
+        </span>
+</div>
+{% for rs in sodo %}
+<!-- https://www.w3schools.com/howto/howto_js_accordion.asp -->
+<button class="accordion">
+    {{rs['tenkhuvuc']}}
+</button>
+<div class="panel">
+    <div id="myList">
+        <ul>
+            {% for i in rs['tenphong']%}
+            <li>
+                <span id="tenkv" style="width: 50px; float: left">{{rs['tenkhuvuc']}}</span>
+                <p id="tenphong" style="width: 60px; float: left; color: red; padding-left: 10px;">{{i['tenphong']}}</p>
+                <br>
+                <t id="trangthai" hidden>{{i['trangthai']}}</t>
+                <d id="trangthaidatphong" hidden>{{i['trangthaidatphong']}}</d>
+                <dp id="trangthaidonphong" hidden>{{i['trangthaidonphong']}}</dp>
+                <lp id="loaiphong" style="float: left" hidden><label style="width: 100px; display: none;"
+                                                                     name="loaiphong">{{i['loaiphong']}}</label>
+                </lp>
+                <img src="/static/images/phongtrong.jpg" style="width:80px; height: 80px;">
+                <tc id="tiencoc" style="width: 160px; float: left" hidden> Đặt trước :<label
+                        style="width: 100px;display: none;"
+                        name="tiencoc">{{i['tiencoc']}}/VNĐ</label>
+                </tc>
+                <!--<sn id="songuoi" style="float: left"> Ticket :<label style="width: 100px;"-->
+                <!--name="songuoi"></label>-->
+
+                <!--</sn>-->
+
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div id="danhsachthucdon">
+        <button type="button" class="btn w-xs btn-danger">MENU</button>
+        <button class="btn btn-success luuban" id="luuban" type="button" style="float:right;">
+            <i class="fa fa-save"></i>
+            <span class="bold">Ghi thực đơn</span>
+        </button>
+        <table id="list_menu" class="display table table-bordered dataTable no-footer" style="background-color: #ffb62c">
+            <tr>
+                <td style="width: 20px;">STT</td>
+                <td style="width: 120px;">Tên hàng</td>
+                <td style="width: 100px;">Số lượng</td>
+                <td style="width: 60px;">Đơn giá</td>
+                <td style="width: 80px;">Chọn</td>
+            </tr>
+        </table>
+        <div id="addlistmenu" style="width:100%;height:320px;overflow-y:scroll">
+            <table id="listmenu" class="tblRoom table table-bordered table-striped">
+                {% set i=0 %}
+                {% for dt in rs['data_menu'] %}
+                {% set i = i + 1 %}
+                <!--{% if i % 2 != 0 %}-->
+                <tr style="background-color: cornsilk">
+                    <td style="width:3px;">{{ i }}</td>
+                    <td style="width:93px">{{dt['mahang']}}</td>
+                    <td style="width:50px">
+                        <input type="number" class="quantity form-control text-center" title="Số lượng"
+                               value="1" min="1" size="1" maxlength="3" id="quantity" name="quantity">
+                    </td>
+                    <td style="width:30px">{{dt['giaban']|int}}</td>
+                    <!--<td style="width: 10px; cursor: pointer;"><i class="fa fa-upload button_addmenu"></i></td>-->
+                    <td style="width: 10px; cursor: pointer;"><i class="button_addmenu"><img src="/static/images/upload.jpeg" style="width: 30px;height: 30px;"></i></td>
+                </tr>
+                <!--{% else %}-->
+                <!--<tr>-->
+                    <!--<td>-->
+                        <!--asdf-->
+                    <!--</td>-->
+                <!--</tr>-->
+                <!--{% endif%}-->
+                {% endfor %}
+            </table>
+        </div>
+
+    </div>
+
+    </div>
+
+
+{% endfor %}
+<script>
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+    for (i = 0; i < acc.length; i++) {
+        acc[i].onclick = function () {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.maxHeight) {
+                panel.style.maxHeight = null;
+            } else {
+                panel.style.maxHeight = panel.scrollHeight + "px";
+            }
+        }
+    }
+</script>
+
+<div id="options">
+    <p>
+        <input type="button" id="datphong" value="Kiểm tra đặt phòng" style="width: 200px;"/>
+        <input type="button" id="chuyenhinhthucnghi" value="Chuyển hình thức nghỉ" style="width: 200px;"/>
+    </p>
+    <p>
+        <input type="button" id="gopban" value="Gộp phòng/bàn" style="width: 200px;"/>
+    </p>
+    <p>
+        <input type="button" id="nhaphang" value="Nhập hàng hóa" style="width: 200px;"/>
+        <input type="button" id="huyphong" value="Hủy phòng" style="width: 200px;"/>
+    </p>
+    <p>
+        <input type="button" id="disableItems" value="Khóa Thuê phòng/Thêm dịch vụ" style="width: 200px;"/>
+        <input type="button" id="enableItems" value="Mở Thuê phòng/Thêm dịch vụ" disabled="disabled"
+               style="width: 200px;"/>
+    </p>
+    <p>
+        <input type="button" id="disableMenus" value="Khóa Menu" style="width: 200px;"/>
+        <input type="button" id="enableMenus" value="Mở Menu" disabled="disabled" style="width: 200px;"/>
+    </p>
+</div>
+
+<ul id="myMenu" class="contextMenu">
+    <li class="thuephong separator"><a href="#thuephong">Thuê phòng</a></li>
+    <li class="traphong"><a href="#traphong">Trả phòng</a></li>
+    <li class="dichvu"><a href="#dichvu">Thêm dịch vụ</a></li>
+    <li class="suaphong"><a href="#suaphong">Sửa loại phòng</a></li>
+    <li class="donphong"><a href="#donphong">Dọn phòng</a></li>
+    <li class="chuyenphong separator"><a href="#chuyenphong">Chuyển phòng</a></li>
+</ul>
+
+{% endblock %}
