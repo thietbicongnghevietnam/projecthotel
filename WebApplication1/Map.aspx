@@ -419,6 +419,13 @@
 
                     <div class="modal-body">
                         <div class="container-fluid" id="printableArea">
+
+                           Ten phong: <b id="tenphong2"></b>
+                           Tong tien: <b id="tongtien2"></b>
+                           C/K: <b id="chietkau2"></b><br />
+                           Thanh toan: <b id="thantoan2"></b>
+                           Con lai: <b id="conlai2"></b>
+
                                 <div style="width: 100%; height: 250px; overflow-y: scroll; float: left;">
                                     <table class="display table table-bordered dataTable no-footer">
                                         <thead>
@@ -681,26 +688,19 @@
 
             $('#khachthanhtoan2').click(function () {
                   //save hoa don truoc
-                 var itemdata = {};
+                var itemdata = {};
                 var tenphong = $('#nametable').text();//dj('#name_room').text();
-                var tienhang = $('#tongtienid').val();                 
+                var tienhang = $('#tongtienid').val();                                 
                 if (tenphong != "") {
                     $('.themthucdon').each(function () {
                         //var mahang = $(this).find('td').eq(0).text();
                         //var soluong = $(this).find('td').eq(1).text();
                         var mahang = $(this).find('td').eq(0).text() + "," + $(this).find('td').eq(2).text() + "," + $(this).find('td').eq(3).text();
                         var soluong = $(this).find('td').eq(1).text();
-
                         var element = {}, cart = [];
                         if (mahang != "") {
                             //items.push({'a': chk ? 1 : 0, 'c': content});
-                            itemdata[mahang] = parseInt(soluong);
-                            //itemdata.mahang = mahang;
-
-                            //itemdata.soluong = soluong;
-                            //cart.push({ itemdata: itemdata });
-                            //JSON.stringify([{a: 1}, {a: 2}]) 
-                            //==> "[{"a":1},{"a":2}]" 
+                            itemdata[mahang] = parseInt(soluong);                            
                         }
                     });
                     var hanghoa_new = itemdata;
@@ -725,9 +725,8 @@
                             //alert("No Match");
                         }
                     });
-
-                     // nha du lieu len thong tin hoa don
-                            // lay thong tin hoang hoa
+                        // nha du lieu len thong tin hoa don
+                        // lay thong tin hoang hoa
                         $.ajax({
                             type: "POST",
                             contentType: "application/json; charset=utf-8",
@@ -738,9 +737,7 @@
                             success: function (data) {
                                 //response(data.d);                              
                                 const objdata = $.parseJSON(data.d);
-
                                 //var giaphong = objdata['Table'][2]; 
-
                                 //debugger;
                                 if (objdata['Table'][0] != "")  //|| objdata ['Table'][0][0] != "0"
                                 {
@@ -752,10 +749,10 @@
                                     if (myArr == '0') {
                                         //truong hop chua co hang ban
                                         $('#tbnhaphang_inhoadon tr').remove();
-                                        //$('#tongtienid').val(0);                                        
-                                        //$('#thanhtoanid').val(0);
-                                        //$('#chietkhauid').val(0);
-
+                                        $("#tenphong2").text(tenphong);
+                                        $('#tongtien2').text(0);                                        
+                                        $('#thantoan2').text(0);
+                                        $('#chietkau2').text(0);
                                     } 
                                     else 
                                     {
@@ -765,7 +762,6 @@
                                             blkstr.push(str);
                                         });
                                         debugger;
-
                                         //var aaa = blkstr[0];
                                         //var bbb = blkstr[1];
                                         for (var i = 0; i < blkstr.length; i++) {
@@ -786,60 +782,50 @@
                                                 '</tr>';
                                             $('#tbnhaphang_inhoadon').append(newrow);
                                         }
-
                                         //$('#checkinput1').val(giovao);
-                                        //$('#checkinput2').val(giora);
-                        
-                                        
-                                        
-                                        //$('#tongtienid').val(tienhang);
-                                        //$('#thanhtoanid').val(tienhang);
-                                        //$('#chietkhauid').val(0);
+                                        //$('#checkinput2').val(giora);                                                                
+                                        $("#tenphong2").text(tenphong);
+                                        $('#tongtien2').text(tienhang);
+                                        $('#thantoan2').text(tienhang);
+                                        $('#chietkau2').text(0);
                                     }
                                 }
                                 else {
                                     $('#tbnhaphang_inhoadon tr').remove();
-                                    //$('#tongtienhang').val(0);
-                                    //$('#thanhtoanid').val(0);
-                                    //$('#chietkhauid').val(0);
-                                    //$('#songuoio').val(ticket);
+                                     $("#tenphong2").text(tenphong);
+                                        $('#tongtien2').text(0);                                        
+                                        $('#thantoan2').text(0);
+                                        $('#chietkau2').text(0);
                                 }
-
                             },
                             error: function () {
                                 //alert("No Match");
                             }
-                        });
-
-
-            
+                        });            
                 }
                 else
                 {
                         alert('Bạn chưa chọn phòng thuê!')
                 }
-
-
                   $('#myModal6').modal('show');
-            })
+            })            
 
-            function thanhtoanhoadon()
+            function thanhtoanhoadon(tenphong2,tongtien2,chietkau2,thantoan2,conlai2)
             {
-                var psco = "100000";//$('#thanhtoanid').val();
-                var tongtienhang = "100000";//$('#tongtienid').val();
-                var tienck = "0";//$('#chietkhauid').val();
                 debugger;
-                var tienthoi = (parseFloat(psco) - parseFloat(tongtienhang)) 
-                if (tienthoi < 0) {
-                            $('#lblconlai').text("Tiền thiếu :");
-                            $('#conlaiid').val(tienthoi);
-                        } else {
-                            $('#lblconlai').text("Tiền thừa :");
-                            $('#conlaiid').val(tienthoi);
-                        }
-
-                var tenphong = "P01";//$('#nametable').text();
-                var psno = "0";//$('#conlaiid').val();
+                var psco = thantoan2;//$('#thanhtoanid').val();
+                var tongtienhang = tongtien2;//$('#tongtienid').val();
+                var tienck = chietkau2;//$('#chietkhauid').val();                
+                //var tienthoi = (parseFloat(psco) - parseFloat(tongtienhang)) 
+                //if (tienthoi < 0) {
+                //            $('#lblconlai').text("Tiền thiếu :");
+                //            $('#conlaiid').val(tienthoi);
+                //        } else {
+                //            $('#lblconlai').text("Tiền thừa :");
+               //             $('#conlaiid').val(tienthoi);
+                //        }
+                var tenphong = tenphong2;//$('#nametable').text();
+                var psno = conlai2;//$('#conlaiid').val();
                 var itemdata = {};
 
                 $('.themthucdon2').each(function () {                        
@@ -871,8 +857,10 @@
                                 $('#tongtienid').val(0);                                        
                                 $('#thanhtoanid').val(0);
                                 $('#chietkhauid').val(0);
-                            } else {
-                                alert('Phòng/ bàn đang trống!');
+                            } 
+                            else 
+                            {
+                                //alert('Phòng/ bàn đang trống!');
                             }
                             
 
@@ -1548,7 +1536,14 @@
             });
 
             function printDiv(divId) {
-                 
+                
+                var tenphong2 = $("#MainContent_Button3").parent().parent().find("b").eq(0).text(); 
+                var tongtien2 = $("#MainContent_Button3").parent().parent().find("b").eq(1).text();
+                var chietkau2 = $("#MainContent_Button3").parent().parent().find("b").eq(2).text();
+                var thantoan2 = $("#MainContent_Button3").parent().parent().find("b").eq(3).text();
+                var conlai2 = $("#MainContent_Button3").parent().parent().find("b").eq(4).text();
+             
+                //alert("ten phong"+ tenphong111);
                 var printContents = document.getElementById(divId).innerHTML;
                 var originalContents = document.body.innerHTML;
 
@@ -1556,7 +1551,7 @@
 
                 window.print();    
 
-                thanhtoanhoadon();
+                thanhtoanhoadon(tenphong2,tongtien2,chietkau2,thantoan2,conlai2);
 
                 document.body.innerHTML = originalContents;
                 setTimeout(function() {
