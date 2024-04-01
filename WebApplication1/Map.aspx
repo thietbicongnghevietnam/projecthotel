@@ -50,6 +50,24 @@
             font-size: 1em;
         }
 
+        /* CSS để điều chỉnh kiểu in */
+    @media print {
+        /* Ẩn các phần tử không muốn in */
+        body * {
+            visibility: hidden;
+        }
+        /* Hiển thị lại phần tử div mà bạn muốn in */
+        #printableArea, #printableArea * {
+            visibility: visible;
+        }
+        /* Đảm bảo rằng nội dung divToPrint vẫn nằm trong giới hạn in */
+        #printableArea {
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    }
+
     
 
     </style>
@@ -83,11 +101,11 @@
                             <b style="padding-right: 10px; margin-left: 10px; margin-top: 5px;">Giờ ra:</b>
                             <input id="checkinput2" style="width: 150px; margin-top: 10px;" name="checkinput2" value=""/>
                             <b style="padding-right: 12px; margin-left: 10px;">Hình thức nghỉ:</b>
-                            <input id="stylerender" style="width: 50px; " name="stylerender" value="" />
+                            <input id="stylerender" style="width: 80px; " name="stylerender" value="" />
                             <b style="padding-right: 10px; margin-left: 10px;">Loại phòng:</b>
                             <input id="styleroom" style="width: 50px; " name="styleroom" value=""/>
                             <b style="padding-right: 10px; margin-left: 10px;">Ticket:</b>
-                            <input  style="width: 50px;margin-left: 30px;" id="songuoio" name="songuoio" />
+                            <input  style="width: 80px;margin-left: 30px;" id="ticketid" name="ticket" />
                         </div>
 
                         <div class="col-sm-4">
@@ -199,6 +217,10 @@
                                                 <label for="inmaunho" style="float: left; margin-top: 5px;">Inmaunho</label>
                                                 <input type="checkbox" id="inmaunho" name="inmaunho" checked>
                                             </td>
+                                            <td style="padding-bottom: 10px; padding-right: 10px; padding-left: 10px;">
+                                                <b style="padding-right: 3px; margin-left: 10px;">So HD:</b>
+                                                <input  style="width: 80px;margin-left: 5px;" id="hoadonid" name="sohoadon" />
+                                            </td>
                                             
                                             <%--<td style="padding-bottom: 10px; padding-right: 10px; padding-left: 10px;">
                                                 <input type="submit" value="Thanh toan" id="khachthanhtoan" class="btn btn-success float-right">  <%--class , id="saveproduct"
@@ -222,8 +244,6 @@
                                             </tr>
                                             <tbody id="tbnhaphang">
                                             </tbody>
-
-
                                     </table>
                                 </div>
 
@@ -267,12 +287,11 @@
                                     </div>
                                      
                                     <div class="col-2">
-                                        <input type="submit" value="Thanh toan" id="khachthanhtoan" class="btn btn-success float-right">  <%--class , id="saveproduct"--%>
-                                       
+                                        <input type="submit" value="Thanh toan" id="khachthanhtoan2" class="btn btn-success float-right">  <%--class , id="saveproduct"--%>                                                                                                                      
                                     </div>
                                            
                                     <div class="col-2">
-                                        <input type="submit" value="Thanh toan 2" id="khachthanhtoan2" class="btn btn-success float-right">  <%--class , id="saveproduct"--%>                                       
+                                        <input type="submit" value="In lai hoa don" id="inlaihoadon" class="btn btn-success float-right">  <%--class , id="saveproduct"--%>
                                     </div>
                                      
                                 </div>
@@ -419,12 +438,11 @@
 
                     <div class="modal-body">
                         <div class="container-fluid" id="printableArea">
-
+                            Hinh thuc: <b id="hinhthucnghi2"></b>
+                            &nbsp;&nbsp;&nbsp; tongtienhat: <b id="tongtienhat2"></b><br />
                            Ten phong: <b id="tenphong2"></b>
-                           Tong tien: <b id="tongtien2"></b>
-                           C/K: <b id="chietkau2"></b><br />
-                           Thanh toan: <b id="thantoan2"></b>
-                           Con lai: <b id="conlai2"></b>
+                           &nbsp;&nbsp;&nbsp; Tong tien hang: <b id="tongtien2"></b>                                                      
+
 
                                 <div style="width: 100%; height: 250px; overflow-y: scroll; float: left;">
                                     <table class="display table table-bordered dataTable no-footer">
@@ -433,15 +451,18 @@
                                                 <th>Tên hàng</th>
                                                 <th>Số lượng</th>
                                                 <th>Đơn giá</th>
-                                                <th>Thành tiền</th>
-                                                <th>Chon</th>
+                                                <th>Thành tiền</th>                                                
                                             </tr>
                                             <tbody id="tbnhaphang_inhoadon">
                                             </tbody>
 
 
                                     </table>
-                                </div>                                             
+                                </div>
+                            
+                           <br /> 
+                           Thanh toan: <b id="thantoan2"></b> &nbsp;&nbsp;&nbsp;  C/K: <b id="chietkau2"></b> <br />
+                           Con lai: <b id="conlai2"></b>
                             
                         </div>
                     </div>
@@ -477,6 +498,24 @@
                 //$('#TOOLING_NO_ID').prop("readonly", true);
                 //$('#CustomTooling_ID').prop("readonly", true);
                 //$('#txt_ID').prop("readonly", true);
+                
+                //lay so hoa don lon nhat
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    url: "Map.aspx/getsohoadon",
+                    //data: JSON.stringify(data),
+                    dataType: "json",
+                    success: function (data) {
+                        //response(data.d);
+                        //alert(data.d);
+                        $("#hoadonid").val(data.d);
+                    },
+                    error: function (result) {
+                        //alert("No Match");
+                    }
+                 });
+                
 
                 // phan render giao dien cac phong co khach va khong co khach
                 $("#myList UL LI").each(function () {
@@ -546,6 +585,11 @@
                                     const myArr = JSON.parse(objdata['Table'][0][0]);
                                     var tienhang = objdata['Table'][0][1];
                                     var giovao = objdata['Table'][0][3];
+                                    var hinhthucnghi = objdata['Table'][0][4];
+                                    var giohat = objdata['Table'][0][5];
+
+                                    //var sohoadon = objdata['Table'][0][6];
+                                    //id stylerender
 
                                     var today = new Date();
                                     var dd = today.getDate();
@@ -625,6 +669,12 @@
                                         $('#thanhtoanid').val(0);
                                         $('#chietkhauid').val(0);
 
+                                        $('#ticketid').val(0);
+                                        $('#stylerender').val('NH-CF');
+                                        
+                                        
+                                        
+
                                     } 
                                     else 
                                     {
@@ -664,6 +714,9 @@
                                         $('#tongtienid').val(tienhang);
                                         $('#thanhtoanid').val(tienhang);
                                         $('#chietkhauid').val(0);
+
+                                        $('#ticketid').val(giohat);
+                                        $('#stylerender').val(hinhthucnghi);
                                     }
                                 }
                                 else {
@@ -671,7 +724,9 @@
                                     $('#tongtienhang').val(0);
                                     $('#thanhtoanid').val(0);
                                     $('#chietkhauid').val(0);
-                                    //$('#songuoio').val(ticket);
+
+                                    $('#ticketid').val(0);
+                                    $('#stylerender').val('NH-CF');
                                 }
 
                             },
@@ -686,11 +741,32 @@
 
             });
 
-            $('#khachthanhtoan2').click(function () {
-                  //save hoa don truoc
+            $('#khachthanhtoan2').click(function () {                                       
+                //save hoa don truoc
                 var itemdata = {};
                 var tenphong = $('#nametable').text();//dj('#name_room').text();
                 var tienhang = $('#tongtienid').val();                                 
+
+                var sogiodung = $(".sogiodung").text();
+                var sophutdung = $(".sophutdung").text();
+                
+                var tongsophutdung = parseInt(sogiodung)*60+parseInt(sophutdung);
+                var hinhthucnghi = $('#stylerender').val();
+                var giohat = '0';//$('#ticketid').val();
+                if(hinhthucnghi == 'Karaoke')
+                {
+                    giohat = $('#ticketid').val();
+                }
+                var tienhat1phut = parseInt(giohat)/60;
+                var tongtienhat = Math.round(tongsophutdung * tienhat1phut);
+                //console.log(tongsophutdung)    
+                //console.log(tongsophutdung)
+
+                //alert(tienhat1phut);
+                //alert(tongtienhat);
+                                 
+                //alert(tongsophutdung);
+
                 if (tenphong != "") {
                     $('.themthucdon').each(function () {
                         //var mahang = $(this).find('td').eq(0).text();
@@ -753,6 +829,9 @@
                                         $('#tongtien2').text(0);                                        
                                         $('#thantoan2').text(0);
                                         $('#chietkau2').text(0);
+
+                                        $('#hinhthucnghi2').text('');
+                                        $('#tongtienhat2').text(tongtienhat);
                                     } 
                                     else 
                                     {
@@ -777,8 +856,7 @@
                                                 '<td id="tenhang">' + mahang + '</td>' +
                                                 '<td id="soluong">' + soluong + '</td>' +
                                                 '<td id="giale">' + dongia + '</td>' +
-                                                '<td id="thanhtien">' + thanhtien + '</td>' +
-                                                '<td><input name="checkinput" class="checkinput" type="checkbox" value="" /></td>' +
+                                                '<td id="thanhtien">' + thanhtien + '</td>' +                                               
                                                 '</tr>';
                                             $('#tbnhaphang_inhoadon').append(newrow);
                                         }
@@ -786,8 +864,11 @@
                                         //$('#checkinput2').val(giora);                                                                
                                         $("#tenphong2").text(tenphong);
                                         $('#tongtien2').text(tienhang);
-                                        $('#thantoan2').text(tienhang);
+                                        $('#thantoan2').text(parseInt(tienhang)+parseInt(tongtienhat));
                                         $('#chietkau2').text(0);
+
+                                        $('#hinhthucnghi2').text(hinhthucnghi);
+                                        $('#tongtienhat2').text(tongtienhat);
                                     }
                                 }
                                 else {
@@ -796,6 +877,9 @@
                                         $('#tongtien2').text(0);                                        
                                         $('#thantoan2').text(0);
                                         $('#chietkau2').text(0);
+
+                                        $('#hinhthucnghi2').text('');
+                                        $('#tongtienhat2').text(tongtienhat);
                                 }
                             },
                             error: function () {
@@ -810,12 +894,13 @@
                   $('#myModal6').modal('show');
             })            
 
-            function thanhtoanhoadon(tenphong2,tongtien2,chietkau2,thantoan2,conlai2)
+            function thanhtoanhoadon(tenphong2,tongtien2,chietkau2,thantoan2,conlai2,tienhat,sohoadon)
             {
                 debugger;
                 var psco = thantoan2;//$('#thanhtoanid').val();
                 var tongtienhang = tongtien2;//$('#tongtienid').val();
-                var tienck = chietkau2;//$('#chietkhauid').val();                
+                var tienck = chietkau2;//$('#chietkhauid').val();
+                var tongtienhat =  tienhat;               
                 //var tienthoi = (parseFloat(psco) - parseFloat(tongtienhang)) 
                 //if (tienthoi < 0) {
                 //            $('#lblconlai').text("Tiền thiếu :");
@@ -838,6 +923,8 @@
                     var data = {
                         tenphong: tenphong,
                         tongtienhang: tongtienhang,
+                        tongtienhat:tongtienhat,
+                        psco:psco,
                         tienno: psno,
                         tienck:tienck,
                         items: JSON.stringify(itemdata)
@@ -857,6 +944,11 @@
                                 $('#tongtienid').val(0);                                        
                                 $('#thanhtoanid').val(0);
                                 $('#chietkhauid').val(0);
+                                
+                                $('#stylerender').val('');
+                                $('#ticketid').val(0);
+                                
+                                $('#hoadonid').val(parseInt(sohoadon)+1);
                             } 
                             else 
                             {
@@ -870,73 +962,7 @@
                         }
                     });
             }
-
-            $('#khachthanhtoan').click(function () {
-                //debugger;
-                var psco = $('#thanhtoanid').val();
-                var tongtienhang = $('#tongtienid').val();
-                var tienck = $('#chietkhauid').val();
-
-                var tienthoi = (parseFloat(psco) - parseFloat(tongtienhang)) 
-                if (tienthoi < 0) {
-                            $('#lblconlai').text("Tiền thiếu :");
-                            $('#conlaiid').val(tienthoi);
-                        } else {
-                            $('#lblconlai').text("Tiền thừa :");
-                            $('#conlaiid').val(tienthoi);
-                        }
-
-                var tenphong = $('#nametable').text();
-                var psno = $('#conlaiid').val();
-                var itemdata = {};
-                if (tenphong != "") {
-                    $('.themthucdon').each(function () {                        
-                        var mahang = $(this).find('td').eq(0).text() + "," + $(this).find('td').eq(2).text() + "," + $(this).find('td').eq(3).text();
-                        var soluong = $(this).find('td').eq(1).text();                       
-                        if (mahang != "") {                           
-                            itemdata[mahang] = parseInt(soluong);                            
-                        }
-                    });                                       
-                    var data = {
-                        tenphong: tenphong,
-                        tongtienhang: tongtienhang,
-                        tienno: psno,
-                        tienck:tienck,
-                        items: JSON.stringify(itemdata)
-                    };
-                    $.ajax({
-                        type: "POST",
-                        contentType: "application/json; charset=utf-8",
-                        url: "Map.aspx/khthantoan",
-                        //data: JSON.stringify(data),
-                        data: JSON.stringify(data),
-                        dataType: "json",
-                        success: function (data) {
-                            debugger;
-                            if (data.d != "NG") {
-                                alert('Hàng hóa đã được thêm thành công!');
-                                $('#tbnhaphang tr').remove();
-                                $('#tongtienid').val(0);                                        
-                                $('#thanhtoanid').val(0);
-                                $('#chietkhauid').val(0);
-                            } else {
-                                alert('Phòng/ bàn đang trống!');
-                            }
-                            
-
-                        },
-                        error: function () {
-                            //alert("No Match");
-                        }
-                    });
-
-
-
-                } else {
-                    alert('Bạn chưa chọn bàn/phòng!')
-                }
-
-            });
+            
 
             // nut ghi lai danh sach thuc don
             $('.saveproduct').click(function () {
@@ -1536,27 +1562,66 @@
             });
 
             function printDiv(divId) {
+                //debugger;
+                //var delayInMilliseconds = 5000; //1000 = 1 second
+                //setTimeout(function() {
+                //  //your code to be executed after 1 second
+                //}, delayInMilliseconds);
+               try {
+                    var tienhat = $("#MainContent_Button3").parent().parent().parent().find("b").eq(1).text(); 
+                    var tenphong2 = $("#MainContent_Button3").parent().parent().find("b").eq(2).text(); 
+                    var tongtien2 = $("#MainContent_Button3").parent().parent().find("b").eq(3).text();
                 
-                var tenphong2 = $("#MainContent_Button3").parent().parent().find("b").eq(0).text(); 
-                var tongtien2 = $("#MainContent_Button3").parent().parent().find("b").eq(1).text();
-                var chietkau2 = $("#MainContent_Button3").parent().parent().find("b").eq(2).text();
-                var thantoan2 = $("#MainContent_Button3").parent().parent().find("b").eq(3).text();
-                var conlai2 = $("#MainContent_Button3").parent().parent().find("b").eq(4).text();
+                    var thantoan2 = $("#MainContent_Button3").parent().parent().find("b").eq(4).text();
+                    var chietkau2 = $("#MainContent_Button3").parent().parent().find("b").eq(5).text();
+                    var conlai2 = $("#MainContent_Button3").parent().parent().find("b").eq(6).text();  
+                    
+                    var sohoadon = $("#hoadonid").val();
+                    //alert(sohoadon);                
+
+                    //alert(tienhat);
+                    //alert(tenphong2);
+                    //alert(tongtien2);             
+                    //alert(thantoan2);
+                    //alert(chietkau2);
+                    //alert(conlai2);
              
-                //alert("ten phong"+ tenphong111);
-                var printContents = document.getElementById(divId).innerHTML;
-                var originalContents = document.body.innerHTML;
+                    
+                    //var printContents = document.getElementById(divId).innerHTML;
+                    //var originalContents = document.body.innerHTML;
 
-                document.body.innerHTML = printContents;
+                    //document.body.innerHTML = printContents;
 
-                window.print();    
+                    //window.print();    
 
-                thanhtoanhoadon(tenphong2,tongtien2,chietkau2,thantoan2,conlai2);
+                    //thanhtoanhoadon(tenphong2,tongtien2,chietkau2,thantoan2,conlai2,tienhat,sohoadon);
 
-                document.body.innerHTML = originalContents;
-                setTimeout(function() {
-                location.reload();
-           }, 1000);
+                    //document.body.innerHTML = originalContents;
+
+                    // Mở một cửa sổ in mới
+                    var printWindow = window.open('', '', 'height=400,width=400');
+                    printWindow.document.write('<html><head><title>Print</title></head><body>');
+                    // Lấy nội dung của div và ghi vào cửa sổ in
+                    printWindow.document.write(document.getElementById(divId).innerHTML);
+                    printWindow.document.write('</body></html>');
+                    printWindow.document.close();
+                    // Chờ cho cửa sổ in được load hoàn tất trước khi in
+                    printWindow.onload = function() {
+                        //printWindow.print();
+                        window.print();  
+                    };
+
+                    //setTimeout(function() {
+                    //location.reload();
+                    //}, 1000);
+  
+                }
+                catch(err) {
+                 console.log(err.tostring());
+                 alert(err.tostring());
+                }
+                
+                
                 
             }
 

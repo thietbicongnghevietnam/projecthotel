@@ -1,0 +1,68 @@
+$('#khachthanhtoan').click(function () {
+                //debugger;
+                var psco = $('#thanhtoanid').val();
+                var tongtienhang = $('#tongtienid').val();
+                var tienck = $('#chietkhauid').val();
+
+                var tienthoi = (parseFloat(psco) - parseFloat(tongtienhang)) 
+                if (tienthoi < 0) {
+                            $('#lblconlai').text("Tiền thiếu :");
+                            $('#conlaiid').val(tienthoi);
+                        } else {
+                            $('#lblconlai').text("Tiền thừa :");
+                            $('#conlaiid').val(tienthoi);
+                        }
+
+                var tenphong = $('#nametable').text();
+                var psno = $('#conlaiid').val();
+                var itemdata = {};
+                if (tenphong != "") {
+                    $('.themthucdon').each(function () {                        
+                        var mahang = $(this).find('td').eq(0).text() + "," + $(this).find('td').eq(2).text() + "," + $(this).find('td').eq(3).text();
+                        var soluong = $(this).find('td').eq(1).text();                       
+                        if (mahang != "") {                           
+                            itemdata[mahang] = parseInt(soluong);                            
+                        }
+                    });                                       
+                    var data = {
+                        tenphong: tenphong,
+                        tongtienhang: tongtienhang,
+                        tienno: psno,
+                        tienck:tienck,
+                        items: JSON.stringify(itemdata)
+                    };
+                    $.ajax({
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: "Map.aspx/khthantoan",
+                        //data: JSON.stringify(data),
+                        data: JSON.stringify(data),
+                        dataType: "json",
+                        success: function (data) {
+                            debugger;
+                            if (data.d != "NG") {
+                                alert('Hàng hóa đã được thêm thành công!');
+                                $('#tbnhaphang tr').remove();
+                                $('#tongtienid').val(0);                                        
+                                $('#thanhtoanid').val(0);
+                                $('#chietkhauid').val(0);
+                            } else {
+                                alert('Phòng/ bàn đang trống!');
+                            }
+                            
+
+                        },
+                        error: function () {
+                            //alert("No Match");
+                        }
+                    });
+
+
+
+                } else {
+                    alert('Bạn chưa chọn bàn/phòng!')
+                }
+
+            });
+
+=============

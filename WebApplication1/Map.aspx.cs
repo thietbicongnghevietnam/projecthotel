@@ -159,11 +159,11 @@ namespace WebApplication1
         }
 
         [WebMethod]
-        public static string khthantoan(string tenphong,string tongtienhang, string tienno, string tienck, string items)  //string tenphong, string tienhang  --, 
+        public static string khthantoan(string tenphong,string tongtienhang,string tongtienhat,string psco, string tienno, string tienck, string items)  //string tenphong, string tienhang  --, 
         {
             String thongbao = "";
             DataTable dtsave = new DataTable();
-            dtsave = DataConn.StoreFillDS("NH_save_khthanhtoan", System.Data.CommandType.StoredProcedure, tenphong, tongtienhang, tienno, tienck, items);//, 
+            dtsave = DataConn.StoreFillDS("NH_save_khthanhtoan", System.Data.CommandType.StoredProcedure, tenphong, tongtienhang, tongtienhat, psco, tienno, tienck, items);//, 
 
             if (dtsave.Rows[0][0].ToString() == "1")
             {
@@ -195,6 +195,26 @@ namespace WebApplication1
             ds.Tables.Add(dt2);
             daresult = DataSetToJSON(ds);
             return daresult;
+
+        }
+
+        [WebMethod]
+        public static string getsohoadon()  //string tenphong, string tienhang
+        {
+            String kq = ""; 
+            DataTable dt = new DataTable();
+
+            dt = DataConn.StoreFillDS("NH_getsohoadon", System.Data.CommandType.StoredProcedure);
+
+            if (dt.Rows[0][0].ToString() != "0")
+            {
+                kq = dt.Rows[0][0].ToString();
+            }
+            else
+            {
+                kq = "0";
+            }
+            return kq;
 
         }
 
