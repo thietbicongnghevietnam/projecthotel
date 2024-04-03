@@ -54,11 +54,10 @@
     @media print {
         .printableArea {
             display: block !important;
-           
-        }              
-    }
-    @page {
-    size: auto; /* hoặc kích thước khác */
+        }
+        .non-printableArea {
+            display: none !important;
+        }
     }
 
     
@@ -99,10 +98,6 @@
                             <input id="styleroom" style="width: 50px; " name="styleroom" value=""/>
                             <b style="padding-right: 10px; margin-left: 10px;">Ticket:</b>
                             <input  style="width: 80px;margin-left: 30px;" id="ticketid" name="ticket" />
-
-                            <b style="padding-right: 10px; margin-left: 10px;">Phong chuyen:</b>
-                            <b style="font-size: 14px; color: blue" id="thongbao"></b>
-
                         </div>
 
                         <div class="col-sm-4">
@@ -441,7 +436,7 @@
                            &nbsp;&nbsp;&nbsp; Tong tien hang: <b id="tongtien2"></b>                                                      
 
 
-                                <div style="width: 100%; height: 300px; float: left;">  <%-- overflow-y: scroll;--%>
+                                <div style="width: 100%; height: 250px; overflow-y: scroll; float: left;">
                                     <table class="display table table-bordered dataTable no-footer">
                                         <thead>
                                             <tr>
@@ -1584,21 +1579,20 @@
                     //alert(conlai2);
              
                     
-                    var printContents = document.getElementById(divId).innerHTML;
-                    var originalContents = document.body.innerHTML;
-                    document.body.innerHTML = printContents;
-                    window.print();                    
-                    thanhtoanhoadon(tenphong2,tongtien2,chietkau2,thantoan2,conlai2,tienhat,sohoadon);
-                    document.body.innerHTML = originalContents;
+                    //var printContents = document.getElementById(divId).innerHTML;
+                    //var originalContents = document.body.innerHTML;
+                    //document.body.innerHTML = printContents;
+                    //window.print();                    
+                    //thanhtoanhoadon(tenphong2,tongtien2,chietkau2,thantoan2,conlai2,tienhat,sohoadon);
+                    //document.body.innerHTML = originalContents;
 
                   
-                    //var content = document.getElementById(divId).innerHTML;
-                    //var printWindow = window.open('', '_blank');
-                    //var printWindow = window.open();
-                    //printWindow.document.open();
-                    //printWindow.document.write('<html><head><title>Print</title></head><body>' + content + '</body></html>');
-                    //printWindow.document.close();
-                    //printWindow.print();
+                    var content = document.getElementById(divId).innerHTML;
+                    var printWindow = window.open('', '_blank');
+                    printWindow.document.open();
+                    printWindow.document.write('<html><head><title>Print</title></head><body>' + content + '</body></html>');
+                    printWindow.document.close();
+                    printWindow.print();
 
 
                     setTimeout(function() {
@@ -1622,36 +1616,35 @@
 
         <script>
             var str = '';
-            var tenphong = '';
             var menu = new Contextmenu({
                 name: "menu",
                 wrapper: ".wrapper",
                 trigger: ".item",
                 item: [{
-                    "name": "Thông tin phòng",
+                    "name": "Click Event",
                     "func": "setText()",
                     "link": null,
                     "disable": false
                 },
                 {
-                    "name": "Dọn Phòng",
+                    "name": "External Link",
                     "link": "https://www.jqueryscript.net",
                     "disable": false
                 },
                 {
-                    "name": "Đặt Phòng",
-                    "disable": false
+                    "name": "Disabled Item",
+                    "disable": true
                 },
                 {
                     "name": "-"
-                },                
-                {
-                    "name": "Chuyển phòng",
-                    "func": "updateItem()"
                 },
                 {
-                    "name": "Hủy Phòng",
+                    "name": "Delete Method",
                     "func": "delItem()"
+                },
+                {
+                    "name": "Update Method",
+                    "func": "updateItem()"
                 },
                 {
                     "name": "Add Method",
@@ -1665,21 +1658,17 @@
                     "func": "removeMenu()"
                 },
                 {
-                    "name": "Đóng Menu"
+                    "name": "Close The Menu"
                 }
                 ],
                 target: "_blank",
                 beforeFunc: function (ele) {
                     str = $(ele).text();
-                    //tenphong = $("#tenphong").text();
-               
                 }
             });
 
             function setText() {
                 alert(str);
-                //var tenphong = $("#tenphong").val();
-                //alert(tenphong);
             }
 
             function addItem() {
@@ -1693,40 +1682,7 @@
             }
 
             function delItem() {
-                //menu.del(4);
-                //debugger;
-                var tenphong = $("#nametable").val();
-                var nameitem = tenphong;                            
-                var data = { nameitem: nameitem };
-                $.ajax({
-                            type: "POST",
-                            contentType: "application/json; charset=utf-8",
-                            url: "Map.aspx/huyphongban",
-                            data: JSON.stringify(data),
-                            dataType: "json",
-                            success: function (data) {
-                                //response(data.d);
-                                //alert(data.d);
-                                if(data.d != "NG")
-                                {
-                                    alert('Huy ban thành công!');
-                                    $("#myList UL LI").each(function () {
-                                        var nameroom = $(this).find('#tenphong').text();
-                                        if (nameroom == tenphong) {
-                                            $(this).find("img").attr('src','/static/images/phongtrong.png');
-                                        }
-                                    })
-
-                                }
-                                else
-                                {
-                                    alert('NG!!!');
-                                }
-                            },
-                            error: function (result) {
-                                //alert("No Match");
-                            }
-                        });                
+                menu.del(4);
             }
 
             function removeMenu() {
@@ -1734,74 +1690,13 @@
             }
 
             function updateItem() {
-                //let newroom;
-                debugger;
-                var tenphong1 = $("#nametable").val();
-                let notice = prompt("Vui long nhap ban/phong can chuyen!");
-                if (notice == null || notice == "") 
-                {
-                    newroom = "Phong/ban null!"; 
-                    alert(newroom);               
-                } 
-                else 
-                {
-                    //newroom = "Phong moi chuyen: " + notice;
-                    document.getElementById("thongbao").innerHTML = notice;
-                    var newroom = notice;
-
-                    //alert(tenphong);                
-
-                    var nameitem = tenphong1;            
-                    var data = { nameitem: nameitem, newroom:newroom };
-                    $.ajax({
-                                type: "POST",
-                                contentType: "application/json; charset=utf-8",
-                                url: "Map.aspx/chuyenphongban",
-                                data: JSON.stringify(data),
-                                dataType: "json",
-                                success: function (data) {
-                                    //response(data.d);
-                                    //alert(data.d);
-                                    if(data.d != "NG")
-                                    {
-                                        alert('Chuyen ban thành công!');
-                                        $("#myList UL LI").each(function () {
-                                            var nameroom = $(this).find('#tenphong').text();
-                                            if (nameroom == tenphong) {
-                                                $(this).find("img").attr('src','/static/images/phongtrong.png');
-                                            }
-                                        })
-
-                                        $("#myList UL LI").each(function () {
-                                            var nameroom = $(this).find('#tenphong').text();
-                                            if (nameroom == newroom) {
-                                                $(this).find("img").attr('src','/static/images/cokhach.png');
-                                            }
-                                        })
-
-                                    }
-                                    else
-                                    {
-                                        alert('Chuyen ban/phong NG!!!');
-                                    }
-                                },
-                                error: function (result) {
-                                    //alert("No Match");
-                                }
-                            }); 
-
-
-                }
-               
-                 
- 
-                //menu.update({
-                //    index: 5,
-                //    name: "github",
-                //    func: "",
-                //    link: "https://www.jqueryscript.net",
-                //    disable: false
-                //});
+                menu.update({
+                    index: 5,
+                    name: "github",
+                    func: "",
+                    link: "https://www.jqueryscript.net",
+                    disable: false
+                });
             }
 </script>
         <script type="text/javascript">

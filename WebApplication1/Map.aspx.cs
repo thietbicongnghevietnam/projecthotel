@@ -159,6 +159,52 @@ namespace WebApplication1
         }
 
         [WebMethod]
+        public static string huyphongban(string nameitem)  //string tenphong, string tienhang
+        {
+            String thongbao = "";
+            DataTable dtupdate = new DataTable();
+
+            //check xem hoa don ton tai chua
+            //update *** neu hoa don ton tai roi
+            //lay so hoa don truyen len de update
+
+            dtupdate = DataConn.StoreFillDS("NH_delete_phongban", System.Data.CommandType.StoredProcedure, nameitem);
+
+            if (dtupdate.Rows[0][0].ToString() == "1")
+            {
+                //thongbao = "OK" + "," + dtlevel.Rows[0][1].ToString();
+
+                thongbao = "OK";
+            }
+            else
+            {
+                thongbao = "NG";
+            }
+            return thongbao;
+        }
+
+        [WebMethod]
+        public static string chuyenphongban(string nameitem, string newroom)  //string tenphong, string tienhang
+        {
+            String thongbao = "";
+            DataTable dtupdate = new DataTable();
+
+            dtupdate = DataConn.StoreFillDS("NH_Move_phongban", System.Data.CommandType.StoredProcedure, nameitem, newroom);
+
+            if (dtupdate.Rows[0][0].ToString() == "1")
+            {
+                //thongbao = "OK" + "," + dtlevel.Rows[0][1].ToString();
+
+                thongbao = "OK";
+            }
+            else
+            {
+                thongbao = "NG";
+            }
+            return thongbao;
+        }
+
+        [WebMethod]
         public static string khthantoan(string tenphong,string tongtienhang,string tongtienhat,string psco, string tienno, string tienck, string items)  //string tenphong, string tienhang  --, 
         {
             String thongbao = "";

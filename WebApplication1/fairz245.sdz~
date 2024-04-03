@@ -99,10 +99,6 @@
                             <input id="styleroom" style="width: 50px; " name="styleroom" value=""/>
                             <b style="padding-right: 10px; margin-left: 10px;">Ticket:</b>
                             <input  style="width: 80px;margin-left: 30px;" id="ticketid" name="ticket" />
-
-                            <b style="padding-right: 10px; margin-left: 10px;">Phong chuyen:</b>
-                            <b style="font-size: 14px; color: blue" id="thongbao"></b>
-
                         </div>
 
                         <div class="col-sm-4">
@@ -1622,7 +1618,6 @@
 
         <script>
             var str = '';
-            var tenphong = '';
             var menu = new Contextmenu({
                 name: "menu",
                 wrapper: ".wrapper",
@@ -1644,14 +1639,14 @@
                 },
                 {
                     "name": "-"
-                },                
-                {
-                    "name": "Chuyển phòng",
-                    "func": "updateItem()"
                 },
                 {
                     "name": "Hủy Phòng",
                     "func": "delItem()"
+                },
+                {
+                    "name": "Update Method",
+                    "func": "updateItem()"
                 },
                 {
                     "name": "Add Method",
@@ -1671,15 +1666,13 @@
                 target: "_blank",
                 beforeFunc: function (ele) {
                     str = $(ele).text();
-                    //tenphong = $("#tenphong").text();
-               
                 }
             });
 
             function setText() {
-                alert(str);
-                //var tenphong = $("#tenphong").val();
-                //alert(tenphong);
+                //alert(str);
+                var tenphong = $("#tenphong").val();
+                alert(tenphong);
             }
 
             function addItem() {
@@ -1693,40 +1686,7 @@
             }
 
             function delItem() {
-                //menu.del(4);
-                //debugger;
-                var tenphong = $("#nametable").val();
-                var nameitem = tenphong;                            
-                var data = { nameitem: nameitem };
-                $.ajax({
-                            type: "POST",
-                            contentType: "application/json; charset=utf-8",
-                            url: "Map.aspx/huyphongban",
-                            data: JSON.stringify(data),
-                            dataType: "json",
-                            success: function (data) {
-                                //response(data.d);
-                                //alert(data.d);
-                                if(data.d != "NG")
-                                {
-                                    alert('Huy ban thành công!');
-                                    $("#myList UL LI").each(function () {
-                                        var nameroom = $(this).find('#tenphong').text();
-                                        if (nameroom == tenphong) {
-                                            $(this).find("img").attr('src','/static/images/phongtrong.png');
-                                        }
-                                    })
-
-                                }
-                                else
-                                {
-                                    alert('NG!!!');
-                                }
-                            },
-                            error: function (result) {
-                                //alert("No Match");
-                            }
-                        });                
+                menu.del(4);
             }
 
             function removeMenu() {
@@ -1734,74 +1694,13 @@
             }
 
             function updateItem() {
-                //let newroom;
-                debugger;
-                var tenphong1 = $("#nametable").val();
-                let notice = prompt("Vui long nhap ban/phong can chuyen!");
-                if (notice == null || notice == "") 
-                {
-                    newroom = "Phong/ban null!"; 
-                    alert(newroom);               
-                } 
-                else 
-                {
-                    //newroom = "Phong moi chuyen: " + notice;
-                    document.getElementById("thongbao").innerHTML = notice;
-                    var newroom = notice;
-
-                    //alert(tenphong);                
-
-                    var nameitem = tenphong1;            
-                    var data = { nameitem: nameitem, newroom:newroom };
-                    $.ajax({
-                                type: "POST",
-                                contentType: "application/json; charset=utf-8",
-                                url: "Map.aspx/chuyenphongban",
-                                data: JSON.stringify(data),
-                                dataType: "json",
-                                success: function (data) {
-                                    //response(data.d);
-                                    //alert(data.d);
-                                    if(data.d != "NG")
-                                    {
-                                        alert('Chuyen ban thành công!');
-                                        $("#myList UL LI").each(function () {
-                                            var nameroom = $(this).find('#tenphong').text();
-                                            if (nameroom == tenphong) {
-                                                $(this).find("img").attr('src','/static/images/phongtrong.png');
-                                            }
-                                        })
-
-                                        $("#myList UL LI").each(function () {
-                                            var nameroom = $(this).find('#tenphong').text();
-                                            if (nameroom == newroom) {
-                                                $(this).find("img").attr('src','/static/images/cokhach.png');
-                                            }
-                                        })
-
-                                    }
-                                    else
-                                    {
-                                        alert('Chuyen ban/phong NG!!!');
-                                    }
-                                },
-                                error: function (result) {
-                                    //alert("No Match");
-                                }
-                            }); 
-
-
-                }
-               
-                 
- 
-                //menu.update({
-                //    index: 5,
-                //    name: "github",
-                //    func: "",
-                //    link: "https://www.jqueryscript.net",
-                //    disable: false
-                //});
+                menu.update({
+                    index: 5,
+                    name: "github",
+                    func: "",
+                    link: "https://www.jqueryscript.net",
+                    disable: false
+                });
             }
 </script>
         <script type="text/javascript">
