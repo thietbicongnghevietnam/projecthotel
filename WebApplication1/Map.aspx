@@ -216,8 +216,13 @@
                                             </td>
                                             <td style="padding-bottom: 10px; padding-right: 10px; padding-left: 10px;">
                                                 <b style="padding-right: 3px; margin-left: 10px;">So HD:</b>
-                                                <input  style="width: 80px;margin-left: 5px;" id="hoadonid" name="sohoadon" />
+                                                <input  style="width: 80px;margin-left: 5px;" id="hoadonid" name="sohoadon" disabled />                                              
                                             </td>
+                                            <td style="padding-bottom: 10px; padding-right: 10px; padding-left: 10px;">
+                                                  <label for="inlaihoadon" style="float: left; margin-top: 5px;">In lai hoa don</label>
+                                                <input type="checkbox" id="inlaiHD" name="inlaiHD">
+                                            </td>
+
                                             
                                             <%--<td style="padding-bottom: 10px; padding-right: 10px; padding-left: 10px;">
                                                 <input type="submit" value="Thanh toan" id="khachthanhtoan" class="btn btn-success float-right">  <%--class , id="saveproduct"
@@ -616,6 +621,14 @@
                                     var date2 = new Date(giora);
 
                                     var diffMs = (date2 - date1); // milliseconds between now & date1   1giay = 1000 millisecnds 
+
+                                    // Tính số mili giây giữa hai ngày
+                                   var soMiligiay = date2.getTime() - date1.getTime();
+                                    // Chuyển đổi số mili giây thành số giờ
+                                    var soGio = soMiligiay / (1000 * 60 * 60);
+                                    // In ra kết quả
+                                   // console.log("Số giờ giữa hai ngày là: " + soGio);
+
                                     var diffHrs = Math.round((diffMs % 86400000) / 3600000); // hours   1gio = 3600000 , 1 ngay = 86400000 mililigiay
                                     var diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000); // minutes
                                     //var diffDays = Math.round(diffMs / 86400000);
@@ -627,7 +640,8 @@
 
                                     //console.log(diffMs);    //so ngay
                                     //console.log(diffHrs);   //so gio
-                                    //console.log(diffMins);  //so phut                                                                      
+                                    //console.log(diffMins);  //so phut                                           
+                                                                                                   
                                     
                                     if(diffMs.toString() == 'NaN')
                                     {
@@ -640,8 +654,20 @@
                                         //$('#songaydung').val(diffMs);  //nho hon 1h
                                         if(diffHrs_check < 1)
                                         {
-                                            $('.sogiodung').text('0');
-                                            $('.sophutdung').text(diffMins);
+                                            if(soGio > 24)
+                                            {
+                                               //ngay lon hon 1 ngay
+                                               //alert("vao a"+soGio);                                                
+                                                $('.sogiodung').text(parseInt(soGio));
+                                                $('.sophutdung').text(diffMins);
+                                            }
+                                            else
+                                            {
+                                                //alert("vap b");
+                                                $('.sogiodung').text('0');
+                                                $('.sophutdung').text(diffMins);
+                                            }
+                                            
                                         }
                                         else
                                         {
@@ -1095,8 +1121,124 @@
                 }
             });
 
-           
+            $('#inlaiHD').on('change', function() { 
+                // From the other examples
+                if (!this.checked) {
+                    //var sure = confirm("Are you sure?");
+                    //this.checked = !sure;
+                    //$('#textbox1').val(sure.toString());
+                    //alert('false');
+                    $('#hoadonid').attr('disabled', 'disabled');
+                    //document.getElementById("textboxId").setAttribute("disabled", "disabled");
+                }
+                else
+                {
+                    //alert('true');
+                    $('#hoadonid').removeAttr("disabled");
+                    //document.getElementById("textboxId").removeAttribute("disabled"); 
+                }
+            });
 
+            $("#hoadonid").on('keyup', function (e) {
+                if ((e.key === 'Enter' || e.keyCode === 13)) {
+                    //alert('hoadon inlai');
+                    var sohoadon = $("#hoadonid").val();
+                    //alert(sohoadon);
+                    var data = { sohoadon: sohoadon };
+
+                    // lay thong tin hoang hoa
+                        $.ajax({
+                            type: "POST",
+                            contentType: "application/json; charset=utf-8",
+                            url: "Map.aspx/thongtinhanghoa_inlai",
+                            //data: JSON.stringify(data),
+                            data: JSON.stringify(data),
+                            dataType: "json",
+                            success: function (data) {
+                                //response(data.d);                              
+                                const objdata = $.parseJSON(data.d);
+                                //var giaphong = objdata['Table'][2]; 
+                                //debugger;
+                                if (objdata['Table'][0] != "")  //|| objdata ['Table'][0][0] != "0"
+                                {
+                                    $('#tbnhaphang_inhoadon tr').remove();
+                                    const myArr = JSON.parse(objdata['Table'][0][0]);
+                                    var tienhang = objdata['Table'][0][1];
+                                    var hinhthucnghi = objdata['Table'][0][4];  
+                                    var tongtienhat = objdata['Table'][0][5];
+                                    var tenphong = objdata['Table'][0][8];                                
+                                    //debugger; 
+                                    if (myArr == '0') {
+                                        //truong hop chua co hang ban
+                                        $('#tbnhaphang_inhoadon tr').remove();
+                                        $("#tenphong2").text(tenphong);
+                                        $('#tongtien2').text(0);                                        
+                                        $('#thantoan2').text(0);
+                                        $('#chietkau2').text(0);
+
+                                        $('#hinhthucnghi2').text('');
+                                        $('#tongtienhat2').text(tongtienhat);
+                                    } 
+                                    else 
+                                    {
+                                        var blkstr = [];
+                                        $.each(myArr, function (idx2, val2) {
+                                            var str = idx2 + ":" + val2;
+                                            blkstr.push(str);
+                                        });
+                                        debugger;
+                                        //var aaa = blkstr[0];
+                                        //var bbb = blkstr[1];
+                                        for (var i = 0; i < blkstr.length; i++) {
+                                            const chars = blkstr[i].split(':');
+                                            const info_mahang = chars[0].split(',');
+
+                                            var mahang = info_mahang[0];
+                                            var dongia = info_mahang[1];
+                                            var thanhtien = info_mahang[2];
+                                            var soluong = chars[1];
+
+                                            var newrow = '<tr class="themthucdon2">' +
+                                                '<td id="tenhang">' + mahang + '</td>' +
+                                                '<td id="soluong">' + soluong + '</td>' +
+                                                '<td id="giale">' + dongia + '</td>' +
+                                                '<td id="thanhtien">' + thanhtien + '</td>' +                                               
+                                                '</tr>';
+                                            $('#tbnhaphang_inhoadon').append(newrow);
+                                        }
+                                        //$('#checkinput1').val(giovao);
+                                        //$('#checkinput2').val(giora);                                                                
+                                        $("#tenphong2").text(tenphong);
+                                        $('#tongtien2').text(tienhang);
+                                        $('#thantoan2').text(parseInt(tienhang)+parseInt(tongtienhat));
+                                        $('#chietkau2').text(0);
+
+                                        $('#hinhthucnghi2').text(hinhthucnghi);
+                                        $('#tongtienhat2').text(tongtienhat);
+                                    }
+                                }
+                                else {
+                                    $('#tbnhaphang_inhoadon tr').remove();
+                                     $("#tenphong2").text(tenphong);
+                                        $('#tongtien2').text(0);                                        
+                                        $('#thantoan2').text(0);
+                                        $('#chietkau2').text(0);
+
+                                        $('#hinhthucnghi2').text('');
+                                        $('#tongtienhat2').text(tongtienhat);
+                                }
+                            },
+                            error: function () {
+                                //alert("No Match");
+                            }
+                        }); 
+
+
+                        $('#myModal6').modal('show');
+                    
+                }
+            });
+      
             $('.button_addmenu').each(function () {
                 $(this).click(function () {                  
                     var _mahang = $(this).parent().find('mh').text();
@@ -1582,16 +1724,32 @@
                     //alert(thantoan2);
                     //alert(chietkau2);
                     //alert(conlai2);
-             
                     
-                    var printContents = document.getElementById(divId).innerHTML;
-                    var originalContents = document.body.innerHTML;
-                    document.body.innerHTML = printContents;
-                    window.print();                    
-                    thanhtoanhoadon(tenphong2,tongtien2,chietkau2,thantoan2,conlai2,tienhat,sohoadon);
-                    document.body.innerHTML = originalContents;
-
-                  
+                    //kiem tra xem co phai hoa don in lai khong
+                    //debugger;
+                    var checkboxid = document.getElementById("inlaiHD");
+                    if(checkboxid.checked == true)
+                    {
+                        //alert('OK');
+                        // truong hop in lai hoa don
+                        var printContents = document.getElementById(divId).innerHTML;
+                        var originalContents = document.body.innerHTML;
+                        document.body.innerHTML = printContents;
+                        window.print();                                                  
+                        document.body.innerHTML = originalContents;  
+                    }
+                    else
+                    {
+                        //alert('NG');
+                        //truong hop hoa don moi
+                        var printContents = document.getElementById(divId).innerHTML;
+                        var originalContents = document.body.innerHTML;
+                        document.body.innerHTML = printContents;
+                        window.print();           
+                        thanhtoanhoadon(tenphong2,tongtien2,chietkau2,thantoan2,conlai2,tienhat,sohoadon);                                       
+                        document.body.innerHTML = originalContents;                        
+                    }          
+                                                                                                                                   
                     //var content = document.getElementById(divId).innerHTML;
                     //var printWindow = window.open('', '_blank');
                     //var printWindow = window.open();
@@ -1599,7 +1757,6 @@
                     //printWindow.document.write('<html><head><title>Print</title></head><body>' + content + '</body></html>');
                     //printWindow.document.close();
                     //printWindow.print();
-
 
                     setTimeout(function() {
                     location.reload();
@@ -1646,16 +1803,16 @@
                     "name": "-"
                 },                
                 {
-                    "name": "Chuyển phòng",
+                    "name": "Chuyển ban",
                     "func": "updateItem()"
+                },                
+                {
+                    "name": "Ghep ban",
+                    "func": "ghepban()"
                 },
                 {
                     "name": "Hủy Phòng",
                     "func": "delItem()"
-                },
-                {
-                    "name": "Add Method",
-                    "func": "addItem()"
                 },
                 {
                     "name": "-"
@@ -1671,8 +1828,7 @@
                 target: "_blank",
                 beforeFunc: function (ele) {
                     str = $(ele).text();
-                    //tenphong = $("#tenphong").text();
-               
+                    //tenphong123 = $("#tenphong").text();               
                 }
             });
 
@@ -1682,21 +1838,24 @@
                 //alert(tenphong);
             }
 
-            function addItem() {
-                menu.add({
-                    index: 0,
-                    name: "New Item",
-                    func: 'alert("New Item")',
-                    link: null,
-                    disable: false
-                });
+            function ghepban() {
+                alert("chuc nang ghep ban!");
+                // addItem()
+                //menu.add({
+                //    index: 0,
+                //    name: "New Item",
+                //    func: 'alert("New Item")',
+                //    link: null,
+                //    disable: false
+                //});
             }
 
             function delItem() {
                 //menu.del(4);
                 //debugger;
-                var tenphong = $("#nametable").val();
-                var nameitem = tenphong;                            
+                var tenphong1 = $("#nametable").text();
+                //alert(tenphong1);
+                var nameitem = tenphong1;                            
                 var data = { nameitem: nameitem };
                 $.ajax({
                             type: "POST",
@@ -1735,8 +1894,9 @@
 
             function updateItem() {
                 //let newroom;
-                debugger;
-                var tenphong1 = $("#nametable").val();
+                //debugger;
+                var tenphong1 = $("#nametable").text();
+                //alert(tenphong1);
                 let notice = prompt("Vui long nhap ban/phong can chuyen!");
                 if (notice == null || notice == "") 
                 {
@@ -1749,11 +1909,16 @@
                     document.getElementById("thongbao").innerHTML = notice;
                     var newroom = notice;
 
-                    //alert(tenphong);                
-
-                    var nameitem = tenphong1;            
-                    var data = { nameitem: nameitem, newroom:newroom };
-                    $.ajax({
+                    //alert(tenphong1);                
+                    if(tenphong1 == "")
+                    {
+                        alert("ban can chon phong can chuyen!");
+                    }
+                    else
+                    {
+                        var nameitem = tenphong1;            
+                        var data = { nameitem: nameitem, newroom:newroom };
+                        $.ajax({
                                 type: "POST",
                                 contentType: "application/json; charset=utf-8",
                                 url: "Map.aspx/chuyenphongban",
@@ -1767,18 +1932,13 @@
                                         alert('Chuyen ban thành công!');
                                         $("#myList UL LI").each(function () {
                                             var nameroom = $(this).find('#tenphong').text();
-                                            if (nameroom == tenphong) {
+                                            if (nameroom == nameitem) {
                                                 $(this).find("img").attr('src','/static/images/phongtrong.png');
                                             }
-                                        })
-
-                                        $("#myList UL LI").each(function () {
-                                            var nameroom = $(this).find('#tenphong').text();
                                             if (nameroom == newroom) {
                                                 $(this).find("img").attr('src','/static/images/cokhach.png');
                                             }
-                                        })
-
+                                        })                                        
                                     }
                                     else
                                     {
@@ -1788,9 +1948,8 @@
                                 error: function (result) {
                                     //alert("No Match");
                                 }
-                            }); 
-
-
+                          }); 
+                    }                   
                 }
                
                  

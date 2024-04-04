@@ -245,6 +245,27 @@ namespace WebApplication1
         }
 
         [WebMethod]
+        public static string thongtinhanghoa_inlai(string sohoadon)  //string tenphong, string tienhang
+        {
+            //check xem hoa don ton tai chua
+            //update *** neu hoa don ton tai roi
+            //lay so hoa don truyen len de update            
+            DataTable dt = new DataTable();
+
+            dt = DataConn.StoreFillDS("NH_infor_thongtinhanghoa_inlai", System.Data.CommandType.StoredProcedure, sohoadon);
+
+            DataTable dt2 = new DataTable();
+            dt2 = dt.Copy();
+
+            String daresult = null;
+            DataSet ds = new DataSet();
+            ds.Tables.Add(dt2);
+            daresult = DataSetToJSON(ds);
+            return daresult;
+
+        }
+
+        [WebMethod]
         public static string getsohoadon()  //string tenphong, string tienhang
         {
             String kq = ""; 
