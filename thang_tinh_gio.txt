@@ -1,0 +1,594 @@
+email soft ware:  	tigersoftonline@gmail.com   pass: Abc363636				skype: nguyennhuminh1986
+mk chuyen tien: 66954649 (vietel)
+le ngoc minh: Abcd@123
+https://my.vultr.com/
+mat khau tai khoan vutrul: Abcd@1234567
+server: sudoku
+$2.50/mo ($0.004/hr)
+ip: 100.68.64.188
+pass: 2rE}a6zM%aReoT)s
+
+
+
+kinhdoanh facebook
+minhden8x@yahoo.com		=> mat khau Abcd@123456
+0979479623
+nick2: o357409@mvrht.com(mavach)=> mat khau: abc123456
+100022423988014 (ngoc le minh)  => mat khau: Abcd@123 
+
+100009730545256 (phanmemquanly)     matkhau: abc123456
+tu ma y:			    matkhau: abc123456
+
+nick3: i2280818@mvrht.net
+Mavach Maso
+
+
+======// giao dien eop // ========   // ========   softonlinevn.com // ============
+	http://admin.eop.edu.vn/index.html
+	http://admin.eop.edu.vn/icons.html
+*** xem bo phim va dich ra ****
+4. Đừng bao giờ ngồi vào bàn tiệc khi chưa biết được ai là người trả tiền. (Dịch 25 câu)
+Never sit a meal if you don't know people who pay for that meal.   (**** nho cai karaoke my hanh 2 cua Thang Binh ****)
+
+0. video hoc tieng anh
+	https://www.youtube.com/watch?v=G9a_uPzLOVs   *** tao dong luc
+	https://www.youtube.com/watch?v=SJlu--hdFQU&index=1&list=PL4IJAxR6Bqq8vP0kEeQRgU6lUe4s4u2DW   (hoi thoai tieng anh*** toi)
+	https://www.youtube.com/watch?v=2LdY4GcDu1M&t=23s  (jackma)
+	https://www.youtube.com/watch?v=A5Wvy9WOxwU -> nghe va dich video
+	https://www.youtube.com/watch?v=LWgwApN_Ef8 -> nghe va dich video
+	
+
+
+	https://www.youtube.com/watch?v=ctNrPefanNY  (if you want to change all over the worl..)  may cau phan cuoi
+	https://www.youtube.com/watch?v=AKfMcByHXfQ    - bill gate
+	https://www.youtube.com/watch?v=MY5SatbZMAo  -- dich tieng viet  
+	https://www.youtube.com/watch?v=MY5SatbZMAo		(maria)
+	https://www.youtube.com/watch?v=aDzEAIwc8_E		(da ngon ngu)
+
+	let talk 1:
+	https://www.youtube.com/watch?v=anq4TQn-eVo&t=102s
+	let talk 2:
+	https://www.youtube.com/watch?v=4xY-NUcefME&t=1352s
+	
+	movie friend
+	***https://www.youtube.com/watch?v=x38uDruvepg 
+	steve job
+	https://www.youtube.com/watch?v=VJKIABOOlC4
+	aaa
+	https://www.facebook.com/tuhoctienganhbangu/
+
+	https://www.youtube.com/watch?v=wtq-Fh4sm34&t=1248s  jackma
+	https://www.youtube.com/watch?v=JrsIhrv0nxQ		jackma (1o **)
+
+
+*****https://www.youtube.com/watch?v=75oT4LSEkb4  (mau)
+***** https://www.youtube.com/watch?v=KplYKwe4Sak	(tieng anh giao tiep)
+
+1. hoc tieng anh:
+	https://efc.edu.vn/12-thi-trong-tieng-anh
+2. 84 cau truc cau can hoc:
+	https://kenhtuyensinh.vn/84-cau-truc-cau-thong-dung-trong-tieng-anh
+3. cac cau giao tiep
+	https://kenhtuyensinh.vn/50-cau-tieng-anh-giao-tiep-thong-dung-hang-ngay-ban-nen-biet
+4. cau truc giao tiep hang ngay:
+	https://elight.edu.vn/cac-cau-truc-tieng-anh-giao-tiep-hang-ngay
+
+****https://www.youtube.com/watch?v=gL-6eDdMiBk&t=5s       - jackma
+https://vnexpress.net/tin-tuc/giao-duc/hoc-tieng-anh/mo-ta-moi-quan-he-yeu-duong-trong-tieng-anh-3711597.html
+
+
+**** dich tieng anh 
+http://attitudeofgratitude-nsrichford.blogspot.com/2011/04/most-of-shadows-of-this-life-are-caused.html
+
+
+Nghỉ theo giờ:
+	+ nhỏ hơn 1H và nhỏ hơn 1 ngày:			***tien thu phong bang gia phong ke ca khi <30phut   if (diffHrs < 1 && diffDays < 1) {}
+		+ vào nghỉ < 30 phút đầu: 30k
+		+ trên 30 phút tính tiền = 1h
+	+ == 1 giờ và nếu ở thêm số phút nhỏ hơn 60phút	***ở 1giờ và nhỏ hơn 60 phút thì công thêm 50k nếu không thì thôi.
+		+ số phút <= 30n -> số tiền 1h + 30k
+		+ nếu lớn hơn 30phút sẽ + 50k
+	+ trường hợp lớn hơn 1h và nhỏ hơn 8h và số ngày nhỏ hơn 1 	*** gio dau = gia phong moi gio sau cong them 50k 
+		+ giờ đầu bằng giá phòng, mỗi giờ sau cộng thêm 50k.
+			+ trường hợp 1 so phut nho hon 30phút
+			+ trường hợp lớn hơn 30phút.
+	+ trường hợp lớn hơn 8h. -> cứ mỗi giờ sau + 50K
+
+
+nghỉ theo ngày:
+	+ ngày nhỏ hơn 1 ngày
+		+ nghỉ < 8 tiếng : tiền phòng giảm 10%
+		+ lớn hơn 8 tiếng: tính tiền bằng 1 ngày.
+	+ lớn hơn 1 ngày:
+		+ lớn hơn 6tiếng và nhỏ hơn 18 tiếng (mỗi tiếng tính thêm 30K)
+		+ lớn hơn 18 tiếng sẽ tính thêm là một ngày.
+		+ nhỏ hơn 6tiếng thì không tính thêm gì. 
+
+nghỉ đêm == giá đêm
+nghỉ tuần ==  giá tuần
+nghỉ tháng == giá tháng
+
+Cac lenh khoi dong:
+	truncate htsocai;
+	truncate htkhachhang;
+	truncate htdatphong;
+	truncate hthanghoa;
+	truncate htSoQuy;
+
+	truncate htkhuvuc;
+	truncate htphong;
+	truncate htloaiphong;
+	update hthanghoa set soluongton=0;
+keo dai ma hang ra thanh ten hang:
+	ALTER TABLE datahotel.hthanghoa MODIFY mahang VARCHAR(500);
+
+xay ra truong hop neu trong 1 phut ma click luu ban 2 lan se tang them mot hoa don -> 0k
+**** phan dat phong van phai viet lai: can hien ra cac phong de biet phong day dang hoat dong vao thoi gian nao 
+	---> hoac chuc nang nay se cho chuot phai
+*** viec cai dong ho khong co theo y muon --> chay theo thanh scoll bar
+
++ chuc nang dat phong cho vao menu phai
++ chuc nang huy phong cho vao menu phai
++ chuc nang chuyen hinh thuc nghi cho vao menu phai
+
+phần in hóa đơn chỗ hiện ra bàn và phòng vẫn chưa hiện đuợc--- click hien ra hoa don kho A4 + Kho K80   --> xong ok
+việc các phòng ghỉ đã được lưu giờ vào khi chọn đồ vào bàn thì click nút lưu bàn cafe cũng sẽ phải lưu được đồ vào phòng --> phai bam vao nut Save(ghi gio va ghi thuc dong) xong ok
+
+*** việc phòng đã được đặt nếu thanh toán xong thi cần quay về trạng thái là phòng đã được đặt. (chi F5 moi load lai trang thai phong)
+bi loi khi chon bàn cafe, chọn đồ,chon món sau đó click vào thanh toán không hiện ra phải đợi sau 1 phút sau mới hiện ra form thanh toán.-> ok (da kiem tra duoc rui)
+
+==// quy trinh chay ban cafe // ==
+khach vao -> chon ban ->  chon thuc don -> sau do click luu ban.
+khach goi them -> chon ban -> chon thuc don -> sau do click ghi thuc don.
+phan ticket: (so nguoi o )--> phan tick ticket cho lên trên chỗ chi tiết phòng (khi click vào hiện ra) --> ok
+hiện tại báo cao đang theo ngày tạo -> không phải ngày ra -> phải theo ngày ra. ->0k
+Phân quyền:  (tạm thời xư lý vậy đã)
+	+ Tạm th có 4 quyền 
+		- quản lý: toàn quyền
+		- Trưởng phòng: quyền vào : Phần mềm khách sạn
+		- nhan vien và menu : vào phần bán hàng và nhân sư
+			* phân quyên cấp nhân viên.
+	
+***** kiem tra xem so gio (chú ý kẻo lệch -> da check gio rui, *** con ngay nua) **** ngày giờ vào -> ngày giờ ra. (doi ngay-> rui check)
+***** Sáng nay xử lý trường hợp chức năng gộp bàn.
+	+làm luôn Gộp phòng/bàn  **** chieu dang lam tiep ****
+Danh sách phòng/bàn đang hoạt động
+	+ xu ly viec gop ban cafe truoc (sau gop phong sau)  *** xu ly tren server
+
+****van bi lech 3 phut == timedatectl set-time 15:58:30 ->>xong ok
+timedatectl list-timezones | grep Asia 			->>xong ok
+timedatectl set-timezone Asia/Ho_Chi_Minh		->>xong ok
+kiem tra gio local: ls -l /etc/localtime
+
+ 
+các nut cần post: Trả phong (thanh toán) --> xong sau up len
+
+click nut lưu bàn cafe -> thoi gian vao quay về 0. --> ok ( khi gặp lỗi này nhớ cập nhật cả ngày giờ thuê nữa) ===@da.route('/capnhatthucdon',
+/thanhtoantien
+giothue = app.mdb(dbname='datahotel').query_scalar(
+        'SELECT max(ngaygiothue) FROM htsocai WHERE tenphong=:tenphong;', {'tenphong': tenphong})
+
+
+
+UPDATE ecThanhVien SET hovaten="quanly" where id=1;
+UPDATE ecThanhVien SET user="thungan", hovaten="thungan" where id=11;
+
+=== // nghiep vu // ====
+
+icloud: https://appleid.apple.com/account/manage
+minh nguyen nhu	
+07/11/1986
+user: thietbicongnghevietnam@gmail.com
+pass: Legiaminh@123456
+cau hoi 1: ten con vat ban yeu thich?
+dog
+cau hoi 2: cong viec mo uoc cua ban?
+bussinees
+cau hoi 3: thanh pho bo me ban gap nhau?
+hanoi
+
+
+=== // website -> quy // ====    Ctrl+Alt+L  refomatting code
+phan mem quan ly nha hang
+
+
+
+=== // luu tru cuc bo // ==== 
+https://www.youtube.com/watch?v=FWUOzZ8aJ8w
+http://v1study.com/html5-web-storage-a423.html
+
+
+
+Hi beat, 
+I'm fine and you? i am going to plan Merry Christmas 
+I'm trying to find a girlfriend to going out on Merry Christmas night. I hope it has come true.
+this time, i guess you are staying Cambodia
+how was your travel in ThaiLand and Cambodia?
+
+see you tomorrow
+
+dear Dori Wang:
+I'm thank you so much. I wish you all the best and a good start into the new year with many success !!!   
+Happy new year!
+
+i am so grateful for your enthusiasm and concer during I stay at Haui. may  the new year bring many good things and rich blessings to you and all those you love
+
+dia chi may quy: 183.80.171.252  (lan 2)
+
+Phần mềm quản lý shop thời trang mỹ phẩm
+https://www.facebook.com/Giaiphapquanlysocom-886938491324225/
+http://soft.tinhocvietnam.com/
+
+**** toi tim hieu: local storage là gì
+
+
+Goi basic: 300k/1thang = 3,6tr/1nam
+NH-THT9171815  - karaoke socson
+NH-THT0921801  - karaoke my hanh 2
+
+chi huyen lang son: 278403209
+BH-THT3181481--> 1297862898123
+
+Dear everybody:
+I need two people to work tomorrow, work all day. because Personnel manager have alot of work involve to Student certificates.
+At noon I would you like everybody for lunch.
+i hope everybody can help manager solve work of faculty foreign language.
+If everybody is all coming here tomorrow, it is wonderful!
+Faculty
+foreign language departments
+
+no problem at all, I will arrange the work in the best way. You can still finish your plan, thanks alot!
+
+
+//dj(this).attr('style', 'background-color:pink;');
+//dj(this).find("label[name='kieunghi']").text(kieunghi);   *** chieu xu ly phan render ra
+-- sau do maket ting
+
+chi nguyet belay -- phan mem quan ly shop thoi trang
+
+dia chi truong -- cac may cung dia chi - toi vao server kiem tra
+113.190.235.197
+
+http://vzsoft.net/Tin-tuc/97/cau-chuyen-kinh-doanh-thu-vi.html
+
+if dr['ngaygiothue']:
+            dr['ngaygiothue'] = Ddatetime.time2str(dr['ngaygiothue'], '%m/%d/%Y %H:%M:%S')
+
+
++ viet bao cao moodle (da viet)
++ viet phan phan quyen nguoi dung (theo sission) -> xong
++ viet phan may in  + setup  ****
+
+nguoi dung: 	adminh
+		hang
+xulythuephong
+xulythueban
+thanhtoantien
+_uid = session['username']
+userid = app.mdb(dbname='ecom').query_scalar('SELECT id FROM ecThanhVien WHERE user=:username', {'username': _uid})
+mo hinh = 0 la khach san ---- mohinh = 1 la nha hang ---- mohinh = 2 la massage
+
+
+dia chi may nam son
+116.97.203.184
+116.97.203.184
+
+
+
+==========// 2-4-2018 // ==================
+1. hinhthucthue (them 1 hinh thuc thue nghi ca ngay)
+	+ up du lieu bang: 				htloaiphong   (them mot cot giacangay)  FlOATnone l
+	+ chinh lai modlue quan ly gia phong	   	/modules/hotel/qlgiaphong
+	+ dhotel
+	
+2. up lai quan user nguoi dung:
+	Quản lý
+
+3. in bao cao tong tien tren hoa don. (kho in K80)
+
+4. loc theo nha nghi + massage
+	+ loc theo tung laoi ve. --> chinh là lọc theo tên hàng.
+
+Cong viec buoi Toi
+
+
+khi click vao thi khoang 30 -> 60 tinh hien so gio sai *** trong khoang nay no cong them 60 phut****  (tren 1 tieng thi khong sao, duoi 30 phut cung khong sao)  --> ok
+
+Dùng query ở phần result trong các báo cáo để lọc ra hóa đơn cần xem -> phải thử ***  da hieu *** ---> phai viet combox de loc theo bat cu ten hang gì thì hay nhất  --> ok (theo yeu cau khach hang)
+
+viet lai in lai hoa don  -> ok  -> up ca dhotel va module bao cao
+/inbaocaohoadon
+/inbaocaohoadonk80
+*** doi cai nut click menu cho to len
+
+
+
+==========// 5-4-2018 (shop online) // ==================
++ viet in hoa don K80 o phieu ban hang  -> ok
++ viet phan nhap tu excel trong from hang hoa -> ok
+**** phan in ma vach
+
+==========// 7-4-2018 (nha hang) // ==================
+Viet phan doi mat khau -> ok
+phan quan ly nguoi dung -> ok   --> module thanh vien phai upload het len
+(* phan thanh vien chua can upload voi)
+
+	+ upload file: 	main.html
+	+ localhost.json *** sua : framework  : http://127.0.0.1:2505/
+						"framework": "http://phanmemsohoa.com/",
+	+ them file html: e405.html vao : /views/modules/hotel/e405.html
+	+ cap nhat : dhotel.py
+
+thay cai nut to len mot chu -> ok (upload anh len)
+viet them cai menu phai click them cai dich vu -> ok
+
+**** chu y luc them dich vu khi click menu phai (cap nhat) -> co the luu luon ban voi dang cafe (doi trang thai ban == co khach)
+
+*** giai quyet not phan gop ban  --> moi hien ra thong bao la gop ban trong cafe (*** viet phan gio khach san sau***)
+/xulygopban
+# xu ly thue phong
+@da.route('/xulyhuyphong', methods=['GET', 'POST'])
+
+
+*** bao cao ban hang theo hoa don **** khi khong chon nhan vien va khong ban ve se bao la 'Hotel'
+ data['tennhanvien'] = data['tennhanvien'] == null ? 'Hotel' : data['tennhanvien'];
+
+
+======================// TIGER_KARAOKE //======================16.04.2018
+<option value="7">Dịch vụ KARAOKE</option>'  them mot loai hinh
+/hinhthucnghi
+/xulythuephongd
+/xulysuagio
+
+/suagiokhachvao		(vidu phanquyen) -> ok bao mat trinh duyet -> ok.
+	dnhanvien = 0
+        username = session['username']
+        loggeduser = app.mdb(dbname='ecom').query_table('SELECT logged FROM ecThanhVien WHERE user=:u;',
+                                                        {'u': username})
+        for dr in loggeduser:
+            logged1 = json.loads(dr['logged'])
+            for i in logged1:
+                #print(i['r'])  #{'truongphong': 1, 'nhanvien': 1, 'eu-manager': 1}
+                for q in i['r']:
+                    if q == 'nhanvien':
+                        dnhanvien = 1
+        if dnhanvien == 0:
+		return true
+	else: 	return false
+viet mot muc quan ly gia phong karaoke -> ok
+
+
+
+0988611555 chi linh  -- phan mem quan ly ban hang
+
+
+Bạn đang là chủ doanh nghiệp.Bạn đang gặp khó khăn trong vấn đề sổ sách cũng như vấn đề quản lý nhân viên trong trong việc thất thoát lợi nhuận. (Chỉ với 3000đ/1ngày bạn có 1 phần mềm như ý.)
+Chúng tôi có các sản phẩm hỗ trợ khách hàng như:
++ Phần mềm chuỗi nhà hàng, chuỗi khách sạn, nhà nghỉ online giá rẻ
++ Phần mềm quản lý bán hàng,Kho hàng, hiệu dược, nhà thuốc, bệnh viện,...
++ Phần mềm quản lý chuỗi shop quần áo thời trang mỹ phẩm, trang sức...
++ Phần mềm quản lý kho hàng, quản lý phụ tùng ô tô xe máy, gara ô tô...
++ Thiết kế website và viết phần mềm theo yêu cầu.
+Lợi ích:
++ Quản lý giám sát nhân viên tránh thất thoát doanh thu bằng qua điện thoại.
++ Quản lý việc in báo bán hàng nhanh chóng chính xác.
++ Quản lý việc báo cáo thống kê theo ngày, tháng, năm một cách nhan chóng tiện lợi.
++ Quản lý xuất nhập tồn hàng hóa.
++ quản lý lỗ lãi kinh doanh....
+Và còn rất nhiều lợi ích khác khi sử dụng phần mềm.
+ღ Liên hệ để được tư vấn: 0979479007 - 0985015831 - 0979479623 ღ Le ღ
+https://www.facebook.com/Giaiphapquanlysocom-886938491324225/
+xem chi tiết tại: http://soft.tinhocvietnam.com/
+
+
+Phần mềm quản lý khách sạn, nhà nghỉ, massage, spa, nhà hàng,karaoke tốt nhất hiện nay chỉ với 3000đ/1ngày bạn có ngày 
+Giúp bạn giải quyết gặp khó khăn trong vấn đề sổ sách hàng ngày cũng như vấn đề quản lý nhân viên.
++ Quản lý phòng theo loại phòng,khu vực phòng
++ Quản lý chấm công nhân viên 
++ Thiết lập Bảng giá thuê phòng và  tính tiền phòng
++ CheckIn, CheckOut, In Bil, Tính tiền phòng
++ Quản lý danh sách thức ăn, nước uống, mặt hàng khác,… theo nhóm mặt hàng
++ Quản lý Chi tiền mặt
++ Quản lý nhập, xuất, tồn kho mặt hàng
+.... (Còn rất nhiều tính năng khác nữa)
+Lợi ích:
++ Quản lý giám sát nhân viên tránh thất thoát doanh thu bằng qua điện thoại.
++ Quản lý việc in báo bán hàng nhanh chóng chính xác.
++ Quản lý việc báo cáo thống kê theo ngày, tháng, năm một cách nhan chóng tiện lợi.
++ Quản lý xuất nhập tồn hàng hóa.
++ quản lý thu chi và lỗ lãi kinh doanh....
+Và còn rất nhiều lợi ích khác khi sử dụng phần mềm.
+ღ Liên hệ để được tư vấn: 0979479007 ღ Le Gia Minh ღ
+https://www.facebook.com/Giaiphapquanlysocom-8869384913242…/
+xem chi tiết tại: http://soft.tinhocvietnam.com/
+
+Tuyển dụng!!!
+Ưu tiên các bạn sinh viên đang học học công nghệ thông tin.
+Không cần kinh nghiệm, chỉ cần chăm chỉ, năng động hoạt bát. Các bạn sẽ được đào tạo lập trình (Python + C# + PHP), sửa chữa máy tính.
+Môi trường làm việc năng động được tạo điều kiện thuận lợi để phát triển bản thân, Có thể đến công ty làm việc hoặc làm ở nhà.
+Thử việc thời gian linh động có thể sắp xếp thời gian hợp lý để đi làm không gò bó, không áp lực.
+Khi làm được việc lương khởi đầu là 7tr/1tháng + Phần trăm doanh thu đạt được theo sản phẩm
+(sẽ tăng lương theo quý nếu khối lượng công việc đạt yêu cầu.)
+Chi tiết liên hệ : 0979479007 (Lê Gia Minh)
+webstie: http://soft.tinhocvietnam.com/
+
+
+Tuyển dụng sinh sinh viên thực tập!
+Ưu tiên các bạn sinh viên đang học học công nghệ thông tin và quản trị kinh doanh.
+Không cần kinh nghiệm, chỉ cần chăm chỉ, năng động hoạt bát. Khi vào làm các bạn được đào tạo các kỹ năng giao tiếp và nghiệp vụ quản lý.
+Môi trường làm việc năng động được tạo điều kiện thuận lợi để phát triển bản thân, Có thể đến công ty làm việc hoặc làm ở nhà.
+Thử việc thời gian linh động có thể sắp xếp thời gian hợp lý để đi làm không gò bó, không áp lực.
+Khi làm được việc lương khởi đầu là 7tr/1tháng + Phần trăm doanh thu đạt được theo sản phẩm
+(sẽ tăng lương theo quý + khối lượng công việc đạt yêu cầu.)
+Chi tiết liên hệ : 0979479007 (Lê Minh)
+webstie: http://soft.tinhocvietnam.com/
+
+
+**** Viet phieu thu + phieu chi + bao cao so quy -> xong
++ tao mot bang htSoQuy
+	mysql -u root -p datahotel < /home/minh/PycharmProjects/TIGER_KARAOKE/htSoQuy.sql
++ _debug.json  (bo sung)
++ dhotel.py  	(upload)
++ copy 4 file : phieuchi,phieuthu,inphieuchi,inphieuthu
+
+*** Tao bao cao tong hop thu chi        -> xong
+	+ bcsoquy (debug.json)
+	+ update 2 ham trong dhotel (/bcsoquy + /bcphieuthuchi)
+	+ bcsoquygrid.py (update trong /modules/hotel/)
+	+ thu muc bcsoquy (update /view/vn/modules/hotel)
+	+ bcsoquy.html 	  (update /view/vn/modules/hotel)
+
+*** Bao cao cong no khach	-> xong 		
+	+ up cac module nhu binh thuong.
+	+ up them ham: /baocaochitietcongno trong dhotel
+	+ up them file: /form_in/baocaochitietcongno.html  (*** bao cao nay xem chi tiet khach hang no ***)
+	+ *** phan giao dien cho them cot *** tong thu tong chi va tong chi***)
+truncate htkhachhang;
+truncate htSoQuy;
+truncate htsocai;
+
+*** tao mot danh muc khach hang -> xong   (*** chú ý trong bảng danh mục khách hàng có cột ===idhoadon=== nếu khách hàng có sẵn thì khi thanh toan chưa nhập idhoadon vào cho khách hàng đó. tam thời chưa nghỉ ra để làm gì.***) 
+	+ upload nhu cac phan khac
+
+*** chu y phan bao cao ban hang theo hoa don phải thể hiện thông tin thực thu và có nợ hay không.
+
+NHÀ NGHỈ PHƯƠNG LINH
+dia chi : 43.239.190.251
+****van bi lech 3 phut == timedatectl set-time 15:58:30 ->>xong ok
+timedatectl list-timezones | grep Asia 			->>xong ok
+timedatectl set-timezone Asia/Ho_Chi_Minh		->>xong ok
+kiem tra gio local: ls -l /etc/localtime
+**** update dat phong:  dhotel.py  ==> ok
+	+ /xacnhandatphong
+	+ luc xu ly dat phong van bi loi datetime*** ghi vao csdl van dung: *** xu ly sau
+
+
+HOTEL RELAX
+*** phieu nhap hang viet them mot nut nhap hang hoa o DM_HangHoa *** tien hon rat nhieu
+
+
+Tối dựng lên server.==> phan ban hang  ==> soft.tinhocvietnam.com
+80.211.162.110:8010	==> dia chi chay
+
+
+**** hotel phuong linh == sang gio thu 2 thi moi tinh tien + 20k
+
+*** loi vuot qua 12h phai sua them dau =
+	if (diffHrs >= 12){
+
+*** ban moi co karaoke sua id="luuban" thanh class= luuban (update sodokhachsan.html)
+
+*** khoa sua gio + chi ap dung cho karaoke
+*** viet phan tinh gio tu dong: Tiền giờ phụ trội
+	+qlphonggrid.py
+	+qlphong/grid.js (khong)
+	+qlphong/index.xhtml
+	*** bang: htphong them cot : giophutroi   (tien gio phu troi sau moi tieng)
+	dhotel.py
+	sodokhachsan.thml
+	jquery.contextMenu.js
+
+********** chu y xem lai bao cao ton kho ben hotel relax dang khong loc duoc theo ngay *** toi ve xem lai
+	+ viec bao cao ton kho theo ngay phai bat ngay o htsocai
+
+******
+up quan ly nhan su cho Namson
++ cap nhat file: nhanvien.html
+
+*** Them cot tam uong vao DM_BangChamCong -> them mot nut chon tam uong trong
+*** Them mot nut in bang luong --> de in ra cho nhan vien
+
+truncate DM_NhanVien;
+truncate DM_bangchamcong_chitiet;
+truncate DM_BangChamCong;
+
+Danh muc : DM_BangChamCong => them 1 cot (tientamung)==>   ALTER TABLE DM_BangChamCong ADD tientamung float DEFAULT '0' AFTER songayantrua;
+Thực lãnh
+Tổng lương
+Tháng Năm
+Khách TT
+
+
+===// viet them tien thuong cho khach san nam son //============
+them 2 cot vao bang DM_BangChamCong : 
+	tienthuong, soluotnguoi  (da up) ==>  ALTER TABLE DM_BangChamCong ADD soluotnguoi float DEFAULT '0' AFTER songayle;
+
+
++ cap nhat bang luong: http://127.0.0.1:2505/modules/nhansu/bangluong
+NV phục vụ
+NV Giới thiệu
+Số lượt
+
+
++ cap nhat them bang: ecCompany (*** xong ***)
+
+
+===***===  trang tao file (html) 
+https://www.willpeavy.com/minifier/
+
+==============// cach chay nhieu server Tmux //==========    https://techblog.vn/gioi-thieu-co-ban-ve-tmux
+
+1. trong thu muc tao 1 file : uwsgi.ini
+[uwsgi]
+chmod-socket    = 666
+
+plugin    = python
+wsgi-file = ./main.py
+process   = 3
+socket = /home/minh/PycharmProjects/untitled1/%n.sock
+callable = app
+
+2. trong nginx conf.d/hotel.conf
+server {
+  listen 80;
+  server_name hotel.haui.com.vn;
+  location / {
+    include uwsgi_params;
+    uwsgi_pass unix:/home/minh/PycharmProjects/hotel/uwsgi.sock;
+  }
+}
+3. vao thu muc do va chay (tu dong tao file sock-> neu co file sock cu phai xoa): uwsgi --ini uwsgi.ini
+
+3. cac lenh chay
+https://labs.septeni-technology.jp/none/huong-dan-su-dung-tmux-trong-viec-quan-ly-servers/
+
+tmux new -s s_name			tmux new -s banhang
+tmux a -t s_name
+tmux ls
+tmux kill-session -t s_name
+Ctrl B s  -> chuyen cac session
+ctrl + D  : exit
+
+
+
+
+https://rungbie.kiotviet.com
+
+
+https://fnb.kiotviet.vn/rungbie
+rungbie
+
+ten dang nhap: 0979479623
+
+*** socket***
+https://codeburst.io/building-your-first-chat-application-using-flask-in-7-minutes-f98de4adfa5d
+
+https://codeburst.io/building-your-first-chat-application-using-flask-in-7-minutes-f98de4adfa5d
+
+https://portal.aws.amazon.com
+minhden8x@yahoo.com = Abc@7111986
+
+
+===============// hotel //==========
+test thu nha hang:
+http://94.177.216.42:8089/modules/hotel/sodokhachsan
+
+loi ckthoigian khi thanh toan -> ok
+	them cot chiet khau thoi gian trong bang htsocai:	
+	ALTER TABLE htsocai ADD ckthoigian float DEFAULT '0' AFTER chietkhau;
+
+
+$ sudo yum install gimp 
+
+
+
