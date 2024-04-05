@@ -283,6 +283,7 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="index.html" />
     <Content Include="index2.html" />
+    <Content Include="invoice.html" />
     <Content Include="Map.aspx" />
     <Content Include="pages\calendar.html" />
     <Content Include="pages\charts\chartjs.html" />

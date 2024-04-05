@@ -287,18 +287,14 @@
         </span>
 
                                     </div>
-
-                                     <div class="col-2">
-                                        <input type="submit" value="Xem hoa don" id="khachthanhtoan2" class="btn btn-success float-right">  <%--class , id="saveproduct"--%>                                                                                                                      
-                                    </div>
-
-                                    <div class="col-2">
-                                        <input type="submit" value="Ghi hoa don" id="ghilaihoadon"  class="btn btn-success float-right">                                        
-                                    </div>
                                      
-                                   
+                                    <div class="col-2">
+                                        <input type="submit" value="Thanh toan" id="khachthanhtoan2" class="btn btn-success float-right">  <%--class , id="saveproduct"--%>                                                                                                                      
+                                    </div>
                                            
-                                    
+                                    <div class="col-2">
+                                        <input type="submit" value="In lai hoa don" id="inlaihoadon" class="btn btn-success float-right">  <%--class , id="saveproduct"--%>
+                                    </div>
                                      
                                 </div>
                                 
@@ -443,15 +439,14 @@
 
 
                     <div class="modal-body">
-                       
-                       <div class="container-fluid" id="printableArea" style="width:400px;height:auto;">
+                        <div class="container-fluid" id="printableArea" style="width:400px;height:auto;">
                             Hinh thuc: <b id="hinhthucnghi2"></b>
                             &nbsp;&nbsp;&nbsp; tongtienhat: <b id="tongtienhat2"></b><br />
                            Ten phong: <b id="tenphong2"></b>
                            &nbsp;&nbsp;&nbsp; Tong tien hang: <b id="tongtien2"></b>                                                      
 
 
-                                <div style="width: 100%; height: 300px; float: left;">  
+                                <div style="width: 100%; height: 300px; float: left;">  <%-- overflow-y: scroll;--%>
                                     <table class="display table table-bordered dataTable no-footer">
                                         <thead>
                                             <tr>
@@ -472,20 +467,17 @@
                            Con lai: <b id="conlai2"></b>
                             
                         </div>
-                                                                           
                     </div>
 
-                    <div class="modal-footer">
-                       <%-- <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times"></i>Close</button>--%>
-                         <button type="button" runat="server" id="Button2"  class="btn btn-primary" onclick="printDiv_Close()" >Close</button>
-                        <button type="button" runat="server" id="Button1"  class="btn btn-primary" onclick="printDiv_Save()" >Save</button>
-                        <button type="button" runat="server" id="Button3"  class="btn btn-primary" onclick="printDiv('printableArea')" > 
-                            <i class="fas fa-download"></i>
-                            In hoa don
-                        </button>                       
-                        
-                        
 
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times"></i>Close</button>
+                        <button type="button" runat="server" id="Button3"  class="btn btn-primary" onclick="printDiv('printableArea')" > <%-- value="print a div!"   onserverclick="test"--%>
+                            <i class="fas fa-download"></i>
+                            In & luu hoa don
+                        </button>
+                        <button onclick="printIframe()">In Hóa Đơn</button>
+                         <iframe id="invoiceFrame" style="display:none;"></iframe>
                     </div>
                 </div>
             </div>
@@ -501,7 +493,20 @@
 
         <%--  <script src="../plugins/jquery/jquery.min.js"></script>--%>
         <script src="../dist/contextmenu.js"></script>
-             
+
+        <script>
+            function printIframe() {
+                var iframe = document.getElementById("invoiceFrame");
+                var content = iframe.contentWindow.document.documentElement.outerHTML;
+            
+                var printWindow = window.open('', '_blank');
+                printWindow.document.open();
+                printWindow.document.write('<html><head><title>Hóa Đơn</title></head><body>' + content + '</body></html>');
+                printWindow.document.close();
+                printWindow.print();
+            }
+        </script>
+
         <script>
             $(document).ready(function () {
                 //$('#txtid').prop("readonly", true);
@@ -774,12 +779,6 @@
 
             });
 
-            $('#ghilaihoadon').click(function () 
-            {
-                 thanhtoanhoadon2();
-                //printDiv_Save();    //toi lam tiep
-            });
-
             $('#khachthanhtoan2').click(function () {                                       
                 //save hoa don truoc
                 var itemdata = {};
@@ -897,7 +896,7 @@
                                                 '<td id="giale">' + dongia + '</td>' +
                                                 '<td id="thanhtien">' + thanhtien + '</td>' +                                               
                                                 '</tr>';
-                                            $('#tbnhaphang_inhoadon').append(newrow);                                                                                           
+                                            $('#tbnhaphang_inhoadon').append(newrow);
                                         }
                                         //$('#checkinput1').val(giovao);
                                         //$('#checkinput2').val(giora);                                                                
@@ -988,13 +987,6 @@
                                 $('#ticketid').val(0);
                                 
                                 $('#hoadonid').val(parseInt(sohoadon)+1);
-
-                                //pending -> doi trang thai khi thanh cong -> khong co kach
-
-                                //load lai trang khi thanh cong
-                                //setTimeout(function() {
-                                //location.reload();
-                                //}, 1000);
                             } 
                             else 
                             {
@@ -1008,98 +1000,6 @@
                         }
                     });
             }
-
-            function thanhtoanhoadon2()
-            {
-               // debugger;
-               
-                var psco = $('#thanhtoanid').val();
-                var tongtienhang = $('#tongtienid').val();
-                var tienck = $('#chietkhauid').val();
-               
-
-                var sogiodung = $(".sogiodung").text();
-                var sophutdung = $(".sophutdung").text();
-                
-                var tongsophutdung = parseInt(sogiodung)*60+parseInt(sophutdung);
-                var hinhthucnghi = $('#stylerender').val();
-                var giohat = '0';//$('#ticketid').val();
-                if(hinhthucnghi == 'Karaoke')
-                {
-                    giohat = $('#ticketid').val();
-                }
-                var tienhat1phut = parseInt(giohat)/60;
-                var tongtienhat = Math.round(tongsophutdung * tienhat1phut);
-
-                //var tongtienhat =  tienhat;               
-                var tienthoi = (parseFloat(psco) - parseFloat(tongtienhang)) 
-                if (tienthoi < 0) {
-                            $('#lblconlai').text("Tiền thiếu :");
-                            $('#conlaiid').val(tienthoi);
-                        } else {
-                            $('#lblconlai').text("Tiền thừa :");
-                            $('#conlaiid').val(tienthoi);
-                        }
-                var tenphong = $('#nametable').text();
-                var psno = $('#conlaiid').val();
-                var itemdata = {};
-
-                $('.themthucdon').each(function () {                        
-                        var mahang = $(this).find('td').eq(0).text() + "," + $(this).find('td').eq(2).text() + "," + $(this).find('td').eq(3).text();
-                        var soluong = $(this).find('td').eq(1).text();                       
-                        if (mahang != "") {                           
-                            itemdata[mahang] = parseInt(soluong);                            
-                        }
-                    });                                       
-                    var data = {
-                        tenphong: tenphong,
-                        tongtienhang: tongtienhang,
-                        tongtienhat:tongtienhat,
-                        psco:psco,
-                        tienno: psno,
-                        tienck:tienck,
-                        items: JSON.stringify(itemdata)
-                    };
-                    $.ajax({
-                        type: "POST",
-                        contentType: "application/json; charset=utf-8",
-                        url: "Map.aspx/khthantoan",
-                        //data: JSON.stringify(data),
-                        data: JSON.stringify(data),
-                        dataType: "json",
-                        success: function (data) {
-                            debugger;
-                            if (data.d != "NG") {
-                                alert('Hoa don them thành công!');
-                                $('#tbnhaphang tr').remove();
-                                $('#tongtienid').val(0);                                        
-                                $('#thanhtoanid').val(0);
-                                $('#chietkhauid').val(0);
-                                
-                                $('#stylerender').val('');
-                                $('#ticketid').val(0);
-                                
-                                $('#hoadonid').val(parseInt(sohoadon)+1);
-
-                                //pending -> doi trang thai khi thanh cong -> khong co kach
-
-                                //load lai trang khi thanh cong
-                                //setTimeout(function() {
-                                //location.reload();
-                                //}, 1000);
-                            } 
-                            else 
-                            {
-                                //alert('Phòng/ bàn đang trống!');
-                            }
-                            
-
-                        },
-                        error: function () {
-                            //alert("No Match");
-                        }
-                    });
-            };
             
 
             // nut ghi lai danh sach thuc don
@@ -1815,60 +1715,43 @@
                 alert("adfas");
             });
 
-             function printDiv_Close()
-            {
-                //alert('asdfas');
-                setTimeout(function() {
-                    location.reload();
-                    }, 1000);
-                //$('#myModal6').modal('hide');
-            }
-
-            function printDiv_Save()
-            {
-                 var tienhat = $("#MainContent_Button3").parent().parent().parent().find("b").eq(1).text(); 
-                var tenphong2 = $("#MainContent_Button3").parent().parent().find("b").eq(2).text(); 
-                var tongtien2 = $("#MainContent_Button3").parent().parent().find("b").eq(3).text();
-                
-                var thantoan2 = $("#MainContent_Button3").parent().parent().find("b").eq(4).text();
-                var chietkau2 = $("#MainContent_Button3").parent().parent().find("b").eq(5).text();
-                var conlai2 = $("#MainContent_Button3").parent().parent().find("b").eq(6).text();  
-                    
-                var sohoadon = $("#hoadonid").val();
-                //alert(sohoadon);                
-
-                //alert(tienhat);
-                //alert(tenphong2);
-                //alert(tongtien2);             
-                //alert(thantoan2);
-                //alert(chietkau2);
-                //alert(conlai2);
-                thanhtoanhoadon(tenphong2,tongtien2,chietkau2,thantoan2,conlai2,tienhat,sohoadon); 
-            }
-
             function printDiv(divId) {
                 //debugger;
                 //var delayInMilliseconds = 5000; //1000 = 1 second
                 //setTimeout(function() {
                 //  //your code to be executed after 1 second
                 //}, delayInMilliseconds);
-               try {                                       
+               try {
+                    var tienhat = $("#MainContent_Button3").parent().parent().parent().find("b").eq(1).text(); 
+                    var tenphong2 = $("#MainContent_Button3").parent().parent().find("b").eq(2).text(); 
+                    var tongtien2 = $("#MainContent_Button3").parent().parent().find("b").eq(3).text();
+                
+                    var thantoan2 = $("#MainContent_Button3").parent().parent().find("b").eq(4).text();
+                    var chietkau2 = $("#MainContent_Button3").parent().parent().find("b").eq(5).text();
+                    var conlai2 = $("#MainContent_Button3").parent().parent().find("b").eq(6).text();  
+                    
+                    var sohoadon = $("#hoadonid").val();
+                    //alert(sohoadon);                
+
+                    //alert(tienhat);
+                    //alert(tenphong2);
+                    //alert(tongtien2);             
+                    //alert(thantoan2);
+                    //alert(chietkau2);
+                    //alert(conlai2);
+                    
                     //kiem tra xem co phai hoa don in lai khong
                     //debugger;
                     var checkboxid = document.getElementById("inlaiHD");
                     if(checkboxid.checked == true)
                     {
-                       //alert('OK');
+                        //alert('OK');
                         // truong hop in lai hoa don
                         var printContents = document.getElementById(divId).innerHTML;
                         var originalContents = document.body.innerHTML;
                         document.body.innerHTML = printContents;
-                        //window.print();        
-                        setTimeout(function() {
-                            window.print();
-                            // Sau khi in, phục hồi nội dung ban đầu của body
-                            document.body.innerHTML = originalContents;
-                        }, 1000);   
+                        window.print();                                                  
+                        document.body.innerHTML = originalContents;  
                     }
                     else
                     {
@@ -1877,16 +1760,19 @@
                         var printContents = document.getElementById(divId).innerHTML;
                         var originalContents = document.body.innerHTML;
                         document.body.innerHTML = printContents;
-                        //window.print();      
-                        setTimeout(function() {
-                            window.print();
-                            // Sau khi in, phục hồi nội dung ban đầu của body
-                            document.body.innerHTML = originalContents;
-                        }, 1000);    
-debugger; 
-                        thanhtoanhoadon(tenphong2,tongtien2,chietkau2,thantoan2,conlai2,tienhat,sohoadon);                                                                  
+                        window.print();           
+                        thanhtoanhoadon(tenphong2,tongtien2,chietkau2,thantoan2,conlai2,tienhat,sohoadon);                                       
+                        document.body.innerHTML = originalContents;                        
                     }          
-                                                                                                                                                       
+                                                                                                                                   
+                    //var content = document.getElementById(divId).innerHTML;
+                    //var printWindow = window.open('', '_blank');
+                    //var printWindow = window.open();
+                    //printWindow.document.open();
+                    //printWindow.document.write('<html><head><title>Print</title></head><body>' + content + '</body></html>');
+                    //printWindow.document.close();
+                    //printWindow.print();
+
                     setTimeout(function() {
                     location.reload();
                     }, 1000);

@@ -1817,11 +1817,7 @@
 
              function printDiv_Close()
             {
-                //alert('asdfas');
-                setTimeout(function() {
-                    location.reload();
-                    }, 1000);
-                //$('#myModal6').modal('hide');
+                $('#myModal6').modal('hide');
             }
 
             function printDiv_Save()
