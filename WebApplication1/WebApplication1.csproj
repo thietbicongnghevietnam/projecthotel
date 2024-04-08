@@ -337,6 +337,7 @@
     <Content Include="pages\UI\sliders.html" />
     <Content Include="pages\UI\timeline.html" />
     <Content Include="pages\widgets.html" />
+    <Content Include="Phieunhaphang.aspx" />
     <Content Include="plugins\bootstrap-colorpicker\css\bootstrap-colorpicker.css.map" />
     <Content Include="plugins\bootstrap-colorpicker\css\bootstrap-colorpicker.min.css.map" />
     <Content Include="plugins\bootstrap-colorpicker\js\bootstrap-colorpicker.js.map" />
@@ -2480,6 +2481,13 @@
     </Compile>
     <Compile Include="Map.aspx.designer.cs">
       <DependentUpon>Map.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Phieunhaphang.aspx.cs">
+      <DependentUpon>Phieunhaphang.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Phieunhaphang.aspx.designer.cs">
+      <DependentUpon>Phieunhaphang.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">
