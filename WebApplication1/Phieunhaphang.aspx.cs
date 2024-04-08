@@ -12,9 +12,21 @@ using WebApplication1.App_Code;
 
 using System.Drawing;
 using System.Web.Script.Serialization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace WebApplication1
-{    
+{
+    public class OrderList
+    {
+        public List<Danhmuc> Orders { get; set; }
+    }
+    public class Danhmuc
+    {
+        public string mahang { get; set; }
+        public string soluong { get; set; }      
+    }
+
     public partial class Phieunhaphang : System.Web.UI.Page
     {
         public DataTable dt_doc = new DataTable();
@@ -50,6 +62,82 @@ namespace WebApplication1
                     return docResult;
                 }
             }
+        }
+
+        [WebMethod]
+        public static string getthongtinmahang(string _mahang)
+        {
+            DataTable dt = new DataTable();
+
+            dt = DataConn.StoreFillDS("NH_select_documentNo", System.Data.CommandType.StoredProcedure, _mahang);
+
+            DataTable dt2 = new DataTable();
+            dt2 = dt.Copy();
+
+            String daresult = null;
+            DataSet ds = new DataSet();
+            ds.Tables.Add(dt2);
+            daresult = DataSetToJSON(ds);
+            return daresult;
+        }
+
+        public static string DataSetToJSON(DataSet ds)
+        {
+            Dictionary<string, object> dict = new Dictionary<string, object>();
+            foreach (DataTable dt in ds.Tables)
+            {
+                object[] arr = new object[dt.Rows.Count + 1];
+
+                for (int i = 0; i <= dt.Rows.Count - 1; i++)
+                {
+                    arr[i] = dt.Rows[i].ItemArray;
+                }
+
+                //dict.Add(dt.TableName, arr);
+                dict.Add(dt.TableName, arr);
+            }
+
+            JavaScriptSerializer json = new JavaScriptSerializer();
+            return json.Serialize(dict);
+        }
+
+
+
+        [WebMethod]
+        public static string addthongtinhanghoa_PNH(string chieukhau, string nhacungcap, string tienhang, string items)  //string tenphong, string tienhang
+        {
+            String thongbao = "";
+            DataTable dtsave = new DataTable();
+            DataTable dtupdatekho = new DataTable();
+
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            var jsonObj = jss.Deserialize<dynamic>(items);
+            string type_act = "nhaphang";
+
+            foreach (var item in jsonObj)
+            {                
+                string[] numbersArray = item.Key.Split(',');
+                var mahang = numbersArray.FirstOrDefault();
+                var soluong = item.Value;
+                //Console.WriteLine($"Key: {key}, Value: {value}");
+                //dtupdatekho = DataConn.StoreFillDS("NH_updatekho", System.Data.CommandType.StoredProcedure, mahang, soluong, type_act);
+            }
+            //check xem hoa don ton tai chua
+            //update *** neu hoa don ton tai roi
+            //lay so hoa don truyen len de update
+            dtsave = DataConn.StoreFillDS("addthongtinhanghoa_PNH", System.Data.CommandType.StoredProcedure, chieukhau, nhacungcap, tienhang, items);
+
+            if (dtsave.Rows[0][0].ToString() == "1")
+            {
+                //thongbao = "OK" + "," + dtlevel.Rows[0][1].ToString();
+
+                thongbao = "OK";
+            }
+            else
+            {
+                thongbao = "NG";
+            }
+            return thongbao;
         }
 
 

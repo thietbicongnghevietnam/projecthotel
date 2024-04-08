@@ -243,6 +243,7 @@
                                                 <th>Thành tiền</th>
                                                 <th>Chon</th>
                                             </tr>
+                                        </thead>
                                             <tbody id="tbnhaphang">
                                             </tbody>
                                     </table>
