@@ -211,6 +211,20 @@ namespace WebApplication1
             DataTable dtsave = new DataTable();
             dtsave = DataConn.StoreFillDS("NH_save_khthanhtoan", System.Data.CommandType.StoredProcedure, tenphong, tongtienhang, tongtienhat, psco, tienno, tienck, items);//, 
 
+            DataTable dtupdatekho = new DataTable();
+
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            var jsonObj = jss.Deserialize<dynamic>(items);
+            string type_act = "banhang";
+            foreach (var item in jsonObj)
+            {
+                string[] numbersArray = item.Key.Split(',');
+                var mahang = numbersArray.FirstOrDefault();
+                var soluong = item.Value;
+                //Console.WriteLine($"Key: {key}, Value: {value}");
+                dtupdatekho = DataConn.StoreFillDS("NH_updatekho", System.Data.CommandType.StoredProcedure, mahang, soluong, type_act);
+            }
+
             if (dtsave.Rows[0][0].ToString() == "1")
             {
                 //thongbao = "OK" + "," + dtlevel.Rows[0][1].ToString();

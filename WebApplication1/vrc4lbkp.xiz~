@@ -14,16 +14,19 @@
                 <input id="soluongnhaphang" name="soluongnhaphang" class="form-control input-sm" value="" />
                 </td>
                 <td style="padding-bottom: 10px; padding-right: 10px;">
-                   <%-- <input id="nhaccid" name="nhacungcap" class="form-control input-sm" value="NCC" />--%>
+                    <input id="nhaccid" name="nhacungcap" class="form-control input-sm" value="NCC" />
 
-                  
-                   
+                    <div class="col-md-3" style="float: left">
+                    <div class="form-group">
                         <%--<label for="Group">NCC</label>--%>
-                        <asp:DropDownList ID="dr_nhacungcap" runat="server" AppendDataBoundItems="true" DataTextField="mancc" DataValueField="id" CssClass="form-control input-sm">
+                        <asp:DropDownList ID="dr_nhacungcap" runat="server"
+                            AppendDataBoundItems="true"
+                            DataTextField="id"
+                            DataValueField="mancc"
+                            CssClass="form-control input-sm">
                         </asp:DropDownList>
-                     
-                   
-                
+                    </div>
+                </div>
 
                 </td>
                 <td>
@@ -413,8 +416,6 @@
          {
              var itemdata = {};
              var tienhang = $('#tongtiennhap').val(); 
-             var nhacungcap = ('#dr_nhacungcap').val();
-             alert(nhacungcap);
              //var nhacungcap = $('#nhaccid').val(); 
              var chieukhau = $('#chietkhauid').val();
              $('.themthucdon').each(function () {

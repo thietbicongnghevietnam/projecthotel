@@ -106,7 +106,7 @@
         <a href="Map.aspx" class="nav-link" style="width:150px; background-color:darkgray; border-right: 1px solid; text-align:center; color:white;">EMap</a>
       </li>
         <li class="nav-item d-none d-sm-inline-block">
-        <a href="Phieunhaphang.aspx" class="nav-link" style="width:150px; background-color:darkgray;border-right: 1px solid;text-align:center; color:white;">Phieu Nhap hang</a>
+        <a href="Phieunhaphang.aspx" class="nav-link" style="width:180px; background-color:darkgray;border-right: 1px solid;text-align:center; color:white;">Phieu Nhap hang</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link" style="width:150px; background-color:darkgray;border-right: 1px solid;text-align:center; color:white;">Contact</a>

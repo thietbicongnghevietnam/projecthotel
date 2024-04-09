@@ -31,11 +31,22 @@ namespace WebApplication1
     {
         public DataTable dt_doc = new DataTable();
         public DataTable dt_nhomhang = new DataTable();
+
+        public DataTable dtncc = new DataTable();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 //BindStockCode();
+
+                dtncc = DataConn.StoreFillDS("NH_Get_NCC", System.Data.CommandType.StoredProcedure);
+                DataRow newRow2 = dtncc.NewRow();
+                newRow2["mancc"] = "==NCC==";
+                dtncc.Rows.InsertAt(newRow2, 0);
+                dr_nhacungcap.DataSource = dtncc;
+                dr_nhacungcap.DataBind();
+
+
             }
         }
 
@@ -112,7 +123,7 @@ namespace WebApplication1
 
             JavaScriptSerializer jss = new JavaScriptSerializer();
             var jsonObj = jss.Deserialize<dynamic>(items);
-            string type_act = "nhaphang";
+            string type_act = "nhaphang";            
 
             foreach (var item in jsonObj)
             {                
@@ -120,7 +131,7 @@ namespace WebApplication1
                 var mahang = numbersArray.FirstOrDefault();
                 var soluong = item.Value;
                 //Console.WriteLine($"Key: {key}, Value: {value}");
-                //dtupdatekho = DataConn.StoreFillDS("NH_updatekho", System.Data.CommandType.StoredProcedure, mahang, soluong, type_act);
+                dtupdatekho = DataConn.StoreFillDS("NH_updatekho", System.Data.CommandType.StoredProcedure, mahang, soluong, type_act);
             }
             //check xem hoa don ton tai chua
             //update *** neu hoa don ton tai roi
