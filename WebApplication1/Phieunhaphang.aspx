@@ -19,7 +19,10 @@
                   
                    
                         <%--<label for="Group">NCC</label>--%>
-                        <asp:DropDownList ID="dr_nhacungcap" runat="server" AppendDataBoundItems="true" DataTextField="mancc" DataValueField="id" CssClass="form-control input-sm">
+                        <asp:DropDownList ID="dr_nhacungcap" runat="server" AppendDataBoundItems="true" 
+                            DataTextField="mancc" 
+                            DataValueField="id" 
+                            CssClass="form-control input-sm">
                         </asp:DropDownList>
                      
                    
@@ -69,15 +72,19 @@
                 </div>
 
                 <div>
-                <span style="float: left; padding-right: 10px; padding-top: 20px;"><b style="float: left">Tổng tiền hàng :</b>
+                <span style="float: left; padding-right: 10px; padding-top: 20px;"><b style="float: left">Tổng tiền hàng &nbsp;&nbsp;</b>
                 <input style="width: 140px; float: left" id="tongtiennhap" disabled="disabled" name="tongtiennhap" type="text" class="form-control input-sm" value="0"/></span>
 
-                <span style="float: left; padding-right: 10px; padding-top: 20px;"><b style="float: left">Chiet Khau :</b>
+                <span style="float: left; padding-right: 10px; padding-top: 20px;"><b style="float: left">Chiet Khau &nbsp;&nbsp;</b>
                     <input style="width: 140px; float: left" id="chietkhauid"  name="chietkhauid" type="text" class="form-control input-sm" value="0"/>
                 </span>
                 
-                <span style="float: left; padding-right: 10px; padding-top: 20px;"><b style="float: left">Thanh toan :</b>
-                    <input style="width: 140px; float: left" id="thanhtoanid" disabled="disabled" name="thanhtoanHD" type="text" class="form-control input-sm" value="0"/>
+                <span style="float: left; padding-right: 10px; padding-top: 20px;"><b style="float: left">Thanh toan &nbsp;&nbsp;</b>
+                    <input style="width: 140px; float: left" id="thanhtoanid" name="thanhtoanHD" type="text" class="form-control input-sm" value="0"/>
+                </span>
+
+                <span style="float: left; padding-right: 10px; padding-top: 20px;"><b style="float: left">Con lai &nbsp;&nbsp;</b>
+                    <input style="width: 140px; float: left" id="conlaiid" name="conlaiHD" type="text" class="form-control input-sm" value="0"/>
                 </span>
                
                 <span style="float: left; padding-right: 10px; padding-top: 20px; padding-left: 50px;">
@@ -409,14 +416,45 @@
             })
          });
 
+         $('#thanhtoanid').on('change', function () { 
+             var tongtienhang = $("#tongtiennhap").val();
+             var tongtienthanhtoan = $("#thanhtoanid").val();
+             var conlai = (parseFloat(tongtienthanhtoan) - parseFloat(tongtienhang)) 
+              //var tienthoi = (parseFloat(psco) - parseFloat(tongtienhang)) 
+             var psno='';
+            if (conlai < 0) {
+                        //$('#lblconlai').text("Tiền thiếu :");
+                $('#conlaiid').val(conlai);
+                psno = conlai;
+            }
+            else
+            {
+                        //$('#lblconlai').text("Tiền thừa :");
+                $('#conlaiid').val(conlai);
+                psno = '0';
+             }
+             //alert(psno);
+               
+         });
+
          $('#ghilaihoadon').click(function () 
-         {
+         {             
              var itemdata = {};
              var tienhang = $('#tongtiennhap').val(); 
-             var nhacungcap = ('#dr_nhacungcap').val();
-             alert(nhacungcap);
+             var nhacungcap = $('#MainContent_dr_nhacungcap').val();
+             //alert(nhacungcap);
              //var nhacungcap = $('#nhaccid').val(); 
              var chieukhau = $('#chietkhauid').val();
+
+             var checkcongno = $('#conlaiid').val();
+             var psno = '';
+             //var namencc = $('#MainContent_dr_nhacungcap').text();
+             var ddl = document.getElementById("MainContent_dr_nhacungcap");
+             var namencc = ddl.options[0].innerText;
+             var namencc1 = $('#MainContent_dr_nhacungcap').val();
+             //console.log(namencc);
+             //alert(namencc1);
+                       
              $('.themthucdon').each(function () {
                         //var mahang = $(this).find('td').eq(0).text();
                         //var soluong = $(this).find('td').eq(1).text();
@@ -430,15 +468,23 @@
              });
              //alert(itemdata);
                     //var hanghoa_new = itemdata;
-                    //var aaa = $('#tongtienid').val();
-             var data = {
+                    //var aaa = $('#tongtienid').val();            
+             if (checkcongno < 0) {
+                 //$('#lblconlai').text("Tiền thiếu :");                   
+                 psno = checkcongno;
+                 if (namencc1 == '') {
+                     alert("Ban chua chon nha cung cap!");
+                 }
+                 else
+                 {
+                     var data = {
+                        psno:psno,
                         chieukhau: chieukhau,
-                        //nhacungcap: nhacungcap,
+                        nhacungcap: nhacungcap,
                         tienhang: tienhang,
                         items: JSON.stringify(itemdata)
                     };
-
-                    //save hang hoa
+                     //save hang hoa
                     $.ajax({
                         type: "POST",
                         contentType: "application/json; charset=utf-8",
@@ -453,14 +499,51 @@
                             $('#thanhtoanid').val('0');
                             $('#chietkhauid').val('0');
                             //chietkhauid
+                            $("#soluongnhaphang").val('0');
+                            $("#conlaiid").val('0');
+                            $("#MainContent_phieunhaphang").select();
                         },
                         error: function () {
                             //alert("No Match");
                         }
                   });
-
-
-
+                 }                  
+             }
+             else
+             {                                  
+                 psno = '0';
+                 var data = {
+                        psno:psno,
+                        chieukhau: chieukhau,
+                        nhacungcap: nhacungcap,
+                        tienhang: tienhang,
+                        items: JSON.stringify(itemdata)
+                    };
+                  //save hang hoa
+                    $.ajax({
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: "Phieunhaphang.aspx/addthongtinhanghoa_PNH",
+                        //data: JSON.stringify(data),
+                        data: JSON.stringify(data),
+                        dataType: "json",
+                        success: function (data) {
+                            alert('Hoa don thêm thành công!');  
+                            $('#tbphieunhap tr').remove();
+                            $('#tongtiennhap').val('0');
+                            $('#thanhtoanid').val('0');
+                            $('#chietkhauid').val('0');
+                            //chietkhauid
+                            $("#soluongnhaphang").val('0');
+                            $("#conlaiid").val('0');
+                            $("#MainContent_phieunhaphang").select();
+                        },
+                        error: function () {
+                            //alert("No Match");
+                        }
+                  });
+             }
+                  
             });
 
         function SearchText() {

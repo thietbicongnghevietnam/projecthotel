@@ -115,7 +115,7 @@ namespace WebApplication1
 
 
         [WebMethod]
-        public static string addthongtinhanghoa_PNH(string chieukhau, string nhacungcap, string tienhang, string items)  //string tenphong, string tienhang
+        public static string addthongtinhanghoa_PNH(string psno, string chieukhau, string nhacungcap, string tienhang, string items)  //string tenphong, string tienhang
         {
             String thongbao = "";
             DataTable dtsave = new DataTable();
@@ -136,7 +136,7 @@ namespace WebApplication1
             //check xem hoa don ton tai chua
             //update *** neu hoa don ton tai roi
             //lay so hoa don truyen len de update
-            dtsave = DataConn.StoreFillDS("addthongtinhanghoa_PNH", System.Data.CommandType.StoredProcedure, chieukhau, nhacungcap, tienhang, items);
+            dtsave = DataConn.StoreFillDS("addthongtinhanghoa_PNH", System.Data.CommandType.StoredProcedure, psno, chieukhau, nhacungcap, tienhang, items);
 
             if (dtsave.Rows[0][0].ToString() == "1")
             {
