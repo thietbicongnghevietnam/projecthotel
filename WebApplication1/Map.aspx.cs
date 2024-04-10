@@ -24,6 +24,8 @@ namespace WebApplication1
         public DataTable dt_getinfo_phong = new DataTable();
         public DataTable dt_get_khuvuc0 = new DataTable();
 
+        public DataTable dtncc = new DataTable();
+
         public static string source;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -66,6 +68,12 @@ namespace WebApplication1
             if (!IsPostBack)
             {
                 //BindStockCode();
+                dtncc = DataConn.StoreFillDS("NH_Get_KH", System.Data.CommandType.StoredProcedure);
+                DataRow newRow2 = dtncc.NewRow();
+                newRow2["makh"] = "==KH==";
+                dtncc.Rows.InsertAt(newRow2, 0);
+                dr_nhacungcap.DataSource = dtncc;
+                dr_nhacungcap.DataBind();
             }
 
         }

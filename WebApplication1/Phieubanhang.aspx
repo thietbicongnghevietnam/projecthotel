@@ -30,7 +30,7 @@
                    
                         <%--<label for="Group">NCC</label>--%>
                         <asp:DropDownList ID="dr_nhacungcap" runat="server" AppendDataBoundItems="true" 
-                            DataTextField="mancc" 
+                            DataTextField="makh" 
                             DataValueField="id" 
                             CssClass="form-control input-sm">
                         </asp:DropDownList>
@@ -155,7 +155,7 @@
                                 $.ajax({
                                     type: "POST",
                                     contentType: "application/json; charset=utf-8",
-                                    url: "Map.aspx/getthongtinmahang",
+                                    url: "Phieubanhang.aspx/getthongtinmahang",
                                     data: JSON.stringify(data),
                                     dataType: "json",
                                     success: function (data) {
@@ -363,7 +363,7 @@
                                     $.ajax({
                                         type: "POST",
                                         contentType: "application/json; charset=utf-8",
-                                        url: "Phieunhaphang.aspx/getthongtinmahang",
+                                        url: "Phieubanhang.aspx/getthongtinmahang",
                                         data: JSON.stringify(data),
                                         dataType: "json",
                                         success: function (data) {
@@ -512,7 +512,7 @@
                  //$('#lblconlai').text("Tiền thiếu :");                   
                  psno = checkcongno;
                  if (namencc1 == '') {
-                     alert("Ban chua chon nha cung cap!");
+                     alert("Ban chua chon ten khach hang!");
                  }
                  else
                  {
@@ -528,7 +528,7 @@
                     $.ajax({
                         type: "POST",
                         contentType: "application/json; charset=utf-8",
-                        url: "Phieunhaphang.aspx/addthongtinhanghoa_PNH",
+                        url: "Phieubanhang.aspx/addthongtinhanghoa_PBH",
                         //data: JSON.stringify(data),
                         data: JSON.stringify(data),
                         dataType: "json",
@@ -564,7 +564,7 @@
                     $.ajax({
                         type: "POST",
                         contentType: "application/json; charset=utf-8",
-                        url: "Phieunhaphang.aspx/addthongtinhanghoa_PNH",
+                        url: "Phieubanhang.aspx/addthongtinhanghoa_PBH",
                         //data: JSON.stringify(data),
                         data: JSON.stringify(data),
                         dataType: "json",
@@ -596,7 +596,7 @@
                         $.ajax({
                             type: "POST",
                             contentType: "application/json; charset=utf-8",
-                            url: "Phieunhaphang.aspx/searchmahang",
+                            url: "Phieubanhang.aspx/searchmahang",
                             data: JSON.stringify(data),
                             dataType: "json",
                             success: function (data) {

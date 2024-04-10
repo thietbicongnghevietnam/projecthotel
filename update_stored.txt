@@ -1,73 +1,13 @@
-USE [Warehouse_BPS]
-GO
-/****** Object:  StoredProcedure [dbo].[addthongtinhanghoa_PBH]    Script Date: 04/10/2024 4:05:32 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-ALTER PROCEDURE [dbo].[addthongtinhanghoa_PBH]  --addthongtinhanghoa_PBH '', '0','0','NCC','13000','{"biahn,5000,5000":1,"biaken,8000,8000":1}'
-	@thanhtoantien as nvarchar(50),
-	@psno as nvarchar(20),
-	@chietkhau as nvarchar(20), 
-    @nhacungcap as nvarchar(20), 
-	@tienhang as nvarchar(20), 
-	@items as nvarchar(300)
-AS
-BEGIN
---check ban ghi dau tien
-declare @countid int
-declare @soHD as nvarchar(50)
-declare @maxHD as nvarchar(10)
-declare @tongtienthanhtoan  as float
+**** phai chan neu khong co hang ban thi khong duoc luu hoa don
 
---declare @NCC as int
---set @NCC =1
+[dbo].[addthongtinhanghoa_PBH]
+NH_Get_KH
+NH_save_khthanhtoan
+NH_save_thongtinhanghoa
 
-set 	@countid = (select count(ID) FROM htsonhaphang)
-if (@countid > 0)
-begin
-	--select 1  -- co ban ghi roi
-	--tao so hoadon
-	set @maxHD = (select max(cast(substring(sohd,4,len(sohd)-3) as int))+1 from htsonhaphang)
-	set @soHD = 'NH_'+@maxHD
-	--set @tongtienthanhtoan = cast(@tienhang as float) - cast(@chietkhau as float)
-	insert into htsonhaphang (sohd,idncc,items,tongtien,chietkhau,tongtienthanhtoan,psno) values(@soHD,cast(@nhacungcap as int),@items,@tienhang,@chietkhau,cast(@thanhtoantien as float),cast(@psno as float))    
 
-	--update cong no khach NCC
-	if(@psno <> '0')
-	begin
-		--update cong no bang mater
-		update htnhacungcap set congnodi=congnodi + cast(@psno as float) where id =cast(@nhacungcap as int)
-	end
+bang: 
+htkhachhang
+htsocai
+htsocai_BK
 
-	select 1
-	
-
---select substring('NH_1',4,1) as abc
-
-end
-else
-begin
-	-- TRUONG HOP khong co ban ghi
-	--select 0
-	--tao so hoadon
-	set @maxHD = '1'
-	set @soHD = 'NH_'+@maxHD
-	set @tongtienthanhtoan = cast(@tienhang as float) - cast(@chietkhau as float)
-	--insert ban ghi
-	insert into htsonhaphang (sohd,idncc,items,tongtien,chietkhau,tongtienthanhtoan,psno) values(@soHD,cast(@nhacungcap as int),@items,@tienhang,@chietkhau,cast(@thanhtoantien as float),cast(@psno as float))
-	--update kho  -> xu ly o code c#
-
-	--update cong no khach NCC
-	if(@psno <> '0')
-	begin
-		--update cong no bang mater
-		update htnhacungcap set congnodi=congnodi + cast(@psno as float) where id =cast(@nhacungcap as int)
-	end
-	
-	
-	select 1	
-
-end
-	
-END

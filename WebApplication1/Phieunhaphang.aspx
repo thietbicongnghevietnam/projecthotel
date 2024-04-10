@@ -155,7 +155,7 @@
                                 $.ajax({
                                     type: "POST",
                                     contentType: "application/json; charset=utf-8",
-                                    url: "Map.aspx/getthongtinmahang",
+                                    url: "Phieunhaphang.aspx/getthongtinmahang",
                                     data: JSON.stringify(data),
                                     dataType: "json",
                                     success: function (data) {

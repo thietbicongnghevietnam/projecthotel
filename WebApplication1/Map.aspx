@@ -178,7 +178,9 @@
 
                                 <i class="fa fa-save" style="font-size: 24px;color:blue; padding-left: 20px;"></i><b class="saveproduct" style="color: yellow; padding-left: 5px;">SAVE BILL</b>
 
-                                <i class="fa fa-plus-square" style="font-size: 24px; padding-left: 20px;"></i><b class="add_hanghoa" style="color: yellow; padding-left: 5px;">Add More</b>
+                                <i class="fa fa-plus-square" style="font-size: 24px; padding-left: 20px;"></i><b class="add_hanghoa" style="color: yellow; padding-left: 5px;">Add Item</b>
+
+                                <i class="fa fa-plus-square" style="font-size: 24px; padding-left: 20px;"></i><b class="addnew_KH" style="color: yellow; padding-left: 5px;">Add KH</b>
 
                                 
 
@@ -205,14 +207,23 @@
                                             <td style="padding-bottom: 10px; padding-right: 10px;">
                                                 <input id="soluong" name="soluong" class="soluong form-control input-sm" value="1" style="width: 50px;">
                                             </td>
-                                            <td style="padding-bottom: 10px; padding-right: 10px; padding-left: 10px;">
+                                           <%-- <td style="padding-bottom: 10px; padding-right: 10px; padding-left: 10px;">
                                                 <label for="inmauto" style="float: left; margin-top: 5px;">inmauto</label>
                                                    <input type="checkbox" id="inmauto" name="inmauto" >
                                             </td>
                                             <td style="padding-bottom: 10px; padding-right: 10px; padding-left: 10px;">
                                                 <label for="inmaunho" style="float: left; margin-top: 5px;">Inmaunho</label>
                                                 <input type="checkbox" id="inmaunho" name="inmaunho" checked>
+                                            </td>--%>
+
+                                            <td style="padding-bottom: 10px; padding-right: 10px; padding-left: 10px;">                                              
+                                                <asp:DropDownList ID="dr_nhacungcap" runat="server" AppendDataBoundItems="true" 
+                                                    DataTextField="makh" 
+                                                    DataValueField="id" 
+                                                    CssClass="form-control input-sm">
+                                                </asp:DropDownList>                                                                                                             
                                             </td>
+
                                             <td style="padding-bottom: 10px; padding-right: 10px; padding-left: 10px;">
                                                 <b style="padding-right: 3px; margin-left: 10px;">So HD:</b>
                                                 <input  style="width: 80px;margin-left: 5px;" id="hoadonid" name="sohoadon" disabled />                                              
@@ -253,14 +264,21 @@
 
                                 <div class="row">
                                     <div class="col-2">
-                                        <label for="tongtien" style="float: left; margin-top: 5px;">Tong tien:</label>
-                                        <input type="text" id="tongtienid" class="form-control input-sm" name="fname" style="float: left; margin-left: 10px;" value="0">
+                                        <label for="tongtien" style="float: left; margin-top: 5px;">Tien hang:</label>
+                                        <input type="text" id="tongtienid" disabled class="form-control input-sm" name="fname" style="float: left; margin-left: 10px;" value="0">
                                                      <span style="float: left;padding-left: 20px; padding-top: 10px;">
             <img src="/static/images/phongtrong.png" style="width:40px;height:30px;float: left;padding-right: 10px;">
             <b style="font-size: 14px;">Bàn/Phòng trống</b>
 
         </span>
                                     </div>
+
+                                    <div class="col-2">
+                                         <label for="tongtien" style="float: left; margin-top: 5px;">Tien gio</label>  
+                                        <input type="text" id="tiengioid" disabled class="form-control input-sm" name="fname" style="float: left; margin-left: 10px;" value="0">                                                                              
+                                         <span style="float: left;padding-left: 20px; padding-top: 10px;">
+                                    </div>
+
                                     <div class="col-2">
                                         <label for="tongtien" style="float: left; margin-top: 5px;">chiet khau</label>
                                         <input type="text" id="chietkhauid" class="form-control input-sm" name="fname" style="float: left; margin-left: 10px;" value="0">
@@ -268,7 +286,9 @@
             <img src="/static/images/cokhach.png" style="width:40px;height:30px;float: left;padding-right: 10px;">
             <b style="font-size: 14px;">B/P có khách</b>
         </span>
-                                    </div>                                                                    
+                                    </div>   
+
+                                    
                                 
                                     <div class="col-2">
                                         <label for="tongtien" style="float: left; margin-top: 5px;">thanh toan</label>
@@ -288,12 +308,12 @@
 
                                     </div>
 
-                                     <div class="col-2">
-                                        <input type="submit" value="Xem hoa don" id="khachthanhtoan2" class="btn btn-success float-right">  <%--class , id="saveproduct"--%>                                                                                                                      
-                                    </div>
+                                     
 
                                     <div class="col-2">
-                                        <input type="submit" value="Ghi hoa don" id="ghilaihoadon"  class="btn btn-success float-right">                                        
+                                        <br />
+                                        <input type="submit" value="Xem HD" id="khachthanhtoan2" class="btn btn-success float-right" style="width:90px;float:left;"><br /><br />
+                                        <input type="submit" value="Ghi HD" id="ghilaihoadon"  class="btn btn-success float-right" style="width:90px;float:left;">                                        
                                     </div>
                                      
                                    
@@ -694,6 +714,23 @@
                                         diffDays = Math.round(diffMs / 86400000); // days
                                     }
 
+                                    var sogiodung = $(".sogiodung").text();
+                                    var sophutdung = $(".sophutdung").text();
+		                            var tongsophutdung = parseInt(sogiodung)*60+parseInt(sophutdung);
+                                    //var hinhthucnghi = $('#stylerender').val();
+                                    //var giohat = '0';//$('#ticketid').val();
+                                    var tienhat1phut = 0;
+                                    var tongtienhat = 0;
+                                    if (hinhthucnghi != 'Karaoke') {
+                                        //giohat = '0';
+                                        tongtienhat = 0;
+                                    }
+                                    else
+                                    {
+                                        tienhat1phut = parseInt(giohat)/60;
+                                        tongtienhat = Math.round(tongsophutdung * tienhat1phut);
+                                    }                                    
+                                    //alert(giohat);
                                     //debugger; 
                                     if (myArr == '0') {
                                         //truong hop chua co hang ban
@@ -701,13 +738,11 @@
                                         $('#tongtienid').val(0);                                        
                                         $('#thanhtoanid').val(0);
                                         $('#chietkhauid').val(0);
-
                                         $('#ticketid').val(0);
-                                        $('#stylerender').val('NH-CF');
-                                        
-                                        
-                                        
-
+                                        $('#stylerender').val('NH-CF');    
+                                        //tiengioid  //conlaiid
+                                        $('#tiengioid').val(0);
+                                        $('#conlaiid').val(0);
                                     } 
                                     else 
                                     {
@@ -740,16 +775,18 @@
                                         }
 
                                         $('#checkinput1').val(giovao);
-                                        $('#checkinput2').val(giora);
-                        
-                                        
-                                        
+                                        $('#checkinput2').val(giora);                                                                                                        
                                         $('#tongtienid').val(tienhang);
-                                        $('#thanhtoanid').val(tienhang);
-                                        $('#chietkhauid').val(0);
 
+                                        //$('#thanhtoanid').val(tienhang);
+                                        $('#thanhtoanid').val(parseInt(tienhang)+parseInt(tongtienhat));
+
+                                        $('#chietkhauid').val(0);
                                         $('#ticketid').val(giohat);
                                         $('#stylerender').val(hinhthucnghi);
+
+                                        $('#tiengioid').val(tongtienhat);
+                                        $('#conlaiid').val(0);
                                     }
                                 }
                                 else {
@@ -757,9 +794,11 @@
                                     $('#tongtienhang').val(0);
                                     $('#thanhtoanid').val(0);
                                     $('#chietkhauid').val(0);
-
                                     $('#ticketid').val(0);
                                     $('#stylerender').val('NH-CF');
+
+                                    $('#tiengioid').val(0);
+                                    $('#conlaiid').val(0);
                                 }
 
                             },
@@ -1008,6 +1047,57 @@
                         }
                     });
             }
+
+            $('#chietkhauid').on('change', function () { 
+            var textcheck = $('#chietkhauid').val();
+            var tongtienhang = $("#thanhtoanid").val();
+            if (textcheck.includes("%")) {
+                //alert("TextBox chứa ký tự phần trăm (%)");
+                var removeKytu = $("#chietkhauid").val().replace(/%/g, "");
+                //alert(removeKytu);
+                if(parseInt(removeKytu) <= 100) // <100%
+                {
+                    var tienck = parseFloat(removeKytu)*parseFloat(tongtienhang)/100;
+                    //alert(tienck);
+                    var tongtienthanhtoan =(parseFloat(tongtienhang) - parseFloat(tienck)) ; //;$("#thanhtoanid").val();
+                    $("#chietkhauid").val(tienck);
+                    $("#thanhtoanid").val(tongtienthanhtoan);
+                }
+                else
+                {
+                    alert("Gia tri vuot qua 100%");
+                }               
+            }
+            else
+            {               
+                var tienck = $("#chietkhauid").val();
+                var tongtienthanhtoan =(parseFloat(tongtienhang) - parseFloat(tienck)) ; //;$("#thanhtoanid").val();
+                $("#thanhtoanid").val(tongtienthanhtoan);   
+            }
+                                   
+            });
+
+            $('#thanhtoanid').on('change', function () { 
+                var tongtienhang = $("#tongtienid").val();
+                var tongtiengio = $("#tiengioid").val();
+                var tienck = $("#chietkhauid").val();
+             var tongtienthanhtoan = $("#thanhtoanid").val();
+             var conlai = (parseFloat(tongtienthanhtoan) - (parseFloat(tongtienhang)+parseFloat(tongtiengio)-parseFloat(tienck))) 
+              //var tienthoi = (parseFloat(psco) - parseFloat(tongtienhang)) 
+             var psno='';
+            if (conlai < 0) {
+                        //$('#lblconlai').text("Tiền thiếu :");
+                $('#conlaiid').val(conlai);
+                psno = conlai;
+            }
+            else
+            {
+                        //$('#lblconlai').text("Tiền thừa :");
+                $('#conlaiid').val(conlai);
+                psno = '0';
+             }
+             //alert(psno);               
+         });
 
             function thanhtoanhoadon2()
             {

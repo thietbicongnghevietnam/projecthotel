@@ -30,9 +30,9 @@ namespace WebApplication1
             {
                 //BindStockCode();
 
-                dtncc = DataConn.StoreFillDS("NH_Get_NCC", System.Data.CommandType.StoredProcedure);
+                dtncc = DataConn.StoreFillDS("NH_Get_KH", System.Data.CommandType.StoredProcedure);
                 DataRow newRow2 = dtncc.NewRow();
-                newRow2["mancc"] = "==NCC==";
+                newRow2["makh"] = "==KH==";
                 dtncc.Rows.InsertAt(newRow2, 0);
                 dr_nhacungcap.DataSource = dtncc;
                 dr_nhacungcap.DataBind();
@@ -104,7 +104,7 @@ namespace WebApplication1
         }
 
         [WebMethod]
-        public static string addthongtinhanghoa_PNH(string thanhtoantien, string psno, string chieukhau, string nhacungcap, string tienhang, string items)  //string tenphong, string tienhang
+        public static string addthongtinhanghoa_PBH(string thanhtoantien, string psno, string chieukhau, string nhacungcap, string tienhang, string items)  //string tenphong, string tienhang
         {
             String thongbao = "";
             DataTable dtsave = new DataTable();
@@ -112,7 +112,7 @@ namespace WebApplication1
 
             JavaScriptSerializer jss = new JavaScriptSerializer();
             var jsonObj = jss.Deserialize<dynamic>(items);
-            string type_act = "nhaphang";
+            string type_act = "banhang";
 
             foreach (var item in jsonObj)
             {
@@ -125,7 +125,7 @@ namespace WebApplication1
             //check xem hoa don ton tai chua
             //update *** neu hoa don ton tai roi
             //lay so hoa don truyen len de update
-            dtsave = DataConn.StoreFillDS("addthongtinhanghoa_PNH", System.Data.CommandType.StoredProcedure, thanhtoantien, psno, chieukhau, nhacungcap, tienhang, items);
+            dtsave = DataConn.StoreFillDS("addthongtinhanghoa_PBH", System.Data.CommandType.StoredProcedure, thanhtoantien, psno, chieukhau, nhacungcap, tienhang, items);
 
             if (dtsave.Rows[0][0].ToString() == "1")
             {

@@ -112,7 +112,16 @@
         <a href="Phieubanhang.aspx" target="_blank" class="nav-link" style="width:180px; background-color:darkgray;border-right: 1px solid;text-align:center; color:white;">Phieu Ban hang</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link" style="width:150px; background-color:darkgray;border-right: 1px solid;text-align:center; color:white;">Contact</a>
+        <a href="#" class="nav-link" style="width:150px; background-color:darkgray;border-right: 1px solid;text-align:center; color:white;">So quy</a>
+      </li>
+        <li class="nav-item d-none d-sm-inline-block">
+        <a href="#" class="nav-link" style="width:150px; background-color:darkgray;border-right: 1px solid;text-align:center; color:white;">Bao cao</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="#" class="nav-link" style="width:150px; background-color:darkgray;border-right: 1px solid;text-align:center; color:white;">Danh muc</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="#" class="nav-link" style="width:150px; background-color:darkgray;border-right: 1px solid;text-align:center; color:white;">Lien he</a>
       </li>
     </ul>
 
