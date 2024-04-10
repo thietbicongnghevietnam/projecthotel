@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+
 using System.Data;
 using System.Data.SqlClient;
 using System.Web.Services;
@@ -17,17 +18,7 @@ using Newtonsoft.Json.Linq;
 
 namespace WebApplication1
 {
-    public class OrderList
-    {
-        public List<Danhmuc> Orders { get; set; }
-    }
-    public class Danhmuc
-    {
-        public string mahang { get; set; }
-        public string soluong { get; set; }      
-    }
-
-    public partial class Phieunhaphang : System.Web.UI.Page
+    public partial class Phieubanhang : System.Web.UI.Page
     {
         public DataTable dt_doc = new DataTable();
         public DataTable dt_nhomhang = new DataTable();
@@ -112,8 +103,6 @@ namespace WebApplication1
             return json.Serialize(dict);
         }
 
-
-
         [WebMethod]
         public static string addthongtinhanghoa_PNH(string thanhtoantien, string psno, string chieukhau, string nhacungcap, string tienhang, string items)  //string tenphong, string tienhang
         {
@@ -123,10 +112,10 @@ namespace WebApplication1
 
             JavaScriptSerializer jss = new JavaScriptSerializer();
             var jsonObj = jss.Deserialize<dynamic>(items);
-            string type_act = "nhaphang";            
+            string type_act = "nhaphang";
 
             foreach (var item in jsonObj)
-            {                
+            {
                 string[] numbersArray = item.Key.Split(',');
                 var mahang = numbersArray.FirstOrDefault();
                 var soluong = item.Value;

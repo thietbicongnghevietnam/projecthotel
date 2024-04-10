@@ -1,12 +1,12 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Phieunhaphang.aspx.cs" Inherits="WebApplication1.Phieunhaphang" %>
-
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Phieubanhang.aspx.cs" Inherits="WebApplication1.Phieubanhang" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="wrapper">
+
         <div class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h3 class="m-0"><b>PHIEU NHAP HANG</b></h3>
+                        <h3 class="m-0">PHIEU BAN HANG</h3>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
@@ -443,7 +443,8 @@
                 $('#conlaiid').val(conlai);
                 psno = '0';
              }
-             //alert(psno);               
+             //alert(psno);
+               
          });
 
         $('#chietkhauid').on('change', function () { 
@@ -471,8 +472,7 @@
                 var tienck = $("#chietkhauid").val();
                 var tongtienthanhtoan =(parseFloat(tongtienhang) - parseFloat(tienck)) ; //;$("#thanhtoanid").val();
                 $("#thanhtoanid").val(tongtienthanhtoan);   
-            }
-                                   
+            }                                   
          });
 
          $('#ghilaihoadon').click(function () 
@@ -613,7 +613,4 @@
 
 
     </script>
-
-
-
 </asp:Content>

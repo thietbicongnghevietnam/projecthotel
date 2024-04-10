@@ -103,10 +103,13 @@
         <a href="Default.aspx" class="nav-link" style="width:150px; background-color:darkgray; border-right: 1px solid;text-align:center;color:white;">Home</a>
       </li>
         <li class="nav-item d-none d-sm-inline-block">
-        <a href="Map.aspx" class="nav-link" style="width:150px; background-color:darkgray; border-right: 1px solid; text-align:center; color:white;">EMap</a>
+        <a href="Map.aspx" class="nav-link" target="_blank" style="width:150px; background-color:darkgray; border-right: 1px solid; text-align:center; color:white;">EMap</a>
       </li>
         <li class="nav-item d-none d-sm-inline-block">
-        <a href="Phieunhaphang.aspx" class="nav-link" style="width:180px; background-color:darkgray;border-right: 1px solid;text-align:center; color:white;">Phieu Nhap hang</a>
+        <a href="Phieunhaphang.aspx" target="_blank" class="nav-link" style="width:180px; background-color:darkgray;border-right: 1px solid;text-align:center; color:white;">Phieu Nhap hang</a>
+      </li>
+        <li class="nav-item d-none d-sm-inline-block">
+        <a href="Phieubanhang.aspx" target="_blank" class="nav-link" style="width:180px; background-color:darkgray;border-right: 1px solid;text-align:center; color:white;">Phieu Ban hang</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link" style="width:150px; background-color:darkgray;border-right: 1px solid;text-align:center; color:white;">Contact</a>
