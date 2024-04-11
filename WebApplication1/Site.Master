@@ -103,40 +103,80 @@
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="Default.aspx" class="nav-link" style="width:150px; background-color:darkgray; border-right: 1px solid;text-align:center;color:white;">Home</a>
-      </li>
-        <li class="nav-item d-none d-sm-inline-block">
-        <a href="Map.aspx" class="nav-link" target="_blank" style="width:150px; background-color:darkgray; border-right: 1px solid; text-align:center; color:white;">EMap</a>
-      </li>
-        <li class="nav-item d-none d-sm-inline-block">
-        <a href="Phieunhaphang.aspx" target="_blank" class="nav-link" style="width:180px; background-color:darkgray;border-right: 1px solid;text-align:center; color:white;">Phieu Nhap hang</a>
-      </li>
-        <li class="nav-item d-none d-sm-inline-block">
-        <a href="Phieubanhang.aspx" target="_blank" class="nav-link" style="width:180px; background-color:darkgray;border-right: 1px solid;text-align:center; color:white;">Phieu Ban hang</a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link" style="width:150px; background-color:darkgray;border-right: 1px solid;text-align:center; color:white;">So quy</a>
-      </li>
+             
+         <li class="nav-item">
+            <a href="Default.aspx" target="_blank" class="nav-link" style="width:80px; text-align:center;">Home</a>
+          </li>
 
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link" style="width:150px; background-color:darkgray;border-right: 1px solid;text-align:center; color:white;">Bao cao</a>          
-      </li>            
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link" style="width:150px; background-color:darkgray;border-right: 1px solid;text-align:center; color:white;">Danh muc</a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link" style="width:150px; background-color:darkgray;border-right: 1px solid;text-align:center; color:white;">Lien he</a>
-      </li>
+       <li class="nav-item">
+            <a href="Map.aspx" target="_blank" class="nav-link" style="width:80px; text-align:center;">EMap</a>
+          </li>
+       
+         <li class="nav-item">
+            <a href="Phieunhaphang.aspx" target="_blank" class="nav-link" style="width:180px; text-align:center;">PHIEU NHAP HANG</a>
+          </li>
+
+        <li class="nav-item">
+            <a href="Phieubanhang.aspx" target="_blank" class="nav-link" style="width:180px; text-align:center;">PHIEU BAN HANG</a>
+          </li>
+    
+         <li class="nav-item dropdown">
+            <a id="dropdownSubMenu11" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">So quy</a>
+            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+              <li><a href="#" class="dropdown-item">Phieu chi</a></li>
+              <li><a href="#" class="dropdown-item">Phieu thu</a></li>
+              <li><a href="#" class="dropdown-item">So thu chi</a></li>             
+              <!-- End Level two -->
+            </ul>
+          </li>
+        <li class="nav-item dropdown">
+            <a id="dropdownSubMenu2" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Bao cao</a>
+            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+              <li><a href="#" class="dropdown-item">BC ban hang theo ngay</a></li>
+              <li><a href="#" class="dropdown-item">BC nhap hang theo ngay</a></li>
+              <li><a href="#" class="dropdown-item">BC ton kho</a></li>
+              <li class="dropdown-divider"></li>
+              <!-- Level two dropdown-->
+              <li class="dropdown-submenu dropdown-hover">
+                <a id="dropdownSubMenu3" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">BC cong no</a>
+                <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
+                  <li>
+                    <a tabindex="-1" href="#" class="dropdown-item">Cong no KH</a>
+                  </li>
+                    <li>
+                    <a tabindex="-1" href="#" class="dropdown-item">Cong no NCC</a>
+                  </li>                 
+                </ul>
+              </li>
+              <!-- End Level two -->
+
+               <li><a href="#" class="dropdown-item">BC lo lai</a></li>
+            </ul>
+          </li>
+   
+         <li class="nav-item dropdown">
+            <a id="dropdownSubMenu4" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Danh muc</a>
+            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+              <li><a href="#" class="dropdown-item">Danh muc hang hoa</a></li>
+              <li><a href="#" class="dropdown-item">Danh muc khach hang</a></li>
+              <li><a href="#" class="dropdown-item">Danh muc ban/phong</a></li>
+              <li class="dropdown-divider"></li>
+              <li><a href="#" class="dropdown-item">Danh muc khu vuc</a></li>
+              <li><a href="#" class="dropdown-item">Danh muc nhom hang</a></li> 
+              <li><a href="#" class="dropdown-item">Danh muc NCC</a></li>
+            </ul>
+          </li>
+
+      <li class="nav-item dropdown">
+            <a id="dropdownSubMenu5" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Lien he</a>
+           <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+              <li><a href="#" class="dropdown-item">Dat hang online</a></li>
+              <li><a href="#" class="dropdown-item">Truc tiep</a></li>              
+            </ul>
+       </li>
     </ul>
 
-    
-
-
-    
-     
-     
-
+                  
     <!-- SEARCH FORM -->
     <form class="form-inline ml-3">
       <div class="input-group input-group-sm">
@@ -249,66 +289,12 @@
     </ul>
   </nav>
 
+ 
+
+
         </div>
 
-        <div class="btn-group">
-  <button class="btn btn-secondary btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-    Home
-  </button>
-           </div>
-        <div class="btn-group">
-             <button class="btn btn-secondary btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-    Emap
-  </button>
-            </div>
-        <div class="btn-group">
-            <button class="btn btn-secondary btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-    Phieu Nhap hang
-  </button>
-            </div>
-        <div class="btn-group">
-            <button class="btn btn-secondary btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-    Phieu ban hang
-  </button>
-</div>
-
- <div class="btn-group">
-  <button class="btn btn-secondary btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-    So quy
-  </button>
-  <div class="dropdown-menu">
-    <a class="dropdown-item" href="#">Phieu chi</a>
-    <a class="dropdown-item" href="#">Phieu thu</a>
-    <a class="dropdown-item" href="#">BC so quy</a>
-    <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="#">Separated link</a>
-  </div>
-</div>
- <div class="btn-group">
-  <button class="btn btn-secondary btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-    Cong no
-  </button>
-  <div class="dropdown-menu">
-    <a class="dropdown-item" href="#">Cong no khach hang</a>
-    <a class="dropdown-item" href="#">Cong no nha cung cap</a>
-    <a class="dropdown-item" href="#">abc</a>
-    <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="#">Separated link</a>
-  </div>
-</div>
-<div class="btn-group">
-  <button class="btn btn-secondary btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-    Bao cao
-  </button>
-  <div class="dropdown-menu">
-    <a class="dropdown-item" href="#">Bao cao ban hang theo ngay</a>
-    <a class="dropdown-item" href="#">Bao cao chi tiet ban hang</a>
-    <a class="dropdown-item" href="#">BC ....</a>
-    <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="#">Bao cao lo lai</a>
-  </div>
-</div>
-
+       
 
   <!-- /.navbar -->
 

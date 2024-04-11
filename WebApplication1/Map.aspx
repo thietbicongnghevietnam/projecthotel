@@ -1175,7 +1175,9 @@
                 var psco = $('#thanhtoanid').val();
                 var tongtienhang = $('#tongtienid').val();
                 var tienck = $('#chietkhauid').val();
-               
+
+                var idkhachhang = $('#MainContent_dr_nhacungcap').val();  
+                //alert(idkhachhang); 
 
                 var sogiodung = $(".sogiodung").text();
                 var sophutdung = $(".sophutdung").text();
@@ -1210,7 +1212,8 @@
                             itemdata[mahang] = parseInt(soluong);                            
                         }
                     });                                       
-                    var data = {
+                var data = {
+                        idkhachhang: idkhachhang,
                         tenphong: tenphong,
                         tongtienhang: tongtienhang,
                         tongtienhat:tongtienhat,
