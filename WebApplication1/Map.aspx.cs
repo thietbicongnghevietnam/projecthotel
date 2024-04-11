@@ -213,11 +213,13 @@ namespace WebApplication1
         }
 
         [WebMethod]
-        public static string khthantoan(string tenphong,string tongtienhang,string tongtienhat,string psco, string tienno, string tienck, string items)  //string tenphong, string tienhang  --, 
+        public static string khthantoan(string idkhachhang, string tenphong,string tongtienhang,string tongtienhat,string psco, string tienno, string tienck, string items)  //string tenphong, string tienhang  --, 
         {
+
             String thongbao = "";
+
             DataTable dtsave = new DataTable();
-            dtsave = DataConn.StoreFillDS("NH_save_khthanhtoan", System.Data.CommandType.StoredProcedure, tenphong, tongtienhang, tongtienhat, psco, tienno, tienck, items);//, 
+            dtsave = DataConn.StoreFillDS("NH_save_khthanhtoan", System.Data.CommandType.StoredProcedure, idkhachhang, tenphong, tongtienhang, tongtienhat, psco, tienno, tienck, items);//, 
 
             DataTable dtupdatekho = new DataTable();
 
@@ -242,6 +244,7 @@ namespace WebApplication1
             {
                 thongbao = "NG";
             }
+
             return thongbao;
         }
 

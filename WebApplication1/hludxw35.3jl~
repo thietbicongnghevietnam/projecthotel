@@ -1000,7 +1000,8 @@
                 //        }
                 var tenphong = tenphong2;//$('#nametable').text();
                 var psno = conlai2;//$('#conlaiid').val();
-                var itemdata = {};               
+                var itemdata = {};
+
                 $('.themthucdon2').each(function () {                        
                         var mahang = $(this).find('td').eq(0).text() + "," + $(this).find('td').eq(2).text() + "," + $(this).find('td').eq(3).text();
                         var soluong = $(this).find('td').eq(1).text();                       
@@ -1018,103 +1019,45 @@
                         tienck:tienck,
                         items: JSON.stringify(itemdata)
                     };
-
-                    if(psno < 0)
-                    {
-                        //alert("cong no < 0");
-                        if(idkhachhang == "")
-                        {
-                            alert("Ban phai chon KH cong no!");
-                        }
-                        else
-                        {
-                            $.ajax({
-                                    type: "POST",
-                                    contentType: "application/json; charset=utf-8",
-                                    url: "Map.aspx/khthantoan",
-                                    //data: JSON.stringify(data),
-                                    data: JSON.stringify(data),
-                                    dataType: "json",
-                                    success: function (data) {
-                                        debugger;
-                                        if (data.d != "NG") {
-                                            alert('Hoa don them thành công!');
-                                            $('#tbnhaphang tr').remove();
-                                            $('#tongtienid').val(0);                                        
-                                            $('#thanhtoanid').val(0);
-                                            $('#chietkhauid').val(0);
+                    $.ajax({
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: "Map.aspx/khthantoan",
+                        //data: JSON.stringify(data),
+                        data: JSON.stringify(data),
+                        dataType: "json",
+                        success: function (data) {
+                            debugger;
+                            if (data.d != "NG") {
+                                alert('Hoa don them thành công!');
+                                $('#tbnhaphang tr').remove();
+                                $('#tongtienid').val(0);                                        
+                                $('#thanhtoanid').val(0);
+                                $('#chietkhauid').val(0);
                                 
-                                            $('#stylerender').val('');
-                                            $('#ticketid').val(0);
+                                $('#stylerender').val('');
+                                $('#ticketid').val(0);
                                 
-                                            $('#hoadonid').val(parseInt(sohoadon)+1);
+                                $('#hoadonid').val(parseInt(sohoadon)+1);
 
-                                            //pending -> doi trang thai khi thanh cong -> khong co kach
+                                //pending -> doi trang thai khi thanh cong -> khong co kach
 
-                                            //load lai trang khi thanh cong
-                                            //setTimeout(function() {
-                                            //location.reload();
-                                            //}, 1000);
-                                        } 
-                                        else 
-                                        {
-                                            //alert('Phòng/ bàn đang trống!');
-                                        }
+                                //load lai trang khi thanh cong
+                                //setTimeout(function() {
+                                //location.reload();
+                                //}, 1000);
+                            } 
+                            else 
+                            {
+                                //alert('Phòng/ bàn đang trống!');
+                            }
                             
 
-                                    },
-                                    error: function () {
-                                        //alert("No Match");
-                                    }
-                                });
+                        },
+                        error: function () {
+                            //alert("No Match");
                         }
-                    }
-                    else
-                    {
-
-                        //alert("khong co cong no");
-                        $.ajax({
-                                type: "POST",
-                                contentType: "application/json; charset=utf-8",
-                                url: "Map.aspx/khthantoan",
-                                //data: JSON.stringify(data),
-                                data: JSON.stringify(data),
-                                dataType: "json",
-                                success: function (data) {
-                                    debugger;
-                                    if (data.d != "NG") {
-                                        alert('Hoa don them thành công!');
-                                        $('#tbnhaphang tr').remove();
-                                        $('#tongtienid').val(0);                                        
-                                        $('#thanhtoanid').val(0);
-                                        $('#chietkhauid').val(0);
-                                
-                                        $('#stylerender').val('');
-                                        $('#ticketid').val(0);
-                                
-                                        $('#hoadonid').val(parseInt(sohoadon)+1);
-
-                                        //pending -> doi trang thai khi thanh cong -> khong co kach
-
-                                        //load lai trang khi thanh cong
-                                        //setTimeout(function() {
-                                        //location.reload();
-                                        //}, 1000);
-                                    } 
-                                    else 
-                                    {
-                                        //alert('Phòng/ bàn đang trống!');
-                                    }
-                            
-
-                                },
-                                error: function () {
-                                    //alert("No Match");
-                                }
-                            });
-                    }
-
-                    
+                    });
             }
 
             $('#chietkhauid').on('change', function () { 
@@ -1987,19 +1930,17 @@
             {
                  var tienhat = $("#MainContent_Button3").parent().parent().parent().find("b").eq(1).text(); 
                 var tenphong2 = $("#MainContent_Button3").parent().parent().find("b").eq(2).text(); 
-
-                var tongtien2 = $("#MainContent_Button3").parent().parent().find("b").eq(4).text();
+                var tongtien2 = $("#MainContent_Button3").parent().parent().find("b").eq(3).text();
+                
+                var thantoan2 = $("#MainContent_Button3").parent().parent().find("b").eq(4).text();
                 var chietkau2 = $("#MainContent_Button3").parent().parent().find("b").eq(5).text();
-                var thantoan2 = $("#MainContent_Button3").parent().parent().find("b").eq(6).text();                
-                var conlai2 = $("#MainContent_Button3").parent().parent().find("b").eq(7).text(); 
-
-                //alert(conlai2);
+                var conlai2 = $("#MainContent_Button3").parent().parent().find("b").eq(6).text();  
                     
                 var sohoadon = $("#hoadonid").val();
                 //alert(sohoadon);   
                 
                  var idkhachhang = $('#MainContent_dr_nhacungcap').val();  
-                //alert(idkhachhang);                        
+                alert(idkhachhang);                        
 
                 //alert(tienhat);
                 //alert(tenphong2);
@@ -2020,7 +1961,7 @@
                     //kiem tra xem co phai hoa don in lai khong
                     //debugger;
                     var idkhachhang = $('#MainContent_dr_nhacungcap').val();
-                    //alert(idkhachhang);  
+                    alert(idkhachhang);  
 
                     var checkboxid = document.getElementById("inlaiHD");
                     if(checkboxid.checked == true)
