@@ -38,15 +38,12 @@ namespace WebApplication1
             if (!IsPostBack)
             {
                 //BindStockCode();
-
                 dtncc = DataConn.StoreFillDS("NH_Get_NCC", System.Data.CommandType.StoredProcedure);
                 DataRow newRow2 = dtncc.NewRow();
                 newRow2["mancc"] = "==NCC==";
                 dtncc.Rows.InsertAt(newRow2, 0);
                 dr_nhacungcap.DataSource = dtncc;
                 dr_nhacungcap.DataBind();
-
-
             }
         }
 

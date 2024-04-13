@@ -123,9 +123,11 @@
          <li class="nav-item dropdown">
             <a id="dropdownSubMenu11" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">So quy</a>
             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-              <li><a href="#" class="dropdown-item">Phieu chi</a></li>
-              <li><a href="#" class="dropdown-item">Phieu thu</a></li>
-              <li><a href="#" class="dropdown-item">So thu chi</a></li>             
+              <li><a href="Phieuchi.aspx" class="dropdown-item">Phieu chi</a></li>
+              <li><a href="Phieuthu.aspx" class="dropdown-item">Phieu thu</a></li>
+                <li class="dropdown-divider"></li>
+              <li><a href="#" class="dropdown-item">BC So quy</a></li>
+                <li><a href="#" class="dropdown-item">BC tong hop thu chi</a></li>
               <!-- End Level two -->
             </ul>
           </li>
@@ -164,6 +166,8 @@
               <li><a href="#" class="dropdown-item">Danh muc khu vuc</a></li>
               <li><a href="#" class="dropdown-item">Danh muc nhom hang</a></li> 
               <li><a href="#" class="dropdown-item">Danh muc NCC</a></li>
+                <li class="dropdown-divider"></li>
+              <li><a href="#" class="dropdown-item">Danh muc Nhan vien</a></li>
             </ul>
           </li>
 
@@ -894,7 +898,7 @@
             <hr />
 
             <footer class="main-footer">
-    <strong>Copyright &copy; 2022 <a href="#">PSNV</a>.</strong>
+    <strong>Copyright &copy; 2024 <a href="#">Phan mem thu ngan</a>.</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
       <b>Version</b> 01

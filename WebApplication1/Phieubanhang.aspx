@@ -38,7 +38,8 @@
                    
                 
 
-                </td>
+                </td>                   
+
                 <td>
                     <span class="addphieunhap" style="padding-right: 30px; padding-left:50px;">                
                     <i class="fa fa-plus-square" style="font-size: 24px; padding-left: 20px;"></i>
@@ -53,6 +54,13 @@
                         <b class="delproduct" style="color: black; padding-left: 5px;">&nbsp;Xoa</b>
                     </span>
                  </td>
+
+                     <td>
+                        <span class="addKhachhang" style="padding-right: 10px; padding-left:10px;">
+                        <i class="fa fa-plus-square" style="font-size: 24px; padding-left: 20px;"></i>
+                        <b class="add_Khachhang" style="color: black; padding-left: 5px; float:left">&nbsp;Them KH</b>
+                        </span>
+                    </td>
                 
                 </tr>
                 </table>
@@ -108,6 +116,41 @@
                 <br />
                 <br />
                 <br />
+
+        <div class="modal" id="myModal">
+            <div class="modal-dialog" >
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="row">
+                            <div>
+                                <h4 class="modal-title" id="headerTag" style="float: left">Them khach hang</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="float: right; margin-left: 300px;">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="modal-body">
+                       
+                       <div class="container-fluid" id="printableArea" style="width:400px;height:auto;">
+                                                                             
+                           testsss
+                                                       
+                        </div>
+                                                                           
+                    </div>
+
+                    <div class="modal-footer">
+                       <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times"></i>Close</button>                         
+                        <button type="button" runat="server" id="Button1"  class="btn btn-primary" >Save</button>                                                                                                                                                                     
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
     </div>
      <script type="text/javascript">
         $(document).ready(function () {
@@ -119,6 +162,9 @@
                     $("#soluongnhaphang").val(1);
                     $("#soluongnhaphang").select();
                 }
+         });
+         $('.addKhachhang').click(function () {
+             $('#myModal').modal('show');
          });
 
          $('.add_hanghoa').each(function () {

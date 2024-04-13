@@ -338,7 +338,9 @@
     <Content Include="pages\UI\timeline.html" />
     <Content Include="pages\widgets.html" />
     <Content Include="Phieubanhang.aspx" />
+    <Content Include="Phieuchi.aspx" />
     <Content Include="Phieunhaphang.aspx" />
+    <Content Include="Phieuthu.aspx" />
     <Content Include="plugins\bootstrap-colorpicker\css\bootstrap-colorpicker.css.map" />
     <Content Include="plugins\bootstrap-colorpicker\css\bootstrap-colorpicker.min.css.map" />
     <Content Include="plugins\bootstrap-colorpicker\js\bootstrap-colorpicker.js.map" />
@@ -2491,11 +2493,25 @@
     <Compile Include="Phieubanhang.aspx.designer.cs">
       <DependentUpon>Phieubanhang.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Phieuchi.aspx.cs">
+      <DependentUpon>Phieuchi.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Phieuchi.aspx.designer.cs">
+      <DependentUpon>Phieuchi.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Phieunhaphang.aspx.cs">
       <DependentUpon>Phieunhaphang.aspx</DependentUpon>
     </Compile>
     <Compile Include="Phieunhaphang.aspx.designer.cs">
       <DependentUpon>Phieunhaphang.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Phieuthu.aspx.cs">
+      <DependentUpon>Phieuthu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Phieuthu.aspx.designer.cs">
+      <DependentUpon>Phieuthu.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">
