@@ -267,8 +267,7 @@
                                         <label for="tongtien" style="float: left; margin-top: 5px;">Tiền hàng</label>
                                         <input type="text" id="tongtienid" disabled class="form-control input-sm" name="fname" style="float: left; margin-left: 10px;" value="0">
                                                      <span style="float: left;padding-left: 20px; padding-top: 10px;">
-            <img src="/static/images/phongtrong.png" style="width:40px;height:30px;float: left;padding-right: 10px;">
-            <b style="font-size: 14px;">Bàn/Phòng trống</b>
+            <%--<img src="/static/images/phongtrong.png" style="width:40px;height:30px;float: left;padding-right: 10px;">--%>            
 
         </span>
                                     </div>
@@ -283,8 +282,8 @@
                                         <label for="tongtien" style="float: left; margin-top: 5px;">Chiết khấu</label>
                                         <input type="text" id="chietkhauid" class="form-control input-sm" name="fname" style="float: left; margin-left: 10px;" value="0">
                                          <span style="float: left;padding-left: 20px; padding-top: 10px;">
-            <img src="/static/images/cokhach.png" style="width:40px;height:30px;float: left;padding-right: 10px;">
-            <b style="font-size: 14px;">B/P có khách</b>
+            <%--<img src="/static/images/cokhach.png" style="width:40px;height:30px;float: left;padding-right: 10px;">--%>
+            
         </span>
                                     </div>   
 
@@ -294,16 +293,16 @@
                                         <label for="tongtien" style="float: left; margin-top: 5px;">Khách TT</label>
                                         <input type="text" id="thanhtoanid" class="form-control input-sm" name="fname" style="float: left; margin-left: 10px;" value="0">                                                                              
                                          <span style="float: left;padding-left: 20px; padding-top: 10px;">
-            <img src="/static/images/phongdattruoc.png" style="width:40px;height:30px;float: left;padding-right: 10px;">
-            <b style="font-size: 14px;">B/P đặt trước</b>
+            <%--<img src="/static/images/phongdattruoc.png" style="width:40px;height:30px;float: left;padding-right: 10px;">--%>
+           <%-- <b style="font-size: 14px;">B/P đặt trước</b>--%>
         </span>                                   
                                     </div>
                                     <div class="col-2">
                                         <label for="tongtien" style="float: left; margin-top: 5px; id="lblconlai" ">Còn lại</label>
                                         <input type="text" id="conlaiid" class="form-control input-sm" name="fname" style="float: left; margin-left: 10px;" value="0">                                        
         <span style="float: left;padding-left: 20px; padding-top: 10px;">
-            <img src="/static/images/chuadonphong.png" style="width:40px;height:30px;float: left;padding-right: 10px;">
-            <b style="font-size: 14px;">Chưa dọn B/P</b>
+            <%--<img src="/static/images/chuadonphong.png" style="width:40px;height:30px;float: left;padding-right: 10px;">
+            <b style="font-size: 14px;">Chưa dọn B/P</b>--%>
         </span>
 
                                     </div>
@@ -321,6 +320,7 @@
                                     
                                      
                                 </div>
+                                <div><b>Bằng chữ:</b> <span id="bangchuid2" style="font-weight:300; color:red;"></span></div>
                                 
 
 
@@ -489,9 +489,10 @@
                             
                            <br /> 
                            Tong tien: <b id="thantoan2"></b> &nbsp;&nbsp;&nbsp;  C/K: <b id="chietkau2"></b> <br />
-                           KH thanh toan: <b id="khthanhtoan2"></b> &nbsp;&nbsp;&nbsp; Con lai: <b id="psno2"></b>
-                                                       
+                           KH thanh toan: <b id="khthanhtoan2"></b> &nbsp;&nbsp;&nbsp; Con lai: <b id="psno2"></b>     
+                           <div>Bằng chữ: <span id="bangchuid" style="font-weight:200; color:red;"></span></div>
                         </div>
+                        
                                                                            
                     </div>
 
@@ -523,6 +524,90 @@
         <script src="../dist/contextmenu.js"></script>
              
         <script>
+            const defaultNumbers =' hai ba bốn năm sáu bảy tám chín';
+            const chuHangDonVi = ('1 một' + defaultNumbers).split(' ');
+            const chuHangChuc = ('lẻ mười' + defaultNumbers).split(' ');
+            const chuHangTram = ('không một' + defaultNumbers).split(' ');
+
+            function convert_block_three(number) {
+                  if(number == '000') return '';
+                  var _a = number + ''; //Convert biến 'number' thành kiểu string
+
+                  //Kiểm tra độ dài của khối
+                  switch (_a.length) {
+                    case 0: return '';
+                    case 1: return chuHangDonVi[_a];
+                    case 2: return convert_block_two(_a);
+                    case 3: 
+                      var chuc_dv = '';
+                      if (_a.slice(1,3) != '00') {
+                        chuc_dv = convert_block_two(_a.slice(1,3));
+                      }
+                      var tram = chuHangTram[_a[0]] + ' trăm';
+                      return tram + ' ' + chuc_dv;
+                  }
+            };
+
+            function convert_block_two(number) {
+                  var dv = chuHangDonVi[number[1]];
+                  var chuc = chuHangChuc[number[0]];
+                  var append = '';
+
+                  // Nếu chữ số hàng đơn vị là 5
+                  if (number[0] > 0 && number[1] == 5) {
+                    dv = 'lăm'
+                  }
+
+                  // Nếu số hàng chục lớn hơn 1
+                  if (number[0] > 1) {
+                    append = ' mươi';
+    
+                    if (number[1] == 1) {
+                      dv = ' mốt';
+                    }
+                  }
+
+              return chuc + '' + append + ' ' + dv; 
+            };
+
+            const dvBlock = '1 nghìn triệu tỷ'.split(' ');
+
+            function to_vietnamese(number) {
+              var str = parseInt(number) + '';
+              var i = 0;
+              var arr = [];
+              var index = str.length;
+              var result = [];
+              var rsString = '';
+
+              if (index == 0 || str == 'NaN') {
+                return '';
+              }
+
+              // Chia chuỗi số thành một mảng từng khối có 3 chữ số
+              while (index >= 0) {
+                arr.push(str.substring(index, Math.max(index - 3, 0)));
+                index -= 3;
+              }
+
+              // Lặp từng khối trong mảng trên và convert từng khối đấy ra chữ Việt Nam
+              for (i = arr.length - 1; i >= 0; i--) {
+                if (arr[i] != '' && arr[i] != '000') {
+                  result.push(convert_block_three(arr[i]));
+
+                  // Thêm đuôi của mỗi khối
+                  if (dvBlock[i]) {
+                    result.push(dvBlock[i]);
+                  }
+                }
+              }
+              // Join mảng kết quả lại thành chuỗi string
+              rsString = result.join(' ');
+
+              // Trả về kết quả kèm xóa những ký tự thừa
+              return rsString.replace(/[0-9]/g, '').replace(/ /g,' ').replace(/ $/,'');
+            }
+
             $(document).ready(function () {
                 //$('#txtid').prop("readonly", true);
                 //$('#txtmaterial').prop("readonly", true);
@@ -732,6 +817,9 @@
                                     }                                    
                                     //alert(giohat);
                                     //debugger; 
+
+                                    const bangchu_hienthi2 = to_vietnamese(parseInt(tienhang) + parseInt(tongtienhat));
+
                                     if (myArr == '0') {
                                         //truong hop chua co hang ban
                                         $('#tbnhaphang tr').remove();
@@ -743,6 +831,8 @@
                                         //tiengioid  //conlaiid
                                         $('#tiengioid').val(0);
                                         $('#conlaiid').val(0);
+
+                                        $('#bangchuid2').text('');
                                     } 
                                     else 
                                     {
@@ -787,6 +877,8 @@
 
                                         $('#tiengioid').val(tongtienhat);
                                         $('#conlaiid').val(0);
+
+                                        $('#bangchuid2').text(bangchu_hienthi2);
                                     }
                                 }
                                 else {
@@ -799,6 +891,8 @@
 
                                     $('#tiengioid').val(0);
                                     $('#conlaiid').val(0);
+
+                                     $('#bangchuid2').text('');
                                 }
 
                             },
@@ -812,12 +906,14 @@
                 });
 
             });
+            
 
             $('#ghilaihoadon').click(function () 
             {
                  thanhtoanhoadon2();
                 //printDiv_Save();    //toi lam tiep
             });
+            
 
             $('#khachthanhtoan2').click(function () {                                       
                 //save hoa don truoc
@@ -850,6 +946,8 @@
                 var khthanhtoan2 = $('#thanhtoanid').val();
                 var tienthoi = $('#conlaiid').val();
                 //alert(tienthoi);
+
+                const hienthi_bangchu = to_vietnamese(khthanhtoan2);
 
                 if (tenphong != "") {
                     $('.themthucdon').each(function () {
@@ -956,6 +1054,8 @@
 
                                         $('#hinhthucnghi2').text(hinhthucnghi);
                                         $('#tongtienhat2').text(tongtienhat);
+
+                                        $('#bangchuid').text(hienthi_bangchu);
                                     }
                                 }
                                 else {
@@ -1036,7 +1136,7 @@
                                     data: JSON.stringify(data),
                                     dataType: "json",
                                     success: function (data) {
-                                        debugger;
+                                        //debugger;
                                         if (data.d != "NG") {
                                             alert('Hoa don them thành công!');
                                             $('#tbnhaphang tr').remove();
@@ -1050,6 +1150,13 @@
                                             $('#hoadonid').val(parseInt(sohoadon)+1);
 
                                             //pending -> doi trang thai khi thanh cong -> khong co kach
+
+                                            $("#myList UL LI").each(function () {
+                                                var nameroom = $(this).find('#tenphong').text();
+                                                if (nameroom == tenphong) {
+                                                    $(this).find("img").attr('src', '/static/images/phongtrong.png');
+                                                }
+                                            });
 
                                             //load lai trang khi thanh cong
                                             //setTimeout(function() {
@@ -1095,6 +1202,12 @@
                                         $('#hoadonid').val(parseInt(sohoadon)+1);
 
                                         //pending -> doi trang thai khi thanh cong -> khong co kach
+                                         $("#myList UL LI").each(function () {
+                                                var nameroom = $(this).find('#tenphong').text();
+                                                if (nameroom == tenphong) {
+                                                    $(this).find("img").attr('src', '/static/images/phongtrong.png');
+                                                }
+                                            });
 
                                         //load lai trang khi thanh cong
                                         //setTimeout(function() {
@@ -1106,7 +1219,6 @@
                                         //alert('Phòng/ bàn đang trống!');
                                     }
                             
-
                                 },
                                 error: function () {
                                     //alert("No Match");
@@ -1204,6 +1316,8 @@
                 var tenphong = $('#nametable').text();
                 var psno = $('#conlaiid').val();
                 var itemdata = {};
+                var sohoadon = parseInt($('#hoadonid').val()) + 1;
+                //alert(sohoadon);
 
                 $('.themthucdon').each(function () {                        
                         var mahang = $(this).find('td').eq(0).text() + "," + $(this).find('td').eq(2).text() + "," + $(this).find('td').eq(3).text();
@@ -1241,9 +1355,17 @@
                                 $('#stylerender').val('');
                                 $('#ticketid').val(0);
                                 
-                                $('#hoadonid').val(parseInt(sohoadon)+1);
+                                //$('#hoadonid').val(parseInt(sohoadon) + 1);
+                                $('#hoadonid').val(sohoadon);
 
                                 //pending -> doi trang thai khi thanh cong -> khong co kach
+
+                                $("#myList UL LI").each(function () {
+                                        var nameroom = $(this).find('#tenphong').text();
+                                        if (nameroom == tenphong) {
+                                            $(this).find("img").attr('src','/static/images/phongtrong.png');
+                                        }
+                                    })
 
                                 //load lai trang khi thanh cong
                                 //setTimeout(function() {

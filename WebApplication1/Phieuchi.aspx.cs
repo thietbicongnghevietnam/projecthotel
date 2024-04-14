@@ -11,11 +11,6 @@ using System.Web.Services;
 using WebApplication1.App_Code;
 
 
-using System.Drawing;
-using System.Web.Script.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-
 namespace WebApplication1
 {
     public partial class Phieuchi : System.Web.UI.Page
@@ -25,17 +20,61 @@ namespace WebApplication1
         {
             if (!IsPostBack)
             {
-                //BindStockCode();
-                //dtncc = DataConn.StoreFillDS("NH_Get_NCC", System.Data.CommandType.StoredProcedure);
-                //DataRow newRow2 = dtncc.NewRow();
-                //newRow2["mancc"] = "==NCC==";
-                //dtncc.Rows.InsertAt(newRow2, 0);
-                //dr_nhacungcap.DataSource = dtncc;
-                //dr_nhacungcap.DataBind();
+                
+                dtncc = DataConn.StoreFillDS("NH_Get_NCC", System.Data.CommandType.StoredProcedure);
+                DataRow newRow2 = dtncc.NewRow();
+                newRow2["mancc"] = "==NCC==";
+                dtncc.Rows.InsertAt(newRow2, 0);
+                dr_nhacungcap.DataSource = dtncc;
+                dr_nhacungcap.DataBind();
             }
+
         }
 
-       
+        [WebMethod]
+        public static string NH_Phieuchi(string guoinhan, string nhacc, string sotien, string conoid, string motaid, string ngaychi, string phuongthuc, string nguoichitienid)
+        {
+            String thongbao = "";
+            DataTable dtsave = new DataTable();           
+
+            dtsave = DataConn.StoreFillDS("NH_Phieuchi_Phieuthu", System.Data.CommandType.StoredProcedure, guoinhan, nhacc, sotien, conoid, motaid, ngaychi, phuongthuc, nguoichitienid);
+
+            if (dtsave.Rows[0][0].ToString() == "1")
+            {
+                //thongbao = "OK" + "," + dtlevel.Rows[0][1].ToString();
+
+                thongbao = "OK";
+            }
+            else
+            {
+                thongbao = "NG";
+            }
+            return thongbao;
+        }
+
+        [WebMethod]
+        public static string NH_getcongno(string idcongno)
+        {
+            String thongbao = "";
+            DataTable dtsave = new DataTable();
+            String type_cono = "phieuchi";
+
+            dtsave = DataConn.StoreFillDS("NH_getcongno", System.Data.CommandType.StoredProcedure, idcongno, type_cono);
+
+            if (dtsave.Rows.Count > 0)
+            {
+                //thongbao = "OK" + "," + dtlevel.Rows[0][1].ToString();
+
+                thongbao = dtsave.Rows[0][0].ToString();
+            }
+            else
+            {
+                thongbao = "NG";
+            }
+            return thongbao;
+        }
+
+
 
 
     }

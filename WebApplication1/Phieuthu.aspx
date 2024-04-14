@@ -65,40 +65,41 @@ button:hover {
     </style>
 
 
-<div class="container">
-    <h2>Phiếu Chi</h2>
-    
+
+    <div class="container">
+    <h2>Phiếu Thu</h2>
+ 
       <div class="row">
         <div class="column">
           <div class="form-group">
-            <label for="recipient">Người nhận:</label>
-            <input type="text" id="recipient" name="recipient">
+            <label for="recipient">Người tra:</label>
+            <input type="text" id="idnguoinhan" name="recipient">
           </div>
           <div class="form-group">
             <label for="amount">Số tiền:</label>
-            <input type="number" id="amount" name="amount">
+            <input type="number" id="sotienid" name="amount">
           </div>
           <div class="form-group">
             <label for="description">Mô tả:</label>
-            <textarea id="description" name="description"></textarea>
+            <textarea id="motaid" name="description"></textarea>
           </div>
         </div>
         <div class="column">
           <div class="form-group">
-            <label for="supplier">Nhà cung cấp:</label>
-            <select id="supplier" name="supplier">
-              <option value="supplier1">Nhà cung cấp 1</option>
-              <option value="supplier2">Nhà cung cấp 2</option>
-              <option value="supplier3">Nhà cung cấp 3</option>
-            </select>
+            <label for="supplier">Khach hang:</label>
+            <asp:DropDownList ID="dr_nhacungcap" runat="server" AppendDataBoundItems="true" 
+                            DataTextField="makh" 
+                            DataValueField="id" 
+                            CssClass="form-control input-sm">
+                        </asp:DropDownList>
           </div>
           <div class="form-group">
-            <label for="balance">Công nợ nhà cung cấp:</label>
-            <input type="number" id="balance" name="balance">
+            <label for="balance" style="padding-top:5px;">Công nợ KH:</label>
+            <input type="number" id="congnoid" name="balance">
           </div>
           <div class="form-group">
-            <label for="date">Ngày chi:</label>
-            <input type="date" id="date" name="date">
+            <label for="date" style="padding-top:10px;">Ngày chi:</label>
+            <input type="date" id="ngaychiid" name="date">
           </div>
         </div>
       </div>
@@ -106,23 +107,105 @@ button:hover {
         <div class="column">
           <div class="form-group">
             <label for="payment-method">Phương thức thanh toán:</label>
-            <select id="payment-method" name="payment-method">
-              <option value="cash">Tiền mặt</option>
-              <option value="bank-transfer">Chuyển khoản ngân hàng</option>
-              <option value="check">Séc</option>
+            <select id="phuongthucid" name="payment-method">
+              <option value="tienmat">Tiền mặt</option>
+              <option value="chuyenkhoan">Chuyển khoản ngân hàng</option>
+              <option value="sec">Séc</option>
             </select>
           </div>
         </div>
         <div class="column">
           <div class="form-group">
-            <label for="note">Ghi chú:</label>
-            <textarea id="note" name="note"></textarea>
+            <label for="note">Nguoi thu tien:</label>
+            <input type="text" id="nguoichitienid" name="amount">
           </div>
         </div>
       </div>
-      <button type="submit">Gửi</button>
- 
+      <button type="submit" id="confirmid">Gửi</button>
+
   </div>
+
+     <script type="text/javascript">
+          $(document).ready(function () {
+            //SearchText();            
+         });     
+
+        
+         $('#MainContent_dr_nhacungcap').on('change', function () {
+             var idcongno = $('#MainContent_dr_nhacungcap').val();
+             //alert(idcongno);
+             var data = { idcongno: idcongno }
+             $.ajax({
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    url: "Phieuthu.aspx/NH_getcongno",
+                    data: JSON.stringify(data),
+                    dataType: "json",
+                    success: function (data) {
+                        //response(data.d);
+                        //var objdata = $.parseJSON(data.d);
+                        //alert(data.d);
+                        $("#congnoid").val(data.d);                             
+                    },
+                    error: function () {
+                        //alert("No Match");
+                    }
+             });
+
+         });
+
+         $('#confirmid').click(function () {
+             var guoinhan = $("#idnguoinhan").val();
+             var nhacc = $("#MainContent_dr_nhacungcap").val();
+             var sotien = $("#sotienid").val();
+             var conoid = $("#congnoid").val();
+             var motaid = $("#motaid").val();
+             var ngaychi = $("#ngaychiid").val();
+             var phuongthuc = $("#phuongthucid").val();
+             var nguoichitienid = $("#nguoichitienid").val();
+            
+             var data = { guoinhan: guoinhan,nhacc:nhacc,sotien:sotien,conoid:conoid,motaid:motaid,ngaychi:ngaychi,phuongthuc:phuongthuc,nguoichitienid:nguoichitienid };
+             //alert(guoinhan);
+
+             if (nhacc == '' || sotien == '' || nguoichitienid == '')
+             {
+                 alert('Ban chua nhap du thong tin!');
+             }
+             else
+             {
+                 $.ajax({
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: "Phieuthu.aspx/NH_Phieuthu",
+                        data: JSON.stringify(data),
+                        dataType: "json",
+                        success: function (data) {
+                            //response(data.d);
+                            //var objdata = $.parseJSON(data.d);
+                            alert("Them phieu thu thanh cong!");
+                            $("#idnguoinhan").val('');
+                            $("#MainContent_dr_nhacungcap").val('==KH==');
+                            $("#sotienid").val('');
+                            $("#congnoid").val('');
+                            $("#motaid").val('');
+                            $("#ngaychiid").val('');
+                            $("#phuongthucid").val('Tien mat');
+                            $("#nguoichitienid").val('');                                    
+                        },
+                        error: function () {
+                            //alert("No Match");
+                        }
+                 });
+             }
+
+             
+
+
+         });
+
+     </script>
+    
+      
 
 
 </asp:Content>
