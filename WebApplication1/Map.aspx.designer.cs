@@ -13,6 +13,15 @@ namespace WebApplication1 {
     public partial class Map {
         
         /// <summary>
+        /// dr_hinhthucnghi control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList dr_hinhthucnghi;
+        
+        /// <summary>
         /// txt_doc control.
         /// </summary>
         /// <remarks>

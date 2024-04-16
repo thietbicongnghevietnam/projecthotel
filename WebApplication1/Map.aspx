@@ -94,6 +94,9 @@
                             <input id="checkinput2" style="width: 150px; margin-top: 10px;" name="checkinput2" value=""/>
                             <b style="padding-right: 12px; margin-left: 10px;">Hình thức nghỉ:</b>
                             <input id="stylerender" style="width: 80px; " name="stylerender" value="" />
+                           
+                            
+
                             <b style="padding-right: 10px; margin-left: 10px;">Loại phòng:</b>
                             <input id="styleroom" style="width: 50px; " name="styleroom" value=""/>
                             <b style="padding-right: 10px; margin-left: 10px;">Ticket:</b>
@@ -102,6 +105,13 @@
                             <b style="padding-right: 10px; margin-left: 10px;">Phong chuyen:</b>
                             <b style="font-size: 14px; color: blue" id="thongbao"></b>
 
+                            <div style="width:150px; float:right;">
+                            <asp:DropDownList ID="dr_hinhthucnghi" runat="server" AppendDataBoundItems="true" 
+                            DataTextField="hinhthucnghi" 
+                            DataValueField="id" 
+                            CssClass="form-control input-sm">
+                            </asp:DropDownList>
+                                </div>
                         </div>
 
                         <div class="col-sm-4">
@@ -123,6 +133,7 @@
                             <%int i = 0; %>
                                             <%foreach (System.Data.DataRow rows1 in dt_get_khuvuc0.Rows)
                                                 {%>   
+                                            
                             <div class="card-header">
                                 <h3 class="card-title"><%=rows1["tenkhuvuc"].ToString() %></h3>
 
@@ -147,7 +158,7 @@
                                             <d id="trangthaidatphong" hidden><%=rows["trangthaidatphong"].ToString() %></d>
                                             <dp id="trangthaidonphong" hidden><%=rows["trangthaidonphong"].ToString() %></dp>
                                             <lp id="loaiphong" style="float: left" hidden><label style="width: 100px; display: none;" name="loaiphong"><%=rows["loaiphongid"].ToString() %></label></lp>                                           
-                                            
+                                            <ht id="hinhthuephong" hidden><%=rows["nhanghi"].ToString() %></ht>
                                             <tc id="tiencoc" style="width: 160px; float: left" hidden> Đặt trước :<label
                                                     style="width: 100px;display: none;" name="tiencoc">.../VNĐ</label>
                                             </tc>
@@ -163,6 +174,52 @@
                             <%} %>
                         </div>
                         <!-- /.card -->
+
+                       <div class="card card-primary">
+                            <%int j = 0; %>
+                                            <%foreach (System.Data.DataRow rows1 in dt_get_khuvuc1.Rows)
+                                                {%>   
+                                            
+                            <div class="card-header">
+                                <h3 class="card-title"><%=rows1["tenkhuvuc"].ToString() %></h3>
+
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                
+                                <div class="wrapper" id="myList">
+                                    <ul>
+                                        <%int k = 0; %>
+                                        <%foreach (System.Data.DataRow rows in dt_getinfo_phong1.Rows)
+                                            {%>
+                                        <%k++;%>
+                                        <li class="item" id="nametable_<%=k %>">
+                                             <img src="/static/images/phongtrong.png" style="float:left; margin-left:3px; margin-top:3px;width:50px; height: 50px;">
+                                            <p id="tenphong" style="float:left; margin-left: 5px; margin-top:3px;"><%=rows["tenphong"].ToString() %></p> 
+                                            <t id="trangthai" hidden><%=rows["trangthai"].ToString()%></t>
+                                            <d id="trangthaidatphong" hidden><%=rows["trangthaidatphong"].ToString() %></d>
+                                            <dp id="trangthaidonphong" hidden><%=rows["trangthaidonphong"].ToString() %></dp>
+                                            <lp id="loaiphong" style="float: left" hidden><label style="width: 100px; display: none;" name="loaiphong"><%=rows["loaiphongid"].ToString() %></label></lp>                                           
+                                            <ht id="hinhthuephong" hidden><%=rows["nhanghi"].ToString() %></ht>
+                                            <tc id="tiencoc" style="width: 160px; float: left" hidden> Đặt trước :<label
+                                                    style="width: 100px;display: none;" name="tiencoc">.../VNĐ</label>
+                                            </tc>
+                                        </li>
+                                           
+
+                                        <%} %>
+                                    </ul>
+                                </div>
+                               
+                            </div>
+                            <!-- /.card-body -->
+                            <%} %>
+                        </div>
+
                     </div>
 
 
@@ -617,6 +674,10 @@
                 //$('#txt_ID').prop("readonly", true);
                 
                 //lay so hoa don lon nhat
+               
+
+                        //check trang thai ban phong co khach hay khong?
+                
                 $.ajax({
                     type: "POST",
                     contentType: "application/json; charset=utf-8",
@@ -649,7 +710,8 @@
                     // Trang thai chua don phong
                     if ($(this).find('#trangthaidonphong').text() == 1) {
                         $(this).find("img").attr('src','/static/images/chuadonphong.png');
-                    }
+                    }                   
+
                 });
 
                 SearchText();
@@ -657,6 +719,20 @@
                 $("#myList UL LI").each(function () {
                     $(this).click(function () {
                         var tenphong = $(this).find('p').text();
+                        var trangthainhanghi = $(this).find('ht').text();
+
+                        if (trangthainhanghi == '1')
+                        {
+                            //alert('hotel');
+                            $('#stylerender').val('hotel');  
+                        }
+                        else
+                        {
+                            //alert('nhahang');
+                            $('#stylerender').val('NH-CF');  
+                        }
+
+
                         $('#MainContent_txt_doc').val('');
                         $('#MainContent_txt_doc').select();
                         //alert(tenphong);                        
@@ -695,7 +771,7 @@
 
                                 //var giaphong = objdata['Table'][2]; 
 
-                                //debugger;
+                                //debugger;                                
                                 if (objdata['Table'][0] != "")  //|| objdata ['Table'][0][0] != "0"
                                 {
                                     $('#tbnhaphang tr').remove();
@@ -704,6 +780,10 @@
                                     var giovao = objdata['Table'][0][3];
                                     var hinhthucnghi = objdata['Table'][0][4];
                                     var giohat = objdata['Table'][0][5];
+                                    var kieuthuenghi = objdata['Table'][0][7];
+                                    //alert(parseInt(kieuthuenghi));
+                                    //debugger;
+                                   
 
                                     //var sohoadon = objdata['Table'][0][6];
                                     //id stylerender
@@ -806,17 +886,53 @@
                                     //var giohat = '0';//$('#ticketid').val();
                                     var tienhat1phut = 0;
                                     var tongtienhat = 0;
-                                    if (hinhthucnghi != 'Karaoke') {
-                                        //giohat = '0';
-                                        tongtienhat = 0;
+                                    var tongtiennghi = 0;
+
+                                     // $('#MainContent_dr_hinhthucnghi').text('adsfga');
+                                    if (parseInt(kieuthuenghi) == 1) {
+                                        //nghi gio
+                                        $('#MainContent_dr_hinhthucnghi').text('adsfga');
+                                        alert('vao1');
+                                    }
+                                    else if (parseInt(kieuthuenghi) == 2)
+                                    {
+                                        //nghi dem
+                                        $('#MainContent_dr_hinhthucnghi').text('nghi dem');
+                                        alert('vao2');
+                                    }
+                                    else if (parseInt(kieuthuenghi) == 3)
+                                    {
+                                        //nghi ngay
+                                        $('#MainContent_dr_hinhthucnghi').text('nghi ngay');
+                                        alert('vao3');
+                                    }
+                                    else if (parseInt(kieuthuenghi) == 4)
+                                    {
+                                        //nghi thang
+                                        $('#MainContent_dr_hinhthucnghi').text('nghi thang');
+                                        alert('vao4');
                                     }
                                     else
                                     {
+                                        //nhahaang - cafe
+                                        $('#MainContent_dr_hinhthucnghi').text('==kieunghi==');
+                                    }
+
+
+                                    if (hinhthucnghi != 'Karaoke') {
+                                        //giohat = '0';
+                                       tongtienhat = 0;
+                                       //cach tinh tien nghi khach san o day // *** pending
+                                    }
+                                    else
+                                    {                                        
+                                        //truonghop la karaoke
                                         tienhat1phut = parseInt(giohat)/60;
-                                        tongtienhat = Math.round(tongsophutdung * tienhat1phut);
+                                        tongtienhat = Math.round(tongsophutdung * tienhat1phut);                                       
                                     }                                    
                                     //alert(giohat);
                                     //debugger; 
+                                    //alert('asdfgadf');
 
                                     const bangchu_hienthi2 = to_vietnamese(parseInt(tienhang) + parseInt(tongtienhat));
 
@@ -827,7 +943,7 @@
                                         $('#thanhtoanid').val(0);
                                         $('#chietkhauid').val(0);
                                         $('#ticketid').val(0);
-                                        $('#stylerender').val('NH-CF');    
+                                        //$('#stylerender').val('NH-CF');    
                                         //tiengioid  //conlaiid
                                         $('#tiengioid').val(0);
                                         $('#conlaiid').val(0);
@@ -887,7 +1003,7 @@
                                     $('#thanhtoanid').val(0);
                                     $('#chietkhauid').val(0);
                                     $('#ticketid').val(0);
-                                    $('#stylerender').val('NH-CF');
+                                    //('#stylerender').val('NH-CF'); //hinhthucnghi_null                                    
 
                                     $('#tiengioid').val(0);
                                     $('#conlaiid').val(0);
@@ -1392,92 +1508,107 @@
                 var itemdata = {};
                 var tenphong = $('#nametable').text();//dj('#name_room').text();
                 var tienhang = $('#tongtienid').val();
-                if (tenphong != "") {
-                    $('.themthucdon').each(function () {
-                        //var mahang = $(this).find('td').eq(0).text();
-                        //var soluong = $(this).find('td').eq(1).text();
-                        var mahang = $(this).find('td').eq(0).text() + "," + $(this).find('td').eq(2).text() + "," + $(this).find('td').eq(3).text();
-                        var soluong = $(this).find('td').eq(1).text();
+                var kieunghi = $('#MainContent_dr_hinhthucnghi').val();
+                var hinhthucnghi = $('#stylerender').val();
 
-                        var element = {}, cart = [];
-                        if (mahang != "") {
-                            //items.push({'a': chk ? 1 : 0, 'c': content});
-                            itemdata[mahang] = parseInt(soluong);
-                            //itemdata.mahang = mahang;
-
-                            //itemdata.soluong = soluong;
-                            //cart.push({ itemdata: itemdata });
-                            //JSON.stringify([{a: 1}, {a: 2}]) 
-                            //==> "[{"a":1},{"a":2}]" 
-                        }
-                    });
-                    var hanghoa_new = itemdata;
-                    var aaa = $('#tongtienid').val();
-                    //djLog(itemdata);  //Object {bimbim: 1}
-                    //var data = {
-                    //    'tenphong': tenphong,
-                    //    'tienhang': tienhang,
-                    //    'items': JSON.stringify(itemdata)
-                    //};
-
-                    var data = {
-                        tenphong: tenphong,
-                        tienhang: tienhang,
-                        items: JSON.stringify(itemdata)
-                    };
-                    //djLog(data);  //Object {tenphong: "P.101", tienhang: "10000", items: "{"ngocay":1}"}
-                    //console.log(data);
-
-                    // var data_new = { tenphong: tenphong, tienhang: tienhang };
-                    //var data_new = { tenphong: tenphong, tienhang: tienhang };
-
-                    //save hang hoa
-                    $.ajax({
-                        type: "POST",
-                        contentType: "application/json; charset=utf-8",
-                        url: "Map.aspx/addthongtinhanghoa",
-                        //data: JSON.stringify(data),
-                        data: JSON.stringify(data),
-                        dataType: "json",
-                        success: function (data) {
-                            alert('Hàng hóa đã được thêm thành công!');
-                            $("#myList UL LI").each(function () {
-                                    var nameroom = $(this).find('#tenphong').text();
-                                    if (nameroom == tenphong) {
-                                        $(this).find("img").attr('src','/static/images/cokhach.png');
-                                    }
-                                })
-                        },
-                        error: function () {
-                            //alert("No Match");
-                        }
-                    });
-
-
-                    // kiem tra xem phong + ban da co khach chua ?
-                    //dj.getJSON('/modules/hotel/testtrangthaiphong', { 'tenphong': tenphong }, function (rs) {
-                    //    //djLog(rs.trangthai);
-                    //    if (rs.trangthai === 0) {
-                    //        //dWin.alert('ban chua chon phong de thue aaa');
-                    //        var action = 'thuephong';
-
-                    //        //*** chua ra tien hang de cap nhat vao so cai
-
-                    //        // djLog(tienhang); vao den day
-                    //        dhotel.thuephong(action, rs, tenphong, hanghoa_new, aaa);
-                    //    } else {
-                    //        // neu da thue phong cap nhat them hang hoa vao chung tu
-                    //        // cap nhat thong tin menu
-                    //        dj.getJSON('/modules/hotel/testcapnhathanghoa', data, function (rs) {
-                    //            if (rs.err === 0) {
-                    //                dWin.alert('Hàng hóa đã được thêm thành công!');
-                    //            }
-                    //        });
-                    //    }
-                    //});
-                } else {
-                    alert('Bạn chưa chọn phòng thuê!')
+                //alert(hinhthucnghi);
+                if (kieunghi == '' && hinhthucnghi == 'hotel')
+                {
+                    alert('ban chua chon mo hinh nghi!');
                 }
+                else
+                {
+                         if (tenphong != "") {
+                                $('.themthucdon').each(function () {
+                                    //var mahang = $(this).find('td').eq(0).text();
+                                    //var soluong = $(this).find('td').eq(1).text();
+                                    var mahang = $(this).find('td').eq(0).text() + "," + $(this).find('td').eq(2).text() + "," + $(this).find('td').eq(3).text();
+                                    var soluong = $(this).find('td').eq(1).text();
+
+                                    var element = {}, cart = [];
+                                    if (mahang != "") {
+                                        //items.push({'a': chk ? 1 : 0, 'c': content});
+                                        itemdata[mahang] = parseInt(soluong);
+                                        //itemdata.mahang = mahang;
+
+                                        //itemdata.soluong = soluong;
+                                        //cart.push({ itemdata: itemdata });
+                                        //JSON.stringify([{a: 1}, {a: 2}]) 
+                                        //==> "[{"a":1},{"a":2}]" 
+                                    }
+                                });
+                                var hanghoa_new = itemdata;
+                                var aaa = $('#tongtienid').val();
+                                //djLog(itemdata);  //Object {bimbim: 1}
+                                //var data = {
+                                //    'tenphong': tenphong,
+                                //    'tienhang': tienhang,
+                                //    'items': JSON.stringify(itemdata)
+                                //};
+
+                             var data = {
+                                    kieunghi:kieunghi,
+                                    tenphong: tenphong,
+                                    tienhang: tienhang,
+                                    items: JSON.stringify(itemdata)
+                                };
+                                //djLog(data);  //Object {tenphong: "P.101", tienhang: "10000", items: "{"ngocay":1}"}
+                                //console.log(data);
+
+                                // var data_new = { tenphong: tenphong, tienhang: tienhang };
+                                //var data_new = { tenphong: tenphong, tienhang: tienhang };
+
+                                //save hang hoa
+                                $.ajax({
+                                    type: "POST",
+                                    contentType: "application/json; charset=utf-8",
+                                    url: "Map.aspx/addthongtinhanghoa",
+                                    //data: JSON.stringify(data),
+                                    data: JSON.stringify(data),
+                                    dataType: "json",
+                                    success: function (data) {
+                                        alert('Hàng hóa đã được thêm thành công!');
+                                        $("#myList UL LI").each(function () {
+                                                var nameroom = $(this).find('#tenphong').text();
+                                                if (nameroom == tenphong) {
+                                                    $(this).find("img").attr('src','/static/images/cokhach.png');
+                                                }
+                                            })
+                                    },
+                                    error: function () {
+                                        //alert("No Match");
+                                    }
+                                });
+
+
+                                // kiem tra xem phong + ban da co khach chua ?
+                                //dj.getJSON('/modules/hotel/testtrangthaiphong', { 'tenphong': tenphong }, function (rs) {
+                                //    //djLog(rs.trangthai);
+                                //    if (rs.trangthai === 0) {
+                                //        //dWin.alert('ban chua chon phong de thue aaa');
+                                //        var action = 'thuephong';
+
+                                //        //*** chua ra tien hang de cap nhat vao so cai
+
+                                //        // djLog(tienhang); vao den day
+                                //        dhotel.thuephong(action, rs, tenphong, hanghoa_new, aaa);
+                                //    } else {
+                                //        // neu da thue phong cap nhat them hang hoa vao chung tu
+                                //        // cap nhat thong tin menu
+                                //        dj.getJSON('/modules/hotel/testcapnhathanghoa', data, function (rs) {
+                                //            if (rs.err === 0) {
+                                //                dWin.alert('Hàng hóa đã được thêm thành công!');
+                                //            }
+                                //        });
+                                //    }
+                                //});
+                            } else {
+                        alert('Bạn chưa chọn phòng thuê!')
+                }
+                }
+
+
+               
             });
 
             // nut sua hoa don

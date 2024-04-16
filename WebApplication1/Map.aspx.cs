@@ -24,7 +24,11 @@ namespace WebApplication1
         public DataTable dt_getinfo_phong = new DataTable();
         public DataTable dt_get_khuvuc0 = new DataTable();
 
+        public DataTable dt_get_khuvuc1 = new DataTable();
+        public DataTable dt_getinfo_phong1 = new DataTable();
+
         public DataTable dtncc = new DataTable();
+        public DataTable dthinhthucnghi = new DataTable();
 
         public static string source;
 
@@ -33,6 +37,9 @@ namespace WebApplication1
             dt_nhomhang = DataConn.StoreFillDS("NH_select_nhomhang", CommandType.StoredProcedure);
             dt_getinfo_phong = DataConn.StoreFillDS("NH_select_info_phong", CommandType.StoredProcedure);
             dt_get_khuvuc0 = DataConn.StoreFillDS("NH_select_khuvuc", CommandType.StoredProcedure);
+
+            dt_get_khuvuc1 = DataConn.StoreFillDS("NH_select_khuvuc1", CommandType.StoredProcedure);
+            dt_getinfo_phong1 = DataConn.StoreFillDS("NH_select_info_phong1", CommandType.StoredProcedure);
 
             string nhomhangid = Request.QueryString["nhomhangid"];
             if (nhomhangid != null)
@@ -74,6 +81,13 @@ namespace WebApplication1
                 dtncc.Rows.InsertAt(newRow2, 0);
                 dr_nhacungcap.DataSource = dtncc;
                 dr_nhacungcap.DataBind();
+
+                dthinhthucnghi = DataConn.StoreFillDS("NH_Get_kieunghi", System.Data.CommandType.StoredProcedure);
+                DataRow newRow3 = dthinhthucnghi.NewRow();
+                newRow3["hinhthucnghi"] = "==kieu nghi==";
+                dthinhthucnghi.Rows.InsertAt(newRow3, 0);
+                dr_hinhthucnghi.DataSource = dthinhthucnghi;
+                dr_hinhthucnghi.DataBind();
             }
 
         }
@@ -142,7 +156,7 @@ namespace WebApplication1
         }
 
         [WebMethod]
-        public static string addthongtinhanghoa(string tenphong , string tienhang, string items)  //string tenphong, string tienhang
+        public static string addthongtinhanghoa(string kieunghi, string tenphong , string tienhang, string items)  //string tenphong, string tienhang
         {
             String thongbao = "";
             DataTable dtsave = new DataTable();
@@ -151,7 +165,7 @@ namespace WebApplication1
             //update *** neu hoa don ton tai roi
             //lay so hoa don truyen len de update
            
-            dtsave = DataConn.StoreFillDS("NH_save_thongtinhanghoa", System.Data.CommandType.StoredProcedure,tenphong,tienhang,items);//tenphong, data, tienhang
+            dtsave = DataConn.StoreFillDS("NH_save_thongtinhanghoa", System.Data.CommandType.StoredProcedure, kieunghi, tenphong,tienhang,items);//tenphong, data, tienhang
 
             if (dtsave.Rows[0][0].ToString() == "1")
             {
