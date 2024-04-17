@@ -105,6 +105,9 @@
                             <b style="padding-right: 10px; margin-left: 10px;">Phong chuyen:</b>
                             <b style="font-size: 14px; color: blue" id="thongbao"></b>
 
+                            <b style="padding-right: 10px; margin-left: 10px;">kieu nghi:</b>
+                            <b style="font-size: 14px; color: blue" id="kieunghiid"></b>
+
                             <div style="width:150px; float:right;">
                             <asp:DropDownList ID="dr_hinhthucnghi" runat="server" AppendDataBoundItems="true" 
                             DataTextField="hinhthucnghi" 
@@ -781,6 +784,14 @@
                                     var hinhthucnghi = objdata['Table'][0][4];
                                     var giohat = objdata['Table'][0][5];
                                     var kieuthuenghi = objdata['Table'][0][7];
+
+                                    var tientheogio = objdata['Table'][0][8];
+                                    var tientheodem = objdata['Table'][0][9];
+                                    var tientheongay = objdata['Table'][0][10];
+                                    var tientheothang = objdata['Table'][0][11];
+                                    var tienphutroi = objdata['Table'][0][12];
+                                    var tienphutroiphut = objdata['Table'][0][13];
+                                    var settingtimephutroi = objdata['Table'][0][14];
                                     //alert(parseInt(kieuthuenghi));
                                     //debugger;
                                    
@@ -826,7 +837,7 @@
 
                                     var diffHrs = Math.round((diffMs % 86400000) / 3600000); // hours   1gio = 3600000 , 1 ngay = 86400000 mililigiay
                                     var diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000); // minutes
-                                    //var diffDays = Math.round(diffMs / 86400000);
+                                    var diffDays = Math.round(diffMs / 86400000);
 
                                     var diffHrs_check = (diffMs % 86400000) / 3600000
                                     //var diffHrs_check2 =  parseFloat(diffMs % 86400000) / 3600000
@@ -836,7 +847,7 @@
                                     //console.log(diffMs);    //so ngay
                                     //console.log(diffHrs);   //so gio
                                     //console.log(diffMins);  //so phut                                           
-                                                                                                   
+                                    //alert(diffDays);                                                                    
                                     
                                     if(diffMs.toString() == 'NaN')
                                     {
@@ -861,8 +872,7 @@
                                                 //alert("vap b");
                                                 $('.sogiodung').text('0');
                                                 $('.sophutdung').text(diffMins);
-                                            }
-                                            
+                                            }                                            
                                         }
                                         else
                                         {
@@ -887,42 +897,107 @@
                                     var tienhat1phut = 0;
                                     var tongtienhat = 0;
                                     var tongtiennghi = 0;
+                                    var tongtienphutroi = 0;
+                                    var phutroitheophut = 0;                                                                        
 
-                                     // $('#MainContent_dr_hinhthucnghi').text('adsfga');
-                                    if (parseInt(kieuthuenghi) == 1) {
-                                        //nghi gio
-                                        $('#MainContent_dr_hinhthucnghi').text('adsfga');
-                                        alert('vao1');
-                                    }
-                                    else if (parseInt(kieuthuenghi) == 2)
-                                    {
-                                        //nghi dem
-                                        $('#MainContent_dr_hinhthucnghi').text('nghi dem');
-                                        alert('vao2');
-                                    }
-                                    else if (parseInt(kieuthuenghi) == 3)
-                                    {
-                                        //nghi ngay
-                                        $('#MainContent_dr_hinhthucnghi').text('nghi ngay');
-                                        alert('vao3');
-                                    }
-                                    else if (parseInt(kieuthuenghi) == 4)
-                                    {
-                                        //nghi thang
-                                        $('#MainContent_dr_hinhthucnghi').text('nghi thang');
-                                        alert('vao4');
-                                    }
-                                    else
-                                    {
-                                        //nhahaang - cafe
-                                        $('#MainContent_dr_hinhthucnghi').text('==kieunghi==');
-                                    }
-
-
-                                    if (hinhthucnghi != 'Karaoke') {
+                                    if (hinhthucnghi == 'hotel') {
                                         //giohat = '0';
-                                       tongtienhat = 0;
-                                       //cach tinh tien nghi khach san o day // *** pending
+                                        if (parseInt(kieuthuenghi) == 1) {
+                                            //nghi gio                                       
+                                            $('#kieunghiid').text('nghi gio');
+                                            //alert('vao1');
+                                            if (parseInt(sogiodung) > 1)
+                                            {
+                                                if (parseInt(sophutdung) >= parseInt(settingtimephutroi))  
+                                                {
+                                                    phutroitheophut = tienphutroiphut;
+                                                }
+                                                else
+                                                {
+                                                    phutroitheophut = 0;
+                                                }
+                                                tongtienphutroi = (parseInt(sogiodung) - 1) * parseInt(tienphutroi) + parseInt(phutroitheophut);
+                                                tongtiennghi = parseInt(tientheogio) + parseInt(tongtienphutroi);
+                                                //alert(tongtienphutroi);
+                                                //alert(tongtiennghi);
+                                                tongtienhat = tongtiennghi;
+                                            }
+                                            else if (parseInt(sogiodung) == 1)
+                                            {
+                                                //if (parseInt(sophutdung) >= 30)
+                                                if (parseInt(sophutdung) >= parseInt(settingtimephutroi))
+                                                {
+                                                    phutroitheophut = tienphutroiphut;
+                                                }
+                                                else
+                                                {
+                                                    phutroitheophut = 0;
+                                                }
+                                                tongtienphutroi = parseInt(phutroitheophut);
+                                                tongtiennghi = parseInt(tientheogio)+ parseInt(tongtienphutroi);
+                                                tongtienhat = tongtiennghi;
+                                            }
+                                            else
+                                            {
+                                                //sogiodung < 1 gio
+                                                if (parseInt(sophutdung) >= parseInt(settingtimephutroi))
+                                                {
+                                                    //phutroitheophut = tienphutroiphut;
+                                                    tongtiennghi = parseInt(tientheogio);
+                                                }
+                                                else
+                                                {
+                                                    //phutroitheophut = 0;
+                                                    tongtiennghi = tienphutroiphut;
+                                                }
+                                                //tongtienphutroi = 0;                                                
+                                                tongtienhat = tongtiennghi;
+                                            }
+                                        
+                                        }
+                                        else if (parseInt(kieuthuenghi) == 2)
+                                        {
+                                            //nghi dem                                        
+                                            $('#kieunghiid').text('nghi dem');
+                                            //alert('vao2');
+                                            tongtiennghi = tientheodem;
+                                            tongtienhat = tongtiennghi;
+                                        }
+                                        else if (parseInt(kieuthuenghi) == 3)
+                                        {
+                                            //nghi ngay                                        
+                                            $('#kieunghiid').text('nghi ngay');
+                                            //alert('vao3');
+                                            if (diffDays == 0)
+                                            {
+                                                tongtiennghi = parseInt(tientheongay);
+                                            }
+                                            else
+                                            {
+                                                //so ngay * tien theo ngay
+                                                tongtiennghi = parseInt(tientheongay)* parseInt(diffDays);
+                                            }                                            
+                                            tongtienhat = tongtiennghi;
+                                        }
+                                        else if (parseInt(kieuthuenghi) == 4)
+                                        {
+                                            //nghi thang                                      
+                                            $('#kieunghiid').text('nghi thang');
+                                            //alert('vao4');
+                                             tongtiennghi = tientheothang;
+                                            tongtienhat = tongtiennghi;
+                                        }
+                                        else
+                                        {
+                                            //nhahaang - cafe
+                                            $('#kieunghiid').text('');
+                                            //$('#MainContent_dr_hinhthucnghi').text('==kieunghi==');
+                                        }                                       
+                                    }
+                                    else if (hinhthucnghi == 'NH-CF' || hinhthucnghi == 'Nhahang')
+                                    {
+                                        //alert('aaa');
+                                        tongtienhat = 0;
                                     }
                                     else
                                     {                                        
@@ -945,6 +1020,8 @@
                                         $('#ticketid').val(0);
                                         //$('#stylerender').val('NH-CF');    
                                         //tiengioid  //conlaiid
+                                        //$('#tiengioid').val(0);
+                                        //alert('2'+tongtienhat);
                                         $('#tiengioid').val(0);
                                         $('#conlaiid').val(0);
 
@@ -958,7 +1035,7 @@
                                             blkstr.push(str);
                                         });
                                         debugger;
-
+                                        
                                         //var aaa = blkstr[0];
                                         //var bbb = blkstr[1];
                                         for (var i = 0; i < blkstr.length; i++) {
@@ -1005,6 +1082,8 @@
                                     $('#ticketid').val(0);
                                     //('#stylerender').val('NH-CF'); //hinhthucnghi_null                                    
 
+                                    //$('#tiengioid').val(0);
+                                    //alert(tongtienhat);
                                     $('#tiengioid').val(0);
                                     $('#conlaiid').val(0);
 
