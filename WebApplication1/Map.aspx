@@ -162,6 +162,7 @@
                                             <dp id="trangthaidonphong" hidden><%=rows["trangthaidonphong"].ToString() %></dp>
                                             <lp id="loaiphong" style="float: left" hidden><label style="width: 100px; display: none;" name="loaiphong"><%=rows["loaiphongid"].ToString() %></label></lp>                                           
                                             <ht id="hinhthuephong" hidden><%=rows["nhanghi"].ToString() %></ht>
+                                            <ka id="karaokeid" hidden><%=rows["karaoke"].ToString() %></ka>
                                             <tc id="tiencoc" style="width: 160px; float: left" hidden> Đặt trước :<label
                                                     style="width: 100px;display: none;" name="tiencoc">.../VNĐ</label>
                                             </tc>
@@ -208,6 +209,7 @@
                                             <dp id="trangthaidonphong" hidden><%=rows["trangthaidonphong"].ToString() %></dp>
                                             <lp id="loaiphong" style="float: left" hidden><label style="width: 100px; display: none;" name="loaiphong"><%=rows["loaiphongid"].ToString() %></label></lp>                                           
                                             <ht id="hinhthuephong" hidden><%=rows["nhanghi"].ToString() %></ht>
+                                             <ka id="karaokeid" hidden><%=rows["karaoke"].ToString() %></ka>
                                             <tc id="tiencoc" style="width: 160px; float: left" hidden> Đặt trước :<label
                                                     style="width: 100px;display: none;" name="tiencoc">.../VNĐ</label>
                                             </tc>
@@ -723,11 +725,16 @@
                     $(this).click(function () {
                         var tenphong = $(this).find('p').text();
                         var trangthainhanghi = $(this).find('ht').text();
+                        var trangthaikaraoke = $(this).find('ka').text();
 
                         if (trangthainhanghi == '1')
                         {
                             //alert('hotel');
                             $('#stylerender').val('hotel');  
+                        }
+                        else if (trangthaikaraoke == '1')
+                        {
+                            $('#stylerender').val('karaoke');
                         }
                         else
                         {
@@ -998,12 +1005,14 @@
                                     {
                                         //alert('aaa');
                                         tongtienhat = 0;
+                                        $('#kieunghiid').text('');
                                     }
                                     else
                                     {                                        
                                         //truonghop la karaoke
                                         tienhat1phut = parseInt(giohat)/60;
-                                        tongtienhat = Math.round(tongsophutdung * tienhat1phut);                                       
+                                        tongtienhat = Math.round(tongsophutdung * tienhat1phut);   
+                                        $('#kieunghiid').text('');
                                     }                                    
                                     //alert(giohat);
                                     //debugger; 
@@ -1026,6 +1035,8 @@
                                         $('#conlaiid').val(0);
 
                                         $('#bangchuid2').text('');
+
+                                        
                                     } 
                                     else 
                                     {
@@ -1282,7 +1293,15 @@
                 var psco = thantoan2;//$('#thanhtoanid').val();
                 var tongtienhang = tongtien2;//$('#tongtienid').val();
                 var tienck = chietkau2;//$('#chietkhauid').val();
-                var tongtienhat =  tienhat;  
+                var tongtienhat = tienhat;  
+
+                //them tien phong de thanh toan khach san - nha nghi
+                var tongtienphong = 0;
+                var tiengiock = $('#tiengioid').val();
+                if($('#stylerender').val() == 'hotel')
+                {
+                    tongtienphong = tiengiock;
+                }
 
                
                 //var tienthoi = (parseFloat(psco) - parseFloat(tongtienhang)) 
@@ -1307,7 +1326,8 @@
                         idkhachhang:idkhachhang,
                         tenphong: tenphong,
                         tongtienhang: tongtienhang,
-                        tongtienhat:tongtienhat,
+                        tongtienhat: tongtienhat,
+                        tongtienphong:tongtienphong,
                         psco:psco,
                         tienno: psno,
                         tienck:tienck,
@@ -1342,7 +1362,10 @@
                                             $('#stylerender').val('');
                                             $('#ticketid').val(0);
                                 
-                                            $('#hoadonid').val(parseInt(sohoadon)+1);
+                                            $('#hoadonid').val(parseInt(sohoadon) + 1);
+
+                                            $('#conlaiid').val('0'); 
+                                            $('#tiengioid').val('0');
 
                                             //pending -> doi trang thai khi thanh cong -> khong co kach
 
@@ -1477,7 +1500,7 @@
 
             function thanhtoanhoadon2()
             {
-               // debugger;
+               debugger;
                
                 var psco = $('#thanhtoanid').val();
                 var tongtienhang = $('#tongtienid').val();
@@ -1492,15 +1515,32 @@
                 var tongsophutdung = parseInt(sogiodung)*60+parseInt(sophutdung);
                 var hinhthucnghi = $('#stylerender').val();
                 var giohat = '0';//$('#ticketid').val();
+                var tienthoi = '0';
+                var tongtienphong = 0;
                 if(hinhthucnghi == 'Karaoke')
                 {
                     giohat = $('#ticketid').val();
                 }
+                
                 var tienhat1phut = parseInt(giohat)/60;
                 var tongtienhat = Math.round(tongsophutdung * tienhat1phut);
 
-                //var tongtienhat =  tienhat;               
-                var tienthoi = (parseFloat(psco) - parseFloat(tongtienhang)) 
+                //var tongtienhat =  tienhat;
+                var tiengiock = $('#tiengioid').val();
+                if(hinhthucnghi == 'hotel')
+                {
+                    tongtienphong = tiengiock;
+                }
+                if (tiengiock != '0')
+                {                    
+                    var tienthoi = (parseFloat(psco) - parseFloat(tongtienhang)) - parseFloat(tiengiock);
+                }
+                else
+                {                   
+                    var tienthoi = (parseFloat(psco) - parseFloat(tongtienhang));
+                }
+                //var tienthoi = (parseFloat(psco) - parseFloat(tongtienhang)) 
+               
                 if (tienthoi < 0) {
                             $('#lblconlai').text("Tiền thiếu :");
                             $('#conlaiid').val(tienthoi);
@@ -1525,7 +1565,8 @@
                         idkhachhang: idkhachhang,
                         tenphong: tenphong,
                         tongtienhang: tongtienhang,
-                        tongtienhat:tongtienhat,
+                        tongtienhat: tongtienhat,
+                        tongtienphong:tongtienphong,
                         psco:psco,
                         tienno: psno,
                         tienck:tienck,
@@ -1549,9 +1590,13 @@
                                 
                                 $('#stylerender').val('');
                                 $('#ticketid').val(0);
+
+                                $('#conlaiid').val('0'); 
+                                $('#tiengioid').val('0');
                                 
                                 //$('#hoadonid').val(parseInt(sohoadon) + 1);
                                 $('#hoadonid').val(sohoadon);
+                                
 
                                 //pending -> doi trang thai khi thanh cong -> khong co kach
 
@@ -1589,11 +1634,61 @@
                 var tienhang = $('#tongtienid').val();
                 var kieunghi = $('#MainContent_dr_hinhthucnghi').val();
                 var hinhthucnghi = $('#stylerender').val();
-
+                var loaihinhnghi = $('#kieunghiid').text();
+                //alert(loaihinhnghi);
                 //alert(hinhthucnghi);
                 if (kieunghi == '' && hinhthucnghi == 'hotel')
                 {
-                    alert('ban chua chon mo hinh nghi!');
+                    if (loaihinhnghi == '')
+                    {
+                         alert('ban chua chon mo hinh nghi!');
+                    }
+                    else
+                    {
+                        //phong da co khach roi
+                        //luu hoa don binh thuong
+                         $('.themthucdon').each(function () {                                  
+                                    var mahang = $(this).find('td').eq(0).text() + "," + $(this).find('td').eq(2).text() + "," + $(this).find('td').eq(3).text();
+                                    var soluong = $(this).find('td').eq(1).text();
+
+                                    var element = {}, cart = [];
+                                    if (mahang != "") {
+                                        //items.push({'a': chk ? 1 : 0, 'c': content});
+                                        itemdata[mahang] = parseInt(soluong);                                       
+                                    }
+                                });
+                                var hanghoa_new = itemdata;
+                                var aaa = $('#tongtienid').val();                               
+
+                             var data = {
+                                    kieunghi:kieunghi,
+                                    tenphong: tenphong,
+                                    tienhang: tienhang,
+                                    items: JSON.stringify(itemdata)
+                                };                                
+                                //save hang hoa
+                                $.ajax({
+                                    type: "POST",
+                                    contentType: "application/json; charset=utf-8",
+                                    url: "Map.aspx/addthongtinhanghoa",
+                                    //data: JSON.stringify(data),
+                                    data: JSON.stringify(data),
+                                    dataType: "json",
+                                    success: function (data) {
+                                        alert('Hàng hóa đã được thêm thành công!');
+                                        $("#myList UL LI").each(function () {
+                                                var nameroom = $(this).find('#tenphong').text();
+                                                if (nameroom == tenphong) {
+                                                    $(this).find("img").attr('src','/static/images/cokhach.png');
+                                                }
+                                            })
+                                    },
+                                    error: function () {
+                                        //alert("No Match");
+                                    }
+                                });
+                    }
+                   
                 }
                 else
                 {
@@ -1681,9 +1776,11 @@
                                 //        });
                                 //    }
                                 //});
-                            } else {
-                        alert('Bạn chưa chọn phòng thuê!')
-                }
+                         }
+                         else
+                         {
+                            alert('Bạn chưa chọn phòng thuê!')
+                        }
                 }
 
 
