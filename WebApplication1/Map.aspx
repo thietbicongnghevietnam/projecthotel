@@ -1375,6 +1375,7 @@
                                                     $(this).find("img").attr('src', '/static/images/phongtrong.png');
                                                 }
                                             });
+                                            $('#bangchuid2').text('');
 
                                             //load lai trang khi thanh cong
                                             //setTimeout(function() {
@@ -1425,7 +1426,9 @@
                                                 if (nameroom == tenphong) {
                                                     $(this).find("img").attr('src', '/static/images/phongtrong.png');
                                                 }
-                                            });
+                                        });
+
+                                        $('#bangchuid2').text('');
 
                                         //load lai trang khi thanh cong
                                         //setTimeout(function() {
@@ -1449,7 +1452,9 @@
 
             $('#chietkhauid').on('change', function () { 
             var textcheck = $('#chietkhauid').val();
-            var tongtienhang = $("#thanhtoanid").val();
+            //var tongtienhang = $("#thanhtoanid").val();
+                var tongtienhang = $("#tongtienid").val();
+                var tongtiengio = $("#tiengioid").val();
             if (textcheck.includes("%")) {
                 //alert("TextBox chứa ký tự phần trăm (%)");
                 var removeKytu = $("#chietkhauid").val().replace(/%/g, "");
@@ -1458,9 +1463,13 @@
                 {
                     var tienck = parseFloat(removeKytu)*parseFloat(tongtienhang)/100;
                     //alert(tienck);
-                    var tongtienthanhtoan =(parseFloat(tongtienhang) - parseFloat(tienck)) ; //;$("#thanhtoanid").val();
+                    //var tongtienthanhtoan =(parseFloat(tongtienhang) - parseFloat(tienck)) ; //;$("#thanhtoanid").val();
+                    var tongtienthanhtoan =(parseFloat(tongtienhang)+parseFloat(tongtiengio) - parseFloat(tienck)) ;
                     $("#chietkhauid").val(tienck);
                     $("#thanhtoanid").val(tongtienthanhtoan);
+
+                    const bangchu_hienthi2 = to_vietnamese(tongtienthanhtoan);
+                    $('#bangchuid2').text(bangchu_hienthi2);
                 }
                 else
                 {
@@ -1470,8 +1479,13 @@
             else
             {               
                 var tienck = $("#chietkhauid").val();
-                var tongtienthanhtoan =(parseFloat(tongtienhang) - parseFloat(tienck)) ; //;$("#thanhtoanid").val();
-                $("#thanhtoanid").val(tongtienthanhtoan);   
+                //var tongtienthanhtoan =(parseFloat(tongtienhang) - parseFloat(tienck)) ; //;$("#thanhtoanid").val();
+                var tongtienthanhtoan =(parseFloat(tongtienhang)+parseFloat(tongtiengio) - parseFloat(tienck)) ; //;$("#thanhtoanid").val();
+                $("#thanhtoanid").val(tongtienthanhtoan);  
+
+                const bangchu_hienthi2 = to_vietnamese(tongtienthanhtoan);
+                $('#bangchuid2').text(bangchu_hienthi2);
+
             }
                                    
             });
@@ -2225,6 +2239,9 @@
             $("#soluong").on('keyup', function (e) {
                 if ((e.key === 'Enter' || e.keyCode === 13)) {
                     var tongtienhang = parseInt($('#tongtienid').val());
+                    var tongtiengio = parseInt($('#tiengioid').val());
+                    
+                    //alert(tongtiengio);
                     var _mahang = $("#MainContent_txt_doc").val();
                     var data = { _mahang: _mahang };
                     //push mahang vao array
@@ -2267,9 +2284,14 @@
                                     '</tr>';
                                 $('#tbnhaphang').append(newrow);
                                 tongtienhang += thanhtien;
-                                //alert(tongtienhang);
+                                //alert(tongtiengio);
+                                var tongtienthanhtoan = parseInt(tongtienhang) + parseInt(tongtiengio);
+
                                 $('#tongtienid').val(tongtienhang);
-                                $('#thanhtoanid').val(tongtienhang);
+                                $('#thanhtoanid').val(tongtienthanhtoan);
+
+                                const bangchu_hienthi2 = to_vietnamese(tongtienthanhtoan);
+                                $('#bangchuid2').text(bangchu_hienthi2);
 
                                 $("#MainContent_txt_doc").select();
                             },
@@ -2299,8 +2321,9 @@
                                     }
                                 });
                                 //alert(tongtienhang);
-                                $('#tongtienid').val(tongtienhang);
-                                $('#thanhtoanid').val(tongtienhang);
+                                //$('#tongtienid').val(tongtienhang);
+                                //$('#thanhtoanid').val(tongtienhang);
+                               
                                 // _$addproduct_(soluong);
                                 //debugger;
                                 $.ajax({
@@ -2326,7 +2349,12 @@
                                         $('#tbnhaphang').append(newrow);
                                         tongtienhang += thanhtien;
                                         $('#tongtienid').val(tongtienhang);
-                                        $('#thanhtoanid').val(tongtienhang);
+                                        //$('#thanhtoanid').val(tongtienhang);
+                                        var tongtienthanhtoan = parseInt(tongtienhang) + parseInt(tongtiengio);
+                                        $('#thanhtoanid').val(tongtienthanhtoan);
+
+                                        const bangchu_hienthi2 = to_vietnamese(tongtienthanhtoan);
+                                        $('#bangchuid2').text(bangchu_hienthi2);
 
                                         $("#MainContent_txt_doc").select();
                                     },
@@ -2419,8 +2447,8 @@
             {
                  var tienhat = $("#MainContent_Button3").parent().parent().parent().find("b").eq(1).text(); 
                 var tenphong2 = $("#MainContent_Button3").parent().parent().find("b").eq(2).text(); 
-
-                var tongtien2 = $("#MainContent_Button3").parent().parent().find("b").eq(4).text();
+                var tongtien2 = $("#MainContent_Button3").parent().parent().find("b").eq(3).text();
+                //var tongtien2 = $("#MainContent_Button3").parent().parent().find("b").eq(4).text();
                 var chietkau2 = $("#MainContent_Button3").parent().parent().find("b").eq(5).text();
                 var thantoan2 = $("#MainContent_Button3").parent().parent().find("b").eq(6).text();                
                 var conlai2 = $("#MainContent_Button3").parent().parent().find("b").eq(7).text(); 

@@ -1,16 +1,50 @@
-id
-type
-MaHD
-IDketoan
-IDnguoinhan
-IDkhachhang
-IDnhacungcap
-psco
-psno
-Mota
-ngaygiaodich
-phuongthucTT
-Createdate
+USE [Warehouse_BPS]
+GO
+/****** Object:  StoredProcedure [dbo].[NH_save_khthanhtoan]    Script Date: 04/20/2024 02:03:45 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [dbo].[NH_save_khthanhtoan]  -- NH_save_khthanhtoan '2','P05','45000','0','0','0','-45000','0','{"biahn,20000,20000":1,"biaken,25000,25000":1}'
+	@idkhachhang as nvarchar(10),
+	@tenphong as nvarchar(50), 	 
+	@tongtienhang as nvarchar(50),
+	@tongtienhat as nvarchar(50),
+	@tongtienphong as nvarchar(50),
+	@psco as nvarchar(50),
+	@tienno as nvarchar(50),
+	@tienck as nvarchar(50),
+	@items as nvarchar(500)
+AS
+BEGIN
+	
+	declare @sohd as nvarchar(50)
+
+	set @sohd = (select id  FROM [Warehouse_BPS].[dbo].[htsocai] where tenphong=@tenphong and Flag='0')
 
 
-htsoquy
+	if exists(select * FROM [Warehouse_BPS].[dbo].[htsocai] where tenphong=@tenphong and Flag='0')
+	begin
+		--update trang thai thanh toan
+		update [Warehouse_BPS].[dbo].[htsocai] set Flag='1',items=@items,tienhang=@tongtienhang,tongtien=@psco,psno=@tienno,tiengiohat=@tongtienhat,tienphong=@tongtienphong,tiensauchietkhau=@psco,ngaygiora=GETDATE(),idncc=cast(@idkhachhang as int),chietkhau=@tienck where id=@sohd
+
+		--update trang thai bang mater khi thanh toan xong  trangthai='0'  (khong co khach)
+		update [Warehouse_BPS].[dbo].[htphong] set trangthai='0' where tenphong=@tenphong
+
+		--update cong no khach NCC
+		if(@tienno <> '0')
+		begin
+			--print('vao cong no')
+			--update cong no bang mater
+			update htkhachhang set congnoden=congnoden + cast(@tienno as float) where id =cast(@idkhachhang as int)
+		end
+
+		select 1
+	end
+	else
+	begin
+		-- khong ton tai, kiem tra lai
+		select 0
+	end
+
+END
