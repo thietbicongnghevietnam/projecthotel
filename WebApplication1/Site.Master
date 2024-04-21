@@ -121,61 +121,61 @@
           </li>
     
          <li class="nav-item dropdown">
-            <a id="dropdownSubMenu11" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">So quy</a>
+            <a id="dropdownSubMenu11" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Sổ Quỹ</a>
             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-              <li><a href="Phieuchi.aspx" target="_blank" class="dropdown-item">Phieu chi</a></li>
-              <li><a href="Phieuthu.aspx" target="_blank" class="dropdown-item">Phieu thu</a></li>
+              <li><a href="Phieuchi.aspx" target="_blank" class="dropdown-item">Phiếu chi</a></li>
+              <li><a href="Phieuthu.aspx" target="_blank" class="dropdown-item">Phiếu thu</a></li>
                 <li class="dropdown-divider"></li>
-              <li><a href="#" class="dropdown-item">BC So quy</a></li>
-                <li><a href="#" class="dropdown-item">BC tong hop thu chi</a></li>
+              <li><a href="#" class="dropdown-item">BC sổ quỹ</a></li>
+                <li><a href="#" class="dropdown-item">BC tổng hợp thu chi</a></li>
               <!-- End Level two -->
             </ul>
           </li>
         <li class="nav-item dropdown">
-            <a id="dropdownSubMenu2" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Bao cao</a>
+            <a id="dropdownSubMenu2" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Báo cáo</a>
             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-              <li><a href="#" class="dropdown-item">BC ban hang theo ngay</a></li>
-              <li><a href="#" class="dropdown-item">BC nhap hang theo ngay</a></li>
-              <li><a href="#" class="dropdown-item">BC ton kho</a></li>
+              <li><a href="#" class="dropdown-item">BC bán hàng theo HĐ</a></li>
+              <li><a href="#" class="dropdown-item">BC nhập hàng theo HĐ</a></li>
+              <li><a href="#" class="dropdown-item">BC tồn kho</a></li>
               <li class="dropdown-divider"></li>
               <!-- Level two dropdown-->
               <li class="dropdown-submenu dropdown-hover">
-                <a id="dropdownSubMenu3" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">BC cong no</a>
+                <a id="dropdownSubMenu3" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">BC công nợ</a>
                 <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
                   <li>
-                    <a tabindex="-1" href="#" class="dropdown-item">Cong no KH</a>
+                    <a tabindex="-1" href="#" class="dropdown-item">Công nợ KH</a>
                   </li>
                     <li>
-                    <a tabindex="-1" href="#" class="dropdown-item">Cong no NCC</a>
+                    <a tabindex="-1" href="#" class="dropdown-item">Công nợ NCC</a>
                   </li>                 
                 </ul>
               </li>
               <!-- End Level two -->
 
-               <li><a href="#" class="dropdown-item">BC lo lai</a></li>
+               <li><a href="#" class="dropdown-item">BC lỗ lãi</a></li>
             </ul>
           </li>
    
          <li class="nav-item dropdown">
-            <a id="dropdownSubMenu4" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Danh muc</a>
+            <a id="dropdownSubMenu4" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Danh mục</a>
             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-              <li><a href="#" class="dropdown-item">Danh muc hang hoa</a></li>
-              <li><a href="#" class="dropdown-item">Danh muc khach hang</a></li>
-              <li><a href="#" class="dropdown-item">Danh muc ban/phong</a></li>
+              <li><a href="#" class="dropdown-item">Danh mục hàng hóa</a></li>
+              <li><a href="#" class="dropdown-item">Danh mục khách hàng</a></li>
+              <li><a href="#" class="dropdown-item">Danh mục bàn/phòng</a></li>
               <li class="dropdown-divider"></li>
-              <li><a href="#" class="dropdown-item">Danh muc khu vuc</a></li>
-              <li><a href="#" class="dropdown-item">Danh muc nhom hang</a></li> 
-              <li><a href="#" class="dropdown-item">Danh muc NCC</a></li>
+              <li><a href="#" class="dropdown-item">Danh mục khu vực</a></li>
+              <li><a href="#" class="dropdown-item">Danh mục nhóm hàng</a></li> 
+              <li><a href="#" class="dropdown-item">Danh mục NCC</a></li>
                 <li class="dropdown-divider"></li>
-              <li><a href="#" class="dropdown-item">Danh muc Nhan vien</a></li>
+              <li><a href="#" class="dropdown-item">Danh mục nhân viên</a></li>
             </ul>
           </li>
 
       <li class="nav-item dropdown">
-            <a id="dropdownSubMenu5" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Lien he</a>
+            <a id="dropdownSubMenu5" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Liên hệ</a>
            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-              <li><a href="#" class="dropdown-item">Dat hang online</a></li>
-              <li><a href="#" class="dropdown-item">Truc tiep</a></li>              
+              <li><a href="#" class="dropdown-item">Đặt hàng online</a></li>
+              <li><a href="#" class="dropdown-item">Liên hệ trực tiếp</a></li>              
             </ul>
        </li>
     </ul>

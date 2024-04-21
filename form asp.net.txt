@@ -1,0 +1,60 @@
+   <%--<form id="form1" runat="server" >--%>
+      <div class="row">
+        <div class="column">
+          <div class="form-group">
+            <label for="recipient">Người nhận:</label>            
+              <asp:TextBox ID="idnguoinhan" runat="server" />
+          </div>
+          <div class="form-group">
+            <label for="amount">Số tiền:</label>
+            <asp:TextBox ID="idsotien" runat="server" />
+          </div>
+          <div class="form-group">
+            <label for="description">Mô tả:</label>
+            <%--<textarea id="idmota" cols="20" rows="2" ></textarea>--%>
+              <asp:TextBox id="idmota" TextMode="multiline" Columns="20" Rows="3" runat="server" />
+          </div>
+        </div>
+        <div class="column">
+          <div class="form-group">
+            <label for="supplier">Nhà cung cấp:</label>
+            <asp:DropDownList ID="dr_nhacungcap" runat="server" AppendDataBoundItems="true" 
+                            DataTextField="mancc" 
+                            DataValueField="id" 
+                            CssClass="form-control input-sm">
+             </asp:DropDownList>
+          </div>
+          <div class="form-group">
+            <label for="balance">Công nợ nhà cung cấp:</label>
+            <asp:TextBox ID="idcongnoncc" runat="server" />
+          </div>
+          <div class="form-group">
+            <label for="date" style="padding-top:10px;">Ngày chi:</label>
+            <%--<input type="date" id="iddate" name="date">--%>
+              <asp:TextBox ID="DateTextBox" runat="server" CssClass="datePicker"></asp:TextBox>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="column">
+          <div class="form-group">
+            <label for="payment-method">Phương thức thanh toán:</label>
+            <asp:DropDownList ID="dr_phuongthucTT" runat="server">
+                <asp:ListItem Enabled="true" Text="Tien mat" Value="0"></asp:ListItem>
+                <asp:ListItem Text="Chuyen khoan" Value="1"></asp:ListItem>
+                <asp:ListItem Text="ky gui" Value="2"></asp:ListItem>               
+            </asp:DropDownList>
+          </div>
+        </div>
+        <div class="column">
+          <div class="form-group">
+            <label for="note">Nguoi Chi tien:</label>   
+            <asp:TextBox ID="idnguichitien" runat="server" />
+          </div>
+        </div>
+      </div>
+      <%--<button type="submit">Gửi</button>--%>
+        <asp:Button ID="idconfirm" runat="server" Text="Gửi" OnClick="Button1_Click" />  
+
+        <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
+   <%-- </form>--%>
