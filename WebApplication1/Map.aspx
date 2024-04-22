@@ -1619,7 +1619,8 @@
                                         if (nameroom == tenphong) {
                                             $(this).find("img").attr('src','/static/images/phongtrong.png');
                                         }
-                                    })
+                                })
+                                $('#bangchuid2').text('');
 
                                 //load lai trang khi thanh cong
                                 //setTimeout(function() {

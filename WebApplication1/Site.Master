@@ -134,9 +134,9 @@
         <li class="nav-item dropdown">
             <a id="dropdownSubMenu2" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Báo cáo</a>
             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-              <li><a href="#" class="dropdown-item">BC bán hàng theo HĐ</a></li>
-              <li><a href="#" class="dropdown-item">BC nhập hàng theo HĐ</a></li>
-              <li><a href="#" class="dropdown-item">BC tồn kho</a></li>
+              <li><a href="Report/BaocaoBH.aspx" target="_blank" class="dropdown-item">BC bán hàng theo HĐ</a></li>
+              <li><a href="Report/BaocaoNH.aspx" target="_blank" class="dropdown-item">BC nhập hàng theo HĐ</a></li>
+              <li><a href="Report/test.aspx" class="dropdown-item">BC tồn kho</a></li>
               <li class="dropdown-divider"></li>
               <!-- Level two dropdown-->
               <li class="dropdown-submenu dropdown-hover">
