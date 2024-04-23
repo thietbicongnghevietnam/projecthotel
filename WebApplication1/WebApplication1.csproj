@@ -402,6 +402,7 @@
     <Content Include="plugins\summernote\summernote-lite.min.js.map" />
     <Content Include="plugins\summernote\summernote.js.map" />
     <Content Include="plugins\summernote\summernote.min.js.map" />
+    <Content Include="plugins\toastr\toastr.js" />
     <Content Include="plugins\toastr\toastr.js.map" />
     <Content Include="dist\css\adminlte.css.map" />
     <Content Include="dist\css\adminlte.min.css.map" />
