@@ -1,6 +1,6 @@
 USE [Warehouse_BPS]
 GO
-/****** Object:  StoredProcedure [dbo].[NH_BaocaoNH]    Script Date: 04/23/2024 4:36:26 PM ******/
+/****** Object:  StoredProcedure [dbo].[NH_BaocaoNH]    Script Date: 04/24/2024 06:34:48 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -10,18 +10,66 @@ ALTER PROCEDURE [dbo].[NH_BaocaoNH]
 	
 AS
 BEGIN
-	SELECT TOP (1000) [id]
-      ,[sohd]
-      ,[idncc]
-      ,[items]
-      ,[tongtien]
-      ,[chietkhau]
-      ,[tongtienthanhtoan]
-      ,[psco]
-      ,[psno]
+	SELECT TOP 1000 [id],[sohd],[idncc],[items],[tongtien],[chietkhau],[tongtienthanhtoan],[psco],[psno]
       --,[ghichu]
       --,[userid]
       ,[created]
       --,[modified]
   FROM [Warehouse_BPS].[dbo].[htsonhaphang]
+
+union
+
+select '1000' as id, '-','-','Tong tien',
+(select sum(tongtien) from htsonhaphang) as tongtien,
+(select sum(chietkhau) from htsonhaphang) as chietkhau,
+(select sum(tongtienthanhtoan) from htsonhaphang) as tongtienthanhtoan,
+(select sum(psco) from htsonhaphang) as psco,
+(select sum(psno) from htsonhaphang) as psno,
+'' as created
+from htsonhaphang
+
+
+
 END
+
+==========================================
+USE [Warehouse_BPS]
+GO
+/****** Object:  StoredProcedure [dbo].[NH_BaocaoBH]    Script Date: 04/24/2024 06:35:06 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER PROCEDURE [dbo].[NH_BaocaoBH]
+	
+AS
+BEGIN
+
+
+
+select id,sohd,type,ngaygiothue,ngaygiora,tongthoigianthue,tenphong,
+tienphong,tiengiohat,items,tienhang,tongtien,chietkhau,tiensauchietkhau,hinhthucnghi,mohinh,created from htsocai
+
+union 
+
+select '1000' as id,'-','-','','','','Tong tien',
+(select sum(tienphong) from htsocai) as tienphong,
+(select sum(tiengiohat) from htsocai) as tiengiohat,
+'' as items,
+(select sum(tienhang) from htsocai) as tienhang,
+(select sum(tongtien) from htsocai) as tongtien,
+(select sum(chietkhau) from htsocai) as chietkhau,
+(select sum(tiensauchietkhau) from htsocai)as tiensauchietkhau,
+'' as hinhthucnghi,
+'' as mohinh,
+'' as created
+from htsocai
+
+
+
+
+
+END
+
+

@@ -35,7 +35,7 @@
            <div>
             <div class="card">
             <div class="card-header">
-                <h1>History Borrow and return Management equipment</h1>
+                <h1>Báo cáo nhập hàng</h1>
                 <br />
                 <%--class="card-title"--%>
                 <div class="col-sm-12">
@@ -128,7 +128,7 @@
                                     <%} %>
                                      
                                 </tbody>
-        <tfoot>
+        <%--<tfoot>
             <tr>
                 <th>NO</th>
                                         <th>sohd</th>
@@ -142,7 +142,7 @@
                                                                                
                                         <th>Action</th>
             </tr>
-        </tfoot>
+        </tfoot>--%>
 
     </table>
         </div>
