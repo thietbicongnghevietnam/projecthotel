@@ -136,7 +136,7 @@
             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
               <li><a href="Report/BaocaoBH.aspx" target="_blank" class="dropdown-item">BC bán hàng theo HĐ</a></li>
               <li><a href="Report/Baocaonhaphang.aspx" target="_blank" class="dropdown-item">BC nhập hàng theo HĐ</a></li>
-              <li><a href="Report/test.aspx" class="dropdown-item">BC tồn kho</a></li>
+              <li><a href="Report/Baocaotonkho.aspx" class="dropdown-item">BC tồn kho</a></li>
               <li class="dropdown-divider"></li>
               <!-- Level two dropdown-->
               <li class="dropdown-submenu dropdown-hover">

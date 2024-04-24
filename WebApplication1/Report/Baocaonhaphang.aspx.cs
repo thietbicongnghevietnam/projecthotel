@@ -88,9 +88,15 @@ namespace WebApplication1.Report
             //    Response.Redirect("ReportBorrowReturn.aspx?itemid='" + _itemid + "' ");
             //}
 
-            protected void Search_Date_Click(object sender, EventArgs e)
+        protected void Search_Date_Click(object sender, EventArgs e)
         {
-            string _date = Request.Form[datepicker.UniqueID];
+            //string _date = Request.Form[datepicker.UniqueID];
+            string _fromdate = Request.Form[Date1.UniqueID];
+            string _todate = Request.Form[ngaychiid.UniqueID];
+            
+
+            //string _todate = Request.Form[ngaychiid.UniqueID];
+
             string _checkpartno = Request.Form["check_partno_search"];
             string _partno = partno_search.Value.ToString();
             //filter_type.Text = "";
@@ -98,36 +104,36 @@ namespace WebApplication1.Report
             if (_checkpartno == "on")
             {
                 //loc theo ma
-                string nam = _date.Substring(6, 4);
-                string thang = _date.Substring(3, 2);
-                string ngay = _date.Substring(0, 2);
-                string _date2 = nam + "-" + thang + "-" + ngay;
+                //string nam = _date.Substring(6, 4);
+                //string thang = _date.Substring(3, 2);
+                //string ngay = _date.Substring(0, 2);
+                //string _date2 = nam + "-" + thang + "-" + ngay;
 
-                dt_BCNH = DataConn.StoreFillDS("Get_mater_device_borrow_part2", System.Data.CommandType.StoredProcedure, _partno);
-                datepicker.Value = ngay + "-" + thang + "-" + nam;
+                dt_BCNH = DataConn.StoreFillDS("NH_BaocaoNH", System.Data.CommandType.StoredProcedure);
+                //datepicker.Value = ngay + "-" + thang + "-" + nam;
 
             }
             else
             {
                 //loc theo ngay
-                if (_date == "")
+                if (_fromdate == "")
                 {
-                    dt_BCNH = DataConn.StoreFillDS("Get_history_device_borrow", System.Data.CommandType.StoredProcedure);
+                    dt_BCNH = DataConn.StoreFillDS("NH_BaocaoNH", System.Data.CommandType.StoredProcedure);
                 }
                 else
                 {
-                    string nam = _date.Substring(6, 4);
-                    string thang = _date.Substring(3, 2);
-                    string ngay = _date.Substring(0, 2);
-                    string _date2 = nam + "-" + thang + "-" + ngay;
+                    //string nam = _date.Substring(6, 4);
+                    //string thang = _date.Substring(3, 2);
+                    //string ngay = _date.Substring(0, 2);
+                    //string _date2 = nam + "-" + thang + "-" + ngay;
 
-                    //string _cate = dr_filter_cate.Text;
-                    string typefilter = "all";
+                    ////string _cate = dr_filter_cate.Text;
+                    //string typefilter = "all";
 
 
 
-                    dt_BCNH = DataConn.StoreFillDS("Get_history_device_borrow_date", System.Data.CommandType.StoredProcedure, _date2);
-                    datepicker.Value = ngay + "-" + thang + "-" + nam;
+                    dt_BCNH = DataConn.StoreFillDS("NH_BaocaoNH_theongay", System.Data.CommandType.StoredProcedure, _fromdate, _todate);
+                    //datepicker.Value = ngay + "-" + thang + "-" + nam;
                 }
             }
         }

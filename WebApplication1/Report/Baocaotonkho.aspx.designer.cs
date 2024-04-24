@@ -10,7 +10,7 @@
 namespace WebApplication1.Report {
     
     
-    public partial class BaocaoBH {
+    public partial class Baocaotonkho {
         
         /// <summary>
         /// form1 control.
@@ -22,13 +22,13 @@ namespace WebApplication1.Report {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// Date2 control.
+        /// Date1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl Date2;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl Date1;
         
         /// <summary>
         /// ngaychiid control.
@@ -49,13 +49,13 @@ namespace WebApplication1.Report {
         protected global::System.Web.UI.HtmlControls.HtmlInputText partno_search;
         
         /// <summary>
-        /// txtsohoadon control.
+        /// txtmahang control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtsohoadon;
+        protected global::System.Web.UI.WebControls.TextBox txtmahang;
         
         /// <summary>
         /// txtuserid control.

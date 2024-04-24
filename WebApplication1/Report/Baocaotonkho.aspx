@@ -1,12 +1,11 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Baocaonhaphang.aspx.cs" Inherits="WebApplication1.Report.Baocaonhaphang" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Baocaotonkho.aspx.cs" Inherits="WebApplication1.Report.Baocaotonkho" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Bao cao nhap hang</title>
-   <%--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&amp;display=fallback">--%>
-    
+    <title>Bao cao ton kho</title>
+        
     <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="../../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
@@ -26,12 +25,9 @@
   <script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
  <%--   <script src="../Exportexcel/jquery.table2excel.min.js"></script>--%>
-
-
-
 </head>
 <body>
-    <form id="form1" runat="server">
+     <form id="form1" runat="server">
            <div>
             <div class="card">
             <div class="card-header">
@@ -95,13 +91,13 @@
             <tr>
                  <tr role="row">
                                         <th>NO</th>
-                                        <th>sohd</th>
-                                        <th>items</th>
-                                        <th>tongtien</th>
-                                        <th>chietkhau</th> 
-                                        <th>tongtienthanhtoan</th> 
-                                         <th>psco</th> 
-                                        <th>psno</th>
+                                        <th>Mahang</th>
+                                        <th>Tenhang</th>
+                                        <th>dvt</th>
+                                        <th>Soluongton</th> 
+                                        <th>Gianhap</th> 
+                                         <th>Giaban</th> 
+                                        <th>Nhomhang</th>
                                         <th>created</th>
                                                                                
                                         <th>Action</th>
@@ -110,43 +106,27 @@
         </thead>
         <tbody>
                                 <%int i = 0; %>
-                                    <%foreach (System.Data.DataRow rows in dt_BCNH.Rows)
+                                    <%foreach (System.Data.DataRow rows in dt_BCTonkho.Rows)
                                         {%>
                                      <%i++;%>
                                     <tr role="row">                                        
                                         <td><%=i %></td>
-                                        <td><%=rows["sohd"].ToString()%></td>
-                                        <td><%=rows["items"].ToString()%></td>
-                                        <td><%=rows["tongtien"].ToString()%></td>
-                                        <td><%=rows["chietkhau"].ToString()%></td>
-                                        <td><%=rows["tongtienthanhtoan"].ToString()%></td>
-                                         <td><%=rows["psco"].ToString()%></td> 
-                                        <td><%=rows["psno"].ToString()%></td>
+                                        <td><%=rows["mahang"].ToString()%></td>
+                                        <td><%=rows["tenhang"].ToString()%></td>
+                                        <td><%=rows["dvt"].ToString()%></td>
+                                        <td><%=rows["soluongton"].ToString()%></td>
+                                        <td><%=rows["gianhap"].ToString()%></td>
+                                         <td><%=rows["giaban"].ToString()%></td> 
+                                        <td><%=rows["nhomhangid"].ToString()%></td>
                                         <td><%=rows["created"].ToString()%></td>
                                        
                                         <td>
-                                            <a href="#" class="btn btn-info btn-sm" title="delete item" onclick="openEditModal2('<%= rows["sohd"].ToString() %>')"><i class="fas fa-pencil-alt"></i>View</a>
+                                            <a href="#" class="btn btn-info btn-sm" title="delete item" onclick="openEditModal2('<%= rows["mahang"].ToString() %>')"><i class="fas fa-pencil-alt"></i>Thekho</a>
                                         </td> 
                                         
                                     </tr>
                                     <%} %>
-                                     
-                                </tbody>
-        <%--<tfoot>
-            <tr>
-                <th>NO</th>
-                                        <th>sohd</th>
-                                        <th>items</th>
-                                        <th>tongtien</th>
-                                        <th>chietkhau</th> 
-                                        <th>tongtienthanhtoan</th> 
-                                         <th>psco</th> 
-                                        <th>psno</th>
-                                        <th>created</th>
-                                                                               
-                                        <th>Action</th>
-            </tr>
-        </tfoot>--%>
+                                           
 
     </table>
         </div>
@@ -162,8 +142,8 @@
                     <div class="modal-header">
                         <div class="row">
                             <div>
-                                <h4 class="modal-title" id="headerTag" style="float: left">Do you want order item?</h4>
-                                <h6 class="modal-title" id="headerTag" style="float: left; color:red"><b><i>You need contact IT PIC to confirm!</i></b></h6>
+                                <h4 class="modal-title" id="headerTag" style="float: left">Thông tin thẻ kho</h4>
+                                <%--<h6 class="modal-title" id="headerTag" style="float: left; color:red"><b><i>Chi tiết tồn kho!</i></b></h6>--%>
 
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="float: right; margin-left: 300px;">
                                     <span aria-hidden="true">&times;</span>
@@ -181,7 +161,7 @@
                                     <div class="form-group">
                                         <label for="ID">Item</label>
                                         <span style="color: green; font-size: 11px; font-style: italic;">(Read only)</span>
-                                        <asp:TextBox ID="txtsohoadon" CssClass="form-control" placeholder="" runat="server"></asp:TextBox>
+                                        <asp:TextBox ID="txtmahang" CssClass="form-control" placeholder="" runat="server"></asp:TextBox>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -194,28 +174,23 @@
                             </div> 
 
                              <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">                                          
-                                        <label id="lbl_machine" for="dr_machine">Reason</label>
-                                        <asp:DropDownList ID="dr_lydo" runat="server"
-                                            AppendDataBoundItems="true"
-                                            DataTextField="Title"
-                                            DataValueField="Title"
-                                            CssClass="custom-select custom-select-sm form-control form-control-sm">
-                                        </asp:DropDownList>
-                                    </div>
+                                
+                                 <div style="width: 100%; height: 350px; overflow-y: scroll; float: left;">
+                                    <table class="display table table-bordered dataTable no-footer">
+                                        <thead>
+                                            <tr>
+                                                <th>Số HĐ</th>
+                                                <th>Hang Hóa</th>  
+                                                <th>So luong</th>  
+                                                <th>Ngày tạo</th>
+                                                <th>Loai HD</th>
+                                            </tr>
+                                        </thead>
+                                            <tbody id="tblthekho">
+                                            </tbody>
+                                    </table>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group" >
-                                       <label for="ID">Department</label>
-                                        <asp:DropDownList ID="dr_phongban" runat="server"
-                                            AppendDataBoundItems="true"
-                                            DataTextField="Maphongban"
-                                            DataValueField="Maphongban"
-                                            CssClass="custom-select custom-select-sm form-control form-control-sm">
-                                        </asp:DropDownList>
-                                    </div>
-                                </div>
+
                             </div>
 
                              <div class="row">
@@ -285,10 +260,56 @@
 
                     });
 
-    function openEditModal2(sohoadon) {           
-            $("#txtsohoadon").val(sohoadon);
+    function openEditModal2(mahang) {           
+            //$("#txtmahang").val(mahang);
+            var fromdate  = $("#Date1").val();
+            var todate  = $("#ngaychiid").val();
+            
+            //alert(fromdate);
+            //alert(todate);
+            var data = {
+                        mahang: mahang,
+                        fromdate: fromdate,
+                        todate: todate
+                    };
 
-            $('#myModal2').modal('show');
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: "Baocaotonkho.aspx/thongtinthekho",
+                //data: JSON.stringify(data),
+                data: JSON.stringify(data),
+                dataType: "json",
+                success: function (data) {
+                debugger;
+                    //alert('Hàng hóa đã được thêm thành công!');
+                    //var objdata = $.parseJSON(data.d);
+                    const objdata = $.parseJSON(data.d);
+                     for (var i = 0; i < objdata['Table1'].length - 1; i++) 
+                    {
+                        var sohoadon = objdata['Table1'][i][0];
+                        var danhsachhanghoa = objdata['Table1'][i][1];
+                        var soluong = objdata['Table1'][i][2];
+                        var ngaytao =  objdata['Table1'][i][3];
+                        var loaihoadon = objdata['Table1'][i][4];
+                        var newrow = '<tr class="danhsachthekho">' +
+                                                '<td id="sohoadon_">' + sohoadon + '</td>' +
+                                                '<td id="danhsachhanghoa_">' + danhsachhanghoa + '</td>' +
+                                                '<td id="soluong_">' + soluong + '</td>' +
+                                                '<td id="ngaytao_">' + ngaytao + '</td>' +   
+                                                '<td id="loaiHD_">' + loaihoadon + '</td>' +                                                                                          
+                                                '</tr>';
+                                            $('#tblthekho').append(newrow);   
+                    }
+                    
+                    $('#myModal2').modal('show');                                                       
+                },
+                error: function () {
+                    //alert("No Match");
+                }
+            });
+
+            //$('#myModal2').modal('show');
         }
 
         
@@ -333,6 +354,5 @@
 
 
     </script>
-
 </body>
 </html>

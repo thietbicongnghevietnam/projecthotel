@@ -23,10 +23,12 @@
               <div class="card-header">
                 <h3 class="card-title">Báo cáo bán hàng theo hóa đơn</h3>
               </div>
-         <div class="col-sm-12">
-            <label for="date" style="padding-top:10px;">Ngày:</label>
-             <%--<asp:TextBox ID="DateTextBox" runat="server" CssClass="datePicker"></asp:TextBox>--%>
-            <input type="date" id="ngaychiid" name="date" runat="server">
+         <div class="col-sm-12">            
+              Tu ngay:                                   
+                     <input type="date" id="Date2" name="date" runat="server">
+             Den ngay:   
+                    <input type="date" id="ngaychiid" name="date" runat="server">
+
              <input type="checkbox" id="check_partno_search" style="width: 20px; height: 20px;" name="check_partno_search">
                     Item:                                    
                                     <input type="text" id="partno_search" runat="server">

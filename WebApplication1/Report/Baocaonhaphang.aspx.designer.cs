@@ -22,13 +22,22 @@ namespace WebApplication1.Report {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// datepicker control.
+        /// Date1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText datepicker;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl Date1;
+        
+        /// <summary>
+        /// ngaychiid control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl ngaychiid;
         
         /// <summary>
         /// partno_search control.

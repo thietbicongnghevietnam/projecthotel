@@ -43,9 +43,11 @@ namespace WebApplication1.Report
             }
         }
 
-            protected void Search_Date_Click2(object sender, EventArgs e)
+        protected void Search_Date_Click2(object sender, EventArgs e)
         {
-            string _date = Request.Form[ngaychiid.UniqueID];
+            string _fromdate = Request.Form[Date2.UniqueID];
+            string _todate = Request.Form[ngaychiid.UniqueID];
+            //string _date = Request.Form[ngaychiid.UniqueID];
             string _checkpartno = Request.Form["check_partno_search"];
             string _partno = partno_search.Value.ToString();
             //filter_type.Text = "";
@@ -53,36 +55,36 @@ namespace WebApplication1.Report
             if (_checkpartno == "on")
             {
                 //loc theo ma
-                string nam = _date.Substring(6, 4);
-                string thang = _date.Substring(3, 2);
-                string ngay = _date.Substring(0, 2);
-                string _date2 = nam + "-" + thang + "-" + ngay;
+                //string nam = _date.Substring(6, 4);
+                //string thang = _date.Substring(3, 2);
+                //string ngay = _date.Substring(0, 2);
+                //string _date2 = nam + "-" + thang + "-" + ngay;
 
                 dtbaocaobanhang = DataConn.StoreFillDS("NH_BaocaoBH", System.Data.CommandType.StoredProcedure);
-                ngaychiid.Value = ngay + "-" + thang + "-" + nam;
+                //ngaychiid.Value = ngay + "-" + thang + "-" + nam;
 
             }
             else
             {
                 //loc theo ngay
-                if (_date == "")
+                if (_fromdate == "")
                 {
                     dtbaocaobanhang = DataConn.StoreFillDS("NH_BaocaoBH", System.Data.CommandType.StoredProcedure);
                 }
                 else
                 {
-                    string nam = _date.Substring(6, 4);
-                    string thang = _date.Substring(3, 2);
-                    string ngay = _date.Substring(0, 2);
-                    string _date2 = nam + "-" + thang + "-" + ngay;
+                    //string nam = _date.Substring(6, 4);
+                    //string thang = _date.Substring(3, 2);
+                    //string ngay = _date.Substring(0, 2);
+                    //string _date2 = nam + "-" + thang + "-" + ngay;
 
                     //string _cate = dr_filter_cate.Text;
                     //string typefilter = "all";
 
 
 
-                    dtbaocaobanhang = DataConn.StoreFillDS("NH_BaocaoBH", System.Data.CommandType.StoredProcedure);
-                    ngaychiid.Value = ngay + "-" + thang + "-" + nam;
+                    dtbaocaobanhang = DataConn.StoreFillDS("NH_BaocaoBH_theongay", System.Data.CommandType.StoredProcedure, _fromdate, _todate);
+                    //ngaychiid.Value = ngay + "-" + thang + "-" + nam;
                 }
             }
         }
