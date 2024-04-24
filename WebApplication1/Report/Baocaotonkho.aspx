@@ -31,7 +31,7 @@
            <div>
             <div class="card">
             <div class="card-header">
-                <h1>Báo cáo nhập hàng</h1>
+                <h1>Báo cáo tồn kho</h1>
                 <br />
                 <%--class="card-title"--%>
                 <div class="col-sm-12">
@@ -285,6 +285,7 @@
                     //alert('Hàng hóa đã được thêm thành công!');
                     //var objdata = $.parseJSON(data.d);
                     const objdata = $.parseJSON(data.d);
+                     $('#tblthekho tr').remove();
                      for (var i = 0; i < objdata['Table1'].length - 1; i++) 
                     {
                         var sohoadon = objdata['Table1'][i][0];
