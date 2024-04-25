@@ -43,7 +43,7 @@
                                     
 
                     <input type="checkbox" id="check_partno_search" style="width: 20px; height: 20px;" name="check_partno_search">
-                    Item:                                    
+                    KH:                                    
                                     <input type="text" id="partno_search" runat="server">
 
                     <button class="btn btn-primary" type="button" runat="server" onserverclick="Search_Date_Click" >
@@ -130,8 +130,9 @@
 
         </div>
 
+
         <div class="modal" id="myModal6">
-            <div class="modal-dialog" >
+            <div class="modal-dialog modal-lg" >
                 <div class="modal-content">
                     <div class="modal-header">
                         <div class="row">
@@ -147,7 +148,7 @@
 
                     <div class="modal-body">
                        
-                       <div class="container-fluid" id="printableArea" style="width:400px;height:auto;">
+                       <div class="container-fluid" id="printableArea" style="width:400px;height:auto; float:left">
                             Hinh thuc: <b id="hinhthucnghi2"></b>
                             &nbsp;&nbsp;&nbsp; tongtienhat: <b id="tongtienhat2"></b><br />
                            Ten phong: <b id="tenphong2"></b>
@@ -158,10 +159,10 @@
                                     <table class="display table table-bordered dataTable no-footer">
                                         <thead>
                                             <tr>
-                                                <th>Tên hàng</th>
-                                                <th>Số lượng</th>
-                                                <th>Đơn giá</th>
-                                                <th>Thành tiền</th>                                                
+                                                <th>Hanghoa</th>
+                                                <th>tienhang</th>
+                                                <th>statusKaraoke</th>
+                                                <th>sohoadon</th>                                                 
                                             </tr>
                                             <tbody id="tbnhaphang_inhoadon">
                                             </tbody>
@@ -188,7 +189,7 @@
 
 
          <div class="modal" id="myModal2">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
                         <div class="row">
@@ -207,7 +208,7 @@
                     <%-- Modal footer --%>
                     <div class="modal-body">
                         <div class="container-fluid">
-                            <div class="row">
+                          <%--  <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="ID">Item</label>
@@ -222,7 +223,7 @@
                                         <asp:TextBox ID="txtuserid" CssClass="form-control" placeholder="" runat="server"></asp:TextBox>
                                     </div>
                                 </div>
-                            </div> 
+                            </div> --%>
 
                              <div class="row">
                                 
@@ -245,22 +246,20 @@
 
                             </div>
 
-                             <div class="row">
+                            <%-- <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="QtyNG">Date borrow</label>
-                                        <%--<asp:TextBox ID="txtngaymuon" CssClass="form-control" placeholder="" runat="server"></asp:TextBox>--%>
+                                        <label for="QtyNG">Date borrow</label>                                      
                                         <input type="text" id="txtngaymuon" runat="server">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Date Return</label>                                        
-                                        <%--<asp:TextBox ID="txtngaytra" CssClass="form-control" placeholder="" runat="server"></asp:TextBox>--%>
+                                        <label for="exampleInputEmail1">Date Return</label>                                                                               
                                         <input type="text" id="txtngaytra" runat="server">
                                     </div>
                                 </div>
-                            </div>
+                            </div>--%>
                             
                         </div>
                     </div>
@@ -306,90 +305,58 @@
 
          });
 
-function openEditModal6(idhoadon)
-{
-     var _fromdate  = $("#Date1").val();
-     var _todate  = $("#ngaychiid").val();
-     var data = {
-                        idhoadon: idhoadon,
-                        _fromdate: _fromdate,
-                        _todate: _todate
-                    };
+        function openEditModal6(idhoadon)
+        {
+             var _fromdate  = $("#Date1").val();
+             var _todate  = $("#ngaychiid").val();
+             var data = {
+                                idhoadon: idhoadon,
+                                _fromdate: _fromdate,
+                                _todate: _todate
+                            };
 
-       $.ajax({
-                type: "POST",
-                contentType: "application/json; charset=utf-8",
-                url: "BaocaocongnoKH.aspx/thongtinhoadon",
-                //data: JSON.stringify(data),
-                data: JSON.stringify(data),
-                dataType: "json",
-                success: function (data) {
-                debugger;
-                    const objdata = $.parseJSON(data.d);
-                    if (objdata['Table'][0] != "")  //|| objdata ['Table'][0][0] != "0"
+               $.ajax({
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: "BaocaocongnoKH.aspx/thongtinhoadon",
+                        //data: JSON.stringify(data),
+                        data: JSON.stringify(data),
+                        dataType: "json",
+                        success: function (data) {
+                        debugger;
+                            const objdata = $.parseJSON(data.d);
+                            $('#tbnhaphang_inhoadon tr').remove();
+                            debugger;
+                            if (objdata['Table'] != "")
+                            {
+                                for (var i = 0; i < objdata['Table'].length - 1; i++)
                                 {
-                                    $('#tbnhaphang_inhoadon tr').remove();
-                                    const myArr = JSON.parse(objdata['Table'][0][0]);
-                                    //var tienhang = objdata['Table'][0][1];
-                                    //var giovao = objdata['Table'][0][3];                                  
-                                    //debugger; 
-                                    if (myArr == '0') {
-                                        //truong hop chua co hang ban
-                                        $('#tbnhaphang_inhoadon tr').remove();
-                                        $("#tenphong2").text('');
-                                        $('#tongtien2').text(0);                                        
-                                        $('#thantoan2').text(0);
-                                        $('#chietkau2').text(0);
-
-                                        $('#hinhthucnghi2').text('');
-                                        $('#tongtienhat2').text('');
-                                    } 
-                                    else 
-                                    {
-                                       
-                                   
-                                        //var aaa = blkstr[0];
-                                        //var bbb = blkstr[1];
-                                        for (var i = 0; i < blkstr.length; i++) {
-                                            const chars = blkstr[i].split(':');
-                                            const info_mahang = chars[0].split(',');
-
-                                                                                                                                 
-                                        }
-                                                                                                       
-                                        //$("#tenphong2").text(tenphong);
-                                        //$('#tongtien2').text(tienhang);
-                                       // $('#thantoan2').text(parseInt(tienhang)+parseInt(tongtienhat));
-                                        //$('#chietkau2').text(tienck);
-                                
-                                        //$('#khthanhtoan2').text(khthanhtoan2);
-                                        //$('#psno2').text(tienthoi);
-
-                                       // $('#hinhthucnghi2').text(hinhthucnghi);
-                                        //$('#tongtienhat2').text(tongtienhat);
-
-                                        //$('#bangchuid').text(hienthi_bangchu);
-                                    }
+                                var hanghoa = objdata['Table'][i][0];
+                                var tienhang = objdata['Table'][i][1];
+                                var loaihoadon = objdata['Table'][i][4];
+                                var sohoadon = objdata['Table'][i][6];
+                                var newrow = '<tr class="thongtinhoadon">' +
+                                                        '<td id="_hanghoad">' + hanghoa + '</td>' +
+                                                        '<td id="_tienhang">' + tienhang + '</td>' +
+                                                        '<td id="_loaihoadon">' + loaihoadon + '</td>' +
+                                                        '<td id="_sohoadon">' + sohoadon + '</td>' +                                                    
+                                                        '</tr>';
+                                                    $('#tbnhaphang_inhoadon').append(newrow); 
                                 }
-                                else {
-                                    $('#tbnhaphang_inhoadon tr').remove();
-                                    // $("#tenphong2").text(tenphong);
-                                       // $('#tongtien2').text(0);                                        
-                                        //$('#thantoan2').text(0);
-                                        //$('#chietkau2').text(0);
+                            }
+                            else
+                            {
+                                $('#tbnhaphang_inhoadon').append(newrow); 
+                            }
+                                                            
+                            $('#myModal6').modal('show');                                                       
+                        },
+                        error: function () {
+                            //alert("No Match");
+                        }
+                    });
 
-                                        //$('#hinhthucnghi2').text('');
-                                        //$('#tongtienhat2').text(tongtienhat);
-                                }
-                    
-                    $('#myModal6').modal('show');                                                       
-                },
-                error: function () {
-                    //alert("No Match");
-                }
-            });
-
-}
+        }
 
         function openEditModal2(makh) {           
             //$("#txtmahang").val(mahang);

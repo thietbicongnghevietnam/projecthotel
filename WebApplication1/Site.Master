@@ -128,7 +128,7 @@
               <li><a href="Phieuchi.aspx" target="_blank" class="dropdown-item">Phiếu chi</a></li>
               <li><a href="Phieuthu.aspx" target="_blank" class="dropdown-item">Phiếu thu</a></li>
                 <li class="dropdown-divider"></li>
-              <li><a href="#" class="dropdown-item">BC sổ quỹ</a></li>
+              <li><a href="Report/Baocaosoquy.aspx" class="dropdown-item">BC sổ quỹ</a></li>
                 <li><a href="#" class="dropdown-item">BC tổng hợp thu chi</a></li>
               <!-- End Level two -->
             </ul>
@@ -148,7 +148,7 @@
                     <a tabindex="-1" href="Report/BaocaocongnoKH.aspx" target="_blank" class="dropdown-item">Công nợ KH</a>
                   </li>
                     <li>
-                    <a tabindex="-1" href="#" class="dropdown-item">Công nợ NCC</a>
+                    <a tabindex="-1" href="Report/BaocaocongnoNCC.aspx" target="_blank" class="dropdown-item">Công nợ NCC</a>
                   </li>                 
                 </ul>
               </li>
