@@ -124,6 +124,23 @@ namespace WebApplication1.Report
         }
 
         [WebMethod]
+        public static string thongtinhoadon(string idhoadon, string _fromdate, string _todate)  //string tenphong, string tienhang
+        {
+            DataTable dt = new DataTable();
+
+            dt = DataConn.StoreFillDS("NH_infor_thongtincongnoKH", System.Data.CommandType.StoredProcedure, idhoadon, _fromdate, _todate);
+
+            DataTable dt2 = new DataTable();
+            dt2 = dt.Copy();
+
+            String daresult = null;
+            DataSet ds = new DataSet();
+            ds.Tables.Add(dt2);
+            daresult = DataSetToJSON(ds);
+            return daresult;
+        }
+
+        [WebMethod]
         public static string thongtinKH(string makh, string _fromdate, string _todate)  //string tenphong, string tienhang
         {
             String daresult = null;

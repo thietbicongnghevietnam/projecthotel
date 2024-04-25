@@ -116,7 +116,7 @@
                                         <td>
                                             <a href="#" class="btn btn-info btn-sm" title="delete item" onclick="openEditModal2('<%= rows["id"].ToString() %>')"><i class="fas fa-pencil-alt"></i>Lich su</a>
                                             &nbsp;&nbsp;
-                                            <a href="#" class="btn btn-info btn-sm" title="delete item" ><i class="fas fa-pencil-alt"></i>Chi tiet HD</a>
+                                            <a href="#" class="btn btn-info btn-sm" title="delete item" onclick="openEditModal6('<%= rows["id"].ToString() %>')" ><i class="fas fa-pencil-alt"></i>Chi tiet HD</a>
                                         </td> 
                                         
                                     </tr>
@@ -128,6 +128,62 @@
 
 
 
+        </div>
+
+        <div class="modal" id="myModal6">
+            <div class="modal-dialog" >
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="row">
+                            <div>
+                                <h4 class="modal-title" id="headerTag" style="float: left">THONG TIN HOA DON</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="float: right; margin-left: 300px;">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="modal-body">
+                       
+                       <div class="container-fluid" id="printableArea" style="width:400px;height:auto;">
+                            Hinh thuc: <b id="hinhthucnghi2"></b>
+                            &nbsp;&nbsp;&nbsp; tongtienhat: <b id="tongtienhat2"></b><br />
+                           Ten phong: <b id="tenphong2"></b>
+                           &nbsp;&nbsp;&nbsp; Tong tien hang: <b id="tongtien2"></b>                                                      
+
+
+                                <div style="width: 100%; height: 300px; float: left;">  
+                                    <table class="display table table-bordered dataTable no-footer">
+                                        <thead>
+                                            <tr>
+                                                <th>Tên hàng</th>
+                                                <th>Số lượng</th>
+                                                <th>Đơn giá</th>
+                                                <th>Thành tiền</th>                                                
+                                            </tr>
+                                            <tbody id="tbnhaphang_inhoadon">
+                                            </tbody>
+
+
+                                    </table>
+                                </div>
+                            
+                           <br /> 
+                           Tong tien: <b id="thantoan2"></b> &nbsp;&nbsp;&nbsp;  C/K: <b id="chietkau2"></b> <br />
+                           KH thanh toan: <b id="khthanhtoan2"></b> &nbsp;&nbsp;&nbsp; Con lai: <b id="psno2"></b>     
+                           <div>Bằng chữ: <span id="bangchuid" style="font-weight:200; color:red;"></span></div>
+                        </div>
+                        
+                                                                           
+                    </div>
+
+                    <div class="modal-footer">
+                       <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times"></i>Close</button>                                                                                            
+                    </div>
+                </div>
+            </div>
         </div>
 
 
@@ -249,6 +305,91 @@
                         });
 
          });
+
+function openEditModal6(idhoadon)
+{
+     var _fromdate  = $("#Date1").val();
+     var _todate  = $("#ngaychiid").val();
+     var data = {
+                        idhoadon: idhoadon,
+                        _fromdate: _fromdate,
+                        _todate: _todate
+                    };
+
+       $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: "BaocaocongnoKH.aspx/thongtinhoadon",
+                //data: JSON.stringify(data),
+                data: JSON.stringify(data),
+                dataType: "json",
+                success: function (data) {
+                debugger;
+                    const objdata = $.parseJSON(data.d);
+                    if (objdata['Table'][0] != "")  //|| objdata ['Table'][0][0] != "0"
+                                {
+                                    $('#tbnhaphang_inhoadon tr').remove();
+                                    const myArr = JSON.parse(objdata['Table'][0][0]);
+                                    //var tienhang = objdata['Table'][0][1];
+                                    //var giovao = objdata['Table'][0][3];                                  
+                                    //debugger; 
+                                    if (myArr == '0') {
+                                        //truong hop chua co hang ban
+                                        $('#tbnhaphang_inhoadon tr').remove();
+                                        $("#tenphong2").text('');
+                                        $('#tongtien2').text(0);                                        
+                                        $('#thantoan2').text(0);
+                                        $('#chietkau2').text(0);
+
+                                        $('#hinhthucnghi2').text('');
+                                        $('#tongtienhat2').text('');
+                                    } 
+                                    else 
+                                    {
+                                       
+                                   
+                                        //var aaa = blkstr[0];
+                                        //var bbb = blkstr[1];
+                                        for (var i = 0; i < blkstr.length; i++) {
+                                            const chars = blkstr[i].split(':');
+                                            const info_mahang = chars[0].split(',');
+
+                                                                                                                                 
+                                        }
+                                                                                                       
+                                        //$("#tenphong2").text(tenphong);
+                                        //$('#tongtien2').text(tienhang);
+                                       // $('#thantoan2').text(parseInt(tienhang)+parseInt(tongtienhat));
+                                        //$('#chietkau2').text(tienck);
+                                
+                                        //$('#khthanhtoan2').text(khthanhtoan2);
+                                        //$('#psno2').text(tienthoi);
+
+                                       // $('#hinhthucnghi2').text(hinhthucnghi);
+                                        //$('#tongtienhat2').text(tongtienhat);
+
+                                        //$('#bangchuid').text(hienthi_bangchu);
+                                    }
+                                }
+                                else {
+                                    $('#tbnhaphang_inhoadon tr').remove();
+                                    // $("#tenphong2").text(tenphong);
+                                       // $('#tongtien2').text(0);                                        
+                                        //$('#thantoan2').text(0);
+                                        //$('#chietkau2').text(0);
+
+                                        //$('#hinhthucnghi2').text('');
+                                        //$('#tongtienhat2').text(tongtienhat);
+                                }
+                    
+                    $('#myModal6').modal('show');                                                       
+                },
+                error: function () {
+                    //alert("No Match");
+                }
+            });
+
+}
 
         function openEditModal2(makh) {           
             //$("#txtmahang").val(mahang);

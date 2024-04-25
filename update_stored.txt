@@ -1,7 +1,1 @@
-NH_BaocaoNH_theongay
-NH_BaocaoBH_theongay
-NH_Baocaotonkho
-
-
-bang:
-[dbo].[hthanghoa]
+loi dang nhap toart chua hien.....

@@ -53,6 +53,8 @@
 
 </head>
 <body class="hold-transition sidebar-mini">
+     <%  string user = Session["username"].ToString(); %>
+
     <form runat="server">
         <asp:ScriptManager runat="server">
             <Scripts>
@@ -119,7 +121,7 @@
         <li class="nav-item">
             <a href="Phieubanhang.aspx" target="_blank" class="nav-link" style="width:180px; text-align:center;">PHIEU BAN HANG</a>
           </li>
-    
+        <%if (Role_ == "admin") {%>
          <li class="nav-item dropdown">
             <a id="dropdownSubMenu11" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Sổ Quỹ</a>
             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
@@ -155,7 +157,8 @@
                <li><a href="#" class="dropdown-item">BC lỗ lãi</a></li>
             </ul>
           </li>
-   
+             <%} %>
+        <%if (Role_ == "NV") {%>
          <li class="nav-item dropdown">
             <a id="dropdownSubMenu4" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Danh mục</a>
             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
@@ -170,7 +173,7 @@
               <li><a href="#" class="dropdown-item">Danh mục nhân viên</a></li>
             </ul>
           </li>
-
+         <%} %>
       <li class="nav-item dropdown">
             <a id="dropdownSubMenu5" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Liên hệ</a>
            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
@@ -193,8 +196,18 @@
       </div>
     </form>
 
+     <ul class="nav navbar-nav" style="font-size: 17px;float: right;"> 
+                             <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-user"></i> User <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#"><i class="far fa-id-badge"></i> Profile </a></li>
+                                    <li><a href="Accounts/Loginnew.aspx" id="btn_logout"onserverclick="bttLogout_Click" ><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+
     <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto">
+    <%--<ul class="navbar-nav ml-auto">
       <!-- Messages Dropdown Menu -->
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
@@ -290,7 +303,7 @@
           <i class="fas fa-th-large"></i>
         </a>
       </li>
-    </ul>
+    </ul>--%>
   </nav>
 
  

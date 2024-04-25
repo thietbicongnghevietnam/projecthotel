@@ -1,21 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Data.SqlClient;
 using System.Data;
 using System.Data.Common;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Web;
 
 namespace WebApplication1.App_Code
 {
-    public class DataConn
+    public class ketnoi
     {
         public static string source;
         private static SqlConnection con;
         public static int gio;
         public static DbDataAdapter adapter;
 
-        static DataConn()
+
+        static ketnoi()
         {
             //source = @"Data Source=192.168.128.1;Initial Catalog=Warehouse_BPS;User ID=sa;Password=Psnvdb2013";.
             //source = @"Data Source=192.168.128.1;Initial Catalog=EDISystem;User ID=sa;Password=Psnvdb2013";
@@ -141,7 +142,5 @@ namespace WebApplication1.App_Code
             conn.Close();
             return ds.Tables[0];
         }
-
-
     }
 }
