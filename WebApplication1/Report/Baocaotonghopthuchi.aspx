@@ -1,11 +1,11 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Baocaosoquy.aspx.cs" Inherits="WebApplication1.Report.Baocaosoquy" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Baocaotonghopthuchi.aspx.cs" Inherits="WebApplication1.Report.Baocaotonghopthuchi" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-     <title>Báo cáo sổ quỹ</title>
-    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+    <title>Báo cáo tổng hợp thu chi</title>
+     <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="../../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
@@ -30,7 +30,7 @@
            <div>
             <div class="card">
             <div class="card-header">
-                <h1>Báo cáo sổ quỹ</h1>
+                <h1>Báo cáo tổng hợp thu chi</h1>
                 <br />
                 <%--class="card-title"--%>
                 <div class="col-sm-12">

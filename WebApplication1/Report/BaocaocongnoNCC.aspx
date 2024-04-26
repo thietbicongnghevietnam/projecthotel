@@ -30,7 +30,7 @@
            <div>
             <div class="card">
             <div class="card-header">
-                <h1>Báo cáo công nợ Nha cung cap</h1>
+                <h1>Báo cáo công nợ nhà cung cấp</h1>
                 <br />
                 <%--class="card-title"--%>
                 <div class="col-sm-12">

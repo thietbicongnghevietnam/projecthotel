@@ -61,6 +61,12 @@
                         <b class="add_Khachhang" style="color: black; padding-left: 5px; float:left">&nbsp;Them KH</b>
                         </span>
                     </td>
+                    <td>
+                       
+                        <label for="inhoadon" style="float: left; margin-top: 5px;">In hoa don</label>
+                        <input type="checkbox" id="inHD" name="inHD">
+                        
+                    </td>
                 
                 </tr>
                 </table>
@@ -615,7 +621,7 @@
                         data: JSON.stringify(data),
                         dataType: "json",
                         success: function (data) {
-                            alert('Hoa don thêm thành công!');  
+                            //alert('Hoa don thêm thành công!');  
                             $('#tbphieunhap tr').remove();
                             $('#tongtiennhap').val('0');
                             $('#thanhtoanid').val('0');
@@ -623,15 +629,118 @@
                             //chietkhauid
                             $("#soluongnhaphang").val('0');
                             $("#conlaiid").val('0');
-                            $("#MainContent_phieunhaphang").select();
+                            $("#MainContent_phieunhaphang").select();                                                    
                         },
                         error: function () {
                             //alert("No Match");
                         }
                   });
+                      debugger;
+                    //bat thong tin vua luu de in ra hoa don len de in hoa don
+                    var ckinhoadon = document.getElementById("inHD");
+                        if(ckinhoadon.checked == true)
+                        {
+                            alert('ban dang in hoa don');
+                            saveAndPrint();
+                        }
+                        else
+                        {
+                            alert('khong in hoa don');
+                        }
+              
+
              }
                   
             });
+
+            function saveAndPrint() {
+            // Lưu hóa đơn và sau đó in nó
+            // Gọi hàm để tạo hóa đơn HTML
+            var invoiceHTML = generateInvoiceHTML();
+
+            // In hóa đơn
+            printInvoice(invoiceHTML);
+        }
+
+        function generateInvoiceHTML() {
+            //lay so hoa don bang javascript o day
+var idhoadon = "10";
+            var data = {
+                        idhoadon: idhoadon                       
+                    };
+
+             $.ajax({
+                            type: "POST",
+                            contentType: "application/json; charset=utf-8",
+                            url: "Phieubanhang.aspx/thongtinhanghoa",
+                            //data: JSON.stringify(data),
+                            data: JSON.stringify(data),
+                            dataType: "json",
+                            success: function (data) {
+                                const objdata = $.parseJSON(data.d);
+                                    if (objdata['Table'] != "")
+                                    {
+                                        for (var i = 0; i < objdata['Table'].length - 1; i++)
+                                        {
+                                        var hanghoa = objdata['Table'][i][0];
+                                        var tienhang = objdata['Table'][i][1];
+                                        var loaihoadon = objdata['Table'][i][4];
+                                        var sohoadon = objdata['Table'][i][6];
+                                        var newrow = '<tr class="thongtinhoadon">' +
+                                                                '<td id="_hanghoad">' + hanghoa + '</td>' +
+                                                                '<td id="_tienhang">' + tienhang + '</td>' +
+                                                                '<td id="_loaihoadon">' + loaihoadon + '</td>' +
+                                                                '<td id="_sohoadon">' + sohoadon + '</td>' +                                                    
+                                                                '</tr>';
+                                                            $('#tbnhaphang_inhoadon').append(newrow); 
+                                        }
+
+                                        var invoiceHTML2 = "<table class='display table table-bordered dataTable no-footer'>"+
+                                        "<thead>"+
+                                            "<tr>"+
+                                                "<th>Hanghoa</th>"+
+                                                "<th>tienhang</th>"+
+                                                "<th>statusKaraoke</th>"+
+                                                "<th>sohoadon</th>"+                                                 
+                                            "</tr>"+
+                                            "<tbody id='tbnhaphang_inhoadon'>"+
+                                            "</tbody>"+
+                                    "</table>";  
+                                    }
+                                    else
+                                    {
+                                        //$('#tbnhaphang_inhoadon').append(newrow); 
+                                    }
+                        
+                            },
+                            error: function () {
+                                //alert("No Match");
+                            }
+                        });            
+
+           
+            //var customerName = "ban dang in thu";//document.getElementById("customerName").value;           
+            //var invoiceHTML = "<h2>Invoice</h2>" +"<p>Customer Name: " + customerName + "</p>";   
+            
+
+
+      
+            //return invoiceHTML;
+            return invoiceHTML2;
+        }
+
+        function printInvoice(invoiceHTML) {
+            // Tạo một cửa sổ mới để in hóa đơn
+            var printWindow = window.open('', '_blank');
+            //var printWindow = window.open();
+            //printWindow.document.open();
+            printWindow.document.open();
+            // Thêm hóa đơn HTML vào cửa sổ in
+            printWindow.document.write(invoiceHTML);
+            printWindow.document.close();
+            // Gọi hàm in
+            printWindow.print();
+        }
 
         function SearchText() {
                 //debugger;

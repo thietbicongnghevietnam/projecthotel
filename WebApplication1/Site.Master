@@ -128,8 +128,8 @@
               <li><a href="Phieuchi.aspx" target="_blank" class="dropdown-item">Phiếu chi</a></li>
               <li><a href="Phieuthu.aspx" target="_blank" class="dropdown-item">Phiếu thu</a></li>
                 <li class="dropdown-divider"></li>
-              <li><a href="Report/Baocaosoquy.aspx" class="dropdown-item">BC sổ quỹ</a></li>
-                <li><a href="#" class="dropdown-item">BC tổng hợp thu chi</a></li>
+              <li><a href="Report/Baocaosoquy.aspx" target="_blank" class="dropdown-item">BC sổ quỹ</a></li>
+                <li><a href="Report/Baocaotonghopthuchi.aspx" target="_blank" class="dropdown-item">BC tổng hợp thu chi</a></li>
               <!-- End Level two -->
             </ul>
           </li>
@@ -138,7 +138,7 @@
             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
               <li><a href="Report/BaocaoBH.aspx" target="_blank" class="dropdown-item">BC bán hàng theo HĐ</a></li>
               <li><a href="Report/Baocaonhaphang.aspx" target="_blank" class="dropdown-item">BC nhập hàng theo HĐ</a></li>
-              <li><a href="Report/Baocaotonkho.aspx" class="dropdown-item">BC tồn kho</a></li>
+              <li><a href="Report/Baocaotonkho.aspx" target="_blank" class="dropdown-item">BC tồn kho</a></li>
               <li class="dropdown-divider"></li>
               <!-- Level two dropdown-->
               <li class="dropdown-submenu dropdown-hover">

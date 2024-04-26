@@ -26,34 +26,34 @@ namespace WebApplication1.Report
             
         }
 
-        public void BtnOrderItem(object sender, EventArgs e)
-        {
-            string userid = txtuserid.Text.ToString();
+        //public void BtnOrderItem(object sender, EventArgs e)
+        //{
+        //    string userid = txtuserid.Text.ToString();
 
-            string _mahang = txtmahang.Text.ToString();
-            //string _ngaymuon = Request.Form[txtngaymuon.UniqueID];//txtngaymuon.Text.ToString();
-            //string _ngaytra = Request.Form[txtngaytra.UniqueID];// txtngaytra.Text.ToString();
-            //string nam = _ngaymuon.Substring(6, 4);
-            //string thang = _ngaymuon.Substring(3, 2);
-            //string ngay = _ngaymuon.Substring(0, 2);
-            //string ngaymuon = nam + "-" + thang + "-" + ngay;
+        //    string _mahang = txtmahang.Text.ToString();
+        //    //string _ngaymuon = Request.Form[txtngaymuon.UniqueID];//txtngaymuon.Text.ToString();
+        //    //string _ngaytra = Request.Form[txtngaytra.UniqueID];// txtngaytra.Text.ToString();
+        //    //string nam = _ngaymuon.Substring(6, 4);
+        //    //string thang = _ngaymuon.Substring(3, 2);
+        //    //string ngay = _ngaymuon.Substring(0, 2);
+        //    //string ngaymuon = nam + "-" + thang + "-" + ngay;
 
-            //string _nam = _ngaytra.Substring(6, 4);
-            //string _thang = _ngaytra.Substring(3, 2);
-            //string _ngay = _ngaytra.Substring(0, 2);
-            //string ngaytra = _nam + "-" + _thang + "-" + _ngay;
+        //    //string _nam = _ngaytra.Substring(6, 4);
+        //    //string _thang = _ngaytra.Substring(3, 2);
+        //    //string _ngay = _ngaytra.Substring(0, 2);
+        //    //string ngaytra = _nam + "-" + _thang + "-" + _ngay;
 
-            DataTable dt5 = new DataTable();
-            DataTable dtuser = new DataTable();
-            if (userid == "")
-            {
-                Page.ClientScript.RegisterStartupScript(Page.GetType(), "Message", "toastr.error('NG, user does not input infor!'); ", true);
-            }
-            else
-            {
+        //    DataTable dt5 = new DataTable();
+        //    DataTable dtuser = new DataTable();
+        //    if (userid == "")
+        //    {
+        //        Page.ClientScript.RegisterStartupScript(Page.GetType(), "Message", "toastr.error('NG, user does not input infor!'); ", true);
+        //    }
+        //    else
+        //    {
 
-            }
-        }
+        //    }
+        //}
 
         protected void Search_Date_Click(object sender, EventArgs e)
         {

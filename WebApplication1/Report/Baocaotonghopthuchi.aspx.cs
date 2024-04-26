@@ -13,18 +13,15 @@ using System.Web.Script.Serialization;
 
 namespace WebApplication1.Report
 {
-    public partial class BaocaocongnoNCC : System.Web.UI.Page
+    public partial class Baocaotonghopthuchi : System.Web.UI.Page
     {
         DataConn cnn = new DataConn();
-        public DataTable dt_cono = new DataTable();
+        public DataTable dt_soquy = new DataTable();
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
-                dt_cono = DataConn.StoreFillDS("NH_BaocaocongnoNCC", System.Data.CommandType.StoredProcedure);
-            }
-        }
+            dt_soquy = DataConn.StoreFillDS("NH_Baocaosoquy", System.Data.CommandType.StoredProcedure);
 
+        }
         protected void Search_Date_Click(object sender, EventArgs e)
         {
             //string _date = Request.Form[datepicker.UniqueID];
@@ -46,7 +43,7 @@ namespace WebApplication1.Report
                 //string ngay = _date.Substring(0, 2);
                 //string _date2 = nam + "-" + thang + "-" + ngay;
 
-                dt_cono = DataConn.StoreFillDS("NH_BaocaocongnoNCC", System.Data.CommandType.StoredProcedure);
+                dt_soquy = DataConn.StoreFillDS("NH_Baocaosoquy", System.Data.CommandType.StoredProcedure);
                 //datepicker.Value = ngay + "-" + thang + "-" + nam;
 
             }
@@ -55,7 +52,7 @@ namespace WebApplication1.Report
                 //loc theo ngay
                 if (_fromdate == "")
                 {
-                    dt_cono = DataConn.StoreFillDS("NH_BaocaocongnoNCC", System.Data.CommandType.StoredProcedure);
+                    dt_soquy = DataConn.StoreFillDS("NH_Baocaosoquy", System.Data.CommandType.StoredProcedure);
                 }
                 else
                 {
@@ -66,10 +63,7 @@ namespace WebApplication1.Report
 
                     ////string _cate = dr_filter_cate.Text;
                     //string typefilter = "all";
-
-
-
-                    dt_cono = DataConn.StoreFillDS("NH_Baocaocongno_theongay_NCC", System.Data.CommandType.StoredProcedure, _fromdate, _todate);
+                    dt_soquy = DataConn.StoreFillDS("NH_Baocaosoquy_theongay", System.Data.CommandType.StoredProcedure, _fromdate, _todate);
                     //datepicker.Value = ngay + "-" + thang + "-" + nam;
                 }
             }
@@ -123,58 +117,6 @@ namespace WebApplication1.Report
             Response.End();  //must this sentence
         }
 
-        [WebMethod]
-        public static string thongtinhoadon(string idhoadon, string _fromdate, string _todate)  //string tenphong, string tienhang
-        {
-            DataTable dt = new DataTable();
-
-            dt = DataConn.StoreFillDS("NH_infor_thongtincongnoNCC", System.Data.CommandType.StoredProcedure, idhoadon, _fromdate, _todate);
-
-            DataTable dt2 = new DataTable();
-            dt2 = dt.Copy();
-
-            String daresult = null;
-            DataSet ds = new DataSet();
-            ds.Tables.Add(dt2);
-            daresult = DataSetToJSON(ds);
-            return daresult;
-        }
-
-        [WebMethod]
-        public static string thongtinKH(string makh, string _fromdate, string _todate)  //string tenphong, string tienhang
-        {
-            String daresult = null;
-            DataTable dtthekho = new DataTable();
-            DataSet ds = new DataSet();
-
-            DataTable dt_new = new DataTable();
-            dt_new.Columns.Add("sohoadon", typeof(String));
-            dt_new.Columns.Add("makh_", typeof(String));
-            dt_new.Columns.Add("tenkh", typeof(String));
-            dt_new.Columns.Add("tongtien", typeof(String));
-            dt_new.Columns.Add("tienno", typeof(String));
-            dt_new.Columns.Add("ngaytao", typeof(String));
-            dtthekho = DataConn.StoreFillDS("NH_thongtinthekho_NCC", System.Data.CommandType.StoredProcedure, makh, _fromdate, _todate);//tenphong, data, tienhang
-
-            for (int i = 0; i < dtthekho.Rows.Count; i++)
-            {
-                string sohoadon = dtthekho.Rows[i][0].ToString();
-                string makh_ = dtthekho.Rows[i][1].ToString();
-                string tenkh = dtthekho.Rows[i][2].ToString();
-                string tongtien = dtthekho.Rows[i][3].ToString();
-                string tienno = dtthekho.Rows[i][4].ToString();
-                string ngaytao = dtthekho.Rows[i][5].ToString();
-                dt_new.Rows.Add(sohoadon, makh_, tenkh, tongtien, tienno, ngaytao);
-            }
-
-            DataTable dt2 = new DataTable();
-            dt2 = dt_new.Copy();
-
-            ds.Tables.Add(dt2);
-            daresult = DataSetToJSON(ds);
-            return daresult;
-        }
-
         public static string DataSetToJSON(DataSet ds)
         {
             Dictionary<string, object> dict = new Dictionary<string, object>();
@@ -194,6 +136,7 @@ namespace WebApplication1.Report
             JavaScriptSerializer json = new JavaScriptSerializer();
             return json.Serialize(dict);
         }
+
 
     }
 }

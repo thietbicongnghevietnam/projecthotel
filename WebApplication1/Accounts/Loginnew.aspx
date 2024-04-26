@@ -14,6 +14,12 @@
   <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+    
+    <link rel="stylesheet" href="../plugins/toastr/toastr.css" />
+
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+    <script src="../plugins/toastr/toastr.js"></script>
+
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
@@ -48,7 +54,7 @@
                                             <a href="#" class="small" onserverclick="btnDownloadIEClick" runat="server">Download Google Chrome</a>
                                              <%--<asp:Button id="btn_login" Text="Login" CssClass="btn btn-info" OnClick="BtnLoginClick" runat="server" />--%>
                                             <%-- <input id="btn_login" type="button" value="Login" Class="btn btn-info" OnServerclick="BtnLoginClick" runat="server" /> class="btn btn-primary"--%>
-                                             <input id="ctl07" class="btn btn-primary" value="Login" type="button" runat="server" onserverclick="BtnLoginClick" />
+                                             <input id="dangnhapid" class="btn btn-primary" value="Login" type="button" runat="server" onserverclick="BtnLoginClick" />
                                          </div>                                    
                                     </div>
 
@@ -103,8 +109,8 @@
              if (e.key === 'Enter' || e.keyCode === 13) {                
                  //$("#ContentPlaceHolder1_btn_login").click();
                 //__doPostBack('btn_login','');
-                //$("#btn_login").click();
-                __doPostBack('ctl07', '');
+                $("#dangnhapid").click();
+                //__doPostBack('ctl07', '');
              }
          });
      </script>

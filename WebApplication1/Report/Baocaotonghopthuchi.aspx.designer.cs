@@ -10,7 +10,7 @@
 namespace WebApplication1.Report {
     
     
-    public partial class Baocaotonkho {
+    public partial class Baocaotonghopthuchi {
         
         /// <summary>
         /// form1 control.

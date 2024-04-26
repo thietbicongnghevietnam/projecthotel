@@ -42,7 +42,8 @@ namespace WebApplication1.Accounts
             }
             else
             {
-                Page.ClientScript.RegisterStartupScript(Page.GetType(), "Message", " toastr.warning('Sai thông tin đăng nhập hoặc mật khẩu','Lỗi');", true);
+                //Page.ClientScript.RegisterStartupScript(Page.GetType(), "Message", " toastr.warning('Sai thông tin đăng nhập hoặc mật khẩu','Lỗi');", true);
+                Page.ClientScript.RegisterStartupScript(Page.GetType(), "Message", "toastr.error('NG, Sai thông tin đăng nhập hoặc mật khẩu!'); ", true);
 
             }
 

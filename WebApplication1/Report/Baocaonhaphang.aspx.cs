@@ -6,6 +6,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using WebApplication1.App_Code;
+using System.Web.Services;
+using System.Web.Script.Serialization;
 
 namespace WebApplication1.Report
 {
@@ -184,9 +186,43 @@ namespace WebApplication1.Report
                 }
             }
             Response.End();  //must this sentence
+        }
 
+        [WebMethod]
+        public static string thongtinhoadon(string idhoadon, string _fromdate, string _todate)  //string tenphong, string tienhang
+        {
+            DataTable dt = new DataTable();
 
+            dt = DataConn.StoreFillDS("NH_infor_thongtincongnoNCC", System.Data.CommandType.StoredProcedure, idhoadon, _fromdate, _todate);
 
+            DataTable dt2 = new DataTable();
+            dt2 = dt.Copy();
+
+            String daresult = null;
+            DataSet ds = new DataSet();
+            ds.Tables.Add(dt2);
+            daresult = DataSetToJSON(ds);
+            return daresult;
+        }
+
+        public static string DataSetToJSON(DataSet ds)
+        {
+            Dictionary<string, object> dict = new Dictionary<string, object>();
+            foreach (DataTable dt in ds.Tables)
+            {
+                object[] arr = new object[dt.Rows.Count + 1];
+
+                for (int i = 0; i <= dt.Rows.Count - 1; i++)
+                {
+                    arr[i] = dt.Rows[i].ItemArray;
+                }
+
+                //dict.Add(dt.TableName, arr);
+                dict.Add(dt.TableName, arr);
+            }
+
+            JavaScriptSerializer json = new JavaScriptSerializer();
+            return json.Serialize(dict);
         }
 
 

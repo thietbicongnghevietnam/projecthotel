@@ -156,7 +156,7 @@
                     <%-- Modal footer --%>
                     <div class="modal-body">
                         <div class="container-fluid">
-                            <div class="row">
+                            <%--<div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="ID">Item</label>
@@ -171,7 +171,7 @@
                                         <asp:TextBox ID="txtuserid" CssClass="form-control" placeholder="" runat="server"></asp:TextBox>
                                     </div>
                                 </div>
-                            </div> 
+                            </div> --%>
 
                              <div class="row">
                                 
@@ -193,31 +193,29 @@
 
                             </div>
 
-                             <div class="row">
+                             <%--<div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="QtyNG">Date borrow</label>
-                                        <%--<asp:TextBox ID="txtngaymuon" CssClass="form-control" placeholder="" runat="server"></asp:TextBox>--%>
+                                        <label for="QtyNG">Date borrow</label>                                       
                                         <input type="text" id="txtngaymuon" runat="server">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Date Return</label>                                        
-                                        <%--<asp:TextBox ID="txtngaytra" CssClass="form-control" placeholder="" runat="server"></asp:TextBox>--%>
+                                        <label for="exampleInputEmail1">Date Return</label>                                                                               
                                         <input type="text" id="txtngaytra" runat="server">
                                     </div>
                                 </div>
-                            </div>
+                            </div>--%>
                             
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times"></i>Close</button>
-                        <button type="button" runat="server" id="btnOrder" onserverclick="BtnOrderItem" class="btn btn-primary">
+                       <%-- <button type="button" runat="server" id="btnOrder" onserverclick="BtnOrderItem" class="btn btn-primary">
                             <i class="fas fa-download"></i>
                             Save
-                        </button>
+                        </button>--%>
                     </div>
                 </div>
             </div>

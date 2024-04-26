@@ -140,6 +140,27 @@ namespace WebApplication1
             return thongbao;
         }
 
+        [WebMethod]
+        public static string thongtinhanghoa(string idhoadon)  //string tenphong, string tienhang
+        {
+            //check xem hoa don ton tai chua
+            //update *** neu hoa don ton tai roi
+            //lay so hoa don truyen len de update            
+            DataTable dt = new DataTable();
+
+            dt = DataConn.StoreFillDS("NH_infor_thongtinhanghoa2", System.Data.CommandType.StoredProcedure, idhoadon);
+
+            DataTable dt2 = new DataTable();
+            dt2 = dt.Copy();
+
+            String daresult = null;
+            DataSet ds = new DataSet();
+            ds.Tables.Add(dt2);
+            daresult = DataSetToJSON(ds);
+            return daresult;
+
+        }
+
 
     }
 }

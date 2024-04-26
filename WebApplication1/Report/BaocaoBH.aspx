@@ -93,9 +93,20 @@
                       <td><%=rows["tiensauchietkhau"].ToString()%></td>
                       <%--<td><%=rows["hinhthucnghi"].ToString()%></td>
                       <td><%=rows["mohinh"].ToString()%></td>--%>
-                      <td><%=rows["created"].ToString()%></td>
+
+                    <%if ((i == dtbaocaobanhang.Rows.Count)  && rows["created"].ToString() != "") { %>
+                        <td></td>
+                    <%} %>                                        
+                    <%else { %>
+                            <td><%=rows["created"].ToString()%></td>
+                    <%} %>
+
+                      
+
                     <td>
-                        <a href="#" class="btn btn-info btn-sm" title="delete item" onclick="openEditModal2('<%= rows["sohd"].ToString() %>')"><i class="fas fa-pencil-alt"></i>View</a>
+                       <%-- <a href="#" class="btn btn-info btn-sm" title="delete item" onclick="openEditModal2('<%= rows["sohd"].ToString() %>')"><i class="fas fa-pencil-alt"></i>View</a>
+                        &nbsp;&nbsp;--%>
+                        <a href="#" class="btn btn-info btn-sm" title="delete item" onclick="openEditModal6('<%= rows["id"].ToString() %>')" ><i class="fas fa-pencil-alt"></i>Chi tiet HD</a>
                     </td>
                     
                   </tr>
@@ -110,6 +121,61 @@
                     </div>
    </div>
 
+         <div class="modal" id="myModal6">
+            <div class="modal-dialog modal-lg" >
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="row">
+                            <div>
+                                <h4 class="modal-title" id="headerTag" style="float: left">THONG TIN HOA DON BAN HANG</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="float: right; margin-left: 300px;">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="modal-body">
+                       
+                       <div class="container-fluid" id="printableArea" style="width:400px;height:auto; float:left">
+                            Hinh thuc: <b id="hinhthucnghi2"></b>
+                            &nbsp;&nbsp;&nbsp; tongtienhat: <b id="tongtienhat2"></b><br />
+                           Ten phong: <b id="tenphong2"></b>
+                           &nbsp;&nbsp;&nbsp; Tong tien hang: <b id="tongtien2"></b>                                                      
+
+
+                                <div style="width: 100%; height: 300px; float: left;">  
+                                    <table class="display table table-bordered dataTable no-footer">
+                                        <thead>
+                                            <tr>
+                                                <th>Hanghoa</th>
+                                                <th>tienhang</th>
+                                                <th>statusKaraoke</th>
+                                                <th>sohoadon</th>                                                 
+                                            </tr>
+                                            <tbody id="tbnhaphang_inhoadon">
+                                            </tbody>
+
+
+                                    </table>
+                                </div>
+                            
+                           <br /> 
+                           Tong tien: <b id="thantoan2"></b> &nbsp;&nbsp;&nbsp;  C/K: <b id="chietkau2"></b> <br />
+                           KH thanh toan: <b id="khthanhtoan2"></b> &nbsp;&nbsp;&nbsp; Con lai: <b id="psno2"></b>     
+                           <div>Bằng chữ: <span id="bangchuid" style="font-weight:200; color:red;"></span></div>
+                        </div>
+                        
+                                                                           
+                    </div>
+
+                    <div class="modal-footer">
+                       <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times"></i>Close</button>                                                                                            
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="modal" id="myModal2">
             <div class="modal-dialog">
@@ -242,11 +308,64 @@
                 //});
         });
 
-        function openEditModal2(sohoadon) {           
-            $("#txtsohoadon").val(sohoadon);
+        //function openEditModal2(sohoadon) {           
+        //    $("#txtsohoadon").val(sohoadon);
+        //    $('#myModal2').modal('show');
+        //}
 
-            $('#myModal2').modal('show');
+        function openEditModal6(idhoadon)
+        {
+             var _fromdate  = $("#Date2").val();
+             var _todate  = $("#ngaychiid").val();
+             var data = {
+                                idhoadon: idhoadon,
+                                _fromdate: _fromdate,
+                                _todate: _todate
+                            };
+
+               $.ajax({
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: "BaocaoBH.aspx/thongtinhoadon",
+                        //data: JSON.stringify(data),
+                        data: JSON.stringify(data),
+                        dataType: "json",
+                        success: function (data) {
+                        debugger;
+                            const objdata = $.parseJSON(data.d);
+                            $('#tbnhaphang_inhoadon tr').remove();
+                            debugger;
+                            if (objdata['Table'] != "")
+                            {
+                                for (var i = 0; i < objdata['Table'].length - 1; i++)
+                                {
+                                var hanghoa = objdata['Table'][i][0];
+                                var tienhang = objdata['Table'][i][1];
+                                var loaihoadon = objdata['Table'][i][4];
+                                var sohoadon = objdata['Table'][i][6];
+                                var newrow = '<tr class="thongtinhoadon">' +
+                                                        '<td id="_hanghoad">' + hanghoa + '</td>' +
+                                                        '<td id="_tienhang">' + tienhang + '</td>' +
+                                                        '<td id="_loaihoadon">' + loaihoadon + '</td>' +
+                                                        '<td id="_sohoadon">' + sohoadon + '</td>' +                                                    
+                                                        '</tr>';
+                                                    $('#tbnhaphang_inhoadon').append(newrow); 
+                                }
+                            }
+                            else
+                            {
+                                $('#tbnhaphang_inhoadon').append(newrow); 
+                            }
+                                                            
+                            $('#myModal6').modal('show');                                                       
+                        },
+                        error: function () {
+                            //alert("No Match");
+                        }
+                    });
+
         }
+
 
 </script>
 

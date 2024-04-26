@@ -2414,6 +2414,7 @@
     <Content Include="Report\BaocaocongnoNCC.aspx" />
     <Content Include="Report\Baocaonhaphang.aspx" />
     <Content Include="Report\Baocaosoquy.aspx" />
+    <Content Include="Report\Baocaotonghopthuchi.aspx" />
     <Content Include="Report\Baocaotonkho.aspx" />
     <Content Include="Report\test.aspx" />
     <Content Include="Scripts\bootstrap.js" />
@@ -2564,6 +2565,13 @@
     </Compile>
     <Compile Include="Report\Baocaosoquy.aspx.designer.cs">
       <DependentUpon>Baocaosoquy.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Report\Baocaotonghopthuchi.aspx.cs">
+      <DependentUpon>Baocaotonghopthuchi.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Report\Baocaotonghopthuchi.aspx.designer.cs">
+      <DependentUpon>Baocaotonghopthuchi.aspx</DependentUpon>
     </Compile>
     <Compile Include="Report\Baocaotonkho.aspx.cs">
       <DependentUpon>Baocaotonkho.aspx</DependentUpon>
