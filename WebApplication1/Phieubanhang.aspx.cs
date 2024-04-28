@@ -23,6 +23,9 @@ namespace WebApplication1
         public DataTable dt_doc = new DataTable();
         public DataTable dt_nhomhang = new DataTable();
 
+        public DataTable dt_getSohd = new DataTable();
+        public string sohoadon = "";       
+
         public DataTable dtncc = new DataTable();
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -37,7 +40,8 @@ namespace WebApplication1
                 dr_nhacungcap.DataSource = dtncc;
                 dr_nhacungcap.DataBind();
 
-
+                dt_getSohd = DataConn.StoreFillDS("NH_getsohoadon_BH", System.Data.CommandType.StoredProcedure);
+                sohoadon = dt_getSohd.Rows[0][0].ToString();
             }
         }
 
@@ -64,6 +68,65 @@ namespace WebApplication1
                     return docResult;
                 }
             }
+        }
+
+        [WebMethod]
+        public static string thongtinhanghoa2(string sohoadon)
+        {
+            DataTable dt = new DataTable();
+            string idhoadon = sohoadon;
+
+            DataTable dt_new = new DataTable();
+            dt_new.Columns.Add("tenhang", typeof(String));
+            dt_new.Columns.Add("soluong", typeof(String));
+            dt_new.Columns.Add("dongia", typeof(String));
+            dt_new.Columns.Add("chietkhau", typeof(String));
+            dt_new.Columns.Add("thanhtien", typeof(String));
+            dt_new.Columns.Add("khachthanhtoan", typeof(String));
+            dt_new.Columns.Add("psco", typeof(String));
+            dt_new.Columns.Add("ngaytao", typeof(String));
+            dt_new.Columns.Add("sohodon", typeof(String));
+
+
+            dt = DataConn.StoreFillDS("NH_infor_thongtinhanghoa2_inlai", System.Data.CommandType.StoredProcedure, idhoadon);
+
+            string items = dt.Rows[0][0].ToString();
+
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            var jsonObj = jss.Deserialize<dynamic>(items);
+
+            foreach (var item in jsonObj)
+            {
+                string[] numbersArray = item.Key.Split(',');
+                var mahang = numbersArray.FirstOrDefault();
+                //string[] strArray = mahang.Split(',');
+                var mahang1 = numbersArray[0];
+                var dongia1 = numbersArray[1];
+                var thanhtien1 = numbersArray[2];
+
+                var soluong = item.Value;
+
+                dt_new.Rows.Add(mahang, soluong, dongia1, "", thanhtien1, "", "", "", "");
+            }
+
+            string chietkhau = dt.Rows[0]["chietkhau"].ToString();
+            string tongtien = dt.Rows[0]["tienhang"].ToString();
+            string khachthanhtoan = dt.Rows[0]["tiensauchietkhau"].ToString();
+            string khachno = dt.Rows[0]["psco"].ToString();
+            string ngaytao = dt.Rows[0]["created"].ToString();
+            //string hoadonid = dt.Rows[0]["sohoadon"].ToString();
+            dt_new.Rows.Add("", "", "", chietkhau, tongtien, khachthanhtoan, khachno, ngaytao, "");
+
+
+            DataTable dt2 = new DataTable();
+            // dt2 = dt.Copy();
+            dt2 = dt_new.Copy();
+
+            String daresult = null;
+            DataSet ds = new DataSet();
+            ds.Tables.Add(dt2);
+            daresult = DataSetToJSON(ds);
+            return daresult;
         }
 
         [WebMethod]
@@ -131,7 +194,8 @@ namespace WebApplication1
             {
                 //thongbao = "OK" + "," + dtlevel.Rows[0][1].ToString();
 
-                thongbao = "OK";
+                //thongbao = "OK" + "," + dtsave.Rows[0][1].ToString();
+                thongbao = dtsave.Rows[0][1].ToString();
             }
             else
             {
@@ -148,10 +212,57 @@ namespace WebApplication1
             //lay so hoa don truyen len de update            
             DataTable dt = new DataTable();
 
+            DataTable dt_new = new DataTable();
+            dt_new.Columns.Add("tenhang", typeof(String));
+            dt_new.Columns.Add("soluong", typeof(String));
+            dt_new.Columns.Add("dongia", typeof(String));
+            dt_new.Columns.Add("chietkhau", typeof(String));
+            dt_new.Columns.Add("thanhtien", typeof(String));
+            dt_new.Columns.Add("khachthanhtoan", typeof(String));
+            dt_new.Columns.Add("psco", typeof(String));
+            dt_new.Columns.Add("ngaytao", typeof(String));
+            dt_new.Columns.Add("sohodon", typeof(String));
+
+
             dt = DataConn.StoreFillDS("NH_infor_thongtinhanghoa2", System.Data.CommandType.StoredProcedure, idhoadon);
 
+            string items = dt.Rows[0][0].ToString();
+
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            var jsonObj = jss.Deserialize<dynamic>(items);
+
+            foreach (var item in jsonObj)
+            {
+                string[] numbersArray = item.Key.Split(',');
+                var mahang = numbersArray.FirstOrDefault();
+                //string[] strArray = mahang.Split(',');
+                var mahang1 = numbersArray[0];
+                var dongia1 = numbersArray[1];
+                var thanhtien1 = numbersArray[2];
+
+                var soluong = item.Value;
+                //Console.WriteLine($"Key: {key}, Value: {value}");
+
+                //string _tenhang = mahang;
+                //string _soluong = soluong;
+               //string _dongia = dongia1;
+                //string _thanhtien = thanhtien1;
+
+                dt_new.Rows.Add(mahang, soluong, dongia1,"", thanhtien1,"","","","");
+            }
+
+            //string chietkhau = dt.Rows[0]["chietkhau"].ToString();
+            //string tongtien = dt.Rows[0]["tienhang"].ToString();
+            //string khachthanhtoan = dt.Rows[0]["tiensauchietkhau"].ToString();
+            //string khachno = dt.Rows[0]["psco"].ToString();
+            //string ngaytao = dt.Rows[0]["created"].ToString();
+            //string sohoadon = dt.Rows[0]["sohoadon"].ToString();
+            //dt_new.Rows.Add("", "", "", chietkhau, tongtien,khachthanhtoan,khachno,ngaytao,sohoadon);
+
+
             DataTable dt2 = new DataTable();
-            dt2 = dt.Copy();
+            // dt2 = dt.Copy();
+            dt2 = dt_new.Copy();
 
             String daresult = null;
             DataSet ds = new DataSet();
@@ -160,6 +271,7 @@ namespace WebApplication1
             return daresult;
 
         }
+       
 
 
     }

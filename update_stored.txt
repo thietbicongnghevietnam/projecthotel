@@ -1,1 +1,6 @@
-loi dang nhap toart chua hien.....
+loi from dang nhap toart chua hien.....
+
+addthongtinhanghoa_PBH
+NH_infor_thongtinhanghoa2
+NH_getsohoadon_BH
+NH_infor_thongtinhanghoa2_inlai
