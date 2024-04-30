@@ -177,38 +177,44 @@ namespace WebApplication1.Report
                 string jsonString = dtthekho.Rows[i][1].ToString();
                 string ngaytao = dtthekho.Rows[i][2].ToString();
                 string loaihoadon = dtthekho.Rows[i][3].ToString();
-               
-                // Phân tích chuỗi JSON
-                JObject json = JObject.Parse(jsonString);
 
-                JToken quantity = 0;
-                
-
-                // Kiểm tra xem phần tử tồn tại trong danh sách không
-                bool exists = json.Properties().Any(p => p.Name.Contains(searchTerm));
-                if (exists)
+                if (jsonString == "{}" || jsonString is null || jsonString == "")
                 {
-                    foreach (var item in json)
-                    {
-                        //string key = item.Key;
-                        if (item.Key == searchTerm)
-                        {
-                            JToken value = item.Value;                           
-                        }
-                        quantity = item.Value;
-                        break;
-                    }
-                    //Console.WriteLine($"Phần tử '{searchTerm}' tồn tại trong danh sách.");
-                    //dt_new.Rows.Add(sohoadon, jsonString, quantity, ngaytao, loaihoadon);
-                    dt_new.Rows.Add(sohoadon, mahang, quantity, ngaytao, loaihoadon);
+                    //no thing  ==> truong hop nha nghi hoac karaoke khong lay do
                 }
                 else
                 {
-                    //Console.WriteLine($"Phần tử '{searchTerm}' không tồn tại trong danh sách.");
-                    //nothing
-                }
-            }
+                    // Phân tích chuỗi JSON
+                    JObject json = JObject.Parse(jsonString);
 
+                    JToken quantity = 0;
+
+
+                    // Kiểm tra xem phần tử tồn tại trong danh sách không
+                    bool exists = json.Properties().Any(p => p.Name.Contains(searchTerm));
+                    if (exists)
+                    {
+                        foreach (var item in json)
+                        {
+                            //string key = item.Key;
+                            if (item.Key == searchTerm)
+                            {
+                                JToken value = item.Value;
+                            }
+                            quantity = item.Value;
+                            break;
+                        }
+                        //Console.WriteLine($"Phần tử '{searchTerm}' tồn tại trong danh sách.");
+                        //dt_new.Rows.Add(sohoadon, jsonString, quantity, ngaytao, loaihoadon);
+                        dt_new.Rows.Add(sohoadon, mahang, quantity, ngaytao, loaihoadon);
+                    }
+                    else
+                    {
+                        //Console.WriteLine($"Phần tử '{searchTerm}' không tồn tại trong danh sách.");
+                        //nothing
+                    }
+                }                
+            }
 
             DataTable dt2 = new DataTable();
             dt2 = dt_new.Copy();

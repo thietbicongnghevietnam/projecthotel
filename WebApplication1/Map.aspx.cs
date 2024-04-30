@@ -41,17 +41,8 @@ namespace WebApplication1
             dt_get_khuvuc1 = DataConn.StoreFillDS("NH_select_khuvuc1", CommandType.StoredProcedure);
             dt_getinfo_phong1 = DataConn.StoreFillDS("NH_select_info_phong1", CommandType.StoredProcedure);
 
-            string nhomhangid = Request.QueryString["nhomhangid"];
-            if (nhomhangid != null)
-            {
-                dt_listhanghoa = DataConn.StoreFillDS("NH_select_hanghoa", CommandType.StoredProcedure,nhomhangid);
-            }
-            else
-            {
-                //all nhom hang
-                string _nhomhangid = "";
-                dt_listhanghoa = DataConn.StoreFillDS("NH_select_hanghoa", CommandType.StoredProcedure, _nhomhangid);
-            }
+            
+            
 
             //if (Request.QueryString["documentNo"] != null)
             //{
@@ -74,6 +65,18 @@ namespace WebApplication1
 
             if (!IsPostBack)
             {
+                string nhomhangid = Request.QueryString["nhomhangid"];
+                if (nhomhangid != null)
+                {
+                    dt_listhanghoa = DataConn.StoreFillDS("NH_select_hanghoa", CommandType.StoredProcedure, nhomhangid);
+                }
+                else
+                {
+                    //all nhom hang
+                    string _nhomhangid = "";
+                    dt_listhanghoa = DataConn.StoreFillDS("NH_select_hanghoa", CommandType.StoredProcedure, _nhomhangid);
+                }
+
                 //BindStockCode();
                 dtncc = DataConn.StoreFillDS("NH_Get_KH", System.Data.CommandType.StoredProcedure);
                 DataRow newRow2 = dtncc.NewRow();
@@ -181,7 +184,7 @@ namespace WebApplication1
         }
 
         [WebMethod]
-        public static string huyphongban(string nameitem)  //string tenphong, string tienhang
+        public static string huyphongban(string nameitem, string userid)  //string tenphong, string tienhang
         {
             String thongbao = "";
             DataTable dtupdate = new DataTable();
@@ -189,8 +192,8 @@ namespace WebApplication1
             //check xem hoa don ton tai chua
             //update *** neu hoa don ton tai roi
             //lay so hoa don truyen len de update
-
-            dtupdate = DataConn.StoreFillDS("NH_delete_phongban", System.Data.CommandType.StoredProcedure, nameitem);
+            
+            dtupdate = DataConn.StoreFillDS("NH_delete_phongban", System.Data.CommandType.StoredProcedure, nameitem, userid);
 
             if (dtupdate.Rows[0][0].ToString() == "1")
             {
@@ -202,7 +205,7 @@ namespace WebApplication1
             {
                 thongbao = "NG";
             }
-            return thongbao;
+            return thongbao;                       
         }
 
         [WebMethod]
@@ -321,6 +324,29 @@ namespace WebApplication1
                 kq = "0";
             }
             return kq;
+
+        }
+
+        [WebMethod]
+        public static string Savekhachhang(string idmakh, string idtenkh, string idcongnoden, string idcongnodi)
+        {
+            string thongbao = "";
+            DataTable dt = new DataTable();
+
+
+            dt = DataConn.StoreFillDS("NH_insert_khachhang", System.Data.CommandType.StoredProcedure, idmakh, idtenkh, idcongnoden, idcongnodi);
+            if (dt.Rows[0][0].ToString() != "0")
+            {
+                //thongbao = "OK" + "," + dtlevel.Rows[0][1].ToString();
+
+                //thongbao = "OK";
+                thongbao = dt.Rows[0][0].ToString() + "," + dt.Rows[0][1].ToString();
+            }
+            else
+            {
+                thongbao = "NG";
+            }
+            return thongbao;
 
         }
 

@@ -16,13 +16,20 @@ namespace WebApplication1.Report
     public partial class BaocaoBH : System.Web.UI.Page
     {
         public DataTable dtbaocaobanhang = new DataTable();
+        public DataTable dt_getSohd = new DataTable();
+        public string sohoadon = "";
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-            {                
+            {
+                dtbaocaobanhang = DataConn.StoreFillDS("NH_BaocaoBH", System.Data.CommandType.StoredProcedure);
+
+                dt_getSohd = DataConn.StoreFillDS("NH_getsohoadon_BH", System.Data.CommandType.StoredProcedure);
+                sohoadon = dt_getSohd.Rows[0][0].ToString();
             }
 
-            dtbaocaobanhang = DataConn.StoreFillDS("NH_BaocaoBH", System.Data.CommandType.StoredProcedure);           
+               
 
         }
 

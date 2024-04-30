@@ -49,20 +49,20 @@
                         <i class="fa fa-pencil" style="font-size: 24px; padding-left: 10px;"></i>
                         <b class="editproduct" style="color: black; padding-left: 10px;">Sua</b>
                     </span>
-                    <span class="delnhaphang" style="padding-right: 30px;">                
+                    <span class="delnhaphang" style="padding-right: 10px;">                
                         <i class="fa fa-times" style="font-size: 24px; padding-left: 20px;"></i>
                         <b class="delproduct" style="color: black; padding-left: 5px;">&nbsp;Xoa</b>
                     </span>
                  </td>
 
                      <td>
-                        <span class="addKhachhang" style="padding-right: 10px; padding-left:10px;">
-                        <i class="fa fa-plus-square" style="font-size: 24px; padding-left: 20px;"></i>
-                        <b class="add_Khachhang" style="color: black; padding-left: 5px; float:left">&nbsp;Them KH</b>
+                        <span class="addKhachhang" style="padding-right: 5px; padding-left:10px;">
+                        <i class="fa fa-plus-square" style="font-size: 24px; padding-left: 3px;"></i>
+                        <b class="add_Khachhang" style="color: black; padding-left: 10px; float:left">&nbsp;Them KH</b>
                         </span>
                     </td>
                     <td>                       
-                        <label for="inhoadon" style="float: left; margin-top: 5px;">In hoa don</label>
+                        <label for="inhoadon" style="float: left; margin-top: 5px; padding-left:10px;">In hoa don</label>
                         <input type="checkbox" id="inHD" name="inHD">                        
                     </td>
                      <td>                       
@@ -127,13 +127,13 @@
                 <br />
                 <br />
 
-        <div class="modal" id="myModal">
+         <div class="modal" id="myModal">
             <div class="modal-dialog" >
                 <div class="modal-content">
                     <div class="modal-header">
                         <div class="row">
                             <div>
-                                <h4 class="modal-title" id="headerTag" style="float: left">Them khach hang</h4>
+                                <h4 class="modal-title" id="headerTag" style="float: left">Thêm mới khách hàng</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="float: right; margin-left: 300px;">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -144,9 +144,28 @@
 
                     <div class="modal-body">
                        
-                       <div class="container-fluid" id="prinkhachahang" style="width:400px;height:auto;">
+                       <div class="container-fluid" id="printphieunhaphang" style="width:400px;height:auto;">
                                                                              
-                           testsss
+                           <div class="form-group">
+                            <label for="recipient">Mã khách hàng:</label>
+                               <input class="form-control" name="makhachhang" id="idmakh" type="text" placeholder="mancc" /> 
+                               <%--<asp:TextBox ID="idmakh" runat="server" class="form-control" />--%>
+                          </div>
+                            <div class="form-group">
+                            <label for="recipient">Tên KH:</label>
+                                <input class="form-control" name="tenkhachhang" id="idtenkh" type="text" placeholder="tenkh" />  
+                               <%-- <asp:TextBox ID="idtenkh" runat="server" class="form-control" />--%>
+                          </div>
+                           <div class="form-group">
+                            <label for="recipient">Công nợ đến:</label>
+                            <input class="form-control" type="text" id="idcongnoden" name="recipient" value="0">
+                               <%--<asp:TextBox ID="idcongnoden" runat="server" class="form-control" Text="0" />--%>
+                          </div>
+                           <div class="form-group">
+                            <label for="recipient">Công nợ đi:</label>
+                            <input class="form-control" type="text" id="idcongnodi" name="recipient" value="0">
+                            <%--   <asp:TextBox ID="idcongnodi" runat="server" class="form-control" Text="0" />--%>
+                          </div>
                                                        
                         </div>
                                                                            
@@ -154,7 +173,7 @@
 
                     <div class="modal-footer">
                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times"></i>Close</button>                         
-                        <button type="button" runat="server" id="Button1"  class="btn btn-primary" >Save</button>                                                                                                                                                                     
+                        <button type="button" runat="server" id="Button4"  class="btn btn-primary" onclick="addnewkhachhang()" >Save</button>                                                                                                                                                                     
                     </div>
                 </div>
             </div>
@@ -359,6 +378,49 @@
                 }                                                
          }
 
+         function addnewkhachhang()
+             {             
+                 var idmakh = $("#idmakh").val();
+                 var makhachang = idmakh;
+                 var idtenkh = $("#idtenkh").val();
+                 var idcongnoden = $("#idcongnoden").val();
+                 var idcongnodi = $("#idcongnodi").val();
+                 var data = { idmakh: idmakh, idtenkh: idtenkh, idcongnoden: idcongnoden, idcongnodi: idcongnodi };
+                 $.ajax({
+                            type: "POST",
+                            contentType: "application/json; charset=utf-8",
+                            url: "Phieubanhang.aspx/Savekhachhang",
+                            //data: JSON.stringify(data),
+                            data: JSON.stringify(data),
+                            dataType: "json",
+                            success: function (data) {
+                                 //debugger;
+                                //alert('Hoa don thêm thành công!');
+                                if (data.d != "NG") {                               
+                                    alert('Hoa don thêm thành công!');    
+                                    //var newItem = $("<option>").attr("value", data.id).text(data.name);
+                                   // debugger;
+                                    var idop = data.d.split(',');
+                                    var _id = idop[0];
+                                    var _name = idop[1];
+                                    var newItem = $("<option>").attr("value", _id).text(_name);
+                                    $("#MainContent_dr_nhacungcap").append(newItem);
+
+                                    $("#idmakh").val('');
+                                    $("#idtenkh").val('');
+                                    $("#idcongnoden").val('0');
+                                    $("#idcongnodi").val('0');
+                                } else {
+                                    alert('Kiểm tra lại thông tin!');
+                                }
+                           
+                            },
+                            error: function () {
+                                //alert("No Match");
+                            }
+                         });
+
+             }
 
         $("#MainContent_phieunhaphang").on('keyup', function (e) {
                 if ((e.key === 'Enter' || e.keyCode === 13)) {
@@ -898,6 +960,15 @@
                         else
                         {                         
                             //alert('khong in hoa don');
+                            alert('Hóa đơn thêm thành công!');
+                            $('#bangchuid2').text('');
+
+                            $('#tongtiennhap').val('0');
+                            $('#thanhtoanid').val('0');
+                            $('#chietkhauid').val('0');
+                            //chietkhauid
+                            $("#soluongnhaphang").val('0');
+                            $("#conlaiid").val('0');
                         }     
 
 
@@ -1016,7 +1087,15 @@
                         else
                         {                         
                             //alert('khong in hoa don');
-                             $('#bangchuid2').text('');
+                            alert('Hóa đơn thêm thành công!');
+                            $('#bangchuid2').text('');
+
+                            $('#tongtiennhap').val('0');
+                            $('#thanhtoanid').val('0');
+                            $('#chietkhauid').val('0');
+                            //chietkhauid
+                            $("#soluongnhaphang").val('0');
+                            $("#conlaiid").val('0');
                         }                           
 
              }

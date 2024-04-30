@@ -110,11 +110,13 @@
 
 
                     P_top = (W_h - MtoW_Y >= M_h && W_h - MtoW_Y < W_h) ? MtoW_Y - 180 : MtoW_Y - M_h + 180;
-                    P_left = (W_w - MtoW_X >= M_w && W_w - MtoW_X < W_w) ? MtoW_X - 300 : MtoW_X - M_w + 300;
+                    P_left = (W_w - MtoW_X >= M_w && W_w - MtoW_X < W_w) ? MtoW_X - 50 : MtoW_X - M_w + 50;
 
                     //设置菜单出现的位置
                     $('#'+menu).addClass('contextmenu-visible');
                     $('#'+menu).css({
+                        //left: P_left + W_scroll_left + 'px',
+                        //top: P_top + W_scroll_top + 'px'
                         left: P_left + W_scroll_left + 'px',
                         top: P_top + W_scroll_top + 'px'
                     });

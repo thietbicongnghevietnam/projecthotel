@@ -39,10 +39,10 @@
                 <br />
                 <%--class="card-title"--%>
                 <div class="col-sm-12">
-                    Tu ngay:
+                    Từ ngày:
                                     <%--<input type="text" id="datepicker" runat="server">--%>
                                     <input type="date" id="Date1" name="date" runat="server">
-                    Den ngay:                                    
+                    Đến ngày:                                    
                                     <input type="date" id="ngaychiid" name="date" runat="server">
                                     
 
@@ -51,7 +51,7 @@
                                     <input type="text" id="partno_search" runat="server">
 
                     <button class="btn btn-primary" type="button" runat="server" onserverclick="Search_Date_Click" >
-                        <i class="fa fa-fw fa-lg fa-search"></i>Filter</button>
+                        <i class="fa fa-fw fa-lg fa-search"></i>Lọc</button>
 
                     
 
@@ -178,7 +178,7 @@
                            <%-- Hinh thuc: <b id="hinhthucnghi2"></b>
                             &nbsp;&nbsp;&nbsp; tongtienhat: <b id="tongtienhat2"></b><br />
                            Ten phong: <b id="tenphong2"></b>--%>
-                           &nbsp;&nbsp;&nbsp; Tong tien hang: <b id="tongtien2"></b>                                                      
+                           &nbsp;&nbsp;&nbsp; Tong tiền hàng: <b id="tongtien2"></b>                                                      
 
 
                                 <div style="width: 100%; height: 300px; float: left;">  
@@ -198,8 +198,8 @@
                                 </div>
                             
                            <br /> 
-                           Tong tien: <b id="thantoan2"></b> &nbsp;&nbsp;&nbsp;  C/K: <b id="chietkau2"></b> <br />
-                           KH thanh toan: <b id="khthanhtoan2"></b> &nbsp;&nbsp;&nbsp; Con lai: <b id="psno2"></b>     
+                           Tổng tiền: <b id="thantoan2"></b> &nbsp;&nbsp;&nbsp;  C/K: <b id="chietkau2"></b> <br />
+                           Thanh toán NCC: <b id="khthanhtoan2"></b> &nbsp;&nbsp;&nbsp; Còn lại: <b id="psno2"></b>     
                            <div>Bằng chữ: <span id="bangchuid" style="font-weight:200; color:red;"></span></div>
                         </div>
                         

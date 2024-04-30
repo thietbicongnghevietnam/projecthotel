@@ -6,7 +6,7 @@
 <head runat="server">
     <meta charset="utf-8" />
     <%--<meta name="viewport" content="width=device-width, initial-scale=1.0" />--%>
-    <title><%: Page.Title %> - My ASP.NET Application</title>
+    <title><%: Page.Title %> - Hệ thống phần mềm quản lý</title>
 
 <%--    <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
@@ -115,11 +115,11 @@
           </li>
        
          <li class="nav-item">
-            <a href="Phieunhaphang.aspx" target="_blank" class="nav-link" style="width:180px; text-align:center;">PHIEU NHAP HANG</a>
+            <a href="Phieunhaphang.aspx" target="_blank" class="nav-link" style="width:180px; text-align:center;">PHIẾU NHẬP HÀNG</a>
           </li>
 
         <li class="nav-item">
-            <a href="Phieubanhang.aspx" target="_blank" class="nav-link" style="width:180px; text-align:center;">PHIEU BAN HANG</a>
+            <a href="Phieubanhang.aspx" target="_blank" class="nav-link" style="width:180px; text-align:center;">PHIẾU BÁN HÀNG</a>
           </li>
         <%if (Role_ == "admin") {%>
          <li class="nav-item dropdown">
@@ -187,12 +187,13 @@
     <!-- SEARCH FORM -->
     <form class="form-inline ml-3">
       <div class="input-group input-group-sm">
-        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+          <b style="font-size:14px; font-family:Tahoma; color:blue;"><i>Hỗ trợ khách hàng 24/24 : 0979 479 007 </i></b>
+       <%-- <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
         <div class="input-group-append">
           <button class="btn btn-navbar" type="submit">
             <i class="fas fa-search"></i>
           </button>
-        </div>
+        </div>--%>
       </div>
     </form>
 

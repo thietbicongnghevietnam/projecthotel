@@ -31,13 +31,13 @@ namespace WebApplication1 {
         protected global::System.Web.UI.WebControls.DropDownList dr_nhacungcap;
         
         /// <summary>
-        /// Button1 control.
+        /// Button4 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton Button1;
+        protected global::System.Web.UI.HtmlControls.HtmlButton Button4;
         
         /// <summary>
         /// Button2 control.

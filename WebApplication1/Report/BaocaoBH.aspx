@@ -24,9 +24,9 @@
                 <h3 class="card-title">Báo cáo bán hàng theo hóa đơn</h3>
               </div>
          <div class="col-sm-12">            
-              Tu ngay:                                   
+              Từ ngày:                                   
                      <input type="date" id="Date2" name="date" runat="server">
-             Den ngay:   
+             Đến ngày:   
                     <input type="date" id="ngaychiid" name="date" runat="server">
 
              <input type="checkbox" id="check_partno_search" style="width: 20px; height: 20px;" name="check_partno_search">
@@ -34,7 +34,7 @@
                                     <input type="text" id="partno_search" runat="server">
 
              <button class="btn btn-primary" type="button" runat="server" onserverclick="Search_Date_Click2" >
-                        <i class="fa fa-fw fa-lg fa-search"></i>Filter</button>
+                        <i class="fa fa-fw fa-lg fa-search"></i>Lọc</button>
           </div>
 
         
@@ -127,7 +127,7 @@
                     <div class="modal-header">
                         <div class="row">
                             <div>
-                                <h4 class="modal-title" id="headerTag" style="float: left">THONG TIN HOA DON BAN HANG</h4>
+                                <h4 class="modal-title" id="headerTag" style="float: left">THÔNG TIN HÓA ĐƠN BÁN HÀNG</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="float: right; margin-left: 300px;">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -139,20 +139,20 @@
                     <div class="modal-body">
                        
                        <div class="container-fluid" id="printableArea" style="width:400px;height:auto; float:left">
-                            Hinh thuc: <b id="hinhthucnghi2"></b>
-                            &nbsp;&nbsp;&nbsp; tongtienhat: <b id="tongtienhat2"></b><br />
-                           Ten phong: <b id="tenphong2"></b>
-                           &nbsp;&nbsp;&nbsp; Tong tien hang: <b id="tongtien2"></b>                                                      
+                            Loại hình: <b id="hinhthucnghi2"></b>
+                            &nbsp;&nbsp;&nbsp; tổng tiền hát: <b id="tongtienhat2"></b><br />
+                           Tên phòng: <b id="tenphong2"></b>
+                           &nbsp;&nbsp;&nbsp; Tổng tiền hàng: <b id="tongtien2"></b>                                                      
 
 
                                 <div style="width: 100%; height: 300px; float: left;">  
                                     <table class="display table table-bordered dataTable no-footer">
                                         <thead>
                                             <tr>
-                                                <th>Hanghoa</th>
-                                                <th>tienhang</th>
+                                                <th>Hàng hóa</th>
+                                                <th>Tiền hàng</th>
                                                 <th>statusKaraoke</th>
-                                                <th>sohoadon</th>                                                 
+                                                <th>Số HĐ</th>                                                 
                                             </tr>
                                             <tbody id="tbnhaphang_inhoadon">
                                             </tbody>
@@ -162,8 +162,8 @@
                                 </div>
                             
                            <br /> 
-                           Tong tien: <b id="thantoan2"></b> &nbsp;&nbsp;&nbsp;  C/K: <b id="chietkau2"></b> <br />
-                           KH thanh toan: <b id="khthanhtoan2"></b> &nbsp;&nbsp;&nbsp; Con lai: <b id="psno2"></b>     
+                           Tổng tiền: <b id="thantoan2"></b> &nbsp;&nbsp;&nbsp;  C/K: <b id="chietkau2"></b> <br />
+                           KH thanh toán: <b id="khthanhtoan2"></b> &nbsp;&nbsp;&nbsp; Còn lại: <b id="psno2"></b>     
                            <div>Bằng chữ: <span id="bangchuid" style="font-weight:200; color:red;"></span></div>
                         </div>
                         

@@ -269,9 +269,29 @@ namespace WebApplication1
             ds.Tables.Add(dt2);
             daresult = DataSetToJSON(ds);
             return daresult;
+        }
+
+        [WebMethod]
+        public static string Savekhachhang(string idmakh, string idtenkh, string idcongnoden, string idcongnodi)
+        {
+            string thongbao = "";
+            DataTable dt = new DataTable();
+            dt = DataConn.StoreFillDS("NH_insert_khachhang", System.Data.CommandType.StoredProcedure, idmakh, idtenkh, idcongnoden, idcongnodi);
+            if (dt.Rows[0][0].ToString() != "0")
+            {
+                //thongbao = "OK" + "," + dtlevel.Rows[0][1].ToString();
+
+                //thongbao = "OK";
+                thongbao = dt.Rows[0][0].ToString() + "," + dt.Rows[0][1].ToString();
+            }
+            else
+            {
+                thongbao = "NG";
+            }
+            return thongbao;
 
         }
-       
+
 
 
     }
