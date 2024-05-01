@@ -135,6 +135,13 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="Danhmuc\Danhmucbanphong.aspx" />
+    <Content Include="Danhmuc\Danhmuchanghoa.aspx" />
+    <Content Include="Danhmuc\Danhmuckhachhang.aspx" />
+    <Content Include="Danhmuc\Danhmucnhacungcap.aspx" />
+    <Content Include="Danhmuc\Danhmucnhanvien.aspx" />
+    <Content Include="Danhmuc\Danhmucnhomhang.aspx" />
+    <Content Include="Danhmuc\DMKhuvuc.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="dist\contextmenu.css" />
     <Content Include="dist\contextmenu.js" />
@@ -2446,6 +2453,9 @@
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Site.Master" />
+    <Content Include="TemplateReport\banhangtheongayhd.aspx" />
+    <Content Include="TemplateReport\Baocaotonghopthuchi.aspx" />
+    <Content Include="TemplateReport\nhaphangtheongayhd.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
@@ -2478,6 +2488,55 @@
     </Compile>
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Danhmuc\Danhmucbanphong.aspx.cs">
+      <DependentUpon>Danhmucbanphong.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Danhmuc\Danhmucbanphong.aspx.designer.cs">
+      <DependentUpon>Danhmucbanphong.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Danhmuc\Danhmuchanghoa.aspx.cs">
+      <DependentUpon>Danhmuchanghoa.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Danhmuc\Danhmuchanghoa.aspx.designer.cs">
+      <DependentUpon>Danhmuchanghoa.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Danhmuc\Danhmuckhachhang.aspx.cs">
+      <DependentUpon>Danhmuckhachhang.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Danhmuc\Danhmuckhachhang.aspx.designer.cs">
+      <DependentUpon>Danhmuckhachhang.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Danhmuc\Danhmucnhacungcap.aspx.cs">
+      <DependentUpon>Danhmucnhacungcap.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Danhmuc\Danhmucnhacungcap.aspx.designer.cs">
+      <DependentUpon>Danhmucnhacungcap.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Danhmuc\Danhmucnhanvien.aspx.cs">
+      <DependentUpon>Danhmucnhanvien.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Danhmuc\Danhmucnhanvien.aspx.designer.cs">
+      <DependentUpon>Danhmucnhanvien.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Danhmuc\Danhmucnhomhang.aspx.cs">
+      <DependentUpon>Danhmucnhomhang.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Danhmuc\Danhmucnhomhang.aspx.designer.cs">
+      <DependentUpon>Danhmucnhomhang.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Danhmuc\DMKhuvuc.aspx.cs">
+      <DependentUpon>DMKhuvuc.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Danhmuc\DMKhuvuc.aspx.designer.cs">
+      <DependentUpon>DMKhuvuc.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -2519,6 +2578,7 @@
     </Compile>
     <Compile Include="Phieunhaphang.aspx.cs">
       <DependentUpon>Phieunhaphang.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Phieunhaphang.aspx.designer.cs">
       <DependentUpon>Phieunhaphang.aspx</DependentUpon>
@@ -2600,6 +2660,27 @@
     </Compile>
     <Compile Include="Site.Mobile.Master.designer.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateReport\banhangtheongayhd.aspx.cs">
+      <DependentUpon>banhangtheongayhd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TemplateReport\banhangtheongayhd.aspx.designer.cs">
+      <DependentUpon>banhangtheongayhd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateReport\Baocaotonghopthuchi.aspx.cs">
+      <DependentUpon>Baocaotonghopthuchi.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TemplateReport\Baocaotonghopthuchi.aspx.designer.cs">
+      <DependentUpon>Baocaotonghopthuchi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateReport\nhaphangtheongayhd.aspx.cs">
+      <DependentUpon>nhaphangtheongayhd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TemplateReport\nhaphangtheongayhd.aspx.designer.cs">
+      <DependentUpon>nhaphangtheongayhd.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>

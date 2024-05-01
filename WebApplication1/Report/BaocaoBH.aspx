@@ -35,7 +35,13 @@
 
              <button class="btn btn-primary" type="button" runat="server" onserverclick="Search_Date_Click2" >
                         <i class="fa fa-fw fa-lg fa-search"></i>Lọc</button>
+
+              <button class="btn btn-primary" type="button" runat="server">
+                        <i class="fa fa-download"></i><a href="../TemplateReport/banhangtheongayhd.aspx" target="_blank" style="color:white">Print</a></button>
           </div>
+
+
+       
 
         
 

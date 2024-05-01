@@ -54,6 +54,8 @@
                         <i class="fa fa-fw fa-lg fa-search"></i>Lọc</button>
 
                     
+                    <button class="btn btn-primary" type="button" runat="server">
+                        <i class="fa fa-download"></i><a href="../TemplateReport/nhaphangtheongayhd.aspx" target="_blank" style="color:white">Print</a></button>
 
                     <%--<button class="btn btn-primary" type="button" runat="server" style="margin-left:20px;"  >
                         Inventory Equipment

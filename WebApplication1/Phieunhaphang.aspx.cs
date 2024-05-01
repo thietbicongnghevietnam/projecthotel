@@ -17,15 +17,15 @@ using Newtonsoft.Json.Linq;
 
 namespace WebApplication1
 {
-    public class OrderList
-    {
-        public List<Danhmuc> Orders { get; set; }
-    }
-    public class Danhmuc
-    {
-        public string mahang { get; set; }
-        public string soluong { get; set; }      
-    }
+    //public class OrderList
+    //{
+    //    public List<Danhmuc> Orders { get; set; }
+    //}
+    //public class Danhmuc
+    //{
+    //    public string mahang { get; set; }
+    //    public string soluong { get; set; }      
+    //}
 
     public partial class Phieunhaphang : System.Web.UI.Page
     {

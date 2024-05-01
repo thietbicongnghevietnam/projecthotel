@@ -128,8 +128,8 @@
               <li><a href="Phieuchi.aspx" target="_blank" class="dropdown-item">Phiếu chi</a></li>
               <li><a href="Phieuthu.aspx" target="_blank" class="dropdown-item">Phiếu thu</a></li>
                 <li class="dropdown-divider"></li>
-              <li><a href="Report/Baocaosoquy.aspx" target="_blank" class="dropdown-item">BC sổ quỹ</a></li>
-                <li><a href="Report/Baocaotonghopthuchi.aspx" target="_blank" class="dropdown-item">BC tổng hợp thu chi</a></li>
+              <li><a href="Report/Baocaosoquy.aspx" target="_blank" class="dropdown-item">BC tổng hợp thu chi</a></li>
+               <%-- <li><a href="Report/Baocaotonghopthuchi.aspx" target="_blank" class="dropdown-item">BC tổng hợp thu chi</a></li>--%>
               <!-- End Level two -->
             </ul>
           </li>
@@ -162,15 +162,15 @@
          <li class="nav-item dropdown">
             <a id="dropdownSubMenu4" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Danh mục</a>
             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-              <li><a href="#" class="dropdown-item">Danh mục hàng hóa</a></li>
-              <li><a href="#" class="dropdown-item">Danh mục khách hàng</a></li>
-              <li><a href="#" class="dropdown-item">Danh mục bàn/phòng</a></li>
+              <li><a href="Danhmuc/Danhmuchanghoa.aspx" target="_blank" class="dropdown-item">Danh mục hàng hóa</a></li>
+              <li><a href="Danhmuc/Danhmuckhachhang.aspx" target="_blank" class="dropdown-item">Danh mục khách hàng</a></li>
+              <li><a href="Danhmuc/Danhmucbanphong.aspx" target="_blank" class="dropdown-item">Danh mục bàn/phòng</a></li>
               <li class="dropdown-divider"></li>
-              <li><a href="#" class="dropdown-item">Danh mục khu vực</a></li>
-              <li><a href="#" class="dropdown-item">Danh mục nhóm hàng</a></li> 
-              <li><a href="#" class="dropdown-item">Danh mục NCC</a></li>
+              <li><a href="Danhmuc/DMKhuvuc.aspx" target="_blank" class="dropdown-item">Danh mục khu vực</a></li>
+              <li><a href="Danhmuc/Danhmucnhomhang.aspx" target="_blank" class="dropdown-item">Danh mục nhóm hàng</a></li> 
+              <li><a href="Danhmuc/Danhmucnhacungcap.aspx" target="_blank" class="dropdown-item">Danh mục NCC</a></li>
                 <li class="dropdown-divider"></li>
-              <li><a href="#" class="dropdown-item">Danh mục nhân viên</a></li>
+              <li><a href="Danhmuc/Danhmucnhanvien.aspx" target="_blank" class="dropdown-item">Danh mục nhân viên</a></li>
             </ul>
           </li>
          <%} %>
@@ -187,7 +187,7 @@
     <!-- SEARCH FORM -->
     <form class="form-inline ml-3">
       <div class="input-group input-group-sm">
-          <b style="font-size:14px; font-family:Tahoma; color:blue;"><i>Hỗ trợ khách hàng 24/24 : 0979 479 007 </i></b>
+          <b style="font-size:14px; font-family:Tahoma; color:blue;"><i>Hỗ trợ khách hàng 24/24 : 0979 479 007 </i></b>          
        <%-- <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
         <div class="input-group-append">
           <button class="btn btn-navbar" type="submit">
@@ -201,7 +201,7 @@
                              <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-user"></i> User <span class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#"><i class="far fa-id-badge"></i> Profile </a></li>
+                                    <li><a href="#"><i class="far fa-id-badge"></i> Profile - <%=Session["username"].ToString() %>  </a></li>
                                     <li><a href="Accounts/Loginnew.aspx" id="btn_logout"onserverclick="bttLogout_Click" ><i class="fas fa-sign-out-alt"></i> Logout</a></li>
                                 </ul>
                             </li>

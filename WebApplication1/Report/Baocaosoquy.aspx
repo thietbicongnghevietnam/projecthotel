@@ -46,10 +46,11 @@
                                     <input type="text" id="partno_search" runat="server">
 
                     <button class="btn btn-primary" type="button" runat="server" onserverclick="Search_Date_Click" >
-                        <i class="fa fa-fw fa-lg fa-search"></i>Filter</button>
+                        <i class="fa fa-fw fa-lg fa-search"></i>Lọc</button>
 
                     
-
+                    <button class="btn btn-primary" type="button" runat="server">
+                        <i class="fa fa-download"></i><a href="../TemplateReport/Baocaotonghopthuchi.aspx" target="_blank" style="color:white">BC tổng hợp thu chi</a></button>
                     <%--<button class="btn btn-primary" type="button" runat="server" style="margin-left:20px;"  >
                         Inventory Equipment
                     </button>--%>
