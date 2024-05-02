@@ -2692,6 +2692,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />
+    <Folder Include="Textfile\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

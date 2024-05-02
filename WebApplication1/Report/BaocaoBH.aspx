@@ -38,6 +38,8 @@
 
               <button class="btn btn-primary" type="button" runat="server">
                         <i class="fa fa-download"></i><a href="../TemplateReport/banhangtheongayhd.aspx" target="_blank" style="color:white">Print</a></button>
+
+             <button class="btn btn-success" type="button" runat="server" style="margin-left:50px;" onserverclick="Download_Click2" ><i class="fa fa-download">In bao cao</i></button>
           </div>
 
 

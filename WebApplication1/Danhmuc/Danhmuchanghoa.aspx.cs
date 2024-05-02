@@ -10,6 +10,8 @@ using WebApplication1.App_Code;
 using System.Web.Services;
 using Newtonsoft.Json.Linq;
 using System.Web.Script.Serialization;
+using System.Data.SqlClient;
+using System.Data.OleDb;
 
 namespace WebApplication1.Danhmuc
 {
@@ -40,6 +42,73 @@ namespace WebApplication1.Danhmuc
                 dr_nhomhang2.DataBind();
             }
                
+        }
+
+        protected void btnDownloadClick(Object sender, EventArgs e)
+        {
+            try
+            {
+                string fileName = "mauupload_hanghoa.xlsx";
+                string fileExtension = ".xlsx";
+
+                // Set Response.ContentType
+                Response.ContentType = GetContentType(fileExtension);
+
+                // Append header
+                Response.AppendHeader("Content-Disposition", "attachment; filename=" + fileName);
+
+                // Write the file to the Response
+                Response.TransmitFile(Server.MapPath("~/Textfile/" + fileName));
+                Response.End();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        private string GetContentType(string fileExtension)
+        {
+            if (string.IsNullOrEmpty(fileExtension))
+                return string.Empty;
+
+            string contentType = string.Empty;
+            switch (fileExtension)
+            {
+                case ".htm":
+                case ".html":
+                    contentType = "text/HTML";
+                    break;
+                case ".csv":
+                case ".txt":
+                    contentType = "text/plain";
+                    break;
+
+                case ".doc":
+                case ".rtf":
+                case ".docx":
+                    contentType = "Application/msword";
+                    break;
+
+                case ".xls":
+                case ".xlsx":
+                    contentType = "Application/x-msexcel";
+                    break;
+
+                case ".jpg":
+                case ".jpeg":
+                    contentType = "image/jpeg";
+                    break;
+
+                case ".gif":
+                    contentType = "image/GIF";
+                    break;
+
+                case ".pdf":
+                    contentType = "application/pdf";
+                    break;
+            }
+            return contentType;
         }
 
         public void Download_Click(object sender, EventArgs e)
@@ -88,6 +157,88 @@ namespace WebApplication1.Danhmuc
                 }
             }
             Response.End();  //must this sentence
+        }
+
+        protected void ImportFromExcel(object sender, EventArgs e)
+        {
+            // CHECK IF A FILE HAS BEEN SELECTED.
+            if ((FileUpload.HasFile))
+            {
+
+                if (!Convert.IsDBNull(FileUpload.PostedFile) &
+                    FileUpload.PostedFile.ContentLength > 0)
+                {
+                    //tam thoi rao cho nay lai. them moi thi update  ==> xoa het xu dung lenh nay
+                    //DataConn.Execute_NonSQL("truncate table [FREE_LOCATION].[dbo].[DM_Mater_Reability];");
+
+                    //FIRST, SAVE THE SELECTED FILE IN THE ROOT DIRECTORY.
+                    FileUpload.SaveAs(Server.MapPath(".") + "\\" + FileUpload.FileName);
+
+                    SqlBulkCopy oSqlBulk = null;
+
+                    // SET A CONNECTION WITH THE EXCEL FILE.
+                    OleDbConnection myExcelConn = new OleDbConnection
+                        ("Provider=Microsoft.ACE.OLEDB.12.0; " +
+                            "Data Source=" + Server.MapPath(".") + "\\" + FileUpload.FileName +
+                            ";Extended Properties=Excel 12.0;");
+                    try
+                    {
+                        myExcelConn.Open();
+
+                        // GET DATA FROM EXCEL SHEET.
+                        OleDbCommand objOleDB =
+                            new OleDbCommand("SELECT *FROM [Sheet1$]", myExcelConn);
+
+                        // READ THE DATA EXTRACTED FROM THE EXCEL FILE.
+                        OleDbDataReader objBulkReader = null;
+                        objBulkReader = objOleDB.ExecuteReader();
+
+                        // SET THE CONNECTION STRING.
+                        //string sCon = "Data Source=10.92.186.30;Persist Security Info=False;" +
+                        //    "Initial Catalog=FREE_LOCATION;User Id=sa;Password=Psnvdb2013;" +
+                        //    "Connect Timeout=30;";                       
+
+                        string sCon = "Data Source=10.92.186.30;Persist Security Info=False;" +
+                           "Initial Catalog=Warehouse_BPS;User Id=sa;Password=Psnvdb2013;" +
+                           "Connect Timeout=30;";
+
+
+                        using (SqlConnection con = new SqlConnection(sCon))
+                        {
+                            con.Open();
+                            // FINALLY, LOAD DATA INTO THE DATABASE TABLE.
+                            oSqlBulk = new SqlBulkCopy(con);
+                            oSqlBulk.DestinationTableName = "hthanghoa"; // TABLE NAME.
+                            oSqlBulk.WriteToServer(objBulkReader);
+                        }
+
+                        lblConfirm.Text = "DATA IMPORTED SUCCESSFULLY.";
+                        lblConfirm.Attributes.Add("style", "color:green");
+                        Page.ClientScript.RegisterStartupScript(Page.GetType(), "Message", "toastr.success('Thành công!');", true);
+
+                        //File.Delete(Server.MapPath(".") + "\\" + FileUpload.FileName); // DELETE THE FILE upload len.
+
+                        //load grid
+                        dt_hanghoa = DataConn.StoreFillDS("NH_danhmuchanghoa", System.Data.CommandType.StoredProcedure);
+                        //LoadData();
+                    }
+                    catch (Exception ex)
+                    {
+
+                        lblConfirm.Text = ex.Message;
+                        lblConfirm.Attributes.Add("style", "color:red");
+
+                    }
+                    finally
+                    {
+                        // CLEAR.
+                        oSqlBulk.Close();
+                        oSqlBulk = null;
+                        myExcelConn.Close();
+                        myExcelConn = null;
+                    }
+                }
+            }
         }
 
         public void updatehanghoa(object sender, EventArgs e)

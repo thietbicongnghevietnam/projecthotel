@@ -27,10 +27,17 @@ namespace WebApplication1.Report
 
                 dt_getSohd = DataConn.StoreFillDS("NH_getsohoadon_BH", System.Data.CommandType.StoredProcedure);
                 sohoadon = dt_getSohd.Rows[0][0].ToString();
-            }
+            }               
+        }
 
-               
+        public void Download_Click2(object sender, EventArgs e)
+        {
+            //string _itemid = itemid.Value.ToString();
+            string _ngaymuon = Request.Form[txtngaymuon.UniqueID];//txtngaymuon.Text.ToString();
+            string _ngaytra = Request.Form[txtngaytra.UniqueID];// txtngaytra.Text.ToString();
 
+            //Response.Redirect("ReportBorrowReturn.aspx?itemid='" + _itemid + "' ");
+            Response.Redirect("/TemplateReport/banhangtheongayhd.aspx?_ngaymuon='" + _ngaymuon + "'&_ngaytra='" + _ngaytra + "' ");
         }
 
         public void BtnOrderItem(object sender, EventArgs e)
