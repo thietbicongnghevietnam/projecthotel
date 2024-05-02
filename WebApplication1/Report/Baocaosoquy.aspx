@@ -49,11 +49,10 @@
                         <i class="fa fa-fw fa-lg fa-search"></i>Lọc</button>
 
                     
-                    <button class="btn btn-primary" type="button" runat="server">
-                        <i class="fa fa-download"></i><a href="../TemplateReport/Baocaotonghopthuchi.aspx" target="_blank" style="color:white">BC tổng hợp thu chi</a></button>
-                    <%--<button class="btn btn-primary" type="button" runat="server" style="margin-left:20px;"  >
-                        Inventory Equipment
-                    </button>--%>
+                   <%-- <button class="btn btn-primary" type="button" runat="server">
+                        <i class="fa fa-download"></i><a href="../TemplateReport/Baocaotonghopthuchi.aspx" target="_blank" style="color:white">BC tổng hợp thu chi</a></button>--%>
+                  
+                     <button class="btn btn-success" type="button" runat="server" style="margin-left:50px;" onserverclick="Download_Click2" ><i class="fa fa-download">BC tổng hợp thu chi</i></button>
                   
                           
                     <button class="btn btn-primary" type="button" runat="server" style="margin-left:20px;" onserverclick="Download_Click" ><i class="fa fa-download"></i>Export</button>
@@ -108,8 +107,8 @@
                                         <td><%=rows["IDnguoinhan"].ToString()%></td>
                                          <td><%=rows["IDkhachhang"].ToString()%></td> 
                                          <td><%=rows["IDnhacungcap"].ToString()%></td>
-                                        <td><%=rows["psco"].ToString()%></td>
-                                        <td><%=rows["psno"].ToString()%></td>
+                                        <td><%=String.Format("{0:N0}", Int32.Parse(rows["psco"].ToString()))%></td>
+                                        <td><%=String.Format("{0:N0}", Int32.Parse(rows["psno"].ToString()))%></td>
                                         <td><%=rows["Mota"].ToString()%></td>
 
                                         <%if ((i == dt_soquy.Rows.Count)  && rows["ngaygiaodich"].ToString() != "") { %>

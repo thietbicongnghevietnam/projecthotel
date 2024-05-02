@@ -36,10 +36,12 @@
              <button class="btn btn-primary" type="button" runat="server" onserverclick="Search_Date_Click2" >
                         <i class="fa fa-fw fa-lg fa-search"></i>Lọc</button>
 
-              <button class="btn btn-primary" type="button" runat="server">
-                        <i class="fa fa-download"></i><a href="../TemplateReport/banhangtheongayhd.aspx" target="_blank" style="color:white">Print</a></button>
+              <%--<button class="btn btn-primary" type="button" runat="server">
+                        <i class="fa fa-download"></i><a href="../TemplateReport/banhangtheongayhd.aspx" target="_blank" style="color:white">Print</a></button>--%>
 
              <button class="btn btn-success" type="button" runat="server" style="margin-left:50px;" onserverclick="Download_Click2" ><i class="fa fa-download">In bao cao</i></button>
+
+             <button class="btn btn-primary" type="button" runat="server" style="margin-left:20px;" onserverclick="Download_Click" ><i class="fa fa-download"></i>Export</button>
           </div>
 
 
@@ -95,10 +97,10 @@
                       <td><%=rows["tienphong"].ToString()%></td>
                       <td><%=rows["tiengiohat"].ToString()%></td>
                      <%-- <td><%=rows["items"].ToString()%></td>--%>
-                      <td><%=rows["tienhang"].ToString()%></td>
-                      <td><%=rows["tongtien"].ToString()%></td>
-                      <td><%=rows["chietkhau"].ToString()%></td>
-                      <td><%=rows["tiensauchietkhau"].ToString()%></td>
+                      <td><%=String.Format("{0:N0}", Int32.Parse(rows["tienhang"].ToString()))%></td>
+                      <td><%=String.Format("{0:N0}", Int32.Parse(rows["tongtien"].ToString()))%></td>
+                      <td><%=String.Format("{0:N0}", Int32.Parse(rows["chietkhau"].ToString()))%></td>
+                      <td><%=String.Format("{0:N0}", Int32.Parse(rows["tiensauchietkhau"].ToString()))%></td>
                       <%--<td><%=rows["hinhthucnghi"].ToString()%></td>
                       <td><%=rows["mohinh"].ToString()%></td>--%>
 

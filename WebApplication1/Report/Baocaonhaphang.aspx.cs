@@ -78,17 +78,31 @@ namespace WebApplication1.Report
 
         }
 
-            //protected void filter_cate_Change(object sender, EventArgs e)
-            //{
-            //    string _cate = dr_filter_cate.Text;
-            //    dt_history = DataConn.StoreFillDS("Get_history_device_borrow_cate", System.Data.CommandType.StoredProcedure, _cate);
-            //}
+        public void Download_Click2(object sender, EventArgs e)
+        {
+            //string _itemid = itemid.Value.ToString();
+            string tungay = Date1.Value;// Request.Form[txtngaymuon.UniqueID];//txtngaymuon.Text.ToString();
+            string denngay = ngaychiid.Value;// Request.Form[txtngaytra.UniqueID];// txtngaytra.Text.ToString();
 
-            //public void Download_Click2(object sender, EventArgs e)
-            //{
-            //    string _itemid = itemid.Value.ToString();
-            //    Response.Redirect("ReportBorrowReturn.aspx?itemid='" + _itemid + "' ");
-            //}
+            //Response.Redirect("ReportBorrowReturn.aspx?itemid='" + _itemid + "' ");
+            Response.Redirect("/TemplateReport/nhaphangtheongayhd.aspx?tungay='" + tungay + "'&denngay='" + denngay + "' ");
+
+            //string url = "/TemplateReport/nhaphangtheongayhd.aspx?tungay='" + tungay + "'&denngay='" + denngay + "'";
+            //string script = "<script>window.open('" + url + "', '_blank');</script>";
+            //Page.ClientScript.RegisterStartupScript(this.GetType(), "OpenWindow", script);
+        }
+
+        //protected void filter_cate_Change(object sender, EventArgs e)
+        //{
+        //    string _cate = dr_filter_cate.Text;
+        //    dt_history = DataConn.StoreFillDS("Get_history_device_borrow_cate", System.Data.CommandType.StoredProcedure, _cate);
+        //}
+
+        //public void Download_Click2(object sender, EventArgs e)
+        //{
+        //    string _itemid = itemid.Value.ToString();
+        //    Response.Redirect("ReportBorrowReturn.aspx?itemid='" + _itemid + "' ");
+        //}
 
         protected void Search_Date_Click(object sender, EventArgs e)
         {

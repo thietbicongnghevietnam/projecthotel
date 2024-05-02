@@ -54,12 +54,10 @@
                         <i class="fa fa-fw fa-lg fa-search"></i>Lọc</button>
 
                     
-                    <button class="btn btn-primary" type="button" runat="server">
-                        <i class="fa fa-download"></i><a href="../TemplateReport/nhaphangtheongayhd.aspx" target="_blank" style="color:white">Print</a></button>
+                   <%-- <button class="btn btn-primary" type="button" runat="server">
+                        <i class="fa fa-download"></i><a href="../TemplateReport/nhaphangtheongayhd.aspx" target="_blank" style="color:white">Print</a></button>--%>
 
-                    <%--<button class="btn btn-primary" type="button" runat="server" style="margin-left:20px;"  >
-                        Inventory Equipment
-                    </button>--%>
+                    <button class="btn btn-success" type="button" runat="server" style="margin-left:50px;" onserverclick="Download_Click2" ><i class="fa fa-download">In bao cao</i></button>
                   
                           
                     <button class="btn btn-primary" type="button" runat="server" style="margin-left:20px;" onserverclick="Download_Click" ><i class="fa fa-download"></i>Export</button>
@@ -102,7 +100,7 @@
                                         <th>tongtien</th>
                                         <th>chietkhau</th> 
                                         <th>tongtienthanhtoan</th> 
-                                         <th>psco</th> 
+                                         <%--<th>psco</th> --%>
                                         <th>psno</th>
                                         <th>created</th>
                                                                                
@@ -119,11 +117,11 @@
                                         <td><%=i %></td>
                                         <td><%=rows["sohd"].ToString()%></td>
                                         <td><%=rows["items"].ToString()%></td>
-                                        <td><%=rows["tongtien"].ToString()%></td>
-                                        <td><%=rows["chietkhau"].ToString()%></td>
-                                        <td><%=rows["tongtienthanhtoan"].ToString()%></td>
-                                         <td><%=rows["psco"].ToString()%></td> 
-                                        <td><%=rows["psno"].ToString()%></td>
+                                        <td><%=String.Format("{0:N0}", Int32.Parse(rows["tongtien"].ToString()))%></td>
+                                        <td><%=String.Format("{0:N0}", Int32.Parse(rows["chietkhau"].ToString()))%></td>
+                                        <td><%=String.Format("{0:N0}", Int32.Parse(rows["tongtienthanhtoan"].ToString()))%></td>
+                                        <%-- <td><%=rows["psco"].ToString()%></td> --%>
+                                        <td><%=String.Format("{0:N0}", Int32.Parse(rows["psno"].ToString()))%></td>
                                         <td><%=rows["created"].ToString()%></td>
                                        
                                         <td>

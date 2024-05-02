@@ -68,6 +68,16 @@ namespace WebApplication1.Report
             }
         }
 
+        public void Download_Click2(object sender, EventArgs e)
+        {
+            //string _itemid = itemid.Value.ToString();
+            string tungay = Date1.Value;// Request.Form[txtngaymuon.UniqueID];//txtngaymuon.Text.ToString();
+            string denngay = ngaychiid.Value;// Request.Form[txtngaytra.UniqueID];// txtngaytra.Text.ToString();
+
+            //Response.Redirect("ReportBorrowReturn.aspx?itemid='" + _itemid + "' ");
+            Response.Redirect("/TemplateReport/Baocaotonghopthuchi.aspx?tungay='" + tungay + "'&denngay='" + denngay + "' ");
+        }
+
         public void Download_Click(object sender, EventArgs e)
         {
             DataTable dt_dowload = new DataTable();

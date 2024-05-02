@@ -33,11 +33,11 @@ namespace WebApplication1.Report
         public void Download_Click2(object sender, EventArgs e)
         {
             //string _itemid = itemid.Value.ToString();
-            string _ngaymuon = Request.Form[txtngaymuon.UniqueID];//txtngaymuon.Text.ToString();
-            string _ngaytra = Request.Form[txtngaytra.UniqueID];// txtngaytra.Text.ToString();
+            string tungay = Date2.Value;// Request.Form[txtngaymuon.UniqueID];//txtngaymuon.Text.ToString();
+            string denngay = ngaychiid.Value;// Request.Form[txtngaytra.UniqueID];// txtngaytra.Text.ToString();
 
             //Response.Redirect("ReportBorrowReturn.aspx?itemid='" + _itemid + "' ");
-            Response.Redirect("/TemplateReport/banhangtheongayhd.aspx?_ngaymuon='" + _ngaymuon + "'&_ngaytra='" + _ngaytra + "' ");
+            Response.Redirect("/TemplateReport/banhangtheongayhd.aspx?tungay='" + tungay + "'&denngay='" + denngay + "' ");
         }
 
         public void BtnOrderItem(object sender, EventArgs e)
@@ -144,6 +144,54 @@ namespace WebApplication1.Report
 
             JavaScriptSerializer json = new JavaScriptSerializer();
             return json.Serialize(dict);
+        }
+
+        public void Download_Click(object sender, EventArgs e)
+        {
+            DataTable dt_dowload = new DataTable();
+            //if (dr_filter_cate.Text == "==select==")
+            //{
+            //    dt_dowload = DataConn.StoreFillDS("Get_history_device_borrow", CommandType.StoredProcedure);
+            //}
+            //else
+            //{
+            //    string _cate = dr_filter_cate.Text;
+            //    dt_dowload = DataConn.StoreFillDS("Get_history_device_borrow_cate", System.Data.CommandType.StoredProcedure, _cate);
+            //}
+
+
+            System.Web.HttpResponse response = System.Web.HttpContext.Current.Response;
+            Response.Clear();
+            Response.Buffer = true;
+            Response.AddHeader("content-disposition", "attachment;filename=Baocao_lichsu_muon.xls");
+            Response.Charset = "";
+            Response.ContentType = "application/ms-excel";
+
+            //System.Web.HttpResponse response = System.Web.HttpContext.Current.Response;
+            //response.Clear();
+            //response.Buffer = true;
+            //response.Charset = "";
+            //response.ContentType = "text/csv";
+            //response.AddHeader("Content-Disposition", "attachment;filename=myfilename.csv");
+
+            if (dt_dowload != null)
+            {
+                foreach (DataColumn dc in dt_dowload.Columns)
+                {
+                    Response.Write(dc.ColumnName + "\t");
+
+                }
+                Response.Write(System.Environment.NewLine);
+                foreach (DataRow dr in dt_dowload.Rows)
+                {
+                    for (int i = 0; i < dt_dowload.Columns.Count; i++)
+                    {
+                        Response.Write(dr[i].ToString() + "\t");
+                    }
+                    Response.Write("\n");
+                }
+            }
+            Response.End();  //must this sentence
         }
 
 
