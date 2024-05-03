@@ -2419,6 +2419,7 @@
     <Content Include="Report\BaocaoBH.aspx" />
     <Content Include="Report\BaocaocongnoKH.aspx" />
     <Content Include="Report\BaocaocongnoNCC.aspx" />
+    <Content Include="Report\Baocaololai.aspx" />
     <Content Include="Report\Baocaonhaphang.aspx" />
     <Content Include="Report\Baocaosoquy.aspx" />
     <Content Include="Report\Baocaotonghopthuchi.aspx" />
@@ -2611,6 +2612,13 @@
     </Compile>
     <Compile Include="Report\BaocaocongnoNCC.aspx.designer.cs">
       <DependentUpon>BaocaocongnoNCC.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Report\Baocaololai.aspx.cs">
+      <DependentUpon>Baocaololai.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Report\Baocaololai.aspx.designer.cs">
+      <DependentUpon>Baocaololai.aspx</DependentUpon>
     </Compile>
     <Compile Include="Report\Baocaonhaphang.aspx.cs">
       <DependentUpon>Baocaonhaphang.aspx</DependentUpon>

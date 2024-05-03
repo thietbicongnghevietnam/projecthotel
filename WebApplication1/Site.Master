@@ -154,7 +154,7 @@
               </li>
               <!-- End Level two -->
 
-               <li><a href="#" class="dropdown-item">BC lỗ lãi</a></li>
+               <li><a href="Report/Baocaololai.aspx" target="_blank" class="dropdown-item">BC lỗ lãi</a></li>
             </ul>
           </li>
              <%} %>
