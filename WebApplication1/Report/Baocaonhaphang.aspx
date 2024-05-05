@@ -35,7 +35,7 @@
            <div>
             <div class="card">
             <div class="card-header">
-                <h1>Báo cáo nhập hàng</h1>
+                <h1>Báo cáo nhập hàng theo hóa đơn</h1>
                 <br />
                 <%--class="card-title"--%>
                 <div class="col-sm-12">
@@ -96,7 +96,7 @@
                  <tr role="row">
                                         <th>NO</th>
                                         <th>sohd</th>
-                                        <th>items</th>
+                                        <%--<th>items</th>--%>
                                         <th>tongtien</th>
                                         <th>chietkhau</th> 
                                         <th>tongtienthanhtoan</th> 
@@ -116,7 +116,7 @@
                                     <tr role="row">                                        
                                         <td><%=i %></td>
                                         <td><%=rows["sohd"].ToString()%></td>
-                                        <td><%=rows["items"].ToString()%></td>
+                                       <%-- <td><%=rows["items"].ToString()%></td>--%>
                                         <td><%=String.Format("{0:N0}", Int32.Parse(rows["tongtien"].ToString()))%></td>
                                         <td><%=String.Format("{0:N0}", Int32.Parse(rows["chietkhau"].ToString()))%></td>
                                         <td><%=String.Format("{0:N0}", Int32.Parse(rows["tongtienthanhtoan"].ToString()))%></td>

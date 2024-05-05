@@ -49,30 +49,7 @@ namespace WebApplication1.Report
             }
             else
             {
-                //check user co trong bang user khong?
-                //dtuser = DataConn.StoreFillDS("Get_userPSNV", System.Data.CommandType.StoredProcedure, userid);
-                //if (dtuser.Rows[0][0].ToString() == "1")
-                //{
-                //    ////user eixsts mater
-                //    dt5 = DataConn.StoreFillDS("Update_order_thietbi", System.Data.CommandType.StoredProcedure, itemorder, userid, lydo, bophan, ngaymuon, ngaytra);
-                //    if (dt5.Rows[0][0].ToString() == "1")
-                //    {
-                //        Page.ClientScript.RegisterStartupScript(Page.GetType(), "Message", "toastr.success('Success!!!');", true);
-                //        dt = DataConn.StoreFillDS("Get_mater_device_borrow", System.Data.CommandType.StoredProcedure);
-                //        txtuserid.Text = "";
-                //    }
-                //    else
-                //    {
-                //        Page.ClientScript.RegisterStartupScript(Page.GetType(), "Message", "toastr.error('NG, You do not Order!'); ", true);
-                //        txtuserid.Text = "";
-                //    }
-                //}
-                //else
-                //{
-                //    //user not eixsts
-                //    Page.ClientScript.RegisterStartupScript(Page.GetType(), "Message", "toastr.error('NG, user does not exists!'); ", true);
-                //    txtuserid.Text = "";
-                //}
+               
             }
 
 
@@ -157,21 +134,16 @@ namespace WebApplication1.Report
         public void Download_Click(object sender, EventArgs e)
         {
             DataTable dt_dowload = new DataTable();
-            //if (dr_filter_cate.Text == "==select==")
-            //{
-            //    dt_dowload = DataConn.StoreFillDS("Get_history_device_borrow", CommandType.StoredProcedure);
-            //}
-            //else
-            //{
-            //    string _cate = dr_filter_cate.Text;
-            //    dt_dowload = DataConn.StoreFillDS("Get_history_device_borrow_cate", System.Data.CommandType.StoredProcedure, _cate);
-            //}
+            string _fromdate = Request.Form[Date1.UniqueID];
+            string _todate = Request.Form[ngaychiid.UniqueID];
+
+            dt_dowload = DataConn.StoreFillDS("NH_BaocaoNH_theongay", System.Data.CommandType.StoredProcedure, _fromdate, _todate);
 
 
             System.Web.HttpResponse response = System.Web.HttpContext.Current.Response;
             Response.Clear();
             Response.Buffer = true;
-            Response.AddHeader("content-disposition", "attachment;filename=Baocao_lichsu_muon.xls");
+            Response.AddHeader("content-disposition", "attachment;filename=Baocao_Nhaphangtheongay.xls");
             Response.Charset = "";
             Response.ContentType = "application/ms-excel";
 

@@ -510,3 +510,5 @@ C:\Nhahang\projecthotel\WebApplication1\bin\Microsoft.CodeDom.Providers.DotNetCo
 C:\Nhahang\projecthotel\WebApplication1\obj\Debug\WebApplication1.csprojResolveAssemblyReference.cache
 C:\Nhahang\projecthotel\WebApplication1\obj\Debug\WebApplication1.dll
 C:\Nhahang\projecthotel\WebApplication1\obj\Debug\WebApplication1.pdb
+C:\Users\ACER\Desktop\Nhahang\projecthotel\WebApplication1\bin\EPPlus.Interfaces.dll
+C:\Users\ACER\Desktop\Nhahang\projecthotel\WebApplication1\bin\EPPlus.System.Drawing.dll

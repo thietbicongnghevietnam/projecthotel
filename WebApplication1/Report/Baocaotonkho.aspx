@@ -121,7 +121,7 @@
                                         <td><%=rows["created"].ToString()%></td>
                                        
                                         <td>
-                                            <a href="#" class="btn btn-info btn-sm" title="delete item" onclick="openEditModal2('<%= rows["mahang"].ToString() %>')"><i class="fas fa-pencil-alt"></i>Thekho</a>
+                                            <a href="#" class="btn btn-info btn-sm" title="delete item" onclick="openEditModal2('<%= rows["tenhang"].ToString() %>')"><i class="fas fa-pencil-alt"></i>Thekho</a>
                                         </td> 
                                         
                                     </tr>
@@ -259,7 +259,8 @@
 
                     });
 
-    function openEditModal2(mahang) {           
+         function openEditModal2(mahang) {   
+             //alert(mahang);
             //$("#txtmahang").val(mahang);
             var fromdate  = $("#Date1").val();
             var todate  = $("#ngaychiid").val();

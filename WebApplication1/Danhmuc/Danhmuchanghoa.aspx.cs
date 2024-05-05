@@ -12,6 +12,8 @@ using Newtonsoft.Json.Linq;
 using System.Web.Script.Serialization;
 using System.Data.SqlClient;
 using System.Data.OleDb;
+using System.Text;
+using System.IO;
 
 namespace WebApplication1.Danhmuc
 {
@@ -111,52 +113,99 @@ namespace WebApplication1.Danhmuc
             return contentType;
         }
 
-        public void Download_Click(object sender, EventArgs e)
-        {
-            DataTable dt_dowload = new DataTable();
-            //if (dr_filter_cate.Text == "==select==")
-            //{
-            //    dt_dowload = DataConn.StoreFillDS("Get_history_device_borrow", CommandType.StoredProcedure);
-            //}
-            //else
-            //{
-            //    string _cate = dr_filter_cate.Text;
-            //    dt_dowload = DataConn.StoreFillDS("Get_history_device_borrow_cate", System.Data.CommandType.StoredProcedure, _cate);
-            //}
+        //public void Download_Click(object sender, EventArgs e)
+        //{
+        //    DataTable dt_dowload = new DataTable();
+        //    dt_dowload = DataConn.StoreFillDS("NH_danhmuchanghoa", System.Data.CommandType.StoredProcedure);          
 
+        //    System.Web.HttpResponse response = System.Web.HttpContext.Current.Response;
+        //    Response.Clear();
+        //    Response.Buffer = true;
+        //    Response.AddHeader("content-disposition", "attachment;filename=Danhmuchanghoa.xls");
+        //    Response.Charset = "";
+        //    //Response.ContentType = "application/ms-excel";
+        //    Response.ContentType = "application/vnd.ms-excel"; // Thay đổi kiểu nội dung
 
-            System.Web.HttpResponse response = System.Web.HttpContext.Current.Response;
-            Response.Clear();
-            Response.Buffer = true;
-            Response.AddHeader("content-disposition", "attachment;filename=Baocao_lichsu_muon.xls");
-            Response.Charset = "";
-            Response.ContentType = "application/ms-excel";
+        //    //System.Web.HttpResponse response = System.Web.HttpContext.Current.Response;
+        //    //response.Clear();
+        //    //response.Buffer = true;
+        //    //response.Charset = "";
+        //    //response.ContentType = "text/csv";
+        //    //response.AddHeader("Content-Disposition", "attachment;filename=myfilename.csv");
 
-            //System.Web.HttpResponse response = System.Web.HttpContext.Current.Response;
-            //response.Clear();
-            //response.Buffer = true;
-            //response.Charset = "";
-            //response.ContentType = "text/csv";
-            //response.AddHeader("Content-Disposition", "attachment;filename=myfilename.csv");
+        //    if (dt_dowload != null)
+        //    {
+        //        // Thêm thẻ meta để chỉ định mã hóa UTF-8
+        //        //Response.Write("<meta http-equiv=\"content-type\" content=\"application/vnd.ms-excel; charset=UTF-8\">");
 
-            if (dt_dowload != null)
+        //        foreach (DataColumn dc in dt_dowload.Columns)
+        //        {
+        //            Response.Write(dc.ColumnName + "\t");
+
+        //        }
+        //        Response.Write(System.Environment.NewLine);
+        //        foreach (DataRow dr in dt_dowload.Rows)
+        //        {
+        //            for (int i = 0; i < dt_dowload.Columns.Count; i++)
+        //            {
+        //                // Mã hóa dữ liệu thành UTF-8
+        //                //Response.Write(HttpUtility.HtmlEncode(dr[i].ToString()) + "\t");
+        //                //Response.Write(dr[i].ToString() + "\t");
+        //                //byte[] bytes = Encoding.Default.GetBytes(dr[i].ToString());
+        //                //string utf8EncodedString = Encoding.UTF8.GetString(bytes);
+        //                //Response.Write(utf8EncodedString + "\t");
+
+        //                byte[] utf8Bytes = Encoding.UTF8.GetBytes(dr[i].ToString());
+        //                string utf8EncodedString = Encoding.UTF8.GetString(utf8Bytes);
+        //                Response.Write(utf8EncodedString + "\t");
+        //            }
+        //            Response.Write("\n");
+        //        }
+        //    }
+        //    Response.End();  //must this sentence
+        //}
+
+        protected void btnExport_Click(object sender, EventArgs e)
+        {          
+            DataTable dataTable = new DataTable();
+            dataTable = DataConn.StoreFillDS("NH_danhmuchanghoa", System.Data.CommandType.StoredProcedure);
+
+            // Tạo một tệp Excel mới
+            string fileName = "ExportedData_" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".xls";
+            string filePath = Server.MapPath("~/Dowloads/" + fileName);
+
+            // Tạo nội dung XML cho tệp Excel
+            string excelContent = "<table><tr><th>ID</th>" +
+                "<th>mahang</th>" +
+                "<th>tenhang</th>" +
+                "<th>soluongton</th>" +
+                "<th>gianhap</th>" +
+                "<th>giaban</th>" +
+                "<th>tennhomhang</th>" +               
+                "</tr>";
+            foreach (DataRow row in dataTable.Rows)
             {
-                foreach (DataColumn dc in dt_dowload.Columns)
-                {
-                    Response.Write(dc.ColumnName + "\t");
-
-                }
-                Response.Write(System.Environment.NewLine);
-                foreach (DataRow dr in dt_dowload.Rows)
-                {
-                    for (int i = 0; i < dt_dowload.Columns.Count; i++)
-                    {
-                        Response.Write(dr[i].ToString() + "\t");
-                    }
-                    Response.Write("\n");
-                }
+                excelContent += "<tr>" +
+                    "<td>" + row["id"].ToString() + "</td>" +
+                    "<td>" + row["mahang"].ToString() + "</td>" +
+                    "<td>" + row["tenhang"].ToString() + "</td>" +
+                    "<td>" + row["soluongton"].ToString() + "</td>" +
+                    "<td>" + row["gianhap"].ToString() + "</td>" +
+                    "<td>" + row["giaban"].ToString() + "</td>" +
+                    "<td>" + row["tennhomhang"].ToString() + "</td>" +
+                    "</tr>";
             }
-            Response.End();  //must this sentence
+            excelContent += "</table>";
+
+            // Lưu nội dung XML vào tệp Excel  // khong can luu
+            File.WriteAllText(filePath, excelContent);
+
+            // Tải tệp Excel xuống
+            Response.Clear();
+            Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            Response.AddHeader("content-disposition", "attachment;  filename=" + fileName);
+            Response.WriteFile(filePath);
+            Response.End();
         }
 
         protected void ImportFromExcel(object sender, EventArgs e)
@@ -196,11 +245,15 @@ namespace WebApplication1.Danhmuc
                         // SET THE CONNECTION STRING.
                         //string sCon = "Data Source=10.92.186.30;Persist Security Info=False;" +
                         //    "Initial Catalog=FREE_LOCATION;User Id=sa;Password=Psnvdb2013;" +
-                        //    "Connect Timeout=30;";                       
+                        //    "Connect Timeout=30;";  
 
-                        string sCon = "Data Source=10.92.186.30;Persist Security Info=False;" +
-                           "Initial Catalog=Warehouse_BPS;User Id=sa;Password=Psnvdb2013;" +
+                        string sCon = "Data Source=./;Persist Security Info=False;" +
+                           "Initial Catalog=Warehouse_BPS;User Id=sa;Password='';" +
                            "Connect Timeout=30;";
+
+                        //string sCon = "Data Source=10.92.186.30;Persist Security Info=False;" +
+                        //   "Initial Catalog=Warehouse_BPS;User Id=sa;Password=Psnvdb2013;" +
+                        //   "Connect Timeout=30;";
 
 
                         using (SqlConnection con = new SqlConnection(sCon))
@@ -224,10 +277,8 @@ namespace WebApplication1.Danhmuc
                     }
                     catch (Exception ex)
                     {
-
                         lblConfirm.Text = ex.Message;
                         lblConfirm.Attributes.Add("style", "color:red");
-
                     }
                     finally
                     {

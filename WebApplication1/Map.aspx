@@ -259,6 +259,7 @@
                                             <td style="padding-bottom: 10px; padding-right: 10px; padding-top: 10px;">
                                                 <%--<input type="text" placeholder="Chọn tên hàng " id="ajax"
                                                     style="float: left; width: 100%;" class="ajax form-control input-sm" value="" />--%>
+                                                <span id="mahanghoa" hidden ></span>
                                                 <asp:TextBox ID="txt_doc" Style="float: left; width: 100%;" class="ajax form-control input-sm" value="" placeholder="Chọn tên hàng" runat="server"></asp:TextBox>
                                             </td>
                                             <td style="padding-bottom: 10px; padding-right: 5px; padding-left: 5px;"><b style="color: black;">QTY </b></td>
@@ -284,7 +285,7 @@
 
                                             <td style="padding-bottom: 10px; padding-right: 10px; padding-left: 10px;">
                                                 <b style="padding-right: 3px; margin-left: 10px;">Số HD:</b>
-                                                <input  style="width: 80px;margin-left: 5px;" id="hoadonid" name="sohoadon" disabled />                                              
+                                                <input  style="width: 120px;margin-left: 5px;" id="hoadonid" name="sohoadon" disabled />                                              
                                             </td>
                                             <td style="padding-bottom: 10px; padding-right: 10px; padding-left: 10px;">
                                                   <label for="inlaihoadon" style="float: left; margin-top: 5px;">In lại HĐ</label>
@@ -369,8 +370,8 @@
 
                                     <div class="col-2">
                                         <br />
-                                        <input type="submit" value="Xem HD" id="khachthanhtoan2" class="btn btn-success float-right" style="width:90px;float:left;"><br /><br />
-                                        <input type="submit" value="Ghi HD" id="ghilaihoadon"  class="btn btn-success float-right" style="width:90px;float:left;">                                        
+                                        <input type="submit" value="Xem HD" id="khachthanhtoan2" class="btn btn-success float-right" style="width:100px;float:left;"><br /><br />
+                                        <input type="submit" value="Thanh toán" id="ghilaihoadon"  class="btn btn-success float-right" style="width:100px;float:left;">                                        
                                     </div>
                                      
                                    
@@ -417,7 +418,7 @@
 
                                         <div class="col-sm-12">
                                             <ol class="breadcrumb float-sm-left">
-                                                <li class="breadcrumb-item active"><a href="/Map.aspx">Nhóm hàng</a></li>
+                                                <li class="breadcrumb-item active"><a href="/Map.aspx"><b style="color:blue; font-size:20px;">Menu :</b> All </a></li>
                                                 <%foreach (System.Data.DataRow rows in dt_nhomhang.Rows)
                                                     {%>
                                                 <li class="breadcrumb-item"><a href="/Map.aspx?nhomhangid=<%=rows["id"].ToString() %>"><%=rows["manhomhang"].ToString() %></a></li>
@@ -440,12 +441,12 @@
                                             <div class="col col-lg-2 d-flex align-items-stretch">
                                                 <div class="row" style="border: 1px solid grey;">
                                                     <div class="col-12 text-center">
-                                                        <%--<img src="../../dist/img/user1-128x128.jpg" alt="user-avatar" class="img-circle img-fluid">--%>
-                                                     <%--   <img src="../../dist/img/monan.JPG" alt="user-avatar" class="img-circle img-fluid">--%>
+                                                       <%-- <img src="../../dist/img/user1-128x128.jpg" alt="user-avatar" class="img-circle img-fluid">--%>
+                                                       <%-- <img src="../../dist/img/monan.JPG" alt="user-avatar" class="img-circle img-fluid">--%>
 
                                                         <div class="text-center" style="margin-bottom: 10px; margin-top: 10px;">
-                                                            <mh><%=rows1["mahang"].ToString() %></mh> <br /> <dg><%=rows1["giaban"].ToString() %></dg> /VND
-                                                            <input type="number" class="quantity form-control text-center" title="Số lượng" value="1" min="1" size="1" maxlength="2" id="quantity" name="quantity" ">                                                                                                                      
+                                                            <mh><%=rows1["tenhang"].ToString() %></mh> <br /> <dg><%=rows1["giaban"].ToString() %></dg> /VNĐ
+                                                            <input type="number" class="quantity form-control text-center" title="Số lượng" value="1" min="1"  id="quantity" name="quantity"  >                                                                                                                      
                                                             <a href="#" class="button_addmenu btn btn-sm btn-primary" id="add_sanpham">
                                                                 Add
                                                             </a>
@@ -572,7 +573,8 @@
 
                     <div class="modal-body" id="printableArea" style="height:auto;">
                        
-                       <div class="container-fluid"  style="width:400px;height:auto;">
+                       <%-- <div class="container-fluid"  style="width:400px;height:auto;">-- mau 400 danh cho may in nho --%>
+                       <div class="container-fluid"  style="width:700px;height:auto;">
                            <span><i style="font-size:22px; text-align:center;">Nhà hàng vườn xoài</i></span><br />                           
                           <%--<span hidden> Loại hình: </span><b id="hinhthucnghi2" hidden></b> &nbsp;&nbsp;&nbsp; <span hidden>Tổng tiền hát:</span> <b id="tongtienhat2" hidden></b><br />--%>
                            <span> Địa chỉ: Nam Hồng - Đông Anh - Hà Nội</span><b id="hinhthucnghi2" hidden></b> &nbsp;&nbsp;&nbsp; <span hidden>Tổng tiền hát:</span> <b id="tongtienhat2" hidden></b><br />
@@ -580,7 +582,7 @@
                            Tên bàn: <b id="tenphong2"></b> &nbsp;&nbsp;&nbsp; <span hidden> tiền hàng:</span> <b id="tongtien2" hidden></b>                                                      
 
 
-                                <div style="width: 100%; height: 300px; float: left; height:auto ">  
+                                <div style="width: 100%;  float: left; height:auto ">  <%--height: 300px;--%>
                                     <table class="display table table-bordered dataTable no-footer">
                                         <thead>
                                             <tr>
@@ -608,11 +610,11 @@
 
                     <div class="modal-footer">
                        <%-- <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times"></i>Close</button>--%>
-                         <button type="button" runat="server" id="Button2"  class="btn btn-primary" onclick="printDiv_Close()" >Close</button>
-                        <button type="button" runat="server" id="Button1"  class="btn btn-primary" onclick="printDiv_Save()" >Save</button>
+                         <button type="button" runat="server" id="Button2"  class="btn btn-primary" onclick="printDiv_Close()" >Đóng</button>
+                        <button type="button" runat="server" id="Button1"  class="btn btn-primary" onclick="printDiv_Save()" >Thanh toán</button>
                         <button type="button" runat="server" id="Button3"  class="btn btn-primary" onclick="printDiv('printableArea')" > 
                             <i class="fas fa-download"></i>
-                            In hoa don
+                            In hóa đơn
                         </button>                       
                         
                         
@@ -1451,7 +1453,7 @@
                                         $('#psno2').text(tienthoi);
                                         $('#sohoadon_').text(_sohoadon);
                                         $('#ngaytao_').text(ngaytao);
-                                        //pending
+                                        
 
                                         $('#hinhthucnghi2').text(hinhthucnghi);
                                         $('#tongtienhat2').text(tongtienhat);
@@ -2044,6 +2046,31 @@
 
             $("#MainContent_txt_doc").on('keyup', function (e) {
                 if ((e.key === 'Enter' || e.keyCode === 13)) {
+                    //var tenhang = $("#MainContent_txt_doc").val();
+                    ////alert(_tenhang);
+                    //var data = { tenhang: tenhang };
+                    ////pending
+                    // $.ajax({
+                    //            type: "POST",
+                    //            contentType: "application/json; charset=utf-8",
+                    //            url: "Map.aspx/laymahang",                                
+                    //            data: JSON.stringify(data),
+                    //            dataType: "json",
+                    //     success: function (data) {   
+                    //         //alert(data.d);
+                    //        if (data.d != "NG") {
+                    //            $("#mahanghoa").text(data.d);
+                    //        } 
+                    //        else 
+                    //        {
+                    //            alert('Khong co trong danh muc hang hoa!');
+                    //        }                            
+                    //    },
+                    //    error: function () {
+                    //        //alert("No Match");
+                    //    }
+                    //  });
+
                     $("#soluong").val(1);
                     $("#soluong").select();
                 }
@@ -2185,6 +2212,7 @@
             $('.button_addmenu').each(function () {
                 $(this).click(function () {                  
                     var _mahang = $(this).parent().find('mh').text();
+                    //alert(_mahang);
                     var data = { _mahang: _mahang };
                     var soluong = $(this).parent().find("input[name='quantity']").val();
                     var dongia = $(this).parent().find('dg').text();
@@ -2230,9 +2258,9 @@
                                 //var thanhtien = parseInt($("#soluong").val()) * parseInt(objdata['Table'][0][7]);
                                 var thanhtien = parseInt(soluong) * parseInt(dongia);   //lay gia chi khi add button
                                 //alert(thanhtien);
-
+                                //alert(objdata['Table'][0][2]);
                                 var newrow = '<tr class="themthucdon">' +
-                                    '<td id="tenhang">' + objdata['Table'][0][1] + '</td>' +
+                                    '<td id="tenhang">' + objdata['Table'][0][2] + '</td>' +
                                     '<td id="soluong">' + soluong + '</td>' +
                                     '<td id="giale">' + dongia + '</td>' +
                                     '<td id="thanhtien">' + thanhtien + '</td>' +
@@ -2296,7 +2324,7 @@
                                         //var _dongia = dongia;
                                         var thanhtien = tong_soluong * dongia;
                                         var newrow = '<tr class="themthucdon">' +
-                                            '<td id="tenhang">' + objdata['Table'][0][1] + '</td>' +
+                                            '<td id="tenhang">' + objdata['Table'][0][2] + '</td>' +
                                             '<td id="soluong">' + tong_soluong + '</td>' +
                                             '<td id="giale">' + dongia + '</td>' +
                                             '<td id="thanhtien">' + thanhtien + '</td>' +
@@ -2334,7 +2362,8 @@
                     }
                     else
                     {
-                        var _mahang = $("#MainContent_txt_doc").val();                    
+                        var _mahang = $("#MainContent_txt_doc").val();
+                        //var _mahang = $("#mahanghoa").text();
                         var soluong = $("#soluong").val(); 
                         var data = { _mahang: _mahang };
                     
@@ -2372,7 +2401,7 @@
                                         //alert(thanhtien);
 
                                         var newrow = '<tr class="themthucdon">' +
-                                            '<td id="tenhang">' + objdata['Table'][0][1] + '</td>' +
+                                            '<td id="tenhang">' + objdata['Table'][0][2] + '</td>' +
                                             '<td id="soluong">' + soluong + '</td>' +
                                             '<td id="giale">' + dongia + '</td>' +
                                             '<td id="thanhtien">' + thanhtien + '</td>' +
@@ -2431,7 +2460,7 @@
                                                 var dongia = parseInt(objdata['Table'][0][7]);
                                                 var thanhtien = tong_soluong * dongia;
                                                 var newrow = '<tr class="themthucdon">' +
-                                                    '<td id="tenhang">' + objdata['Table'][0][1] + '</td>' +
+                                                    '<td id="tenhang">' + objdata['Table'][0][2] + '</td>' +
                                                     '<td id="soluong">' + tong_soluong + '</td>' +
                                                     '<td id="giale">' + dongia + '</td>' +
                                                     '<td id="thanhtien">' + thanhtien + '</td>' +
@@ -2472,6 +2501,7 @@
                     
                     //alert(tongtiengio);
                     var _mahang = $("#MainContent_txt_doc").val();
+                    //var _mahang = $("#mahanghoa").text();                    
                     var data = { _mahang: _mahang };
                     //push mahang vao array
                     var gettr = [];
@@ -2503,9 +2533,9 @@
                                 var dongia = parseInt(objdata['Table'][0][7]);
                                 var thanhtien = parseInt($("#soluong").val()) * parseInt(objdata['Table'][0][7]);
                                 //alert(thanhtien);
-
+                                //mahang = objdata['Table'][0][1]   , tenhang = objdata['Table'][0][2]
                                 var newrow = '<tr class="themthucdon">' +
-                                    '<td id="tenhang">' + objdata['Table'][0][1] + '</td>' +
+                                    '<td id="tenhang">' + objdata['Table'][0][2] + '</td>' +
                                     '<td id="soluong">' + soluong + '</td>' +
                                     '<td id="giale">' + dongia + '</td>' +
                                     '<td id="thanhtien">' + thanhtien + '</td>' +
@@ -2569,7 +2599,7 @@
                                         var dongia = parseInt(objdata['Table'][0][7]);
                                         var thanhtien = tong_soluong * dongia;
                                         var newrow = '<tr class="themthucdon">' +
-                                            '<td id="tenhang">' + objdata['Table'][0][1] + '</td>' +
+                                            '<td id="tenhang">' + objdata['Table'][0][2] + '</td>' +
                                             '<td id="soluong">' + tong_soluong + '</td>' +
                                             '<td id="giale">' + dongia + '</td>' +
                                             '<td id="thanhtien">' + thanhtien + '</td>' +
@@ -2690,12 +2720,12 @@
                  var idkhachhang = $('#MainContent_dr_nhacungcap').val();  
                 //alert(idkhachhang);                        
 
-                alert(tienhat);
-                alert(tenphong2);
-                alert(tongtien2);             
-                alert(thantoan2);
-                alert(chietkau2);
-                alert(conlai2);
+                //alert(tienhat);
+                //alert(tenphong2);
+                //alert(tongtien2);             
+                //alert(thantoan2);
+                //alert(chietkau2);
+                //alert(conlai2);
                 thanhtoanhoadon(tenphong2,tongtien2,chietkau2,thantoan2,conlai2,tienhat,sohoadon,idkhachhang); 
             }
 

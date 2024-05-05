@@ -90,14 +90,16 @@
             <tr>
                  <tr role="row">
                                         <th>NO</th>
-                                        <th>mahang</th>
-                                        <th>tenhang</th>
-                                        <th>dvt</th>                    
-                                         <th>soluongxuat</th>
-                                        <th>giaban</th> 
-                                        <th>doanhso</th> 
-                                         <th>giavon</th> 
-                                        <th>laigop</th>
+                                        <th>Số HĐ</th>
+                                        <th>Mã Hàng</th>
+                                        <th>Tên Hàng</th>
+                                        <th>ĐVT</th>                    
+                                         <th>Số lượng xuất</th>
+                                        <th>Giá bán</th> 
+                                        <th>Giá nhập</th> 
+                                        <th>Tổng doanh số</th> 
+                                         <th>Tổng giá vốn</th> 
+                                        <th>Lãi gộp</th>
                                        <%-- <th>Nhomhang</th>
                                         <th>created</th>--%>
                                                                                
@@ -112,6 +114,7 @@
                                      <%i++;%>
                                     <tr role="row">                                        
                                         <td><%=i %></td>
+                                        <td><%=rows["sohd"].ToString()%></td>
                                         <td><%=rows["mahang"].ToString()%></td>
                                         <td><%=rows["tenhang"].ToString()%></td>
                                         <td><%=rows["dvt"].ToString()%></td>
@@ -120,11 +123,11 @@
                                         <td><%=rows["soluongxuat"].ToString()%></td>
 
                                         <td><%=String.Format("{0:N0}", Int32.Parse(rows["giaban"].ToString()))%></td>
-
-                                        <td><%=rows["doanhso"].ToString() %></td>
-                                         <td><%=rows["giavon"].ToString() %></td> 
+                                        <td><%=String.Format("{0:N0}", Int32.Parse(rows["gianhap"].ToString()))%></td>
+                                        <td><%=String.Format("{0:N0}", Int32.Parse(rows["doanhso"].ToString())) %></td>
+                                         <td><%=String.Format("{0:N0}", Int32.Parse(rows["giavon"].ToString())) %></td> 
                                         <%--<td><%=rows["nhomhangid"].ToString()%></td>--%>
-                                        <td><%=rows["laigop"].ToString() %></td>
+                                        <td><%=String.Format("{0:N0}", Int32.Parse(rows["laigop"].ToString())) %></td>
                                        
                                         <td>
                                            <%-- <a href="#" class="btn btn-info btn-sm" title="delete item" onclick="openEditModal2('<%= rows["mahang"].ToString() %>')"><i class="fas fa-pencil-alt"></i>Thekho</a>--%>

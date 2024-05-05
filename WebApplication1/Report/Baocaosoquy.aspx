@@ -107,8 +107,22 @@
                                         <td><%=rows["IDnguoinhan"].ToString()%></td>
                                          <td><%=rows["IDkhachhang"].ToString()%></td> 
                                          <td><%=rows["IDnhacungcap"].ToString()%></td>
+
+                                         <%if ( rows["psco"].ToString() != "") { %>
                                         <td><%=String.Format("{0:N0}", Int32.Parse(rows["psco"].ToString()))%></td>
+                                         <%} %>                                        
+                                        <%else { %>
+                                          <td>0</td>
+                                        <%} %>
+
+                                         <%if ( rows["psno"].ToString() != "") { %>
                                         <td><%=String.Format("{0:N0}", Int32.Parse(rows["psno"].ToString()))%></td>
+                                         <%} %>                                        
+                                        <%else { %>
+                                          <td>0</td>
+                                        <%} %>
+
+
                                         <td><%=rows["Mota"].ToString()%></td>
 
                                         <%if ((i == dt_soquy.Rows.Count)  && rows["ngaygiaodich"].ToString() != "") { %>

@@ -23,15 +23,17 @@
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
-  <div class="login-logo">
-    <a href="#"><b>Admin</b>Tiger</a>
+  <div class="login-logo">      
+    <a href="#"><b>Restaurant - Hotel - Cafe</b></a>
   </div>
      <form id="form1" runat="server">
          <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
-      <p class="login-box-msg">Sign in to start your session</p>
-
+      <p style=" height:50px; text-align:center;"><%--Sign in to start your session--%>  <%--class="login-box-msg"--%>
+           <img src="../../dist/img/logo_eagle.JPG" alt="user-avatar" class="img-circle img-fluid" style="width:100px;height:100px;">
+          <a href="#"><b>Sky </b> <i>Eagle</i> <b>Soft </b></a>
+      </p>       
                                 <div class="card-body">                                  
                                          <div class="form-group">
                                              <label class="small mb-1" for="inputEmailAddress">Username</label>

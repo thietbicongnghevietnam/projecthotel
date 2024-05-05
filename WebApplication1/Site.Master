@@ -25,8 +25,10 @@
   <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <%--<link rel="stylesheet" href="../dist/css/fontawesome.css">--%>
   <!-- IonIcons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+ <%--   <link rel="stylesheet" href="../dist/css/Ionicons.css">--%>
   <!-- Theme style -->
   <link rel="stylesheet" href="../dist/css/adminlte.min.css">
 
@@ -107,11 +109,11 @@
       </li>
              
          <li class="nav-item">
-            <a href="Default.aspx" target="_blank" class="nav-link" style="width:80px; text-align:center;">Home</a>
+            <a href="Default.aspx" target="_blank" class="nav-link" style="width:80px; text-align:center;">HOME</a>
           </li>
 
        <li class="nav-item">
-            <a href="Map.aspx" target="_blank" class="nav-link" style="width:80px; text-align:center;">EMap</a>
+            <a href="Map.aspx" target="_blank" class="nav-link" style="width:120px; text-align:center;">NHÀ HÀNG</a>
           </li>
        
          <li class="nav-item">
@@ -123,7 +125,7 @@
           </li>
         <%if (Role_ == "admin") {%>
          <li class="nav-item dropdown">
-            <a id="dropdownSubMenu11" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Sổ Quỹ</a>
+            <a id="dropdownSubMenu11" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">SỔ QUỸ</a>
             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
               <li><a href="Phieuchi.aspx" target="_blank" class="dropdown-item">Phiếu chi</a></li>
               <li><a href="Phieuthu.aspx" target="_blank" class="dropdown-item">Phiếu thu</a></li>
@@ -134,7 +136,7 @@
             </ul>
           </li>
         <li class="nav-item dropdown">
-            <a id="dropdownSubMenu2" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Báo cáo</a>
+            <a id="dropdownSubMenu2" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">BÁO CÁO</a>
             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
               <li><a href="Report/BaocaoBH.aspx" target="_blank" class="dropdown-item">BC bán hàng theo HĐ</a></li>
               <li><a href="Report/Baocaonhaphang.aspx" target="_blank" class="dropdown-item">BC nhập hàng theo HĐ</a></li>
@@ -175,7 +177,7 @@
           </li>
          <%} %>
       <li class="nav-item dropdown">
-            <a id="dropdownSubMenu5" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Liên hệ</a>
+            <a id="dropdownSubMenu5" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">LIÊN HỆ</a>
            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
               <li><a href="#" class="dropdown-item">Đặt hàng online</a></li>
               <li><a href="#" class="dropdown-item">Liên hệ trực tiếp</a></li>              

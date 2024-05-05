@@ -66,21 +66,12 @@ namespace WebApplication1.Danhmuc
         public void Download_Click(object sender, EventArgs e)
         {
             DataTable dt_dowload = new DataTable();
-            //if (dr_filter_cate.Text == "==select==")
-            //{
-            //    dt_dowload = DataConn.StoreFillDS("Get_history_device_borrow", CommandType.StoredProcedure);
-            //}
-            //else
-            //{
-            //    string _cate = dr_filter_cate.Text;
-            //    dt_dowload = DataConn.StoreFillDS("Get_history_device_borrow_cate", System.Data.CommandType.StoredProcedure, _cate);
-            //}
-
+            dt_dowload = DataConn.StoreFillDS("NH_danhmuckhuvuc", System.Data.CommandType.StoredProcedure);
 
             System.Web.HttpResponse response = System.Web.HttpContext.Current.Response;
             Response.Clear();
             Response.Buffer = true;
-            Response.AddHeader("content-disposition", "attachment;filename=Baocao_lichsu_muon.xls");
+            Response.AddHeader("content-disposition", "attachment;filename=Danhmuckhuvuc.xls");
             Response.Charset = "";
             Response.ContentType = "application/ms-excel";
 

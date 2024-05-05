@@ -65,19 +65,41 @@ namespace WebApplication1
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     //cmd.CommandText = "select Top 10 t.TOOLING_NO from (select distinct DOC_NUM from TBL_GR_MCS_PLAN where DOC_NUM LIKE ''+@SearchDoc+'%' and [STATUS] <> 'Xong') t;";
-                    cmd.CommandText = "select Top 10 a.mahang from [Warehouse_BPS].[dbo].[hthanghoa] a where a.mahang like '%'+@_mahang+'%' ;";
+                    //cmd.CommandText = "select Top 10 a.mahang from [Warehouse_BPS].[dbo].[hthanghoa] a where a.mahang like '%'+@_mahang+'%' ;";
+                    cmd.CommandText = "select Top 10 a.tenhang from hthanghoa a where a.tenhang like '%'+@_mahang+'%' ;";
                     cmd.Connection = con;
                     con.Open();
                     cmd.Parameters.AddWithValue("@_mahang", _mahang);
                     SqlDataReader dr = cmd.ExecuteReader();
                     while (dr.Read())
                     {
-                        docResult.Add(dr["mahang"].ToString());
+                        //docResult.Add(dr["mahang"].ToString());
+                        docResult.Add(dr["tenhang"].ToString());
                     }
                     con.Close();
                     return docResult;
                 }
             }
+        }
+
+        [WebMethod]
+        public static string laymahang(string tenhang)  //string tenphong, string tienhang
+        {
+            String thongbao = "";
+            DataTable dtmahang = new DataTable();
+
+            dtmahang = DataConn.StoreFillDS("NH_laymahang_tk", System.Data.CommandType.StoredProcedure, tenhang);//tenphong, data, tienhang
+
+            if (dtmahang.Rows[0][0].ToString() != "0")
+            {
+                //thongbao = "OK" + "," + dtlevel.Rows[0][1].ToString();
+                thongbao = dtmahang.Rows[0][0].ToString();
+            }
+            else
+            {
+                thongbao = "NG";
+            }
+            return thongbao;
         }
 
         //protected void Savekhachhang(object sender, EventArgs e)
@@ -131,7 +153,7 @@ namespace WebApplication1
         {
             DataTable dt = new DataTable();
 
-            dt = DataConn.StoreFillDS("NH_select_documentNo", System.Data.CommandType.StoredProcedure, _mahang);
+            dt = DataConn.StoreFillDS("NH_select_documentNo_NH", System.Data.CommandType.StoredProcedure, _mahang);
 
             DataTable dt2 = new DataTable();
             dt2 = dt.Copy();

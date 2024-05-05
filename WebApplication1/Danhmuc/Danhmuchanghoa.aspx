@@ -15,6 +15,10 @@
         <link rel="stylesheet" href="../plugins/jquery-ui/jquery-ui.css" />
 
     <link rel="stylesheet" href="../content/bootstrap.css" />
+
+
+ <%--   <link rel="stylesheet" href="https://cdn.datatables.net/2.0.6/css/dataTables.bootstrap4.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.0.2/css/buttons.bootstrap4.css" />--%>
   
 
     <script src="../../plugins/jquery/jquery.min.js"></script>
@@ -24,6 +28,8 @@
   <script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
  <%--   <script src="../Exportexcel/jquery.table2excel.min.js"></script>--%>
+
+ 
 </head>
 <body>
     <form id="form1" runat="server">
@@ -75,17 +81,10 @@
                     </p>
 
                 </div>
-                    <%--<button class="btn btn-primary" type="button" runat="server" style="margin-left:20px;"  >
-                        Inventory Equipment
-                    </button>--%>
+                
+                   <%-- <button class="btn btn-primary" type="button" runat="server" style="margin-left:20px;" onserverclick="Download_Click" ><i class="fa fa-download"></i>Export</button>--%>
+                   <button class="btn btn-primary" type="button" runat="server" style="margin-left:20px;" onserverclick="btnExport_Click" ><i class="fa fa-download"></i>Export</button>
                   
-                          
-                    <button class="btn btn-primary" type="button" runat="server" style="margin-left:20px;" onserverclick="Download_Click" ><i class="fa fa-download"></i>Export</button>
-
-                    <%--<button class="btn btn-success" type="button" runat="server" style="margin-left:50px;" ><i class="fa fa-download"></i><a href="ReportBorrowReturn.aspx" target="_blank" style="color:blue">Report Item</a></button>--%>
-                  <%--  <button class="btn btn-success" type="button" runat="server" style="margin-left:50px;" onserverclick="Download_Click2" ><i class="fa fa-download">Report Item</i></button>
-
-                    <input type="text" id="itemid" runat="server">--%>
                    
 
                 </div>
@@ -315,6 +314,19 @@
        <script src="../../plugins/jquery/jquery.min.js"></script>
     <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 
+    <script src="../../plugins/datatables/jquery.dataTables.js"></script>
+    <script src="../../plugins\datatables-buttons\js\dataTables.buttons.js"></script>
+    <%--<script src="https://cdn.datatables.net/2.0.6/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/2.0.6/js/dataTables.bootstrap4.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.0.2/js/dataTables.buttons.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.bootstrap4.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.html5.min.js"></script>--%>
+    
+
     <script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
     <script src="../../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
@@ -324,25 +336,28 @@
 
      <script>
    $(document).ready(function () {            
-            //$('#txtdevice').prop("readonly", true);
-        });
+            //$('#txtdevice').prop("readonly", true);       
 
+         });
+               
             $(function () {
-                        $("#example").DataTable({
+                $("#example").DataTable({                           
                             "responsive": true,
                             "autoWidth": true,
                             //"order": [[7, "desc"]],
-                            "pageLength": 50
+                    "pageLength": 50,
+                            "buttons": ['copy', 'csv', 'excel'],
                             //"ordering": true,
                             //"paging": true,
                             //"lengthChange": false,
                             //"searching": false,
                             //"info": true,                    
-                        });
+                });
+                
 
          });
 
-         $('#myModal').modal(options)
+         //$('#myModal').modal()
 
     function openEditModal2(mahang,tenhang,dvt,gianhap,giaban,tennhomhang) {           
         $("#txtmahang").val(mahang);
@@ -360,40 +375,40 @@
 
      <script src="../plugins/jquery-ui/jquery-ui.js"></script>
     <script type="text/javascript">
-        $(function () {
-            var onlyDate, today = new Date();
-            var dateNewFormat = '';
+//        $(function () {
+//            var onlyDate, today = new Date();
+//            var dateNewFormat = '';
 
-            onlyDate = today.getDate();
-            if (onlyDate.toString().length == 2) {
+//            onlyDate = today.getDate();
+//            if (onlyDate.toString().length == 2) {
 
-                dateNewFormat = onlyDate;
-            }
-            else {
-                dateNewFormat = '0' + onlyDate;
-            }
+//                dateNewFormat = onlyDate;
+//            }
+//            else {
+//                dateNewFormat = '0' + onlyDate;
+//            }
 
-            dateNewFormat = dateNewFormat + '-';
+//            dateNewFormat = dateNewFormat + '-';
 
-            if (today.getMonth().length == 2) {
+//            if (today.getMonth().length == 2) {
 
-                dateNewFormat += (today.getMonth() + 1);
-            }
-            else {
-                //dateNewFormat += '0' + (today.getMonth() + 1);
-                dateNewFormat += (today.getMonth() + 1);
-            }
+//                dateNewFormat += (today.getMonth() + 1);
+//            }
+//            else {
+//                //dateNewFormat += '0' + (today.getMonth() + 1);
+//                dateNewFormat += (today.getMonth() + 1);
+//            }
 
-            dateNewFormat = dateNewFormat + '-' + today.getFullYear();
-            //dateNewFormat = today.getFullYear() + '-';
+//            dateNewFormat = dateNewFormat + '-' + today.getFullYear();
+//            //dateNewFormat = today.getFullYear() + '-';
 
-            //$('#datepicker').val(dateNewFormat);
+//            //$('#datepicker').val(dateNewFormat);
            
 
-            //$("#datepicker").datepicker({ dateFormat: 'dd-mm-yy' });
- $("#txtngaymuon").datepicker({ dateFormat: 'dd-mm-yy' });
- $("#txtngaytra").datepicker({ dateFormat: 'dd-mm-yy' });
-        });
+//            //$("#datepicker").datepicker({ dateFormat: 'dd-mm-yy' });
+// //$("#txtngaymuon").datepicker({ dateFormat: 'dd-mm-yy' });
+//// $("#txtngaytra").datepicker({ dateFormat: 'dd-mm-yy' });
+//        });
 
 
     </script>

@@ -24,36 +24,7 @@ namespace WebApplication1.Report
                 dt_BCTonkho = DataConn.StoreFillDS("NH_Baocaotonkho", System.Data.CommandType.StoredProcedure);
             }
             
-        }
-
-        //public void BtnOrderItem(object sender, EventArgs e)
-        //{
-        //    string userid = txtuserid.Text.ToString();
-
-        //    string _mahang = txtmahang.Text.ToString();
-        //    //string _ngaymuon = Request.Form[txtngaymuon.UniqueID];//txtngaymuon.Text.ToString();
-        //    //string _ngaytra = Request.Form[txtngaytra.UniqueID];// txtngaytra.Text.ToString();
-        //    //string nam = _ngaymuon.Substring(6, 4);
-        //    //string thang = _ngaymuon.Substring(3, 2);
-        //    //string ngay = _ngaymuon.Substring(0, 2);
-        //    //string ngaymuon = nam + "-" + thang + "-" + ngay;
-
-        //    //string _nam = _ngaytra.Substring(6, 4);
-        //    //string _thang = _ngaytra.Substring(3, 2);
-        //    //string _ngay = _ngaytra.Substring(0, 2);
-        //    //string ngaytra = _nam + "-" + _thang + "-" + _ngay;
-
-        //    DataTable dt5 = new DataTable();
-        //    DataTable dtuser = new DataTable();
-        //    if (userid == "")
-        //    {
-        //        Page.ClientScript.RegisterStartupScript(Page.GetType(), "Message", "toastr.error('NG, user does not input infor!'); ", true);
-        //    }
-        //    else
-        //    {
-
-        //    }
-        //}
+        }       
 
         protected void Search_Date_Click(object sender, EventArgs e)
         {
@@ -69,13 +40,7 @@ namespace WebApplication1.Report
             //filter_type.Text = "";
 
             if (_checkpartno == "on")
-            {
-                //loc theo ma
-                //string nam = _date.Substring(6, 4);
-                //string thang = _date.Substring(3, 2);
-                //string ngay = _date.Substring(0, 2);
-                //string _date2 = nam + "-" + thang + "-" + ngay;
-
+            {               
                 dt_BCTonkho = DataConn.StoreFillDS("NH_Baocaotonkho", System.Data.CommandType.StoredProcedure);
                 //datepicker.Value = ngay + "-" + thang + "-" + nam;
 
@@ -88,17 +53,7 @@ namespace WebApplication1.Report
                     dt_BCTonkho = DataConn.StoreFillDS("NH_Baocaotonkho", System.Data.CommandType.StoredProcedure);
                 }
                 else
-                {
-                    //string nam = _date.Substring(6, 4);
-                    //string thang = _date.Substring(3, 2);
-                    //string ngay = _date.Substring(0, 2);
-                    //string _date2 = nam + "-" + thang + "-" + ngay;
-
-                    ////string _cate = dr_filter_cate.Text;
-                    //string typefilter = "all";
-
-
-
+                {                   
                     dt_BCTonkho = DataConn.StoreFillDS("NH_Baocaotonkho", System.Data.CommandType.StoredProcedure);
                     //datepicker.Value = ngay + "-" + thang + "-" + nam;
                 }
@@ -107,17 +62,9 @@ namespace WebApplication1.Report
 
         public void Download_Click(object sender, EventArgs e)
         {
-            DataTable dt_dowload = new DataTable();
-            //if (dr_filter_cate.Text == "==select==")
-            //{
-            //    dt_dowload = DataConn.StoreFillDS("Get_history_device_borrow", CommandType.StoredProcedure);
-            //}
-            //else
-            //{
-            //    string _cate = dr_filter_cate.Text;
-            //    dt_dowload = DataConn.StoreFillDS("Get_history_device_borrow_cate", System.Data.CommandType.StoredProcedure, _cate);
-            //}
+            DataTable dt_dowload = new DataTable();            
 
+            dt_dowload = DataConn.StoreFillDS("NH_Baocaotonkho", System.Data.CommandType.StoredProcedure);
 
             System.Web.HttpResponse response = System.Web.HttpContext.Current.Response;
             Response.Clear();

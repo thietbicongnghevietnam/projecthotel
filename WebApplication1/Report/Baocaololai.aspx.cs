@@ -42,11 +42,13 @@ namespace WebApplication1.Report
             string _fromdate = Request.Form[Date1.UniqueID];
             string _todate = Request.Form[ngaychiid.UniqueID];
 
+            dt_new.Columns.Add("sohd", typeof(String));
             dt_new.Columns.Add("mahang", typeof(String));
             dt_new.Columns.Add("tenhang", typeof(String));
             dt_new.Columns.Add("dvt", typeof(String));
             dt_new.Columns.Add("soluongxuat", typeof(int));
             dt_new.Columns.Add("giaban", typeof(int));
+            dt_new.Columns.Add("gianhap", typeof(int));
             dt_new.Columns.Add("doanhso", typeof(int));
             dt_new.Columns.Add("giavon", typeof(int));
             dt_new.Columns.Add("laigop", typeof(int));
@@ -66,7 +68,7 @@ namespace WebApplication1.Report
                 //string _date2 = nam + "-" + thang + "-" + ngay;
 
                 //dt_BCTonkho = DataConn.StoreFillDS("NH_Baocaotonkho_lolai", System.Data.CommandType.StoredProcedure);
-                dt_new.Rows.Add("", "", "", 0, 0, 0, 0, 0);
+                dt_new.Rows.Add("","", "", "", 0,0, 0, 0, 0, 0);
 
             }
             else
@@ -75,7 +77,7 @@ namespace WebApplication1.Report
                 if (_fromdate == "")
                 {
                     //dt_BCTonkho = DataConn.StoreFillDS("NH_Baocaotonkho_lolai", System.Data.CommandType.StoredProcedure);
-                    dt_new.Rows.Add("", "", "", 0, 0, 0, 0, 0);
+                    dt_new.Rows.Add("","", "", "",0, 0, 0, 0, 0, 0);
                 }
                 else
                 {                                        
@@ -89,22 +91,20 @@ namespace WebApplication1.Report
                     int _laigop = 0;
 
                     for (int i = 0; i < dt_danhsachhh.Rows.Count; i++)
-                    {
+                    {                        
                         string mahang = dt_danhsachhh.Rows[i]["mahang"].ToString();
                         string tenhang = dt_danhsachhh.Rows[i]["tenhang"].ToString();
                         string dvt = dt_danhsachhh.Rows[i]["dvt"].ToString();
                         string giaban = dt_danhsachhh.Rows[i]["giaban"].ToString();
                         string giavon = dt_danhsachhh.Rows[i]["gianhap"].ToString();
 
-                        int soluongxuat = 0;
-                        int doanhso = 0;
-                        int tonggiavon = 0;
-                        int laigop = 0;
+                       
 
                        
                         for (int j = 0; j < dt_items.Rows.Count; j++)
                         {                           
-                            string jsonString = dt_items.Rows[j][0].ToString();                           
+                            string jsonString = dt_items.Rows[j][0].ToString();
+                            string sohd = dt_items.Rows[j][1].ToString();
 
                             if (jsonString == "{}" || jsonString is null || jsonString == "")
                             {
@@ -112,23 +112,34 @@ namespace WebApplication1.Report
                             }
                             else
                             {
+                                int soluongxuat = 0;
+                                int doanhso = 0;
+                                int tonggiavon = 0;
+                                int laigop = 0;
+
                                 // Phân tích chuỗi JSON
                                 JObject json = JObject.Parse(jsonString);
                                 JToken quantity = 0;
 
                                 // Kiểm tra xem phần tử tồn tại trong danh sách không
-                                bool exists = json.Properties().Any(p => p.Name.Contains(mahang));
+                                bool exists = json.Properties().Any(p => p.Name.Contains(tenhang));
                                 if (exists)
                                 {
                                     foreach (var item in json)
                                     {
-                                        //string key = item.Key;
-                                        if (item.Key == mahang)
+                                        string chuoimahang = Convert.ToString(item.Key);
+                                        //if (item.Key == mahang)
+                                        if (chuoimahang.Split(',')[0].ToString() == tenhang)
                                         {
                                             JToken value = item.Value;
+                                            quantity = item.Value;
+                                            break;
                                         }
-                                        quantity = item.Value;
-                                        break;
+                                        else
+                                        {
+                                            //nothing
+                                        }
+                                        
                                     }
                                     soluongxuat = soluongxuat + Convert.ToInt32(quantity);
                                     doanhso = soluongxuat * Int32.Parse(giaban);
@@ -137,7 +148,7 @@ namespace WebApplication1.Report
 
                                     //Console.WriteLine($"Phần tử '{searchTerm}' tồn tại trong danh sách.");
                                     //dt_new.Rows.Add(sohoadon, jsonString, quantity, ngaytao, loaihoadon);
-                                    dt_new.Rows.Add(mahang,tenhang,dvt, soluongxuat, giaban, doanhso, tonggiavon, laigop);
+                                    dt_new.Rows.Add(sohd,mahang, tenhang,dvt, soluongxuat, giaban, giavon, doanhso, tonggiavon, laigop);
 
                                     _soluongxuat = _soluongxuat + soluongxuat;
                                     _doanhso = _doanhso + doanhso;
@@ -155,7 +166,7 @@ namespace WebApplication1.Report
                     }
 
 
-                    dt_new.Rows.Add("", "", "", _soluongxuat, 0, _doanhso, _tonggiavon, _laigop);
+                    dt_new.Rows.Add("","", "", "", _soluongxuat, 0, 0, _doanhso, _tonggiavon, _laigop);
 
                    
 
@@ -168,21 +179,13 @@ namespace WebApplication1.Report
         public void Download_Click(object sender, EventArgs e)
         {
             DataTable dt_dowload = new DataTable();
-            //if (dr_filter_cate.Text == "==select==")
-            //{
-            //    dt_dowload = DataConn.StoreFillDS("Get_history_device_borrow", CommandType.StoredProcedure);
-            //}
-            //else
-            //{
-            //    string _cate = dr_filter_cate.Text;
-            //    dt_dowload = DataConn.StoreFillDS("Get_history_device_borrow_cate", System.Data.CommandType.StoredProcedure, _cate);
-            //}
+           
 
 
             System.Web.HttpResponse response = System.Web.HttpContext.Current.Response;
             Response.Clear();
             Response.Buffer = true;
-            Response.AddHeader("content-disposition", "attachment;filename=Baocao_lichsu_muon.xls");
+            Response.AddHeader("content-disposition", "attachment;filename=Baocao_lolai.xls");
             Response.Charset = "";
             Response.ContentType = "application/ms-excel";
 
