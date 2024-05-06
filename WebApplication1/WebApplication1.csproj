@@ -176,6 +176,7 @@
     <Content Include="dist\img\avatar3.png" />
     <Content Include="dist\img\avatar4.png" />
     <Content Include="dist\img\avatar5.png" />
+    <Content Include="dist\img\bannerOK2.jpg" />
     <Content Include="dist\img\boxed-bg.jpg" />
     <Content Include="dist\img\boxed-bg.png" />
     <Content Include="dist\img\credit\american-express.png" />
@@ -296,7 +297,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="GiaodienWeb\Giaodienphanmem\ALINA.jpg" />
     <Content Include="GiaodienWeb\Giaodienphanmem\banchay.png" />
-    <Content Include="GiaodienWeb\Giaodienphanmem\bootstrap.min.css" />
     <Content Include="GiaodienWeb\Giaodienphanmem\C2030.jpg" />
     <Content Include="GiaodienWeb\Giaodienphanmem\CW-1000C.jpg" />
     <Content Include="GiaodienWeb\Giaodienphanmem\daudocyouje.jpg" />
@@ -328,21 +328,15 @@
     <Content Include="GiaodienWeb\Giaodienphanmem\khuyen-mai-292x34.png" />
     <Content Include="GiaodienWeb\Giaodienphanmem\khuyen-mai-436x150.png" />
     <Content Include="GiaodienWeb\Giaodienphanmem\logothvnnew.jpg" />
-    <Content Include="GiaodienWeb\Giaodienphanmem\lookup.html" />
-    <Content Include="GiaodienWeb\Giaodienphanmem\owl.carousel.min.css" />
-    <Content Include="GiaodienWeb\Giaodienphanmem\owl.theme.min.css" />
     <Content Include="GiaodienWeb\Giaodienphanmem\prp085.jpg" />
     <Content Include="GiaodienWeb\Giaodienphanmem\register_step2.jpg" />
     <Content Include="GiaodienWeb\Giaodienphanmem\reponsive.min.css" />
-    <Content Include="GiaodienWeb\Giaodienphanmem\saved_resource.html" />
-    <Content Include="GiaodienWeb\Giaodienphanmem\select2.css" />
     <Content Include="GiaodienWeb\Giaodienphanmem\SEVENOUMO.jpg" />
     <Content Include="GiaodienWeb\Giaodienphanmem\style-admin.css" />
     <Content Include="GiaodienWeb\Giaodienphanmem\style-kv222.min.css" />
     <Content Include="GiaodienWeb\Giaodienphanmem\style.css" />
     <Content Include="GiaodienWeb\Giaodienphanmem\THAILAN.jpg" />
     <Content Include="GiaodienWeb\Giaodienphanmem\ZebexZ3100.jpg" />
-    <Content Include="GiaodienWeb\Home.aspx" />
     <Content Include="GiaodienWeb\index.aspx" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -649,27 +643,6 @@
     <Content Include="docs\_config.yml" />
     <Content Include="dist\contextmenu.css.map" />
     <Content Include="dist\contextmenu.scss" />
-    <Content Include="GiaodienWeb\Giaodienphanmem\802499489845875" />
-    <Content Include="GiaodienWeb\Giaodienphanmem\ajax-auth-script.min.js.download" />
-    <Content Include="GiaodienWeb\Giaodienphanmem\ajax-partner-script.min.js.download" />
-    <Content Include="GiaodienWeb\Giaodienphanmem\analytics.js.download" />
-    <Content Include="GiaodienWeb\Giaodienphanmem\bootstrap.min.js.download" />
-    <Content Include="GiaodienWeb\Giaodienphanmem\fbevents.js.download" />
-    <Content Include="GiaodienWeb\Giaodienphanmem\hotjar-563959.js.download" />
-    <Content Include="GiaodienWeb\Giaodienphanmem\javascript.js.download" />
-    <Content Include="GiaodienWeb\Giaodienphanmem\jquery-1.11.0.min.js.download" />
-    <Content Include="GiaodienWeb\Giaodienphanmem\jquery-migrate.min.js.download" />
-    <Content Include="GiaodienWeb\Giaodienphanmem\jquery.cookie.min.js.download" />
-    <Content Include="GiaodienWeb\Giaodienphanmem\jquery.js.download" />
-    <Content Include="GiaodienWeb\Giaodienphanmem\jquery.validate.min.js.download" />
-    <Content Include="GiaodienWeb\Giaodienphanmem\messages_vi.min.js.download" />
-    <Content Include="GiaodienWeb\Giaodienphanmem\owl.carousel.min.js.download" />
-    <Content Include="GiaodienWeb\Giaodienphanmem\retargeting.js.download" />
-    <Content Include="GiaodienWeb\Giaodienphanmem\select2.js.download" />
-    <Content Include="GiaodienWeb\Giaodienphanmem\shortcut.min.js.download" />
-    <Content Include="GiaodienWeb\Giaodienphanmem\template.min.js.download" />
-    <Content Include="GiaodienWeb\Giaodienphanmem\wp-embed.min.js.download" />
-    <Content Include="GiaodienWeb\Giaodienphanmem\wpc-front.js.download" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Index.aspx" />
@@ -2630,13 +2603,6 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="GiaodienWeb\Home.aspx.cs">
-      <DependentUpon>Home.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="GiaodienWeb\Home.aspx.designer.cs">
-      <DependentUpon>Home.aspx</DependentUpon>
     </Compile>
     <Compile Include="GiaodienWeb\index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>
