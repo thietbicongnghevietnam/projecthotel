@@ -294,6 +294,56 @@
     <Content Include="docs\_layouts\page.html" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\ALINA.jpg" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\banchay.png" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\bootstrap.min.css" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\C2030.jpg" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\CW-1000C.jpg" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\daudocyouje.jpg" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\Giayin.jpg" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\Godexg500.jpg" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\HUONGSEN.jpg" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\ICON.jpg" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\iconcacnganhkhac.jpg" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\iconcamdo.jpg" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\icondienmay.jpg" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\icongara.jpg" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\iconhoaquatang.jpg" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\iconmevabe.jpg" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\iconmypham.jpg" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\iconnhahang.jpg" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\iconnhasach.jpg" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\iconnhathuoc.jpg" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\iconnoithat.jpg" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\iconnongsan.jpg" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\iconphongkham.jpg" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\iconsieuthi.jpg" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\iconspa.jpg" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\icontaphoa.jpg" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\iconthoitrang.jpg" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\icontonthep.jpg" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\iconvatlieuxaydung.jpg" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\iconxemay.jpg" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\ketsat.jpg" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\khuyen-mai-292x34.png" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\khuyen-mai-436x150.png" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\logothvnnew.jpg" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\lookup.html" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\owl.carousel.min.css" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\owl.theme.min.css" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\prp085.jpg" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\register_step2.jpg" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\reponsive.min.css" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\saved_resource.html" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\select2.css" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\SEVENOUMO.jpg" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\style-admin.css" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\style-kv222.min.css" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\style.css" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\THAILAN.jpg" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\ZebexZ3100.jpg" />
+    <Content Include="GiaodienWeb\Home.aspx" />
+    <Content Include="GiaodienWeb\index.aspx" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -599,6 +649,27 @@
     <Content Include="docs\_config.yml" />
     <Content Include="dist\contextmenu.css.map" />
     <Content Include="dist\contextmenu.scss" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\802499489845875" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\ajax-auth-script.min.js.download" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\ajax-partner-script.min.js.download" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\analytics.js.download" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\bootstrap.min.js.download" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\fbevents.js.download" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\hotjar-563959.js.download" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\javascript.js.download" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\jquery-1.11.0.min.js.download" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\jquery-migrate.min.js.download" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\jquery.cookie.min.js.download" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\jquery.js.download" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\jquery.validate.min.js.download" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\messages_vi.min.js.download" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\owl.carousel.min.js.download" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\retargeting.js.download" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\select2.js.download" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\shortcut.min.js.download" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\template.min.js.download" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\wp-embed.min.js.download" />
+    <Content Include="GiaodienWeb\Giaodienphanmem\wpc-front.js.download" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Index.aspx" />
@@ -2559,6 +2630,20 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GiaodienWeb\Home.aspx.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GiaodienWeb\Home.aspx.designer.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GiaodienWeb\index.aspx.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GiaodienWeb\index.aspx.designer.cs">
+      <DependentUpon>index.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
