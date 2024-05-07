@@ -1795,6 +1795,11 @@
                         tienck:tienck,
                         items: JSON.stringify(itemdata)
                     };
+
+                   // setInterval(function () {
+               //ajax de load du lieu
+            //}, 5000); // Làm mới dữ liệu mỗi 5 giây
+
                     $.ajax({
                         type: "POST",
                         contentType: "application/json; charset=utf-8",

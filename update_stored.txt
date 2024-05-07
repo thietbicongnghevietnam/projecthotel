@@ -1,6 +1,5 @@
 loi from dang nhap toart chua hien.....
 
-addthongtinhanghoa_PBH
-NH_infor_thongtinhanghoa2
-NH_getsohoadon_BH
-NH_infor_thongtinhanghoa2_inlai
+
+code signalr
+https://stackoverflow.com/questions/18143599/can-signalr-be-used-with-asp-net-webforms

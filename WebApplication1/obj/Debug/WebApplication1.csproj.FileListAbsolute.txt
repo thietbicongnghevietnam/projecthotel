@@ -514,3 +514,16 @@ C:\Users\ACER\Desktop\Nhahang\projecthotel\WebApplication1\bin\EPPlus.Interfaces
 C:\Users\ACER\Desktop\Nhahang\projecthotel\WebApplication1\bin\EPPlus.System.Drawing.dll
 C:\Hotel\WebApplication1\bin\EPPlus.Interfaces.dll
 C:\Hotel\WebApplication1\bin\EPPlus.System.Drawing.dll
+C:\Hotel\WebApplication1\bin\Microsoft.AspNet.SignalR.Core.dll
+C:\Hotel\WebApplication1\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+C:\Hotel\WebApplication1\bin\Microsoft.Owin.dll
+C:\Hotel\WebApplication1\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Hotel\WebApplication1\bin\Microsoft.Owin.Security.dll
+C:\Hotel\WebApplication1\bin\Owin.dll
+C:\Hotel\WebApplication1\bin\Microsoft.AspNet.SignalR.Core.pdb
+C:\Hotel\WebApplication1\bin\Microsoft.AspNet.SignalR.Core.xml
+C:\Hotel\WebApplication1\bin\Microsoft.AspNet.SignalR.SystemWeb.pdb
+C:\Hotel\WebApplication1\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+C:\Hotel\WebApplication1\bin\Microsoft.Owin.xml
+C:\Hotel\WebApplication1\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Hotel\WebApplication1\bin\Microsoft.Owin.Security.xml

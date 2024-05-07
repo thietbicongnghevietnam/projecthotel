@@ -41,8 +41,12 @@ namespace WebApplication1
             dt_get_khuvuc1 = DataConn.StoreFillDS("NH_select_khuvuc1", CommandType.StoredProcedure);
             dt_getinfo_phong1 = DataConn.StoreFillDS("NH_select_info_phong1", CommandType.StoredProcedure);
 
-            
-            
+            // Khởi tạo một Timer
+            System.Timers.Timer timer = new System.Timers.Timer();
+            timer.Interval = 5000; // Thời gian làm mới dữ liệu (5 giây)
+            //timer.Elapsed += Timer_Elapsed;
+            timer.Enabled = true;
+
 
             //if (Request.QueryString["documentNo"] != null)
             //{
