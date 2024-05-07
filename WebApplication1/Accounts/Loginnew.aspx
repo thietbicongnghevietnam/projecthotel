@@ -20,6 +20,29 @@
     <script src="../../plugins/jquery/jquery.min.js"></script>
     <script src="../plugins/toastr/toastr.js"></script>
 
+    <style>
+        .popup {
+                display: inline-block;
+            }
+            .popup .popuptext {
+                visibility: hidden;
+                width: 160px;
+                background-color: #b1b1b1;
+                color: #fff;
+                text-align: center;
+                border-radius: 6px;
+                padding: 20px;
+                position:relative;
+                top:50px;
+                right:150px;
+            }
+            .popup .show {
+                visibility: visible;
+                -webkit-animation: fadeIn 1s;
+                animation: fadeIn 1s;
+            }
+    </style>
+
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
@@ -50,9 +73,17 @@
                                              </div>
                                          </div>
                                          <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
-                                             <a class="small" href="#">Forgot Password? </a> 
-                                            <%-- <a class="small" href="http://10.92.184.24:8010/" target="_blank">QR-Code generate</a> --%>
-                                             <a class="small" href="#" target="_blank">QR-Code generate</a> 
+                                             <a class="small" href="#">Forgot Password? </a>                                            
+                                            <%-- <a class="small" href="#" target="_blank" id="openModalBtn">Contact Admin</a> --%>
+                                              <div style="text-align:center; width:100px; height:20px;">
+                                              <a href="#" onclick="pop()">Contact</a>
+                                              <div class="popup">
+                                                <span class="popuptext" id="myPopup">
+                                                  thank contac admin <input type="text" id="addminid" />
+                                                </span>
+                                              </div>
+                                            </div>
+
                                             <a href="#" class="small" onserverclick="btnDownloadIEClick" runat="server">Download Google Chrome</a>
                                              <%--<asp:Button id="btn_login" Text="Login" CssClass="btn btn-info" OnClick="BtnLoginClick" runat="server" />--%>
                                             <%-- <input id="btn_login" type="button" value="Login" Class="btn btn-info" OnServerclick="BtnLoginClick" runat="server" /> class="btn btn-primary"--%>
@@ -86,9 +117,20 @@
 
 
      </form>
+
+
+
+
   
 </div>
 <!-- /.login-box -->
+
+    <script>
+       function pop() {
+    var popup = document.getElementById('myPopup');
+    popup.classList.toggle('show');
+}
+    </script>
 
 <!-- jQuery -->
 <script src="../../plugins/jquery/jquery.min.js"></script>
@@ -115,6 +157,39 @@
                 //__doPostBack('ctl07', '');
              }
          });
+
+         $("#addminid").on('keyup', function (e) {
+             if ((e.key === 'Enter' || e.keyCode === 13)) {
+                 var passadmin = $("#addminid").val();
+                 //alert(passadmin);
+                 var data = {passadmin:passadmin}
+                 $.ajax({
+                            type: "POST",
+                            contentType: "application/json; charset=utf-8",
+                            url: "Loginnew.aspx/adminsupport",
+                            //data: JSON.stringify(data),
+                            data: JSON.stringify(data),
+                            dataType: "json",
+                            success: function (data) {
+                                //alert('Hàng hóa đã được thêm thành công!');
+                                if (data.d != "NG") {
+                                   
+                                    //co the xu ly cac truong hop chua don phong, dat phong
+                                } else {
+                                    //nothing
+                                    //toan bo ban phong khong co khach
+                                }
+                               
+                            },
+                            error: function () {
+                                //alert("No Match");                                
+                            }
+                        });
+             }
+
+             });
+         
+
      </script>
 
 

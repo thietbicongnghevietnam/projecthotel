@@ -14,6 +14,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Script.Serialization;
 
+
 namespace WebApplication1
 {
     public partial class Map : System.Web.UI.Page
@@ -40,14 +41,7 @@ namespace WebApplication1
 
             dt_get_khuvuc1 = DataConn.StoreFillDS("NH_select_khuvuc1", CommandType.StoredProcedure);
             dt_getinfo_phong1 = DataConn.StoreFillDS("NH_select_info_phong1", CommandType.StoredProcedure);
-
-            // Khởi tạo một Timer
-            System.Timers.Timer timer = new System.Timers.Timer();
-            timer.Interval = 5000; // Thời gian làm mới dữ liệu (5 giây)
-            //timer.Elapsed += Timer_Elapsed;
-            timer.Enabled = true;
-
-
+                      
             //if (Request.QueryString["documentNo"] != null)
             //{
             //    object[] obj = new object[] { Request.QueryString["documentNo"] };
@@ -198,6 +192,31 @@ namespace WebApplication1
                 //thongbao = "OK" + "," + dtlevel.Rows[0][1].ToString();
                 
                 thongbao = "OK";
+            }
+            else
+            {
+                thongbao = "NG";
+            }
+            return thongbao;
+        }
+
+        [WebMethod]
+        public static string timer_thongtintrangthaiphong(string nameroom)  
+        {
+            String thongbao = "";
+            DataTable dttrangthai = new DataTable();
+
+            //check xem hoa don ton tai chua
+            //update *** neu hoa don ton tai roi
+            //lay so hoa don truyen len de update
+
+            dttrangthai = DataConn.StoreFillDS("NH_get_trangthaiphong", System.Data.CommandType.StoredProcedure, nameroom);
+
+            if (dttrangthai.Rows[0][0].ToString() == "1")
+            {
+                //thongbao = "OK" + "," + dtlevel.Rows[0][1].ToString();
+
+                thongbao = dttrangthai.Rows[0][1].ToString() + "," + dttrangthai.Rows[0][2].ToString();
             }
             else
             {

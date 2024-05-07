@@ -19,6 +19,7 @@ namespace WebApplication1.Accounts
             {
                 Session["username"] = null;
                 Session["password"] = null;
+                
             }
         }
         
@@ -28,25 +29,35 @@ namespace WebApplication1.Accounts
             string password = Request.Form["password"];
             object[] obj = new object[] { username, password };
             DataTable dt = new DataTable();
-            dt = DataConn.StoreFillDS("pro_user_login_N", CommandType.StoredProcedure, obj);
-            string User = null; string Role = null; string Pass = null;
-            if (dt.Rows.Count > 0)
+            DataTable dtchecklogindate = new DataTable();
+            dtchecklogindate = DataConn.StoreFillDS("NH_check_login", CommandType.StoredProcedure);
+            if (Int32.Parse(dtchecklogindate.Rows[0][0].ToString()) <= 2)
             {
-                User = dt.Rows[0]["U_NAME"].ToString();
-                Pass = dt.Rows[0]["U_PASSWORD"].ToString();
-                Role = dt.Rows[0]["ROLE"].ToString();
-                Session["username"] = User;
-                Session["password"] = Pass;
-                Session["role"] = Role;
-                Response.Redirect("~/Default.aspx");
+                Page.ClientScript.RegisterStartupScript(Page.GetType(), "Message", "toastr.error('NG, Phiên bản của bạn đã hết hạn, liên hệ nhà cung cấp!'); ", true);
             }
             else
             {
-                //Page.ClientScript.RegisterStartupScript(Page.GetType(), "Message", " toastr.warning('Sai thông tin đăng nhập hoặc mật khẩu','Lỗi');", true);
-                Page.ClientScript.RegisterStartupScript(Page.GetType(), "Message", "toastr.error('NG, Sai thông tin đăng nhập hoặc mật khẩu!'); ", true);
+                dt = DataConn.StoreFillDS("pro_user_login_N", CommandType.StoredProcedure, obj);
+                string User = null; string Role = null; string Pass = null;
+                if (dt.Rows.Count > 0)
+                {
+                    User = dt.Rows[0]["U_NAME"].ToString();
+                    Pass = dt.Rows[0]["U_PASSWORD"].ToString();
+                    Role = dt.Rows[0]["ROLE"].ToString();
+                    Session["username"] = User;
+                    Session["password"] = Pass;
+                    Session["role"] = Role;
+                    Response.Redirect("~/Default.aspx");
+                }
+                else
+                {
+                    //Page.ClientScript.RegisterStartupScript(Page.GetType(), "Message", " toastr.warning('Sai thông tin đăng nhập hoặc mật khẩu','Lỗi');", true);
+                    Page.ClientScript.RegisterStartupScript(Page.GetType(), "Message", "toastr.error('NG, Sai thông tin đăng nhập hoặc mật khẩu!'); ", true);
 
+                }
             }
 
+           
             //int status = int.Parse(dt.Rows[0][0].ToString());
             //if (status > 0)
             //{
@@ -58,6 +69,31 @@ namespace WebApplication1.Accounts
             //{               
             //    Page.ClientScript.RegisterStartupScript(Page.GetType(), "Message", " toastr.warning('Sai thông tin đăng nhập hoặc mật khẩu','Lỗi');", true);
             //}
+        }
+
+        [WebMethod]
+        public static string adminsupport(string passadmin)
+        {
+            String thongbao = "";
+            DataTable dttrangthai = new DataTable();
+
+            //check xem hoa don ton tai chua
+            //update *** neu hoa don ton tai roi
+            //lay so hoa don truyen len de update
+
+            dttrangthai = DataConn.StoreFillDS("NH_get_Giahansudung", System.Data.CommandType.StoredProcedure, passadmin);
+
+            if (dttrangthai.Rows[0][0].ToString() == "1")
+            {
+                //thongbao = "OK" + "," + dtlevel.Rows[0][1].ToString();
+
+                thongbao = "OK";
+            }
+            else
+            {
+                thongbao = "NG";
+            }
+            return thongbao;
         }
 
         protected void btnDownloadIEClick(Object sender, EventArgs e)

@@ -751,6 +751,7 @@
                 
 
                 // phan render giao dien cac phong co khach va khong co khach
+
                 $("#myList UL LI").each(function () {
                     //phong co khach
                     if ($(this).find('#trangthai').text() == 1) {
@@ -766,7 +767,6 @@
                     if ($(this).find('#trangthaidonphong').text() == 1) {
                         $(this).find("img").attr('src','/static/images/chuadonphong.png');
                     }                   
-
                 });
 
                 SearchText();
@@ -1095,7 +1095,7 @@
                                             var str = idx2 + ":" + val2;
                                             blkstr.push(str);
                                         });
-                                        debugger;
+                                        //debugger;
                                         
                                         //var aaa = blkstr[0];
                                         //var bbb = blkstr[1];
@@ -1422,7 +1422,7 @@
                                             var str = idx2 + ":" + val2;
                                             blkstr.push(str);
                                         });
-                                        debugger;
+                                        //debugger;
                                         //var aaa = blkstr[0];
                                         //var bbb = blkstr[1];
                                         for (var i = 0; i < blkstr.length; i++) {
@@ -1610,7 +1610,7 @@
                                 data: JSON.stringify(data),
                                 dataType: "json",
                                 success: function (data) {
-                                    debugger;
+                                    //debugger;
                                     if (data.d != "NG") {
                                         alert('Hoa don them thành công!');
                                         $('#tbnhaphang tr').remove();
@@ -1718,7 +1718,7 @@
 
             function thanhtoanhoadon2()
             {
-               debugger;
+               //debugger;
                
                 var psco = $('#thanhtoanid').val();
                 var tongtienhang = $('#tongtienid').val();
@@ -1808,7 +1808,7 @@
                         data: JSON.stringify(data),
                         dataType: "json",
                         success: function (data) {
-                            debugger;
+                            //debugger;
                             if (data.d != "NG") {
                                 alert('Hoa don them thành công!');
                                 $('#tbnhaphang tr').remove();
@@ -1853,6 +1853,60 @@
                         }
                     });
             };
+
+            function doSomethingTimer() {
+                // Thực hiện các công việc bạn muốn thực hiện sau mỗi khoảng thời gian
+                console.log("Doing something...");
+                $("#myList UL LI").each(function () {
+                    //var nameroom = $(this).find('#tenphong').text();
+                    var currentListItem = $(this); // Lưu lại ngữ cảnh this trong một biến
+                    var nameroom = currentListItem.find('#tenphong').text();
+
+                    //lay ra trang thai cua phong / ban de load lai hinh anh co khach hay khong?
+                    var data = { nameroom: nameroom };
+                     $.ajax({
+                            type: "POST",
+                            contentType: "application/json; charset=utf-8",
+                            url: "Map.aspx/timer_thongtintrangthaiphong",
+                            //data: JSON.stringify(data),
+                            data: JSON.stringify(data),
+                            dataType: "json",
+                            success: function (data) {
+                                //alert('Hàng hóa đã được thêm thành công!');
+                                if (data.d != "NG") {
+                                    var idop = data.d.split(',');
+                                    var trangthai = idop[0];
+                                    var tenphong = idop[1];
+                                    
+                                    //Console.log(trangthai);
+                                    //console.log(tenphong);
+                                    if (trangthai == '1' && tenphong == nameroom) {
+                                        //alert(tenphong);                                        
+                                        //$(this).find("img").attr('src','/static/images/cokhach.png');
+                                        currentListItem.find("img").attr('src','/static/images/cokhach.png');
+                                    }
+                                    else {
+                                        //$(this).find("img").attr('src','/static/images/phongtrong.png');
+                                        currentListItem.find("img").attr('src','/static/images/phongtrong.png');
+                                    }
+                                    //co the xu ly cac truong hop chua don phong, dat phong
+                                } else {
+                                    //nothing
+                                    //toan bo ban phong khong co khach
+                                }
+                                //consolog.log(data.d);
+                                 //$('#myList UL LI').find("img").attr('src','/static/images/cokhach.png');
+                            },
+                            error: function () {
+                                //alert("No Match");                                
+                            }
+                        });
+                });
+
+            }
+
+            // Thực hiện hàm doSomething() sau mỗi 1000ms (1 giây)
+            var intervalId = setInterval(doSomethingTimer, 60000);
             
 
             // nut ghi lai danh sach thuc don
@@ -2151,7 +2205,7 @@
                                             var str = idx2 + ":" + val2;
                                             blkstr.push(str);
                                         });
-                                        debugger;
+                                        //debugger;
                                         //var aaa = blkstr[0];
                                         //var bbb = blkstr[1];
                                         for (var i = 0; i < blkstr.length; i++) {
@@ -2290,7 +2344,7 @@
                     //neu da co ma hang trog danh sach thi remove cai cu roi insert
                     if (gettr_rs == 'Remove') {
                         // xoa dong
-                        debugger;
+                        //debugger;
                         $('#tbnhaphang tr').each(function () {
                             var td = $(this).find('td').eq(0).text();
 

@@ -527,3 +527,16 @@ C:\Hotel\WebApplication1\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
 C:\Hotel\WebApplication1\bin\Microsoft.Owin.xml
 C:\Hotel\WebApplication1\bin\Microsoft.Owin.Host.SystemWeb.xml
 C:\Hotel\WebApplication1\bin\Microsoft.Owin.Security.xml
+C:\Users\ACER\Desktop\Nhahang\projecthotel\WebApplication1\bin\Microsoft.AspNet.SignalR.Core.dll
+C:\Users\ACER\Desktop\Nhahang\projecthotel\WebApplication1\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+C:\Users\ACER\Desktop\Nhahang\projecthotel\WebApplication1\bin\Microsoft.Owin.dll
+C:\Users\ACER\Desktop\Nhahang\projecthotel\WebApplication1\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\ACER\Desktop\Nhahang\projecthotel\WebApplication1\bin\Microsoft.Owin.Security.dll
+C:\Users\ACER\Desktop\Nhahang\projecthotel\WebApplication1\bin\Owin.dll
+C:\Users\ACER\Desktop\Nhahang\projecthotel\WebApplication1\bin\Microsoft.AspNet.SignalR.Core.pdb
+C:\Users\ACER\Desktop\Nhahang\projecthotel\WebApplication1\bin\Microsoft.AspNet.SignalR.Core.xml
+C:\Users\ACER\Desktop\Nhahang\projecthotel\WebApplication1\bin\Microsoft.AspNet.SignalR.SystemWeb.pdb
+C:\Users\ACER\Desktop\Nhahang\projecthotel\WebApplication1\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+C:\Users\ACER\Desktop\Nhahang\projecthotel\WebApplication1\bin\Microsoft.Owin.xml
+C:\Users\ACER\Desktop\Nhahang\projecthotel\WebApplication1\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\ACER\Desktop\Nhahang\projecthotel\WebApplication1\bin\Microsoft.Owin.Security.xml
