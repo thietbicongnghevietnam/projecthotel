@@ -1317,7 +1317,8 @@
                 //save hoa don truoc
                 var itemdata = {};
                 var tenphong = $('#nametable').text();//dj('#name_room').text();
-                var tienhang = $('#tongtienid').val();                                 
+                var tienhang = $('#tongtienid').val(); 
+                var kieunghi = $('#MainContent_dr_hinhthucnghi').val();
 
                 var sogiodung = $(".sogiodung").text();
                 var sophutdung = $(".sophutdung").text();
@@ -1362,6 +1363,7 @@
                     var hanghoa_new = itemdata;
                     var aaa = $('#tongtienid').val();
                     var data = {
+                        kieunghi: kieunghi,
                         tenphong: tenphong,
                         tienhang: tienhang,
                         items: JSON.stringify(itemdata)

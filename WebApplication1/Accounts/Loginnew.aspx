@@ -22,19 +22,20 @@
 
     <style>
         .popup {
-                display: inline-block;
+                display: inline-block; 
+                padding-top:20px;
             }
             .popup .popuptext {
                 visibility: hidden;
-                width: 160px;
-                background-color: #b1b1b1;
-                color: #fff;
+                width: 200px;                
+                background-color:white;
+                color:red;
                 text-align: center;
                 border-radius: 6px;
                 padding: 20px;
                 position:relative;
-                top:50px;
-                right:150px;
+                top:5px;
+                right:150px;               
             }
             .popup .show {
                 visibility: visible;
@@ -78,9 +79,11 @@
                                               <div style="text-align:center; width:100px; height:20px;">
                                               <a href="#" onclick="pop()">Contact</a>
                                               <div class="popup">
-                                                <span class="popuptext" id="myPopup">
-                                                  thank contac admin <input type="text" id="addminid" />
+                                                  <%--<b style="font-size:14px; color:blue;">thank contac admin</b>--%>
+                                                <span class="popuptext" id="myPopup">                                                  
+                                                     <input type="text" id="addminid" value="contact admin" />
                                                 </span>
+                                                 
                                               </div>
                                             </div>
 
@@ -173,10 +176,12 @@
                             success: function (data) {
                                 //alert('Hàng hóa đã được thêm thành công!');
                                 if (data.d != "NG") {
-                                   alert('Success!!!')
+                                    alert('Success!!!')
+                                    $("#addminid").val('');
                                     //co the xu ly cac truong hop chua don phong, dat phong
                                 } else {
-                                    alert('NGs!!!')
+                                    alert('NG!!!')
+                                    $("#addminid").val('');
                                     //nothing
                                     //toan bo ban phong khong co khach
                                 }
