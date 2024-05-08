@@ -1,39 +1,23 @@
 loi from dang nhap toart chua hien.....
 code signalr
 https://stackoverflow.com/questions/18143599/can-signalr-be-used-with-asp-net-webforms
-
-=====================
-ALTER PROCEDURE [dbo].[NH_check_login]
-	
+===========================
+ALTER PROCEDURE [dbo].[NH_get_Giahansudung]  --NH_get_Giahansudung '2024-05-15'
+	@ngaygiahan as nvarchar(50)
 AS
 BEGIN
-	declare @checkdate as datetime
-	set @checkdate = (select top 1 checkdate from  htlogin order by id desc)
-	print(@checkdate)
-
-	select DATEDIFF(day, getdate(), @checkdate)
-	--DATEDIFF(day, '2019/01/01', '2019/04/28')
-END
-===============================
-ALTER PROCEDURE [dbo].[NH_get_trangthaiphong]
-	@nameroom as nvarchar(20)
-AS
-BEGIN
-
-if exists(select id from htphong where tenphong=@nameroom and trangthai=1)
-begin
-	--phong/ban co khach
-	select 1,trangthai,tenphong from htphong where tenphong=@nameroom
-end
-else
-begin
-	select 0
-end
 	
+	if exists (select * from htlogin where convert(date,checkdate) = convert(date,@ngaygiahan))
+	begin
+		select 0
+	end
+	else
+	begin
+		--ok
+		insert into htlogin(checkdate) values(@ngaygiahan)
+		select 1
+	end
 
 END
-================
-htlogin: (bangmoi)
-id
-checkdate   (datetime)
-Flag
+
+================================

@@ -77,22 +77,36 @@ namespace WebApplication1.Accounts
             String thongbao = "";
             DataTable dttrangthai = new DataTable();
 
-            //check xem hoa don ton tai chua
-            //update *** neu hoa don ton tai roi
-            //lay so hoa don truyen len de update
+            string namhientai = DateTime.Now.Year.ToString();
+            //NH24081086
+            string chuoidau = passadmin.Substring(0, 2);
+            string nam = passadmin.Substring(2, 2);
+            string thang = passadmin.Substring(4, 2);
+            string ngay = passadmin.Substring(6, 2);
+            string ngaygiahan = "20"+nam + "-" + thang + "-" + ngay;
 
-            dttrangthai = DataConn.StoreFillDS("NH_get_Giahansudung", System.Data.CommandType.StoredProcedure, passadmin);
+            string chuoicuoi = passadmin.Substring(8, 2);
 
-            if (dttrangthai.Rows[0][0].ToString() == "1")
+            if (chuoidau == "NH" && chuoicuoi=="86")
             {
-                //thongbao = "OK" + "," + dtlevel.Rows[0][1].ToString();
+                dttrangthai = DataConn.StoreFillDS("NH_get_Giahansudung", System.Data.CommandType.StoredProcedure, ngaygiahan);
 
-                thongbao = "OK";
+                if (dttrangthai.Rows[0][0].ToString() == "1")
+                {
+                    //thongbao = "OK" + "," + dtlevel.Rows[0][1].ToString();
+
+                    thongbao = "OK";
+                }
+                else
+                {
+                    thongbao = "NG";
+                }                
             }
             else
             {
                 thongbao = "NG";
             }
+
             return thongbao;
         }
 

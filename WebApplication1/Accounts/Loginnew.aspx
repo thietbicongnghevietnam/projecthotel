@@ -173,9 +173,10 @@
                             success: function (data) {
                                 //alert('Hàng hóa đã được thêm thành công!');
                                 if (data.d != "NG") {
-                                   
+                                   alert('Success!!!')
                                     //co the xu ly cac truong hop chua don phong, dat phong
                                 } else {
+                                    alert('NGs!!!')
                                     //nothing
                                     //toan bo ban phong khong co khach
                                 }
