@@ -6,7 +6,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h3 class="m-0"><b>PHIEU NHAP HANG</b></h3>
+                        <h3 class="m-0"><b>PHIẾU NHẬP HÀNG</b></h3>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
@@ -15,8 +15,12 @@
     <table id="dnhaphang" style="padding-bottom: 10px; padding-right: 10px;padding-top: 20px;padding-left: 20px;">
 
                 <tr>
-                    <td style="padding-bottom: 10px; padding-right: 10px;"><b>Ma hang </b></td>
-                <td style="padding-bottom: 10px; padding-right: 10px;">                               
+                    <td style="padding-bottom: 10px; padding-right: 10px;">
+                        <b>Mã hàng </b><br />
+                        Nhập nhanh<input type="checkbox" id="bannhanhid" name="bannhanh">
+                    </td>
+                <td style="padding-bottom: 10px; padding-right: 10px;"> 
+                    <span id="mahanghoa" hidden ></span>
                     <asp:TextBox ID="phieunhaphang" Style="float: left; width: 100%;" class="ajax form-control input-sm" value="" placeholder="Chọn tên hàng" runat="server"></asp:TextBox>
                 </td>
                 <td style="padding-bottom: 10px; padding-right: 10px;"><b>Số lượng: </b></td>
@@ -40,26 +44,41 @@
 
                 </td>
                 <td>
-                    <span class="addphieunhap" style="padding-right: 30px; padding-left:50px;">                
+                    <span class="addphieunhap" style="padding-right: 10px; padding-left:10px;">                
                     <i class="fa fa-plus-square" style="font-size: 24px; padding-left: 20px;"></i>
-                    <b class="add_hanghoa" style="color: black; padding-left: 5px;">&nbsp;Them</b>
+                    <b class="add_hanghoa" style="color: black; padding-left: 5px;">&nbsp;Thêm</b>
                     </span>
-                    <span class="editphieunhap" style="padding-right: 30px; padding-left:20px;">                
-                        <i class="fa fa-pencil" style="font-size: 24px; padding-left: 20px;"></i>
-                        <b class="editproduct" style="color: black; padding-left: 10px;">Sua</b>
+                    <span class="editphieunhap" style="padding-right: 10px; padding-left:10px;">                
+                        <i class="fa fa-pencil" style="font-size: 24px; padding-left: 10px;"></i>
+                        <b class="editproduct" style="color: black; padding-left: 10px;">Sửa</b>
                     </span>
-                    <span class="delnhaphang" style="padding-right: 30px;">                
-                        <i class="fa fa-times" style="font-size: 24px; padding-left: 20px;"></i>
-                        <b class="delproduct" style="color: black; padding-left: 5px;">&nbsp;Xoa</b>
+                    <span class="delnhaphang" style="padding-right: 10px;">                
+                        <i class="fa fa-times" style="font-size: 24px; padding-left: 10px;"></i>
+                        <b class="delproduct" style="color: black; padding-left: 5px;">&nbsp;Xóa</b>
                     </span>
                  </td>
+
+                    <td>
+                        <span class="addKhachhang" style="padding-right: 5px; padding-left:5px;">
+                        <i class="fa fa-plus-square" style="font-size: 24px; padding-left: 5px;"></i>
+                        <b class="add_Khachhang" style="color: black; padding-left: 5px; float:left">&nbsp;Thêm NCC</b>
+                        </span>
+                    </td>
+                    <td>                       
+                        <label for="inhoadon" style="float: left; margin-top: 5px; padding-left:10px;">In hóa đơn</label>
+                        <input type="checkbox" id="inHD" name="inHD">                        
+                    </td>
+                    <td>                       
+                        <label for="inhoadon" style="float: left; margin-top: 5px; padding-left:10px;">SHD</label>
+                        <input id="soHD" name="soHD" class="form-control input-sm" value="<%=sohoadon %>"" style="width:80px;"/>                 
+                    </td>
                 
                 </tr>
                 </table>
 
-                <div style="padding-bottom: 20px;">
+               <%-- <div style="padding-bottom: 20px;">
                 
-                </div>
+                </div>--%>
 
                 <div style="height: 300px; overflow-y: scroll">
                 <table  class="display table table-bordered dataTable no-footer">
@@ -85,15 +104,15 @@
                 <span style="float: left; padding-right: 10px; padding-top: 20px;"><b style="float: left">Tổng tiền hàng &nbsp;&nbsp;</b>
                 <input style="width: 140px; float: left" id="tongtiennhap" disabled="disabled" name="tongtiennhap" type="text" class="form-control input-sm" value="0"/></span>
 
-                <span style="float: left; padding-right: 10px; padding-top: 20px;"><b style="float: left">Chiet Khau &nbsp;&nbsp;</b>
+                <span style="float: left; padding-right: 10px; padding-top: 20px;"><b style="float: left">Chiết khấu &nbsp;&nbsp;</b>
                     <input style="width: 140px; float: left" id="chietkhauid"  name="chietkhauid" type="text" class="form-control input-sm" value="0"/>
                 </span>
                 
-                <span style="float: left; padding-right: 10px; padding-top: 20px;"><b style="float: left">Thanh toan &nbsp;&nbsp;</b>
+                <span style="float: left; padding-right: 10px; padding-top: 20px;"><b style="float: left">Thanh toán &nbsp;&nbsp;</b>
                     <input style="width: 140px; float: left" id="thanhtoanid" name="thanhtoanHD" type="text" class="form-control input-sm" value="0"/>
                 </span>
 
-                <span style="float: left; padding-right: 10px; padding-top: 20px;"><b style="float: left">Con lai &nbsp;&nbsp;</b>
+                <span style="float: left; padding-right: 10px; padding-top: 20px;"><b style="float: left">Còn lại &nbsp;&nbsp;</b>
                     <input style="width: 140px; float: left" id="conlaiid" name="conlaiHD" type="text" class="form-control input-sm" value="0"/>
                 </span>
                
@@ -105,20 +124,343 @@
                 </div>
 
                 <br />
+        <br />
+         <br />
+                <div style="float:left; padding-left:50px;"><b>Bằng chữ:</b> <span id="bangchuid2" style="font-weight:500; font-size:20px; color:red;padding-left:10px;"></span></div>
+                            
                 <br />
                 <br />
-                <br />
+
+        <div class="modal" id="myModal">
+            <div class="modal-dialog" >
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="row">
+                            <div>
+                                <h4 class="modal-title" id="headerTag" style="float: left">Thêm nhà cung cấp</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="float: right; margin-left: 300px;">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="modal-body">
+                       
+                       <div class="container-fluid" id="printphieunhaphang" style="width:400px;height:auto;">
+                                                                             
+                           <div class="form-group">
+                            <label for="recipient">Mã Nhà cung cấp:</label>
+                               <input class="form-control" name="makhachhang" id="idmakh" type="text" placeholder="mancc" /> 
+                               <%--<asp:TextBox ID="idmakh" runat="server" class="form-control" />--%>
+                          </div>
+                            <div class="form-group">
+                            <label for="recipient">Tên NCC:</label>
+                                <input class="form-control" name="tenkhachhang" id="idtenkh" type="text" placeholder="tenkh" />  
+                               <%-- <asp:TextBox ID="idtenkh" runat="server" class="form-control" />--%>
+                          </div>
+                           <div class="form-group">
+                            <label for="recipient">Công nợ đến:</label>
+                            <input class="form-control" type="text" id="idcongnoden" name="recipient" value="0">
+                               <%--<asp:TextBox ID="idcongnoden" runat="server" class="form-control" Text="0" />--%>
+                          </div>
+                           <div class="form-group">
+                            <label for="recipient">Công nợ đi:</label>
+                            <input class="form-control" type="text" id="idcongnodi" name="recipient" value="0">
+                            <%--   <asp:TextBox ID="idcongnodi" runat="server" class="form-control" Text="0" />--%>
+                          </div>
+                                                       
+                        </div>
+                                                                           
+                    </div>
+
+                    <div class="modal-footer">
+                       <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times"></i>Close</button>                         
+                        <button type="button" runat="server" id="Button1"  class="btn btn-primary" onclick="addnewkhachhang()" >Save</button>                                                                                                                                                                     
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" id="myModal6">
+            <div class="modal-dialog modal-lg" >
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="row">
+                            <div>
+                                <h4 class="modal-title" id="headerTag" style="float: left">Phiếu nhập hàng</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="float: right; margin-left: 300px;">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="modal-body" id="printableArea" style="height:auto;">
+                       
+                       <%--<div class="container-fluid"  style="width:400px;height:auto;">--%>
+                        <div class="container-fluid"  style="width:700px;height:auto;">  <%--float:left--mau in nho--%>
+                         <%--   Hinh thuc: <b id="hinhthucnghi2"></b>
+                            &nbsp;&nbsp;&nbsp; tongtienhat: <b id="tongtienhat2"></b><br />
+                           Ten phong: <b id="tenphong2"></b>
+                           &nbsp;&nbsp;&nbsp; Tong tien hang: <b id="tongtien2"></b>        --%>   
+                            <span><i style="font-size:22px; text-align:center;">Nhà hàng vườn xoài</i></span><br />  
+                           <span> Địa chỉ: Nam Hồng - Đông Anh - Hà Nội</span><br />
+                           Số HĐ: <b id="sohoadoid"></b> &nbsp;&nbsp;&nbsp; Ngày tạo: <b id="ngaytaoid"></b>
+
+                                <div style="width: 100%; height: auto; float: left;">  
+                                    <table class="display table table-bordered dataTable no-footer">
+                                        <thead>
+                                            <tr>
+                                                <th>Mã hàng</th>
+                                                <th>Tên Hàng</th>
+                                                <th>Số lượng</th>
+                                                <th>Chiết khấu</th>
+                                                <th>Thành tiền</th>                                                 
+                                            </tr>
+                                            <tbody id="tbnhaphang_inhoadon">
+                                            </tbody>
+
+
+                                    </table>
+                                </div>
+                            
+                           <br /> 
+                           Tổng tiền: <b id="thantoan2"></b> &nbsp;&nbsp;&nbsp;  C/K: <b id="chietkau2"></b> <br />
+                           KH thanh toán: <b id="khthanhtoan2"></b> &nbsp;&nbsp;&nbsp; Còn lại: <b id="psno2"></b>     
+                           <div>Bằng chữ: <span id="bangchuid" style="font-weight:300; color:red; font-size:20px; padding-left:10px;"></span></div>
+                        </div>
+                        
+                                                                           
+                    </div>
+
+                    <div class="modal-footer">
+                       <%--<button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times"></i>Close</button> --%>
+                        <button type="button" runat="server" id="Button2"  class="btn btn-primary" onclick="printDiv_Close()" >Close</button>
+                        <button type="button" runat="server" id="Button3"  class="btn btn-primary" onclick="printDiv('printableArea')" > 
+                            <i class="fas fa-download"></i>
+                            In HĐ
+                        </button> 
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
     </div>
      <script type="text/javascript">
         $(document).ready(function () {
             SearchText();            
+         });
+
+        const defaultNumbers =' hai ba bốn năm sáu bảy tám chín';
+        const chuHangDonVi = ('1 một' + defaultNumbers).split(' ');
+        const chuHangChuc = ('lẻ mười' + defaultNumbers).split(' ');
+        const chuHangTram = ('không một' + defaultNumbers).split(' ');
+
+        function convert_block_three(number) {
+                if(number == '000') return '';
+                var _a = number + ''; //Convert biến 'number' thành kiểu string
+
+                //Kiểm tra độ dài của khối
+                switch (_a.length) {
+                case 0: return '';
+                case 1: return chuHangDonVi[_a];
+                case 2: return convert_block_two(_a);
+                case 3: 
+                    var chuc_dv = '';
+                    if (_a.slice(1,3) != '00') {
+                    chuc_dv = convert_block_two(_a.slice(1,3));
+                    }
+                    var tram = chuHangTram[_a[0]] + ' trăm';
+                    return tram + ' ' + chuc_dv;
+                }
+        };
+
+        function convert_block_two(number) {
+                var dv = chuHangDonVi[number[1]];
+                var chuc = chuHangChuc[number[0]];
+                var append = '';
+
+                // Nếu chữ số hàng đơn vị là 5
+                if (number[0] > 0 && number[1] == 5) {
+                dv = 'lăm'
+                }
+
+                // Nếu số hàng chục lớn hơn 1
+                if (number[0] > 1) {
+                append = ' mươi';
+    
+                if (number[1] == 1) {
+                    dv = ' mốt';
+                }
+                }
+
+            return chuc + '' + append + ' ' + dv; 
+        };
+
+        const dvBlock = '1 nghìn triệu tỷ'.split(' ');
+
+        function to_vietnamese(number) {
+            var str = parseInt(number) + '';
+            var i = 0;
+            var arr = [];
+            var index = str.length;
+            var result = [];
+            var rsString = '';
+
+            if (index == 0 || str == 'NaN') {
+            return '';
+            }
+
+            // Chia chuỗi số thành một mảng từng khối có 3 chữ số
+            while (index >= 0) {
+            arr.push(str.substring(index, Math.max(index - 3, 0)));
+            index -= 3;
+            }
+
+            // Lặp từng khối trong mảng trên và convert từng khối đấy ra chữ Việt Nam
+            for (i = arr.length - 1; i >= 0; i--) {
+            if (arr[i] != '' && arr[i] != '000') {
+                result.push(convert_block_three(arr[i]));
+
+                // Thêm đuôi của mỗi khối
+                if (dvBlock[i]) {
+                result.push(dvBlock[i]);
+                }
+            }
+            }
+            // Join mảng kết quả lại thành chuỗi string
+            rsString = result.join(' ');
+
+            // Trả về kết quả kèm xóa những ký tự thừa
+            return rsString.replace(/[0-9]/g, '').replace(/ /g,' ').replace(/ $/,'');
+        }
+
+         function printDiv_Close()
+            {
+                //alert('asdfas');
+                //setTimeout(function() {
+                //    location.reload();
+                //    }, 1000);
+              $('#tongtiennhap').val('0');
+                $('#thanhtoanid').val('0');
+                $('#chietkhauid').val('0');                           
+                $("#soluongnhaphang").val('0');
+                $("#conlaiid").val('0');
+             $('#myModal6').modal('hide');
+             $("#MainContent_phieunhaphang").select();
+            
+             $('#bangchuid').text('');
+             $('#bangchuid2').text('');
+         }
+
+         function printDiv(divId) {              
+               try {                                       
+                    //alert('NG');
+                    //truong hop hoa don moi
+                    var printContents = document.getElementById(divId).innerHTML;
+                    var originalContents = document.body.innerHTML;
+                    document.body.innerHTML = printContents;
+                    //window.print();      
+                    setTimeout(function() {
+                        window.print();
+                        // Sau khi in, phục hồi nội dung ban đầu của body
+                        document.body.innerHTML = originalContents;
+                    }, 1000);              
+                                                                                                                                                       
+                    setTimeout(function() {
+                    location.reload();
+                   }, 1000);
+    
+                 $("#MainContent_phieunhaphang").select();
+
+  
+                }
+                catch(err) {
+                 console.log(err.tostring());
+                 alert(err.tostring());
+                }                                                
+         }
+
+         function addnewkhachhang()
+         {             
+             var idmakh = $("#idmakh").val();
+             var makhachang = idmakh;
+             var idtenkh = $("#idtenkh").val();
+             var idcongnoden = $("#idcongnoden").val();
+             var idcongnodi = $("#idcongnodi").val();
+             var data = { idmakh: idmakh, idtenkh: idtenkh, idcongnoden: idcongnoden, idcongnodi: idcongnodi };
+             $.ajax({
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: "Phieunhaphang.aspx/Savekhachhang",
+                        //data: JSON.stringify(data),
+                        data: JSON.stringify(data),
+                        dataType: "json",
+                        success: function (data) {
+                             //debugger;
+                            //alert('Hoa don thêm thành công!');
+                            if (data.d != "NG") {                               
+                                alert('Hoa don thêm thành công!');    
+                                //var newItem = $("<option>").attr("value", data.id).text(data.name);
+                               // debugger;
+                                var idop = data.d.split(',');
+                                var _id = idop[0];
+                                var _name = idop[1];
+                                var newItem = $("<option>").attr("value", _id).text(_name);
+                                $("#MainContent_dr_nhacungcap").append(newItem);
+
+                                $("#idmakh").val('');
+                                $("#idtenkh").val('');
+                                $("#idcongnoden").val('0');
+                                $("#idcongnodi").val('0');
+                            } else {
+                                alert('Kiểm tra lại thông tin!');
+                            }
+                           
+                        },
+                        error: function () {
+                            //alert("No Match");
+                        }
+                     });
+
+         }
+
+         $('#bannhanhid').change(function() {
+            if($(this).is(":checked")) {
+                //var returnVal = confirm("Are you sure?");
+                //$(this).attr("checked", returnVal);
+                $('#soluongnhaphang').val(1);               
+               // alert('scan QR');
+            } else {
+                $('#soluongnhaphang').val('');
+                //alert('ban 2');
+            }
+            //$('#bannhanhid').val($(this).is(':checked'));        
         });
 
         $("#MainContent_phieunhaphang").on('keyup', function (e) {
-                if ((e.key === 'Enter' || e.keyCode === 13)) {
+            if ((e.key === 'Enter' || e.keyCode === 13)) {
+                var ckQRcode = document.getElementById("bannhanhid");
+                if (ckQRcode.checked == true) {
+                    //alert('Scan QRcode');                    
+                    soluong_keyenter();
+                }
+                else
+                {
                     $("#soluongnhaphang").val(1);
                     $("#soluongnhaphang").select();
                 }
+                    //$("#soluongnhaphang").val(1);
+                    //$("#soluongnhaphang").select();
+                }
+         });
+
+          $('.addKhachhang').click(function () {
+             $('#myModal').modal('show');
          });
 
          $('.add_hanghoa').each(function () {
@@ -130,7 +472,8 @@
                     }
                     else
                     {
-                        var _mahang = $("#MainContent_phieunhaphang").val();                    
+                        var _mahang = $("#MainContent_phieunhaphang").val();  //new3
+                        //var _mahang = $("#mahanghoa").text();
                         //var soluong = $("#soluong").val(); 
                         var data = { _mahang: _mahang };
                     
@@ -169,7 +512,7 @@
                                         //alert(thanhtien);
 
                                         var newrow = '<tr class="themthucdon">' +
-                                            '<td id="tenhang">' + objdata['Table'][0][1] + '</td>' +
+                                            '<td id="tenhang">' + objdata['Table'][0][2] + '</td>' +
                                             '<td id="soluong">' + soluong + '</td>' +
                                             '<td id="giale">' + dongia + '</td>' +
                                             '<td id="thanhtien">' + thanhtien + '</td>' +
@@ -228,7 +571,7 @@
                                                 var dongia = parseInt(objdata['Table'][0][6]);
                                                 var thanhtien = tong_soluong * dongia;
                                                 var newrow = '<tr class="themthucdon">' +
-                                                    '<td id="tenhang">' + objdata['Table'][0][1] + '</td>' +
+                                                    '<td id="tenhang">' + objdata['Table'][0][2] + '</td>' +
                                                     '<td id="soluong">' + tong_soluong + '</td>' +
                                                     '<td id="giale">' + dongia + '</td>' +
                                                     '<td id="thanhtien">' + thanhtien + '</td>' +
@@ -278,10 +621,17 @@
         $("#soluongnhaphang").on('keyup', function (e) {
             if ((e.key === 'Enter' || e.keyCode === 13))
             {
-                var tongtienhang = parseInt($('#tongtiennhap').val());                
-                //alert(tongtienhang);
+                soluong_keyenter();
+            }
+         });
 
+         function soluong_keyenter()
+         {
+             var tongtienhang = parseInt($('#tongtiennhap').val());                
+                //alert(tongtienhang);
+                //new2
                 var _mahang = $("#MainContent_phieunhaphang").val();
+                //var _mahang = $("#mahanghoa").text();
                 var data = { _mahang: _mahang };
                 //push mahang vao array
                 var gettr = [];
@@ -303,7 +653,7 @@
                             $.ajax({
                                 type: "POST",
                                 contentType: "application/json; charset=utf-8",
-                                url: "Map.aspx/getthongtinmahang",
+                                url: "Phieunhaphang.aspx/getthongtinmahang",
                                 data: JSON.stringify(data),
                                 dataType: "json",
                                 success: function (data) {
@@ -317,7 +667,7 @@
                                     //alert(thanhtien);
 
                                     var newrow = '<tr class="themthucdon">' +
-                                        '<td id="tenhang">' + objdata['Table'][0][1] + '</td>' +
+                                        '<td id="tenhang">' + objdata['Table'][0][2] + '</td>' +
                                         '<td id="soluong">' + soluong + '</td>' +
                                         '<td id="giale">' + dongia + '</td>' +
                                         '<td id="thanhtien">' + thanhtien + '</td>' +
@@ -328,6 +678,9 @@
                                     //alert(tongtienhang);
                                     $('#tongtiennhap').val(tongtienhang);
                                     $('#thanhtoanid').val(tongtienhang);
+
+                                    const bangchu_hienthi2 = to_vietnamese(tongtienhang);
+                                    $('#bangchuid2').text(bangchu_hienthi2);
 
                                     $("#MainContent_phieunhaphang").select();
                                 },
@@ -375,7 +728,7 @@
                                             var dongia = parseInt(objdata['Table'][0][6]);  //gia nhap
                                             var thanhtien = tong_soluong * dongia;
                                             var newrow = '<tr class="themthucdon">' +
-                                                '<td id="tenhang">' + objdata['Table'][0][1] + '</td>' +
+                                                '<td id="tenhang">' + objdata['Table'][0][2] + '</td>' +
                                                 '<td id="soluong">' + tong_soluong + '</td>' +
                                                 '<td id="giale">' + dongia + '</td>' +
                                                 '<td id="thanhtien">' + thanhtien + '</td>' +
@@ -387,6 +740,9 @@
                                             $('#tongtiennhap').val(tongtienhang);
                                             $('#thanhtoanid').val(tongtienhang);
 
+                                            const bangchu_hienthi2 = to_vietnamese(tongtienhang);
+                                            $('#bangchuid2').text(bangchu_hienthi2);
+
                                             $("#MainContent_phieunhaphang").select();
                                         },
                                         error: function () {
@@ -396,10 +752,7 @@
                                 }
                             });
                 }
-
-            }
-
-         });
+         };
 
          $('.delproduct').click(function () {
             //var tenphong = dj('#name_room').text();
@@ -415,6 +768,9 @@
                     $(this).parent().parent().remove();
                     $('#tongtiennhap').val(tongtienhang);
                     $('#thanhtoanid').val(tongtienhang);
+
+                    const bangchu_hienthi2 = to_vietnamese(tongtienhang);
+                    $('#bangchuid2').text(bangchu_hienthi2);
                     // *** -> se xu ly bang cach nguoi dung nhap sua xoa -> click 2 nut (luu ban /phong) + tra phong -> save all   (xu ly sau ***** cap nhat ngay lap tuc)
                     //dj.getJSON('/modules/hotel/xulyxoathucdon', {'tenphong': tenphong, 'mahang': delid, 'giaban': price}, function (rs) {
                     //    if (rs.err === 0) {
@@ -460,6 +816,9 @@
                     var tongtienthanhtoan =(parseFloat(tongtienhang) - parseFloat(tienck)) ; //;$("#thanhtoanid").val();
                     $("#chietkhauid").val(tienck);
                     $("#thanhtoanid").val(tongtienthanhtoan);
+
+                    const bangchu_hienthi2 = to_vietnamese(tongtienthanhtoan);
+                    $('#bangchuid2').text(bangchu_hienthi2);
                 }
                 else
                 {
@@ -470,7 +829,10 @@
             {               
                 var tienck = $("#chietkhauid").val();
                 var tongtienthanhtoan =(parseFloat(tongtienhang) - parseFloat(tienck)) ; //;$("#thanhtoanid").val();
-                $("#thanhtoanid").val(tongtienthanhtoan);   
+                $("#thanhtoanid").val(tongtienthanhtoan);  
+
+                const bangchu_hienthi2 = to_vietnamese(tongtienthanhtoan);
+                $('#bangchuid2').text(bangchu_hienthi2);
             }
                                    
          });
@@ -533,20 +895,126 @@
                         data: JSON.stringify(data),
                         dataType: "json",
                         success: function (data) {
-                            alert('Hoa don thêm thành công!');  
+                            //alert('Hoa don thêm thành công!');  
                             $('#tbphieunhap tr').remove();
+                            //$('#tongtiennhap').val('0');
+                            //$('#thanhtoanid').val('0');
+                            //$('#chietkhauid').val('0');
+                            ////chietkhauid
+                            //$("#soluongnhaphang").val('0');
+                            //$("#conlaiid").val('0');
+                            $("#MainContent_phieunhaphang").select();
+                            $('#soHD').val(data.d);
+                        },
+                        error: function () {
+                            //alert("No Match");
+                        }
+                     });
+
+                         //debugger;
+                    //bat thong tin vua luu de in ra hoa don len de in hoa don
+                    var today = new Date();
+                    var dd = today.getDate();
+                    var mm = today.getMonth() + 1; //January is 0!
+                     var yyyy = today.getFullYear();
+
+                    var ckinhoadon = document.getElementById("inHD");
+                        if(ckinhoadon.checked == true)
+                        {
+                            //alert('ban dang in hoa don');
+                            var idhoadon = $('#soHD').val();                            
+                            if (idhoadon == '0')
+                            {
+                                alert('Đây là hóa đơn dầu tiên, đã được ghi, bạn hãy chọn chức năng in lại!');
+                            }
+                            else
+                            {
+                                var data1 = {
+                                idhoadon:idhoadon
+                            };
+                              $.ajax({
+                                    type: "POST",
+                                    contentType: "application/json; charset=utf-8",
+                                    url: "Phieunhaphang.aspx/thongtinhanghoa",
+                                    //data: JSON.stringify(data),
+                                    data: JSON.stringify(data1),
+                                    dataType: "json",
+                                    success: function (data) {
+                                        const objdata = $.parseJSON(data.d);
+                                        //debugger;
+                                        var tongtienhang = $('#tongtiennhap').val();
+                                        var tongchietkhau = $('#chietkhauid').val();                                
+                                        var khachthanhtoan = $('#thanhtoanid').val();
+                                        //alert(khachthanhtoan);
+                                        var khachno =  $('#conlaiid').val();
+                                        var ngaytao = dd + "-" + mm + "-" + yyyy;//;$('#soHD').val();
+                                        var sohoadon = $('#soHD').val();
+                                        //alert(khachthanhtoan);
+                                        //alert(sohoadon);
+                                        $('#tbnhaphang_inhoadon tr').remove();   
+
+                                            if (objdata['Table1'] != "")
+                                            {                                                                                                                                               
+                                                for (var i = 0; i < objdata['Table1'].length - 1; i++) {
+                                                    var tenhang = objdata['Table1'][i][0];
+                                                    var dongia = objdata['Table1'][i][1];
+                                                    var soluong = objdata['Table1'][i][2];
+                                                    var chietkhau = "";//objdata['Table1'][i][3];
+                                                    var thanhtien = objdata['Table1'][i][4];
+                                                    var newrow = '<tr class="thongtinhoadon">' +
+                                                        '<td id="_hanghoad">' + tenhang + '</td>' +
+                                                        '<td id="_tienhang">' + dongia + '</td>' +
+                                                        '<td id="_loaihoadon">' + soluong + '</td>' +
+                                                        '<td id="_chietkhau">' + chietkhau + '</td>' +
+                                                        '<td id="_sohoadon">' + thanhtien + '</td>' +
+                                                        '</tr>';
+                                                    $('#tbnhaphang_inhoadon').append(newrow);                                                                                        
+                                                }                                        
+                                            }
+                                            else
+                                            {
+                                                //$('#tbnhaphang_inhoadon').append(newrow); 
+                                            } 
+                                        //alert(sohoadon);
+                                        $('#ngaytaoid').text(ngaytao);
+                                        $('#sohoadoid').text(sohoadon);
+                                        $('#thantoan2').text(tongtienhang);
+                                        $('#khthanhtoan2').text(khachthanhtoan);
+                                        $('#chietkau2').text(tongchietkhau);
+                                        $('#psno2').text(khachno);   
+
+                                        const bangchu_hienthi2 = to_vietnamese(tongtienhang);
+                                        $('#bangchuid').text(bangchu_hienthi2);
+
+                                    },
+                                    error: function () {
+                                        //alert("No Match");
+                                    }
+                                });   
+                                $('#myModal6').modal('show');
+                            }
+                            
+                        }
+                        else
+                        {                         
+                            //alert('khong in hoa don');
+                            alert('Hóa đơn thêm thành công!');
+                            $('#bangchuid2').text('');
+
                             $('#tongtiennhap').val('0');
                             $('#thanhtoanid').val('0');
                             $('#chietkhauid').val('0');
                             //chietkhauid
                             $("#soluongnhaphang").val('0');
                             $("#conlaiid").val('0');
-                            $("#MainContent_phieunhaphang").select();
-                        },
-                        error: function () {
-                            //alert("No Match");
-                        }
-                  });
+                        }   
+
+                     var ckQRcode = document.getElementById("bannhanhid");
+                     if (ckQRcode.checked == true)
+                     {
+                         $("#soluongnhaphang").val(1);
+                     }
+
                  }                  
              }
              else
@@ -569,23 +1037,214 @@
                         data: JSON.stringify(data),
                         dataType: "json",
                         success: function (data) {
-                            alert('Hoa don thêm thành công!');  
+                            //alert('Hoa don thêm thành công!');  
                             $('#tbphieunhap tr').remove();
+                            //$('#tongtiennhap').val('0');
+                            //$('#thanhtoanid').val('0');
+                            //$('#chietkhauid').val('0');
+                            ////chietkhauid
+                            //$("#soluongnhaphang").val('0');
+                            //$("#conlaiid").val('0');
+                            $("#MainContent_phieunhaphang").select();
+                            $('#soHD').val(data.d);  
+                        },
+                        error: function () {
+                            //alert("No Match");
+                        }
+                 });
+
+                    //debugger;
+                    //bat thong tin vua luu de in ra hoa don len de in hoa don
+                 var today = new Date();
+                 var dd = today.getDate();
+                 var mm = today.getMonth() + 1; //January is 0!
+                 var yyyy = today.getFullYear();
+
+                    var ckinhoadon = document.getElementById("inHD");
+                        if(ckinhoadon.checked == true)
+                        {
+                            //alert('ban dang in hoa don');
+                            var idhoadon = $('#soHD').val();                          
+                             //alert(idhoadon);
+                            if (idhoadon == '0')
+                            {
+                                alert('Đây là hóa đơn dầu tiên, đã được ghi, bạn hãy chọn chức năng in lại!');
+                            }
+                            else
+                            {
+                                 var data1 = {
+                                idhoadon:idhoadon
+                                };
+
+                              $.ajax({
+                                type: "POST",
+                                contentType: "application/json; charset=utf-8",
+                                url: "Phieunhaphang.aspx/thongtinhanghoa",
+                                //data: JSON.stringify(data),
+                                data: JSON.stringify(data1),
+                                dataType: "json",
+                                success: function (data) {
+                                    const objdata = $.parseJSON(data.d);
+                                    //debugger;
+                                    var tongtienhang = $('#tongtiennhap').val();
+                                    var tongchietkhau = $('#chietkhauid').val();                                
+                                    var khachthanhtoan = $('#thanhtoanid').val();
+                                    //alert(khachthanhtoan);
+                                    var khachno =  $('#conlaiid').val();
+                                    var ngaytao = dd + "-" + mm + "-" + yyyy;//;$('#soHD').val();
+                                    var sohoadon = $('#soHD').val();
+                                    //alert(khachthanhtoan);
+                                    //alert(sohoadon);
+                                    $('#tbnhaphang_inhoadon tr').remove();   
+
+                                        if (objdata['Table1'] != "")
+                                        {                                                                                                                                               
+                                            for (var i = 0; i < objdata['Table1'].length - 1; i++) {
+                                                var tenhang = objdata['Table1'][i][0];
+                                                var dongia = objdata['Table1'][i][1];
+                                                var soluong = objdata['Table1'][i][2];
+                                                var chietkhau = "";//objdata['Table1'][i][3];
+                                                var thanhtien = objdata['Table1'][i][4];
+                                                var newrow = '<tr class="thongtinhoadon">' +
+                                                    '<td id="_hanghoad">' + tenhang + '</td>' +
+                                                    '<td id="_tienhang">' + dongia + '</td>' +
+                                                    '<td id="_loaihoadon">' + soluong + '</td>' +
+                                                    '<td id="_chietkhau">' + chietkhau + '</td>' +
+                                                    '<td id="_sohoadon">' + thanhtien + '</td>' +
+                                                    '</tr>';
+                                                $('#tbnhaphang_inhoadon').append(newrow);                                                                                        
+                                            }                                        
+                                        }
+                                        else
+                                        {
+                                            //$('#tbnhaphang_inhoadon').append(newrow); 
+                                        } 
+                                    //alert(sohoadon);
+                                    $('#ngaytaoid').text(ngaytao);
+                                    $('#sohoadoid').text(sohoadon);
+                                    $('#thantoan2').text(tongtienhang);
+                                    $('#khthanhtoan2').text(khachthanhtoan);
+                                    $('#chietkau2').text(tongchietkhau);
+                                    $('#psno2').text(khachno); 
+
+                                    const bangchu_hienthi2 = to_vietnamese(tongtienhang);
+                                    $('#bangchuid').text(bangchu_hienthi2);
+                                },
+                                error: function () {
+                                    //alert("No Match");
+                                }
+                                }); 
+                                
+                                $('#myModal6').modal('show');
+
+                            }
+
+                           
+                        }
+                        else
+                        {                         
+                            //alert('khong in hoa don');
+                            alert('Hóa đơn thêm thành công!');
+                            $('#bangchuid2').text('');
+
                             $('#tongtiennhap').val('0');
                             $('#thanhtoanid').val('0');
                             $('#chietkhauid').val('0');
                             //chietkhauid
                             $("#soluongnhaphang").val('0');
                             $("#conlaiid").val('0');
-                            $("#MainContent_phieunhaphang").select();
-                        },
-                        error: function () {
-                            //alert("No Match");
-                        }
-                  });
+                 }  
+
+                 var ckQRcode = document.getElementById("bannhanhid");
+                     if (ckQRcode.checked == true)
+                     {
+                         $("#soluongnhaphang").val(1);
+                     }
+
              }
                   
-            });
+         });
+
+          $("#soHD").on('keyup', function (e) {
+             if ((e.key === 'Enter' || e.keyCode === 13))
+             {
+                 var sohoadon = $("#soHD").val();
+                    //alert(sohoadon);
+                 var data = { sohoadon: sohoadon };
+
+                 var today = new Date();
+                 var dd = today.getDate();
+                 var mm = today.getMonth() + 1; //January is 0!
+                 var yyyy = today.getFullYear();
+                 //debugger;
+                 $.ajax({
+                            type: "POST",
+                            contentType: "application/json; charset=utf-8",
+                            url: "Phieunhaphang.aspx/thongtinhanghoa2",
+                            data: JSON.stringify(data),
+                            dataType: "json",
+                            success: function (data) {
+                                const objdata = $.parseJSON(data.d); 
+                                //Console.log(objdata);
+                                var tongtienhang = "";//$('#tongtiennhap').val();
+                                var tongchietkhau = "";$('#chietkhauid').val();                                
+                                var khachthanhtoan = "";//$('#thanhtoanid').val();
+                                //alert(khachthanhtoan);
+                                var khachno =  "";//$('#conlaiid').val();
+                                var ngaytao = "";//dd + "-" + mm + "-" + yyyy;//;$('#soHD').val();
+                                var sohoadon = $('#soHD').val();
+                                //alert(khachthanhtoan);
+                                //alert(sohoadon);
+                                $('#tbnhaphang_inhoadon tr').remove(); 
+                                var biendem = objdata['Table1'].length;
+                                //for (var i = 0; i < objdata['Table1'].length - 1; i++) {
+                                for (var i = 0; i < objdata['Table1'].length - 1; i++) {
+                                    //console.log(objdata['Table1'].length);
+                                    var tenhang = objdata['Table1'][i][0];
+                                    var dongia = objdata['Table1'][i][1];
+                                    var soluong = objdata['Table1'][i][2];
+                                    var chietkhau = "";//objdata['Table1'][i][3];
+                                    var thanhtien = objdata['Table1'][i][4];
+                                    var newrow = '<tr class="thongtinhoadon">' +
+                                        '<td id="_hanghoad">' + tenhang + '</td>' +
+                                        '<td id="_tienhang">' + dongia + '</td>' +
+                                        '<td id="_loaihoadon">' + soluong + '</td>' +
+                                        '<td id="_chietkhau">' + chietkhau + '</td>' +
+                                        '<td id="_sohoadon">' + thanhtien + '</td>' +
+                                        '</tr>';
+                                    $('#tbnhaphang_inhoadon').append(newrow); 
+
+                                    if (i == (biendem - 2))
+                                    {
+                                        tongchietkhau = objdata['Table1'][i][3];
+                                        tongtienhang = objdata['Table1'][i][4];
+                                        khachthanhtoan = objdata['Table1'][i][5];
+                                        khachno = objdata['Table1'][i][6];
+                                        ngaytao = objdata['Table1'][i][7];
+                                    }
+                                }
+                                    
+                                //alert(sohoadon);
+                                $('#ngaytaoid').text(ngaytao);
+                                $('#sohoadoid').text(sohoadon);
+                                //alert(khachthanhtoan);
+                                $('#thantoan2').text(tongtienhang);
+                                $('#khthanhtoan2').text(khachthanhtoan);
+                                $('#chietkau2').text(tongchietkhau);
+                                $('#psno2').text(khachno);   
+
+                                const bangchu_hienthi2 = to_vietnamese(tongtienhang);
+                                $('#bangchuid').text(bangchu_hienthi2);
+
+                            },
+                            error: function () {
+                                //alert("No Match");
+                     }
+
+                 });
+                 $('#myModal6').modal('show');
+             }
+         }); 
 
         function SearchText() {
                 //debugger;

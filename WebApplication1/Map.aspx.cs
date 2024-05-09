@@ -13,7 +13,8 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Script.Serialization;
-
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace WebApplication1
 {
@@ -277,6 +278,90 @@ namespace WebApplication1
             DataTable dtupdate = new DataTable();
 
             dtupdate = DataConn.StoreFillDS("NH_Move_phongban", System.Data.CommandType.StoredProcedure, nameitem, newroom);
+
+            if (dtupdate.Rows[0][0].ToString() == "1")
+            {
+                //thongbao = "OK" + "," + dtlevel.Rows[0][1].ToString();
+
+                thongbao = "OK";
+            }
+            else
+            {
+                thongbao = "NG";
+            }
+            return thongbao;
+        }
+
+        static Dictionary<string, int> MergeItems(string json1, string json2)
+        {
+            // Chuyển đổi chuỗi JSON thành Dictionary
+            Dictionary<string, int> items1 = JsonConvert.DeserializeObject<Dictionary<string, int>>(json1);
+            Dictionary<string, int> items2 = JsonConvert.DeserializeObject<Dictionary<string, int>>(json2);
+
+            Dictionary<string, int> mergedItems = new Dictionary<string, int>();
+
+            // Gộp số lượng các mặt hàng từ mảng thứ nhất vào mảng mới
+            foreach (var item in items1)
+            {
+                if (mergedItems.ContainsKey(item.Key))
+                {
+                    mergedItems[item.Key] += item.Value;
+                }
+                else
+                {
+                    mergedItems.Add(item.Key, item.Value);
+                }
+            }
+
+            // Gộp số lượng các mặt hàng từ mảng thứ hai vào mảng mới
+            foreach (var item in items2)
+            {
+                if (mergedItems.ContainsKey(item.Key))
+                {
+                    mergedItems[item.Key] += item.Value;
+                }
+                else
+                {
+                    mergedItems.Add(item.Key, item.Value);
+                }
+            }
+
+            return mergedItems;
+        }
+
+        [WebMethod]
+        public static string gopphongban(string nameitem, string newroom)  //string tenphong, string tienhang
+        {
+            String thongbao = "";
+            DataTable dtupdate = new DataTable();
+
+            //{ "bia ha noi,15000,15000":1,"bia ken,20000,20000":1,"Lẩu bò,300000,300000":1}
+            //{"bia ken,20000,20000":1,"bia ha noi,15000,15000":1}
+            DataTable dt1 = new DataTable();
+            DataTable dt2 = new DataTable();
+            dt1 = DataConn.StoreFillDS("NH_gop_phongban1", System.Data.CommandType.StoredProcedure, nameitem);
+            dt2 = DataConn.StoreFillDS("NH_gop_phongban2", System.Data.CommandType.StoredProcedure, newroom);
+            string jsonString1 = dt1.Rows[0][0].ToString();
+            string jsonString2 = dt2.Rows[0][0].ToString();
+        
+            string chuoighep = "";
+
+            string json1 = jsonString1;
+            string json2 = jsonString2;//"{\"Bò khô,20000,20000\":1,\"bia ha noi,15000,15000\":1}";
+
+            Dictionary<string, int> mergedItems = MergeItems(json1, json2);
+
+            // In ra mảng mới đã gộp
+            foreach (var item in mergedItems)
+            {
+                chuoighep = chuoighep+ '"'+ item.Key+'"'+':'+ item.Value+',';
+                //Console.WriteLine($"{item.Key}:{item.Value}");
+            }
+            chuoighep = chuoighep.Substring(0, chuoighep.Length - 1);
+            chuoighep = '{' + chuoighep + '}';
+
+
+            dtupdate = DataConn.StoreFillDS("NH_gop_phongban", System.Data.CommandType.StoredProcedure, nameitem, newroom,chuoighep);
 
             if (dtupdate.Rows[0][0].ToString() == "1")
             {

@@ -6,11 +6,14 @@ by editing this MSBuild file. In order to learn more about this please visit htt
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_PublishTargetUrl>C:\Users\ACER\Desktop\Nhahang\projecthotel\WebApplication1\bin\Release\Publish</_PublishTargetUrl>
+    <_PublishTargetUrl>D:\deploy_test</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="About.aspx">
       <publishTime>04/09/2024 01:47:58</publishTime>
+    </File>
+    <File Include="Accounts/Loginnew.aspx">
+      <publishTime>05/08/2024 22:15:19</publishTime>
     </File>
     <File Include="bin/Antlr3.Runtime.dll">
       <publishTime>04/09/2024 01:48:01</publishTime>
@@ -19,16 +22,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/09/2024 01:48:01</publishTime>
     </File>
     <File Include="bin/App_Code.compiled">
-      <publishTime>04/11/2024 22:26:29</publishTime>
+      <publishTime>05/09/2024 21:01:58</publishTime>
     </File>
     <File Include="bin/App_Code.dll">
-      <publishTime>04/11/2024 22:26:29</publishTime>
+      <publishTime>05/09/2024 21:01:58</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>04/11/2024 22:26:30</publishTime>
+      <publishTime>05/09/2024 21:01:58</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>04/11/2024 22:26:30</publishTime>
+      <publishTime>05/09/2024 21:01:58</publishTime>
     </File>
     <File Include="bin/AspNet.ScriptManager.bootstrap.dll">
       <publishTime>04/09/2024 01:48:01</publishTime>
@@ -36,14 +39,41 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/AspNet.ScriptManager.jQuery.dll">
       <publishTime>04/09/2024 01:48:01</publishTime>
     </File>
+    <File Include="bin/EPPlus.Interfaces.dll">
+      <publishTime>11/21/2022 12:51:04</publishTime>
+    </File>
+    <File Include="bin/EPPlus.System.Drawing.dll">
+      <publishTime>11/21/2022 12:51:06</publishTime>
+    </File>
     <File Include="bin/Microsoft.AspNet.FriendlyUrls.dll">
       <publishTime>04/09/2024 01:48:01</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNet.SignalR.Core.dll">
+      <publishTime>05/08/2024 02:25:47</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNet.SignalR.Core.pdb">
+      <publishTime>05/08/2024 02:25:47</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNet.SignalR.SystemWeb.dll">
+      <publishTime>05/08/2024 02:25:47</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNet.SignalR.SystemWeb.pdb">
+      <publishTime>05/08/2024 02:25:47</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.Web.Optimization.WebForms.dll">
       <publishTime>04/09/2024 01:48:01</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
       <publishTime>04/09/2024 01:48:01</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.dll">
+      <publishTime>05/08/2024 02:25:47</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.Host.SystemWeb.dll">
+      <publishTime>05/08/2024 02:25:47</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.Security.dll">
+      <publishTime>05/08/2024 02:25:47</publishTime>
     </File>
     <File Include="bin/Microsoft.ScriptManager.MSAjax.dll">
       <publishTime>04/09/2024 01:48:01</publishTime>
@@ -56,6 +86,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>04/09/2024 01:48:01</publishTime>
+    </File>
+    <File Include="bin/Owin.dll">
+      <publishTime>05/08/2024 02:25:47</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
       <publishTime>04/09/2024 01:48:01</publishTime>
@@ -208,10 +241,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/09/2024 01:48:01</publishTime>
     </File>
     <File Include="bin/WebApplication1.dll">
-      <publishTime>04/11/2024 22:26:09</publishTime>
+      <publishTime>05/09/2024 21:01:40</publishTime>
     </File>
     <File Include="bin/WebApplication1.pdb">
-      <publishTime>04/11/2024 22:26:09</publishTime>
+      <publishTime>05/09/2024 21:01:40</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>04/09/2024 01:48:02</publishTime>
@@ -549,17 +582,38 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Content/Site.css">
       <publishTime>04/09/2024 01:47:58</publishTime>
     </File>
+    <File Include="Danhmuc/Danhmucbanphong.aspx">
+      <publishTime>05/01/2024 21:43:01</publishTime>
+    </File>
+    <File Include="Danhmuc/Danhmuchanghoa.aspx">
+      <publishTime>05/08/2024 06:01:39</publishTime>
+    </File>
+    <File Include="Danhmuc/Danhmuckhachhang.aspx">
+      <publishTime>05/02/2024 00:16:47</publishTime>
+    </File>
+    <File Include="Danhmuc/Danhmucnhacungcap.aspx">
+      <publishTime>05/02/2024 00:30:13</publishTime>
+    </File>
+    <File Include="Danhmuc/Danhmucnhanvien.aspx">
+      <publishTime>05/02/2024 00:45:10</publishTime>
+    </File>
+    <File Include="Danhmuc/Danhmucnhomhang.aspx">
+      <publishTime>05/01/2024 23:42:35</publishTime>
+    </File>
+    <File Include="Danhmuc/DMKhuvuc.aspx">
+      <publishTime>05/01/2024 23:27:53</publishTime>
+    </File>
     <File Include="Default.aspx">
-      <publishTime>04/09/2024 01:47:58</publishTime>
+      <publishTime>05/04/2024 13:12:51</publishTime>
     </File>
     <File Include="dist/contextmenu.css">
-      <publishTime>04/09/2024 01:47:58</publishTime>
+      <publishTime>04/30/2024 08:35:50</publishTime>
     </File>
     <File Include="dist/contextmenu.css.map">
       <publishTime>04/09/2024 01:47:58</publishTime>
     </File>
     <File Include="dist/contextmenu.js">
-      <publishTime>04/09/2024 01:47:58</publishTime>
+      <publishTime>04/30/2024 08:11:04</publishTime>
     </File>
     <File Include="dist/contextmenu.scss">
       <publishTime>04/09/2024 01:47:58</publishTime>
@@ -571,7 +625,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/09/2024 01:47:58</publishTime>
     </File>
     <File Include="dist/css/adminlte.min.css">
-      <publishTime>04/09/2024 01:47:58</publishTime>
+      <publishTime>05/06/2024 23:05:33</publishTime>
     </File>
     <File Include="dist/css/adminlte.min.css.map">
       <publishTime>04/09/2024 01:47:58</publishTime>
@@ -636,6 +690,15 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="dist/css/alt/adminlte.plugins.min.css.map">
       <publishTime>04/09/2024 01:47:58</publishTime>
     </File>
+    <File Include="dist/css/fontawesome.css">
+      <publishTime>05/05/2024 10:12:29</publishTime>
+    </File>
+    <File Include="dist/css/font_google.css">
+      <publishTime>05/05/2024 10:10:32</publishTime>
+    </File>
+    <File Include="dist/css/Ionicons.css">
+      <publishTime>05/05/2024 10:14:31</publishTime>
+    </File>
     <File Include="dist/img/AdminLTELogo.png">
       <publishTime>04/09/2024 01:47:58</publishTime>
     </File>
@@ -653,6 +716,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="dist/img/avatar5.png">
       <publishTime>04/09/2024 01:47:58</publishTime>
+    </File>
+    <File Include="dist/img/bannerOK2.jpg">
+      <publishTime>05/06/2024 23:59:52</publishTime>
     </File>
     <File Include="dist/img/boxed-bg.jpg">
       <publishTime>04/09/2024 01:47:58</publishTime>
@@ -683,6 +749,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="dist/img/icons.png">
       <publishTime>04/09/2024 01:47:58</publishTime>
+    </File>
+    <File Include="dist/img/logo_eagle.jpg">
+      <publishTime>05/05/2024 11:25:33</publishTime>
     </File>
     <File Include="dist/img/monan.JPG">
       <publishTime>04/09/2024 01:47:58</publishTime>
@@ -1260,6 +1329,135 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="fonts/glyphicons-halflings-regular.woff2">
       <publishTime>04/09/2024 01:47:58</publishTime>
     </File>
+    <File Include="GiaodienWeb/Giaodienphanmem/ALINA.jpg">
+      <publishTime>05/07/2024 00:08:54</publishTime>
+    </File>
+    <File Include="GiaodienWeb/Giaodienphanmem/banchay.png">
+      <publishTime>05/06/2024 22:26:24</publishTime>
+    </File>
+    <File Include="GiaodienWeb/Giaodienphanmem/C2030.jpg">
+      <publishTime>05/06/2024 22:26:24</publishTime>
+    </File>
+    <File Include="GiaodienWeb/Giaodienphanmem/CW-1000C.jpg">
+      <publishTime>05/06/2024 22:26:24</publishTime>
+    </File>
+    <File Include="GiaodienWeb/Giaodienphanmem/daudocyouje.jpg">
+      <publishTime>05/06/2024 22:26:24</publishTime>
+    </File>
+    <File Include="GiaodienWeb/Giaodienphanmem/Giayin.jpg">
+      <publishTime>05/06/2024 22:26:24</publishTime>
+    </File>
+    <File Include="GiaodienWeb/Giaodienphanmem/Godexg500.jpg">
+      <publishTime>05/06/2024 22:26:24</publishTime>
+    </File>
+    <File Include="GiaodienWeb/Giaodienphanmem/HUONGSEN.jpg">
+      <publishTime>05/06/2024 22:26:24</publishTime>
+    </File>
+    <File Include="GiaodienWeb/Giaodienphanmem/ICON.jpg">
+      <publishTime>05/06/2024 22:26:24</publishTime>
+    </File>
+    <File Include="GiaodienWeb/Giaodienphanmem/iconcacnganhkhac.jpg">
+      <publishTime>05/06/2024 22:26:24</publishTime>
+    </File>
+    <File Include="GiaodienWeb/Giaodienphanmem/iconcamdo.jpg">
+      <publishTime>05/06/2024 22:26:24</publishTime>
+    </File>
+    <File Include="GiaodienWeb/Giaodienphanmem/icondienmay.jpg">
+      <publishTime>05/06/2024 22:26:24</publishTime>
+    </File>
+    <File Include="GiaodienWeb/Giaodienphanmem/icongara.jpg">
+      <publishTime>05/06/2024 22:26:24</publishTime>
+    </File>
+    <File Include="GiaodienWeb/Giaodienphanmem/iconhoaquatang.jpg">
+      <publishTime>05/06/2024 22:26:24</publishTime>
+    </File>
+    <File Include="GiaodienWeb/Giaodienphanmem/iconmevabe.jpg">
+      <publishTime>05/06/2024 22:26:24</publishTime>
+    </File>
+    <File Include="GiaodienWeb/Giaodienphanmem/iconmypham.jpg">
+      <publishTime>05/06/2024 22:26:24</publishTime>
+    </File>
+    <File Include="GiaodienWeb/Giaodienphanmem/iconnhahang.jpg">
+      <publishTime>05/06/2024 22:26:24</publishTime>
+    </File>
+    <File Include="GiaodienWeb/Giaodienphanmem/iconnhasach.jpg">
+      <publishTime>05/06/2024 22:26:24</publishTime>
+    </File>
+    <File Include="GiaodienWeb/Giaodienphanmem/iconnhathuoc.jpg">
+      <publishTime>05/06/2024 22:26:24</publishTime>
+    </File>
+    <File Include="GiaodienWeb/Giaodienphanmem/iconnoithat.jpg">
+      <publishTime>05/06/2024 22:26:24</publishTime>
+    </File>
+    <File Include="GiaodienWeb/Giaodienphanmem/iconnongsan.jpg">
+      <publishTime>05/06/2024 22:26:24</publishTime>
+    </File>
+    <File Include="GiaodienWeb/Giaodienphanmem/iconphongkham.jpg">
+      <publishTime>05/06/2024 22:26:24</publishTime>
+    </File>
+    <File Include="GiaodienWeb/Giaodienphanmem/iconsieuthi.jpg">
+      <publishTime>05/06/2024 22:26:24</publishTime>
+    </File>
+    <File Include="GiaodienWeb/Giaodienphanmem/iconspa.jpg">
+      <publishTime>05/06/2024 22:26:24</publishTime>
+    </File>
+    <File Include="GiaodienWeb/Giaodienphanmem/icontaphoa.jpg">
+      <publishTime>05/06/2024 22:26:24</publishTime>
+    </File>
+    <File Include="GiaodienWeb/Giaodienphanmem/iconthoitrang.jpg">
+      <publishTime>05/06/2024 22:26:24</publishTime>
+    </File>
+    <File Include="GiaodienWeb/Giaodienphanmem/icontonthep.jpg">
+      <publishTime>05/06/2024 22:26:24</publishTime>
+    </File>
+    <File Include="GiaodienWeb/Giaodienphanmem/iconvatlieuxaydung.jpg">
+      <publishTime>05/06/2024 22:26:24</publishTime>
+    </File>
+    <File Include="GiaodienWeb/Giaodienphanmem/iconxemay.jpg">
+      <publishTime>05/06/2024 22:26:24</publishTime>
+    </File>
+    <File Include="GiaodienWeb/Giaodienphanmem/ketsat.jpg">
+      <publishTime>05/06/2024 22:26:24</publishTime>
+    </File>
+    <File Include="GiaodienWeb/Giaodienphanmem/khuyen-mai-292x34.png">
+      <publishTime>05/06/2024 22:26:24</publishTime>
+    </File>
+    <File Include="GiaodienWeb/Giaodienphanmem/khuyen-mai-436x150.png">
+      <publishTime>05/06/2024 22:26:24</publishTime>
+    </File>
+    <File Include="GiaodienWeb/Giaodienphanmem/logothvnnew.jpg">
+      <publishTime>05/06/2024 22:26:24</publishTime>
+    </File>
+    <File Include="GiaodienWeb/Giaodienphanmem/prp085.jpg">
+      <publishTime>05/06/2024 22:26:24</publishTime>
+    </File>
+    <File Include="GiaodienWeb/Giaodienphanmem/register_step2.jpg">
+      <publishTime>05/06/2024 22:26:24</publishTime>
+    </File>
+    <File Include="GiaodienWeb/Giaodienphanmem/reponsive.min.css">
+      <publishTime>05/06/2024 22:26:24</publishTime>
+    </File>
+    <File Include="GiaodienWeb/Giaodienphanmem/SEVENOUMO.jpg">
+      <publishTime>05/06/2024 22:26:24</publishTime>
+    </File>
+    <File Include="GiaodienWeb/Giaodienphanmem/style-admin.css">
+      <publishTime>05/06/2024 22:26:24</publishTime>
+    </File>
+    <File Include="GiaodienWeb/Giaodienphanmem/style-kv222.min.css">
+      <publishTime>05/06/2024 23:06:26</publishTime>
+    </File>
+    <File Include="GiaodienWeb/Giaodienphanmem/style.css">
+      <publishTime>05/06/2024 22:26:24</publishTime>
+    </File>
+    <File Include="GiaodienWeb/Giaodienphanmem/THAILAN.jpg">
+      <publishTime>05/06/2024 22:26:24</publishTime>
+    </File>
+    <File Include="GiaodienWeb/Giaodienphanmem/ZebexZ3100.jpg">
+      <publishTime>05/06/2024 22:26:24</publishTime>
+    </File>
+    <File Include="GiaodienWeb/index.aspx">
+      <publishTime>05/07/2024 00:18:04</publishTime>
+    </File>
     <File Include="Index.aspx">
       <publishTime>04/09/2024 01:47:58</publishTime>
     </File>
@@ -1273,7 +1471,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/09/2024 01:47:58</publishTime>
     </File>
     <File Include="Map.aspx">
-      <publishTime>04/11/2024 21:02:42</publishTime>
+      <publishTime>05/08/2024 22:38:57</publishTime>
     </File>
     <File Include="pages/calendar.html">
       <publishTime>04/09/2024 01:47:59</publishTime>
@@ -1432,10 +1630,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/09/2024 01:47:59</publishTime>
     </File>
     <File Include="Phieubanhang.aspx">
-      <publishTime>04/11/2024 03:11:45</publishTime>
+      <publishTime>05/06/2024 00:53:30</publishTime>
+    </File>
+    <File Include="Phieuchi.aspx">
+      <publishTime>04/15/2024 03:20:37</publishTime>
     </File>
     <File Include="Phieunhaphang.aspx">
-      <publishTime>04/11/2024 02:40:07</publishTime>
+      <publishTime>05/06/2024 00:59:03</publishTime>
+    </File>
+    <File Include="Phieuthu.aspx">
+      <publishTime>04/15/2024 03:37:26</publishTime>
     </File>
     <File Include="plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.css">
       <publishTime>04/09/2024 01:47:59</publishTime>
@@ -7098,6 +7302,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="plugins/toastr/toastr.css">
       <publishTime>04/09/2024 01:48:01</publishTime>
     </File>
+    <File Include="plugins/toastr/toastr.js">
+      <publishTime>04/23/2024 22:38:10</publishTime>
+    </File>
     <File Include="plugins/toastr/toastr.js.map">
       <publishTime>04/09/2024 01:48:01</publishTime>
     </File>
@@ -7108,7 +7315,34 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/09/2024 01:48:01</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>04/11/2024 22:26:21</publishTime>
+      <publishTime>05/09/2024 21:01:47</publishTime>
+    </File>
+    <File Include="Report/BaocaoBH.aspx">
+      <publishTime>05/05/2024 08:47:42</publishTime>
+    </File>
+    <File Include="Report/BaocaocongnoKH.aspx">
+      <publishTime>04/26/2024 04:37:13</publishTime>
+    </File>
+    <File Include="Report/BaocaocongnoNCC.aspx">
+      <publishTime>04/27/2024 14:44:45</publishTime>
+    </File>
+    <File Include="Report/Baocaololai.aspx">
+      <publishTime>05/04/2024 11:00:25</publishTime>
+    </File>
+    <File Include="Report/Baocaonhaphang.aspx">
+      <publishTime>05/05/2024 08:43:49</publishTime>
+    </File>
+    <File Include="Report/Baocaosoquy.aspx">
+      <publishTime>05/05/2024 08:36:22</publishTime>
+    </File>
+    <File Include="Report/Baocaotonghopthuchi.aspx">
+      <publishTime>04/27/2024 14:44:45</publishTime>
+    </File>
+    <File Include="Report/Baocaotonkho.aspx">
+      <publishTime>05/04/2024 15:33:22</publishTime>
+    </File>
+    <File Include="Report/test.aspx">
+      <publishTime>04/22/2024 21:52:13</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
       <publishTime>04/09/2024 01:47:58</publishTime>
@@ -7133,6 +7367,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Scripts/jquery-3.4.1.slim.min.map">
       <publishTime>04/09/2024 01:47:58</publishTime>
+    </File>
+    <File Include="Scripts/jquery.signalR-2.4.3.js">
+      <publishTime>05/08/2024 02:25:47</publishTime>
+    </File>
+    <File Include="Scripts/jquery.signalR-2.4.3.min.js">
+      <publishTime>05/08/2024 02:25:47</publishTime>
     </File>
     <File Include="Scripts/modernizr-2.8.3.js">
       <publishTime>04/09/2024 01:47:58</publishTime>
@@ -7200,17 +7440,29 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Scripts/WebForms/WebUIValidation.js">
       <publishTime>04/09/2024 01:47:58</publishTime>
     </File>
+    <File Include="SignalR_hub.aspx">
+      <publishTime>05/08/2024 02:25:47</publishTime>
+    </File>
     <File Include="Site.Master">
-      <publishTime>04/11/2024 21:02:42</publishTime>
+      <publishTime>05/05/2024 10:21:21</publishTime>
     </File>
     <File Include="Site.Mobile.Master">
       <publishTime>04/09/2024 01:47:58</publishTime>
+    </File>
+    <File Include="TemplateReport/banhangtheongayhd.aspx">
+      <publishTime>05/02/2024 23:33:50</publishTime>
+    </File>
+    <File Include="TemplateReport/Baocaotonghopthuchi.aspx">
+      <publishTime>05/03/2024 00:47:31</publishTime>
+    </File>
+    <File Include="TemplateReport/nhaphangtheongayhd.aspx">
+      <publishTime>05/02/2024 23:26:24</publishTime>
     </File>
     <File Include="ViewSwitcher.ascx">
       <publishTime>04/09/2024 01:47:58</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>04/11/2024 22:26:11</publishTime>
+      <publishTime>05/09/2024 21:01:43</publishTime>
     </File>
   </ItemGroup>
 </Project>

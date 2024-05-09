@@ -1,19 +1,21 @@
 .contextmenu {
-  margin: 0;
-  position: absolute;
-  display: none;
-  *display: inline;
-  *zoom: 1;
-  min-width: 100px;
-  background-color: #fff;
-  padding: 2px 0;
-  border-radius: 4px;
-  box-shadow: 1px 2px 30px #ddd;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  -khtml-user-select: none;
-  user-select: none; }
+    margin: 0;
+    position: absolute;
+    /*display: none;*/
+    display: none;
+    *display: inline;
+    *zoom: 1;
+    min-width: 100px;
+    background-color: #fff;
+    padding: 2px 0;
+    border-radius: 4px;
+    box-shadow: 1px 2px 30px #ddd;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
+}
   .contextmenu > ul {
     margin: 0;
     padding: 0; }
@@ -50,6 +52,7 @@
       color: #ccc; }
 
 .contextmenu-visible {
-  display: inline-block; }
+    display: inline-block;  
+}
 
 /*# sourceMappingURL=contextmenu.css.map */

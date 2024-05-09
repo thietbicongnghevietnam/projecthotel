@@ -96,7 +96,7 @@
                             <b style="padding-right: 10px; margin-left: 10px;">Ticket:</b>
                             <input  style="width: 80px;margin-left: 30px;" id="ticketid" name="ticket" />
 
-                            <b style="padding-right: 10px; margin-left: 10px;">Phong chuyen:</b>
+                            <b style="padding-right: 10px; margin-left: 10px;">Gộp/chuyển:</b>
                             <b style="font-size: 14px; color: blue" id="thongbao"></b>
 
                             <b style="padding-right: 10px; margin-left: 10px;">kieu nghi:</b>
@@ -115,7 +115,7 @@
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
                                 <li class="breadcrumb-item active"> <a href="#" onclick="updateItem()">Chuyển bàn</a></li>
-                                <li class="breadcrumb-item active">Gộp bàn</li>
+                                <li class="breadcrumb-item active"><a href="#" onclick="gopban()">Gộp bàn</a></li>
                                 <li class="breadcrumb-item active"><a href="#" onclick="delItem()">Hủy bàn</a></li>
                             </ol>
                         </div>
@@ -1105,8 +1105,9 @@
 
                                             var mahang = info_mahang[0];
                                             var dongia = info_mahang[1];
-                                            var thanhtien = info_mahang[2];
                                             var soluong = chars[1];
+                                            var thanhtien = soluong*dongia;//info_mahang[2];
+                                            
 
                                             var newrow = '<tr class="themthucdon">' +
                                                 '<td id="tenhang">' + mahang + '</td>' +
@@ -1162,7 +1163,62 @@
                 });
 
             });
-            
+
+            function gopban() {
+                //let newroom;
+                //debugger;
+                var tenphong1 = $("#nametable").text();
+                //alert(tenphong1);
+                let notice = prompt("Vui lòng nhập bàn cần gộp!");
+                if (notice == null || notice == "") {
+                    newroom = "Phong/ban null!";
+                    alert(newroom);
+                }
+                else {
+                    //newroom = "Phong moi chuyen: " + notice;
+                    document.getElementById("thongbao").innerHTML = notice;
+                    var newroom = notice;
+
+                    //alert(tenphong1);                
+                    if (tenphong1 == "") {
+                        alert("Bạn cần chọn bàn cần gộp!");
+                    }
+                    else {
+                        var nameitem = tenphong1;
+                        var data = { nameitem: nameitem, newroom: newroom };
+                        $.ajax({
+                            type: "POST",
+                            contentType: "application/json; charset=utf-8",
+                            url: "Map.aspx/gopphongban",
+                            data: JSON.stringify(data),
+                            dataType: "json",
+                            success: function (data) {
+                                //response(data.d);
+                                //alert(data.d);
+                                if (data.d != "NG") {
+                                    alert('Gộp bàn thành công!');
+                                    $("#myList UL LI").each(function () {
+                                        var nameroom = $(this).find('#tenphong').text();
+                                        if (nameroom == nameitem) {
+                                            $(this).find("img").attr('src', '/static/images/cokhach.png');
+                                        }
+                                        if (nameroom == newroom) {
+                                             $(this).find("img").attr('src', '/static/images/phongtrong.png');                                           
+                                        }
+                                    })
+                                }
+                                else {
+                                    alert('Gộp bàn NG!!!');
+                                }
+                            },
+                            error: function (result) {
+                                //alert("No Match");
+                            }
+                        });
+                    }
+                }
+            }
+
             function updateItem() {
                 //let newroom;
                 //debugger;
@@ -1225,8 +1281,13 @@
                 //alert(tenphong1);
                 var nameitem = tenphong1;
                 var userid = <%=Session["username"].ToString()%>;
-                var data = { nameitem: nameitem, userid:userid };
-                $.ajax({
+                var data = { nameitem: nameitem, userid: userid };
+
+                 if(confirm("Bạn có chắc muốn hủy? Bấm OK để tiếp tục!") == true){
+                        //document.getElementById("demo").innerHTML = 
+                        //"Bạn muốn tiếp tục";
+                     //console.log('Bạn muốn tiếp tục');
+                        $.ajax({
                             type: "POST",
                             contentType: "application/json; charset=utf-8",
                             url: "Map.aspx/huyphongban",
@@ -1256,6 +1317,13 @@
                                 //alert("No Match");
                             }
                         });                
+                 }
+                 else
+                 {
+                        //document.getElementById("demo").innerHTML = 
+                        // "Bạn không muốn tiếp tục";
+                      console.log('Bạn không muốn tiếp tục');
+                    }
             }
 
             $('#ghilaihoadon').click(function () 
@@ -1433,8 +1501,9 @@
 
                                             var mahang = info_mahang[0];
                                             var dongia = info_mahang[1];
-                                            var thanhtien = info_mahang[2];
                                             var soluong = chars[1];
+                                            var thanhtien = soluong*dongia;//info_mahang[2];
+                                            
 
                                             var newrow = '<tr class="themthucdon2">' +
                                                 '<td id="tenhang">' + mahang + '</td>' +
@@ -2216,8 +2285,9 @@
 
                                             var mahang = info_mahang[0];
                                             var dongia = info_mahang[1];
-                                            var thanhtien = info_mahang[2];
                                             var soluong = chars[1];
+                                            var thanhtien = soluong*dongia;//info_mahang[2];
+                                            
 
                                             var newrow = '<tr class="themthucdon2">' +
                                                 '<td id="tenhang">' + mahang + '</td>' +
