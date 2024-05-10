@@ -94,7 +94,12 @@
                                         <th>Mahang</th>
                                         <th>Tenhang</th>
                                         <th>dvt</th>
-                                        <th>Soluongton</th> 
+                                        <%--<th>Ton dau ky</th> --%>
+
+                                         <th>Nhap trong ky</th>
+                                         <th>Xuat trong ky</th>
+
+                                        <th>Ton cuoi ky</th> 
                                         <th>Gianhap</th> 
                                          <th>Giaban</th> 
                                         <th>Nhomhang</th>
@@ -114,6 +119,12 @@
                                         <td><%=rows["mahang"].ToString()%></td>
                                         <td><%=rows["tenhang"].ToString()%></td>
                                         <td><%=rows["dvt"].ToString()%></td>
+
+                                        <%-- <td></td>--%>
+
+                                        <td><%=rows["Soluongnhap"].ToString()%></td>
+                                        <td><%=rows["Soluongxuat"].ToString()%></td>
+
                                         <td><%=rows["soluongton"].ToString()%></td>
                                         <td><%=rows["gianhap"].ToString()%></td>
                                          <td><%=rows["giaban"].ToString()%></td> 

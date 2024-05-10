@@ -29,8 +29,8 @@ namespace WebApplication1.Report
         protected void Search_Date_Click(object sender, EventArgs e)
         {
             //string _date = Request.Form[datepicker.UniqueID];
-            string _fromdate = Request.Form[Date1.UniqueID];
-            string _todate = Request.Form[ngaychiid.UniqueID];
+            string fromdate = Request.Form[Date1.UniqueID];
+            string todate = Request.Form[ngaychiid.UniqueID];
 
 
             //string _todate = Request.Form[ngaychiid.UniqueID];
@@ -38,6 +38,20 @@ namespace WebApplication1.Report
             string _checkpartno = Request.Form["check_partno_search"];
             string _partno = partno_search.Value.ToString();
             //filter_type.Text = "";
+
+            DataTable dt_new = new DataTable();
+            dt_new.Columns.Add("mahang", typeof(String));
+            dt_new.Columns.Add("tenhang", typeof(String));
+            dt_new.Columns.Add("dvt", typeof(String));
+            dt_new.Columns.Add("Soluongnhap", typeof(String));
+            dt_new.Columns.Add("Soluongxuat", typeof(String));
+            dt_new.Columns.Add("soluongton", typeof(String));            
+            dt_new.Columns.Add("gianhap", typeof(String));
+            dt_new.Columns.Add("giaban", typeof(String));
+            dt_new.Columns.Add("nhomhangid", typeof(String));           
+            dt_new.Columns.Add("created", typeof(String));
+
+
 
             if (_checkpartno == "on")
             {               
@@ -48,14 +62,90 @@ namespace WebApplication1.Report
             else
             {
                 //loc theo ngay
-                if (_fromdate == "")
+                if (fromdate == "")
                 {
                     dt_BCTonkho = DataConn.StoreFillDS("NH_Baocaotonkho", System.Data.CommandType.StoredProcedure);
                 }
                 else
-                {                   
-                    dt_BCTonkho = DataConn.StoreFillDS("NH_Baocaotonkho", System.Data.CommandType.StoredProcedure);
-                    //datepicker.Value = ngay + "-" + thang + "-" + nam;
+                {
+                    DataTable dtthekho = new DataTable();
+                    DataTable dt_danhmuckho = new DataTable();
+                    string mahang = "";
+                    dtthekho = DataConn.StoreFillDS("NH_thongtinthekho", System.Data.CommandType.StoredProcedure, mahang, fromdate, todate);
+
+                    dt_danhmuckho = DataConn.StoreFillDS("NH_Baocaotonkho", System.Data.CommandType.StoredProcedure);
+
+                    for (int j = 0; j < dt_danhmuckho.Rows.Count; j++)
+                    {
+                        string _mahang = dt_danhmuckho.Rows[j]["mahang"].ToString();
+                        string tenhang = dt_danhmuckho.Rows[j]["tenhang"].ToString();
+                        string dvt = dt_danhmuckho.Rows[j]["dvt"].ToString();
+                        string Soluongnhap = "0";// dt_BCTonkho.Rows[j]["Soluongnhap"].ToString();
+                        string Soluongxuat = "0";// dt_BCTonkho.Rows[j]["Soluongxuat"].ToString();
+                        string soluongton = dt_danhmuckho.Rows[j]["soluongton"].ToString();
+                        string gianhap = dt_danhmuckho.Rows[j]["gianhap"].ToString();
+                        string giaban = dt_danhmuckho.Rows[j]["giaban"].ToString();
+                        string nhomhangid = dt_danhmuckho.Rows[j]["nhomhangid"].ToString();
+                        string created = dt_danhmuckho.Rows[j]["created"].ToString();
+                        
+
+                        for (int i = 0; i < dtthekho.Rows.Count; i++)
+                        {
+                            //string sohoadon = dtkho.Rows[i][0].ToString();
+                            string jsonString = dtthekho.Rows[i][1].ToString();
+                            //string ngaytao = dtkho.Rows[i][2].ToString();
+                            string loaihoadon = dtthekho.Rows[i][3].ToString();
+
+                            if (jsonString == "{}" || jsonString is null || jsonString == "")
+                            {
+                                //no thing  ==> truong hop nha nghi hoac karaoke khong lay do
+                            }
+                            else
+                            {
+                                // Phân tích chuỗi JSON
+                                JObject json = JObject.Parse(jsonString);
+
+                                JToken quantity = 0;
+
+
+                                // Kiểm tra xem phần tử tồn tại trong danh sách không
+                                bool exists = json.Properties().Any(p => p.Name.Contains(tenhang));
+                                if (exists)
+                                {
+                                    foreach (var item in json)
+                                    {
+                                        //string key = item.Key;
+                                        if (item.Key.Split(',')[0] == tenhang)
+                                        {
+                                            JToken value = item.Value;
+                                            quantity = item.Value;
+                                            break;
+                                        }                                                                                
+                                    }
+                                    if (loaihoadon == "xuathang")
+                                    {
+                                        Soluongxuat = (Int32.Parse(Soluongxuat.ToString()) + Int32.Parse(quantity.ToString())).ToString();
+                                    }
+                                    if (loaihoadon == "nhaphang")
+                                    {
+                                        Soluongnhap = (Int32.Parse(Soluongnhap.ToString()) + Int32.Parse(quantity.ToString())).ToString();
+                                    }
+                                    
+                                }
+                                else
+                                {
+
+                                    //Console.WriteLine($"Phần tử '{searchTerm}' không tồn tại trong danh sách.");
+                                    //nothing
+                                }                               
+                            }
+                        }
+
+                        dt_new.Rows.Add(_mahang, tenhang, dvt,Soluongnhap, Soluongxuat, soluongton, gianhap, giaban, nhomhangid, created);
+                    }
+
+                    //show bao cao ton kho
+                    dt_BCTonkho = dt_new.Copy();
                 }
             }
         }
@@ -144,12 +234,12 @@ namespace WebApplication1.Report
                         foreach (var item in json)
                         {
                             //string key = item.Key;
-                            if (item.Key == searchTerm)
+                            if (item.Key.Split(',')[0] == searchTerm)
                             {
                                 JToken value = item.Value;
-                            }
-                            quantity = item.Value;
-                            break;
+                                quantity = item.Value;
+                                break;
+                            }                            
                         }
                         //Console.WriteLine($"Phần tử '{searchTerm}' tồn tại trong danh sách.");
                         //dt_new.Rows.Add(sohoadon, jsonString, quantity, ngaytao, loaihoadon);

@@ -2,3 +2,36 @@ loi from dang nhap toart chua hien.....
 code signalr
 https://stackoverflow.com/questions/18143599/can-signalr-be-used-with-asp-net-webforms
 ===========================
+
+edit
+NH_Baocaotonkho
+GO
+ALTER PROCEDURE [dbo].[NH_Baocaotonkho]
+	
+AS
+BEGIN
+	
+	SELECT TOP 1000 [id]
+      ,[mahang]
+      ,[tenhang]
+      ,[dvt]
+	  ,'0' as Soluongnhap
+	  ,'0' as Soluongxuatton
+      ,[soluongton]
+      ,[anh]
+      ,[gianhap]
+      ,[giaban]
+      ,[nhomhangid]
+      ,[userid]
+      ,[created]
+      ,[modified]
+  FROM hthanghoa
+
+
+END
+
+cach 1
+ton dau ky = sum(tongnhap)-sum(tongxuat) where tu dau thang den tai thoi diem hien tai
+
+cach 2
+tinh ton dau vao hoa don 
