@@ -27,6 +27,7 @@ namespace WebApplication1
         public string sohoadon = "";       
 
         public DataTable dtncc = new DataTable();
+        public DataTable dtdvt = new DataTable();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -39,6 +40,13 @@ namespace WebApplication1
                 dtncc.Rows.InsertAt(newRow2, 0);
                 dr_nhacungcap.DataSource = dtncc;
                 dr_nhacungcap.DataBind();
+
+                dtdvt = DataConn.StoreFillDS("NH_Get_DVT", System.Data.CommandType.StoredProcedure);
+                DataRow newRow3 = dtdvt.NewRow();
+                newRow3["dvtto"] = "==DVT==";
+                dtdvt.Rows.InsertAt(newRow3, 0);
+                dr_dvt.DataSource = dtdvt;
+                dr_dvt.DataBind();
 
                 dt_getSohd = DataConn.StoreFillDS("NH_getsohoadon_BH", System.Data.CommandType.StoredProcedure);
                 sohoadon = dt_getSohd.Rows[0][0].ToString();
@@ -295,6 +303,34 @@ namespace WebApplication1
         }
 
         [WebMethod]
+        public static string laysoluongdvt(string donvinhonhat, string kiemtramahang, string donvilonhon)
+        {
+            string thongbao = "";
+            DataTable dt = new DataTable();
+            dt = DataConn.StoreFillDS("NH_show_dvt", System.Data.CommandType.StoredProcedure, donvinhonhat, kiemtramahang, donvilonhon);
+
+            if (dt.Rows.Count > 0)
+            {
+                if(dt.Rows[0][0].ToString() != "0")
+                {
+                    //thongbao = "OK" + "," + dtlevel.Rows[0][1].ToString();
+
+                    thongbao = dt.Rows[0][1].ToString();
+                    //thongbao = dt.Rows[0][0].ToString() + "," + dt.Rows[0][1].ToString();
+                }
+                else
+                {
+                        thongbao = "NG";
+                }
+            }
+            else
+            {
+                thongbao = "NG";
+            }            
+            return thongbao;
+        }
+
+        [WebMethod]
         public static string laymahang(string tenhang)  //string tenphong, string tienhang
         {
             String thongbao = "";
@@ -305,7 +341,7 @@ namespace WebApplication1
             if (dtmahang.Rows[0][0].ToString() != "0")
             {
                 //thongbao = "OK" + "," + dtlevel.Rows[0][1].ToString();
-                thongbao = dtmahang.Rows[0][0].ToString();
+                thongbao = dtmahang.Rows[0][0].ToString() + "," + dtmahang.Rows[0][1].ToString();
             }
             else
             {
