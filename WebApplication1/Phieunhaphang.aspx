@@ -19,7 +19,8 @@
                         <b>Mã hàng </b><br />
                         Nhập nhanh<input type="checkbox" id="bannhanhid" name="bannhanh">
                     </td>
-                <td style="padding-bottom: 10px; padding-right: 10px;"> 
+                <td style="padding-bottom: 10px; padding-right: 10px;">
+                    <span id="tenhanghoaid" hidden ></span>
                     <span id="mahanghoa" hidden ></span>
                     <asp:TextBox ID="phieunhaphang" Style="float: left; width: 100%;" class="ajax form-control input-sm" value="" placeholder="Chọn tên hàng" runat="server"></asp:TextBox>
                 </td>
@@ -447,9 +448,44 @@
         });
 
         $("#MainContent_phieunhaphang").on('keyup', function (e) {
-            if ((e.key === 'Enter' || e.keyCode === 13)) {
-                var tenhang = $("#MainContent_phieunhaphang").val();
-                var data = { tenhang: tenhang };
+            if ((e.key === 'Enter' || e.keyCode === 13)) {    
+                var ckQRcode = document.getElementById("bannhanhid");
+                if (ckQRcode.checked == true) {
+                    var mahang = $("#MainContent_phieunhaphang").val();
+                    var data = { mahang: mahang };
+                    //new1
+                     $.ajax({
+                                type: "POST",
+                                contentType: "application/json; charset=utf-8",
+                                url: "Phieunhaphang.aspx/laymahang_chuan",                                
+                                data: JSON.stringify(data),
+                                dataType: "json",
+                         success: function (data) {   
+                             //alert(data.d);                            
+                            if (data.d != "NG") {
+                                var chuoihang = data.d.split(',');                                
+                                $("#mahanghoa").text(chuoihang[0]);
+                                $("#dvtnhonhat").val(chuoihang[1]);    
+                                $("#MainContent_dr_dvt").val('==DVT==');
+                            } 
+                            else 
+                            {
+                                alert('Khong co trong danh muc hang hoa!');
+                            }                            
+                        },
+                        error: function () {
+                            //alert("No Match");
+                        }
+                    });
+
+                    //alert('Scan QRcode');                    
+                    soluong_keyenter();
+                }
+                else
+                {                    
+                    // khong scan QRcode
+                    var tenhang = $("#MainContent_phieunhaphang").val();
+                    var data = { tenhang: tenhang };
                     //new1
                      $.ajax({
                                 type: "POST",
@@ -473,15 +509,8 @@
                         error: function () {
                             //alert("No Match");
                         }
-                });
+                    });
 
-                var ckQRcode = document.getElementById("bannhanhid");
-                if (ckQRcode.checked == true) {
-                    //alert('Scan QRcode');                    
-                    soluong_keyenter();
-                }
-                else
-                {
                     $("#soluongnhaphang").val(1);
                     $("#soluongnhaphang").select();
                 }
@@ -522,7 +551,7 @@
                             $.ajax({
                                 type: "POST",
                                 contentType: "application/json; charset=utf-8",
-                                url: "Phieubanhang.aspx/laysoluongdvt",
+                                url: "Phieunhaphang.aspx/laysoluongdvt",
                                 data: JSON.stringify(data),
                                 dataType: "json",
                                 success: function (data) {
@@ -546,150 +575,60 @@
                             //alert(soluong_dvt);
                         }
 
-                        var _mahang = $("#MainContent_phieunhaphang").val();  //new3
-                        //var _mahang = $("#mahanghoa").text();
-                        //var soluong = $("#soluong").val(); 
-                        var data = { _mahang: _mahang };
-                    
                         var tongtienhang = parseInt($('#tongtiennhap').val());
 
-                        //push mahang vao array
-                        var gettr = [];
-
-                       $('#tbphieunhap tr').each(function () {
-                        var mhold = $(this).find('td').eq(0).text();
-                        gettr.push(mhold);
-                            });
-                            //neu mahang = phan tu trong array thi gan 1 gia tri de so sanh
-                            var gettr_rs = 'Insert';
-                            for (var i = 0; i < gettr.length; i++) {
-                                if (_mahang == gettr[i]) {
-                                    gettr_rs = 'Remove';
-                                }
-                            }
-
-                            if (gettr_rs == 'Insert') {
-                                $.ajax({
+                        var _mahang = "";                
+                        var ckQRcode = document.getElementById("bannhanhid");
+                        if (ckQRcode.checked == true)
+                        {
+                            var mahang_chuan = $("#MainContent_phieunhaphang").val();
+                                 //alert(mahang_chuan);
+                                 var data3 = {mahang_chuan : mahang_chuan}
+                                 //scan QRcode
+                                 $.ajax({
                                     type: "POST",
                                     contentType: "application/json; charset=utf-8",
-                                    url: "Phieunhaphang.aspx/getthongtinmahang",
-                                    data: JSON.stringify(data),
+                                    url: "Phieunhaphang.aspx/laydungtenhang",
+                                    data: JSON.stringify(data3),
                                     dataType: "json",
                                     success: function (data) {
-                                        //response(data.d);
-                                        var objdata = $.parseJSON(data.d);
-                                        //debugger;
-                                        var soluong = 1;//parseInt($("#soluongnhaphang").val());
-                                        if(ktdvt == "==DVT==")
+                                        if (data.d != "NG")
                                         {
-                                            soluong = 1;
+                                             $('#tenhanghoaid').text(data.d);
+                                            _mahang = $("#tenhanghoaid").text(); // Gán giá trị trong hàm gọi lại success
+                                             handleMahang(_mahang,ktdvt,soluong_dvt,tongtienhang);                   
                                         }
                                         else
                                         {
-                                           soluong = parseInt(soluong_dvt)*parseInt($("#soluongnhaphang").val());
-                                        }
-                                        //var soluong = parseInt($("#soluongnhaphang").val());
-                                        //var dongia = parseInt(objdata['Table'][0][7]);
-                                        var dongia = parseInt(objdata['Table'][0][6]);  //gianhap
-                                        var thanhtien = parseInt(soluong) * parseInt(objdata['Table'][0][6]);
-                                        //alert(thanhtien);
-                                        var newrow = '<tr class="themthucdon">' +
-                                            '<td id="tenhang">' + objdata['Table'][0][2] + '</td>' +
-                                            '<td id="soluong">' + soluong + '</td>' +
-                                            '<td id="giale">' + dongia + '</td>' +
-                                            '<td id="thanhtien">' + thanhtien + '</td>' +
-                                            '<td><input name="checknhaphang" class="checknhaphang" type="checkbox" value="" /></td>' +
-                                            '</tr>';
-                                        $('#tbphieunhap').append(newrow);
-                                        tongtienhang += thanhtien;
-
-                                        //alert(tongtienhang);
-                                        $('#tongtiennhap').val(tongtienhang);
-                                        $('#thanhtoanid').val(tongtienhang);
-
-                                        const bangchu_hienthi2 = to_vietnamese(tongtienhang);
-                                        $('#bangchuid2').text(bangchu_hienthi2);
-
-                                        $("#MainContent_phieunhaphang").select();
+                                            alert('khong ton tai ma hang, kiem tra lai!');
+                                            //_mahang = "";
+                                        }                                               
                                     },
-                                    error: function () {
+                                    error: function ()
+                                    {
                                         //alert("No Match");
                                     }
                                 });
-                            }
-
-                            //neu da co ma hang trog danh sach thi remove cai cu roi insert
-                            if (gettr_rs == 'Remove') {
-                                // xoa dong
-                                $('#tbphieunhap tr').each(function () {
-                                    var td = $(this).find('td').eq(0).text();
-
-                                    var soluongmoi = $('#soluongnhaphang').val();
-                                    var soluongcu = $(this).find('td').eq(1).text();
-                                    var tong_soluong = parseInt(soluongmoi) + parseInt(soluongcu);
-
-                                    if (td == _mahang) {
-                                        $('#tbphieunhap tr').each(function () {
-                                            if ($(this).find('td').eq(0).text() == _mahang) {
-                                                var tongtiencu = parseFloat($(this).find('td').eq(3).text());
-                                                //alert(tongtiencu);
-                                                $(this).remove();
-                                                tongtienhang = tongtienhang - tongtiencu;
-                                            }
-                                        });
-                                        //alert(tongtienhang);
-                                        //$('#tongtiennhap').val(tongtienhang);
-                                        //$('#thanhtoanid').val(tongtienhang);
-                                        // _$addproduct_(soluong);
-                                        //debugger;
-                                        $.ajax({
-                                            type: "POST",
-                                            contentType: "application/json; charset=utf-8",
-                                            url: "Map.aspx/getthongtinmahang",
-                                            data: JSON.stringify(data),
-                                            dataType: "json",
-                                            success: function (data) {
-                                                //response(data.d);
-                                                var objdata = $.parseJSON(data.d);
-                                                //debugger;
-                                                var soluong = parseInt($("#soluongnhaphang").val());
-                                                var dongia = parseInt(objdata['Table'][0][6]);
-                                                var thanhtien = tong_soluong * dongia;
-                                                var newrow = '<tr class="themthucdon">' +
-                                                    '<td id="tenhang">' + objdata['Table'][0][2] + '</td>' +
-                                                    '<td id="soluong">' + tong_soluong + '</td>' +
-                                                    '<td id="giale">' + dongia + '</td>' +
-                                                    '<td id="thanhtien">' + thanhtien + '</td>' +
-                                                    '<td><input name="checknhaphang" class="checknhaphang" type="checkbox" value="" /></td>' +
-                                                    '</tr>';
-                                                $('#tbphieunhap').append(newrow);
-                                                tongtienhang += thanhtien;
-                                                $('#tongtiennhap').val(tongtienhang);
-                                                $('#thanhtoanid').val(tongtienhang);
-
-                                                const bangchu_hienthi2 = to_vietnamese(tongtienhang);
-                                                $('#bangchuid2').text(bangchu_hienthi2);
-
-                                                $("#MainContent_phieunhaphang").select();
-                                            },
-                                            error: function () {
-                                                //alert("No Match");
-                                            }
-                                        });
-                                    }
-                                });
-                            }
+                        }
+                        else
+                        {
+                            _mahang = $("#MainContent_phieunhaphang").val();
+                            handleMahang(_mahang,ktdvt,soluong_dvt,tongtienhang);
+                        }
+                        //code cu....
                     }                                                                         
                 });               
          });
 
          // nut sua hoa don
-            $('.editproduct').click(function () {                        
+         $('.editproduct').click(function () {                  
+             var ckQRcode = document.getElementById("bannhanhid");
+
                         var tongtienhang = parseInt($('#tongtiennhap').val());
                         $('.checknhaphang').each(function () {
                             var chk = $(this).is(':checked');
                             if (chk == true) {
-                                var mahangid = $(this).parent().parent().find('td').eq(0).text();
+                                var tenhangid = $(this).parent().parent().find('td').eq(0).text();
                                 var soluong = $(this).parent().parent().find('td').eq(1).text();
                                 var price = $(this).parent().parent().find('td').eq(3).text();
                                 tongtienhang = tongtienhang - price;
@@ -698,8 +637,36 @@
                                 $('#thanhtoanid').val(tongtienhang);
 
                                 $('#soluongnhaphang').val(soluong);
-                                $('#MainContent_phieunhaphang').val(mahangid);
-                                
+                                if (ckQRcode.checked == true) {
+                                    //ban bang scan QR code
+                                    var data2 = { tenhangid: tenhangid };
+                                    $.ajax({
+                                            type: "POST",
+                                            contentType: "application/json; charset=utf-8",
+                                            url: "Phieunhaphang.aspx/laymahangscan",
+                                            data: JSON.stringify(data2),
+                                            dataType: "json",
+                                            success: function (data) {
+                                                if(data.d == "NG")
+                                                {
+                                                    $('#MainContent_phieunhaphang').val(data.d);
+                                                }
+                                                else
+                                                {
+                                                   //nothing
+                                                }                                                      
+                                            },
+                                            error: function ()
+                                            {
+                                                //alert("No Match");
+                                            }
+                                        });   
+                                }
+                                else
+                                {
+                                    $('#MainContent_phieunhaphang').val(tenhangid);
+                                }
+                                                                
                                 $('#soluongnhaphang').focus();
                                 $('#soluongnhaphang').select();
                                 
@@ -739,7 +706,7 @@
                 $.ajax({
                     type: "POST",
                     contentType: "application/json; charset=utf-8",
-                    url: "Phieubanhang.aspx/laysoluongdvt",
+                    url: "Phieunhaphang.aspx/laysoluongdvt",
                     data: JSON.stringify(data2),
                     dataType: "json",
                     success: function (data) {
@@ -763,13 +730,64 @@
                 //alert(soluong_dvt);
             }
 
-             var tongtienhang = parseInt($('#tongtiennhap').val());                
+               var tongtienhang = parseInt($('#tongtiennhap').val());                
                 //alert(tongtienhang);
                 //new2
-                var _mahang = $("#MainContent_phieunhaphang").val();
+                var _mahang = "";
+                //var _mahang = $("#MainContent_phieunhaphang").val();
                 //var _mahang = $("#mahanghoa").text();
+                 var ckQRcode = document.getElementById("bannhanhid");
+                 if (ckQRcode.checked == true)
+                 {
+                     var mahang_chuan = $("#MainContent_phieunhaphang").val();
+                     //alert(mahang_chuan);
+                     var data3 = {mahang_chuan : mahang_chuan}
+                     //scan QRcode
+                     $.ajax({
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: "Phieunhaphang.aspx/laydungtenhang",
+                        data: JSON.stringify(data3),
+                        dataType: "json",
+                        success: function (data) {
+                            if (data.d != "NG")
+                            {
+                                 $('#tenhanghoaid').text(data.d);
+                                _mahang = $("#tenhanghoaid").text(); // Gán giá trị trong hàm gọi lại success
+                                 handleMahang(_mahang,ktdvt,soluong_dvt,tongtienhang);                   
+                            }
+                            else
+                            {
+                                alert('khong ton tai ma hang, kiem tra lai!');
+                                //_mahang = "";
+                            }                                               
+                        },
+                        error: function ()
+                        {
+                            //alert("No Match");
+                        }
+                    });
+                 }
+                 else
+                 {
+                     _mahang = $("#MainContent_phieunhaphang").val();
+                     handleMahang(_mahang,ktdvt,soluong_dvt,tongtienhang);
+                 }
+
+             //khong bat duoc ma hang o day  ==> cho ra ham moi
+             //alert($("#tenhanghoaid").text());
+             //_mahang = $("#tenhanghoaid").text();
+             //alert(_mahang);       
+             
                 
-                var data = { _mahang: _mahang };
+         };
+
+         // Hàm xử lý giá trị _mahang ngoài phạm vi của hàm gọi AJAX
+        function handleMahang(mahang,ktdvt,soluong_dvt,tongtienhang) {
+            // Bạn có thể sử dụng giá trị _mahang ở đây
+            //alert(mahang);
+            var _mahang = mahang;
+            var data = { _mahang: _mahang };
                 //push mahang vao array
                 var gettr = [];
     
@@ -897,8 +915,10 @@
                                     });
                                 }
                             });
-                }
-         };
+            }
+
+
+        }
 
          $('.delproduct').click(function () {
             //var tenphong = dj('#name_room').text();

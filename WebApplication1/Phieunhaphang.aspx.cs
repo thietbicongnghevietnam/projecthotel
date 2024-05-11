@@ -139,6 +139,69 @@ namespace WebApplication1
             return thongbao;
         }
 
+        [WebMethod]
+        public static string laymahang_chuan(string mahang)  //string tenphong, string tienhang
+        {
+            String thongbao = "";
+            DataTable dtmahang = new DataTable();
+
+            dtmahang = DataConn.StoreFillDS("NH_laymahang_tk_chuan", System.Data.CommandType.StoredProcedure, mahang);//tenphong, data, tienhang
+
+            if (dtmahang.Rows[0][0].ToString() != "0")
+            {
+                //thongbao = "OK" + "," + dtlevel.Rows[0][1].ToString();
+                //thongbao = dtmahang.Rows[0][0].ToString();
+                thongbao = dtmahang.Rows[0][0].ToString() + "," + dtmahang.Rows[0][1].ToString();
+            }
+            else
+            {
+                thongbao = "NG";
+            }
+            return thongbao;
+        }
+
+        [WebMethod]
+        public static string laydungtenhang(string mahang_chuan)  //string tenphong, string tienhang
+        {
+            String thongbao = "";
+            DataTable dtmahang = new DataTable();
+
+            dtmahang = DataConn.StoreFillDS("NH_laydungtenhang", System.Data.CommandType.StoredProcedure, mahang_chuan);//tenphong, data, tienhang
+
+            if (dtmahang.Rows[0][0].ToString() != "0")
+            {
+                //thongbao = "OK" + "," + dtlevel.Rows[0][1].ToString();
+                //thongbao = dtmahang.Rows[0][0].ToString();
+                thongbao = dtmahang.Rows[0][0].ToString() ;
+            }
+            else
+            {
+                thongbao = "NG";
+            }
+            return thongbao;
+        }
+
+        [WebMethod]
+        public static string laymahangscan(string tenhangid)  //string tenphong, string tienhang
+        {
+            String thongbao = "";
+            DataTable dtmahang = new DataTable();
+
+            dtmahang = DataConn.StoreFillDS("NH_laydungmahang", System.Data.CommandType.StoredProcedure, tenhangid);//tenphong, data, tienhang
+
+            if (dtmahang.Rows[0][0].ToString() != "0")
+            {
+                //thongbao = "OK" + "," + dtlevel.Rows[0][1].ToString();
+                //thongbao = dtmahang.Rows[0][0].ToString();
+                thongbao = dtmahang.Rows[0][0].ToString();
+            }
+            else
+            {
+                thongbao = "NG";
+            }
+            return thongbao;
+        }
+
         //protected void Savekhachhang(object sender, EventArgs e)
         //{
         //    string makh = idmakh.Text;// Request.Form["username"];
