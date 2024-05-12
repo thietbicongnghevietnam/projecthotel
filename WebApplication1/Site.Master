@@ -172,6 +172,7 @@
               <li><a href="Danhmuc/Danhmucnhomhang.aspx" target="_blank" class="dropdown-item">Danh mục nhóm hàng</a></li> 
               <li><a href="Danhmuc/Danhmucnhacungcap.aspx" target="_blank" class="dropdown-item">Danh mục NCC</a></li>
                 <li class="dropdown-divider"></li>
+                <li><a href="Danhmuc/DMcauthanhDVT.aspx" target="_blank" class="dropdown-item">Danh mục cấu thành ĐVT</a></li>
               <li><a href="Danhmuc/Danhmucnhanvien.aspx" target="_blank" class="dropdown-item">Danh mục nhân viên</a></li>
             </ul>
           </li>

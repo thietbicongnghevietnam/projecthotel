@@ -483,7 +483,7 @@
                      $.ajax({
                                 type: "POST",
                                 contentType: "application/json; charset=utf-8",
-                                url: "Phieunbanhang.aspx/laymahang",                                
+                                url: "Phieubanhang.aspx/laymahang",                                
                                 data: JSON.stringify(data),
                                 dataType: "json",
                          success: function (data) {   
@@ -526,10 +526,12 @@
                     {
                         var soluong_dvt = 1;
                         var ktdvt = $('#MainContent_dr_dvt').val();
+                         var tongtienhang = parseInt($('#tongtiennhap').val());
                         //==DVT==           
                         if(ktdvt == "==DVT==")
                         {
                             soluong_dvt = 1;
+                            handledonvitinh(ktdvt,soluong_dvt,tongtienhang);
                         }
                         else
                         {
@@ -551,11 +553,13 @@
                                     {
                                         //alert('mat hang khong co cau thanh don vi tinh');
                                         soluong_dvt = 1;
+                                        handledonvitinh(ktdvt,soluong_dvt,tongtienhang);
                                     }
                                     else
                                     {
                                         //alert(data.d);
                                         soluong_dvt = data.d;
+                                        handledonvitinh(ktdvt,soluong_dvt,tongtienhang);
                                     }                                                      
                                 },
                                 error: function ()
@@ -565,51 +569,7 @@
                             });                
                             //soluong_dvt = 1;
                             //alert(soluong_dvt);
-                        }
-
-                        var tongtienhang = parseInt($('#tongtiennhap').val());
-                        var _mahang = "";                
-                        var ckQRcode = document.getElementById("bannhanhid");
-                        //var _mahang = $("#MainContent_phieunhaphang").val();   //new3
-                        //var _mahang = $("#mahanghoa").text();
-                        //var soluong = $("#soluong").val(); 
-                        if (ckQRcode.checked == true) {
-                            var mahang_chuan = $("#MainContent_phieunhaphang").val();
-                                 //alert(mahang_chuan);
-                                 var data3 = {mahang_chuan : mahang_chuan}
-                                 //scan QRcode
-                                 $.ajax({
-                                    type: "POST",
-                                    contentType: "application/json; charset=utf-8",
-                                    url: "Phieubanhang.aspx/laydungtenhang",
-                                    data: JSON.stringify(data3),
-                                    dataType: "json",
-                                    success: function (data) {
-                                        if (data.d != "NG")
-                                        {
-                                             $('#tenhanghoaid').text(data.d);
-                                            _mahang = $("#tenhanghoaid").text(); // Gán giá trị trong hàm gọi lại success
-                                             handleMahang(_mahang,ktdvt,soluong_dvt,tongtienhang);                   
-                                        }
-                                        else
-                                        {
-                                            alert('khong ton tai ma hang, kiem tra lai!');
-                                            //_mahang = "";
-                                        }                                               
-                                    },
-                                    error: function ()
-                                    {
-                                        //alert("No Match");
-                                    }
-                                });
-                        }
-                        else
-                        {
-                            _mahang = $("#MainContent_phieunhaphang").val();
-                            handleMahang(_mahang,ktdvt,soluong_dvt,tongtienhang);
-                        }
-
-                        //code cu 2                        
+                        }                                                                    
                     }                                                                         
                 });               
          });
@@ -658,7 +618,35 @@
                                 }
                                 else
                                 {
-                                    $('#MainContent_phieunhaphang').val(tenhangid);
+                                    var tenhang = $("#MainContent_phieunhaphang").val();
+                                    var data = { tenhang: tenhang };
+                                    //new1
+                                     $.ajax({
+                                                type: "POST",
+                                                contentType: "application/json; charset=utf-8",
+                                                url: "Phieubanhang.aspx/laymahang",                                
+                                                data: JSON.stringify(data),
+                                                dataType: "json",
+                                         success: function (data) {   
+                                             //alert(data.d);                            
+                                            if (data.d != "NG") {
+                                                var chuoihang = data.d.split(',');                                
+                                                $("#mahanghoa").text(chuoihang[0]);
+                                                $("#dvtnhonhat").val(chuoihang[1]);    
+                                                $("#MainContent_dr_dvt").val('==DVT==');
+
+                                                $('#MainContent_phieunhaphang').val(tenhangid);
+                                            } 
+                                            else 
+                                            {
+                                                alert('Khong co trong danh muc hang hoa!');
+                                            }                            
+                                        },
+                                        error: function () {
+                                            //alert("No Match");
+                                        }
+                                    });
+                                    //$('#MainContent_phieunhaphang').val(tenhangid);
                                 }
                                                                 
                                 $('#soluongnhaphang').focus();
@@ -680,11 +668,14 @@
          function soluong_keyenter()
          {
             var soluong_dvt = 1;
-            var ktdvt = $('#MainContent_dr_dvt').val();
+             var ktdvt = $('#MainContent_dr_dvt').val();
+             var tongtienhang = parseInt($('#tongtiennhap').val());     
+
             //==DVT==           
             if(ktdvt == "==DVT==")
             {
                 soluong_dvt = 1;
+                handledonvitinh(ktdvt, soluong_dvt, tongtienhang);
             }
             else
             {
@@ -706,11 +697,13 @@
                         {
                             //alert('mat hang khong co cau thanh don vi tinh');
                             soluong_dvt = 1;
+                            handledonvitinh(ktdvt, soluong_dvt, tongtienhang);
                         }
                         else
                         {
                             //alert(data.d);
                             soluong_dvt = data.d;
+                            handledonvitinh(ktdvt, soluong_dvt, tongtienhang);
                         }                                                      
                     },
                     error: function ()
@@ -721,13 +714,12 @@
                 //soluong_dvt = 1;
                 //alert(soluong_dvt);
             }
+                                
+         };
 
-             var tongtienhang = parseInt($('#tongtiennhap').val());                
-                //alert(tongtienhang);
-                //new2
-                var _mahang = "";
-                //var _mahang = $("#MainContent_phieunhaphang").val();
-                //var _mahang = $("#mahanghoa").text();
+         function handledonvitinh(ktdvt, soluong_dvt, tongtienhang)
+         {          
+             var _mahang = "";             
              var ckQRcode = document.getElementById("bannhanhid");
              if (ckQRcode.checked == true)
              {
@@ -765,17 +757,15 @@
                  _mahang = $("#MainContent_phieunhaphang").val();
                  handleMahang(_mahang,ktdvt,soluong_dvt,tongtienhang);
              }
-
-                
-         };
+         }
 
          // Hàm xử lý giá trị _mahang ngoài phạm vi của hàm gọi AJAX
          function handleMahang(mahang, ktdvt, soluong_dvt, tongtienhang) {
              var _mahang = mahang;
              var data = { _mahang: _mahang };
                 //push mahang vao array
-                var gettr = [];
-    
+             var gettr = [];
+             
                 $('#tbphieunhap tr').each(function () {
                         var mhold = $(this).find('td').eq(0).text();
                         gettr.push(mhold);

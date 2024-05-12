@@ -169,6 +169,7 @@
     <Content Include="Danhmuc\Danhmucnhacungcap.aspx" />
     <Content Include="Danhmuc\Danhmucnhanvien.aspx" />
     <Content Include="Danhmuc\Danhmucnhomhang.aspx" />
+    <Content Include="Danhmuc\DMcauthanhDVT.aspx" />
     <Content Include="Danhmuc\DMKhuvuc.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="dist\contextmenu.css" />
@@ -2610,6 +2611,13 @@
     </Compile>
     <Compile Include="Danhmuc\Danhmucnhomhang.aspx.designer.cs">
       <DependentUpon>Danhmucnhomhang.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Danhmuc\DMcauthanhDVT.aspx.cs">
+      <DependentUpon>DMcauthanhDVT.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Danhmuc\DMcauthanhDVT.aspx.designer.cs">
+      <DependentUpon>DMcauthanhDVT.aspx</DependentUpon>
     </Compile>
     <Compile Include="Danhmuc\DMKhuvuc.aspx.cs">
       <DependentUpon>DMKhuvuc.aspx</DependentUpon>

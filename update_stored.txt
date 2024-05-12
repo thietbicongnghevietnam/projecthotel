@@ -29,7 +29,21 @@ BEGIN
 
 
 END
+===================================
 
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE NH_DMCauthanhDVT
+
+AS
+BEGIN
+	select * from htdonvitinh
+END
+GO
+=======================
 cach 1
 ton dau ky = sum(tongnhap)-sum(tongxuat) where tu dau thang den tai thoi diem hien tai
 
