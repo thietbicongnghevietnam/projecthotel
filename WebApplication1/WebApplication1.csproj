@@ -2538,6 +2538,7 @@
     <Content Include="TemplateReport\banhangtheongayhd.aspx" />
     <Content Include="TemplateReport\Baocaotonghopthuchi.aspx" />
     <Content Include="TemplateReport\nhaphangtheongayhd.aspx" />
+    <Content Include="TemplateReport\ReportPhieuchi.aspx" />
     <Content Include="TemplateReport\ReportPhieuthu.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
@@ -2799,6 +2800,13 @@
     </Compile>
     <Compile Include="TemplateReport\nhaphangtheongayhd.aspx.designer.cs">
       <DependentUpon>nhaphangtheongayhd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateReport\ReportPhieuchi.aspx.cs">
+      <DependentUpon>ReportPhieuchi.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TemplateReport\ReportPhieuchi.aspx.designer.cs">
+      <DependentUpon>ReportPhieuchi.aspx</DependentUpon>
     </Compile>
     <Compile Include="TemplateReport\ReportPhieuthu.aspx.cs">
       <DependentUpon>ReportPhieuthu.aspx</DependentUpon>

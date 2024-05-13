@@ -162,7 +162,7 @@
              <%} %>
         <%if (Role_ == "NV") {%>
          <li class="nav-item dropdown">
-            <a id="dropdownSubMenu4" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Danh mục</a>
+            <a id="dropdownSubMenu4" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">DANH MỤC</a>
             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
               <li><a href="Danhmuc/Danhmuchanghoa.aspx" target="_blank" class="dropdown-item">Danh mục hàng hóa</a></li>
               <li><a href="Danhmuc/Danhmuckhachhang.aspx" target="_blank" class="dropdown-item">Danh mục khách hàng</a></li>

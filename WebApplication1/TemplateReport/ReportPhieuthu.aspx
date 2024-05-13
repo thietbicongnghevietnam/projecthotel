@@ -268,16 +268,16 @@ table-layout:fixed;width:510pt'>
 <td colspan='11' height='17' style='mso-ignore:colspan;height:12.75pt;'></td>
  </tr>
  <tr height='17' style='mso-height-source:userset;height:12.75pt'>
-<td colspan='11' height='17' style='mso-ignore:colspan;height:12.75pt;'>Họ và tên người nộp tiền: …………………………………………………………………………………………….</td>
+<td colspan='11' height='17' style='mso-ignore:colspan;height:12.75pt;'>Họ và tên người nộp tiền:&nbsp;&nbsp;&nbsp;  <%=nguoinoptien %> </td>
  </tr>
  <tr height='17' style='mso-height-source:userset;height:12.75pt'>
 <td colspan='11' height='17' style='mso-ignore:colspan;height:12.75pt;'>Địa chỉ: ………………………………………………………………………………………………………………….</td>
  </tr>
  <tr height='17' style='mso-height-source:userset;height:12.75pt'>
-<td colspan='11' height='17' style='mso-ignore:colspan;height:12.75pt;'>Lý do nộp: ………………………………………………………………………………………………………………</td>
+<td colspan='11' height='17' style='mso-ignore:colspan;height:12.75pt;'>Lý do nộp: <%=lydo %> </td>
  </tr>
  <tr height='17' style='mso-height-source:userset;height:12.75pt'>
-<td colspan='11' height='17' style='mso-ignore:colspan;height:12.75pt;'>Số tiền: ………………………………………… (Viết bằng chữ): ………………………………………………….</td>
+<td colspan='11' height='17' style='mso-ignore:colspan;height:12.75pt;'>Số tiền:&nbsp;&nbsp;&nbsp;&nbsp; <%=sotien %> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (Viết bằng chữ): ………………………………………………….</td>
  </tr>
  <tr height='17' style='mso-height-source:userset;height:12.75pt'>
 <td colspan='11' height='17' style='mso-ignore:colspan;height:12.75pt;'>……………………………………………………………………………………………………………………………</td>
@@ -314,27 +314,34 @@ table-layout:fixed;width:510pt'>
  <tr height='17' style='mso-height-source:userset;height:12.75pt'>
 <td colspan='11' height='17' style='mso-ignore:colspan;height:12.75pt;'></td>
  </tr>
- <tr height='17' style='mso-height-source:userset;height:12.75pt'>
-<td colspan='11' height='17' style='mso-ignore:colspan;height:12.75pt;'>Đã nhận đủ số tiền (viết bằng chữ): …………………………………………………………………………………</td>
- </tr>
- <tr height='17' style='mso-height-source:userset;height:12.75pt'>
-<td colspan='11' height='17' style='mso-ignore:colspan;height:12.75pt;'>Tỷ giá ngoại tệ (vàng bạc, đá quý): ………………………………………………………………………………….</td>
- </tr>
- <tr height='17' style='mso-height-source:userset;height:12.75pt'>
-<td colspan='11' height='17' style='mso-ignore:colspan;height:12.75pt;'>Số tiền quy đổi: ………………………………………………………………………………………………………..</td>
- </tr>
- <tr height='17' style='mso-height-source:userset;height:12.75pt'>
-<td colspan='4' height='17' style='mso-ignore:colspan;height:12.75pt;'>(Liên gửi ra ngoài phải đóng dấu)</td>
-<td colspan='7' style='mso-ignore:colspan;'></td>
- </tr>
-<![if supportMisalignedColumns]>
+    
+
+
  <tr height='0' style='display:none'>
   <td width='549' colspan='9' style='width:411.75pt;mso-ignore:colspan;'></td>
   <td width='68' style='width:51pt;'></td>
   <td width='64' style='width:48pt;'></td>
  </tr>
- <![endif]>
+
 </table>
+    <br />
+     <br />
+    
+    <table>
+         <tr height='17' style='mso-height-source:userset;height:12.75pt;'>
+        <td colspan='11' height='17' style='mso-ignore:colspan;height:12.75pt;'>Đã nhận đủ số tiền (viết bằng chữ): …………………………………………………………………………………</td>
+         </tr>
+         <tr height='17' style='mso-height-source:userset;height:12.75pt'>
+        <td colspan='11' height='17' style='mso-ignore:colspan;height:12.75pt;'>Tỷ giá ngoại tệ (vàng bạc, đá quý): ………………………………………………………………………………….</td>
+         </tr>
+         <tr height='17' style='mso-height-source:userset;height:12.75pt'>
+        <td colspan='11' height='17' style='mso-ignore:colspan;height:12.75pt;'>Số tiền quy đổi: ………………………………………………………………………………………………………..</td>
+         </tr>
+         <tr height='17' style='mso-height-source:userset;height:12.75pt'>
+        <td colspan='4' height='17' style='mso-ignore:colspan;height:12.75pt;'>(Liên gửi ra ngoài phải đóng dấu)</td>
+        <td colspan='7' style='mso-ignore:colspan;'></td>
+         </tr>
+    </table>
 
 </body>
 </html>

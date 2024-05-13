@@ -46,7 +46,7 @@ namespace WebApplication1
             {
                 //thongbao = "OK" + "," + dtlevel.Rows[0][1].ToString();
 
-                thongbao = "OK";
+                thongbao = "OK" + "," + dtsave.Rows[0][1].ToString();
             }
             else
             {

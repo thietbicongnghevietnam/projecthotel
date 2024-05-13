@@ -6,10 +6,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 
 using System.Data;
-using System.Data.SqlClient;
-using System.Web.Services;
 using WebApplication1.App_Code;
-using System.Web.Script.Serialization;
+
 
 namespace WebApplication1.TemplateReport
 {
@@ -18,15 +16,22 @@ namespace WebApplication1.TemplateReport
         DataConn cnn = new DataConn();
         public DataTable dt_report = new DataTable();
         public string soHD = "";
+        public string nguoinoptien = "";
+        public string lydo = "";
+        public string sotien = "";
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                if (Request.QueryString["sohoadon"] is null )
+                if (Request.QueryString["sohoadon"] != "" )
                 {
                     string _sohoadon = Request.QueryString["sohoadon"].Replace("'", "");
 
                     dt_report = DataConn.StoreFillDS("NH_sochungtu_PT", System.Data.CommandType.StoredProcedure, _sohoadon);
+                    nguoinoptien = dt_report.Rows[0][4].ToString();
+                    lydo = dt_report.Rows[0][9].ToString();
+                    sotien = dt_report.Rows[0][7].ToString();
 
                 }
             }

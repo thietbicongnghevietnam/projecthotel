@@ -20,6 +20,14 @@ SET XACT_ABORT ON
 
 
 =======================
+new
+NH_sochungtu_PT
+
+
+
+
+
+
 cach 1
 ton dau ky = sum(tongnhap)-sum(tongxuat) where tu dau thang den tai thoi diem hien tai
 

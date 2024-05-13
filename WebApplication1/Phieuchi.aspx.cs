@@ -16,6 +16,8 @@ namespace WebApplication1
     public partial class Phieuchi : System.Web.UI.Page
     {
         public DataTable dtncc = new DataTable();
+        public DataTable dt_getSohd = new DataTable();
+        public string sohoadon = "";
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -27,6 +29,9 @@ namespace WebApplication1
                 dtncc.Rows.InsertAt(newRow2, 0);
                 dr_nhacungcap.DataSource = dtncc;
                 dr_nhacungcap.DataBind();
+
+                dt_getSohd = DataConn.StoreFillDS("NH_getsohoadon_PC", System.Data.CommandType.StoredProcedure);
+                sohoadon = dt_getSohd.Rows[0][0].ToString();
             }
 
         }
@@ -43,7 +48,7 @@ namespace WebApplication1
             {
                 //thongbao = "OK" + "," + dtlevel.Rows[0][1].ToString();
 
-                thongbao = "OK";
+                thongbao = "OK" + "," + dtsave.Rows[0][1].ToString();
             }
             else
             {
