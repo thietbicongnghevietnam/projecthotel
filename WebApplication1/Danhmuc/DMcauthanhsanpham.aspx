@@ -1,11 +1,11 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="DMcauthanhDVT.aspx.cs" Inherits="WebApplication1.Danhmuc.DMcauthanhDVT" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="DMcauthanhsanpham.aspx.cs" Inherits="WebApplication1.Danhmuc.DMcauthanhsanpham" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Danh mục cấu thành ĐVT</title>
-    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+    <title>Danh muc cau thanh san pham</title>
+     <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="../../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
@@ -26,7 +26,7 @@
  <%--   <script src="../Exportexcel/jquery.table2excel.min.js"></script>--%>
 </head>
 <body>
-    
+   
       <form id="form1" runat="server">
         <div>
             <div class="card">
@@ -90,10 +90,9 @@
             <tr>
                  <tr role="row">
                                         <th>NO</th>
-                                        <th>Ma Hang</th>
-                                        <th>DVT T0</th>                                                                                                                      
+                                        <th>Ma Hang</th>                                                                                                                                                              
                                         <th>So luong quy doi</th>  
-                                        <th>DVT nho</th>  
+                                        <th>Ma hang quy doi</th>  
                                         <th>Action</th>
                                     </tr>
             </tr>
@@ -105,13 +104,12 @@
                                      <%i++;%>
                                     <tr role="row">                                        
                                         <td><%=i %></td>
-                                        <td><%=rows["mahang"].ToString()%></td>
-                                        <td><%=rows["dvtto"].ToString()%></td>
-                                        <td><%=rows["soluongqudoi"].ToString()%></td>
-                                        <td><%=rows["dvtnho"].ToString()%></td>                                        
+                                        <td><%=rows["mahang"].ToString()%></td>                                        
+                                        <td><%=rows["Slquydoi"].ToString()%></td>
+                                        <td><%=rows["mahangquydoi"].ToString()%></td>                                        
                                         
                                         <td>
-                                            <a href="#" class="btn btn-info btn-sm" title="delete item" onclick="openEditModal2('<%= rows["id"].ToString() %>','<%= rows["mahang"].ToString() %>','<%= rows["dvtto"].ToString() %>','<%= rows["soluongqudoi"].ToString() %>','<%= rows["dvtnho"].ToString() %>')"><i class="fas fa-pencil-alt"></i>Sửa</a>
+                                            <a href="#" class="btn btn-info btn-sm" title="delete item" onclick="openEditModal2('<%= rows["id"].ToString() %>','<%= rows["mahang"].ToString() %>','<%= rows["Slquydoi"].ToString() %>','<%= rows["mahangquydoi"].ToString() %>')"><i class="fas fa-pencil-alt"></i>Sửa</a>
                                         </td> 
                                         
                                     </tr>
@@ -132,7 +130,7 @@
                     <div class="modal-header">
                         <div class="row">
                             <div>
-                                <h4 class="modal-title" id="headerTag" style="float: left">Sửa cấu thành đơn vị tính</h4>
+                                <h4 class="modal-title" id="headerTag" style="float: left">Sửa cấu thành sản phẩm</h4>
                                 <%--<h6 class="modal-title" id="headerTag" style="float: left; color:red"><b><i>Chi tiết tồn kho!</i></b></h6>--%>
 
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="float: right; margin-left: 300px;">
@@ -167,8 +165,8 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="ID">Đơn vị to</label>                                        
-                                        <asp:TextBox ID="txtto" CssClass="form-control" placeholder="" runat="server"></asp:TextBox>
+                                        <label for="ID">Ma hang quy doi</label>                                        
+                                        <asp:TextBox ID="txtmaquydoi" CssClass="form-control" placeholder="" runat="server"></asp:TextBox>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -179,21 +177,7 @@
                                 </div>
                             </div>                                                                                   
                         </div>
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="ID">Đơn vị nhỏ</label>                                        
-                                        <asp:TextBox ID="txtnho" CssClass="form-control" placeholder="" runat="server"></asp:TextBox>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                       
-                                    </div>
-                                </div>
-                            </div>                                                                                   
-                        </div>
+                      
 
                     </div>
                     <div class="modal-footer">
@@ -212,7 +196,7 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Thêm mới danh mục cấu thành đơn vị tính</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Thêm mới danh mục cấu thành sản phẩm</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">×</span>
         </button>
@@ -228,9 +212,9 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                       <label for="exampleInputEmail1">Đơn vị to</label>
+                                       <label for="exampleInputEmail1">Mã hàng quy đổi</label>
                                         <span style="color: red; font-size: 11px; font-style: italic;">You must input!(*)</span>
-                                        <asp:TextBox ID="dvtoid" CssClass="form-control" placeholder="" runat="server"></asp:TextBox>                                        
+                                        <asp:TextBox ID="mahangquydoiid" CssClass="form-control" placeholder="" runat="server"></asp:TextBox>                                        
                                     </div>
                                 </div>
                             </div>
@@ -244,9 +228,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                            <label for="exampleInputEmail1">Đơn vị nhỏ</label>
-                                        <span style="color: red; font-size: 11px; font-style: italic;">You must input!(*)</span>
-                                        <asp:TextBox ID="dvnhoid" CssClass="form-control" placeholder="" runat="server"></asp:TextBox>                                          
+                                                                                   
                                     </div>
                                 </div>
                             </div>
@@ -294,13 +276,12 @@
 
          $('#myModal').modal(options)
 
-    function openEditModal2(id,mahang,dvtto,soluongqudoi,dvtnho) {           
+    function openEditModal2(id,mahang,soluongqudoi,maquydoi) {           
         $("#txtid").val(id);
-        $("#txtmahang").val(mahang);
-        $("#txtto").val(dvtto);
+        $("#txtmahang").val(mahang);       
         $("#txtquydoi").val(soluongqudoi);
-        $("#txtnho").val(dvtnho);   
-          
+        $("#txtmaquydoi").val(maquydoi); 
+            
         $('#myModal2').modal('show');
 
         }
@@ -347,6 +328,7 @@
 
 
     </script>
+
 
 </body>
 </html>

@@ -10,7 +10,7 @@
 namespace WebApplication1.Danhmuc {
     
     
-    public partial class DMcauthanhDVT {
+    public partial class DMcauthanhsanpham {
         
         /// <summary>
         /// form1 control.
@@ -58,13 +58,13 @@ namespace WebApplication1.Danhmuc {
         protected global::System.Web.UI.WebControls.TextBox txtmahang;
         
         /// <summary>
-        /// txtto control.
+        /// txtmaquydoi control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtto;
+        protected global::System.Web.UI.WebControls.TextBox txtmaquydoi;
         
         /// <summary>
         /// txtquydoi control.
@@ -74,15 +74,6 @@ namespace WebApplication1.Danhmuc {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtquydoi;
-        
-        /// <summary>
-        /// txtnho control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtnho;
         
         /// <summary>
         /// btnOrder control.
@@ -103,13 +94,13 @@ namespace WebApplication1.Danhmuc {
         protected global::System.Web.UI.WebControls.TextBox mahangid;
         
         /// <summary>
-        /// dvtoid control.
+        /// mahangquydoiid control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox dvtoid;
+        protected global::System.Web.UI.WebControls.TextBox mahangquydoiid;
         
         /// <summary>
         /// slquydoiid control.
@@ -119,14 +110,5 @@ namespace WebApplication1.Danhmuc {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox slquydoiid;
-        
-        /// <summary>
-        /// dvnhoid control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox dvnhoid;
     }
 }

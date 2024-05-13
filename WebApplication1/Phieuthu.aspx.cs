@@ -15,14 +15,23 @@ namespace WebApplication1
     public partial class Phieuthu : System.Web.UI.Page
     {
         public DataTable dtncc = new DataTable();
+        public DataTable dt_getSohd = new DataTable();
+        public string sohoadon = "";
         protected void Page_Load(object sender, EventArgs e)
         {
-            dtncc = DataConn.StoreFillDS("NH_Get_KH", System.Data.CommandType.StoredProcedure);
-            DataRow newRow2 = dtncc.NewRow();
-            newRow2["makh"] = "==KH==";
-            dtncc.Rows.InsertAt(newRow2, 0);
-            dr_nhacungcap.DataSource = dtncc;
-            dr_nhacungcap.DataBind();
+            if (!IsPostBack)
+            {
+                dtncc = DataConn.StoreFillDS("NH_Get_KH", System.Data.CommandType.StoredProcedure);
+                DataRow newRow2 = dtncc.NewRow();
+                newRow2["makh"] = "==KH==";
+                dtncc.Rows.InsertAt(newRow2, 0);
+                dr_nhacungcap.DataSource = dtncc;
+                dr_nhacungcap.DataBind();
+
+                dt_getSohd = DataConn.StoreFillDS("NH_getsohoadon_PT", System.Data.CommandType.StoredProcedure);
+                sohoadon = dt_getSohd.Rows[0][0].ToString();
+            }
+            
         }
 
         [WebMethod]

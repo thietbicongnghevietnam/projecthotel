@@ -68,7 +68,10 @@ button:hover {
 
     <div class="container">
     <h2>Phiếu Thu</h2>
- 
+        <div>                        
+            <input id="soHD" name="soHD" class="form-control input-sm" value="<%=sohoadon %>"" style="width:200px;"/> 
+        </div>
+         
       <div class="row">
         <div class="column">
           <div class="form-group">
@@ -128,7 +131,17 @@ button:hover {
      <script type="text/javascript">
           $(document).ready(function () {
             //SearchText();            
-         });     
+         });    
+
+
+ $("#soHD").on('keyup', function (e) {
+ if ((e.key === 'Enter' || e.keyCode === 13))
+{    
+var sohoadon = $('#soHD').val();
+    //window.location.href = "/TemplateReport/ReportPhieuthu.aspx";
+    window.open('/TemplateReport/ReportPhieuthu.aspx?sohoadon='+sohoadon+'', '_blank'); // keeps page one active
+}
+}); 
 
         
          $('#MainContent_dr_nhacungcap').on('change', function () {

@@ -8,8 +8,8 @@ using System.Data;
 using WebApplication1.App_Code;
 
 namespace WebApplication1.Danhmuc
-{
-    public partial class DMcauthanhDVT : System.Web.UI.Page
+{    
+    public partial class DMcauthanhsanpham : System.Web.UI.Page
     {
         DataConn cnn = new DataConn();
         public DataTable dt_dvt = new DataTable();
@@ -17,7 +17,7 @@ namespace WebApplication1.Danhmuc
         {
             if (!IsPostBack)
             {
-                dt_dvt = DataConn.StoreFillDS("NH_DMCauthanhDVT", System.Data.CommandType.StoredProcedure);
+                dt_dvt = DataConn.StoreFillDS("NH_DMCauthanhsanpham", System.Data.CommandType.StoredProcedure);
             }
         }
 
@@ -25,15 +25,14 @@ namespace WebApplication1.Danhmuc
         {
             //string id = txtid.Text;
             string mahang = mahangid.Text;
-            string donvito = dvtoid.Text;
             string soluongquydoi = slquydoiid.Text;
-            string donvinho = dvnhoid.Text;
-
+            string maquydoi = mahangquydoiid.Text;
+                     
             DataTable dtinsert = new DataTable();
-            dtinsert = DataConn.StoreFillDS("NH_insert_cauthanhdvt", System.Data.CommandType.StoredProcedure, mahang, donvito, soluongquydoi, donvinho);
+            dtinsert = DataConn.StoreFillDS("NH_insert_cauthanhsanpham", System.Data.CommandType.StoredProcedure, mahang,soluongquydoi, maquydoi);
             if (dtinsert.Rows[0][0].ToString() == "1")
             {
-                dt_dvt = DataConn.StoreFillDS("NH_DMCauthanhDVT", System.Data.CommandType.StoredProcedure);
+                dt_dvt = DataConn.StoreFillDS("NH_DMCauthanhsanpham", System.Data.CommandType.StoredProcedure);
                 Page.ClientScript.RegisterStartupScript(Page.GetType(), "Message", "toastr.success('Success!!!');", true);
             }
             else
@@ -47,15 +46,14 @@ namespace WebApplication1.Danhmuc
         {
             string id = txtid.Text;
             string mahang = txtmahang.Text;
-            string donvito = txtto.Text;
-            string soluongquydoi = txtquydoi.Text;
-            string donvinho = txtnho.Text;
+            string maquydoi = txtmaquydoi.Text;
+            string soluongquydoi = txtquydoi.Text;            
 
             DataTable dtupdate = new DataTable();
-            dtupdate = DataConn.StoreFillDS("NH_update_cauthanhdvt", System.Data.CommandType.StoredProcedure, id, mahang, donvito, soluongquydoi, donvinho);
+            dtupdate = DataConn.StoreFillDS("NH_update_cauthanhsanpham", System.Data.CommandType.StoredProcedure, id, mahang, soluongquydoi, maquydoi);
             if (dtupdate.Rows[0][0].ToString() == "1")
             {
-                dt_dvt = DataConn.StoreFillDS("NH_DMCauthanhDVT", System.Data.CommandType.StoredProcedure);
+                dt_dvt = DataConn.StoreFillDS("NH_DMCauthanhsanpham", System.Data.CommandType.StoredProcedure);
                 Page.ClientScript.RegisterStartupScript(Page.GetType(), "Message", "toastr.success('Success!!!');", true);
             }
             else
@@ -103,7 +101,6 @@ namespace WebApplication1.Danhmuc
             }
             Response.End();  //must this sentence
         }
-
 
 
     }

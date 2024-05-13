@@ -170,6 +170,7 @@
     <Content Include="Danhmuc\Danhmucnhanvien.aspx" />
     <Content Include="Danhmuc\Danhmucnhomhang.aspx" />
     <Content Include="Danhmuc\DMcauthanhDVT.aspx" />
+    <Content Include="Danhmuc\DMcauthanhsanpham.aspx" />
     <Content Include="Danhmuc\DMKhuvuc.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="dist\contextmenu.css" />
@@ -2537,6 +2538,7 @@
     <Content Include="TemplateReport\banhangtheongayhd.aspx" />
     <Content Include="TemplateReport\Baocaotonghopthuchi.aspx" />
     <Content Include="TemplateReport\nhaphangtheongayhd.aspx" />
+    <Content Include="TemplateReport\ReportPhieuthu.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
@@ -2618,6 +2620,13 @@
     </Compile>
     <Compile Include="Danhmuc\DMcauthanhDVT.aspx.designer.cs">
       <DependentUpon>DMcauthanhDVT.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Danhmuc\DMcauthanhsanpham.aspx.cs">
+      <DependentUpon>DMcauthanhsanpham.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Danhmuc\DMcauthanhsanpham.aspx.designer.cs">
+      <DependentUpon>DMcauthanhsanpham.aspx</DependentUpon>
     </Compile>
     <Compile Include="Danhmuc\DMKhuvuc.aspx.cs">
       <DependentUpon>DMKhuvuc.aspx</DependentUpon>
@@ -2790,6 +2799,13 @@
     </Compile>
     <Compile Include="TemplateReport\nhaphangtheongayhd.aspx.designer.cs">
       <DependentUpon>nhaphangtheongayhd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateReport\ReportPhieuthu.aspx.cs">
+      <DependentUpon>ReportPhieuthu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TemplateReport\ReportPhieuthu.aspx.designer.cs">
+      <DependentUpon>ReportPhieuthu.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>

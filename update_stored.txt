@@ -2,47 +2,23 @@ loi from dang nhap toart chua hien.....
 code signalr
 https://stackoverflow.com/questions/18143599/can-signalr-be-used-with-asp-net-webforms
 ===========================
+	----- begin rollback ----
+SET XACT_ABORT ON
+	BEGIN TRAN
+	BEGIN TRY
 
-edit
-NH_Baocaotonkho
-GO
-ALTER PROCEDURE [dbo].[NH_Baocaotonkho]
-	
-AS
-BEGIN
-	
-	SELECT TOP 1000 [id]
-      ,[mahang]
-      ,[tenhang]
-      ,[dvt]
-	  ,'0' as Soluongnhap
-	  ,'0' as Soluongxuatton
-      ,[soluongton]
-      ,[anh]
-      ,[gianhap]
-      ,[giaban]
-      ,[nhomhangid]
-      ,[userid]
-      ,[created]
-      ,[modified]
-  FROM hthanghoa
+.....
+----- end rollback ----
+ COMMIT
+	END TRY
+	BEGIN CATCH
+	   ROLLBACK
+	   DECLARE @ErrorMessage VARCHAR(2000)
+	   SELECT @ErrorMessage = 'Lỗi: ' + ERROR_MESSAGE()
+	   RAISERROR(@ErrorMessage, 16, 1)
+	END CATCH
 
 
-END
-===================================
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
-CREATE PROCEDURE NH_DMCauthanhDVT
-
-AS
-BEGIN
-	select * from htdonvitinh
-END
-GO
 =======================
 cach 1
 ton dau ky = sum(tongnhap)-sum(tongxuat) where tu dau thang den tai thoi diem hien tai

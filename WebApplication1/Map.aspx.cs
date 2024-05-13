@@ -390,12 +390,21 @@ namespace WebApplication1
             JavaScriptSerializer jss = new JavaScriptSerializer();
             var jsonObj = jss.Deserialize<dynamic>(items);
             string type_act = "banhang";
+
+            DataTable dt_cauthanh = new DataTable();            
+
             foreach (var item in jsonObj)
             {
                 string[] numbersArray = item.Key.Split(',');
                 var mahang = numbersArray.FirstOrDefault();
                 var soluong = item.Value;
                 //Console.WriteLine($"Key: {key}, Value: {value}");
+                //kiem tra ma hang xem co phai cau thanh don vi tinh khong? neu co se tru cac nguyen vat lieu!!!!
+                dt_cauthanh = DataConn.StoreFillDS("NH_check_cauthanh", System.Data.CommandType.StoredProcedure, mahang, soluong);
+                //if (dt_cauthanh.Rows[0][0].ToString() == "1")
+                //{
+                //    //tru ton kho thanh cong
+                //}
                 dtupdatekho = DataConn.StoreFillDS("NH_updatekho", System.Data.CommandType.StoredProcedure, mahang, soluong, type_act);
             }
 
