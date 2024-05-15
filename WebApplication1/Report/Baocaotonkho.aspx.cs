@@ -43,6 +43,7 @@ namespace WebApplication1.Report
             dt_new.Columns.Add("mahang", typeof(String));
             dt_new.Columns.Add("tenhang", typeof(String));
             dt_new.Columns.Add("dvt", typeof(String));
+            dt_new.Columns.Add("soluongdauky", typeof(String));
             dt_new.Columns.Add("Soluongnhap", typeof(String));
             dt_new.Columns.Add("Soluongxuat", typeof(String));
             dt_new.Columns.Add("soluongton", typeof(String));            
@@ -68,10 +69,14 @@ namespace WebApplication1.Report
                 }
                 else
                 {
+                    DataTable dttondauky = new DataTable();
+
                     DataTable dtthekho = new DataTable();
                     DataTable dt_danhmuckho = new DataTable();
                     string mahang = "";
                     dtthekho = DataConn.StoreFillDS("NH_thongtinthekho", System.Data.CommandType.StoredProcedure, mahang, fromdate, todate);
+
+                    dttondauky = DataConn.StoreFillDS("NH_thongtinthekho2", System.Data.CommandType.StoredProcedure, fromdate, todate);
 
                     dt_danhmuckho = DataConn.StoreFillDS("NH_Baocaotonkho", System.Data.CommandType.StoredProcedure);
 
@@ -87,6 +92,45 @@ namespace WebApplication1.Report
                         string giaban = dt_danhmuckho.Rows[j]["giaban"].ToString();
                         string nhomhangid = dt_danhmuckho.Rows[j]["nhomhangid"].ToString();
                         string created = dt_danhmuckho.Rows[j]["created"].ToString();
+
+                        string soluongdauky = "0";
+                        //tinh so luong ton dau ky
+                        for (int k = 0; k < dttondauky.Rows.Count; k++)
+                        {
+                            string jsonStringd = dttondauky.Rows[k][1].ToString();
+                            if (jsonStringd == "{}" || jsonStringd is null || jsonStringd == "")
+                            {
+                                //no thing  ==> truong hop nha nghi hoac karaoke khong lay do
+                            }
+                            else
+                            {
+                                // Phân tích chuỗi JSON
+                                JObject jsond = JObject.Parse(jsonStringd);
+                                JToken quantity = 0;
+                                bool exists = jsond.Properties().Any(p => p.Name.Contains(tenhang));
+                                if (exists)
+                                {
+                                    foreach (var item in jsond)
+                                    {
+                                        //string key = item.Key;
+                                        if (item.Key.Split(',')[0] == tenhang)
+                                        {
+                                            JToken value = item.Value;
+                                            quantity = item.Value;
+                                            soluongdauky = quantity.ToString();
+                                            break;
+                                        }
+                                    }
+
+                                    break; //thoat khong cho lap tiep. chi lay 1 gia tri ton kho cuoi cung cua bang history
+                                }
+                                else
+                                {
+                                    //nothing
+                                }
+
+                            }
+                        }
                         
 
                         for (int i = 0; i < dtthekho.Rows.Count; i++)
@@ -141,7 +185,7 @@ namespace WebApplication1.Report
                             }
                         }
 
-                        dt_new.Rows.Add(_mahang, tenhang, dvt,Soluongnhap, Soluongxuat, soluongton, gianhap, giaban, nhomhangid, created);
+                        dt_new.Rows.Add(_mahang, tenhang, dvt, soluongdauky, Soluongnhap, Soluongxuat, soluongton, gianhap, giaban, nhomhangid, created);
                     }
 
                     //show bao cao ton kho

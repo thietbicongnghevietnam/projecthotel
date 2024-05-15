@@ -381,17 +381,15 @@ namespace WebApplication1
         {
 
             String thongbao = "";
-
-            DataTable dtsave = new DataTable();
-            dtsave = DataConn.StoreFillDS("NH_save_khthanhtoan", System.Data.CommandType.StoredProcedure, idkhachhang, tenphong, tongtienhang, tongtienhat, tongtienphong, psco, tienno, tienck, items);//, 
-
+            DataTable dtsave = new DataTable();           
             DataTable dtupdatekho = new DataTable();
 
             JavaScriptSerializer jss = new JavaScriptSerializer();
             var jsonObj = jss.Deserialize<dynamic>(items);
             string type_act = "banhang";
 
-            DataTable dt_cauthanh = new DataTable();            
+            DataTable dt_cauthanh = new DataTable();
+            string listtoncuoiky = "";
 
             foreach (var item in jsonObj)
             {
@@ -406,7 +404,14 @@ namespace WebApplication1
                 //    //tru ton kho thanh cong
                 //}
                 dtupdatekho = DataConn.StoreFillDS("NH_updatekho", System.Data.CommandType.StoredProcedure, mahang, soluong, type_act);
+
+                var sltoncuoiky = dtupdatekho.Rows[0][1].ToString();
+                listtoncuoiky = listtoncuoiky + '"' + mahang + '"' + ':' + sltoncuoiky + ',';
             }
+            listtoncuoiky = listtoncuoiky.Substring(0, listtoncuoiky.Length - 1);
+            listtoncuoiky = '{' + listtoncuoiky + '}';
+
+            dtsave = DataConn.StoreFillDS("NH_save_khthanhtoan", System.Data.CommandType.StoredProcedure, idkhachhang, tenphong, tongtienhang, tongtienhat, tongtienphong, psco, tienno, tienck, items, listtoncuoiky);//, 
 
             if (dtsave.Rows[0][0].ToString() == "1")
             {

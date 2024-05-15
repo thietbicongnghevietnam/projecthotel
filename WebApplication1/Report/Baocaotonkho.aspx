@@ -94,7 +94,7 @@
                                         <th>Mahang</th>
                                         <th>Tenhang</th>
                                         <th>dvt</th>
-                                        <%--<th>Ton dau ky</th> --%>
+                                        <th>Ton dau ky</th> 
 
                                          <th>Nhap trong ky</th>
                                          <th>Xuat trong ky</th>
@@ -120,7 +120,7 @@
                                         <td><%=rows["tenhang"].ToString()%></td>
                                         <td><%=rows["dvt"].ToString()%></td>
 
-                                        <%-- <td></td>--%>
+                                         <td><%=rows["soluongdauky"].ToString()%></td>
 
                                         <td><%=rows["Soluongnhap"].ToString()%></td>
                                         <td><%=rows["Soluongxuat"].ToString()%></td>

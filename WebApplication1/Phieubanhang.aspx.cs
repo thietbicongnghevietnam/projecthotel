@@ -187,6 +187,10 @@ namespace WebApplication1
             var jsonObj = jss.Deserialize<dynamic>(items);
             string type_act = "banhang";
 
+            //{"bia ha noi":1,"Bò khô":2}
+            //them moi mot cot ton dau ky trong bang socai
+            string listtoncuoiky = "";
+
             foreach (var item in jsonObj)
             {
                 string[] numbersArray = item.Key.Split(',');
@@ -194,11 +198,16 @@ namespace WebApplication1
                 var soluong = item.Value;
                 //Console.WriteLine($"Key: {key}, Value: {value}");
                 dtupdatekho = DataConn.StoreFillDS("NH_updatekho", System.Data.CommandType.StoredProcedure, mahang, soluong, type_act);
+                var sltoncuoiky = dtupdatekho.Rows[0][1].ToString();
+                listtoncuoiky = listtoncuoiky + '"' + mahang + '"' + ':' + sltoncuoiky+',';
             }
+
+            listtoncuoiky = listtoncuoiky.Substring(0, listtoncuoiky.Length - 1);
+            listtoncuoiky = '{' + listtoncuoiky + '}';
             //check xem hoa don ton tai chua
             //update *** neu hoa don ton tai roi
             //lay so hoa don truyen len de update
-            dtsave = DataConn.StoreFillDS("addthongtinhanghoa_PBH", System.Data.CommandType.StoredProcedure, thanhtoantien, psno, chieukhau, nhacungcap, tienhang, items);
+            dtsave = DataConn.StoreFillDS("addthongtinhanghoa_PBH", System.Data.CommandType.StoredProcedure, thanhtoantien, psno, chieukhau, nhacungcap, tienhang, items, listtoncuoiky);
 
             if (dtsave.Rows[0][0].ToString() == "1")
             {
