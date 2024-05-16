@@ -20,8 +20,11 @@ SET XACT_ABORT ON
 
 
 =======================
-new
-NH_sochungtu_PT
+NH_infor_thongtincongnoNCC
+NH_infor_thongtincongnoKH
+
+them 2 truong :.... ,chietkhau,created
+......sohd as sohoadon2,chietkhau,created from htsocai
 
 
 =============

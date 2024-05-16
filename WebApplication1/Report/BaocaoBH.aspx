@@ -149,23 +149,25 @@
 
 
                     <div class="modal-body">
-                       
-                       <div class="container-fluid" id="printableArea" style="width:400px;height:auto; float:left">
+                       <div class="container-fluid"  style="width:700px;height:auto;">
+                       <%--<div class="container-fluid" id="printableArea" style="width:400px;height:auto; float:left">--%>
                             Loại hình: <b id="hinhthucnghi2"></b>
                             &nbsp;&nbsp;&nbsp; tổng tiền hát: <b id="tongtienhat2"></b><br />
                            Tên phòng: <b id="tenphong2"></b>
-                           &nbsp;&nbsp;&nbsp; Tổng tiền hàng: <b id="tongtien2"></b>                                                      
+                           &nbsp;&nbsp;&nbsp; SHD:  <b id="hoadon2"></b> <%--Tổng tiền hàng:--%> <%--<b id="tongtien2"></b>      --%>                                                
 
 
                                 <div style="width: 100%; height: 300px; float: left;">  
                                     <table class="display table table-bordered dataTable no-footer">
                                         <thead>
                                             <tr>
-                                                <th>Hàng hóa</th>
-                                                <th>Tiền hàng</th>
-                                                <th>statusKaraoke</th>
-                                                <th>Số HĐ</th>                                                 
+                                                <th>Mã hàng</th>
+                                                <th>Tên Hàng</th>
+                                                <th>Số lượng</th>
+                                                <th>Chiết khấu</th>
+                                                <th>Thành tiền</th>                                             
                                             </tr>
+                                            </thead>
                                             <tbody id="tbnhaphang_inhoadon">
                                             </tbody>
 
@@ -346,35 +348,51 @@
                         debugger;
                             const objdata = $.parseJSON(data.d);
                             $('#tbnhaphang_inhoadon tr').remove();
-                            debugger;
-                            if (objdata['Table'] != "")
-                            {
-                                for (var i = 0; i < objdata['Table'].length - 1; i++)
-                                {
-                                var hanghoa = objdata['Table'][i][0];
-                                var tienhang = objdata['Table'][i][1];
-                                var loaihoadon = objdata['Table'][i][4];
-                                var sohoadon = objdata['Table'][i][6];
-                                var newrow = '<tr class="thongtinhoadon">' +
-                                                        '<td id="_hanghoad">' + hanghoa + '</td>' +
-                                                        '<td id="_tienhang">' + tienhang + '</td>' +
-                                                        '<td id="_loaihoadon">' + loaihoadon + '</td>' +
-                                                        '<td id="_sohoadon">' + sohoadon + '</td>' +                                                    
-                                                        '</tr>';
-                                                    $('#tbnhaphang_inhoadon').append(newrow); 
-                                }
+                             var tongtienhang = "";//$('#tongtiennhap').val();
+                                var tongchietkhau = "";//$('#chietkhauid').val();                                
+                                var khachthanhtoan = "";//$('#thanhtoanid').val();                             
+                                var khachno =  "";//$('#conlaiid').val();
+                                var ngaytao = "";//dd + "-" + mm + "-" + yyyy;//;$('#soHD').val();
+                            var sohoadon = "";$('#soHD').val();                               
+                            var biendem = objdata['Table1'].length;
+                            //debugger;
+                            for (var i = 0; i < objdata['Table1'].length - 1; i++) {
+                                    //console.log(objdata['Table1'].length);
+                                    var tenhang = objdata['Table1'][i][0];
+                                    var dongia = objdata['Table1'][i][1];
+                                    var soluong = objdata['Table1'][i][2];
+                                    var chietkhau = "";//objdata['Table1'][i][3];
+                                var thanhtien = objdata['Table1'][i][4];
+                                sohoadon = objdata['Table1'][i][8];
+                                    var newrow = '<tr class="thongtinhoadon">' +
+                                        '<td id="_hanghoad">' + tenhang + '</td>' +
+                                        '<td id="_tienhang">' + dongia + '</td>' +
+                                        '<td id="_loaihoadon">' + soluong + '</td>' +
+                                        '<td id="_chietkhau">' + chietkhau + '</td>' +
+                                        '<td id="_sohoadon">' + thanhtien + '</td>' +
+                                        '</tr>';
+                                    $('#tbnhaphang_inhoadon').append(newrow); 
+
+                                    if (i == (biendem - 2))
+                                    {
+                                        tongchietkhau = objdata['Table1'][i][3];
+                                        tongtienhang = objdata['Table1'][i][4];
+                                        khachthanhtoan = objdata['Table1'][i][5];
+                                        khachno = objdata['Table1'][i][6];
+                                        ngaytao = objdata['Table1'][i][7];
+                                    }
                             }
-                            else
-                            {
-                                $('#tbnhaphang_inhoadon').append(newrow); 
-                            }
+
+                            $('#thantoan2').text(tongtienhang);
+                            $('#hoadon2').text(sohoadon);
                                                             
-                            $('#myModal6').modal('show');                                                       
+                                                                               
                         },
                         error: function () {
                             //alert("No Match");
                         }
-                    });
+            });
+            $('#myModal6').modal('show');    
 
         }
 

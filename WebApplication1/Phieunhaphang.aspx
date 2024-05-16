@@ -1349,7 +1349,7 @@
                                 const objdata = $.parseJSON(data.d); 
                                 //Console.log(objdata);
                                 var tongtienhang = "";//$('#tongtiennhap').val();
-                                var tongchietkhau = "";$('#chietkhauid').val();                                
+                                var tongchietkhau = "";//$('#chietkhauid').val();                                
                                 var khachthanhtoan = "";//$('#thanhtoanid').val();
                                 //alert(khachthanhtoan);
                                 var khachno =  "";//$('#conlaiid').val();

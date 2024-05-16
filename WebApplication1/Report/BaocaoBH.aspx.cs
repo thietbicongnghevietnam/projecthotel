@@ -113,11 +113,49 @@ namespace WebApplication1.Report
         public static string thongtinhoadon(string idhoadon, string _fromdate, string _todate)  //string tenphong, string tienhang
         {
             DataTable dt = new DataTable();
+            DataTable dt_new = new DataTable();
+            dt_new.Columns.Add("tenhang", typeof(String));
+            dt_new.Columns.Add("soluong", typeof(String));
+            dt_new.Columns.Add("dongia", typeof(String));
+            dt_new.Columns.Add("chietkhau", typeof(String));
+            dt_new.Columns.Add("thanhtien", typeof(String));
+
+            dt_new.Columns.Add("khachthanhtoan", typeof(String));
+            dt_new.Columns.Add("psco", typeof(String));
+            dt_new.Columns.Add("ngaytao", typeof(String));
+            dt_new.Columns.Add("sohodon", typeof(String));
 
             dt = DataConn.StoreFillDS("NH_infor_thongtincongnoKH", System.Data.CommandType.StoredProcedure, idhoadon, _fromdate, _todate);
 
+            string items = dt.Rows[0][0].ToString();
+
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            var jsonObj = jss.Deserialize<dynamic>(items);
+
+            foreach (var item in jsonObj)
+            {
+                string[] numbersArray = item.Key.Split(',');
+                var mahang = numbersArray.FirstOrDefault();
+                //string[] strArray = mahang.Split(',');
+                var mahang1 = numbersArray[0];
+                var dongia1 = numbersArray[1];
+                var thanhtien1 = numbersArray[2];
+
+                var soluong = item.Value;
+
+                dt_new.Rows.Add(mahang, soluong, dongia1, "", thanhtien1, "", "", "", "");
+            }
+            string chietkhau = dt.Rows[0]["chietkhau"].ToString();
+            string tongtien = dt.Rows[0]["tienhang"].ToString();
+            string khachthanhtoan = "0";// dt.Rows[0]["tiensauchietkhau"].ToString();
+            string khachno = "0"; //dt.Rows[0]["psco"].ToString();
+            string ngaytao = dt.Rows[0]["created"].ToString();
+            string hoadonid = dt.Rows[0]["sohoadon2"].ToString();
+            dt_new.Rows.Add("", "", "", chietkhau, tongtien, khachthanhtoan, khachno, ngaytao, hoadonid);
+
             DataTable dt2 = new DataTable();
-            dt2 = dt.Copy();
+            //dt2 = dt.Copy();
+            dt2 = dt_new.Copy();
 
             String daresult = null;
             DataSet ds = new DataSet();
