@@ -358,6 +358,7 @@
     <Content Include="GiaodienWeb\Giaodienphanmem\THAILAN.jpg" />
     <Content Include="GiaodienWeb\Giaodienphanmem\ZebexZ3100.jpg" />
     <Content Include="GiaodienWeb\index.aspx" />
+    <Content Include="GiaodienWeb\sanpham.aspx" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -2649,6 +2650,13 @@
     </Compile>
     <Compile Include="GiaodienWeb\index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GiaodienWeb\sanpham.aspx.cs">
+      <DependentUpon>sanpham.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GiaodienWeb\sanpham.aspx.designer.cs">
+      <DependentUpon>sanpham.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

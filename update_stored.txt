@@ -24,6 +24,11 @@ new
 NH_sochungtu_PT
 
 
+=============
+e-commerce.html
+
+file:///C:/Hotel/WebApplication1/pages/examples/e-commerce.html
+giaiphapphanmem.com
 
 
 
