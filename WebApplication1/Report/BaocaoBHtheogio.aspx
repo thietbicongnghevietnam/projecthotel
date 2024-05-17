@@ -1,10 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="BaocaoBH.aspx.cs" Inherits="WebApplication1.Report.BaocaoBH" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="BaocaoBHtheogio.aspx.cs" Inherits="WebApplication1.Report.BaocaoBHtheogio" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>BÁO CÁO BÁN HÀNG THEO HÓA ĐƠN</title>
+    <title>BÁO CÁO BÁN HÀNG THEO GIỜ</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&amp;display=fallback">
     <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
@@ -21,17 +21,27 @@
      <form id="form1" runat="server">
     <div class="card">
               <div class="card-header">
-                <h1>Báo cáo bán hàng theo hóa đơn</h1>
+                <h1>Báo cáo bán hàng theo giờ</h1>
               </div>
          <div class="col-sm-12">            
               Từ ngày:                                   
                      <input type="date" id="Date2" name="date" runat="server">
+                        Giờ: 
+                <select id="fromhours" style="width:50px;"></select>
+                     Phút:
+                <select id="fromminutes" style="width:50px;"></select>
+
              Đến ngày:   
-                    <input type="date" id="ngaychiid" name="date" runat="server">
+                    <input type="date" id="ngaychiid" name="date" runat="server">             
+             Giờ: 
+                <select id="tohours" style="width:50px;"></select>
+                     Phút:
+                <select id="tominutes" style="width:50px;"></select>
+           
 
              <input type="checkbox" id="check_partno_search" style="width: 20px; height: 20px;" name="check_partno_search">
-                    Item:                                    
-                                    <input type="text" id="partno_search" runat="server">
+                    Lọc theo giờ:                                    
+                                    <%--<input type="text" id="partno_search" runat="server">--%>
 
              <button class="btn btn-primary" type="button" runat="server" onserverclick="Search_Date_Click2" >
                         <i class="fa fa-fw fa-lg fa-search"></i>Lọc</button>
@@ -44,11 +54,11 @@
              <button class="btn btn-primary" type="button" runat="server" style="margin-left:20px;" onserverclick="Download_Click" ><i class="fa fa-download"></i>Export</button>
           </div>
 
-
        
-
         
 
+
+        
         <br />
               <!-- /.card-header -->
               <%--<div class="card-body">
@@ -62,12 +72,12 @@
                       <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">STT</th>
                       <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">sohd</th>
                       <%--<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">type</th>--%>
-                     <%-- <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">ngaygiothue</th>
-                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">ngaygiora</th>--%>
-                     <%-- <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">tongthoigianthue</th>--%>
+                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">ngaygiothue</th>
+                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">ngaygiora</th>
+                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">tongthoigianthue</th>
                       <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">tenphong</th>
-                    <%--  <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">tienphong</th>
-                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">tiengiohat</th>--%>
+                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">tienphong</th>
+                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">tiengiohat</th>
                      <%-- <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">Hanghoa</th>--%>
                       <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">tienhang</th>
                       <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">tongtien</th>
@@ -90,13 +100,13 @@
                   <tr role="row" class="odd">
                     <td class="sorting_1 dtr-control"><%=i %></td>
                     <td><%=rows["sohd"].ToString()%></td>
-                    <%--  <td><%=rows["type"].ToString()%></td>--%>
-                     <%-- <td><%=rows["ngaygiothue"].ToString()%></td>
-                      <td><%=rows["ngaygiora"].ToString()%></td>--%>
-                    <%--  <td><%=rows["tongthoigianthue"].ToString()%></td>--%>
+                     <%-- <td><%=rows["type"].ToString()%></td>--%>
+                      <td><%=rows["ngaygiothue"].ToString()%></td>
+                      <td><%=rows["ngaygiora"].ToString()%></td>
+                      <td><%=rows["tongthoigianthue"].ToString()%></td>
                       <td><%=rows["tenphong"].ToString()%></td>
-                     <%-- <td><%=rows["tienphong"].ToString()%></td>
-                      <td><%=rows["tiengiohat"].ToString()%></td>--%>
+                      <td><%=rows["tienphong"].ToString()%></td>
+                      <td><%=rows["tiengiohat"].ToString()%></td>
                      <%-- <td><%=rows["items"].ToString()%></td>--%>
                       <td><%=String.Format("{0:N0}", Int32.Parse(rows["tienhang"].ToString()))%></td>
                       <td><%=String.Format("{0:N0}", Int32.Parse(rows["tongtien"].ToString()))%></td>
@@ -326,6 +336,55 @@
         //    $("#txtsohoadon").val(sohoadon);
         //    $('#myModal2').modal('show');
         //}
+
+// Tự động tạo các tùy chọn cho giờ từ 0 đến 23
+var hoursSelect = document.getElementById("fromhours");
+for (var hour = 0; hour <= 23; hour++) {
+  var option = document.createElement("option");
+  option.value = hour;
+  option.text = hour < 10 ? "0" + hour : hour; // Định dạng để hiển thị "09" thay vì "9"
+  hoursSelect.appendChild(option);
+}
+var hoursSelect2 = document.getElementById("tohours");
+for (var hour = 0; hour <= 23; hour++) {
+  var option = document.createElement("option");
+  option.value = hour;
+  option.text = hour < 10 ? "0" + hour : hour; // Định dạng để hiển thị "09" thay vì "9"
+  hoursSelect2.appendChild(option);
+}
+
+// Tự động tạo các tùy chọn cho phút từ 0 đến 59
+var minutesSelect = document.getElementById("fromminutes");
+for (var minute = 0; minute <= 59; minute++) {
+  var option = document.createElement("option");
+  option.value = minute;
+  option.text = minute < 10 ? "0" + minute : minute; // Định dạng để hiển thị "09" thay vì "9"
+  minutesSelect.appendChild(option);
+}
+
+var minutesSelect2 = document.getElementById("tominutes");
+for (var minute = 0; minute <= 59; minute++) {
+  var option = document.createElement("option");
+  option.value = minute;
+  option.text = minute < 10 ? "0" + minute : minute; // Định dạng để hiển thị "09" thay vì "9"
+  minutesSelect2.appendChild(option);
+}
+
+// Lắng nghe sự kiện khi có thay đổi trong combobox giờ
+//hoursSelect.addEventListener("change", function() {
+  //var selectedHour = this.value;
+  //console.log("Bạn đã chọn giờ: " + selectedHour);
+//alert(selectedHour);
+//});
+
+// Lắng nghe sự kiện khi có thay đổi trong combobox phút
+//minutesSelect.addEventListener("change", function() {
+//  var selectedMinute = this.value;
+//  console.log("Bạn đã chọn phút: " + selectedMinute);
+//alert(selectedMinute);
+//});
+
+
 
         function openEditModal6(idhoadon)
         {

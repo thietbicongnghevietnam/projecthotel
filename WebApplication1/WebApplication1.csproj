@@ -2496,6 +2496,7 @@
     <Content Include="plugins\toastr\toastr.min.css" />
     <Content Include="plugins\toastr\toastr.min.js" />
     <Content Include="Report\BaocaoBH.aspx" />
+    <Content Include="Report\BaocaoBHtheogio.aspx" />
     <Content Include="Report\BaocaocongnoKH.aspx" />
     <Content Include="Report\BaocaocongnoNCC.aspx" />
     <Content Include="Report\Baocaololai.aspx" />
@@ -2710,6 +2711,13 @@
     </Compile>
     <Compile Include="Report\BaocaoBH.aspx.designer.cs">
       <DependentUpon>BaocaoBH.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Report\BaocaoBHtheogio.aspx.cs">
+      <DependentUpon>BaocaoBHtheogio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Report\BaocaoBHtheogio.aspx.designer.cs">
+      <DependentUpon>BaocaoBHtheogio.aspx</DependentUpon>
     </Compile>
     <Compile Include="Report\BaocaocongnoKH.aspx.cs">
       <DependentUpon>BaocaocongnoKH.aspx</DependentUpon>

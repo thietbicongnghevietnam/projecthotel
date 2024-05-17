@@ -139,6 +139,7 @@
             <a id="dropdownSubMenu2" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">BÁO CÁO</a>
             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
               <li><a href="Report/BaocaoBH.aspx" target="_blank" class="dropdown-item">BC bán hàng theo HĐ</a></li>
+                <li><a href="Report/BaocaoBHtheogio.aspx" target="_blank" class="dropdown-item">BC bán hàng theo giờ</a></li>
               <li><a href="Report/Baocaonhaphang.aspx" target="_blank" class="dropdown-item">BC nhập hàng theo HĐ</a></li>
               <li><a href="Report/Baocaotonkho.aspx" target="_blank" class="dropdown-item">BC tồn kho</a></li>
               <li class="dropdown-divider"></li>

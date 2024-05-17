@@ -20,11 +20,7 @@ SET XACT_ABORT ON
 
 
 =======================
-NH_infor_thongtincongnoNCC
-NH_infor_thongtincongnoKH
-
-them 2 truong :.... ,chietkhau,created
-......sohd as sohoadon2,chietkhau,created from htsocai
+addthongtinhanghoa_PBH   them truong hop ban ghi dau tien , Flag =1 , type 2
 
 
 =============

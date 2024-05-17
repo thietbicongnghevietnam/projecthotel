@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
 using System.Data;
 using System.Data.SqlClient;
 using System.Web.Services;
@@ -13,12 +12,11 @@ using System.Web.Script.Serialization;
 
 namespace WebApplication1.Report
 {
-    public partial class BaocaoBH : System.Web.UI.Page
+    public partial class BaocaoBHtheogio : System.Web.UI.Page
     {
         public DataTable dtbaocaobanhang = new DataTable();
         public DataTable dt_getSohd = new DataTable();
         public string sohoadon = "";
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -27,7 +25,7 @@ namespace WebApplication1.Report
 
                 dt_getSohd = DataConn.StoreFillDS("NH_getsohoadon_BH", System.Data.CommandType.StoredProcedure);
                 sohoadon = dt_getSohd.Rows[0][0].ToString();
-            }               
+            }
         }
 
         public void Download_Click2(object sender, EventArgs e)
@@ -64,12 +62,12 @@ namespace WebApplication1.Report
             string _todate = Request.Form[ngaychiid.UniqueID];
             //string _date = Request.Form[ngaychiid.UniqueID];
             string _checkpartno = Request.Form["check_partno_search"];
-            string _partno = partno_search.Value.ToString();
+            //string _partno = partno_search.Value.ToString();
             //filter_type.Text = "";
 
             if (_checkpartno == "on")
             {
-                //loc theo ma
+                //loc theo gio o day
                 //string nam = _date.Substring(6, 4);
                 //string thang = _date.Substring(3, 2);
                 //string ngay = _date.Substring(0, 2);
@@ -172,7 +170,7 @@ namespace WebApplication1.Report
                 return daresult;
             }
 
-            
+
         }
 
         public static string DataSetToJSON(DataSet ds)
@@ -237,8 +235,6 @@ namespace WebApplication1.Report
             }
             Response.End();  //must this sentence
         }
-
-
 
     }
 }
