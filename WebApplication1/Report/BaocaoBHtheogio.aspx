@@ -27,16 +27,16 @@
               Từ ngày:                                   
                      <input type="date" id="Date2" name="date" runat="server">
                         Giờ: 
-                <select id="fromhours" style="width:50px;"></select>
+                <select id="fromhours" style="width:50px;" runat="server"></select>
                      Phút:
-                <select id="fromminutes" style="width:50px;"></select>
+                <select id="fromminutes" style="width:50px;" runat="server"></select>
 
              Đến ngày:   
                     <input type="date" id="ngaychiid" name="date" runat="server">             
              Giờ: 
-                <select id="tohours" style="width:50px;"></select>
+                <select id="tohours" style="width:50px;" runat="server"></select>
                      Phút:
-                <select id="tominutes" style="width:50px;"></select>
+                <select id="tominutes" style="width:50px;" runat="server"></select>
            
 
              <input type="checkbox" id="check_partno_search" style="width: 20px; height: 20px;" name="check_partno_search">
@@ -310,6 +310,8 @@
             //$('#txtdevice').prop("readonly", true);
         });
 
+       
+
           $(function () {
               $("#example1").DataTable({
                     "paging": true,
@@ -383,6 +385,16 @@ for (var minute = 0; minute <= 59; minute++) {
 //  console.log("Bạn đã chọn phút: " + selectedMinute);
 //alert(selectedMinute);
 //});
+
+         window.onload = function() {
+            document.getElementById("fromhours").value =<%= giovao %>;
+            document.getElementById("fromminutes").value =<%= phutvao %>;
+            document.getElementById("tohours").value =<%= giora %>;
+             document.getElementById("tominutes").value =<%= phutra %>;
+
+             var checkbox = document.getElementById("check_partno_search");
+             checkbox.checked = true;
+        };
 
 
 

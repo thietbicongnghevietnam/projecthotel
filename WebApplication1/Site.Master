@@ -160,6 +160,23 @@
                <li><a href="Report/Baocaololai.aspx" target="_blank" class="dropdown-item">BC lỗ lãi</a></li>
             </ul>
           </li>
+
+        <li class="nav-item dropdown">
+            <a id="dropdownSubMenu6" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">DANH MỤC</a>
+            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+              <li><a href="Danhmuc/Danhmuchanghoa.aspx" target="_blank" class="dropdown-item">Danh mục hàng hóa</a></li>
+              <li><a href="Danhmuc/Danhmuckhachhang.aspx" target="_blank" class="dropdown-item">Danh mục khách hàng</a></li>
+              <li><a href="Danhmuc/Danhmucbanphong.aspx" target="_blank" class="dropdown-item">Danh mục bàn/phòng</a></li>
+              <li class="dropdown-divider"></li>
+              <li><a href="Danhmuc/DMKhuvuc.aspx" target="_blank" class="dropdown-item">Danh mục khu vực</a></li>
+              <li><a href="Danhmuc/Danhmucnhomhang.aspx" target="_blank" class="dropdown-item">Danh mục nhóm hàng</a></li> 
+              <li><a href="Danhmuc/Danhmucnhacungcap.aspx" target="_blank" class="dropdown-item">Danh mục NCC</a></li>
+                <li class="dropdown-divider"></li>
+                <li><a href="Danhmuc/DMcauthanhDVT.aspx" target="_blank" class="dropdown-item">Danh mục cấu thành ĐVT</a></li>
+                <li><a href="Danhmuc/DMcauthanhsanpham.aspx" target="_blank" class="dropdown-item">Danh mục cấu thành sản phẩm</a></li>
+              <li><a href="Danhmuc/Danhmucnhanvien.aspx" target="_blank" class="dropdown-item">Danh mục nhân viên</a></li>
+            </ul>
+          </li>
              <%} %>
         <%if (Role_ == "NV") {%>
          <li class="nav-item dropdown">

@@ -20,8 +20,7 @@ SET XACT_ABORT ON
 
 
 =======================
-addthongtinhanghoa_PBH   them truong hop ban ghi dau tien , Flag =1 , type 2
-
+NH_BaocaoBH_theogio
 
 =============
 e-commerce.html
@@ -30,10 +29,50 @@ file:///C:/Hotel/WebApplication1/pages/examples/e-commerce.html
 giaiphapphanmem.com
 
 
+====
+USE [Warehouse_BPS]
+GO
+/****** Object:  StoredProcedure [dbo].[NH_BaocaoBH_theogio]    Script Date: 05/18/2024 09:03:45 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER PROCEDURE [dbo].[NH_BaocaoBH_theogio] -- NH_BaocaoBH_theogio '2024-05-18 06:00:00','2024-05-18 07:30:00'
+	@checkin as nvarchar(50),
+	@checkout as nvarchar(50)
+AS
+BEGIN
+--CAST('2024-05-18 07:09:56' AS DATETIME);
+--CONVERT(DATETIME, '2024-05-18 07:09:56', 120)
+
+select * from 
+(
+select id,sohd,type,ngaygiothue,ngaygiora,tongthoigianthue,tenphong,
+tienphong,tiengiohat,items,tienhang,tongtien,chietkhau,tiensauchietkhau,hinhthucnghi,mohinh,created,idnhanvien,psco,CONVERT(VARCHAR(5),ngaygiothue,108) as giovao,CONVERT(VARCHAR(5),ngaygiora,108) as giora from htsocai where type<>2 and ngaygiora BETWEEN  @checkin AND @checkout  
+
+union 
+
+select '' as id,'-','-','','','','Tong tien',
+(select sum(tienphong) from htsocai where type<>2 and ngaygiora BETWEEN  @checkin AND @checkout) as tienphong,
+(select sum(tiengiohat) from htsocai where type<>2 and ngaygiora BETWEEN  @checkin AND @checkout) as tiengiohat,
+'' as items,
+(select sum(tienhang) from htsocai where type<>2 and ngaygiora BETWEEN  @checkin AND @checkout) as tienhang,
+(select sum(tongtien) from htsocai where type<>2 and ngaygiora BETWEEN  @checkin AND @checkout) as tongtien,
+(select sum(chietkhau) from htsocai where type<>2 and ngaygiora BETWEEN  @checkin AND @checkout) as chietkhau,
+(select sum(tiensauchietkhau) from htsocai where type<>2 and ngaygiora BETWEEN  @checkin AND @checkout)as tiensauchietkhau,
+'' as hinhthucnghi,
+'' as mohinh,
+GETDATE() as created,
+'' as idnhanvien,
+'' as psco,
+'' as giovao,
+'' as giora
+from htsocai where type<>2 and ngaygiora BETWEEN  @checkin AND @checkout
+) ABC order by created asc
 
 
-cach 1
-ton dau ky = sum(tongnhap)-sum(tongxuat) where tu dau thang den tai thoi diem hien tai
 
-cach 2
-tinh ton dau vao hoa don 
+
+
+END

@@ -2537,6 +2537,7 @@
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="SignalR_hub.aspx" />
     <Content Include="Site.Master" />
+    <Content Include="TemplateReport\banhangtheogio.aspx" />
     <Content Include="TemplateReport\banhangtheongayhd.aspx" />
     <Content Include="TemplateReport\Baocaotonghopthuchi.aspx" />
     <Content Include="TemplateReport\nhaphangtheongayhd.aspx" />
@@ -2795,6 +2796,13 @@
     </Compile>
     <Compile Include="Site.Mobile.Master.designer.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateReport\banhangtheogio.aspx.cs">
+      <DependentUpon>banhangtheogio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TemplateReport\banhangtheogio.aspx.designer.cs">
+      <DependentUpon>banhangtheogio.aspx</DependentUpon>
     </Compile>
     <Compile Include="TemplateReport\banhangtheongayhd.aspx.cs">
       <DependentUpon>banhangtheongayhd.aspx</DependentUpon>

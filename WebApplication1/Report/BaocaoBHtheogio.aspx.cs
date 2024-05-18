@@ -17,6 +17,11 @@ namespace WebApplication1.Report
         public DataTable dtbaocaobanhang = new DataTable();
         public DataTable dt_getSohd = new DataTable();
         public string sohoadon = "";
+
+        public string giovao = "00";
+        public string phutvao = "00";
+        public string giora = "00";
+        public string phutra = "00";
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -34,8 +39,33 @@ namespace WebApplication1.Report
             string tungay = Date2.Value;// Request.Form[txtngaymuon.UniqueID];//txtngaymuon.Text.ToString();
             string denngay = ngaychiid.Value;// Request.Form[txtngaytra.UniqueID];// txtngaytra.Text.ToString();
 
+            giovao = Request.Form[fromhours.UniqueID];
+            phutvao = Request.Form[fromminutes.UniqueID];
+            giora = Request.Form[tohours.UniqueID];
+            phutra = Request.Form[tominutes.UniqueID];
+
+            if (Int32.Parse(giovao) < 10)
+            {
+                giovao = "0" + giovao;
+            }
+            if (Int32.Parse(phutvao) < 10)
+            {
+                phutvao = "0" + phutvao;
+            }
+            if (Int32.Parse(giora) < 10)
+            {
+                giora = "0" + giora;
+            }
+            if (Int32.Parse(phutra) < 10)
+            {
+                phutra = "0" + phutra;
+            }
+
+            string checkin = tungay + " " + giovao + ":" + phutvao + ":" + "00";
+            string checkout = denngay + " " + giora + ":" + phutra + ":" + "00";
+
             //Response.Redirect("ReportBorrowReturn.aspx?itemid='" + _itemid + "' ");
-            Response.Redirect("/TemplateReport/banhangtheongayhd.aspx?tungay='" + tungay + "'&denngay='" + denngay + "' ");
+            Response.Redirect("/TemplateReport/banhangtheogio.aspx?tungay='" + checkin + "'&denngay='" + checkout + "' ");
         }
 
         public void BtnOrderItem(object sender, EventArgs e)
@@ -60,10 +90,33 @@ namespace WebApplication1.Report
         {
             string _fromdate = Request.Form[Date2.UniqueID];
             string _todate = Request.Form[ngaychiid.UniqueID];
-            //string _date = Request.Form[ngaychiid.UniqueID];
-            string _checkpartno = Request.Form["check_partno_search"];
-            //string _partno = partno_search.Value.ToString();
-            //filter_type.Text = "";
+
+            giovao = Request.Form[fromhours.UniqueID];
+            phutvao = Request.Form[fromminutes.UniqueID];
+            giora = Request.Form[tohours.UniqueID];
+            phutra = Request.Form[tominutes.UniqueID];
+
+            if (Int32.Parse(giovao) < 10)
+            {
+                giovao = "0" + giovao;
+            }
+            if (Int32.Parse(phutvao) < 10)
+            {
+                phutvao = "0" + phutvao;
+            }
+            if (Int32.Parse(giora) < 10)
+            {
+                giora = "0" + giora;
+            }
+            if (Int32.Parse(phutra) < 10)
+            {
+                phutra = "0" + phutra;
+            }
+
+            string checkin = _fromdate + " " + giovao + ":" + phutvao + ":" + "00";
+            string checkout = _todate + " " + giora + ":" + phutra + ":" + "00";
+
+            string _checkpartno = Request.Form["check_partno_search"];            
 
             if (_checkpartno == "on")
             {
@@ -73,8 +126,14 @@ namespace WebApplication1.Report
                 //string ngay = _date.Substring(0, 2);
                 //string _date2 = nam + "-" + thang + "-" + ngay;
 
-                dtbaocaobanhang = DataConn.StoreFillDS("NH_BaocaoBH", System.Data.CommandType.StoredProcedure);
+                dtbaocaobanhang = DataConn.StoreFillDS("NH_BaocaoBH_theogio", System.Data.CommandType.StoredProcedure, checkin, checkout);
                 //ngaychiid.Value = ngay + "-" + thang + "-" + nam;
+                
+                //fromhours.Value = giovao;
+                //fromminutes.Value = phutvao;
+                //tohours.Value = giora;
+                //tominutes.Value = phutra;
+
 
             }
             else

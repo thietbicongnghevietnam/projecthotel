@@ -31,6 +31,24 @@ namespace WebApplication1.Report {
         protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl Date2;
         
         /// <summary>
+        /// fromhours control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlSelect fromhours;
+        
+        /// <summary>
+        /// fromminutes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlSelect fromminutes;
+        
+        /// <summary>
         /// ngaychiid control.
         /// </summary>
         /// <remarks>
@@ -38,6 +56,24 @@ namespace WebApplication1.Report {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl ngaychiid;
+        
+        /// <summary>
+        /// tohours control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlSelect tohours;
+        
+        /// <summary>
+        /// tominutes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlSelect tominutes;
         
         /// <summary>
         /// txtsohoadon control.
