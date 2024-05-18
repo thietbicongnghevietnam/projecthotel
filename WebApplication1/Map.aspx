@@ -72,6 +72,7 @@
     <script src="../dist/contextmenu.js"></script>--%>
    
         <!-- Content Wrapper. Contains page content -->
+     <%  string user = Session["username"].ToString(); %>
         <div class="wrapper">
             <!-- Content Header (Page header) -->
             <section class="content-header">
@@ -87,7 +88,7 @@
                             <b style="padding-right: 10px; margin-left: 10px; margin-top: 5px;">Giờ ra:</b>
                             <input id="checkinput2" style="width: 150px; margin-top: 10px;" name="checkinput2" value=""/>
                             <b style="padding-right: 12px; margin-left: 10px;">Hình thức nghỉ:</b>
-                            <input id="stylerender" style="width: 80px; " name="stylerender" value="" />
+                            <input id="stylerender" style="width: 80px; background-color:aqua; " name="stylerender" value="" />
                            
                             
 
@@ -128,7 +129,8 @@
             <section class="content">
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="card card-primary">
+                        <!--khu vuc 1-->
+                        <div class="card card-primary">                       
                             <%int i = 0; %>
                                             <%foreach (System.Data.DataRow rows1 in dt_get_khuvuc0.Rows)
                                                 {%>   
@@ -175,13 +177,49 @@
                         </div>
                         <!-- /.card -->
 
-                       <div class="card card-primary">
-                            <%int j = 0; %>
-                                            <%foreach (System.Data.DataRow rows1 in dt_get_khuvuc1.Rows)
-                                                {%>   
-                                            
+                       <!--khu vuc 2-->
+                       <div class="card card-primary">                                                                      
                             <div class="card-header">
-                                <h3 class="card-title"><%=rows1["tenkhuvuc"].ToString() %></h3>
+                                <h3 class="card-title"><%=tenkhuvuc2 %></h3>
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                
+                                <div class="wrapper" id="myList">
+                                    <ul>
+                                        <%int p = 0; %>
+                                        <%foreach (System.Data.DataRow rows in dt_getinfo_phong1.Rows)
+                                            {%>
+                                        <%p++;%>
+                                        <li class="item" id="nametable_<%=p %>">
+                                             <img src="/static/images/phongtrong.png" style="float:left; margin-left:3px; margin-top:3px;width:50px; height: 50px;">
+                                            <p id="tenphong" style="float:left; margin-left: 5px; margin-top:3px;"><%=rows["tenphong"].ToString() %></p> 
+                                            <t id="trangthai" hidden><%=rows["trangthai"].ToString()%></t>
+                                            <d id="trangthaidatphong" hidden><%=rows["trangthaidatphong"].ToString() %></d>
+                                            <dp id="trangthaidonphong" hidden><%=rows["trangthaidonphong"].ToString() %></dp>
+                                            <lp id="loaiphong" style="float: left" hidden><label style="width: 100px; display: none;" name="loaiphong"><%=rows["loaiphongid"].ToString() %></label></lp>                                           
+                                            <ht id="hinhthuephong" hidden><%=rows["nhanghi"].ToString() %></ht>
+                                             <ka id="karaokeid" hidden><%=rows["karaoke"].ToString() %></ka>
+                                            <tc id="tiencoc" style="width: 160px; float: left" hidden> Đặt trước :<label
+                                                    style="width: 100px;display: none;" name="tiencoc">.../VNĐ</label>
+                                            </tc>
+                                        </li>                                           
+                                        <%} %>
+                                    </ul>
+                                </div>
+                               
+                            </div>
+                            <!-- /.card-body -->                         
+                        </div>
+
+                        <!--khu vuc 3-->
+                        <div class="card card-primary">                                                                       
+                            <div class="card-header">
+                                <h3 class="card-title"><%=tenkhuvuc3 %></h3>
 
                                 <div class="card-tools">
                                     <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -193,11 +231,11 @@
                                 
                                 <div class="wrapper" id="myList">
                                     <ul>
-                                        <%int k = 0; %>
-                                        <%foreach (System.Data.DataRow rows in dt_getinfo_phong1.Rows)
+                                        <%int h = 0; %>
+                                        <%foreach (System.Data.DataRow rows in dt_getinfo_phong3.Rows)
                                             {%>
-                                        <%k++;%>
-                                        <li class="item" id="nametable_<%=k %>">
+                                        <%h++;%>
+                                        <li class="item" id="nametable_<%=h %>">
                                              <img src="/static/images/phongtrong.png" style="float:left; margin-left:3px; margin-top:3px;width:50px; height: 50px;">
                                             <p id="tenphong" style="float:left; margin-left: 5px; margin-top:3px;"><%=rows["tenphong"].ToString() %></p> 
                                             <t id="trangthai" hidden><%=rows["trangthai"].ToString()%></t>
@@ -211,18 +249,57 @@
                                             </tc>
                                         </li>
                                            
-
                                         <%} %>
                                     </ul>
                                 </div>
                                
                             </div>
                             <!-- /.card-body -->
-                            <%} %>
+                          
                         </div>
 
-                    </div>
+                        <!--khu vuc 4-->
+                        <div class="card card-primary">                                                                       
+                            <div class="card-header">
+                                <h3 class="card-title"><%=tenkhuvuc4 %></h3>
 
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                
+                                <div class="wrapper" id="myList">
+                                    <ul>
+                                        <%int f = 0; %>
+                                        <%foreach (System.Data.DataRow rows in dt_getinfo_phong4.Rows)
+                                            {%>
+                                        <%h++;%>
+                                        <li class="item" id="nametable_<%=f %>">
+                                             <img src="/static/images/phongtrong.png" style="float:left; margin-left:3px; margin-top:3px;width:50px; height: 50px;">
+                                            <p id="tenphong" style="float:left; margin-left: 5px; margin-top:3px;"><%=rows["tenphong"].ToString() %></p> 
+                                            <t id="trangthai" hidden><%=rows["trangthai"].ToString()%></t>
+                                            <d id="trangthaidatphong" hidden><%=rows["trangthaidatphong"].ToString() %></d>
+                                            <dp id="trangthaidonphong" hidden><%=rows["trangthaidonphong"].ToString() %></dp>
+                                            <lp id="loaiphong" style="float: left" hidden><label style="width: 100px; display: none;" name="loaiphong"><%=rows["loaiphongid"].ToString() %></label></lp>                                           
+                                            <ht id="hinhthuephong" hidden><%=rows["nhanghi"].ToString() %></ht>
+                                             <ka id="karaokeid" hidden><%=rows["karaoke"].ToString() %></ka>
+                                            <tc id="tiencoc" style="width: 160px; float: left" hidden> Đặt trước :<label
+                                                    style="width: 100px;display: none;" name="tiencoc">.../VNĐ</label>
+                                            </tc>
+                                        </li>
+                                           
+                                        <%} %>
+                                    </ul>
+                                </div>
+                               
+                            </div>
+                            <!-- /.card-body -->
+                          
+                        </div>
+                    </div>
 
 
                     <div class="col-md-6">
@@ -1280,7 +1357,7 @@
                 var tenphong1 = $("#nametable").text();
                 //alert(tenphong1);
                 var nameitem = tenphong1;
-                var userid = <%=Session["username"].ToString()%>;
+                var userid = '<%=Session["username"].ToString()%>';
                 var data = { nameitem: nameitem, userid: userid };
 
                  if(confirm("Bạn có chắc muốn hủy? Bấm OK để tiếp tục!") == true){
@@ -1388,6 +1465,8 @@
                 var tienhang = $('#tongtienid').val(); 
                 var kieunghi = $('#MainContent_dr_hinhthucnghi').val();
 
+                var userid = '<%=Session["username"].ToString()%>';
+
                 var sogiodung = $(".sogiodung").text();
                 var sophutdung = $(".sophutdung").text();
                 
@@ -1430,11 +1509,12 @@
                     });
                     var hanghoa_new = itemdata;
                     var aaa = $('#tongtienid').val();
-                    var data = {
+                    var data = {                        
                         kieunghi: kieunghi,
                         tenphong: tenphong,
                         tienhang: tienhang,
-                        items: JSON.stringify(itemdata)
+                        items: JSON.stringify(itemdata),
+                        userid: userid
                     };
                     //save hang hoa
                     $.ajax({
@@ -1989,6 +2069,8 @@
                 var kieunghi = $('#MainContent_dr_hinhthucnghi').val();
                 var hinhthucnghi = $('#stylerender').val();
                 var loaihinhnghi = $('#kieunghiid').text();
+               
+                var userid = '<%=Session["username"].ToString()%>';
                 //alert(loaihinhnghi);
                 //alert(hinhthucnghi);
                 if (kieunghi == '' && hinhthucnghi == 'hotel')
@@ -2018,7 +2100,8 @@
                                     kieunghi:kieunghi,
                                     tenphong: tenphong,
                                     tienhang: tienhang,
-                                    items: JSON.stringify(itemdata)
+                                 items: JSON.stringify(itemdata),
+                                    userid: userid
                                 };                                
                                 //save hang hoa
                                 $.ajax({
@@ -2078,7 +2161,8 @@
                                     kieunghi:kieunghi,
                                     tenphong: tenphong,
                                     tienhang: tienhang,
-                                    items: JSON.stringify(itemdata)
+                                 items: JSON.stringify(itemdata),
+                                 userid: userid
                                 };
                                 //djLog(data);  //Object {tenphong: "P.101", tienhang: "10000", items: "{"ngocay":1}"}
                                 //console.log(data);

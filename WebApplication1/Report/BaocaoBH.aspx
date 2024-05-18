@@ -23,8 +23,9 @@
               <div class="card-header">
                 <h1>Báo cáo bán hàng theo hóa đơn</h1>
               </div>
-         <div class="col-sm-12">            
-              Từ ngày:                                   
+         <div class="col-sm-12">  
+             <span style="width:800PX; float:left;">
+                  Từ ngày:                                   
                      <input type="date" id="Date2" name="date" runat="server">
              Đến ngày:   
                     <input type="date" id="ngaychiid" name="date" runat="server">
@@ -32,9 +33,21 @@
              <input type="checkbox" id="check_partno_search" style="width: 20px; height: 20px;" name="check_partno_search">
                     Item:                                    
                                     <input type="text" id="partno_search" runat="server">
+            
+             <button class="btn btn-primary" type="button" runat="server" onserverclick="Search_Date_Click2" >                 
 
-             <button class="btn btn-primary" type="button" runat="server" onserverclick="Search_Date_Click2" >
                         <i class="fa fa-fw fa-lg fa-search"></i>Lọc</button>
+             </span>
+             
+             
+             <span style="width:120PX; float:left;"> 
+                  <asp:DropDownList ID="dr_nhanvien" runat="server" AppendDataBoundItems="true" OnSelectedIndexChanged="dr_nhanvien_SelectedIndexChanged" AutoPostBack="true"
+                                                    DataTextField="U_NAME" 
+                                                    DataValueField="U_NAME" 
+                                                    CssClass="form-control input-sm">
+                                                </asp:DropDownList> 
+             </span>
+             
 
               <%--<button class="btn btn-primary" type="button" runat="server">
                         <i class="fa fa-download"></i><a href="../TemplateReport/banhangtheongayhd.aspx" target="_blank" style="color:white">Print</a></button>--%>

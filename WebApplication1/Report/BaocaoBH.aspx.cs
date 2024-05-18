@@ -18,6 +18,7 @@ namespace WebApplication1.Report
         public DataTable dtbaocaobanhang = new DataTable();
         public DataTable dt_getSohd = new DataTable();
         public string sohoadon = "";
+        public DataTable dtnv = new DataTable();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -27,7 +28,35 @@ namespace WebApplication1.Report
 
                 dt_getSohd = DataConn.StoreFillDS("NH_getsohoadon_BH", System.Data.CommandType.StoredProcedure);
                 sohoadon = dt_getSohd.Rows[0][0].ToString();
+
+                dtnv = DataConn.StoreFillDS("NH_Get_nhanvien", System.Data.CommandType.StoredProcedure);
+                DataRow newRow2 = dtnv.NewRow();
+                newRow2["U_NAME"] = "==NV==";
+                dtnv.Rows.InsertAt(newRow2, 0);
+                dr_nhanvien.DataSource = dtnv;
+                dr_nhanvien.DataBind();
             }               
+        }
+
+        protected void dr_nhanvien_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Lấy giá trị đã chọn từ DropDownList
+            string idnhanvien = dr_nhanvien.SelectedValue;
+            string _fromdate = Request.Form[Date2.UniqueID];
+            string _todate = Request.Form[ngaychiid.UniqueID];
+
+            if (_fromdate == "")
+            {
+                dtbaocaobanhang = DataConn.StoreFillDS("NH_BaocaoBH_NV", System.Data.CommandType.StoredProcedure, idnhanvien);
+            }
+            else
+            {               
+
+                dtbaocaobanhang = DataConn.StoreFillDS("NH_BaocaoBH_theongay_NV", System.Data.CommandType.StoredProcedure, _fromdate, _todate, idnhanvien);
+                //ngaychiid.Value = ngay + "-" + thang + "-" + nam;
+            }
+
+
         }
 
         public void Download_Click2(object sender, EventArgs e)

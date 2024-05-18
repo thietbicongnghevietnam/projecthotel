@@ -19,15 +19,20 @@ SET XACT_ABORT ON
 	END CATCH
 
 
-=======================
+======================= 18.05.2024
+htsocai => cot idnhanvien = int sang nvarchar(20)
+TBL_USER2 ==> 
 NH_BaocaoBH_theogio
+NH_save_thongtinhanghoa
+NH_BaocaoBH_NV
+NH_BaocaoBH_theongay_NV
 
-=============
-e-commerce.html
 
-file:///C:/Hotel/WebApplication1/pages/examples/e-commerce.html
-giaiphapphanmem.com
-
+[NH_select_info_phong3] 
+[NH_select_khuvuc3]
+NH_select_khuvuc4
+NH_select_info_phong4
+NH_Get_nhanvien
 
 ====
 USE [Warehouse_BPS]
