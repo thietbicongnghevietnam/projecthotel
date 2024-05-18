@@ -41,6 +41,15 @@ namespace WebApplication1
 
         public static string source;
 
+        public string tendovi = "";
+        public string diachidonvi = "";
+        public string sodtdonvi = "";
+
+        public DataTable dtdonvi = new DataTable();
+
+
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
             dt_nhomhang = DataConn.StoreFillDS("NH_select_nhomhang", CommandType.StoredProcedure);
@@ -76,25 +85,8 @@ namespace WebApplication1
                 tenkhuvuc2 = "setup2";
             }
             dt_getinfo_phong1 = DataConn.StoreFillDS("NH_select_info_phong1", CommandType.StoredProcedure);
-                      
-            //if (Request.QueryString["documentNo"] != null)
-            //{
-            //    object[] obj = new object[] { Request.QueryString["documentNo"] };
-            //    dt_doc = DataConn.StoreFillDS("NH_select_documentNo", CommandType.StoredProcedure, obj);
-            //    if (dt_doc.Rows.Count > 0)
-            //    {
-            //        if (dt_doc.Rows[0][1] != null)
-            //        {
-            //            txt_doc.Text = dt_doc.Rows[0][2].ToString();
-            //            txt_doc.ReadOnly = true;
-            //            //txt_barcode.Focus();
-            //        }
-            //    }
-            //    else
-            //    {
-            //        Page.ClientScript.RegisterStartupScript(Page.GetType(), "Message", "toastr.warning('Hãy kiểm tra lại thông tin. </br>Phiếu này đã nhận xong hoặc không tồn tại','Lỗi'); ", true);
-            //    }
-            //}
+
+                        
 
             if (!IsPostBack)
             {
@@ -124,6 +116,11 @@ namespace WebApplication1
                 dthinhthucnghi.Rows.InsertAt(newRow3, 0);
                 dr_hinhthucnghi.DataSource = dthinhthucnghi;
                 dr_hinhthucnghi.DataBind();
+
+                dtdonvi = DataConn.StoreFillDS("NH_thongtin_doanhnghiep", System.Data.CommandType.StoredProcedure);
+                tendovi = dtdonvi.Rows[0][1].ToString();
+                diachidonvi = dtdonvi.Rows[0][5].ToString();
+                sodtdonvi = dtdonvi.Rows[0][7].ToString();
             }
 
         }
@@ -214,12 +211,12 @@ namespace WebApplication1
         public static string addthongtinhanghoa(string kieunghi, string tenphong , string tienhang, string items, string userid)  //string tenphong, string tienhang
         {
             String thongbao = "";
-            DataTable dtsave = new DataTable();
+            DataTable dtsave = new DataTable();            
 
             //check xem hoa don ton tai chua
             //update *** neu hoa don ton tai roi
             //lay so hoa don truyen len de update
-           
+
             dtsave = DataConn.StoreFillDS("NH_save_thongtinhanghoa", System.Data.CommandType.StoredProcedure, kieunghi, tenphong,tienhang,items, userid);//tenphong, data, tienhang
 
             if (dtsave.Rows[0][0].ToString() == "1")

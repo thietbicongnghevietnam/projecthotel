@@ -105,7 +105,7 @@
              <div>
             <table id="example" class="table table-striped table-bordered" style="width:100%">
         <thead>
-            <tr>
+         
                  <tr role="row">
                                         <th>NO</th>
                                         <th>mahang</th>
@@ -119,8 +119,8 @@
                                       
                                                                                
                                         <th>Action</th>
-                                    </tr>
-            </tr>
+                     </tr>
+  
         </thead>
         <tbody>
                                 <%int i = 0; %>

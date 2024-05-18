@@ -34,6 +34,10 @@ NH_select_khuvuc4
 NH_select_info_phong4
 NH_Get_nhanvien
 
+NH_insert_thongtindoanhnghiep
+NH_Update_doanhnghiep
+NH_thongtin_doanhnghiep
+
 ====
 USE [Warehouse_BPS]
 GO

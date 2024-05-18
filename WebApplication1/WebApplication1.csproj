@@ -164,6 +164,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Danhmuc\Danhmucbanphong.aspx" />
+    <Content Include="Danhmuc\Danhmucdonvi.aspx" />
     <Content Include="Danhmuc\Danhmuchanghoa.aspx" />
     <Content Include="Danhmuc\Danhmuckhachhang.aspx" />
     <Content Include="Danhmuc\Danhmucnhacungcap.aspx" />
@@ -2582,6 +2583,13 @@
     </Compile>
     <Compile Include="Danhmuc\Danhmucbanphong.aspx.designer.cs">
       <DependentUpon>Danhmucbanphong.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Danhmuc\Danhmucdonvi.aspx.cs">
+      <DependentUpon>Danhmucdonvi.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Danhmuc\Danhmucdonvi.aspx.designer.cs">
+      <DependentUpon>Danhmucdonvi.aspx</DependentUpon>
     </Compile>
     <Compile Include="Danhmuc\Danhmuchanghoa.aspx.cs">
       <DependentUpon>Danhmuchanghoa.aspx</DependentUpon>

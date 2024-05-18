@@ -652,9 +652,10 @@
                        
                        <%-- <div class="container-fluid"  style="width:400px;height:auto;">-- mau 400 danh cho may in nho --%>
                        <div class="container-fluid"  style="width:700px;height:auto;">
-                           <span><i style="font-size:22px; text-align:center;">Nhà hàng vườn xoài</i></span><br />                           
+                           <span><i style="font-size:22px; text-align:center;"><%=tendovi %></i></span><br />                           
                           <%--<span hidden> Loại hình: </span><b id="hinhthucnghi2" hidden></b> &nbsp;&nbsp;&nbsp; <span hidden>Tổng tiền hát:</span> <b id="tongtienhat2" hidden></b><br />--%>
-                           <span> Địa chỉ: Nam Hồng - Đông Anh - Hà Nội</span><b id="hinhthucnghi2" hidden></b> &nbsp;&nbsp;&nbsp; <span hidden>Tổng tiền hát:</span> <b id="tongtienhat2" hidden></b><br />
+                           <span> Địa chỉ: <%=diachidonvi %></span><b id="hinhthucnghi2" hidden></b> &nbsp;&nbsp;&nbsp; <span hidden>Tổng tiền hát:</span> <b id="tongtienhat2" hidden></b><br />
+                           Số ĐT: <span><%=sodtdonvi %></span><br />
                            Số HĐ: <span id="sohoadon_"></span> &nbsp;&nbsp;&nbsp; Ngày tạo : <span id="ngaytao_"></span><br />                            
                            Tên bàn: <b id="tenphong2"></b> &nbsp;&nbsp;&nbsp; <span hidden> tiền hàng:</span> <b id="tongtien2" hidden></b>                                                      
 
