@@ -233,6 +233,8 @@
     <Content Include="dist\js\pages\dashboard.js" />
     <Content Include="dist\js\pages\dashboard2.js" />
     <Content Include="dist\js\pages\dashboard3.js" />
+    <Content Include="dist\js\sweetalert2%4011.js" />
+    <Content Include="dist\js\xlsx.full.min.js" />
     <Content Include="docs\404.html" />
     <Content Include="docs\assets\css\adminlte.css" />
     <Content Include="docs\assets\css\adminlte.min.css" />
@@ -2503,6 +2505,8 @@
     <Content Include="Report\Baocaololai.aspx" />
     <Content Include="Report\Baocaonhaphang.aspx" />
     <Content Include="Report\Baocaosoquy.aspx" />
+    <Content Include="Report\BaocaotonghopBH.aspx" />
+    <Content Include="Report\BaocaotonghopNH.aspx" />
     <Content Include="Report\Baocaotonghopthuchi.aspx" />
     <Content Include="Report\Baocaotonkho.aspx" />
     <Content Include="Report\test.aspx" />
@@ -2762,6 +2766,20 @@
     </Compile>
     <Compile Include="Report\Baocaosoquy.aspx.designer.cs">
       <DependentUpon>Baocaosoquy.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Report\BaocaotonghopBH.aspx.cs">
+      <DependentUpon>BaocaotonghopBH.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Report\BaocaotonghopBH.aspx.designer.cs">
+      <DependentUpon>BaocaotonghopBH.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Report\BaocaotonghopNH.aspx.cs">
+      <DependentUpon>BaocaotonghopNH.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Report\BaocaotonghopNH.aspx.designer.cs">
+      <DependentUpon>BaocaotonghopNH.aspx</DependentUpon>
     </Compile>
     <Compile Include="Report\Baocaotonghopthuchi.aspx.cs">
       <DependentUpon>Baocaotonghopthuchi.aspx</DependentUpon>

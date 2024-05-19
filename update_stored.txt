@@ -38,7 +38,22 @@ NH_insert_thongtindoanhnghiep
 NH_Update_doanhnghiep
 NH_thongtin_doanhnghiep
 
-====
+==== 19.05.2024
+NH_Setting_phongban
+NH_BC_tonghopBH
+NH_BC_tonghopBH_theongay
+
+NH_thongtinthekho_BH
+NH_thongtinthekho_NH
+
+NH_BC_tonghopNH
+NH_BC_tonghopNH_theongay
+
+sua
+NH_getsohoadon_BH
+
+
+===============
 USE [Warehouse_BPS]
 GO
 /****** Object:  StoredProcedure [dbo].[NH_BaocaoBH_theogio]    Script Date: 05/18/2024 09:03:45 ******/

@@ -114,6 +114,57 @@ namespace WebApplication1.Danhmuc
 
         }
 
+        public void settingphongban(object sender, EventArgs e)
+        {
+            string mohinh = "";
+            if (nhahangid.Checked)
+            {
+                // Xử lý khi Option 1 được chọn
+                mohinh = "nhahang";
+            }
+            else if (karaokeid.Checked)
+            {
+                // Xử lý khi Option 2 được chọn
+                mohinh = "karaoke";
+            }
+            else if (hotelid.Checked)
+            {
+                // Xử lý khi Option 3 được chọn
+                mohinh = "hotel";
+            }
+            else
+            {
+                // Xử lý khi không có option nào được chọn
+                mohinh = "nhahang";
+            }
+
+
+            string maphongid = maphong.Text;
+            string tiengionghiid = tiengionghi.Text;
+            string thoigianphutroiid = thoigianphutroi.Text;
+            string tiengiophutroiid = tiengiophutroi.Text;
+            string tiengiophutroitheophutid = tiengiophutroitheophut.Text;
+            string tiennghidemid = tiennghidem.Text;
+            string tiennghingayid = tiennghingay.Text;
+            string tiennghithangid = tiennghithang.Text;
+            string tienkaraokeid = tienkaraoke.Text;
+
+
+
+            DataTable dtupdate = new DataTable();
+            dtupdate = DataConn.StoreFillDS("NH_Setting_phongban", System.Data.CommandType.StoredProcedure, mohinh, maphongid, tiengionghiid, thoigianphutroiid, tiengiophutroiid, tiengiophutroitheophutid, tiennghidemid, tiennghingayid, tiennghithangid, tienkaraokeid);
+            if (dtupdate.Rows[0][0].ToString() == "1")
+            {
+                dt_banphong = DataConn.StoreFillDS("NH_danhmucbanphong", System.Data.CommandType.StoredProcedure);
+                Page.ClientScript.RegisterStartupScript(Page.GetType(), "Message", "toastr.success('Success!!!');", true);
+            }
+            else
+            {
+                Page.ClientScript.RegisterStartupScript(Page.GetType(), "Message", "toastr.error('NG, kiểm tra lại thông tin!'); ", true);
+            }           
+
+        }
+
         public void Download_Click(object sender, EventArgs e)
         {
             DataTable dt_dowload = new DataTable();

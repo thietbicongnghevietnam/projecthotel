@@ -44,11 +44,7 @@ namespace WebApplication1
         public string tendovi = "";
         public string diachidonvi = "";
         public string sodtdonvi = "";
-
         public DataTable dtdonvi = new DataTable();
-
-
-
 
         protected void Page_Load(object sender, EventArgs e)
         {

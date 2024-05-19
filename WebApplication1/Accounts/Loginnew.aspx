@@ -70,7 +70,7 @@
                                          <div class="form-group">
                                              <div class="custom-control custom-checkbox">
                                                  <input class="custom-control-input" id="rememberPasswordCheck" type="checkbox" />
-                                                 <label class="custom-control-label" for="rememberPasswordCheck">Remember password <i>(0979 479 007)</i></label>
+                                                 <label class="custom-control-label" for="rememberPasswordCheck">forgot password <i style="color:blue;">(Call: 0979 479 007)</i></label>
                                              </div>
                                          </div>
                                        
