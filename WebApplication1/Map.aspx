@@ -676,9 +676,11 @@
                                     </table>
                                 </div>
                              <br /> 
-                           Tổng tiền: <b id="thantoan2"></b> &nbsp;&nbsp;&nbsp;  C/K: <b id="chietkau2"></b> <br />
-                           KH thanh toán: <b id="khthanhtoan2"></b> &nbsp;&nbsp;&nbsp; Còn lại: <b id="psno2"></b>     
-                           <div>Bằng chữ: <span id="bangchuid" style="font-weight:300; color:red; font-size:22px; padding-left:10px;"></span></div>
+                           <span style="float:left; margin-left:440px; width:650px;">Tổng tiền: <b id="thantoan2" style="margin-left:12px;"></b> &nbsp;&nbsp;&nbsp;</span><br /> 
+                           <span style="float:left; margin-left:475px; width:650px;">C/K: <b id="chietkau2" style="margin-left:12px;"></b></span> <br />
+                           <span style="float:left; margin-left:410px; width:650px;">KH thanh toán: <b id="khthanhtoan2" style="margin-left:12px;"></b></span>
+                            <span style="float:left; margin-left:455px; width:650px;">Còn lại: <b id="psno2" style="margin-left:15px;"></b>  </span> 
+                           <div><i style="font-size:22px;">Bằng chữ:</i> <span id="bangchuid" style="font-weight:300; color:red; font-size:22px; padding-left:10px;"></span></div>
                           
                         </div>
                         
@@ -798,6 +800,19 @@
               return rsString.replace(/[0-9]/g, '').replace(/ /g,' ').replace(/ $/,'');
             }
 
+            function formatMoney(number) {
+                return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
+
+            // Hàm để cập nhật số tiền hiển thị
+            function updateTotalAmount(amount) {
+                var formattedAmount = formatMoney(amount);
+                document.getElementById('thantoan2').innerText = formattedAmount;
+                document.getElementById('khthanhtoan2').innerText = formattedAmount;
+                //document.getElementById('chietkau2').innerText = formattedAmount;
+                //document.getElementById('psno2').innerText = formattedAmount;
+            }
+
             $(document).ready(function () {
                 //$('#txtid').prop("readonly", true);
                 //$('#txtmaterial').prop("readonly", true);
@@ -805,11 +820,10 @@
                 //$('#TOOLING_NO_ID').prop("readonly", true);
                 //$('#CustomTooling_ID').prop("readonly", true);
                 //$('#txt_ID').prop("readonly", true);
-                
+                               
                 //lay so hoa don lon nhat
                
-
-                        //check trang thai ban phong co khach hay khong?
+               //check trang thai ban phong co khach hay khong?
                 
                 $.ajax({
                     type: "POST",
@@ -1212,6 +1226,8 @@
                                         $('#conlaiid').val(0);
 
                                         $('#bangchuid2').text(bangchu_hienthi2);
+
+                                        
                                     }
                                 }
                                 else {
@@ -1600,15 +1616,21 @@
                                         $('#tongtien2').text(tienhang);
                                         $('#thantoan2').text(parseInt(tienhang)+parseInt(tongtienhat));
                                         $('#chietkau2').text(tienck);
-                                
+                                                                        
                                         $('#khthanhtoan2').text(khthanhtoan2);
                                         $('#psno2').text(tienthoi);
                                         $('#sohoadon_').text(_sohoadon);
                                         $('#ngaytao_').text(ngaytao);
                                         
-
                                         $('#hinhthucnghi2').text(hinhthucnghi);
                                         $('#tongtienhat2').text(tongtienhat);
+
+                                        //var tongtienhienthi = parseInt(tienhang) + parseInt(tongtienhat);
+                                        //updateTotalAmount(tongtienhienthi);
+                                        //updateTotalAmount(khthanhtoan2);
+
+                                        //updateTotalAmount(tienck);
+                                        //updateTotalAmount(tienthoi);
 
                                         $('#bangchuid').text(hienthi_bangchu);
                                     }

@@ -26,6 +26,10 @@ namespace WebApplication1.TemplateReport
         public string tongdoanhsoBH = "";
         public string doanhsosauchietkhau = "";
 
+        public string tendovi = "";
+        public string diachidonvi = "";
+        public string sodtdonvi = "";
+        public DataTable dtdonvi = new DataTable();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -112,6 +116,11 @@ namespace WebApplication1.TemplateReport
                     dt_report = DataConn.StoreFillDS("NH_BaocaoBH_theongay", System.Data.CommandType.StoredProcedure, _fromdate, _todate);
                     //Page.ClientScript.RegisterStartupScript(this.GetType(), "CallMyFunction", "search_material2();", true);
                 }
+
+                dtdonvi = DataConn.StoreFillDS("NH_thongtin_doanhnghiep", System.Data.CommandType.StoredProcedure);
+                tendovi = dtdonvi.Rows[0][1].ToString();
+                diachidonvi = dtdonvi.Rows[0][5].ToString();
+                sodtdonvi = dtdonvi.Rows[0][7].ToString();
             }
         }
 

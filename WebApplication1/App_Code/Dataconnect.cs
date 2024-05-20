@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Web;
 
@@ -15,10 +16,7 @@ namespace WebApplication1.App_Code
         public static int gio;
         public static DbDataAdapter adapter;
         static Dataconnect()
-        {
-            //source = @"Data Source=192.168.128.1;Initial Catalog=Warehouse_BPS;User ID=sa;Password=Psnvdb2013";.
-            //source = @"Data Source=192.168.128.1;Initial Catalog=EDISystem;User ID=sa;Password=Psnvdb2013";
-            //source = @"Data Source=192.168.128.1;Initial Catalog=Warehouse_BPS;User ID=sa;Password=Psnvdb2013";
+        {           
             //source = @"Data Source=10.92.186.30;Initial Catalog=Warehouse_BPS;User ID=sa;Password=Psnvdb2013";
 
             //local
@@ -33,6 +31,41 @@ namespace WebApplication1.App_Code
             catch
             {
             }
+        }
+
+        public static string GetConnectStringFromFile()
+        {
+            //string line = @"Data Source=192.168.128.1;Initial Catalog=Tally_Sheet;Persist Security Info=True;User ID=sa;Password=Psnvdb2013";
+            string filePath = HttpContext.Current.Server.MapPath("~/scnn.ini");
+            string line;
+            try
+            {
+                //using (StreamReader sr = new StreamReader("scnn.ini"))
+                //{
+                //    line = sr.ReadToEnd();
+                //}
+                using (StreamReader sr = new StreamReader(filePath))
+                {
+                    line = sr.ReadToEnd();
+                }
+            }
+            catch
+            {
+                line = "";
+            }
+            return line;
+        }
+
+        public static void OpenConnection(SqlConnection cnn)
+        {
+
+            cnn = new SqlConnection(GetConnectStringFromFile());
+            cnn.Open();
+        }
+
+        public static void CloseConnection(SqlConnection cnn)
+        {
+            cnn.Close();
         }
 
         public static DataTable DataTable_Sql(string sql)
@@ -84,22 +117,49 @@ namespace WebApplication1.App_Code
 
         public static DataTable StoreFillDS(string query_object, CommandType type, params object[] obj)
         {
-            SqlConnection conn = new SqlConnection(source);
-            conn.Open();
-            SqlCommand cmd = new SqlCommand(query_object, conn);
-            cmd.CommandType = type;
-            SqlCommandBuilder.DeriveParameters(cmd);
-            for (int i = 1; i <= obj.Length; i++)
+            using (SqlConnection conn = new SqlConnection(GetConnectStringFromFile()))
             {
-                cmd.Parameters[i].Value = obj[i - 1];
+                conn.Open(); // Mở kết nối trước khi thực hiện DeriveParameters
+
+                using (SqlCommand cmd = new SqlCommand(query_object, conn))
+                {
+                    cmd.CommandType = type;
+                    SqlCommandBuilder.DeriveParameters(cmd);
+
+                    // Set parameter values
+                    for (int i = 0; i < obj.Length; i++)
+                    {
+                        cmd.Parameters[i + 1].Value = obj[i];
+                    }
+
+                    // Continue with the rest of your logic
+                    SqlDataAdapter dap = new SqlDataAdapter(cmd);
+                    DataSet ds = new DataSet();
+                    dap.Fill(ds);
+
+                    return ds.Tables[0];
+                }
             }
-            SqlDataAdapter dap = new SqlDataAdapter(cmd);
-            DataSet ds = new DataSet();
-            dap.Fill(ds);
-            conn.Dispose();
-            conn.Close();
-            return ds.Tables[0];
         }
+
+        //public static DataTable StoreFillDS(string query_object, CommandType type, params object[] obj)
+        //{
+        //    SqlConnection conn = new SqlConnection(source);
+        //    conn.Open();
+        //    SqlCommand cmd = new SqlCommand(query_object, conn);
+        //    cmd.CommandType = type;
+        //    SqlCommandBuilder.DeriveParameters(cmd);
+        //    for (int i = 1; i <= obj.Length; i++)
+        //    {
+        //        cmd.Parameters[i].Value = obj[i - 1];
+        //    }
+        //    SqlDataAdapter dap = new SqlDataAdapter(cmd);
+        //    DataSet ds = new DataSet();
+        //    dap.Fill(ds);
+        //    conn.Dispose();
+        //    conn.Close();
+        //    return ds.Tables[0];
+        //}
 
         /*Nguyen Hien*/
         //Store Procedure tra ve datatable

@@ -15,6 +15,7 @@ using System.Drawing;
 using System.Web.Script.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.IO;
 
 namespace WebApplication1
 {
@@ -53,18 +54,37 @@ namespace WebApplication1
             }
         }
 
+        public static string GetConnectStringFromFile()
+        {
+            string filePath = HttpContext.Current.Server.MapPath("~/scnn.ini");
+            string line;
+            try
+            {
+                using (StreamReader sr = new StreamReader(filePath))
+                {
+                    line = sr.ReadToEnd();
+                }
+            }
+            catch
+            {
+                line = "";
+            }
+            return line;
+        }
+
         [WebMethod]
         public static List<string> searchmahang(string _mahang)
         {
             //source = @"Data Source=10.92.186.30;Initial Catalog=Warehouse_BPS;User ID=sa;Password=Psnvdb2013";
             List<string> docResult = new List<string>();
-            using (SqlConnection con = new SqlConnection(DataConn.source))
+            //using (SqlConnection con = new SqlConnection(DataConn.source))
+            using (SqlConnection con = new SqlConnection(GetConnectStringFromFile()))
             {
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     //cmd.CommandText = "select Top 10 t.TOOLING_NO from (select distinct DOC_NUM from TBL_GR_MCS_PLAN where DOC_NUM LIKE ''+@SearchDoc+'%' and [STATUS] <> 'Xong') t;";
                     //cmd.CommandText = "select Top 10 a.mahang from [Warehouse_BPS].[dbo].[hthanghoa] a where a.mahang like '%'+@_mahang+'%' ;";
-                    cmd.CommandText = "select Top 10 a.tenhang from [Warehouse_BPS].[dbo].[hthanghoa] a where a.tenhang like '%'+@_mahang+'%' ;";
+                    cmd.CommandText = "select Top 10 a.tenhang from hthanghoa a where a.tenhang like '%'+@_mahang+'%' ;";
                     cmd.Connection = con;
                     con.Open();
                     cmd.Parameters.AddWithValue("@_mahang", _mahang);

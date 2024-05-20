@@ -208,6 +208,29 @@ namespace WebApplication1.Danhmuc
             Response.End();
         }
 
+        public static string GetConnectStringFromFile()
+        {
+            //string line = @"Data Source=192.168.128.1;Initial Catalog=Tally_Sheet;Persist Security Info=True;User ID=sa;Password=Psnvdb2013";
+            string filePath = HttpContext.Current.Server.MapPath("~/scnn.ini");
+            string line;
+            try
+            {
+                //using (StreamReader sr = new StreamReader("scnn.ini"))
+                //{
+                //    line = sr.ReadToEnd();
+                //}
+                using (StreamReader sr = new StreamReader(filePath))
+                {
+                    line = sr.ReadToEnd();
+                }
+            }
+            catch
+            {
+                line = "";
+            }
+            return line;
+        }
+
         protected void ImportFromExcel(object sender, EventArgs e)
         {
             // CHECK IF A FILE HAS BEEN SELECTED.
@@ -247,15 +270,13 @@ namespace WebApplication1.Danhmuc
                         //    "Initial Catalog=FREE_LOCATION;User Id=sa;Password=Psnvdb2013;" +
                         //    "Connect Timeout=30;";  
 
-                        string sCon = "Data Source=./;Persist Security Info=False;" +
-                           "Initial Catalog=Warehouse_BPS;User Id=sa;Password='';" +
-                           "Connect Timeout=30;";
-
-                        //string sCon = "Data Source=10.92.186.30;Persist Security Info=False;" +
-                        //   "Initial Catalog=Warehouse_BPS;User Id=sa;Password=Psnvdb2013;" +
+                        //string sCon = "Data Source=./;Persist Security Info=False;" +
+                        //   "Initial Catalog=Warehouse_BPS;User Id=sa;Password='';" +
                         //   "Connect Timeout=30;";
 
+                        string sCon = GetConnectStringFromFile() + ";Connect Timeout=30;";
 
+                        // using (SqlConnection conn = new SqlConnection(GetConnectStringFromFile()))
                         using (SqlConnection con = new SqlConnection(sCon))
                         {
                             con.Open();

@@ -14,6 +14,7 @@ using System.Drawing;
 using System.Web.Script.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.IO;
 
 namespace WebApplication1
 {
@@ -63,12 +64,31 @@ namespace WebApplication1
             }
         }
 
+        public static string GetConnectStringFromFile()
+        {
+            string filePath = HttpContext.Current.Server.MapPath("~/scnn.ini");
+            string line;
+            try
+            {
+                using (StreamReader sr = new StreamReader(filePath))
+                {
+                    line = sr.ReadToEnd();
+                }
+            }
+            catch
+            {
+                line = "";
+            }
+            return line;
+        }
+
         [WebMethod]
         public static List<string> searchmahang(string _mahang)
         {
             //source = @"Data Source=10.92.186.30;Initial Catalog=Warehouse_BPS;User ID=sa;Password=Psnvdb2013";
             List<string> docResult = new List<string>();
-            using (SqlConnection con = new SqlConnection(DataConn.source))
+            //using (SqlConnection con = new SqlConnection(DataConn.source))
+            using (SqlConnection con = new SqlConnection(GetConnectStringFromFile()))
             {
                 using (SqlCommand cmd = new SqlCommand())
                 {
