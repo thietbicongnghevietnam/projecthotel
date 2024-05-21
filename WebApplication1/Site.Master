@@ -206,7 +206,8 @@
                <li><a href="Danhmuc/Danhmucdonvi.aspx" target="_blank" class="dropdown-item">Thông tin doanh nghiệp</a></li>
               <li><a href="#" class="dropdown-item">Đặt hàng online</a></li>
               <li><a href="#" class="dropdown-item">Liên hệ trực tiếp</a></li> 
-              <li><a href="MakeQRcode.aspx" class="dropdown-item">Tạo QR code</a></li> 
+              <li><a href="MakeQR.aspx" target="_blank" class="dropdown-item">Tạo QR code</a></li> 
+                <li><a href="Inbarcode.aspx" target="_blank" class="dropdown-item">Tạo QR DM hàng hóa</a></li> 
             </ul>
        </li>
     </ul>

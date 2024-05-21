@@ -203,7 +203,10 @@
                          <%--   Hinh thuc: <b id="hinhthucnghi2"></b>
                             &nbsp;&nbsp;&nbsp; tongtienhat: <b id="tongtienhat2"></b><br />
                            Ten phong: <b id="tenphong2"></b>
-                           &nbsp;&nbsp;&nbsp; Tong tien hang: <b id="tongtien2"></b>        --%>   
+                           &nbsp;&nbsp;&nbsp; Tong tien hang: <b id="tongtien2"></b>
+                             --%>   
+                          
+
                            <span><i style="font-size:22px; text-align:center;">Nhà hàng vườn xoài</i></span><br />  
                            <span> Địa chỉ: Nam Hồng - Đông Anh - Hà Nội</span><br />
                            Số HĐ: <b id="sohoadoid"></b> &nbsp;&nbsp;&nbsp; Ngày tạo: <b id="ngaytaoid"></b>
@@ -230,7 +233,8 @@
                            KH thanh toán: <b id="khthanhtoan2"></b> &nbsp;&nbsp;&nbsp; Còn lại: <b id="psno2"></b>     
                            <div>Bằng chữ: <span id="bangchuid" style="font-weight:300; color:red; font-size:20px; padding-left:10px;"></span></div>
                         </div>
-                        
+
+                       
                                                                            
                     </div>
 

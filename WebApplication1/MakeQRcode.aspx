@@ -1,7 +1,20 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="MakeQRcode.aspx.cs" Inherits="WebApplication1.MakeQRcode" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-     <div class="container">  
+    <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <div class="wrapper">
+
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h3 class="m-0">PHIẾU BÁN HÀNG</h3>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+
+    
+        <div class="container">  
             <h2>Auto generate QR Code</h2>  
             <div class="row">  
                 <div class="col-md-4">  
@@ -25,8 +38,11 @@
                 </div>  
             </div>         
                <asp:PlaceHolder ID="PlaceHolder1" runat="server"></asp:PlaceHolder>                        
-        </div>  
-    <script type="text/javascript">       
+        </div>
+
+
+    </div>
+<script type="text/javascript">       
         $("#MainContent_txt_width").on('keyup', function (e) {
             //debugger;
             if (parseInt((this.value)) > 1000) {
@@ -43,4 +59,5 @@
         });
     </script>
 
+     
 </asp:Content>

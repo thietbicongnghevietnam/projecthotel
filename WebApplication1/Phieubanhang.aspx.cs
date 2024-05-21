@@ -16,6 +16,9 @@ using System.Web.Script.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.IO;
+using QRCoder;
+
+
 
 namespace WebApplication1
 {
@@ -145,8 +148,7 @@ namespace WebApplication1
             string khachno = dt.Rows[0]["psco"].ToString();
             string ngaytao = dt.Rows[0]["created"].ToString();
             //string hoadonid = dt.Rows[0]["sohoadon"].ToString();
-            dt_new.Rows.Add("", "", "", chietkhau, tongtien, khachthanhtoan, khachno, ngaytao, "");
-
+            dt_new.Rows.Add("", "", "", chietkhau, tongtien, khachthanhtoan, khachno, ngaytao, "");            
 
             DataTable dt2 = new DataTable();
             // dt2 = dt.Copy();
