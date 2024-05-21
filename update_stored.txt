@@ -19,6 +19,9 @@ SET XACT_ABORT ON
 	END CATCH
 
 
+=============
+BACKUP DATABASE FOSS1 TO DISK = '\\10.92.184.233\e\Backup\DBS\FOSS1.bak' WITH INIT
+
 ======================= 18.05.2024
 htsocai => cot idnhanvien = int sang nvarchar(20)
 TBL_USER2 ==> 
@@ -53,50 +56,82 @@ sua
 NH_getsohoadon_BH
 
 
-===============
-USE [Warehouse_BPS]
-GO
-/****** Object:  StoredProcedure [dbo].[NH_BaocaoBH_theogio]    Script Date: 05/18/2024 09:03:45 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
+===============  cach distinct ben client
+  <%int i = 0; %>
+        <%System.Data.DataView view = new System.Data.DataView(dt_home);
+            System.Data.DataTable distinctMater;
+            if (drop_board.Text == "Resin map board")
+            {
+                distinctMater = view.ToTable(true, "MATER_NAME", "MATER_MAKER_CODE", "MATER_VENDOR_CODE", "MATER_VENDOR_NAME", "MATER_GR", "MATER_TYPE", "MATER_COLOR");
+            }
+            else
+            {
+                //distinctMater = view.ToTable(true, "MATER_NAME_RECYCLE", "MATER_MAKER_CODE", "MATER_VENDOR_CODE", "MATER_VENDOR_NAME", "MATER_GR", "MATER_TYPE", "MATER_COLOR", "STOCK_LOC");
+                distinctMater = view.ToTable(true, "MATER_NAME_RECYCLE", "MATER_MAKER_CODE", "MATER_VENDOR_CODE", "MATER_VENDOR_NAME", "MATER_GR", "MATER_TYPE", "MATER_COLOR");
+            }   %>
+        <%foreach (System.Data.DataRow mater in distinctMater.Rows)
+            { %>
+        <%i++;%>
+        <div class="col-sm-3 col-md-2" id="card_<%=i %>">
+            <div class="card shadow-sm mb-4" style="background-color: wheat;">
+                <div class="card-body text-white">
+                    <select multiple class="form-control" style="height: 60px; background-color: wheat">
+                        <%foreach (System.Data.DataRow loc in dt_home.Rows)
+                            {%>
+                        <%if (drop_board.Text == "Resin map board")
+                            {
+                                if (loc["MATER_NAME"].ToString() == mater["MATER_NAME"].ToString())
+                                {%>
+                        <option style="font-size: 16px;" data-toggle="tooltip" data-placement="top" title="<%= loc["DT_REC"].ToString()!="" ? loc["LOT_NO"].ToString() + ":" + loc["DT_REC"].ToString(): loc["LOT_NO"].ToString() %>  ">
+                            <%= loc["STOCK_LOC"].ToString() + ":" + loc["STOCK_GOOD_QTY"].ToString() %>
+                            <%if (loc["LOT_NO"].ToString().Trim() != "")
+                                {%>
+                            <%if (loc["LOT_NO"].ToString().Trim() != "TraKho")
+                                {%>
+                                                              \<%= loc["DT_REC"].ToString() != "" ? loc["LOT_NO"].ToString() + ":" + loc["DT_REC"].ToString() : loc["LOT_NO"].ToString() %>
+                            <%}
+                            else
+                            { %>
+                                                              \<%= loc["LOT_NO"].ToString() %>
+                            <%} %>
+                            <%} %>
+                        </option>
+                        <%}%>
+                        <%}
+                            else
+                            {
+                                if (loc["MATER_NAME_RECYCLE"].ToString() == mater["MATER_NAME_RECYCLE"].ToString())
+                                {%>
 
-ALTER PROCEDURE [dbo].[NH_BaocaoBH_theogio] -- NH_BaocaoBH_theogio '2024-05-18 06:00:00','2024-05-18 07:30:00'
-	@checkin as nvarchar(50),
-	@checkout as nvarchar(50)
-AS
-BEGIN
---CAST('2024-05-18 07:09:56' AS DATETIME);
---CONVERT(DATETIME, '2024-05-18 07:09:56', 120)
+                        <option style="font-size: 16px;" data-toggle="tooltip" data-placement="top" title="<%= loc["STOCK_LOC"].ToString() + ":" + loc["STOCK_GOOD_QTY"].ToString() %>">
+                            <%= loc["STOCK_LOC"].ToString() + ":" + loc["STOCK_GOOD_QTY"].ToString()  %>                                                                                       
+                        </option>
 
-select * from 
-(
-select id,sohd,type,ngaygiothue,ngaygiora,tongthoigianthue,tenphong,
-tienphong,tiengiohat,items,tienhang,tongtien,chietkhau,tiensauchietkhau,hinhthucnghi,mohinh,created,idnhanvien,psco,CONVERT(VARCHAR(5),ngaygiothue,108) as giovao,CONVERT(VARCHAR(5),ngaygiora,108) as giora from htsocai where type<>2 and ngaygiora BETWEEN  @checkin AND @checkout  
-
-union 
-
-select '' as id,'-','-','','','','Tong tien',
-(select sum(tienphong) from htsocai where type<>2 and ngaygiora BETWEEN  @checkin AND @checkout) as tienphong,
-(select sum(tiengiohat) from htsocai where type<>2 and ngaygiora BETWEEN  @checkin AND @checkout) as tiengiohat,
-'' as items,
-(select sum(tienhang) from htsocai where type<>2 and ngaygiora BETWEEN  @checkin AND @checkout) as tienhang,
-(select sum(tongtien) from htsocai where type<>2 and ngaygiora BETWEEN  @checkin AND @checkout) as tongtien,
-(select sum(chietkhau) from htsocai where type<>2 and ngaygiora BETWEEN  @checkin AND @checkout) as chietkhau,
-(select sum(tiensauchietkhau) from htsocai where type<>2 and ngaygiora BETWEEN  @checkin AND @checkout)as tiensauchietkhau,
-'' as hinhthucnghi,
-'' as mohinh,
-GETDATE() as created,
-'' as idnhanvien,
-'' as psco,
-'' as giovao,
-'' as giora
-from htsocai where type<>2 and ngaygiora BETWEEN  @checkin AND @checkout
-) ABC order by created asc
-
-
-
-
-
-END
+                        <%}%>
+                        <%}
+                            }%>
+                    </select>
+                </div>
+                <div class="card-footer text-center text-white" id="<%=i %>" style="color: azure;">
+                    <%if (drop_board.Text == "Resin map board")
+                        {%>
+                    <h6 style="font-size: 20px;"><a href="#" onclick="ShowModal('<%= mater["MATER_NAME"].ToString() %>','<%= mater["MATER_MAKER_CODE"].ToString() %>','<%= mater["MATER_VENDOR_CODE"].ToString() %>','<%= mater["MATER_VENDOR_NAME"].ToString() %>','<%= mater["MATER_GR"].ToString() %>','<%= mater["MATER_TYPE"].ToString() %>','<%= mater["MATER_COLOR"].ToString() %>')" data-toggle="tooltip" style="color: white;"><%=mater["MATER_NAME"].ToString() %></a></h6>
+                    <%}
+                    else
+                    { %>
+                    <h6 style="font-size: 18px;">
+                        <a href="#" onclick="ShowModal('<%= mater["MATER_NAME_RECYCLE"].ToString() %>','<%= mater["MATER_MAKER_CODE"].ToString() %>','<%= mater["MATER_VENDOR_CODE"].ToString() %>','<%= mater["MATER_VENDOR_NAME"].ToString() %>','<%= mater["MATER_GR"].ToString() %>','<%= mater["MATER_TYPE"].ToString() %>','<%= mater["MATER_COLOR"].ToString() %>')" data-toggle="tooltip" style="color: white;"><%=mater["MATER_NAME_RECYCLE"].ToString() %></a>
+                        :<a href="#" onclick="return ShowPopUp('<%=mater["MATER_NAME_RECYCLE"].ToString() %>','<%=mater["MATER_NAME_RECYCLE"].ToString() %>')">
+                            <b style="font-size: 14px; color: black">Detail LotNo</b>
+                        </a>
+                    </h6>
+                    <%} %>
+                </div>
+            </div>
+        </div>
+        <%if (i % 6 == 0)
+            {%>
+        <div style="clear: both;"></div>
+        <%}%>
+        <%}%>
+    </div>
