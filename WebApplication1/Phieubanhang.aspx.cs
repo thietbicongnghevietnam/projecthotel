@@ -32,6 +32,14 @@ namespace WebApplication1
 
         public DataTable dtncc = new DataTable();
         public DataTable dtdvt = new DataTable();
+
+        public string tendovi = "";
+        public string diachidonvi = "";
+        public string sodtdonvi = "";
+        public string ghichu = "";
+        public DataTable dtdonvi = new DataTable();
+
+        public string barcodeData = "";
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -54,6 +62,33 @@ namespace WebApplication1
 
                 dt_getSohd = DataConn.StoreFillDS("NH_getsohoadon_BH", System.Data.CommandType.StoredProcedure);
                 sohoadon = dt_getSohd.Rows[0][0].ToString();
+
+                dtdonvi = DataConn.StoreFillDS("NH_thongtin_doanhnghiep", System.Data.CommandType.StoredProcedure);
+                tendovi = dtdonvi.Rows[0][1].ToString();
+                diachidonvi = dtdonvi.Rows[0][5].ToString();
+                sodtdonvi = dtdonvi.Rows[0][7].ToString();
+                ghichu = dtdonvi.Rows[0][9].ToString();
+
+                GenerateAndConvertQRCode(ghichu);
+            }
+            
+
+        }
+
+        private void GenerateAndConvertQRCode(string data)
+        {
+            // Tạo mã QR từ dữ liệu được chuyển đến
+            QRCodeGenerator qrGenerator = new QRCodeGenerator();
+            QRCodeData qrCodeData = qrGenerator.CreateQrCode(data, QRCodeGenerator.ECCLevel.Q);
+            QRCode qrCode = new QRCode(qrCodeData);
+            Bitmap qrCodeImage = qrCode.GetGraphic(2); // Điều chỉnh kích thước ở đây nếu cần
+
+            // Chuyển đổi hình ảnh Bitmap thành một dạng dữ liệu base64
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                qrCodeImage.Save(memoryStream, System.Drawing.Imaging.ImageFormat.Png);
+                byte[] byteImage = memoryStream.ToArray();
+                barcodeData = "data:image/png;base64," + Convert.ToBase64String(byteImage);
             }
         }
 
@@ -118,8 +153,7 @@ namespace WebApplication1
             dt_new.Columns.Add("khachthanhtoan", typeof(String));
             dt_new.Columns.Add("psco", typeof(String));
             dt_new.Columns.Add("ngaytao", typeof(String));
-            dt_new.Columns.Add("sohodon", typeof(String));
-
+            dt_new.Columns.Add("sohodon", typeof(String));            
 
             dt = DataConn.StoreFillDS("NH_infor_thongtinhanghoa2_inlai", System.Data.CommandType.StoredProcedure, idhoadon);
 

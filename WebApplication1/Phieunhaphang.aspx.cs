@@ -39,6 +39,11 @@ namespace WebApplication1
         public DataTable dtdvt = new DataTable();
         public string sohoadon = "";
 
+        public string tendovi = "";
+        public string diachidonvi = "";
+        public string sodtdonvi = "";
+        public DataTable dtdonvi = new DataTable();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -60,6 +65,11 @@ namespace WebApplication1
 
                 dt_getSohd = DataConn.StoreFillDS("NH_getsohoadon_NH", System.Data.CommandType.StoredProcedure);
                 sohoadon = dt_getSohd.Rows[0][0].ToString();
+
+                dtdonvi = DataConn.StoreFillDS("NH_thongtin_doanhnghiep", System.Data.CommandType.StoredProcedure);
+                tendovi = dtdonvi.Rows[0][1].ToString();
+                diachidonvi = dtdonvi.Rows[0][5].ToString();
+                sodtdonvi = dtdonvi.Rows[0][7].ToString();
 
             }
         }

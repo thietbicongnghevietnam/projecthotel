@@ -107,18 +107,18 @@
 
                 <div>
                 <span style="float: left; padding-right: 10px; padding-top: 20px;"><b style="float: left">Tổng tiền hàng &nbsp;&nbsp;</b>
-                <input style="width: 140px; float: left" id="tongtiennhap" disabled="disabled" name="tongtiennhap" type="text" class="form-control input-sm" value="0"/></span>
+                <input style="width: 180px; float: left;font-size:30px;" id="tongtiennhap" disabled="disabled" name="tongtiennhap" type="text" class="form-control input-sm" value="0"/></span>
 
                 <span style="float: left; padding-right: 10px; padding-top: 20px;"><b style="float: left">Chiết khấu &nbsp;&nbsp;</b>
-                    <input style="width: 140px; float: left" id="chietkhauid"  name="chietkhauid" type="text" class="form-control input-sm" value="0"/>
+                    <input style="width: 180px; float: left;font-size:30px; background-color:aqua; color:black;" id="chietkhauid"  name="chietkhauid" type="text" class="form-control input-sm" value="0"/>
                 </span>
                 
                 <span style="float: left; padding-right: 10px; padding-top: 20px;"><b style="float: left">Thanh toán &nbsp;&nbsp;</b>
-                    <input style="width: 140px; float: left" id="thanhtoanid" name="thanhtoanHD" type="text" class="form-control input-sm" value="0"/>
+                    <input style="width: 180px; float: left;font-size:30px; background-color:aqua; color:black;" id="thanhtoanid" name="thanhtoanHD" type="text" class="form-control input-sm" value="0"/>
                 </span>
 
                 <span style="float: left; padding-right: 10px; padding-top: 20px;"><b style="float: left">Còn lại &nbsp;&nbsp;</b>
-                    <input style="width: 140px; float: left" id="conlaiid" name="conlaiHD" type="text" class="form-control input-sm" value="0"/>
+                    <input style="width: 180px; float: left;font-size:30px; background-color:aqua; color:black;" id="conlaiid" name="conlaiHD" type="text" class="form-control input-sm" value="0"/>
                 </span>
                
                 <span style="float: left; padding-right: 10px; padding-top: 20px; padding-left: 50px;">
@@ -131,7 +131,7 @@
                 <br />
         <br />
          <br />
-                <div style="float:left; padding-left:50px;"><b>Bằng chữ:</b> <span id="bangchuid2" style="font-weight:500; font-size:20px; color:red;padding-left:10px;"></span></div>
+                <div style="float:left; padding-left:50px;font-size:30px;"><b>Bằng chữ:&nbsp;&nbsp;&nbsp;&nbsp; <span id="bangchuid2" style="font-weight:500; font-size:32px; color:red;padding-left:10px;"></span></b> </div>
                             
                 <br />
                 <br />
@@ -211,8 +211,9 @@
                             &nbsp;&nbsp;&nbsp; tongtienhat: <b id="tongtienhat2"></b><br />
                            Ten phong: <b id="tenphong2"></b>
                            &nbsp;&nbsp;&nbsp; Tong tien hang: <b id="tongtien2"></b>        --%>   
-                            <span><i style="font-size:22px; text-align:center;">Nhà hàng vườn xoài</i></span><br />  
-                           <span> Địa chỉ: Nam Hồng - Đông Anh - Hà Nội</span><br />
+                            <span><i style="font-size:22px; text-align:center;"><%=tendovi %></i></span><br />  
+                           <span> Địa chỉ: <%=diachidonvi %></span><br />
+                            <span> Số ĐT: <%=sodtdonvi %></span><br />
                            Số HĐ: <b id="sohoadoid"></b> &nbsp;&nbsp;&nbsp; Ngày tạo: <b id="ngaytaoid"></b>
 
                                 <div style="width: 100%; height: auto; float: left;">  

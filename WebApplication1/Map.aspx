@@ -380,7 +380,7 @@
                                 </table>
 
 
-                                <div style="width: 100%; height: 250px; overflow-y: scroll; float: left;">
+                                <div style="width: 100%; height: 450px; overflow-y: scroll; float: left;">
                                     <table class="display table table-bordered dataTable no-footer">
                                         <thead>
                                             <tr>
@@ -401,45 +401,40 @@
                                 <div class="row">
                                     <div class="col-2">
                                         <label for="tongtien" style="float: left; margin-top: 5px;">Tiền hàng</label>
-                                        <input type="text" id="tongtienid" disabled class="form-control input-sm" name="fname" style="float: left; margin-left: 10px;" value="0">
+                                        <input type="text" id="tongtienid" disabled class="form-control input-sm" name="fname" style="float: left; margin-left: 10px; font-size:22px;" value="0">
                                                      <span style="float: left;padding-left: 20px; padding-top: 10px;">
-            <%--<img src="/static/images/phongtrong.png" style="width:40px;height:30px;float: left;padding-right: 10px;">--%>            
 
-        </span>
+                                                     </span>
                                     </div>
 
                                     <div class="col-2">
                                          <label for="tongtien" style="float: left; margin-top: 5px;">Tiền giờ</label>  
-                                        <input type="text" id="tiengioid" disabled class="form-control input-sm" name="fname" style="float: left; margin-left: 10px;" value="0">                                                                              
+                                        <input type="text" id="tiengioid" disabled class="form-control input-sm" name="fname" style="float: left; margin-left: 10px; font-size:22px;" value="0">                                                                              
                                          <span style="float: left;padding-left: 20px; padding-top: 10px;">
                                     </div>
 
                                     <div class="col-2">
                                         <label for="tongtien" style="float: left; margin-top: 5px;">Chiết khấu</label>
-                                        <input type="text" id="chietkhauid" class="form-control input-sm" name="fname" style="float: left; margin-left: 10px;" value="0">
-                                         <span style="float: left;padding-left: 20px; padding-top: 10px;">
-            <%--<img src="/static/images/cokhach.png" style="width:40px;height:30px;float: left;padding-right: 10px;">--%>
-            
-        </span>
+                                        <input type="text" id="chietkhauid" class="form-control input-sm" name="fname" style="float: left; margin-left: 10px; font-size:22px; background-color:aqua; color:black;" value="0">
+                                         <span style="float: left;padding-left: 20px; padding-top: 10px;">      
+
+                                         </span>
                                     </div>   
 
                                     
                                 
                                     <div class="col-2">
                                         <label for="tongtien" style="float: left; margin-top: 5px;">Khách TT</label>
-                                        <input type="text" id="thanhtoanid" class="form-control input-sm" name="fname" style="float: left; margin-left: 10px;" value="0">                                                                              
+                                        <input type="text" id="thanhtoanid" class="form-control input-sm" name="fname" style="float: left; margin-left: 10px; font-size:22px; background-color:aqua; color:black;" value="0">                                                                              
                                          <span style="float: left;padding-left: 20px; padding-top: 10px;">
-            <%--<img src="/static/images/phongdattruoc.png" style="width:40px;height:30px;float: left;padding-right: 10px;">--%>
-           <%-- <b style="font-size: 14px;">B/P đặt trước</b>--%>
-        </span>                                   
+
+                                         </span>                                   
                                     </div>
                                     <div class="col-2">
                                         <label for="tongtien" style="float: left; margin-top: 5px; id="lblconlai" ">Còn lại</label>
-                                        <input type="text" id="conlaiid" class="form-control input-sm" name="fname" style="float: left; margin-left: 10px;" value="0">                                        
-        <span style="float: left;padding-left: 20px; padding-top: 10px;">
-            <%--<img src="/static/images/chuadonphong.png" style="width:40px;height:30px;float: left;padding-right: 10px;">
-            <b style="font-size: 14px;">Chưa dọn B/P</b>--%>
-        </span>
+                                        <input type="text" id="conlaiid" class="form-control input-sm" name="fname" style="float: left; margin-left: 10px; font-size:22px; background-color:aqua; color:black;" value="0">                                        
+                                        <span style="float: left;padding-left: 20px; padding-top: 10px;">           
+                                        </span>
 
                                     </div>
 
@@ -519,14 +514,13 @@
                                                 <div class="row" style="border: 1px solid grey;">
                                                     <div class="col-12 text-center">
                                                        <%-- <img src="../../dist/img/user1-128x128.jpg" alt="user-avatar" class="img-circle img-fluid">--%>
-                                                       <%-- <img src="../../dist/img/monan.JPG" alt="user-avatar" class="img-circle img-fluid">--%>
+                                                       <%-- <img src="../../dist/img/monan.JPG" alt="user-avatar" class="img-circle img-fluid" style="width:60px;height:50px;">--%>
+                                                        <img src="<%=rows1["anh"].ToString() %>" alt="user-avatar" class="img-circle img-fluid" style="width:60px;height:50px;">
 
-                                                        <div class="text-center" style="margin-bottom: 10px; margin-top: 10px;">
+                                                        <div class="text-center" style="margin-bottom: 10px; margin-top: 3px;">
                                                             <mh><%=rows1["tenhang"].ToString() %></mh> <br /> <dg><%=rows1["giaban"].ToString() %></dg> /VNĐ
-                                                            <input type="number" class="quantity form-control text-center" title="Số lượng" value="1" min="1"  id="quantity" name="quantity"  >                                                                                                                      
-                                                            <a href="#" class="button_addmenu btn btn-sm btn-primary" id="add_sanpham">
-                                                                Add
-                                                            </a>
+                                                            <input type="number" class="quantity form-control text-center" title="Số lượng" value="1" min="1"  id="quantity" name="quantity" style="width:60px;height:30px;float:left;" >                                                                                                                                                                                  
+                                                            <a href="#" id="add_sanpham" style="float:left;"><i class="fa fa-plus-square" style="font-size: 24px; padding-left: 20px;"></i></a>
 
                                                         </div>
                                                         
@@ -812,8 +806,11 @@
                 //document.getElementById('chietkau2').innerText = formattedAmount;
                 //document.getElementById('psno2').innerText = formattedAmount;
             }
+            
+            
 
             $(document).ready(function () {
+
                 //$('#txtid').prop("readonly", true);
                 //$('#txtmaterial').prop("readonly", true);
 
