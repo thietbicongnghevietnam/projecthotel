@@ -121,6 +121,15 @@ namespace WebApplication1.Danhmuc {
         protected global::System.Web.UI.WebControls.DropDownList dr_nhomhang2;
         
         /// <summary>
+        /// txtanhid control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtanhid;
+        
+        /// <summary>
         /// btnOrder control.
         /// </summary>
         /// <remarks>
@@ -182,5 +191,14 @@ namespace WebApplication1.Danhmuc {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList dr_nhomhang;
+        
+        /// <summary>
+        /// txtanh control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtanh;
     }
 }

@@ -321,9 +321,10 @@ namespace WebApplication1.Danhmuc
             string gianhap = txtgianhap.Text;
             string giaban = txtgiaban.Text;
             string nhomhangid = dr_nhomhang2.Text;
+            string anhid = txtanhid.Text;
 
             DataTable dtupdate = new DataTable();
-            dtupdate = DataConn.StoreFillDS("NH_Update_hanghoa", System.Data.CommandType.StoredProcedure, mahang, tenhang, dvt, gianhap, giaban, nhomhangid);
+            dtupdate = DataConn.StoreFillDS("NH_Update_hanghoa", System.Data.CommandType.StoredProcedure, mahang, tenhang, dvt, gianhap, giaban, nhomhangid, anhid);
             if (dtupdate.Rows[0][0].ToString() == "1")
             {
                 dt_hanghoa = DataConn.StoreFillDS("NH_danhmuchanghoa", System.Data.CommandType.StoredProcedure);
@@ -344,9 +345,11 @@ namespace WebApplication1.Danhmuc
             string gianhap = gianhapid.Text;
             string giaban = giabanid.Text;
             string nhomhangid = dr_nhomhang.Text;
+            string anhid = txtanh.Text;
+
 
             DataTable dtinsert = new DataTable();
-            dtinsert = DataConn.StoreFillDS("NH_insert_hanghoa", System.Data.CommandType.StoredProcedure, mahang, tenhang, dvt, gianhap, giaban, nhomhangid);
+            dtinsert = DataConn.StoreFillDS("NH_insert_hanghoa", System.Data.CommandType.StoredProcedure, mahang, tenhang, dvt, gianhap, giaban, nhomhangid, anhid);
             if (dtinsert.Rows[0][0].ToString() == "1")
             {
                 dt_hanghoa = DataConn.StoreFillDS("NH_danhmuchanghoa", System.Data.CommandType.StoredProcedure);
