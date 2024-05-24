@@ -140,6 +140,7 @@
                                        
                                         <td>
                                             <a href="#" class="btn btn-info btn-sm" title="delete item" onclick="openEditModal2('<%= rows["mahang"].ToString() %>','<%= rows["tenhang"].ToString() %>','<%= rows["dvt"].ToString() %>','<%= rows["gianhap"].ToString() %>','<%= rows["giaban"].ToString() %>','<%=rows["tennhomhang"].ToString()%>','<%=rows["anh"].ToString()%>')"><i class="fas fa-pencil-alt"></i>Sửa</a>
+                                            <a href="#" class="btn btn-info btn-sm" title="delete item" onclick="openEditModal3('<%= rows["mahang"].ToString() %>')"><i class="fas fa-pencil-alt"></i>cập nhật Img</a>
                                         </td> 
                                         
                                     </tr>
@@ -338,6 +339,43 @@
   </div>
 </div>
 
+        <!-- Upload anh -->
+        <div class="modal fade" id="uploadModal" >
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="ID">Mã hàng</label>                                      
+                                        <asp:TextBox ID="txtmahang3" CssClass="form-control" placeholder="" runat="server"></asp:TextBox>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                       <label for="exampleInputEmail1">Bạn chọn ảnh tải lên</label>                                                                                                                       
+                                    </div>
+                                </div>
+                            </div> 
+
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Tải lên hình ảnh</h4>
+                    </div>
+                    <div class="modal-body">
+                        <asp:FileUpload ID="fileUpload1" runat="server" style="display:none" />
+                        <asp:Button ID="uploadImage" runat="server" Text="Chọn hình ảnh" CssClass="btn btn-primary" OnClick="UploadImage_Click" />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <h2>Welcom!</h2>
+            <button id="uploadButton" class="btn btn-primary">Mở Modal</button>
+        </div>
+
     </form>
 
        <script src="../../plugins/jquery/jquery.min.js"></script>
@@ -365,7 +403,11 @@
 
      <script>
    $(document).ready(function () {            
-            //$('#txtdevice').prop("readonly", true);       
+            //$('#txtdevice').prop("readonly", true);     
+            $("#uploadImage").click(function () {
+                // Gửi yêu cầu tải lên khi người dùng nhấp vào nút trong modal
+                $("#fileUpload").click();
+            });  
 
          });
                
@@ -404,6 +446,13 @@
         });
 
         $('#myModal2').modal('show');
+
+        }
+
+function openEditModal3(mahang) {           
+        $("#txtmahang3").val(mahang);
+        
+        $('#uploadModal').modal('show');
 
         }
 

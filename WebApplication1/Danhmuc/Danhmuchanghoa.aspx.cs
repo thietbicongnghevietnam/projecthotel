@@ -46,6 +46,47 @@ namespace WebApplication1.Danhmuc
                
         }
 
+        protected void UploadImage_Click(object sender, EventArgs e)
+        {
+            if (fileUpload1.HasFile)
+            {
+                try
+                {
+                    string mahang = txtmahang3.Text;
+                    //string sCon = GetConnectStringFromFile() + ";Connect Timeout=30;";
+                    // Lưu trữ tệp lên vào thư mục trên máy chủ
+                    string filename = Path.GetFileName(fileUpload1.FileName);
+                    string path = Server.MapPath("~/static/monan/" + filename);
+                    fileUpload1.SaveAs(path);
+                    string duongdananh = "static/monan/" + filename;
+
+                    // Lưu đường dẫn vào cơ sở dữ liệu
+                    string connectionString = GetConnectStringFromFile() + ";Connect Timeout=30;";//"YourConnectionString";
+                    using (SqlConnection con = new SqlConnection(connectionString))
+                    {
+                        using (SqlCommand cmd = new SqlCommand())
+                        {
+                            //cmd.CommandText = "INSERT INTO Images (Name, Path) VALUES (@Name, @Path)";
+                            cmd.CommandText = "update hthanghoa set anh='"+ duongdananh + "' where mahang='"+mahang+"' ";
+                            cmd.Parameters.AddWithValue("@Name", filename);
+                            cmd.Parameters.AddWithValue("@Path", "~/static/monan/" + filename);
+                            cmd.Connection = con;
+                            con.Open();
+                            cmd.ExecuteNonQuery();
+                            con.Close();
+                        }
+                    }
+                    lblConfirm.Text  = "Tải lên thành công!";
+                    //StatusLabel.Text = "Tải lên thành công!";
+                }
+                catch (Exception ex)
+                {
+                    //StatusLabel.Text = "Lỗi: " + ex.Message;
+                    lblConfirm.Text = "Lỗi: " + ex.Message;
+                }
+            }
+        }
+
         protected void btnDownloadClick(Object sender, EventArgs e)
         {
             try
