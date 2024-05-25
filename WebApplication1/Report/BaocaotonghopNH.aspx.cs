@@ -103,7 +103,7 @@ namespace WebApplication1.Report
             }
             else
             {
-                dt_new.Rows.Add("", "", "", "");
+                dt_new.Rows.Add("", "", "", "0");
                 dt_banhang = dt_new.Copy();
             }
         }

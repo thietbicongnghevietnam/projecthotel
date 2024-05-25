@@ -46,46 +46,59 @@ namespace WebApplication1.Danhmuc
                
         }
 
-        protected void UploadImage_Click(object sender, EventArgs e)
+        protected void UploadButton_Click(object sender, EventArgs e)
         {
-            if (fileUpload1.HasFile)
+            // Kiểm tra xem người dùng đã chọn tệp hình ảnh hay chưa
+            if (ImageFileUpload.HasFile)
             {
                 try
                 {
                     string mahang = txtmahang3.Text;
-                    //string sCon = GetConnectStringFromFile() + ";Connect Timeout=30;";
-                    // Lưu trữ tệp lên vào thư mục trên máy chủ
-                    string filename = Path.GetFileName(fileUpload1.FileName);
-                    string path = Server.MapPath("~/static/monan/" + filename);
-                    fileUpload1.SaveAs(path);
-                    string duongdananh = "static/monan/" + filename;
+
+                    // Lưu trữ đường dẫn tệp hình ảnh trên máy chủ
+                    string filename = Path.GetFileName(ImageFileUpload.FileName);
+
+                    string imagePath = "/static/monan/" + filename;                   
+                    //string imagePath = Server.MapPath("~/static/monan/" + filename);
+                    //string imagePath = "~/Uploads/" + filename; // Thư mục Uploads phải tồn tại trên máy chủ
+                    ImageFileUpload.SaveAs(Server.MapPath(imagePath));
+
+                    //string duongdananh = "~/static/monan/" + filename;
 
                     // Lưu đường dẫn vào cơ sở dữ liệu
                     string connectionString = GetConnectStringFromFile() + ";Connect Timeout=30;";//"YourConnectionString";
+
+                    // Lưu đường dẫn hình ảnh vào cơ sở dữ liệu
                     using (SqlConnection con = new SqlConnection(connectionString))
                     {
-                        using (SqlCommand cmd = new SqlCommand())
-                        {
-                            //cmd.CommandText = "INSERT INTO Images (Name, Path) VALUES (@Name, @Path)";
-                            cmd.CommandText = "update hthanghoa set anh='"+ duongdananh + "' where mahang='"+mahang+"' ";
-                            cmd.Parameters.AddWithValue("@Name", filename);
-                            cmd.Parameters.AddWithValue("@Path", "~/static/monan/" + filename);
-                            cmd.Connection = con;
-                            con.Open();
-                            cmd.ExecuteNonQuery();
-                            con.Close();
-                        }
+                        con.Open();
+                        //SqlCommand cmd = new SqlCommand("INSERT INTO Images (ImagePath) VALUES (@ImagePath)", con);
+                        //SqlCommand cmd = new SqlCommand("update hthanghoa set anh='" + imagePath + "' where mahang='" + mahang + "' ", con);                       
+                        //cmd.Parameters.AddWithValue("@ImagePath", imagePath);                       
+                        //cmd.ExecuteNonQuery();
+                        SqlCommand cmd = new SqlCommand("update hthanghoa set anh=@ImagePath where mahang=@Mahang", con);
+                        cmd.Parameters.AddWithValue("@ImagePath", imagePath);
+                        cmd.Parameters.AddWithValue("@Mahang", mahang);
+                        cmd.ExecuteNonQuery();
+                        con.Close();
                     }
-                    lblConfirm.Text  = "Tải lên thành công!";
-                    //StatusLabel.Text = "Tải lên thành công!";
+
+                    // Thông báo thành công
+                    lblConfirm.Text = "Tải lên thành công!";
+                    dt_hanghoa = DataConn.StoreFillDS("NH_danhmuchanghoa", System.Data.CommandType.StoredProcedure);
                 }
                 catch (Exception ex)
                 {
-                    //StatusLabel.Text = "Lỗi: " + ex.Message;
+                    // Xử lý nếu có lỗi xảy ra
                     lblConfirm.Text = "Lỗi: " + ex.Message;
                 }
             }
-        }
+            else
+            {
+                // Thông báo nếu người dùng không chọn tệp
+                lblConfirm.Text = "Vui lòng chọn một tệp hình ảnh!";
+            }
+        }       
 
         protected void btnDownloadClick(Object sender, EventArgs e)
         {

@@ -2521,6 +2521,7 @@
     <Content Include="Report\BaocaotonghopNH.aspx" />
     <Content Include="Report\Baocaotonghopthuchi.aspx" />
     <Content Include="Report\Baocaotonkho.aspx" />
+    <Content Include="Report\Phieucandoitonkho.aspx" />
     <Content Include="Report\test.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -2827,6 +2828,13 @@
     </Compile>
     <Compile Include="Report\Baocaotonkho.aspx.designer.cs">
       <DependentUpon>Baocaotonkho.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Report\Phieucandoitonkho.aspx.cs">
+      <DependentUpon>Phieucandoitonkho.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Report\Phieucandoitonkho.aspx.designer.cs">
+      <DependentUpon>Phieucandoitonkho.aspx</DependentUpon>
     </Compile>
     <Compile Include="Report\test.aspx.cs">
       <DependentUpon>test.aspx</DependentUpon>

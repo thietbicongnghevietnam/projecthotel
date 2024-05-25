@@ -211,21 +211,21 @@ namespace WebApplication1.Danhmuc {
         protected global::System.Web.UI.WebControls.TextBox txtmahang3;
         
         /// <summary>
-        /// fileUpload1 control.
+        /// ImageFileUpload control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload fileUpload1;
+        protected global::System.Web.UI.WebControls.FileUpload ImageFileUpload;
         
         /// <summary>
-        /// uploadImage control.
+        /// Button1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button uploadImage;
+        protected global::System.Web.UI.WebControls.Button Button1;
     }
 }

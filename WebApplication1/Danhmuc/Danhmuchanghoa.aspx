@@ -38,7 +38,7 @@
             <div class="card-header">
                 <h1>Danh mục hàng hóa</h1>
                 <br />
-                <p>
+                <p style="color:blue;">
                     <asp:Label ID="lblConfirm" Text="" runat="server"></asp:Label>
                 </p>
                 <%--class="card-title"--%>
@@ -140,7 +140,7 @@
                                        
                                         <td>
                                             <a href="#" class="btn btn-info btn-sm" title="delete item" onclick="openEditModal2('<%= rows["mahang"].ToString() %>','<%= rows["tenhang"].ToString() %>','<%= rows["dvt"].ToString() %>','<%= rows["gianhap"].ToString() %>','<%= rows["giaban"].ToString() %>','<%=rows["tennhomhang"].ToString()%>','<%=rows["anh"].ToString()%>')"><i class="fas fa-pencil-alt"></i>Sửa</a>
-                                            <a href="#" class="btn btn-info btn-sm" title="delete item" onclick="openEditModal3('<%= rows["mahang"].ToString() %>')"><i class="fas fa-pencil-alt"></i>cập nhật Img</a>
+                                            <a href="#" class="btn btn-info btn-sm" title="delete item" onclick="openEditModal3('<%= rows["mahang"].ToString() %>')"><i class="fas fa-pencil-alt"></i>cập nhật ảnh</a>
                                         </td> 
                                         
                                     </tr>
@@ -340,9 +340,10 @@
 </div>
 
         <!-- Upload anh -->
-        <div class="modal fade" id="uploadModal" >
+        <div class="modal" id="uploadModal" >
             <div class="modal-dialog">
                 <div class="modal-content">
+                    <br />
                     <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -352,18 +353,18 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                       <label for="exampleInputEmail1">Bạn chọn ảnh tải lên</label>                                                                                                                       
+                                       <label for="exampleInputEmail1">Bạn chọn hình ảnh tải lên</label>                                                                                                                       
                                     </div>
                                 </div>
                             </div> 
 
-                    <div class="modal-header">
+                   <%-- <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Tải lên hình ảnh</h4>
-                    </div>
+                        <h4 class="modal-title">Đóng</h4>
+                    </div>--%>
                     <div class="modal-body">
-                        <asp:FileUpload ID="fileUpload1" runat="server" style="display:none" />
-                        <asp:Button ID="uploadImage" runat="server" Text="Chọn hình ảnh" CssClass="btn btn-primary" OnClick="UploadImage_Click" />
+                       <asp:FileUpload ID="ImageFileUpload" runat="server" />
+                        <asp:Button ID="Button1" runat="server" Text="Tải lên" OnClick="UploadButton_Click" />
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
@@ -371,10 +372,7 @@
                 </div>
             </div>
         </div>
-        <div class="container">
-            <h2>Welcom!</h2>
-            <button id="uploadButton" class="btn btn-primary">Mở Modal</button>
-        </div>
+       
 
     </form>
 
@@ -404,10 +402,7 @@
      <script>
    $(document).ready(function () {            
             //$('#txtdevice').prop("readonly", true);     
-            $("#uploadImage").click(function () {
-                // Gửi yêu cầu tải lên khi người dùng nhấp vào nút trong modal
-                $("#fileUpload").click();
-            });  
+                    
 
          });
                

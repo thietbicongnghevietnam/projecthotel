@@ -146,6 +146,7 @@
               <li><a href="Report/BaocaotonghopNH.aspx" target="_blank" class="dropdown-item">BC tổng hợp nhập hàng</a></li>
               <li class="dropdown-divider"></li>
               <li><a href="Report/Baocaotonkho.aspx" target="_blank" class="dropdown-item">BC tồn kho</a></li>
+                <li><a href="Report/Phieucandoitonkho.aspx" target="_blank" class="dropdown-item">Cân đối tồn kho</a></li>
               <li class="dropdown-divider"></li>
               <!-- Level two dropdown-->
               <li class="dropdown-submenu dropdown-hover">
