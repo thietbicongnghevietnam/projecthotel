@@ -18,7 +18,9 @@ using Newtonsoft.Json.Linq;
 using System.IO;
 using QRCoder;
 
-
+using ZXing.QrCode;
+using ZXing;
+using System.Drawing.Imaging;
 
 namespace WebApplication1
 {
@@ -75,6 +77,29 @@ namespace WebApplication1
 
         }
 
+        private string GenerateQRCodeBase64(string data, int w, int h)
+        {
+            BarcodeWriter barcodeWriter = new BarcodeWriter();
+            barcodeWriter.Format = BarcodeFormat.QR_CODE;
+            barcodeWriter.Options = new QrCodeEncodingOptions
+            {
+                Width = w,
+                Height = h
+            };
+            Bitmap qrCodeBitmap = barcodeWriter.Write(data);
+            string base64String = Convert.ToBase64String(BitmapToBytes(qrCodeBitmap));
+            return base64String;
+        }
+        private byte[] BitmapToBytes(Bitmap bitmap)
+        {
+            using (MemoryStream stream = new MemoryStream())
+            {
+                bitmap.Save(stream, ImageFormat.Png);
+                return stream.ToArray();
+            }
+        }
+
+
         private void GenerateAndConvertQRCode(string data)
         {
             // Tạo mã QR từ dữ liệu được chuyển đến
@@ -91,6 +116,23 @@ namespace WebApplication1
                 barcodeData = "data:image/png;base64," + Convert.ToBase64String(byteImage);
             }
         }
+
+        //private void GenerateAndConvertQRCode(string data)
+        //{
+        //    // Tạo mã QR từ dữ liệu được chuyển đến
+        //    QRCodeGenerator qrGenerator = new QRCodeGenerator();
+        //    QRCodeData qrCodeData = qrGenerator.CreateQrCode(data, QRCodeGenerator.ECCLevel.Q);
+        //    QRCode qrCode = new QRCode(qrCodeData);
+        //    Bitmap qrCodeImage = qrCode.GetGraphic(2); // Điều chỉnh kích thước ở đây nếu cần
+
+        //    // Chuyển đổi hình ảnh Bitmap thành một dạng dữ liệu base64
+        //    using (MemoryStream memoryStream = new MemoryStream())
+        //    {
+        //        qrCodeImage.Save(memoryStream, System.Drawing.Imaging.ImageFormat.Png);
+        //        byte[] byteImage = memoryStream.ToArray();
+        //        barcodeData = "data:image/png;base64," + Convert.ToBase64String(byteImage);
+        //    }
+        //}
 
         public static string GetConnectStringFromFile()
         {
