@@ -25,80 +25,50 @@ NH_laymahang_tk_chuan 'biahn'
 NH_laymahang_tk
 NH_laydungtenhang
 
+
 ====
-ALTER PROCEDURE [dbo].[NH_laymahang_tk_chuan]  --NH_laymahang_tk_chuan 'biahn'
-	@mahang as nvarchar(300)
+NH_Xemlaihoadon
+
+ALTER PROCEDURE [dbo].[NH_Xemlaihoadon]
+	@idhoadon as nvarchar(50)
 AS
 BEGIN
 
-if exists(select mahang from hthanghoa where mahang=@mahang)
-begin
-	select mahang,dvt,giaban from hthanghoa where mahang=@mahang
-	--select 1
-end
-else
-begin
+declare @checkaraoke  as nvarchar(10)
+declare @giohatkaraoke  as float
+declare @sohoadon as nvarchar(10)
 
-	if exists(select mahang from hthanghoa where tenhang=@mahang)
-	begin
-		select mahang,dvt,giaban from hthanghoa where tenhang=@mahang
+
+declare @nghigio as float
+declare @nghidem as float
+declare @nghingay as float
+declare @nghithang as float
+declare @tienphutroi as float
+declare @tienphutroiphut as float
+declare @timephutroi as int
+
+set @checkaraoke = 'Nhahang'
+	set @giohatkaraoke = 0
+	set @nghigio = 0	
+	set @nghidem = 0
+	set @nghingay = 0
+	set @nghithang = 0
+	set @tienphutroi = 0
+	set @tienphutroiphut =0
+	set @timephutroi =0
+
+
+	--hoa don da duoc thanh toan roi, o dang nha hang <> khong phai ban hang
+if exists(select * from htsocai where sohd=@idhoadon and Flag='1' and type='1')
+	begin			
+		select [items],tienhang,giaphong,CONVERT(varchar,ngaygiothue,22) as ngaygiothue,@checkaraoke as statusKaraoke,@giohatkaraoke as giohat,sohd as sohoadon,hinhthucnghi,@nghigio,@nghidem,@nghingay,@nghithang,@tienphutroi,@tienphutroiphut,@timephutroi,convert(varchar, created, 23) as ngaytao,chietkhau,tiensauchietkhau,psco from htsocai where sohd=@idhoadon and Flag='1' and type='1'
 	end
 	else
 	begin
 		select 0
 	end
 
-	
-end	
-
 END
-==================
-ALTER PROCEDURE [dbo].[NH_laymahang_tk] 
-	@tenhang as nvarchar(300)
-AS
-BEGIN
-
-if exists(select mahang from hthanghoa where tenhang=@tenhang)
-begin
-	select mahang,dvt,giaban from hthanghoa where tenhang=@tenhang
-	--select 1
-end
-else
-begin
-	select 0
-end	
-
-END
-
-====================
-USE [DataNhaHang]
-GO
-/****** Object:  StoredProcedure [dbo].[NH_laydungmahang]    Script Date: 05/27/2024 5:26:52 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-ALTER PROCEDURE [dbo].[NH_laydungmahang]  -- NH_laydungmahang 'biahn'
-	@tenhangid as nvarchar(50)
-AS
-BEGIN
-	
-	if exists(select * from hthanghoa where tenhang=@tenhangid )
-begin
-	select mahang from hthanghoa where tenhang=@tenhangid
-end
-else
-begin
-	select 0
-end
-
-END
-
-
-
-
-
-
 
 
 ===============  cach distinct ben client
