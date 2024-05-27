@@ -153,7 +153,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                       <label for="exampleInputEmail1">Tên nhà nhân viên</label>                                        
+                                       <label for="exampleInputEmail1">Tên nhân viên</label>                                        
                                         <asp:TextBox ID="txttenkhuvuc" CssClass="form-control" placeholder="" runat="server"></asp:TextBox>                                        
                                     </div>
                                 </div>

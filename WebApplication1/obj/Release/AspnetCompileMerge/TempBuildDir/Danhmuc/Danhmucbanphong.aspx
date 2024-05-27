@@ -135,7 +135,18 @@
                                         <td><%=rows["tiennghithang"].ToString()%></td>
                                        --%>
                                         <td>
-                                            <a href="#" class="btn btn-info btn-sm" title="delete item" onclick="openEditModal2('<%= rows["tenphong"].ToString() %>')"><i class="fas fa-pencil-alt"></i>Sửa</a>
+                                            <a href="#" class="btn btn-info btn-sm" title="delete item" onclick="openEditModal2('<%= rows["tenphong"].ToString() %>')"><i class="fas fa-pencil-alt"></i>Sửa khu vực</a>
+                                            &nbsp;&nbsp;&nbsp;<a href="#" class="btn btn-info btn-sm" title="delete item" onclick="openEditModal3('<%= rows["tenphong"].ToString() %>',
+                                                '<%= rows["tiengionghi"].ToString() %>',
+                                                '<%= rows["timephutroi"].ToString() %>',
+                                                '<%= rows["giophutroi"].ToString() %>',
+                                                '<%= rows["giophutroitheophut"].ToString() %>',
+                                                '<%= rows["tiennghidem"].ToString() %>',
+                                                '<%= rows["tiennghingay"].ToString() %>',
+                                                '<%= rows["tiennghithang"].ToString() %>',
+                                                '<%= rows["tiengiohat"].ToString() %>',
+                                                '<%= rows["nhanghi"].ToString() %>',
+                                                '<%= rows["karaoke"].ToString() %>')"><i class="fas fa-pencil-alt"></i>Cài đặt bàn/phòng</a>
                                         </td> 
                                         
                                     </tr>
@@ -222,6 +233,124 @@
             </div>
         </div>
 
+         <div class="modal" id="myModal3">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="row">
+                            <div>
+                                <h4 class="modal-title" id="headerTag" style="float: left">Cài đặt cấu hình</h4>
+                                <%--<h6 class="modal-title" id="headerTag" style="float: left; color:red"><b><i>Chi tiết tồn kho!</i></b></h6>--%>
+
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="float: right; margin-left: 300px;">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <%-- Modal footer --%>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="ID">Item</label>
+                                        <span style="color: green; font-size: 11px; font-style: italic;">(Read only)</span>
+                                        <asp:TextBox ID="maphong" CssClass="form-control" placeholder="" runat="server"></asp:TextBox>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                       <label for="exampleInputEmail1">Chọn mô hình</label>
+                                        <span style="color: red; font-size: 11px; font-style: italic;">You must input!(*)</span>
+                                        <br />
+                                        <asp:RadioButton ID="nhahangid" runat="server" Text="NH-cafe" GroupName="Options" />
+                                        <asp:RadioButton ID="karaokeid" runat="server" Text="Karaoke" GroupName="Options" />
+                                        <asp:RadioButton ID="hotelid" runat="server" Text="Hotel" GroupName="Options" />
+
+                                    </div>
+                                </div>
+                            </div> 
+                          
+
+                             <div class="row">
+                                 <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Tiền nghỉ 1 giờ</label>                                                                               
+                                         <asp:TextBox ID="tiengionghi" CssClass="form-control" placeholder="0" runat="server"></asp:TextBox>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="QtyNG">Time phụ trội</label>                                       
+                                       <asp:TextBox ID="thoigianphutroi" CssClass="form-control" placeholder="0" runat="server"></asp:TextBox>
+                                    </div>
+                                </div>
+                                
+                            </div>
+
+                             <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="QtyNG">Tiền giờ phụ trội</label>                                       
+                                       <asp:TextBox ID="tiengiophutroi" CssClass="form-control" placeholder="0" runat="server"></asp:TextBox>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Giờ phụ trội theo phút</label>                                                                               
+                                         <asp:TextBox ID="tiengiophutroitheophut" CssClass="form-control" placeholder="0" runat="server"></asp:TextBox>
+                                    </div>
+                                </div>
+                            </div>
+
+                              <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="QtyNG">Tiền nghỉ đêm</label>                                       
+                                       <asp:TextBox ID="tiennghidem" CssClass="form-control" placeholder="0" runat="server"></asp:TextBox>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Tiền nghỉ ngày</label>                                                                               
+                                         <asp:TextBox ID="tiennghingay" CssClass="form-control" placeholder="0" runat="server"></asp:TextBox>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="QtyNG">Tiền nghỉ tháng</label>                                       
+                                       <asp:TextBox ID="tiennghithang" CssClass="form-control" placeholder="0" runat="server"></asp:TextBox>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Tiền giờ karaoke / giờ</label>                                                                               
+                                         <asp:TextBox ID="tienkaraoke" CssClass="form-control" placeholder="0" runat="server"></asp:TextBox>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times"></i>Close</button>
+                        <button type="button" runat="server" id="Button1" onserverclick="settingphongban" class="btn btn-primary">
+                            <i class="fas fa-download"></i>
+                            Save
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </form>
     
         <script src="../../plugins/jquery/jquery.min.js"></script>
@@ -262,6 +391,33 @@
             
            
             $('#myModal2').modal('show');
+         }
+
+         function openEditModal3(maphongid, tiengionghiid, thoigianphutroiid, tiengiophutroiid, tiengiophutroitheophutid, tiennghidemid, tiennghingayid, tiennghithangid, tienkaraokeid,nhanghi,karaoke) {   
+             //alert(tienkaraokeid);
+            $("#maphong").val(maphongid);
+             $("#tiengionghi").val(tiengionghiid);
+             $("#thoigianphutroi").val(thoigianphutroiid);
+             $("#tiengiophutroi").val(tiengiophutroiid);
+             $("#tiengiophutroitheophut").val(tiengiophutroitheophutid);
+             $("#tiennghidem").val(tiennghidemid);
+             $("#tiennghingay").val(tiennghingayid);
+             $("#tiennghithang").val(tiennghithangid);
+             $("#tienkaraoke").val(tienkaraokeid);
+             if (nhanghi == '1')
+             {
+                 document.getElementById("hotelid").checked = true;
+             }
+             else if (karaoke == '1')
+             {
+                 document.getElementById("karaokeid").checked = true;
+             }
+             else
+             {
+                 document.getElementById("nhahangid").checked = true;
+             }
+                                            
+            $('#myModal3').modal('show');
         }
 
         

@@ -38,7 +38,7 @@
             <div class="card-header">
                 <h1>Danh mục hàng hóa</h1>
                 <br />
-                <p>
+                <p style="color:blue;">
                     <asp:Label ID="lblConfirm" Text="" runat="server"></asp:Label>
                 </p>
                 <%--class="card-title"--%>
@@ -105,7 +105,7 @@
              <div>
             <table id="example" class="table table-striped table-bordered" style="width:100%">
         <thead>
-            <tr>
+         
                  <tr role="row">
                                         <th>NO</th>
                                         <th>mahang</th>
@@ -115,12 +115,12 @@
                                         <th>gianhap</th> 
                                          <th>giaban</th> 
                                         <th>tennhomhang</th>
-
+                                        <th>Anh</th>
                                       
                                                                                
                                         <th>Action</th>
-                                    </tr>
-            </tr>
+                     </tr>
+  
         </thead>
         <tbody>
                                 <%int i = 0; %>
@@ -136,10 +136,11 @@
                                         <td><%=rows["gianhap"].ToString()%></td>
                                          <td><%=rows["giaban"].ToString()%></td> 
                                         <td><%=rows["tennhomhang"].ToString()%></td>
-                                        
+                                        <td><%=rows["anh"].ToString()%></td>
                                        
                                         <td>
-                                            <a href="#" class="btn btn-info btn-sm" title="delete item" onclick="openEditModal2('<%= rows["mahang"].ToString() %>','<%= rows["tenhang"].ToString() %>','<%= rows["dvt"].ToString() %>','<%= rows["gianhap"].ToString() %>','<%= rows["giaban"].ToString() %>','<%=rows["tennhomhang"].ToString()%>')"><i class="fas fa-pencil-alt"></i>Sửa</a>
+                                            <a href="#" class="btn btn-info btn-sm" title="delete item" onclick="openEditModal2('<%= rows["mahang"].ToString() %>','<%= rows["tenhang"].ToString() %>','<%= rows["dvt"].ToString() %>','<%= rows["gianhap"].ToString() %>','<%= rows["giaban"].ToString() %>','<%=rows["tennhomhang"].ToString()%>','<%=rows["anh"].ToString()%>')"><i class="fas fa-pencil-alt"></i>Sửa</a>
+                                            <a href="#" class="btn btn-info btn-sm" title="delete item" onclick="openEditModal3('<%= rows["mahang"].ToString() %>')"><i class="fas fa-pencil-alt"></i>cập nhật ảnh</a>
                                         </td> 
                                         
                                     </tr>
@@ -221,6 +222,21 @@
                                     </div>
                                 </div>
                             </div> 
+
+                             <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="ID">Đường dân ảnh</label>                                        
+                                        <asp:TextBox ID="txtanhid" CssClass="form-control" placeholder="" runat="server"></asp:TextBox>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                       <label for="exampleInputEmail1"></label>
+                                                                          
+                                    </div>
+                                </div>
+                            </div> 
                           
                             
                         </div>
@@ -298,6 +314,20 @@
                                     </div>
                                 </div>
                             </div> 
+                        <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="ID">Đường dân ảnh</label>                                        
+                                        <asp:TextBox ID="txtanh" CssClass="form-control" placeholder="" runat="server"></asp:TextBox>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                       <label for="exampleInputEmail1"></label>
+                                                                          
+                                    </div>
+                                </div>
+                            </div> 
 
 
       </div>
@@ -308,6 +338,41 @@
     </div>
   </div>
 </div>
+
+        <!-- Upload anh -->
+        <div class="modal" id="uploadModal" >
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <br />
+                    <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="ID">Mã hàng</label>                                      
+                                        <asp:TextBox ID="txtmahang3" CssClass="form-control" placeholder="" runat="server"></asp:TextBox>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                       <label for="exampleInputEmail1">Bạn chọn hình ảnh tải lên</label>                                                                                                                       
+                                    </div>
+                                </div>
+                            </div> 
+
+                   <%-- <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Đóng</h4>
+                    </div>--%>
+                    <div class="modal-body">
+                       <asp:FileUpload ID="ImageFileUpload" runat="server" />
+                        <asp:Button ID="Button1" runat="server" Text="Tải lên" OnClick="UploadButton_Click" />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
 
     </form>
 
@@ -336,7 +401,8 @@
 
      <script>
    $(document).ready(function () {            
-            //$('#txtdevice').prop("readonly", true);       
+            //$('#txtdevice').prop("readonly", true);     
+                    
 
          });
                
@@ -359,14 +425,29 @@
 
          //$('#myModal').modal()
 
-    function openEditModal2(mahang,tenhang,dvt,gianhap,giaban,tennhomhang) {           
+    function openEditModal2(mahang,tenhang,dvt,gianhap,giaban,tennhomhang,anhid) {           
         $("#txtmahang").val(mahang);
         $("#txttenhang").val(tenhang);
         $("#txtdovitinh").val(dvt);
         $("#txtgianhap").val(gianhap);
         $("#txtgiaban").val(giaban);
-        //$("#dr_nhomhang2").val(tennhomhang);        
+        $("#txtanhid").val(anhid);
+        //$("#dr_nhomhang2").val(tennhomhang);       
+        // Tìm và đặt giá trị cho dropdown list
+        $("#dr_nhomhang2 option").each(function() {
+            if ($(this).text() === tennhomhang) {
+                $(this).prop("selected", true);
+            }
+        });
+
         $('#myModal2').modal('show');
+
+        }
+
+function openEditModal3(mahang) {           
+        $("#txtmahang3").val(mahang);
+        
+        $('#uploadModal').modal('show');
 
         }
 

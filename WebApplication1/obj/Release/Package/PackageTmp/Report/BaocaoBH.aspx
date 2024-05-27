@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Bao cao ban hang</title>
+    <title>BÁO CÁO BÁN HÀNG THEO HÓA ĐƠN</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&amp;display=fallback">
     <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
@@ -23,8 +23,9 @@
               <div class="card-header">
                 <h1>Báo cáo bán hàng theo hóa đơn</h1>
               </div>
-         <div class="col-sm-12">            
-              Từ ngày:                                   
+         <div class="col-sm-12">  
+             <span style="width:800PX; float:left;">
+                  Từ ngày:                                   
                      <input type="date" id="Date2" name="date" runat="server">
              Đến ngày:   
                     <input type="date" id="ngaychiid" name="date" runat="server">
@@ -32,9 +33,21 @@
              <input type="checkbox" id="check_partno_search" style="width: 20px; height: 20px;" name="check_partno_search">
                     Item:                                    
                                     <input type="text" id="partno_search" runat="server">
+            
+             <button class="btn btn-primary" type="button" runat="server" onserverclick="Search_Date_Click2" >                 
 
-             <button class="btn btn-primary" type="button" runat="server" onserverclick="Search_Date_Click2" >
                         <i class="fa fa-fw fa-lg fa-search"></i>Lọc</button>
+             </span>
+             
+             
+             <span style="width:120PX; float:left;"> 
+                  <asp:DropDownList ID="dr_nhanvien" runat="server" AppendDataBoundItems="true" OnSelectedIndexChanged="dr_nhanvien_SelectedIndexChanged" AutoPostBack="true"
+                                                    DataTextField="U_NAME" 
+                                                    DataValueField="U_NAME" 
+                                                    CssClass="form-control input-sm">
+                                                </asp:DropDownList> 
+             </span>
+             
 
               <%--<button class="btn btn-primary" type="button" runat="server">
                         <i class="fa fa-download"></i><a href="../TemplateReport/banhangtheongayhd.aspx" target="_blank" style="color:white">Print</a></button>--%>
@@ -149,23 +162,25 @@
 
 
                     <div class="modal-body">
-                       
-                       <div class="container-fluid" id="printableArea" style="width:400px;height:auto; float:left">
+                       <div class="container-fluid"  style="width:700px;height:auto;">
+                       <%--<div class="container-fluid" id="printableArea" style="width:400px;height:auto; float:left">--%>
                             Loại hình: <b id="hinhthucnghi2"></b>
                             &nbsp;&nbsp;&nbsp; tổng tiền hát: <b id="tongtienhat2"></b><br />
                            Tên phòng: <b id="tenphong2"></b>
-                           &nbsp;&nbsp;&nbsp; Tổng tiền hàng: <b id="tongtien2"></b>                                                      
+                           &nbsp;&nbsp;&nbsp; SHD:  <b id="hoadon2"></b> <%--Tổng tiền hàng:--%> <%--<b id="tongtien2"></b>      --%>                                                
 
 
                                 <div style="width: 100%; height: 300px; float: left;">  
                                     <table class="display table table-bordered dataTable no-footer">
                                         <thead>
                                             <tr>
-                                                <th>Hàng hóa</th>
-                                                <th>Tiền hàng</th>
-                                                <th>statusKaraoke</th>
-                                                <th>Số HĐ</th>                                                 
+                                                <th>Mã hàng</th>
+                                                <th>Tên Hàng</th>
+                                                <th>Số lượng</th>
+                                                <th>Chiết khấu</th>
+                                                <th>Thành tiền</th>                                             
                                             </tr>
+                                            </thead>
                                             <tbody id="tbnhaphang_inhoadon">
                                             </tbody>
 
@@ -346,35 +361,52 @@
                         debugger;
                             const objdata = $.parseJSON(data.d);
                             $('#tbnhaphang_inhoadon tr').remove();
-                            debugger;
-                            if (objdata['Table'] != "")
-                            {
-                                for (var i = 0; i < objdata['Table'].length - 1; i++)
-                                {
-                                var hanghoa = objdata['Table'][i][0];
-                                var tienhang = objdata['Table'][i][1];
-                                var loaihoadon = objdata['Table'][i][4];
-                                var sohoadon = objdata['Table'][i][6];
-                                var newrow = '<tr class="thongtinhoadon">' +
-                                                        '<td id="_hanghoad">' + hanghoa + '</td>' +
-                                                        '<td id="_tienhang">' + tienhang + '</td>' +
-                                                        '<td id="_loaihoadon">' + loaihoadon + '</td>' +
-                                                        '<td id="_sohoadon">' + sohoadon + '</td>' +                                                    
-                                                        '</tr>';
-                                                    $('#tbnhaphang_inhoadon').append(newrow); 
-                                }
+                             var tongtienhang = "";//$('#tongtiennhap').val();
+                                var tongchietkhau = "";//$('#chietkhauid').val();                                
+                                var khachthanhtoan = "";//$('#thanhtoanid').val();                             
+                                var khachno =  "";//$('#conlaiid').val();
+                                var ngaytao = "";//dd + "-" + mm + "-" + yyyy;//;$('#soHD').val();
+                            var sohoadon = "";$('#soHD').val();                               
+                            var biendem = objdata['Table1'].length;
+                            //debugger;
+                            for (var i = 0; i < objdata['Table1'].length - 1; i++) {
+                                    //console.log(objdata['Table1'].length);
+                                    var tenhang = objdata['Table1'][i][0];
+                                    var dongia = objdata['Table1'][i][1];
+                                    var soluong = objdata['Table1'][i][2];
+                                    var chietkhau = "";//objdata['Table1'][i][3];
+                                var thanhtien = objdata['Table1'][i][4];
+                                sohoadon = objdata['Table1'][i][8];
+                                    var newrow = '<tr class="thongtinhoadon">' +
+                                        '<td id="_hanghoad">' + tenhang + '</td>' +
+                                        '<td id="_tienhang">' + dongia + '</td>' +
+                                        '<td id="_loaihoadon">' + soluong + '</td>' +
+                                        '<td id="_chietkhau">' + chietkhau + '</td>' +
+                                        '<td id="_sohoadon">' + thanhtien + '</td>' +
+                                        '</tr>';
+                                    $('#tbnhaphang_inhoadon').append(newrow); 
+
+                                    if (i == (biendem - 2))
+                                    {
+                                        tongchietkhau = objdata['Table1'][i][3];
+                                        tongtienhang = objdata['Table1'][i][4];
+                                        khachthanhtoan = objdata['Table1'][i][5];
+                                        khachno = objdata['Table1'][i][6];
+                                        ngaytao = objdata['Table1'][i][7];
+                                    }
                             }
-                            else
-                            {
-                                $('#tbnhaphang_inhoadon').append(newrow); 
-                            }
+
+                            $('#thantoan2').text(tongtienhang);
+                            $('#hoadon2').text(sohoadon);
                                                             
-                            $('#myModal6').modal('show');                                                       
+                                                                               
                         },
                         error: function () {
                             //alert("No Match");
+                            alert('kiem tra la trang thai hoa don!');
                         }
-                    });
+            });
+            $('#myModal6').modal('show');    
 
         }
 

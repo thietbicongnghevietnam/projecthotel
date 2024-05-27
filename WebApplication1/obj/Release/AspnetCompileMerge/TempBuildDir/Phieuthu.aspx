@@ -68,25 +68,28 @@ button:hover {
 
     <div class="container">
     <h2>Phiếu Thu</h2>
- 
+        <div>                        
+            <b style="float:left; margin-right:10px; margin-top:10px;">Số HĐ :</b><input id="soHD" name="soHD" class="form-control input-sm" value="<%=sohoadon %>"" style="width:200px;"/> 
+        </div>
+         
       <div class="row">
         <div class="column">
           <div class="form-group">
-            <label for="recipient">Người tra:</label>
+            <label for="recipient">Người trả :</label>
             <input type="text" id="idnguoinhan" name="recipient">
           </div>
           <div class="form-group">
-            <label for="amount">Số tiền:</label>
+            <label for="amount">Số tiền :</label>
             <input type="number" id="sotienid" name="amount">
           </div>
           <div class="form-group">
-            <label for="description">Mô tả:</label>
+            <label for="description">Mô tả :</label>
             <textarea id="motaid" name="description"></textarea>
           </div>
         </div>
         <div class="column">
           <div class="form-group">
-            <label for="supplier">Khach hang:</label>
+            <label for="supplier">Khách hàng :</label>
             <asp:DropDownList ID="dr_nhacungcap" runat="server" AppendDataBoundItems="true" 
                             DataTextField="makh" 
                             DataValueField="id" 
@@ -94,11 +97,11 @@ button:hover {
                         </asp:DropDownList>
           </div>
           <div class="form-group">
-            <label for="balance" style="padding-top:5px;">Công nợ KH:</label>
+            <label for="balance" style="padding-top:5px;">Công nợ KH :</label>
             <input type="number" id="congnoid" name="balance">
           </div>
           <div class="form-group">
-            <label for="date" style="padding-top:10px;">Ngày chi:</label>
+            <label for="date" style="padding-top:10px;">Ngày chi :</label>
             <input type="date" id="ngaychiid" name="date">
           </div>
         </div>
@@ -106,17 +109,17 @@ button:hover {
       <div class="row">
         <div class="column">
           <div class="form-group">
-            <label for="payment-method">Phương thức thanh toán:</label>
+            <label for="payment-method">Phương thức thanh toán :</label>
             <select id="phuongthucid" name="payment-method">
-              <option value="tienmat">Tiền mặt</option>
-              <option value="chuyenkhoan">Chuyển khoản ngân hàng</option>
+              <option value="tienmat">Tiền mặt </option>
+              <option value="chuyenkhoan">Chuyển khoản ngân hàng </option>
               <option value="sec">Séc</option>
             </select>
           </div>
         </div>
         <div class="column">
           <div class="form-group">
-            <label for="note">Nguoi thu tien:</label>
+            <label for="note">Người thu tiền :</label>
             <input type="text" id="nguoichitienid" name="amount">
           </div>
         </div>
@@ -128,7 +131,18 @@ button:hover {
      <script type="text/javascript">
           $(document).ready(function () {
             //SearchText();            
-         });     
+         });    
+
+
+         $("#soHD").on('keyup', function (e) {
+         if ((e.key === 'Enter' || e.keyCode === 13))
+            {    
+             var sohoadon = $('#soHD').val();
+             //alert(sohoadon);
+                //window.location.href = "/TemplateReport/ReportPhieuthu.aspx?sohoadon='"+sohoadon+"'";
+                window.open('/TemplateReport/ReportPhieuthu.aspx?sohoadon='+sohoadon+'', '_blank'); // keeps page one active
+            }
+        }); 
 
         
          $('#MainContent_dr_nhacungcap').on('change', function () {
@@ -182,7 +196,7 @@ button:hover {
                         success: function (data) {
                             //response(data.d);
                             //var objdata = $.parseJSON(data.d);
-                            alert("Them phieu thu thanh cong!");
+                            alert("Thêm phiếu thu thành công!");
                             $("#idnguoinhan").val('');
                             $("#MainContent_dr_nhacungcap").val('==KH==');
                             $("#sotienid").val('');
@@ -190,7 +204,13 @@ button:hover {
                             $("#motaid").val('');
                             $("#ngaychiid").val('');
                             $("#phuongthucid").val('Tien mat');
-                            $("#nguoichitienid").val('');                                    
+                            $("#nguoichitienid").val('');  
+
+                           var idop = data.d.split(',');
+                           //var _id = idop[0];
+                           var _sohd = idop[1];
+
+                            $("#soHD").val(_sohd);
                         },
                         error: function () {
                             //alert("No Match");

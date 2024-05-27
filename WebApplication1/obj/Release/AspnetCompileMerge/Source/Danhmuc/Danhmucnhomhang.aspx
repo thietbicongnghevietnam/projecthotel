@@ -33,6 +33,11 @@
                 <h1>Danh mục nhóm hàng</h1>
                 <br />
                 <%--class="card-title"--%>
+                <br />
+                <p>
+                    <asp:Label ID="lblConfirm" Text="" runat="server"></asp:Label>
+                </p>
+
                 <div class="col-sm-12">
                     <div style="float:left;">
                         Từ ngày:
@@ -53,7 +58,25 @@
                      Thêm mới
                     </button>
                     
-                    
+                      <!-- import file excel -->
+                <!-- ADD A FILE UPLOAD CONTROL AND A BUTTON TO EXECUTE. -->
+                <div style="font: 14px Verdana; float: right">
+                    <p style="margin-top: 0px; margin-left: 20px;">
+                       Chọn file để upload:
+                        <asp:FileUpload ID="FileUpload" Width="450px" runat="server" />
+                    </p>
+                    <p style="margin-top: 0px; margin-left: 20px;">
+                        <input type="button" onserverclick="ImportFromExcel" value="Import data to Excel" runat="server" class="btn btn-primary" />
+
+                        <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;" onserverclick="btnDownloadClick" runat="server">
+                            <i class="fas fa-download"></i>Tải file mẫu upload
+                        </button>
+                    </p>
+                    <p>
+                        <asp:Label ID="Label1" runat="server"></asp:Label>
+                    </p>
+
+                </div>
 
                     <%--<button class="btn btn-primary" type="button" runat="server" style="margin-left:20px;"  >
                         Inventory Equipment

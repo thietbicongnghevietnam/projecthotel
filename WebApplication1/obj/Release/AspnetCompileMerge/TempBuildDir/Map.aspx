@@ -72,6 +72,7 @@
     <script src="../dist/contextmenu.js"></script>--%>
    
         <!-- Content Wrapper. Contains page content -->
+     <%  string user = Session["username"].ToString(); %>
         <div class="wrapper">
             <!-- Content Header (Page header) -->
             <section class="content-header">
@@ -87,7 +88,7 @@
                             <b style="padding-right: 10px; margin-left: 10px; margin-top: 5px;">Giờ ra:</b>
                             <input id="checkinput2" style="width: 150px; margin-top: 10px;" name="checkinput2" value=""/>
                             <b style="padding-right: 12px; margin-left: 10px;">Hình thức nghỉ:</b>
-                            <input id="stylerender" style="width: 80px; " name="stylerender" value="" />
+                            <input id="stylerender" style="width: 80px; background-color:aqua; " name="stylerender" value="" />
                            
                             
 
@@ -96,7 +97,7 @@
                             <b style="padding-right: 10px; margin-left: 10px;">Ticket:</b>
                             <input  style="width: 80px;margin-left: 30px;" id="ticketid" name="ticket" />
 
-                            <b style="padding-right: 10px; margin-left: 10px;">Phong chuyen:</b>
+                            <b style="padding-right: 10px; margin-left: 10px;">Gộp/chuyển:</b>
                             <b style="font-size: 14px; color: blue" id="thongbao"></b>
 
                             <b style="padding-right: 10px; margin-left: 10px;">kieu nghi:</b>
@@ -115,7 +116,7 @@
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
                                 <li class="breadcrumb-item active"> <a href="#" onclick="updateItem()">Chuyển bàn</a></li>
-                                <li class="breadcrumb-item active">Gộp bàn</li>
+                                <li class="breadcrumb-item active"><a href="#" onclick="gopban()">Gộp bàn</a></li>
                                 <li class="breadcrumb-item active"><a href="#" onclick="delItem()">Hủy bàn</a></li>
                             </ol>
                         </div>
@@ -128,7 +129,8 @@
             <section class="content">
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="card card-primary">
+                        <!--khu vuc 1-->
+                        <div class="card card-primary">                       
                             <%int i = 0; %>
                                             <%foreach (System.Data.DataRow rows1 in dt_get_khuvuc0.Rows)
                                                 {%>   
@@ -175,13 +177,49 @@
                         </div>
                         <!-- /.card -->
 
-                       <div class="card card-primary">
-                            <%int j = 0; %>
-                                            <%foreach (System.Data.DataRow rows1 in dt_get_khuvuc1.Rows)
-                                                {%>   
-                                            
+                       <!--khu vuc 2-->
+                       <div class="card card-primary">                                                                      
                             <div class="card-header">
-                                <h3 class="card-title"><%=rows1["tenkhuvuc"].ToString() %></h3>
+                                <h3 class="card-title"><%=tenkhuvuc2 %></h3>
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                
+                                <div class="wrapper" id="myList">
+                                    <ul>
+                                        <%int p = 0; %>
+                                        <%foreach (System.Data.DataRow rows in dt_getinfo_phong1.Rows)
+                                            {%>
+                                        <%p++;%>
+                                        <li class="item" id="nametable_<%=p %>">
+                                             <img src="/static/images/phongtrong.png" style="float:left; margin-left:3px; margin-top:3px;width:50px; height: 50px;">
+                                            <p id="tenphong" style="float:left; margin-left: 5px; margin-top:3px;"><%=rows["tenphong"].ToString() %></p> 
+                                            <t id="trangthai" hidden><%=rows["trangthai"].ToString()%></t>
+                                            <d id="trangthaidatphong" hidden><%=rows["trangthaidatphong"].ToString() %></d>
+                                            <dp id="trangthaidonphong" hidden><%=rows["trangthaidonphong"].ToString() %></dp>
+                                            <lp id="loaiphong" style="float: left" hidden><label style="width: 100px; display: none;" name="loaiphong"><%=rows["loaiphongid"].ToString() %></label></lp>                                           
+                                            <ht id="hinhthuephong" hidden><%=rows["nhanghi"].ToString() %></ht>
+                                             <ka id="karaokeid" hidden><%=rows["karaoke"].ToString() %></ka>
+                                            <tc id="tiencoc" style="width: 160px; float: left" hidden> Đặt trước :<label
+                                                    style="width: 100px;display: none;" name="tiencoc">.../VNĐ</label>
+                                            </tc>
+                                        </li>                                           
+                                        <%} %>
+                                    </ul>
+                                </div>
+                               
+                            </div>
+                            <!-- /.card-body -->                         
+                        </div>
+
+                        <!--khu vuc 3-->
+                        <div class="card card-primary">                                                                       
+                            <div class="card-header">
+                                <h3 class="card-title"><%=tenkhuvuc3 %></h3>
 
                                 <div class="card-tools">
                                     <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -193,11 +231,11 @@
                                 
                                 <div class="wrapper" id="myList">
                                     <ul>
-                                        <%int k = 0; %>
-                                        <%foreach (System.Data.DataRow rows in dt_getinfo_phong1.Rows)
+                                        <%int h = 0; %>
+                                        <%foreach (System.Data.DataRow rows in dt_getinfo_phong3.Rows)
                                             {%>
-                                        <%k++;%>
-                                        <li class="item" id="nametable_<%=k %>">
+                                        <%h++;%>
+                                        <li class="item" id="nametable_<%=h %>">
                                              <img src="/static/images/phongtrong.png" style="float:left; margin-left:3px; margin-top:3px;width:50px; height: 50px;">
                                             <p id="tenphong" style="float:left; margin-left: 5px; margin-top:3px;"><%=rows["tenphong"].ToString() %></p> 
                                             <t id="trangthai" hidden><%=rows["trangthai"].ToString()%></t>
@@ -211,18 +249,57 @@
                                             </tc>
                                         </li>
                                            
-
                                         <%} %>
                                     </ul>
                                 </div>
                                
                             </div>
                             <!-- /.card-body -->
-                            <%} %>
+                          
                         </div>
 
-                    </div>
+                        <!--khu vuc 4-->
+                        <div class="card card-primary">                                                                       
+                            <div class="card-header">
+                                <h3 class="card-title"><%=tenkhuvuc4 %></h3>
 
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                
+                                <div class="wrapper" id="myList">
+                                    <ul>
+                                        <%int f = 0; %>
+                                        <%foreach (System.Data.DataRow rows in dt_getinfo_phong4.Rows)
+                                            {%>
+                                        <%h++;%>
+                                        <li class="item" id="nametable_<%=f %>">
+                                             <img src="/static/images/phongtrong.png" style="float:left; margin-left:3px; margin-top:3px;width:50px; height: 50px;">
+                                            <p id="tenphong" style="float:left; margin-left: 5px; margin-top:3px;"><%=rows["tenphong"].ToString() %></p> 
+                                            <t id="trangthai" hidden><%=rows["trangthai"].ToString()%></t>
+                                            <d id="trangthaidatphong" hidden><%=rows["trangthaidatphong"].ToString() %></d>
+                                            <dp id="trangthaidonphong" hidden><%=rows["trangthaidonphong"].ToString() %></dp>
+                                            <lp id="loaiphong" style="float: left" hidden><label style="width: 100px; display: none;" name="loaiphong"><%=rows["loaiphongid"].ToString() %></label></lp>                                           
+                                            <ht id="hinhthuephong" hidden><%=rows["nhanghi"].ToString() %></ht>
+                                             <ka id="karaokeid" hidden><%=rows["karaoke"].ToString() %></ka>
+                                            <tc id="tiencoc" style="width: 160px; float: left" hidden> Đặt trước :<label
+                                                    style="width: 100px;display: none;" name="tiencoc">.../VNĐ</label>
+                                            </tc>
+                                        </li>
+                                           
+                                        <%} %>
+                                    </ul>
+                                </div>
+                               
+                            </div>
+                            <!-- /.card-body -->
+                          
+                        </div>
+                    </div>
 
 
                     <div class="col-md-6">
@@ -230,16 +307,18 @@
                             <div class="card-header">
                                 <h3 class="card-title">Vị trí:<b id="nametable" class="td_menu" style="color:springgreen; font-size:22px;"></b></h3>
 
-                                <i class="fa fa-plus-square" style="font-size: 24px; padding-left: 20px;"></i><b class="add_hanghoa" style="color: yellow; padding-left: 5px;">Thêm</b>
+                                <i class="fa fa-plus-square" style="font-size: 24px; padding-left: 15px;"></i><b class="add_hanghoa" style="color: yellow; padding-left: 5px;">Thêm</b>
 
-                                <i class="fa fa-pencil" style="font-size: 24px; padding-left: 20px;"></i><b class="editproduct" style="color: yellow; padding-left: 10px;">Sửa</b>
+                                <i class="fa fa-pencil" style="font-size: 24px; padding-left: 15px;"></i><b class="editproduct" style="color: yellow; padding-left: 10px;">Sửa</b>
 
-                                <i class="fa fa-times" style="font-size: 24px; padding-left: 20px;"></i><b class="delproduct" style="color: yellow; padding-left: 5px;">Xóa</b>
+                                <i class="fa fa-times" style="font-size: 24px; padding-left: 15px;"></i><b class="delproduct" style="color: yellow; padding-left: 5px;">Xóa</b>
 
-                                <i class="fa fa-save" style="font-size: 24px;color:blue; padding-left: 20px;"></i><b class="saveproduct" style="color: yellow; padding-left: 5px;">Ghi Thực đơn</b>
+                                <i class="fa fa-save" style="font-size: 24px;color:blue; padding-left: 10px;"></i><b class="saveproduct" style="color: yellow; padding-left: 5px;">Ghi Thực đơn</b>
                                
-                                <b class="addnew_KH" style="color: yellow; padding-left: 10px;">| Thêm KH</b>
+                                <b class="addnew_KH" style="color: yellow; padding-left: 5px;">| Thêm KH</b>
 
+                                <b style="color: yellow; padding-left: 5px;">| Xem lại HĐ</b>
+                                <input type="checkbox" id="xemlaiHD" name="xemlaiHD">
                                 
 
                                
@@ -303,7 +382,7 @@
                                 </table>
 
 
-                                <div style="width: 100%; height: 250px; overflow-y: scroll; float: left;">
+                                <div style="width: 100%; height: 450px; overflow-y: scroll; float: left;">
                                     <table class="display table table-bordered dataTable no-footer">
                                         <thead>
                                             <tr>
@@ -324,45 +403,40 @@
                                 <div class="row">
                                     <div class="col-2">
                                         <label for="tongtien" style="float: left; margin-top: 5px;">Tiền hàng</label>
-                                        <input type="text" id="tongtienid" disabled class="form-control input-sm" name="fname" style="float: left; margin-left: 10px;" value="0">
+                                        <input type="text" id="tongtienid" disabled class="form-control input-sm" name="fname" style="float: left; margin-left: 10px; font-size:22px;" value="0">
                                                      <span style="float: left;padding-left: 20px; padding-top: 10px;">
-            <%--<img src="/static/images/phongtrong.png" style="width:40px;height:30px;float: left;padding-right: 10px;">--%>            
 
-        </span>
+                                                     </span>
                                     </div>
 
                                     <div class="col-2">
                                          <label for="tongtien" style="float: left; margin-top: 5px;">Tiền giờ</label>  
-                                        <input type="text" id="tiengioid" disabled class="form-control input-sm" name="fname" style="float: left; margin-left: 10px;" value="0">                                                                              
+                                        <input type="text" id="tiengioid" disabled class="form-control input-sm" name="fname" style="float: left; margin-left: 10px; font-size:22px;" value="0">                                                                              
                                          <span style="float: left;padding-left: 20px; padding-top: 10px;">
                                     </div>
 
                                     <div class="col-2">
                                         <label for="tongtien" style="float: left; margin-top: 5px;">Chiết khấu</label>
-                                        <input type="text" id="chietkhauid" class="form-control input-sm" name="fname" style="float: left; margin-left: 10px;" value="0">
-                                         <span style="float: left;padding-left: 20px; padding-top: 10px;">
-            <%--<img src="/static/images/cokhach.png" style="width:40px;height:30px;float: left;padding-right: 10px;">--%>
-            
-        </span>
+                                        <input type="text" id="chietkhauid" class="form-control input-sm" name="fname" style="float: left; margin-left: 10px; font-size:22px; background-color:aqua; color:black;" value="0">
+                                         <span style="float: left;padding-left: 20px; padding-top: 10px;">      
+
+                                         </span>
                                     </div>   
 
                                     
                                 
                                     <div class="col-2">
                                         <label for="tongtien" style="float: left; margin-top: 5px;">Khách TT</label>
-                                        <input type="text" id="thanhtoanid" class="form-control input-sm" name="fname" style="float: left; margin-left: 10px;" value="0">                                                                              
+                                        <input type="text" id="thanhtoanid" class="form-control input-sm" name="fname" style="float: left; margin-left: 10px; font-size:22px; background-color:aqua; color:black;" value="0">                                                                              
                                          <span style="float: left;padding-left: 20px; padding-top: 10px;">
-            <%--<img src="/static/images/phongdattruoc.png" style="width:40px;height:30px;float: left;padding-right: 10px;">--%>
-           <%-- <b style="font-size: 14px;">B/P đặt trước</b>--%>
-        </span>                                   
+
+                                         </span>                                   
                                     </div>
                                     <div class="col-2">
                                         <label for="tongtien" style="float: left; margin-top: 5px; id="lblconlai" ">Còn lại</label>
-                                        <input type="text" id="conlaiid" class="form-control input-sm" name="fname" style="float: left; margin-left: 10px;" value="0">                                        
-        <span style="float: left;padding-left: 20px; padding-top: 10px;">
-            <%--<img src="/static/images/chuadonphong.png" style="width:40px;height:30px;float: left;padding-right: 10px;">
-            <b style="font-size: 14px;">Chưa dọn B/P</b>--%>
-        </span>
+                                        <input type="text" id="conlaiid" class="form-control input-sm" name="fname" style="float: left; margin-left: 10px; font-size:22px; background-color:aqua; color:black;" value="0">                                        
+                                        <span style="float: left;padding-left: 20px; padding-top: 10px;">           
+                                        </span>
 
                                     </div>
 
@@ -433,8 +507,8 @@
                             <section class="content">
 
                                 <!-- Default box -->
-                                <div class="card card-solid">
-                                    <div class="card-body pb-0">
+                              
+                                    <div class="card-body pb-0" style="overflow-y: scroll; height:550px;">
                                         <div class="row d-flex align-items-stretch">
                                             <%foreach (System.Data.DataRow rows1 in dt_listhanghoa.Rows)
                                                 {%>
@@ -442,14 +516,13 @@
                                                 <div class="row" style="border: 1px solid grey;">
                                                     <div class="col-12 text-center">
                                                        <%-- <img src="../../dist/img/user1-128x128.jpg" alt="user-avatar" class="img-circle img-fluid">--%>
-                                                       <%-- <img src="../../dist/img/monan.JPG" alt="user-avatar" class="img-circle img-fluid">--%>
+                                                       <%-- <img src="../../dist/img/monan.JPG" alt="user-avatar" class="img-circle img-fluid" style="width:60px;height:50px;">--%>
+                                                        <img src="<%=rows1["anh"].ToString() %>" alt="user-avatar" class="img-circle img-fluid" style="width:60px;height:50px;">
 
-                                                        <div class="text-center" style="margin-bottom: 10px; margin-top: 10px;">
+                                                        <div class="text-center" style="margin-bottom: 10px; margin-top: 3px;">
                                                             <mh><%=rows1["tenhang"].ToString() %></mh> <br /> <dg><%=rows1["giaban"].ToString() %></dg> /VNĐ
-                                                            <input type="number" class="quantity form-control text-center" title="Số lượng" value="1" min="1"  id="quantity" name="quantity"  >                                                                                                                      
-                                                            <a href="#" class="button_addmenu btn btn-sm btn-primary" id="add_sanpham">
-                                                                Add
-                                                            </a>
+                                                            <input type="number" class="quantity form-control text-center" title="Số lượng" value="1" min="1"  id="quantity" name="quantity" style="width:60px;height:30px;float:left;" >                                                                                                                                                                                  
+                                                            <a href="#" class="button_addmenu" id="add_sanpham" style="float:left;"><i class="fa fa-plus-square" style="font-size: 24px; padding-left: 20px;"></i></a>
 
                                                         </div>
                                                         
@@ -463,36 +536,13 @@
                                             <%} %>
                                         </div>
                                     </div>
-                                    <!-- /.card-body -->
-                                    <div class="card-footer">
-                                        <nav aria-label="Contacts Page Navigation">
-                                            <ul class="pagination justify-content-center m-0">
-                                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">6</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">7</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">8</a></li>
-                                            </ul>
-                                        </nav>
-                                    </div>
-                                    <!-- /.card-footer -->
-                                </div>
+                                  
+                              
                                 <!-- /.card -->
 
                             </section>
 
-
-
-
-
-
                         </div>
-
-
-
                     </div>
                 </div>
                 <%-- <div class="row">
@@ -575,9 +625,10 @@
                        
                        <%-- <div class="container-fluid"  style="width:400px;height:auto;">-- mau 400 danh cho may in nho --%>
                        <div class="container-fluid"  style="width:700px;height:auto;">
-                           <span><i style="font-size:22px; text-align:center;">Nhà hàng vườn xoài</i></span><br />                           
+                           <span><i style="font-size:22px; text-align:center;"><%=tendovi %></i></span><br />                           
                           <%--<span hidden> Loại hình: </span><b id="hinhthucnghi2" hidden></b> &nbsp;&nbsp;&nbsp; <span hidden>Tổng tiền hát:</span> <b id="tongtienhat2" hidden></b><br />--%>
-                           <span> Địa chỉ: Nam Hồng - Đông Anh - Hà Nội</span><b id="hinhthucnghi2" hidden></b> &nbsp;&nbsp;&nbsp; <span hidden>Tổng tiền hát:</span> <b id="tongtienhat2" hidden></b><br />
+                           <span> Địa chỉ: <%=diachidonvi %></span><b id="hinhthucnghi2" hidden></b> &nbsp;&nbsp;&nbsp; <span hidden>Tổng tiền hát:</span> <b id="tongtienhat2" hidden></b><br />
+                           Số ĐT: <span><%=sodtdonvi %></span><br />
                            Số HĐ: <span id="sohoadon_"></span> &nbsp;&nbsp;&nbsp; Ngày tạo : <span id="ngaytao_"></span><br />                            
                            Tên bàn: <b id="tenphong2"></b> &nbsp;&nbsp;&nbsp; <span hidden> tiền hàng:</span> <b id="tongtien2" hidden></b>                                                      
 
@@ -598,9 +649,11 @@
                                     </table>
                                 </div>
                              <br /> 
-                           Tổng tiền: <b id="thantoan2"></b> &nbsp;&nbsp;&nbsp;  C/K: <b id="chietkau2"></b> <br />
-                           KH thanh toán: <b id="khthanhtoan2"></b> &nbsp;&nbsp;&nbsp; Còn lại: <b id="psno2"></b>     
-                           <div>Bằng chữ: <span id="bangchuid" style="font-weight:300; color:red; font-size:22px; padding-left:10px;"></span></div>
+                           <span style="float:left; margin-left:440px; width:650px;">Tổng tiền: <b id="thantoan2" style="margin-left:12px;"></b> &nbsp;&nbsp;&nbsp;</span><br /> 
+                           <span style="float:left; margin-left:475px; width:650px;">C/K: <b id="chietkau2" style="margin-left:12px;"></b></span> <br />
+                           <span style="float:left; margin-left:410px; width:650px;">KH thanh toán: <b id="khthanhtoan2" style="margin-left:12px;"></b></span>
+                            <span style="float:left; margin-left:455px; width:650px;">Còn lại: <b id="psno2" style="margin-left:15px;"></b>  </span> 
+                           <div><i style="font-size:22px;">Bằng chữ:</i> <span id="bangchuid" style="font-weight:300; color:red; font-size:22px; padding-left:10px;"></span></div>
                           
                         </div>
                         
@@ -720,18 +773,33 @@
               return rsString.replace(/[0-9]/g, '').replace(/ /g,' ').replace(/ $/,'');
             }
 
+            function formatMoney(number) {
+                return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
+
+            // Hàm để cập nhật số tiền hiển thị
+            function updateTotalAmount(amount) {
+                var formattedAmount = formatMoney(amount);
+                document.getElementById('thantoan2').innerText = formattedAmount;
+                document.getElementById('khthanhtoan2').innerText = formattedAmount;
+                //document.getElementById('chietkau2').innerText = formattedAmount;
+                //document.getElementById('psno2').innerText = formattedAmount;
+            }
+            
+            
+
             $(document).ready(function () {
+
                 //$('#txtid').prop("readonly", true);
                 //$('#txtmaterial').prop("readonly", true);
 
                 //$('#TOOLING_NO_ID').prop("readonly", true);
                 //$('#CustomTooling_ID').prop("readonly", true);
                 //$('#txt_ID').prop("readonly", true);
-                
+                               
                 //lay so hoa don lon nhat
                
-
-                        //check trang thai ban phong co khach hay khong?
+               //check trang thai ban phong co khach hay khong?
                 
                 $.ajax({
                     type: "POST",
@@ -1105,8 +1173,9 @@
 
                                             var mahang = info_mahang[0];
                                             var dongia = info_mahang[1];
-                                            var thanhtien = info_mahang[2];
                                             var soluong = chars[1];
+                                            var thanhtien = soluong*dongia;//info_mahang[2];
+                                            
 
                                             var newrow = '<tr class="themthucdon">' +
                                                 '<td id="tenhang">' + mahang + '</td>' +
@@ -1133,6 +1202,8 @@
                                         $('#conlaiid').val(0);
 
                                         $('#bangchuid2').text(bangchu_hienthi2);
+
+                                        
                                     }
                                 }
                                 else {
@@ -1162,7 +1233,62 @@
                 });
 
             });
-            
+
+            function gopban() {
+                //let newroom;
+                //debugger;
+                var tenphong1 = $("#nametable").text();
+                //alert(tenphong1);
+                let notice = prompt("Vui lòng nhập bàn cần gộp!");
+                if (notice == null || notice == "") {
+                    newroom = "Phong/ban null!";
+                    alert(newroom);
+                }
+                else {
+                    //newroom = "Phong moi chuyen: " + notice;
+                    document.getElementById("thongbao").innerHTML = notice;
+                    var newroom = notice;
+
+                    //alert(tenphong1);                
+                    if (tenphong1 == "") {
+                        alert("Bạn cần chọn bàn cần gộp!");
+                    }
+                    else {
+                        var nameitem = tenphong1;
+                        var data = { nameitem: nameitem, newroom: newroom };
+                        $.ajax({
+                            type: "POST",
+                            contentType: "application/json; charset=utf-8",
+                            url: "Map.aspx/gopphongban",
+                            data: JSON.stringify(data),
+                            dataType: "json",
+                            success: function (data) {
+                                //response(data.d);
+                                //alert(data.d);
+                                if (data.d != "NG") {
+                                    alert('Gộp bàn thành công!');
+                                    $("#myList UL LI").each(function () {
+                                        var nameroom = $(this).find('#tenphong').text();
+                                        if (nameroom == nameitem) {
+                                            $(this).find("img").attr('src', '/static/images/cokhach.png');
+                                        }
+                                        if (nameroom == newroom) {
+                                             $(this).find("img").attr('src', '/static/images/phongtrong.png');                                           
+                                        }
+                                    })
+                                }
+                                else {
+                                    alert('Gộp bàn NG!!!');
+                                }
+                            },
+                            error: function (result) {
+                                //alert("No Match");
+                            }
+                        });
+                    }
+                }
+            }
+
             function updateItem() {
                 //let newroom;
                 //debugger;
@@ -1224,9 +1350,14 @@
                 var tenphong1 = $("#nametable").text();
                 //alert(tenphong1);
                 var nameitem = tenphong1;
-                var userid = <%=Session["username"].ToString()%>;
-                var data = { nameitem: nameitem, userid:userid };
-                $.ajax({
+                var userid = '<%=Session["username"].ToString()%>';
+                var data = { nameitem: nameitem, userid: userid };
+
+                 if(confirm("Bạn có chắc muốn hủy? Bấm OK để tiếp tục!") == true){
+                        //document.getElementById("demo").innerHTML = 
+                        //"Bạn muốn tiếp tục";
+                     //console.log('Bạn muốn tiếp tục');
+                        $.ajax({
                             type: "POST",
                             contentType: "application/json; charset=utf-8",
                             url: "Map.aspx/huyphongban",
@@ -1256,11 +1387,26 @@
                                 //alert("No Match");
                             }
                         });                
+                 }
+                 else
+                 {
+                        //document.getElementById("demo").innerHTML = 
+                        // "Bạn không muốn tiếp tục";
+                      console.log('Bạn không muốn tiếp tục');
+                    }
             }
 
             $('#ghilaihoadon').click(function () 
             {
-                 thanhtoanhoadon2();
+                var checkbox = document.getElementById('xemlaiHD');
+                if (checkbox.checked == true)
+                {
+                        alert('Ban o che do xem lai hoa don!');                      
+                }
+                else
+                {
+                    thanhtoanhoadon2();
+                }                 
                 //printDiv_Save();    //toi lam tiep
             });
 
@@ -1313,177 +1459,196 @@
              }
             
 
-            $('#khachthanhtoan2').click(function () {                                       
-                //save hoa don truoc
-                var itemdata = {};
-                var tenphong = $('#nametable').text();//dj('#name_room').text();
-                var tienhang = $('#tongtienid').val(); 
-                var kieunghi = $('#MainContent_dr_hinhthucnghi').val();
-
-                var sogiodung = $(".sogiodung").text();
-                var sophutdung = $(".sophutdung").text();
-                
-                var tongsophutdung = parseInt(sogiodung)*60+parseInt(sophutdung);
-                var hinhthucnghi = $('#stylerender').val();
-                var giohat = '0';//$('#ticketid').val();
-                if(hinhthucnghi == 'Karaoke')
-                {
-                    giohat = $('#ticketid').val();
+            $('#khachthanhtoan2').click(function () {  
+                var checkbox = document.getElementById('xemlaiHD');
+                if (checkbox.checked == true) {
+                    //che do xem lai hoa don
+                    alert('Ban o che do xem lai hoa don!');
                 }
-                var tienhat1phut = parseInt(giohat)/60;
-                var tongtienhat = Math.round(tongsophutdung * tienhat1phut);
-                //console.log(tongsophutdung)    
-                //console.log(tongsophutdung)
+                else
+                {
+                    //save hoa don truoc
+                    var itemdata = {};
+                    var tenphong = $('#nametable').text();//dj('#name_room').text();
+                    var tienhang = $('#tongtienid').val(); 
+                    var kieunghi = $('#MainContent_dr_hinhthucnghi').val();
 
-                //alert(tienhat1phut);
-                //alert(tongtienhat);
+                    var userid = '<%=Session["username"].ToString()%>';
+
+                    var sogiodung = $(".sogiodung").text();
+                    var sophutdung = $(".sophutdung").text();
+                
+                    var tongsophutdung = parseInt(sogiodung)*60+parseInt(sophutdung);
+                    var hinhthucnghi = $('#stylerender').val();
+                    var giohat = '0';//$('#ticketid').val();
+                    if(hinhthucnghi == 'Karaoke')
+                    {
+                        giohat = $('#ticketid').val();
+                    }
+                    var tienhat1phut = parseInt(giohat)/60;
+                    var tongtienhat = Math.round(tongsophutdung * tienhat1phut);
+                    //console.log(tongsophutdung)    
+                    //console.log(tongsophutdung)
+
+                    //alert(tienhat1phut);
+                    //alert(tongtienhat);
                                  
-                //alert(tongsophutdung);
+                    //alert(tongsophutdung);
 
-                var tiengiohat = $('#tiengioid').val();
-                var tienck = $('#chietkhauid').val();
-                var khthanhtoan2 = $('#thanhtoanid').val();
-                var tienthoi = $('#conlaiid').val();
-                //alert(tienthoi);
+                    var tiengiohat = $('#tiengioid').val();
+                    var tienck = $('#chietkhauid').val();
+                    var khthanhtoan2 = $('#thanhtoanid').val();
+                    var tienthoi = $('#conlaiid').val();
+                    //alert(tienthoi);
 
-                const hienthi_bangchu = to_vietnamese(khthanhtoan2);
+                    const hienthi_bangchu = to_vietnamese(khthanhtoan2);
 
-                if (tenphong != "") {
-                    $('.themthucdon').each(function () {
-                        //var mahang = $(this).find('td').eq(0).text();
-                        //var soluong = $(this).find('td').eq(1).text();
-                        var mahang = $(this).find('td').eq(0).text() + "," + $(this).find('td').eq(2).text() + "," + $(this).find('td').eq(3).text();
-                        var soluong = $(this).find('td').eq(1).text();
-                        var element = {}, cart = [];
-                        if (mahang != "") {
-                            //items.push({'a': chk ? 1 : 0, 'c': content});
-                            itemdata[mahang] = parseInt(soluong);                            
-                        }
-                    });
-                    var hanghoa_new = itemdata;
-                    var aaa = $('#tongtienid').val();
-                    var data = {
-                        kieunghi: kieunghi,
-                        tenphong: tenphong,
-                        tienhang: tienhang,
-                        items: JSON.stringify(itemdata)
-                    };
-                    //save hang hoa
-                    $.ajax({
-                        type: "POST",
-                        contentType: "application/json; charset=utf-8",
-                        url: "Map.aspx/addthongtinhanghoa",
-                        //data: JSON.stringify(data),
-                        data: JSON.stringify(data),
-                        dataType: "json",
-                        success: function (data) {
-                            //alert('Hàng hóa đã được thêm thành công!');                                                       
-                        },
-                        error: function () {
-                            //alert("No Match");
-                        }
-                    });
-                        // nha du lieu len thong tin hoa don
-                        // lay thong tin hoang hoa
+                    if (tenphong != "") {
+                        $('.themthucdon').each(function () {
+                            //var mahang = $(this).find('td').eq(0).text();
+                            //var soluong = $(this).find('td').eq(1).text();
+                            var mahang = $(this).find('td').eq(0).text() + "," + $(this).find('td').eq(2).text() + "," + $(this).find('td').eq(3).text();
+                            var soluong = $(this).find('td').eq(1).text();
+                            var element = {}, cart = [];
+                            if (mahang != "") {
+                                //items.push({'a': chk ? 1 : 0, 'c': content});
+                                itemdata[mahang] = parseInt(soluong);                            
+                            }
+                        });
+                        var hanghoa_new = itemdata;
+                        var aaa = $('#tongtienid').val();
+                        var data = {                        
+                            kieunghi: kieunghi,
+                            tenphong: tenphong,
+                            tienhang: tienhang,
+                            items: JSON.stringify(itemdata),
+                            userid: userid
+                        };
+                        //save hang hoa
                         $.ajax({
                             type: "POST",
                             contentType: "application/json; charset=utf-8",
-                            url: "Map.aspx/thongtinhanghoa",
+                            url: "Map.aspx/addthongtinhanghoa",
                             //data: JSON.stringify(data),
                             data: JSON.stringify(data),
                             dataType: "json",
                             success: function (data) {
-                                //response(data.d);                              
-                                const objdata = $.parseJSON(data.d);
-                                //var giaphong = objdata['Table'][2]; 
-                                //debugger;
-                                if (objdata['Table'][0] != "")  //|| objdata ['Table'][0][0] != "0"
-                                {
-                                    $('#tbnhaphang_inhoadon tr').remove();
-                                    const myArr = JSON.parse(objdata['Table'][0][0]);
-                                    //var tienhang = objdata['Table'][0][1];
-                                    //var giovao = objdata['Table'][0][3];  
-                                    var ngaytao = objdata['Table'][0][15]; 
-                                    var _sohoadon = objdata['Table'][0][6]; 
-                                    //debugger; 
-                                    if (myArr == '0') {
-                                        //truong hop chua co hang ban
-                                        $('#tbnhaphang_inhoadon tr').remove();
-                                        $("#tenphong2").text(tenphong);
-                                        $('#tongtien2').text(0);                                        
-                                        $('#thantoan2').text(0);
-                                        $('#chietkau2').text(0);
-
-                                        $('#hinhthucnghi2').text('');
-                                        $('#tongtienhat2').text(tongtienhat);
-                                    } 
-                                    else 
-                                    {
-                                        var blkstr = [];
-                                        $.each(myArr, function (idx2, val2) {
-                                            var str = idx2 + ":" + val2;
-                                            blkstr.push(str);
-                                        });
-                                        //debugger;
-                                        //var aaa = blkstr[0];
-                                        //var bbb = blkstr[1];
-                                        for (var i = 0; i < blkstr.length; i++) {
-                                            const chars = blkstr[i].split(':');
-                                            const info_mahang = chars[0].split(',');
-
-                                            var mahang = info_mahang[0];
-                                            var dongia = info_mahang[1];
-                                            var thanhtien = info_mahang[2];
-                                            var soluong = chars[1];
-
-                                            var newrow = '<tr class="themthucdon2">' +
-                                                '<td id="tenhang">' + mahang + '</td>' +
-                                                '<td id="soluong">' + soluong + '</td>' +
-                                                '<td id="giale">' + dongia + '</td>' +
-                                                '<td id="thanhtien">' + thanhtien + '</td>' +                                               
-                                                '</tr>';
-                                            $('#tbnhaphang_inhoadon').append(newrow);                                                                                           
-                                        }
-                                        //$('#checkinput1').val(giovao);
-                                        //$('#checkinput2').val(giora);                                                                
-                                        $("#tenphong2").text(tenphong);
-                                        $('#tongtien2').text(tienhang);
-                                        $('#thantoan2').text(parseInt(tienhang)+parseInt(tongtienhat));
-                                        $('#chietkau2').text(tienck);
-                                
-                                        $('#khthanhtoan2').text(khthanhtoan2);
-                                        $('#psno2').text(tienthoi);
-                                        $('#sohoadon_').text(_sohoadon);
-                                        $('#ngaytao_').text(ngaytao);
-                                        
-
-                                        $('#hinhthucnghi2').text(hinhthucnghi);
-                                        $('#tongtienhat2').text(tongtienhat);
-
-                                        $('#bangchuid').text(hienthi_bangchu);
-                                    }
-                                }
-                                else {
-                                    $('#tbnhaphang_inhoadon tr').remove();
-                                     $("#tenphong2").text(tenphong);
-                                        $('#tongtien2').text(0);                                        
-                                        $('#thantoan2').text(0);
-                                        $('#chietkau2').text(0);
-
-                                        $('#hinhthucnghi2').text('');
-                                        $('#tongtienhat2').text(tongtienhat);
-                                }
+                                //alert('Hàng hóa đã được thêm thành công!');                                                       
                             },
                             error: function () {
                                 //alert("No Match");
                             }
-                        });            
+                        });
+                            // nha du lieu len thong tin hoa don
+                            // lay thong tin hoang hoa
+                            $.ajax({
+                                type: "POST",
+                                contentType: "application/json; charset=utf-8",
+                                url: "Map.aspx/thongtinhanghoa",
+                                //data: JSON.stringify(data),
+                                data: JSON.stringify(data),
+                                dataType: "json",
+                                success: function (data) {
+                                    //response(data.d);                              
+                                    const objdata = $.parseJSON(data.d);
+                                    //var giaphong = objdata['Table'][2]; 
+                                    //debugger;
+                                    if (objdata['Table'][0] != "")  //|| objdata ['Table'][0][0] != "0"
+                                    {
+                                        $('#tbnhaphang_inhoadon tr').remove();
+                                        const myArr = JSON.parse(objdata['Table'][0][0]);
+                                        //var tienhang = objdata['Table'][0][1];
+                                        //var giovao = objdata['Table'][0][3];  
+                                        var ngaytao = objdata['Table'][0][15]; 
+                                        var _sohoadon = objdata['Table'][0][6]; 
+                                        //debugger; 
+                                        if (myArr == '0') {
+                                            //truong hop chua co hang ban
+                                            $('#tbnhaphang_inhoadon tr').remove();
+                                            $("#tenphong2").text(tenphong);
+                                            $('#tongtien2').text(0);                                        
+                                            $('#thantoan2').text(0);
+                                            $('#chietkau2').text(0);
+
+                                            $('#hinhthucnghi2').text('');
+                                            $('#tongtienhat2').text(tongtienhat);
+                                        } 
+                                        else 
+                                        {
+                                            var blkstr = [];
+                                            $.each(myArr, function (idx2, val2) {
+                                                var str = idx2 + ":" + val2;
+                                                blkstr.push(str);
+                                            });
+                                            //debugger;
+                                            //var aaa = blkstr[0];
+                                            //var bbb = blkstr[1];
+                                            for (var i = 0; i < blkstr.length; i++) {
+                                                const chars = blkstr[i].split(':');
+                                                const info_mahang = chars[0].split(',');
+
+                                                var mahang = info_mahang[0];
+                                                var dongia = info_mahang[1];
+                                                var soluong = chars[1];
+                                                var thanhtien = soluong*dongia;//info_mahang[2];
+                                            
+
+                                                var newrow = '<tr class="themthucdon2">' +
+                                                    '<td id="tenhang">' + mahang + '</td>' +
+                                                    '<td id="soluong">' + soluong + '</td>' +
+                                                    '<td id="giale">' + dongia + '</td>' +
+                                                    '<td id="thanhtien">' + thanhtien + '</td>' +                                               
+                                                    '</tr>';
+                                                $('#tbnhaphang_inhoadon').append(newrow);                                                                                           
+                                            }
+                                            //$('#checkinput1').val(giovao);
+                                            //$('#checkinput2').val(giora);                                                                
+                                            $("#tenphong2").text(tenphong);
+                                            $('#tongtien2').text(tienhang);
+                                            $('#thantoan2').text(parseInt(tienhang)+parseInt(tongtienhat));
+                                            $('#chietkau2').text(tienck);
+                                                                        
+                                            $('#khthanhtoan2').text(khthanhtoan2);
+                                            $('#psno2').text(tienthoi);
+                                            $('#sohoadon_').text(_sohoadon);
+                                            $('#ngaytao_').text(ngaytao);
+                                        
+                                            $('#hinhthucnghi2').text(hinhthucnghi);
+                                            $('#tongtienhat2').text(tongtienhat);
+
+                                            //var tongtienhienthi = parseInt(tienhang) + parseInt(tongtienhat);
+                                            //updateTotalAmount(tongtienhienthi);
+                                            //updateTotalAmount(khthanhtoan2);
+
+                                            //updateTotalAmount(tienck);
+                                            //updateTotalAmount(tienthoi);
+
+                                            $('#bangchuid').text(hienthi_bangchu);
+                                        }
+                                    }
+                                    else {
+                                        $('#tbnhaphang_inhoadon tr').remove();
+                                         $("#tenphong2").text(tenphong);
+                                            $('#tongtien2').text(0);                                        
+                                            $('#thantoan2').text(0);
+                                            $('#chietkau2').text(0);
+
+                                            $('#hinhthucnghi2').text('');
+                                            $('#tongtienhat2').text(tongtienhat);
+                                    }
+                                },
+                                error: function () {
+                                    //alert("No Match");
+                                }
+                            });            
+                    }
+                    else
+                    {
+                            alert('Bạn chưa chọn phòng thuê!')
+                    }
+                    $('#myModal6').modal('show');
                 }
-                else
-                {
-                        alert('Bạn chưa chọn phòng thuê!')
-                }
-                  $('#myModal6').modal('show');
+                
             })            
 
             function thanhtoanhoadon(tenphong2,tongtien2,chietkau2,thantoan2,conlai2,tienhat,sohoadon,idkhachhang)
@@ -1920,6 +2085,8 @@
                 var kieunghi = $('#MainContent_dr_hinhthucnghi').val();
                 var hinhthucnghi = $('#stylerender').val();
                 var loaihinhnghi = $('#kieunghiid').text();
+               
+                var userid = '<%=Session["username"].ToString()%>';
                 //alert(loaihinhnghi);
                 //alert(hinhthucnghi);
                 if (kieunghi == '' && hinhthucnghi == 'hotel')
@@ -1949,7 +2116,8 @@
                                     kieunghi:kieunghi,
                                     tenphong: tenphong,
                                     tienhang: tienhang,
-                                    items: JSON.stringify(itemdata)
+                                 items: JSON.stringify(itemdata),
+                                    userid: userid
                                 };                                
                                 //save hang hoa
                                 $.ajax({
@@ -2009,7 +2177,8 @@
                                     kieunghi:kieunghi,
                                     tenphong: tenphong,
                                     tienhang: tienhang,
-                                    items: JSON.stringify(itemdata)
+                                 items: JSON.stringify(itemdata),
+                                 userid: userid
                                 };
                                 //djLog(data);  //Object {tenphong: "P.101", tienhang: "10000", items: "{"ngocay":1}"}
                                 //console.log(data);
@@ -2155,6 +2324,84 @@
                 }
             });
 
+            $('#xemlaiHD').on('change', function() {                 
+                if (!this.checked) {                  
+                    $('#hoadonid').attr('disabled', 'disabled');                    
+
+                    var checkbox = document.getElementById('inlaiHD');
+                    if (checkbox) {
+                        checkbox.checked = false;                        
+                    }
+                    $('#tbnhaphang tr').remove();
+                    $('#tongtienid').val('0');
+                    $('#chietkhauid').val('0');
+                    $('#thanhtoanid').val('0');
+                    $('#conlaiid').val('0');
+                    $('#tiengioid').val('0');
+                }
+                else
+                {
+                   // alert('show lai hoa don');
+                   var sohoadon = $("#hoadonid").val();
+                    //alert(sohoadon);
+                    var data = { sohoadon: sohoadon };
+                    $.ajax({
+                            type: "POST",
+                            contentType: "application/json; charset=utf-8",
+                            url: "Map.aspx/Xemlaihoadon",
+                            data: JSON.stringify(data),
+                            dataType: "json",
+                            success: function (data) {
+                                const objdata = $.parseJSON(data.d);
+                                var tongtienhang = "";
+                                var tongchietkhau = "";                            
+                                var khachthanhtoan = "";
+                                var khachno = "";
+                                $('#tbnhaphang tr').remove();
+
+                                var biendem = objdata['Table1'].length;
+                                for (var i = 0; i < objdata['Table1'].length - 1; i++) {
+                                    //console.log(objdata['Table1'].length);
+                                    var tenhang = objdata['Table1'][i][0];                                    
+                                    var soluong = objdata['Table1'][i][1];
+                                    var dongia = objdata['Table1'][i][2];                                   
+                                    var thanhtien = objdata['Table1'][i][3];
+
+                                    var newrow = '<tr class="themthucdon">' +
+                                                '<td id="tenhang">' + tenhang + '</td>' +
+                                                '<td id="soluong">' + soluong + '</td>' +
+                                                '<td id="giale">' + dongia + '</td>' +
+                                                '<td id="thanhtien">' + thanhtien + '</td>' +
+                                                '<td><input name="checkinput" class="checkinput" type="checkbox" value="" /></td>' +
+                                                '</tr>';
+                                            $('#tbnhaphang').append(newrow);
+
+                                    if (i == (biendem - 2))
+                                    {                                        
+                                        tongchietkhau = objdata['Table1'][i][4];  
+                                        tongtienhang = objdata['Table1'][i][5];  
+                                        khachthanhtoan = objdata['Table1'][i][6];
+                                        khachno = objdata['Table1'][i][7];                                       
+                                    }
+                                }
+
+                                $('#tongtienid').val(tongtienhang);
+                                $('#chietkhauid').val(tongchietkhau);
+                                $('#thanhtoanid').val(khachthanhtoan);
+                                $('#conlaiid').val(khachno);
+
+
+
+                            },
+                            error: function () {
+                                //alert("No Match");
+                            }
+                    });
+
+
+                }
+            });
+
             $("#hoadonid").on('keyup', function (e) {
                 if ((e.key === 'Enter' || e.keyCode === 13)) {
                     //alert('hoadon inlai');
@@ -2216,8 +2463,9 @@
 
                                             var mahang = info_mahang[0];
                                             var dongia = info_mahang[1];
-                                            var thanhtien = info_mahang[2];
                                             var soluong = chars[1];
+                                            var thanhtien = soluong*dongia;//info_mahang[2];
+                                            
 
                                             var newrow = '<tr class="themthucdon2">' +
                                                 '<td id="tenhang">' + mahang + '</td>' +

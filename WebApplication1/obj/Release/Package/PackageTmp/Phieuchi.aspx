@@ -68,7 +68,9 @@ button:hover {
 
     <div class="container">
     <h2>Phiếu Chi</h2>
- 
+        <div>                        
+            <b style="float:left; margin-right:10px; margin-top:10px;">Số HĐ :</b><input id="soHD" name="soHD" class="form-control input-sm" value="<%=sohoadon %>"" style="width:200px;"/> 
+        </div>
       <div class="row">
         <div class="column">
           <div class="form-group">
@@ -116,7 +118,7 @@ button:hover {
         </div>
         <div class="column">
           <div class="form-group">
-            <label for="note">Nguoi Chi tien:</label>
+            <label for="note">Người chi tiền:</label>
             <input type="text" id="nguoichitienid" name="amount">
           </div>
         </div>
@@ -130,6 +132,15 @@ button:hover {
             //SearchText();            
          });     
 
+         $("#soHD").on('keyup', function (e) {
+         if ((e.key === 'Enter' || e.keyCode === 13))
+            {    
+             var sohoadon = $('#soHD').val();
+             //alert(sohoadon);
+                //window.location.href = "/TemplateReport/ReportPhieuthu.aspx?sohoadon='"+sohoadon+"'";
+                window.open('/TemplateReport/ReportPhieuchi.aspx?sohoadon='+sohoadon+'', '_blank'); // keeps page one active
+            }
+        }); 
         
          $('#MainContent_dr_nhacungcap').on('change', function () {
              var idcongno = $('#MainContent_dr_nhacungcap').val();
@@ -182,7 +193,7 @@ button:hover {
                         success: function (data) {
                             //response(data.d);
                             //var objdata = $.parseJSON(data.d);
-                            alert("Them phieu chi thanh cong!");
+                            alert("Thêm phiếu chi thành công!");
                             $("#idnguoinhan").val('');
                             $("#MainContent_dr_nhacungcap").val('==NCC==');
                             $("#sotienid").val('');
@@ -190,7 +201,13 @@ button:hover {
                             $("#motaid").val('');
                             $("#ngaychiid").val('');
                             $("#phuongthucid").val('Tien mat');
-                            $("#nguoichitienid").val('');                                    
+                            $("#nguoichitienid").val(''); 
+
+                             var idop = data.d.split(',');
+                           //var _id = idop[0];
+                           var _sohd = idop[1];
+
+                            $("#soHD").val(_sohd);
                         },
                         error: function () {
                             //alert("No Match");

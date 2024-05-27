@@ -113,6 +113,10 @@
 <body>
     <form id="form1" runat="server">
         <div>
+            <h2 style="padding-top: 4pt;padding-left: 10pt;text-indent: 0pt;text-align: left;"><%=tendovi %></h2>
+            <p class="s1" style="padding-top: 7pt;padding-left: 10pt;text-indent: 0pt;text-align: left;">Địa chỉ: <%=diachidonvi %></p>
+            <p class="s1" style="padding-top: 7pt;padding-left: 10pt;text-indent: 0pt;text-align: left;">Điện thoại: <%=sodtdonvi %></p>  
+
              <p style="padding-left: 6pt;text-indent: 0pt;line-height: 1pt;text-align: left;" />
     <h1 style="padding-top: 7pt;padding-left: 10pt;text-indent: 0pt;text-align: left;">Báo cáo tổng hợp thu chi : <br />
         <span class="s1">Từ ngày :<%=tungay %> Đến ngày :<%=tungay %></span></h1>

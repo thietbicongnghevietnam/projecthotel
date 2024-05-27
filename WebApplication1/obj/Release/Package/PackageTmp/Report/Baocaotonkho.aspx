@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Bao cao ton kho</title>
+    <title>Báo cáo tồn kho</title>
         
     <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
@@ -94,7 +94,12 @@
                                         <th>Mahang</th>
                                         <th>Tenhang</th>
                                         <th>dvt</th>
-                                        <th>Soluongton</th> 
+                                        <th>Ton dau ky</th> 
+
+                                         <th>Nhap trong ky</th>
+                                         <th>Xuat trong ky</th>
+
+                                        <th>Ton cuoi ky</th> 
                                         <th>Gianhap</th> 
                                          <th>Giaban</th> 
                                         <th>Nhomhang</th>
@@ -114,6 +119,12 @@
                                         <td><%=rows["mahang"].ToString()%></td>
                                         <td><%=rows["tenhang"].ToString()%></td>
                                         <td><%=rows["dvt"].ToString()%></td>
+
+                                         <td><%=rows["soluongdauky"].ToString()%></td>
+
+                                        <td><%=rows["Soluongnhap"].ToString()%></td>
+                                        <td><%=rows["Soluongxuat"].ToString()%></td>
+
                                         <td><%=rows["soluongton"].ToString()%></td>
                                         <td><%=rows["gianhap"].ToString()%></td>
                                          <td><%=rows["giaban"].ToString()%></td> 

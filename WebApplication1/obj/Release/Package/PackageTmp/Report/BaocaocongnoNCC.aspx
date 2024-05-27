@@ -115,7 +115,7 @@
                                         <td>
                                             <a href="#" class="btn btn-info btn-sm" title="delete item" onclick="openEditModal2('<%= rows["id"].ToString() %>')"><i class="fas fa-pencil-alt"></i>Lich su</a>
                                             &nbsp;&nbsp;
-                                            <a href="#" class="btn btn-info btn-sm" title="delete item" onclick="openEditModal6('<%= rows["id"].ToString() %>')" ><i class="fas fa-pencil-alt"></i>Chi tiet HD</a>
+                                            <%--<a href="#" class="btn btn-info btn-sm" title="delete item" onclick="openEditModal6('<%= rows["id"].ToString() %>')" ><i class="fas fa-pencil-alt"></i>Chi tiet HD</a>--%>
                                         </td> 
                                         
                                     </tr>

@@ -86,3 +86,8 @@ C:\Users\ACER\Desktop\Nhahang\projecthotel\WebApplication1\bin\Microsoft.AspNet.
 C:\Users\ACER\Desktop\Nhahang\projecthotel\WebApplication1\bin\Microsoft.Owin.xml
 C:\Users\ACER\Desktop\Nhahang\projecthotel\WebApplication1\bin\Microsoft.Owin.Host.SystemWeb.xml
 C:\Users\ACER\Desktop\Nhahang\projecthotel\WebApplication1\bin\Microsoft.Owin.Security.xml
+C:\Users\ACER\Desktop\Nhahang\projecthotel\WebApplication1\bin\QRCoder.dll
+C:\Users\ACER\Desktop\Nhahang\projecthotel\WebApplication1\bin\zxing.dll
+C:\Users\ACER\Desktop\Nhahang\projecthotel\WebApplication1\bin\zxing.presentation.dll
+C:\Users\ACER\Desktop\Nhahang\projecthotel\WebApplication1\bin\zxing.xml
+C:\Users\ACER\Desktop\Nhahang\projecthotel\WebApplication1\bin\zxing.presentation.xml
