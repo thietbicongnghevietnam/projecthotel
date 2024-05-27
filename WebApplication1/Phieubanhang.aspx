@@ -29,6 +29,12 @@
                 <input id="soluongnhaphang" name="soluongnhaphang" class="form-control input-sm" value="" style="width:60px;float:left; margin-right:3px;" />
                 <input id="dvtnhonhat" name="donvitinh" class="form-control input-sm" value="" style="width:60px;float:left;" />
                 </td>
+                    
+                <td style="padding-bottom: 10px; padding-right: 10px;">
+                    <b style="float:left;">Đơn giá: </b>
+                    <input id="dongiaid" name="dongia" class="form-control input-sm" value="" style="width:100px;float:left;" />
+                </td>
+
 
                 <td style="padding-bottom: 10px; padding-right: 10px;">                        
                         <asp:DropDownList ID="dr_dvt" runat="server" AppendDataBoundItems="true" 
@@ -252,8 +258,35 @@
             </div>
         </div>
 
+        <div id="contentToPrint">
+        <!-- Nội dung bạn muốn in -->
+        <h1>Hello, world!</h1>
+        <p>This is the content that you want to print. noi dung in khong can hoi</p>
+    </div>
+
+    <!-- Nút để kích hoạt chức năng in -->
+    <button onclick="printContent()">Print</button>
+
 
     </div>
+
+    <script>
+        function printContent() {
+alert('toi dang thu');
+            //var content = document.getElementById("contentToPrint").innerHTML;
+            //var printWindow = window.open('', '_blank');
+            //printWindow.document.open();
+            //printWindow.document.write('<html><head><title>Print</title></head><body>' + content + '</body></html>');
+            //printWindow.document.close();
+            //printWindow.print();
+            var content = document.getElementById("contentToPrint").innerHTML;
+            //var printWindow = window.open('', '_blank');
+            printWindow.document.open();
+            printWindow.document.write('<html><head><title>Print</title></head><body onload="window.print(); window.close()">' + content + '</body></html>');
+            printWindow.document.close();
+        }
+    </script>
+
      <script type="text/javascript">
         $(document).ready(function () {
             SearchText();   
@@ -465,12 +498,18 @@
                             if (data.d != "NG") {
                                 var chuoihang = data.d.split(',');                                
                                 $("#mahanghoa").text(chuoihang[0]);
-                                $("#dvtnhonhat").val(chuoihang[1]);    
+                                $("#dvtnhonhat").val(chuoihang[1]);   
+                                $("#dongiaid").val(chuoihang[2]); 
                                 $("#MainContent_dr_dvt").val('==DVT==');
+
+                                soluong_keyenter();
                             } 
                             else 
                             {
-                                alert('Khong co trong danh muc hang hoa!');
+                                //alert('Khong co trong danh muc hang hoa!');
+                                //truong hop khong can bo tich QRcode van co the ban tay duoc
+                                $("#soluongnhaphang").val(1);
+                                $("#soluongnhaphang").select();
                             }                            
                         },
                         error: function () {
@@ -478,7 +517,7 @@
                         }
                     });
 
-                    soluong_keyenter();
+                    //soluong_keyenter();
                 }
                 else
                 {
@@ -497,7 +536,8 @@
                             if (data.d != "NG") {
                                 var chuoihang = data.d.split(',');                                
                                 $("#mahanghoa").text(chuoihang[0]);
-                                $("#dvtnhonhat").val(chuoihang[1]);    
+                                $("#dvtnhonhat").val(chuoihang[1]); 
+                                $("#dongiaid").val(chuoihang[2]);   
                                 $("#MainContent_dr_dvt").val('==DVT==');
                             } 
                             else 
@@ -590,11 +630,14 @@
                             if (chk == true) {
                                 var tenhangid = $(this).parent().parent().find('td').eq(0).text();
                                 var soluong = $(this).parent().parent().find('td').eq(1).text();
+                                var giabanra = $(this).parent().parent().find('td').eq(2).text();
                                 var price = $(this).parent().parent().find('td').eq(3).text();
                                 tongtienhang = tongtienhang - price;
                                 $(this).parent().parent().remove();
                                 $('#tongtiennhap').val(tongtienhang);
                                 $('#thanhtoanid').val(tongtienhang);
+
+                                $('#dongiaid').val(giabanra);
 
                                 $('#soluongnhaphang').val(soluong);
                                 if (ckQRcode.checked == true) {
@@ -607,7 +650,7 @@
                                             data: JSON.stringify(data2),
                                             dataType: "json",
                                             success: function (data) {
-                                                if(data.d == "NG")
+                                                if(data.d != "NG")
                                                 {
                                                     $('#MainContent_phieunhaphang').val(data.d);
                                                 }
@@ -665,6 +708,13 @@
                     });
 
         $("#soluongnhaphang").on('keyup', function (e) {
+            if ((e.key === 'Enter' || e.keyCode === 13))
+            {                
+                soluong_keyenter();
+            }
+         });
+
+        $("#dongiaid").on('keyup', function (e) {
             if ((e.key === 'Enter' || e.keyCode === 13))
             {                
                 soluong_keyenter();
@@ -769,6 +819,8 @@
          function handleMahang(mahang, ktdvt, soluong_dvt, tongtienhang) {
              var _mahang = mahang;
              var data = { _mahang: _mahang };
+
+            var dongiabanra = $('#dongiaid').val();
                 //push mahang vao array
              var gettr = [];
              
@@ -808,13 +860,14 @@
                                     //var soluong = parseInt($("#soluongnhaphang").val());
                                     var dongia = parseInt(objdata['Table'][0][7]);  //gia le
                                     //var dongia = parseInt(objdata['Table'][0][6]);    //gia nhap  
-                                    var thanhtien = parseInt(soluong) * parseInt(objdata['Table'][0][7]);
+                                    //var thanhtien = parseInt(soluong) * parseInt(objdata['Table'][0][7]);
+                                    var thanhtien = parseInt(soluong) * parseInt(dongiabanra);
                                     //alert(thanhtien);
 
                                     var newrow = '<tr class="themthucdon">' +
                                         '<td id="tenhang">' + objdata['Table'][0][2] + '</td>' +
                                         '<td id="soluong">' + soluong + '</td>' +
-                                        '<td id="giale">' + dongia + '</td>' +
+                                        '<td id="giale">' + dongiabanra + '</td>' +
                                         '<td id="thanhtien">' + thanhtien + '</td>' +
                                         '<td><input name="checknhaphang" class="checknhaphang" type="checkbox" value="" /></td>' +
                                         '</tr>';
@@ -873,11 +926,12 @@
                                             var soluong = parseInt($("#soluongnhaphang").val());
                                             var dongia = parseInt(objdata['Table'][0][7]);
                                             //var dongia = parseInt(objdata['Table'][0][6]);  //gia nhap
-                                            var thanhtien = tong_soluong * dongia;
+                                            //var thanhtien = tong_soluong * dongia;
+                                            var thanhtien = tong_soluong * dongiabanra;
                                             var newrow = '<tr class="themthucdon">' +
                                                 '<td id="tenhang">' + objdata['Table'][0][2] + '</td>' +
                                                 '<td id="soluong">' + tong_soluong + '</td>' +
-                                                '<td id="giale">' + dongia + '</td>' +
+                                                '<td id="giale">' + dongiabanra + '</td>' +
                                                 '<td id="thanhtien">' + thanhtien + '</td>' +
                                                 '<td><input name="checknhaphang" class="checknhaphang" type="checkbox" value="" /></td></td>' +
                                                 '</tr>';
@@ -1114,11 +1168,11 @@
                                                 var chietkhau = "";//objdata['Table1'][i][3];
                                                 var thanhtien = objdata['Table1'][i][4];
                                                 var newrow = '<tr class="thongtinhoadon">' +
-                                                    '<td id="_hanghoad" style="width:150px;">' + tenhang + '</td>' +
-                                                    '<td id="_tienhang">' + dongia + '</td>' +
-                                                    '<td id="_loaihoadon">' + soluong + '</td>' +
+                                                    '<td id="_hanghoad" style="width:250px; border: 1px soild black;">' + tenhang + '</td>' +
+                                                    '<td id="_tienhang" style="border: 1px soild black;">' + dongia + '</td>' +
+                                                    '<td id="_loaihoadon" style="border: 1px soild black;">' + soluong + '</td>' +
                                                     //'<td id="_chietkhau">' + chietkhau + '</td>' +
-                                                    '<td id="_sohoadon">' + thanhtien + '</td>' +
+                                                    '<td id="_sohoadon" style="border: 1px soild black;">' + thanhtien + '</td>' +
                                                     '</tr>';
                                                 $('#tbnhaphang_inhoadon').append(newrow);                                                                                        
                                             }                                        
@@ -1161,6 +1215,7 @@
                             //chietkhauid
                             $("#soluongnhaphang").val('0');
                             $("#conlaiid").val('0');
+                            $("#dongiaid").val('0');
                      }  
 
                      var ckQRcode = document.getElementById("bannhanhid");
@@ -1257,11 +1312,11 @@
                                                     var chietkhau = "";//objdata['Table1'][i][3];
                                                     var thanhtien = objdata['Table1'][i][4];
                                                     var newrow = '<tr class="thongtinhoadon">' +
-                                                        '<td id="_hanghoad" style="width:150px;">' + tenhang + '</td>' +
-                                                        '<td id="_tienhang">' + dongia + '</td>' +
-                                                        '<td id="_loaihoadon">' + soluong + '</td>' +
+                                                        '<td id="_hanghoad" style="width:250px; border: 1px soild black;">' + tenhang + '</td>' +
+                                                        '<td id="_tienhang" style="border: 1px soild black;">' + dongia + '</td>' +
+                                                        '<td id="_loaihoadon" style="border: 1px soild black;">' + soluong + '</td>' +
                                                         //'<td id="_chietkhau">' + chietkhau + '</td>' +
-                                                        '<td id="_sohoadon">' + thanhtien + '</td>' +
+                                                        '<td id="_sohoadon" style="border: 1px soild black;">' + thanhtien + '</td>' +
                                                         '</tr>';
                                                     $('#tbnhaphang_inhoadon').append(newrow);                                                                                        
                                                 }                                        
@@ -1302,6 +1357,7 @@
                             //chietkhauid
                             $("#soluongnhaphang").val('0');
                             $("#conlaiid").val('0');
+                            $("#dongiaid").val('0');
                  }   
 
 
@@ -1356,11 +1412,11 @@
                                     var chietkhau = "";//objdata['Table1'][i][3];
                                     var thanhtien = objdata['Table1'][i][4];
                                     var newrow = '<tr class="thongtinhoadon">' +
-                                        '<td id="_hanghoad" style="width:150px;">' + tenhang + '</td>' +
-                                        '<td id="_tienhang">' + dongia + '</td>' +
-                                        '<td id="_loaihoadon">' + soluong + '</td>' +
+                                        '<td id="_hanghoad" style="width:250px; border: 1px soild black;">' + tenhang + '</td>' +
+                                        '<td id="_tienhang" style="border: 1px soild black;">' + dongia + '</td>' +
+                                        '<td id="_loaihoadon" style="border: 1px soild black;">' + soluong + '</td>' +
                                         //'<td id="_chietkhau">' + chietkhau + '</td>' +
-                                        '<td id="_sohoadon">' + thanhtien + '</td>' +
+                                        '<td id="_sohoadon" style="border: 1px soild black;">' + thanhtien + '</td>' +
                                         '</tr>';
                                     $('#tbnhaphang_inhoadon').append(newrow); 
 
