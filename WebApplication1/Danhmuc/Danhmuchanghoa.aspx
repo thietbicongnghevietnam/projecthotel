@@ -139,7 +139,7 @@
                                         <td><%=rows["anh"].ToString()%></td>
                                        
                                         <td>
-                                            <a href="#" class="btn btn-info btn-sm" title="delete item" onclick="openEditModal2('<%= rows["mahang"].ToString() %>','<%= rows["tenhang"].ToString() %>','<%= rows["dvt"].ToString() %>','<%= rows["gianhap"].ToString() %>','<%= rows["giaban"].ToString() %>','<%=rows["tennhomhang"].ToString()%>','<%=rows["anh"].ToString()%>')"><i class="fas fa-pencil-alt"></i>Sửa</a>
+                                            <a href="#" class="btn btn-info btn-sm" title="delete item" onclick="openEditModal2('<%= rows["mahang"].ToString() %>','<%= rows["tenhang"].ToString() %>','<%= rows["dvt"].ToString() %>','<%= rows["gianhap"].ToString() %>','<%= rows["giaban"].ToString() %>','<%=rows["tennhomhang"].ToString()%>','<%=rows["anh"].ToString()%>','<%=rows["Orderid"].ToString()%>')"><i class="fas fa-pencil-alt"></i>Sửa</a>
                                             <a href="#" class="btn btn-info btn-sm" title="delete item" onclick="openEditModal3('<%= rows["mahang"].ToString() %>')"><i class="fas fa-pencil-alt"></i>cập nhật ảnh</a>
                                         </td> 
                                         
@@ -233,7 +233,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                        <label for="exampleInputEmail1"></label>
-                                                                          
+                                            <asp:CheckBox ID="suaorderid" runat="server" Text="Order ID" />                                  
                                     </div>
                                 </div>
                             </div> 
@@ -324,7 +324,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                        <label for="exampleInputEmail1"></label>
-                                                                          
+                                             <asp:CheckBox ID="ckOrder" runat="server" Text="Order ID" />                             
                                     </div>
                                 </div>
                             </div> 
@@ -425,7 +425,7 @@
 
          //$('#myModal').modal()
 
-    function openEditModal2(mahang,tenhang,dvt,gianhap,giaban,tennhomhang,anhid) {           
+    function openEditModal2(mahang,tenhang,dvt,gianhap,giaban,tennhomhang,anhid,orderid) {           
         $("#txtmahang").val(mahang);
         $("#txttenhang").val(tenhang);
         $("#txtdovitinh").val(dvt);
@@ -439,6 +439,15 @@
                 $(this).prop("selected", true);
             }
         });
+
+        if (orderid == "1")
+        {
+            $("#suaorderid").prop("checked", true);
+        }
+        else
+        {
+            $("#suaorderid").prop("checked", false);
+        }
 
         $('#myModal2').modal('show');
 

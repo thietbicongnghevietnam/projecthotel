@@ -382,7 +382,7 @@
                                 </table>
 
 
-                                <div style="width: 100%; height: 450px; overflow-y: scroll; float: left;">
+                                <div style="width: 100%; height: 400px; overflow-y: scroll; float: left;">
                                     <table class="display table table-bordered dataTable no-footer">
                                         <thead>
                                             <tr>
@@ -444,8 +444,9 @@
 
                                     <div class="col-2">
                                         <br />
-                                        <input type="submit" value="Xem HD" id="khachthanhtoan2" class="btn btn-success float-right" style="width:100px;float:left;"><br /><br />
-                                        <input type="submit" value="Thanh toán" id="ghilaihoadon"  class="btn btn-success float-right" style="width:100px;float:left;">                                        
+                                        <input type="submit" value="Xem HD" id="khachthanhtoan2" class="btn btn-success float-right" style="width:100px;float:left; margin-bottom:5px;"><br />
+                                        <input type="submit" value="Thanh toán" id="ghilaihoadon"  class="btn btn-success float-right" style="width:100px;float:left; margin-bottom:5px;">  <br />  
+                                        <input type="submit" value="Order bep" id="orderbepid"  class="btn btn-success float-right" style="width:100px;float:left; margin-bottom:5px;"> <br />
                                     </div>
                                      
                                    

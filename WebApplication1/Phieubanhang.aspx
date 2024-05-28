@@ -258,14 +258,14 @@
             </div>
         </div>
 
-        <div id="contentToPrint">
+      <%--  <div id="contentToPrint">
         <!-- Nội dung bạn muốn in -->
         <h1>Hello, world!</h1>
         <p>This is the content that you want to print. noi dung in khong can hoi</p>
     </div>
 
     <!-- Nút để kích hoạt chức năng in -->
-    <button onclick="printContent()">Print</button>
+    <button onclick="printContent()">Print</button>--%>
 
 
     </div>

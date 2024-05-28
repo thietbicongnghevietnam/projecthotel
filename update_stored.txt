@@ -24,51 +24,15 @@ BACKUP DATABASE FOSS1 TO DISK = '\\10.92.184.233\e\Backup\DBS\FOSS1.bak' WITH IN
 NH_laymahang_tk_chuan 'biahn'
 NH_laymahang_tk
 NH_laydungtenhang
+==================
+
+htOrderMonan
+ hthanghoa
+NH_insert_hanghoa
+NH_danhmuchanghoa
+NH_Update_hanghoa
 
 
-====
-NH_Xemlaihoadon
-
-ALTER PROCEDURE [dbo].[NH_Xemlaihoadon]
-	@idhoadon as nvarchar(50)
-AS
-BEGIN
-
-declare @checkaraoke  as nvarchar(10)
-declare @giohatkaraoke  as float
-declare @sohoadon as nvarchar(10)
-
-
-declare @nghigio as float
-declare @nghidem as float
-declare @nghingay as float
-declare @nghithang as float
-declare @tienphutroi as float
-declare @tienphutroiphut as float
-declare @timephutroi as int
-
-set @checkaraoke = 'Nhahang'
-	set @giohatkaraoke = 0
-	set @nghigio = 0	
-	set @nghidem = 0
-	set @nghingay = 0
-	set @nghithang = 0
-	set @tienphutroi = 0
-	set @tienphutroiphut =0
-	set @timephutroi =0
-
-
-	--hoa don da duoc thanh toan roi, o dang nha hang <> khong phai ban hang
-if exists(select * from htsocai where sohd=@idhoadon and Flag='1' and type='1')
-	begin			
-		select [items],tienhang,giaphong,CONVERT(varchar,ngaygiothue,22) as ngaygiothue,@checkaraoke as statusKaraoke,@giohatkaraoke as giohat,sohd as sohoadon,hinhthucnghi,@nghigio,@nghidem,@nghingay,@nghithang,@tienphutroi,@tienphutroiphut,@timephutroi,convert(varchar, created, 23) as ngaytao,chietkhau,tiensauchietkhau,psco from htsocai where sohd=@idhoadon and Flag='1' and type='1'
-	end
-	else
-	begin
-		select 0
-	end
-
-END
 
 
 ===============  cach distinct ben client

@@ -376,9 +376,18 @@ namespace WebApplication1.Danhmuc
             string giaban = txtgiaban.Text;
             string nhomhangid = dr_nhomhang2.Text;
             string anhid = txtanhid.Text;
+            string checkorder = "";
+            if (suaorderid.Checked == true)
+            {
+                checkorder = "1";
+            }
+            else
+            {
+                checkorder = "0";
+            }
 
             DataTable dtupdate = new DataTable();
-            dtupdate = DataConn.StoreFillDS("NH_Update_hanghoa", System.Data.CommandType.StoredProcedure, mahang, tenhang, dvt, gianhap, giaban, nhomhangid, anhid);
+            dtupdate = DataConn.StoreFillDS("NH_Update_hanghoa", System.Data.CommandType.StoredProcedure, mahang, tenhang, dvt, gianhap, giaban, nhomhangid, anhid, checkorder);
             if (dtupdate.Rows[0][0].ToString() == "1")
             {
                 dt_hanghoa = DataConn.StoreFillDS("NH_danhmuchanghoa", System.Data.CommandType.StoredProcedure);
@@ -400,10 +409,18 @@ namespace WebApplication1.Danhmuc
             string giaban = giabanid.Text;
             string nhomhangid = dr_nhomhang.Text;
             string anhid = txtanh.Text;
-
+            string checkorder = "";
+            if (ckOrder.Checked == true)
+            {
+                checkorder = "1";
+            }
+            else
+            {
+                checkorder = "0";
+            }
 
             DataTable dtinsert = new DataTable();
-            dtinsert = DataConn.StoreFillDS("NH_insert_hanghoa", System.Data.CommandType.StoredProcedure, mahang, tenhang, dvt, gianhap, giaban, nhomhangid, anhid);
+            dtinsert = DataConn.StoreFillDS("NH_insert_hanghoa", System.Data.CommandType.StoredProcedure, mahang, tenhang, dvt, gianhap, giaban, nhomhangid, anhid, checkorder);
             if (dtinsert.Rows[0][0].ToString() == "1")
             {
                 dt_hanghoa = DataConn.StoreFillDS("NH_danhmuchanghoa", System.Data.CommandType.StoredProcedure);
