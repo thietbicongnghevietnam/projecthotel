@@ -258,14 +258,14 @@
             </div>
         </div>
 
-       <%-- <div id="contentToPrint">
+        <div id="contentToPrint">
         <!-- Nội dung bạn muốn in -->
         <h1>Hello, world!</h1>
         <p>This is the content that you want to print. noi dung in khong can hoi</p>
     </div>
 
     <!-- Nút để kích hoạt chức năng in -->
-    <button onclick="printContent()">Print</button>--%>
+    <button onclick="printContent()">Print</button>
 
 
     </div>
@@ -279,11 +279,21 @@ alert('toi dang thu');
             //printWindow.document.write('<html><head><title>Print</title></head><body>' + content + '</body></html>');
             //printWindow.document.close();
             //printWindow.print();
-            var content = document.getElementById("contentToPrint").innerHTML;
+
+            //var content = document.getElementById("contentToPrint").innerHTML;
             //var printWindow = window.open('', '_blank');
-            printWindow.document.open();
-            printWindow.document.write('<html><head><title>Print</title></head><body onload="window.print(); window.close()">' + content + '</body></html>');
-            printWindow.document.close();
+            //printWindow.document.open();
+            //printWindow.document.write('<html><head><title>Print</title></head><body onload="window.print(); window.close()">' + content + '</body></html>');
+            //printWindow.document.close();
+var content = document.getElementById("contentToPrint").innerHTML;
+    //var printWindow = window.open('', '_blank');
+    printWindow.document.open();
+    printWindow.document.write('<html><head><title>Print</title></head><body onload="window.print(); window.close()">' + content + '</body></html>');
+    printWindow.document.close();
+    printWindow.print(); // In trực tiếp từ cửa sổ đã mở
+    printWindow.close(); // Đóng cửa sổ in sau khi đã in
+
+
         }
     </script>
 
