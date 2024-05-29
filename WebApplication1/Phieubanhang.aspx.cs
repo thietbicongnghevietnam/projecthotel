@@ -42,6 +42,11 @@ namespace WebApplication1
         public DataTable dtdonvi = new DataTable();
 
         public string barcodeData = "";
+
+        //public string tongtienhang = "";
+        //public string chietkhau = "";
+        //public string khachthanhtoan = "";
+        //public string khachno = "";
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -280,6 +285,63 @@ namespace WebApplication1
                 thongbao = "NG";
             }
             return thongbao;
+        }
+
+
+        [WebMethod]
+        public static string Xemlaihoadon(string sohoadon)
+        {
+            DataTable dt = new DataTable();
+            string idhoadon = sohoadon;
+
+            DataTable dt_new = new DataTable();
+            dt_new.Columns.Add("tenhang", typeof(String));
+            dt_new.Columns.Add("soluong", typeof(String));
+            dt_new.Columns.Add("dongia", typeof(String));
+            dt_new.Columns.Add("thanhtien", typeof(String));
+
+            dt_new.Columns.Add("chietkhau", typeof(String));
+            dt_new.Columns.Add("tongtienhang", typeof(String));
+            dt_new.Columns.Add("khachthanhtoan", typeof(String));
+            dt_new.Columns.Add("psco", typeof(String));
+
+            dt = DataConn.StoreFillDS("NH_Xemlaihoadon", System.Data.CommandType.StoredProcedure, idhoadon);
+
+            string items = dt.Rows[0][0].ToString();
+
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            var jsonObj = jss.Deserialize<dynamic>(items);
+
+            foreach (var item in jsonObj)
+            {
+                string[] numbersArray = item.Key.Split(',');
+                var tenhang = numbersArray.FirstOrDefault();
+                //string[] strArray = mahang.Split(',');
+                var mahang1 = numbersArray[0];
+                var dongia1 = numbersArray[1];
+                var thanhtien1 = numbersArray[2];
+
+                var soluong = item.Value;
+
+                dt_new.Rows.Add(tenhang, soluong, dongia1, thanhtien1, "", "", "", "");
+            }
+            //tongtienhang = dt.Rows[0]["tienhang"].ToString();
+            //chietkhau = dt.Rows[0]["chietkhau"].ToString();
+            //khachthanhtoan = dt.Rows[0]["tiensauchietkhau"].ToString();
+            //khachno = dt.Rows[0]["psco"].ToString();
+
+            //string hoadonid = dt.Rows[0]["sohoadon"].ToString();
+            //dt_new.Rows.Add("", "0", "0", "0", chietkhau, tongtienhang, khachthanhtoan, khachno);
+
+            DataTable dt2 = new DataTable();
+            // dt2 = dt.Copy();
+            dt2 = dt_new.Copy();
+
+            String daresult = null;
+            DataSet ds = new DataSet();
+            ds.Tables.Add(dt2);
+            daresult = DataSetToJSON(ds);
+            return daresult;
         }
 
         [WebMethod]

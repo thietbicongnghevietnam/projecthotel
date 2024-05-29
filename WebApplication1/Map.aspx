@@ -372,10 +372,11 @@
                                             </td>
 
                                             
-                                            <%--<td style="padding-bottom: 10px; padding-right: 10px; padding-left: 10px;">
-                                                <input type="submit" value="Thanh toan" id="khachthanhtoan" class="btn btn-success float-right">  <%--class , id="saveproduct"
-                                            </td>--%>
-                                    
+                                            <td style="padding-bottom: 10px; padding-right: 10px; padding-left: 10px;">
+                                                 <input type="submit" value="Order bếp" id="orderbepid"  class="btn btn-success float-right" style="width:100px;float:left; margin-bottom:5px;">
+                                               <%-- <input type="submit" value="Thanh toan" id="khachthanhtoan" class="btn btn-success float-right">  <%--class , id="saveproduct"--%>
+                                            </td>
+                                   
 
                                         </tr>
                                     </tbody>
@@ -445,14 +446,9 @@
                                     <div class="col-2">
                                         <br />
                                         <input type="submit" value="Xem HD" id="khachthanhtoan2" class="btn btn-success float-right" style="width:100px;float:left; margin-bottom:5px;"><br />
-                                        <input type="submit" value="Thanh toán" id="ghilaihoadon"  class="btn btn-success float-right" style="width:100px;float:left; margin-bottom:5px;">  <br />  
-                                        <input type="submit" value="Order bep" id="orderbepid"  class="btn btn-success float-right" style="width:100px;float:left; margin-bottom:5px;"> <br />
+                                        <input type="submit" value="Thanh toán" id="ghilaihoadon"  class="btn btn-success float-right" style="width:100px;float:left; margin-bottom:5px;">  <br />                                          
                                     </div>
-                                     
-                                   
-                                           
-                                    
-                                     
+                                                                                                                                                                                            
                                 </div>
                                 <div><b>Bằng chữ:</b> <span id="bangchuid2" style="font-weight:300; color:red; font-size:25px; padding-left:10px;"></span></div>
                                 
@@ -678,7 +674,19 @@
             </div>
         </div>
 
-
+        <div id="invoice" style="display: none;"> 
+          <h2>Hóa Đơn</h2>
+          <table style="border: 1px solid black;">
+            <tr style="border: 1px solid black;">
+              <th>Tên Hàng</th>
+              <th>Số Lượng</th>
+                <th>Ten ban</th>
+            </tr>
+            <tbody id="invoiceItems">
+              <!-- Dữ liệu hóa đơn sẽ được thêm vào đây sau khi nhấn nút "In Hóa Đơn" -->
+            </tbody>
+          </table>
+        </div>
 
 
         </div>
@@ -1410,6 +1418,98 @@
                 }                 
                 //printDiv_Save();    //toi lam tiep
             });
+
+            $('#orderbepid').click(function () 
+            {
+                var checkbox = document.getElementById('xemlaiHD');
+                if (checkbox.checked == true)
+                {
+                        alert('Ban o che do xem lai hoa don!');                      
+                }
+                else
+                {
+                    var tenphong = $('#nametable').text();
+                    var itemdata = {};
+
+                    $('.themthucdon').each(function () {                        
+                        var mahang = $(this).find('td').eq(0).text() + "," + $(this).find('td').eq(2).text() + "," + $(this).find('td').eq(3).text();
+                        var soluong = $(this).find('td').eq(1).text();                       
+                        if (mahang != "") {                           
+                            itemdata[mahang] = parseInt(soluong);                            
+                        }
+                    });                                       
+                    var data = {                       
+                        tenphong: tenphong,                       
+                        items: JSON.stringify(itemdata)
+                    };
+                    $.ajax({
+                            type: "POST",
+                            contentType: "application/json; charset=utf-8",
+                            url: "Map.aspx/Ordernhabep",
+                            //data: JSON.stringify(data),
+                            data: JSON.stringify(data),
+                            dataType: "json",
+                            success: function (data) {
+                                const objdata = $.parseJSON(data.d);    
+                                //debugger;                      
+                                $('#invoiceItems tr').remove();                                     
+                                for (var i = 0; i < objdata['Table'].length - 1; i++) {
+                                    //console.log(objdata['Table1'].length);
+                                    var tenhang = objdata['Table'][i][0];
+                                    var soluong = objdata['Table'][i][1];
+                                    var banid = objdata['Table'][i][2];
+                                    var solanin = objdata['Table'][i][3];                                                                  
+                                    var newrow = '<tr class="thongtinnhabep">' +
+                                        '<td id="_hanghoad" style="width:250px; border: 1px soild black;">' + tenhang + '</td>' +
+                                        '<td id="_tienhang" style="border: 1px soild black;">' + soluong + '</td>' +
+                                        '<td id="_loaihoadon" style="border: 1px soild black;">' + banid + '</td>' +
+                                        //'<td id="_loaihoadon" style="border: 1px soild black;">' + solanin + '</td>' +                                                                         
+                                        '</tr>';
+                                   $('#invoiceItems').append(newrow);                                                                        
+                                }
+                               
+                                //$("#invoice").show();
+                                // Gọi hàm để in
+                               printElement('invoice');
+                            },
+                            error: function () {
+                                //alert("No Match");
+                            }
+                         });
+                }                 
+                //printDiv_Save();    //toi lam tiep
+            });
+
+            var printWindow = null; // Biến lưu trữ cửa sổ in
+            // Hàm in một phần tử HTML
+            function printElement(elementId) {                            
+             var divContents = document.getElementById("invoice").innerHTML; 
+                // Đóng cửa sổ in cũ nếu tồn tại
+                if (printWindow !== null) {
+                    //printWindow.close();
+                // Kiểm tra xem cửa sổ in có phải là trang hiện tại không
+                        if (printWindow.location.href !== window.location.href) {
+                            printWindow.close();
+                        }
+                }
+                // Tạo cửa sổ in mới
+                printWindow = window.open('', '', 'height=500, width=1000'); 
+                printWindow.document.write('<html>'); 
+                printWindow.document.write('<body >'); 
+                printWindow.document.write(divContents); 
+                printWindow.document.write('</body></html>'); 
+                printWindow.document.close(); 
+                // In
+                printWindow.print(); 
+                // Đợi sự kiện in hoàn tất và đóng cửa sổ in
+                printWindow.onafterprint = function() {
+                    //printWindow.close();
+                     if (printWindow.location.href !== window.location.href) {
+                            printWindow.close();
+                        }
+                };
+            }  
+               
 
             $('.addnew_KH').click(function () {
              $('#myModal').modal('show');

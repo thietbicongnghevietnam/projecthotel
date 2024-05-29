@@ -248,6 +248,38 @@ namespace WebApplication1
             return thongbao;
         }
 
+
+        [WebMethod]
+        public static string Ordernhabep(string tenphong, string items)  //string tenphong, string tienhang
+        {           
+            DataTable dtsave = new DataTable();
+            DataTable dtorder = new DataTable();
+
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            var jsonObj = jss.Deserialize<dynamic>(items);
+            foreach (var item in jsonObj)
+            {
+                string[] numbersArray = item.Key.Split(',');
+                var tenhang = numbersArray.FirstOrDefault();
+                var soluong = item.Value;
+                //Console.WriteLine($"Key: {key}, Value: {value}");
+                //kiem tra ma hang xem co phai cau thanh don vi tinh khong? neu co se tru cac nguyen vat lieu!!!!
+                dtorder = DataConn.StoreFillDS("NH_check_order", System.Data.CommandType.StoredProcedure, tenhang, soluong, tenphong);                
+            }
+
+            //show data de in hoa don ra nha bep
+            dtsave = DataConn.StoreFillDS("NH_thongtinbep", System.Data.CommandType.StoredProcedure, tenphong);//tenphong, data, tienhang
+
+            DataTable dt2 = new DataTable();
+            dt2 = dtsave.Copy();
+
+            String daresult = null;
+            DataSet ds = new DataSet();
+            ds.Tables.Add(dt2);
+            daresult = DataSetToJSON(ds);
+            return daresult;
+        }
+
         [WebMethod]
         public static string timer_thongtintrangthaiphong(string nameroom)  
         {
@@ -456,7 +488,8 @@ namespace WebApplication1
                     //{
                     //    //tru ton kho thanh cong
                     //}
-                    dtupdatekho = DataConn.StoreFillDS("NH_updatekho", System.Data.CommandType.StoredProcedure, mahang, soluong, type_act);
+                    // xoa danh sach mon an da duoc order o bep sau khi thanh toan xong
+                    dtupdatekho = DataConn.StoreFillDS("NH_updatekho", System.Data.CommandType.StoredProcedure, mahang, soluong, type_act, tenphong);
 
                     var sltoncuoiky = dtupdatekho.Rows[0][1].ToString();
                     listtoncuoiky = listtoncuoiky + '"' + mahang + '"' + ':' + sltoncuoiky + ',';

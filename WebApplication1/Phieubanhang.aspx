@@ -81,6 +81,10 @@
                         <label for="inhoadon" style="float: left; margin-top: 5px;  padding-left:10px;">SHĐ</label>
                         <input id="soHD" name="soHD" class="form-control input-sm" value="<%=sohoadon %>"" style="width:80px;"/>                 
                     </td>
+                    <td>
+                        <b style="color: black; padding-left: 5px;">| Xem lại HĐ</b>
+                        <input type="checkbox" id="xemlaiHD" name="xemlaiHD">
+                    </td>
                     
                 
                 </tr>
@@ -1463,6 +1467,77 @@ var content = document.getElementById("contentToPrint").innerHTML;
              }
 
          });    
+
+         $('#xemlaiHD').on('change', function() {                 
+                if (!this.checked) {                                     
+                    $('#tbphieunhap tr').remove();
+                    $('#tongtiennhap').val('0');
+                    $('#chietkhauid').val('0');
+                    $('#thanhtoanid').val('0');
+                    $('#conlaiid').val('0');
+                   
+                }
+                else
+                {
+                   // alert('show lai hoa don');
+                   var sohoadon = $("#soHD").val();
+                    //alert(sohoadon);
+                    var data = { sohoadon: sohoadon };
+                    $.ajax({
+                            type: "POST",
+                            contentType: "application/json; charset=utf-8",
+                            url: "Phieubanhang.aspx/Xemlaihoadon",
+                            data: JSON.stringify(data),
+                            dataType: "json",
+                            success: function (data) {
+                                const objdata = $.parseJSON(data.d);
+                                     
+                                var tongtienhang = "";
+                                var tongchietkhau = "";                            
+                                var khachthanhtoan = "";
+                                var khachno = "";
+                                $('#tbphieunhap tr').remove();
+
+                                //var biendem = objdata['Table1'].length;
+                                for (var i = 0; i < objdata['Table1'].length - 1; i++) {
+                                    //console.log(objdata['Table1'].length);
+                                    var tenhang = objdata['Table1'][i][0];                                    
+                                    var soluong = objdata['Table1'][i][1];
+                                    var dongia = objdata['Table1'][i][2];                                   
+                                    var thanhtien = objdata['Table1'][i][3];
+
+                                    var newrow = '<tr class="themthucdon">' +
+                                                '<td id="tenhang">' + tenhang + '</td>' +
+                                                '<td id="soluong">' + soluong + '</td>' +
+                                                '<td id="giale">' + dongia + '</td>' +
+                                                '<td id="thanhtien">' + thanhtien + '</td>' +
+                                                '<td><input name="checkinput" class="checkinput" type="checkbox" value="" /></td>' +
+                                                '</tr>';
+                                            $('#tbphieunhap').append(newrow);
+                                    
+                                }
+
+
+                                $('#tongtiennhap').val('0');
+                                $('#chietkhauid').val('0');
+                                $('#thanhtoanid').val('0');
+                                $('#conlaiid').val('0');                          
+                                //$('#tongtienid').val(tongtienhang);
+                                //$('#chietkhauid').val(tongchietkhau);
+                                //$('#thanhtoanid').val(khachthanhtoan);
+                                //$('#conlaiid').val(khachno);
+
+
+
+                            },
+                            error: function () {
+                                //alert("No Match");
+                            }
+                    });
+
+
+                }
+            });
         
 
         
