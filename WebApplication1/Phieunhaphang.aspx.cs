@@ -338,7 +338,7 @@ namespace WebApplication1
                 var mahang = numbersArray.FirstOrDefault();
                 var soluong = item.Value;
                 //Console.WriteLine($"Key: {key}, Value: {value}");
-                dtupdatekho = DataConn.StoreFillDS("NH_updatekho", System.Data.CommandType.StoredProcedure, mahang, soluong, type_act);
+                dtupdatekho = DataConn.StoreFillDS("NH_updatekho_BH", System.Data.CommandType.StoredProcedure, mahang, soluong, type_act);
                 var sltoncuoiky = dtupdatekho.Rows[0][1].ToString();
                 listtoncuoiky = listtoncuoiky + '"' + mahang + '"' + ':' + sltoncuoiky + ',';
             }

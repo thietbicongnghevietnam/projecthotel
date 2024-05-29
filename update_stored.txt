@@ -21,87 +21,13 @@ SET XACT_ABORT ON
 
 =============
 BACKUP DATABASE FOSS1 TO DISK = '\\10.92.184.233\e\Backup\DBS\FOSS1.bak' WITH INIT
-NH_laymahang_tk_chuan 'biahn'
-NH_laymahang_tk
-NH_laydungtenhang
-==================
-
-them moi:
-NH_check_order
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
-ALTER PROCEDURE [dbo].[NH_check_order] --NH_check_order 'Bia ha noi','1','Ban1'
-	@tenhang as nvarchar(100),
-	@soluong as nvarchar(10),
-	@tenphong as nvarchar(50)
-AS
-BEGIN
-	declare @solanin as int
-	
-	if exists(select Solanin from htOrderMonan where tenhang=@tenhang and banid=@tenphong)
-	begin
-		set @solanin = (select top 1 Solanin from htOrderMonan where tenhang=@tenhang and banid=@tenphong order by id desc)
-		set @solanin = @solanin + 1
-	end
-	else
-	begin
-		set @solanin = 1
-	end
 
 
-	--kiem tra ten hang thuoc hang order hay khong
-	if exists(select * from hthanghoa where tenhang=@tenhang and Orderid=1)
-	begin
-		delete htOrderMonan where tenhang=@tenhang and banid=@tenphong
-
-		insert into htOrderMonan([tenhang],[soluong],[banid],[Solanin]) values(@tenhang,@soluong,@tenphong,@solanin)
-		select 1
-	end
-	else
-	begin
-		select 0
-	end
-
-
-END
-
+====moi ====
+NH_updatekho_BH
+NH_Xemlaihoadon2
 sua
-NH_updatekho
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-ALTER PROCEDURE [dbo].[NH_updatekho] --NH_updatekho 'bia ha noi',1,'nhaphang',''	
-	@mahang as nvarchar(50), 
-	@soluong as nvarchar(10),
-	@type_act as nvarchar(50),
-	@tenphong as nvarchar(50)
-AS
-BEGIN
-if(@type_act = 'nhaphang')
-begin
-	update hthanghoa set soluongton=soluongton+cast(@soluong as int) where tenhang=@mahang
-	select 1,soluongton from hthanghoa where tenhang=@mahang
-end
-else
-begin
-	--@type_act = 'banhang'
-	update hthanghoa set soluongton=soluongton-cast(@soluong as int) where tenhang=@mahang
-
-	-- xoa danh sach mon an da duoc order o bep sau khi thanh toan xong
-	delete htOrderMonan where tenhang=@mahang and banid=@tenphong
-
-
-	select 1,soluongton from hthanghoa where tenhang=@mahang
-end
-
-	
-	
-
-END
+addthongtinhanghoa_PBH
 
 
 

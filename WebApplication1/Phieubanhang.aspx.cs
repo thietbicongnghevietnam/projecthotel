@@ -241,7 +241,7 @@ namespace WebApplication1
         }
 
         [WebMethod]
-        public static string addthongtinhanghoa_PBH(string thanhtoantien, string psno, string chieukhau, string nhacungcap, string tienhang, string items)  //string tenphong, string tienhang
+        public static string addthongtinhanghoa_PBH(string suahoadon, string sohoadon, string thanhtoantien, string psno, string chieukhau, string nhacungcap, string tienhang, string items)  //string tenphong, string tienhang
         {
             String thongbao = "";
             DataTable dtsave = new DataTable();
@@ -255,13 +255,16 @@ namespace WebApplication1
             //them moi mot cot ton dau ky trong bang socai
             string listtoncuoiky = "";
 
+            //ghi chu: voi truong hop sua hoa don thi so luong ton se bi sai****** vi bi thuc hien them mot lan nua
+            //truong hop nay bi sai **** se khong co truong hop sua hoa don
+
             foreach (var item in jsonObj)
             {
                 string[] numbersArray = item.Key.Split(',');
                 var mahang = numbersArray.FirstOrDefault();
                 var soluong = item.Value;
                 //Console.WriteLine($"Key: {key}, Value: {value}");
-                dtupdatekho = DataConn.StoreFillDS("NH_updatekho", System.Data.CommandType.StoredProcedure, mahang, soluong, type_act);
+                dtupdatekho = DataConn.StoreFillDS("NH_updatekho_BH", System.Data.CommandType.StoredProcedure, mahang, soluong, type_act);
                 var sltoncuoiky = dtupdatekho.Rows[0][1].ToString();
                 listtoncuoiky = listtoncuoiky + '"' + mahang + '"' + ':' + sltoncuoiky+',';
             }
@@ -271,7 +274,7 @@ namespace WebApplication1
             //check xem hoa don ton tai chua
             //update *** neu hoa don ton tai roi
             //lay so hoa don truyen len de update
-            dtsave = DataConn.StoreFillDS("addthongtinhanghoa_PBH", System.Data.CommandType.StoredProcedure, thanhtoantien, psno, chieukhau, nhacungcap, tienhang, items, listtoncuoiky);
+            dtsave = DataConn.StoreFillDS("addthongtinhanghoa_PBH", System.Data.CommandType.StoredProcedure, suahoadon, sohoadon, thanhtoantien, psno, chieukhau, nhacungcap, tienhang, items, listtoncuoiky);
 
             if (dtsave.Rows[0][0].ToString() == "1")
             {
@@ -305,7 +308,7 @@ namespace WebApplication1
             dt_new.Columns.Add("khachthanhtoan", typeof(String));
             dt_new.Columns.Add("psco", typeof(String));
 
-            dt = DataConn.StoreFillDS("NH_Xemlaihoadon", System.Data.CommandType.StoredProcedure, idhoadon);
+            dt = DataConn.StoreFillDS("NH_Xemlaihoadon2", System.Data.CommandType.StoredProcedure, idhoadon);
 
             string items = dt.Rows[0][0].ToString();
 

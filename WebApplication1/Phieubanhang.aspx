@@ -82,7 +82,7 @@
                         <input id="soHD" name="soHD" class="form-control input-sm" value="<%=sohoadon %>"" style="width:80px;"/>                 
                     </td>
                     <td>
-                        <b style="color: black; padding-left: 5px;">| Xem lại HĐ</b>
+                        <b style="color: black; padding-left: 10px;">| Sửa HĐ</b>
                         <input type="checkbox" id="xemlaiHD" name="xemlaiHD">
                     </td>
                     
@@ -127,7 +127,7 @@
                 </span>
                
                 <span style="float: left; padding-right: 10px; padding-top: 20px; padding-left: 50px;">
-                    <input type="submit" value="Ghi hoa don" id="ghilaihoadon"  class="btn btn-success float-right">   
+                    <input type="submit" value="Ghi hóa đơn" id="ghilaihoadon"  class="btn btn-success float-right">   
                 </span>
 
                 </div>
@@ -972,7 +972,7 @@ var content = document.getElementById("contentToPrint").innerHTML;
 
         $('.delproduct').click(function () {
             //var tenphong = dj('#name_room').text();
-            //var tongtienhang = parseInt($('#tongtienhang').val());
+            //var tongtienhang = parseInt($('#tongtienhang').val());            
             var tongtienhang = parseInt($('#tongtiennhap').val());
             $('.checknhaphang').each(function () {
                 var chk = $(this).is(':checked');
@@ -1072,7 +1072,17 @@ var content = document.getElementById("contentToPrint").innerHTML;
              var namencc1 = $('#MainContent_dr_nhacungcap').val();
              //console.log(namencc);
              //alert(namencc1);
-
+             var suahoadon = '0';
+             var sohoadon = $('#soHD').val();
+             var checkbox = document.getElementById('xemlaiHD');
+             if (checkbox.checked == true)
+             {
+                suahoadon = '1';                     
+             }
+             else
+             {
+                suahoadon = '0';
+             }   
              
                        
              $('.themthucdon').each(function () {
@@ -1098,6 +1108,8 @@ var content = document.getElementById("contentToPrint").innerHTML;
                  else
                  {
                      var data = {
+                        suahoadon: suahoadon,
+                        sohoadon:sohoadon,
                         thanhtoantien:thanhtoantien,
                         psno:psno,
                         chieukhau: chieukhau,
@@ -1124,6 +1136,12 @@ var content = document.getElementById("contentToPrint").innerHTML;
                             //$("#conlaiid").val('0');
                             $("#MainContent_phieunhaphang").select();
                             $('#soHD').val(data.d);
+
+                            var checkbox1 = document.getElementById('xemlaiHD');
+                             if (checkbox1.checked == true)
+                             {
+                                $("#xemlaiHD").prop("checked", false);                   
+                             }                      
                         },
                         error: function () {
                             //alert("No Match");
@@ -1245,6 +1263,8 @@ var content = document.getElementById("contentToPrint").innerHTML;
              {                                  
                  psno = '0';                 
                  var data = {
+                        suahoadon: suahoadon,
+                        sohoadon:sohoadon,
                         thanhtoantien:thanhtoantien,
                         psno:psno,
                         chieukhau: chieukhau,
@@ -1269,7 +1289,13 @@ var content = document.getElementById("contentToPrint").innerHTML;
                             //$("#soluongnhaphang").val('0');
                             //$("#conlaiid").val('0');
                             $("#MainContent_phieunhaphang").select();     
-                            $('#soHD').val(data.d);                            
+                            $('#soHD').val(data.d); 
+
+                             var checkbox2 = document.getElementById('xemlaiHD');
+                             if (checkbox2.checked == true)
+                             {
+                                $("#xemlaiHD").prop("checked", false);                   
+                             }
                         },
                         error: function () {
                             //alert("No Match");
@@ -1474,8 +1500,7 @@ var content = document.getElementById("contentToPrint").innerHTML;
                     $('#tongtiennhap').val('0');
                     $('#chietkhauid').val('0');
                     $('#thanhtoanid').val('0');
-                    $('#conlaiid').val('0');
-                   
+                    $('#conlaiid').val('0');                   
                 }
                 else
                 {
@@ -1492,10 +1517,10 @@ var content = document.getElementById("contentToPrint").innerHTML;
                             success: function (data) {
                                 const objdata = $.parseJSON(data.d);
                                      
-                                var tongtienhang = "";
-                                var tongchietkhau = "";                            
-                                var khachthanhtoan = "";
-                                var khachno = "";
+                                var tongtienhang = "0";
+                                //var tongchietkhau = "0";                            
+                                //var khachthanhtoan = "0";
+                                //var khachno = "0";
                                 $('#tbphieunhap tr').remove();
 
                                 //var biendem = objdata['Table1'].length;
@@ -1505,6 +1530,8 @@ var content = document.getElementById("contentToPrint").innerHTML;
                                     var soluong = objdata['Table1'][i][1];
                                     var dongia = objdata['Table1'][i][2];                                   
                                     var thanhtien = objdata['Table1'][i][3];
+
+                                    tongtienhang = parseInt(tongtienhang) + parseInt(thanhtien);
 
                                     var newrow = '<tr class="themthucdon">' +
                                                 '<td id="tenhang">' + tenhang + '</td>' +
@@ -1516,19 +1543,10 @@ var content = document.getElementById("contentToPrint").innerHTML;
                                             $('#tbphieunhap').append(newrow);
                                     
                                 }
-
-
-                                $('#tongtiennhap').val('0');
+                                $('#tongtiennhap').val(tongtienhang);
                                 $('#chietkhauid').val('0');
-                                $('#thanhtoanid').val('0');
-                                $('#conlaiid').val('0');                          
-                                //$('#tongtienid').val(tongtienhang);
-                                //$('#chietkhauid').val(tongchietkhau);
-                                //$('#thanhtoanid').val(khachthanhtoan);
-                                //$('#conlaiid').val(khachno);
-
-
-
+                                $('#thanhtoanid').val(tongtienhang);
+                                $('#conlaiid').val('0');                                                        
                             },
                             error: function () {
                                 //alert("No Match");
