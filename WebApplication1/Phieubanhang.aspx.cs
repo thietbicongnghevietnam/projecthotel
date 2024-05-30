@@ -253,22 +253,39 @@ namespace WebApplication1
 
             //{"bia ha noi":1,"Bò khô":2}
             //them moi mot cot ton dau ky trong bang socai
-            string listtoncuoiky = "";
-
-            //ghi chu: voi truong hop sua hoa don thi so luong ton se bi sai****** vi bi thuc hien them mot lan nua
-            //truong hop nay bi sai **** se khong co truong hop sua hoa don
-
-            foreach (var item in jsonObj)
+            string listtoncuoiky = "";            
+            if (suahoadon == "1")
             {
-                string[] numbersArray = item.Key.Split(',');
-                var mahang = numbersArray.FirstOrDefault();
-                var soluong = item.Value;
-                //Console.WriteLine($"Key: {key}, Value: {value}");
-                dtupdatekho = DataConn.StoreFillDS("NH_updatekho_BH", System.Data.CommandType.StoredProcedure, mahang, soluong, type_act);
-                var sltoncuoiky = dtupdatekho.Rows[0][1].ToString();
-                listtoncuoiky = listtoncuoiky + '"' + mahang + '"' + ':' + sltoncuoiky+',';
-            }
+                //truong hop sua hoa don, khong update ton kho
+                //ton kho se duoc update o thao tac sua xoa.
+                //da chon vao sua hoa don thi bat phai luu lai hoa don  ==> truong hop nay phai bat chat o client
+                foreach (var item in jsonObj)
+                {
+                    string[] numbersArray = item.Key.Split(',');
+                    var mahang = numbersArray.FirstOrDefault();
+                    var soluong = item.Value;
+                    //Console.WriteLine($"Key: {key}, Value: {value}");
+                    dtupdatekho = DataConn.StoreFillDS("NH_updatekho_BH_suaHD", System.Data.CommandType.StoredProcedure, mahang, soluong, type_act);
+                    var sltoncuoiky = dtupdatekho.Rows[0][1].ToString();
+                    listtoncuoiky = listtoncuoiky + '"' + mahang + '"' + ':' + sltoncuoiky + ',';
+                }
 
+            }
+            else
+            {
+                //van update ton kho binh thuong
+                foreach (var item in jsonObj)
+                {
+                    string[] numbersArray = item.Key.Split(',');
+                    var mahang = numbersArray.FirstOrDefault();
+                    var soluong = item.Value;
+                    //Console.WriteLine($"Key: {key}, Value: {value}");
+                    dtupdatekho = DataConn.StoreFillDS("NH_updatekho_BH", System.Data.CommandType.StoredProcedure, mahang, soluong, type_act);
+                    var sltoncuoiky = dtupdatekho.Rows[0][1].ToString();
+                    listtoncuoiky = listtoncuoiky + '"' + mahang + '"' + ':' + sltoncuoiky + ',';
+                }
+            }
+            
             listtoncuoiky = listtoncuoiky.Substring(0, listtoncuoiky.Length - 1);
             listtoncuoiky = '{' + listtoncuoiky + '}';
             //check xem hoa don ton tai chua
@@ -412,6 +429,30 @@ namespace WebApplication1
             ds.Tables.Add(dt2);
             daresult = DataSetToJSON(ds);
             return daresult;
+        }
+
+        [WebMethod]
+        public static string updatetonkhoxoahang(string tenhang, string soluongxoa) 
+        {
+            String thongbao = "";
+            DataTable dtupdate = new DataTable();
+
+            dtupdate = DataConn.StoreFillDS("htupdate_tonkho_xoahang", System.Data.CommandType.StoredProcedure, tenhang, soluongxoa);
+
+            thongbao = "OK";
+            return thongbao;
+        }
+
+        [WebMethod]
+        public static string updatetonkhosuahang(string tenhang, string soluongupdate)  //string tenphong, string tienhang
+        {
+            String thongbao = "";
+            DataTable dtupdate = new DataTable();
+
+            dtupdate = DataConn.StoreFillDS("htupdate_tonkho_suahang", System.Data.CommandType.StoredProcedure, tenhang, soluongupdate);
+
+            thongbao = "OK";
+            return thongbao;
         }
 
         [WebMethod]

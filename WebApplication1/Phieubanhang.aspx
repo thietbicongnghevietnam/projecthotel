@@ -84,8 +84,9 @@
                     <td>
                         <b style="color: black; padding-left: 10px;">| Sửa HĐ</b>
                         <input type="checkbox" id="xemlaiHD" name="xemlaiHD">
-                        No<input type="radio" id="khongid" name="fruit" value="NO">
-                        Yes<input type="radio" id="coid" name="fruit" value="yes">
+                       <%-- No<input type="radio" id="khongid" name="fruit" value="NO">
+                        Yes<input type="radio" id="coid" name="fruit" value="yes">--%>
+                        <input id="suahd_soluongcu" class="form-control input-sm" value="0" style="width:60px;float:left; margin-left:2px;">
                     </td>
                     
                 
@@ -306,7 +307,8 @@ var content = document.getElementById("contentToPrint").innerHTML;
      <script type="text/javascript">
         $(document).ready(function () {
             SearchText();   
-           $('#khongid').prop('checked', true);
+            //$('#khongid').prop('checked', true);
+            $('#bannhanhid').prop('checked', true);
          });
 
          const defaultNumbers =' hai ba bốn năm sáu bảy tám chín';
@@ -640,7 +642,8 @@ var content = document.getElementById("contentToPrint").innerHTML;
          $('.editproduct').click(function () {   
              var ckQRcode = document.getElementById("bannhanhid");
 
-                        var tongtienhang = parseInt($('#tongtiennhap').val());
+             var tongtienhang = parseInt($('#tongtiennhap').val());
+
                         $('.checknhaphang').each(function () {
                             var chk = $(this).is(':checked');
                             if (chk == true) {
@@ -652,6 +655,7 @@ var content = document.getElementById("contentToPrint").innerHTML;
                                 $(this).parent().parent().remove();
                                 $('#tongtiennhap').val(tongtienhang);
                                 $('#thanhtoanid').val(tongtienhang);
+                                
 
                                 $('#dongiaid').val(giabanra);
 
@@ -669,6 +673,8 @@ var content = document.getElementById("contentToPrint").innerHTML;
                                                 if(data.d != "NG")
                                                 {
                                                     $('#MainContent_phieunhaphang').val(data.d);
+
+                                                    $('#suahd_soluongcu').val(soluong);
                                                 }
                                                 else
                                                 {
@@ -701,6 +707,8 @@ var content = document.getElementById("contentToPrint").innerHTML;
                                                 $("#MainContent_dr_dvt").val('==DVT==');
 
                                                 $('#MainContent_phieunhaphang').val(tenhangid);
+
+                                                $('#suahd_soluongcu').val(soluong);
                                             } 
                                             else 
                                             {
@@ -716,6 +724,7 @@ var content = document.getElementById("contentToPrint").innerHTML;
                                                                 
                                 $('#soluongnhaphang').focus();
                                 $('#soluongnhaphang').select();
+                                 
 
                                 const bangchu_hienthi2 = to_vietnamese(tongtienhang);
                                 $('#bangchuid2').text(bangchu_hienthi2);
@@ -793,6 +802,8 @@ var content = document.getElementById("contentToPrint").innerHTML;
          {          
              var _mahang = "";             
              var ckQRcode = document.getElementById("bannhanhid");
+             var checkbox = document.getElementById('xemlaiHD');
+
              if (ckQRcode.checked == true)
              {
                  var mahang_chuan = $("#MainContent_phieunhaphang").val();
@@ -809,8 +820,39 @@ var content = document.getElementById("contentToPrint").innerHTML;
                             if (data.d != "NG")
                             {
                                  $('#tenhanghoaid').text(data.d);
-                                _mahang = $("#tenhanghoaid").text(); // Gán giá trị trong hàm gọi lại success
-                                 handleMahang(_mahang,ktdvt,soluong_dvt,tongtienhang);                   
+                                _mahang = $("#tenhanghoaid").text(); 
+                                //kiem tra xem co vao truong hop sua hoa don khong?
+                                 if (checkbox.checked == true)
+                                 {
+                                    //suahoadon = '1'; 
+                                     //update lai ton kho
+                                     var soluongcu = $('#suahd_soluongcu').val();
+                                     var soluongmoi = $('#soluongnhaphang').val();
+                                     var soluongupdate = parseInt(soluongcu) - parseInt(soluongmoi);
+                                     var data2 = {tenhang:_mahang, soluongupdate:soluongupdate}
+                                     $.ajax({
+                                            type: "POST",
+                                            contentType: "application/json; charset=utf-8",
+                                            url: "Phieubanhang.aspx/updatetonkhosuahang",                                
+                                            data: JSON.stringify(data2),
+                                            dataType: "json",
+                                                success: function (data2) {   
+                                                    //alert(data.d);                                                                                              
+                                            },
+                                            error: function () {
+                                                //alert("No Match");
+                                            }
+                                        });
+
+                                     handleMahang(_mahang,ktdvt,soluong_dvt,tongtienhang);      
+                                 }
+                                 else
+                                 {
+                                    //suahoadon = '0';
+                                     handleMahang(_mahang,ktdvt,soluong_dvt,tongtienhang);      
+                                }
+
+                                //handleMahang(_mahang,ktdvt,soluong_dvt,tongtienhang);                   
                             }
                             else
                             {
@@ -827,7 +869,38 @@ var content = document.getElementById("contentToPrint").innerHTML;
              else
              {
                  _mahang = $("#MainContent_phieunhaphang").val();
-                 handleMahang(_mahang,ktdvt,soluong_dvt,tongtienhang);
+                 //kiem tra xem co vao truong hop sua hoa don khong?
+                 if (checkbox.checked == true)
+                    {
+                    //suahoadon = '1'; 
+                        //update lai ton kho
+                        var soluongcu = $('#suahd_soluongcu').val();
+                        var soluongmoi = $('#soluongnhaphang').val();
+                        var soluongupdate = parseInt(soluongcu) - parseInt(soluongmoi);
+                        var data2 = {tenhang:_mahang, soluongupdate:soluongupdate}
+                        $.ajax({
+                            type: "POST",
+                            contentType: "application/json; charset=utf-8",
+                            url: "Phieubanhang.aspx/updatetonkhosuahang",                                
+                            data: JSON.stringify(data2),
+                            dataType: "json",
+                                success: function (data2) {   
+                                    //alert(data.d);                                                                                              
+                            },
+                            error: function () {
+                                //alert("No Match");
+                            }
+                        });
+
+                        handleMahang(_mahang,ktdvt,soluong_dvt,tongtienhang);      
+                    }
+                    else
+                    {
+                    //suahoadon = '0';
+                        handleMahang(_mahang,ktdvt,soluong_dvt,tongtienhang);      
+                 }
+
+                 //handleMahang(_mahang,ktdvt,soluong_dvt,tongtienhang);
              }
          }
 
@@ -972,34 +1045,67 @@ var content = document.getElementById("contentToPrint").innerHTML;
 
         }
 
-        $('.delproduct').click(function () {
-            //var tenphong = dj('#name_room').text();
-            //var tongtienhang = parseInt($('#tongtienhang').val());            
-            var tongtienhang = parseInt($('#tongtiennhap').val());
-            $('.checknhaphang').each(function () {
-                var chk = $(this).is(':checked');
-                if (chk == true) {
-                    var delid = $(this).parent().parent().find('td').eq(0).text();
-                    var price = parseInt($(this).parent().parent().find('td').eq(3).text());
-                    tongtienhang = tongtienhang - price;
-                    //djLog(tongtienhang);
-                    $(this).parent().parent().remove();
-                    $('#tongtiennhap').val(tongtienhang);
-                    $('#thanhtoanid').val(tongtienhang);
+        $('.delproduct').click(function () {            
+            var tongtienhang = parseInt($('#tongtiennhap').val());   
+            //check truong hop co sua hoa don hay khong de tru ton kho
+            var checkbox = document.getElementById('xemlaiHD');
+             if (checkbox.checked == true)
+             {
+                  //truong hop co sua hoa don
+                 $('.checknhaphang').each(function () {
+                     var chk = $(this).is(':checked');
+                     if (chk == true) {
+                         var tenhang = $(this).parent().parent().find('td').eq(0).text();
+                         var soluongxoa = $(this).parent().parent().find('td').eq(1).text();
+                         //ham chay ngam de cap nhat ton kho
+                         var data2 = { tenhang: tenhang,soluongxoa:soluongxoa };
+                         $.ajax({
+                                type: "POST",
+                                contentType: "application/json; charset=utf-8",
+                                url: "Phieubanhang.aspx/updatetonkhoxoahang",                                
+                                data: JSON.stringify(data2),
+                                dataType: "json",
+                                    success: function (data) {   
+                                        //alert(data.d);                                                                                              
+                                },
+                                error: function () {
+                                    //alert("No Match");
+                                }
+                            });
+                         var price = parseInt($(this).parent().parent().find('td').eq(3).text());
+                         tongtienhang = tongtienhang - price;
+                         //djLog(tongtienhang);
+                         $(this).parent().parent().remove();
+                         $('#tongtiennhap').val(tongtienhang);
+                         $('#thanhtoanid').val(tongtienhang);
+                         const bangchu_hienthi2 = to_vietnamese(tongtienhang);
+                         $('#bangchuid2').text(bangchu_hienthi2);
+                     }
+                 });
+             }
+             else
+             {
+                 $('.checknhaphang').each(function () {
+                     var chk = $(this).is(':checked');
+                     if (chk == true) {
+                         var tenhang = $(this).parent().parent().find('td').eq(0).text();
+                         var soluongxoa = $(this).parent().parent().find('td').eq(0).text();
+                         var price = parseInt($(this).parent().parent().find('td').eq(3).text());
+                         tongtienhang = tongtienhang - price;
+                         //djLog(tongtienhang);
+                         $(this).parent().parent().remove();
+                         $('#tongtiennhap').val(tongtienhang);
+                         $('#thanhtoanid').val(tongtienhang);
+                         const bangchu_hienthi2 = to_vietnamese(tongtienhang);
+                         $('#bangchuid2').text(bangchu_hienthi2);
+                     }
+                 });
+             }
 
-                    const bangchu_hienthi2 = to_vietnamese(tongtienhang);
-                    $('#bangchuid2').text(bangchu_hienthi2);
-
-                    // *** -> se xu ly bang cach nguoi dung nhap sua xoa -> click 2 nut (luu ban /phong) + tra phong -> save all   (xu ly sau ***** cap nhat ngay lap tuc)
-                    //dj.getJSON('/modules/hotel/xulyxoathucdon', {'tenphong': tenphong, 'mahang': delid, 'giaban': price}, function (rs) {
-                    //    if (rs.err === 0) {
-                    //        dWin.alert("Bạn xóa thành công!");
-                    //        dj('#tongtienhang').val(rs.tienhang);
-                    //    }
-                    //});
-                }
-            })
+                     
+            
          });
+         
 
         $('#thanhtoanid').on('change', function () { 
              var tongtienhang = $("#tongtiennhap").val();
@@ -1143,7 +1249,8 @@ var content = document.getElementById("contentToPrint").innerHTML;
                              if (checkbox1.checked == true)
                              {
                                 $("#xemlaiHD").prop("checked", false);                   
-                             }                      
+                            }   
+                            $('#suahd_soluongcu').val('0');
                         },
                         error: function () {
                             //alert("No Match");
@@ -1297,7 +1404,8 @@ var content = document.getElementById("contentToPrint").innerHTML;
                              if (checkbox2.checked == true)
                              {
                                 $("#xemlaiHD").prop("checked", false);                   
-                             }
+                            }
+                            $('#suahd_soluongcu').val('0');
                         },
                         error: function () {
                             //alert("No Match");
@@ -1496,96 +1604,97 @@ var content = document.getElementById("contentToPrint").innerHTML;
 
          });  
 
-        $('#coid').click(function() {
-            // Xử lý sự kiện ở đây
-            //console.log("Nút radio đã được chọn");
-            //alert("Nút radio sua đã được chọn");
-            var sohoadon = $("#soHD").val();
-            alert(sohoadon);
-            debugger;
-            var data = { sohoadon: sohoadon };
-            
-             $.ajax({
-                            type: "POST",
-                            contentType: "application/json; charset=utf-8",
-                            url: "Phieubanhang.aspx/Xemlaihoadon",
-                            data: JSON.stringify(data),
-                            dataType: "json",
-                            success: function (data) {
-                                
-                            },
-                            error: function (result) {
-                                //alert("No Match");
-                            }
-                        });
+        //$('#coid').click(function() {
+        //    // Xử lý sự kiện ở đây
+        //    //console.log("Nút radio đã được chọn");
+        //    //alert("Nút radio sua đã được chọn");          
+        //}); 
 
-        }); 
-
-        $('#khongid').click(function() {
-            // Xử lý sự kiện ở đây
-            //console.log("Nút radio đã được chọn");
-            alert("Nút radio khong sua đã được chọn");
-            $('#tbphieunhap tr').remove();
-            $('#tongtiennhap').val('0');
-            $('#chietkhauid').val('0');
-            $('#thanhtoanid').val('0');
-            $('#conlaiid').val('0');   
-        });  
+        //$('#khongid').click(function() {
+        //    // Xử lý sự kiện ở đây
+        //    //console.log("Nút radio đã được chọn");
+        //    alert("Nút radio khong sua đã được chọn");           
+        //});  
 
          $('#xemlaiHD').on('change', function() {                 
                 if (!this.checked) {                                     
-                                   
+                        $('#tbphieunhap tr').remove();
+                        $('#tongtiennhap').val('0');
+                        $('#chietkhauid').val('0');
+                        $('#thanhtoanid').val('0');
+                        $('#conlaiid').val('0');             
+                        $('#dongiaid').val('0');             
+                    $('#soluongnhaphang').val('1');  
+                    $("#MainContent_phieunhaphang").val('');
+                    $("#MainContent_phieunhaphang").focus();
                 }
                 else
                 {
-                   // alert('show lai hoa don');
-                   var sohoadon = $("#soHD").val();
-                    //alert(sohoadon);
-                    var data = { sohoadon: sohoadon };
-                    $.ajax({
-                            type: "POST",
-                            contentType: "application/json; charset=utf-8",
-                            url: "Phieubanhang.aspx/Xemlaihoadon",
-                            data: JSON.stringify(data),
-                            dataType: "json",
-                            success: function (data) {
-                                const objdata = $.parseJSON(data.d);
+                    var userInput = prompt("Nhập thông tin mật khẩu:");                   
+                    if (userInput != null) {                        
+                        //alert("Bạn đã nhập: " + userInput);
+                        if (userInput == '123456')
+                        {
+                            // alert('show lai hoa don');
+                               var sohoadon = $("#soHD").val();
+                                //alert(sohoadon);
+                                var data = { sohoadon: sohoadon };
+                                $.ajax({
+                                        type: "POST",
+                                        contentType: "application/json; charset=utf-8",
+                                        url: "Phieubanhang.aspx/Xemlaihoadon",
+                                        data: JSON.stringify(data),
+                                        dataType: "json",
+                                        success: function (data) {
+                                            const objdata = $.parseJSON(data.d);
                                      
-                                var tongtienhang = "0";
-                                //var tongchietkhau = "0";                            
-                                //var khachthanhtoan = "0";
-                                //var khachno = "0";
-                                $('#tbphieunhap tr').remove();
+                                            var tongtienhang = "0";
+                                            //var tongchietkhau = "0";                            
+                                            //var khachthanhtoan = "0";
+                                            //var khachno = "0";
+                                            $('#tbphieunhap tr').remove();
 
-                                //var biendem = objdata['Table1'].length;
-                                for (var i = 0; i < objdata['Table1'].length - 1; i++) {
-                                    //console.log(objdata['Table1'].length);
-                                    var tenhang = objdata['Table1'][i][0];                                    
-                                    var soluong = objdata['Table1'][i][1];
-                                    var dongia = objdata['Table1'][i][2];                                   
-                                    var thanhtien = objdata['Table1'][i][3];
+                                            //var biendem = objdata['Table1'].length;
+                                            for (var i = 0; i < objdata['Table1'].length - 1; i++) {
+                                                //console.log(objdata['Table1'].length);
+                                                var tenhang = objdata['Table1'][i][0];                                    
+                                                var soluong = objdata['Table1'][i][1];
+                                                var dongia = objdata['Table1'][i][2];                                   
+                                                var thanhtien = objdata['Table1'][i][3];
 
-                                    tongtienhang = parseInt(tongtienhang) + parseInt(thanhtien);
+                                                tongtienhang = parseInt(tongtienhang) + parseInt(thanhtien);
 
-                                    var newrow = '<tr class="themthucdon">' +
-                                                '<td id="tenhang">' + tenhang + '</td>' +
-                                                '<td id="soluong">' + soluong + '</td>' +
-                                                '<td id="giale">' + dongia + '</td>' +
-                                                '<td id="thanhtien">' + thanhtien + '</td>' +
-                                                '<td><input name="checkinput" class="checkinput" type="checkbox" value="" /></td>' +
-                                                '</tr>';
-                                            $('#tbphieunhap').append(newrow);
+                                                var newrow = '<tr class="themthucdon">' +
+                                                            '<td id="tenhang">' + tenhang + '</td>' +
+                                                            '<td id="soluong">' + soluong + '</td>' +
+                                                            '<td id="giale">' + dongia + '</td>' +
+                                                            '<td id="thanhtien">' + thanhtien + '</td>' +
+                                                            '<td><input name="checkinput" class="checknhaphang" type="checkbox" value="" /></td>' +
+                                                            '</tr>';
+                                                        $('#tbphieunhap').append(newrow);
                                     
-                                }
-                                $('#tongtiennhap').val(tongtienhang);
-                                $('#chietkhauid').val('0');
-                                $('#thanhtoanid').val(tongtienhang);
-                                $('#conlaiid').val('0');                                                        
-                            },
-                            error: function () {
-                                //alert("No Match");
-                            }
-                    });
+                                            }
+                                            $('#tongtiennhap').val(tongtienhang);
+                                            $('#chietkhauid').val('0');
+                                            $('#thanhtoanid').val(tongtienhang);
+                                            $('#conlaiid').val('0');                                                        
+                                        },
+                                        error: function () {
+                                            //alert("No Match");
+                                        }
+                                });
+
+                        }
+                        else
+                        {
+                            alert("Sai password!");
+                        }
+                    } else {                       
+                        $(this).prop('checked', false);
+                        alert("Bạn đã hủy thao tác này.");
+                    }
+
+                   
 
 
                 }

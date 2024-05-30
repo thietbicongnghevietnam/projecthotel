@@ -24,11 +24,9 @@ BACKUP DATABASE FOSS1 TO DISK = '\\10.92.184.233\e\Backup\DBS\FOSS1.bak' WITH IN
 
 
 ====moi ====
-NH_updatekho_BH
-NH_Xemlaihoadon2
-sua
-addthongtinhanghoa_PBH
-
+NH_updatekho_BH_suaHD
+htupdate_tonkho_xoahang
+htupdate_tonkho_suahang
 
 
 ===============  cach distinct ben client
