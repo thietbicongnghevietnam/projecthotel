@@ -1,0 +1,1 @@
+BACKUP DATABASE [DataNhaHang] TO DISK = 'D:\Database\backup\DataNhaHang.bak' WITH INIT
