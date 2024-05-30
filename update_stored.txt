@@ -2,6 +2,7 @@ loi from dang nhap toart chua hien.....
 code signalr
 https://stackoverflow.com/questions/18143599/can-signalr-be-used-with-asp-net-webforms
 ===========================
+
 static class Program
     {
         /// <summary>
