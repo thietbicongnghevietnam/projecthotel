@@ -84,6 +84,8 @@
                     <td>
                         <b style="color: black; padding-left: 10px;">| Sửa HĐ</b>
                         <input type="checkbox" id="xemlaiHD" name="xemlaiHD">
+                        No<input type="radio" id="khongid" name="fruit" value="NO">
+                        Yes<input type="radio" id="coid" name="fruit" value="yes">
                     </td>
                     
                 
@@ -304,7 +306,7 @@ var content = document.getElementById("contentToPrint").innerHTML;
      <script type="text/javascript">
         $(document).ready(function () {
             SearchText();   
-           
+           $('#khongid').prop('checked', true);
          });
 
          const defaultNumbers =' hai ba bốn năm sáu bảy tám chín';
@@ -1492,15 +1494,47 @@ var content = document.getElementById("contentToPrint").innerHTML;
 
              }
 
-         });    
+         });  
+
+        $('#coid').click(function() {
+            // Xử lý sự kiện ở đây
+            //console.log("Nút radio đã được chọn");
+            //alert("Nút radio sua đã được chọn");
+            var sohoadon = $("#soHD").val();
+            alert(sohoadon);
+            debugger;
+            var data = { sohoadon: sohoadon };
+            
+             $.ajax({
+                            type: "POST",
+                            contentType: "application/json; charset=utf-8",
+                            url: "Phieubanhang.aspx/Xemlaihoadon",
+                            data: JSON.stringify(data),
+                            dataType: "json",
+                            success: function (data) {
+                                
+                            },
+                            error: function (result) {
+                                //alert("No Match");
+                            }
+                        });
+
+        }); 
+
+        $('#khongid').click(function() {
+            // Xử lý sự kiện ở đây
+            //console.log("Nút radio đã được chọn");
+            alert("Nút radio khong sua đã được chọn");
+            $('#tbphieunhap tr').remove();
+            $('#tongtiennhap').val('0');
+            $('#chietkhauid').val('0');
+            $('#thanhtoanid').val('0');
+            $('#conlaiid').val('0');   
+        });  
 
          $('#xemlaiHD').on('change', function() {                 
                 if (!this.checked) {                                     
-                    $('#tbphieunhap tr').remove();
-                    $('#tongtiennhap').val('0');
-                    $('#chietkhauid').val('0');
-                    $('#thanhtoanid').val('0');
-                    $('#conlaiid').val('0');                   
+                                   
                 }
                 else
                 {
