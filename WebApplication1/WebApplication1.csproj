@@ -179,6 +179,7 @@
     <Content Include="Danhmuc\Danhmucnhacungcap.aspx" />
     <Content Include="Danhmuc\Danhmucnhanvien.aspx" />
     <Content Include="Danhmuc\Danhmucnhomhang.aspx" />
+    <Content Include="Danhmuc\DanhmucOrder.aspx" />
     <Content Include="Danhmuc\DMcauthanhDVT.aspx" />
     <Content Include="Danhmuc\DMcauthanhsanpham.aspx" />
     <Content Include="Danhmuc\DMKhuvuc.aspx" />
@@ -2642,6 +2643,13 @@
     </Compile>
     <Compile Include="Danhmuc\Danhmucnhomhang.aspx.designer.cs">
       <DependentUpon>Danhmucnhomhang.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Danhmuc\DanhmucOrder.aspx.cs">
+      <DependentUpon>DanhmucOrder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Danhmuc\DanhmucOrder.aspx.designer.cs">
+      <DependentUpon>DanhmucOrder.aspx</DependentUpon>
     </Compile>
     <Compile Include="Danhmuc\DMcauthanhDVT.aspx.cs">
       <DependentUpon>DMcauthanhDVT.aspx</DependentUpon>

@@ -564,3 +564,4 @@ C:\Nhahang\projecthotel\WebApplication1\bin\zxing.presentation.xml
 C:\Nhahang\projecthotel\WebApplication1\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\Nhahang\projecthotel\WebApplication1\obj\Debug\WebApplication1.dll
 C:\Nhahang\projecthotel\WebApplication1\obj\Debug\WebApplication1.pdb
+C:\Nhahang\projecthotel\WebApplication1\obj\Debug\WebApplication1.csprojResolveAssemblyReference.cache

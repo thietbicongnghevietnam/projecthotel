@@ -16,6 +16,7 @@ using System.Web.Script.Serialization;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System.IO;
+using QRCoder;
 
 namespace WebApplication1
 {
@@ -45,7 +46,10 @@ namespace WebApplication1
         public string tendovi = "";
         public string diachidonvi = "";
         public string sodtdonvi = "";
+        public string ghichu = "";
         public DataTable dtdonvi = new DataTable();
+
+        public string barcodeData = "";
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -118,8 +122,29 @@ namespace WebApplication1
                 tendovi = dtdonvi.Rows[0][1].ToString();
                 diachidonvi = dtdonvi.Rows[0][5].ToString();
                 sodtdonvi = dtdonvi.Rows[0][7].ToString();
+                ghichu = dtdonvi.Rows[0][9].ToString();
+
+                GenerateAndConvertQRCode(ghichu);
             }
 
+        }
+
+        private void GenerateAndConvertQRCode(string data)
+        {
+            // Tạo mã QR từ dữ liệu được chuyển đến
+            QRCodeGenerator qrGenerator = new QRCodeGenerator();
+            //QRCodeData qrCodeData = qrGenerator.CreateQrCode(data, QRCodeGenerator.ECCLevel.Q);
+            QRCodeData qrCodeData = qrGenerator.CreateQrCode(data, QRCodeGenerator.ECCLevel.L);
+            QRCode qrCode = new QRCode(qrCodeData);
+            Bitmap qrCodeImage = qrCode.GetGraphic(2); // Điều chỉnh kích thước ở đây nếu cần
+
+            // Chuyển đổi hình ảnh Bitmap thành một dạng dữ liệu base64
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                qrCodeImage.Save(memoryStream, System.Drawing.Imaging.ImageFormat.Png);
+                byte[] byteImage = memoryStream.ToArray();
+                barcodeData = "data:image/png;base64," + Convert.ToBase64String(byteImage);
+            }
         }
 
         public static string GetConnectStringFromFile()

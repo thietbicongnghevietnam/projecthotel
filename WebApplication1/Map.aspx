@@ -118,6 +118,7 @@
                                 <li class="breadcrumb-item active"> <a href="#" onclick="updateItem()">Chuyển bàn</a></li>
                                 <li class="breadcrumb-item active"><a href="#" onclick="gopban()">Gộp bàn</a></li>
                                 <li class="breadcrumb-item active"><a href="#" onclick="delItem()">Hủy bàn</a></li>
+                                <li class="breadcrumb-item active"><a href="Danhmuc/DanhmucOrder.aspx" target="_blank" >Danh sách Order</a></li>
                             </ol>
                         </div>
                     </div>
@@ -651,7 +652,7 @@
                            <span style="float:left; margin-left:410px; width:650px;">KH thanh toán: <b id="khthanhtoan2" style="margin-left:12px;"></b></span>
                             <span style="float:left; margin-left:455px; width:650px;">Còn lại: <b id="psno2" style="margin-left:15px;"></b>  </span> 
                            <div><i style="font-size:22px;">Bằng chữ:</i> <span id="bangchuid" style="font-weight:300; color:red; font-size:22px; padding-left:10px;"></span></div>
-                          
+                           Thanh toán chuyển khoản :<img id="barcodeImage" src="<%= barcodeData %>" alt="Barcode" />
                         </div>
                         
                         
@@ -1483,31 +1484,36 @@
             var printWindow = null; // Biến lưu trữ cửa sổ in
             // Hàm in một phần tử HTML
             function printElement(elementId) {                            
-             var divContents = document.getElementById("invoice").innerHTML; 
-                // Đóng cửa sổ in cũ nếu tồn tại
-                if (printWindow !== null) {
-                    //printWindow.close();
-                // Kiểm tra xem cửa sổ in có phải là trang hiện tại không
-                        if (printWindow.location.href !== window.location.href) {
-                            printWindow.close();
-                        }
-                }
-                // Tạo cửa sổ in mới
-                printWindow = window.open('', '', 'height=500, width=1000'); 
-                printWindow.document.write('<html>'); 
-                printWindow.document.write('<body >'); 
-                printWindow.document.write(divContents); 
-                printWindow.document.write('</body></html>'); 
-                printWindow.document.close(); 
+             var divContents = document.getElementById("invoice").innerHTML;                 
+                //if (printWindow !== null) {                
+                //        if (printWindow.location.href !== window.location.href) {
+                //            printWindow.close();
+                //        }
+                //}               
+                //printWindow = window.open('', '', 'height=500, width=1000'); 
+                //printWindow.document.write('<html>'); 
+                //printWindow.document.write('<body >'); 
+                //printWindow.document.write(divContents); 
+                //printWindow.document.write('</body></html>'); 
+                //printWindow.document.close(); 
                 // In
-                printWindow.print(); 
+                //printWindow.print(); 
                 // Đợi sự kiện in hoàn tất và đóng cửa sổ in
-                printWindow.onafterprint = function() {
+                //printWindow.onafterprint = function() {
                     //printWindow.close();
-                     if (printWindow.location.href !== window.location.href) {
-                            printWindow.close();
-                        }
-                };
+                //     if (printWindow.location.href !== window.location.href) {
+                //            printWindow.close();
+                //        }
+                //};
+
+//var content = document.getElementById("contentToPrint").innerHTML;
+    var printWindow = window.open('','','height=500, width=1000', '_blank');
+    printWindow.document.open();
+    printWindow.document.write('<html><head><title>Print</title></head><body onload="window.print(); window.close()">' + divContents + '</body></html>');
+    printWindow.document.close();
+    printWindow.print(); // In trực tiếp từ cửa sổ đã mở
+    printWindow.close(); // Đóng cửa sổ in
+
             }  
                
 

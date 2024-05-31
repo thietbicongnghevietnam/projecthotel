@@ -265,14 +265,14 @@
             </div>
         </div>
 
-      <%--  <div id="contentToPrint">
+        <div id="contentToPrint">
         <!-- Nội dung bạn muốn in -->
         <h1>Hello, world!</h1>
         <p>This is the content that you want to print. noi dung in khong can hoi</p>
     </div>
 
     <!-- Nút để kích hoạt chức năng in -->
-    <button onclick="printContent()">Print</button>--%>
+    <button onclick="printContent()">Print</button>
 
 
     </div>
@@ -293,7 +293,7 @@ alert('toi dang thu');
             //printWindow.document.write('<html><head><title>Print</title></head><body onload="window.print(); window.close()">' + content + '</body></html>');
             //printWindow.document.close();
 var content = document.getElementById("contentToPrint").innerHTML;
-    //var printWindow = window.open('', '_blank');
+    var printWindow = window.open('', '_blank');
     printWindow.document.open();
     printWindow.document.write('<html><head><title>Print</title></head><body onload="window.print(); window.close()">' + content + '</body></html>');
     printWindow.document.close();
@@ -309,6 +309,22 @@ var content = document.getElementById("contentToPrint").innerHTML;
             SearchText();   
             //$('#khongid').prop('checked', true);
             $('#bannhanhid').prop('checked', true);
+
+if (typeof navigator !== 'undefined' && 'printer' in navigator) {
+        // Lấy thông tin về máy in
+        var printers = navigator.printer.getPrinters();
+
+        // Hiển thị danh sách các máy in trong console
+        console.log(printers);
+
+        // Lấy địa chỉ của máy in đầu tiên trong danh sách và hiển thị trên giao diện
+        var firstPrinterAddress = printers.length > 0 ? printers[0].address : 'Không có máy in';
+        $('#printerAddress').text(firstPrinterAddress);
+    } else {
+        // Trình duyệt không hỗ trợ truy cập thông tin máy in
+        $('#printerAddress').text('Trình duyệt không hỗ trợ truy cập thông tin máy in.');
+    }
+
          });
 
          const defaultNumbers =' hai ba bốn năm sáu bảy tám chín';

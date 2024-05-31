@@ -65,6 +65,38 @@ static class Program
     }
 
 
+===============
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE NH_danhmucorder
+	
+AS
+BEGIN
+	
+	select [tenhang]
+      ,[soluong]
+      ,[banid]      
+      ,[createtime] from htOrderMonan order by createtime desc
+
+END
+GO
+===============
+ALTER PROCEDURE [dbo].[NH_delete_order]
+	@tenhangid as nvarchar(50),
+	@tenbanid as nvarchar(50)
+AS
+BEGIN
+	
+	delete htOrderMonan where tenhang=@tenhangid and banid= @tenbanid
+	select 1
+
+END
+
+
+
 =============
 BACKUP DATABASE FOSS1 TO DISK = '\\10.92.184.233\e\Backup\DBS\FOSS1.bak' WITH INIT
 BACKUP DATABASE [DataNhaHang] TO DISK = 'D:\Database\backup\DataNhaHang.bak' WITH INIT
