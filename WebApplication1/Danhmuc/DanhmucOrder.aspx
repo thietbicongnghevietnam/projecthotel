@@ -30,7 +30,7 @@
         <div>
             <div class="card">
             <div class="card-header">
-                <h1>Danh sách món ăn Order!</h1>
+                <h1>Danh sách món ăn order nhà bếp</h1>
                 <br />
                 <%--class="card-title"--%>
                 <div class="col-sm-12">

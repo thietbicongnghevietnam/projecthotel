@@ -118,6 +118,7 @@
                                 <li class="breadcrumb-item active"> <a href="#" onclick="updateItem()">Chuyển bàn</a></li>
                                 <li class="breadcrumb-item active"><a href="#" onclick="gopban()">Gộp bàn</a></li>
                                 <li class="breadcrumb-item active"><a href="#" onclick="delItem()">Hủy bàn</a></li>
+                                <li class="breadcrumb-item active"><a href="Danhmuc/DanhmucOrder.aspx" target="_blank" >Danh sách Order</a></li>
                             </ol>
                         </div>
                     </div>
@@ -372,17 +373,18 @@
                                             </td>
 
                                             
-                                            <%--<td style="padding-bottom: 10px; padding-right: 10px; padding-left: 10px;">
-                                                <input type="submit" value="Thanh toan" id="khachthanhtoan" class="btn btn-success float-right">  <%--class , id="saveproduct"
-                                            </td>--%>
-                                    
+                                            <td style="padding-bottom: 10px; padding-right: 10px; padding-left: 10px;">
+                                                 <input type="submit" value="Order bếp" id="orderbepid"  class="btn btn-success float-right" style="width:100px;float:left; margin-bottom:5px;">
+                                               <%-- <input type="submit" value="Thanh toan" id="khachthanhtoan" class="btn btn-success float-right">  <%--class , id="saveproduct"--%>
+                                            </td>
+                                   
 
                                         </tr>
                                     </tbody>
                                 </table>
 
 
-                                <div style="width: 100%; height: 450px; overflow-y: scroll; float: left;">
+                                <div style="width: 100%; height: 400px; overflow-y: scroll; float: left;">
                                     <table class="display table table-bordered dataTable no-footer">
                                         <thead>
                                             <tr>
@@ -444,14 +446,10 @@
 
                                     <div class="col-2">
                                         <br />
-                                        <input type="submit" value="Xem HD" id="khachthanhtoan2" class="btn btn-success float-right" style="width:100px;float:left;"><br /><br />
-                                        <input type="submit" value="Thanh toán" id="ghilaihoadon"  class="btn btn-success float-right" style="width:100px;float:left;">                                        
+                                        <input type="submit" value="Xem HD" id="khachthanhtoan2" class="btn btn-success float-right" style="width:100px;float:left; margin-bottom:5px;"><br />
+                                        <input type="submit" value="Thanh toán" id="ghilaihoadon"  class="btn btn-success float-right" style="width:100px;float:left; margin-bottom:5px;">  <br />                                          
                                     </div>
-                                     
-                                   
-                                           
-                                    
-                                     
+                                                                                                                                                                                            
                                 </div>
                                 <div><b>Bằng chữ:</b> <span id="bangchuid2" style="font-weight:300; color:red; font-size:25px; padding-left:10px;"></span></div>
                                 
@@ -623,14 +621,14 @@
 
                     <div class="modal-body" id="printableArea" style="height:auto;">
                        
-                       <%-- <div class="container-fluid"  style="width:400px;height:auto;">-- mau 400 danh cho may in nho --%>
+                       <%-- <div class="container-fluid"  style="width:400px;height:auto;float:left;">--%>
                        <div class="container-fluid"  style="width:700px;height:auto;">
-                           <span><i style="font-size:22px; text-align:center;"><%=tendovi %></i></span><br />                           
+                           <span><i style="font-size:24px; text-align:center;color:black;"><%=tendovi %></i></span><br />                           
                           <%--<span hidden> Loại hình: </span><b id="hinhthucnghi2" hidden></b> &nbsp;&nbsp;&nbsp; <span hidden>Tổng tiền hát:</span> <b id="tongtienhat2" hidden></b><br />--%>
-                           <span> Địa chỉ: <%=diachidonvi %></span><b id="hinhthucnghi2" hidden></b> &nbsp;&nbsp;&nbsp; <span hidden>Tổng tiền hát:</span> <b id="tongtienhat2" hidden></b><br />
-                           Số ĐT: <span><%=sodtdonvi %></span><br />
-                           Số HĐ: <span id="sohoadon_"></span> &nbsp;&nbsp;&nbsp; Ngày tạo : <span id="ngaytao_"></span><br />                            
-                           Tên bàn: <b id="tenphong2"></b> &nbsp;&nbsp;&nbsp; <span hidden> tiền hàng:</span> <b id="tongtien2" hidden></b>                                                      
+                           <span style="color:black;"> Địa chỉ: <%=diachidonvi %></span><b id="hinhthucnghi2" hidden></b> &nbsp;&nbsp;&nbsp; <span hidden>Tổng tiền hát:</span> <b id="tongtienhat2" hidden></b><br />
+                           Số ĐT: <span style="color:black;"><%=sodtdonvi %></span><br />
+                           Số HĐ: <span id="sohoadon_" style="color:black;"></span> &nbsp;&nbsp;&nbsp; Ngày tạo : <span id="ngaytao_" style="color:black;"></span><br />                            
+                           Tên bàn: <b id="tenphong2" style="color:black;"></b> &nbsp;&nbsp;&nbsp; <span hidden> tiền hàng:</span> <b id="tongtien2" hidden></b>                                                      
 
 
                                 <div style="width: 100%;  float: left; height:auto ">  <%--height: 300px;--%>
@@ -642,19 +640,19 @@
                                                 <th>Đơn giá</th>
                                                 <th>Thành tiền</th>                                                
                                             </tr>
-                                            <tbody id="tbnhaphang_inhoadon">
+                                            <tbody id="tbnhaphang_inhoadon" style="font-size:22px;color:black;">
                                             </tbody>
 
 
                                     </table>
                                 </div>
                              <br /> 
-                           <span style="float:left; margin-left:440px; width:650px;">Tổng tiền: <b id="thantoan2" style="margin-left:12px;"></b> &nbsp;&nbsp;&nbsp;</span><br /> 
-                           <span style="float:left; margin-left:475px; width:650px;">C/K: <b id="chietkau2" style="margin-left:12px;"></b></span> <br />
-                           <span style="float:left; margin-left:410px; width:650px;">KH thanh toán: <b id="khthanhtoan2" style="margin-left:12px;"></b></span>
-                            <span style="float:left; margin-left:455px; width:650px;">Còn lại: <b id="psno2" style="margin-left:15px;"></b>  </span> 
-                           <div><i style="font-size:22px;">Bằng chữ:</i> <span id="bangchuid" style="font-weight:300; color:red; font-size:22px; padding-left:10px;"></span></div>
-                          
+                           <span style="float:left; margin-left:410px; width:650px; color:black;font-size:22px;">Tổng tiền: <b id="thantoan2" style="margin-left:12px;color:black;font-size:22px;"></b> &nbsp;&nbsp;&nbsp;</span><br /> 
+                           <span style="float:left; margin-left:445px; width:650px;color:black;font-size:22px;">C/K: <b id="chietkau2" style="margin-left:12px;color:black;font-size:22px;"></b></span> <br />
+                           <span style="float:left; margin-left:370px; width:650px;color:black;font-size:22px;">KH thanh toán: <b id="khthanhtoan2" style="margin-left:12px;color:black;font-size:22px;"></b></span>
+                            <span style="float:left; margin-left:420px; width:650px;color:black;font-size:22px;">Còn lại: <b id="psno2" style="margin-left:15px;color:black;font-size:22px;"></b>  </span> 
+                           <div><i style="font-size:22px;color:black;">Bằng chữ:</i> <span id="bangchuid" style="color:black; font-size:22px; padding-left:10px;"></span></div>
+                           <i style="font-size:20px;color:black;">Thanh toán chuyển khoản :</i><img id="barcodeImage" src="<%= barcodeData %>" alt="Barcode" style="width:100px;height:100px;" />
                         </div>
                         
                         
@@ -677,7 +675,19 @@
             </div>
         </div>
 
-
+        <div id="invoice" style="display: none; height:auto;"> 
+          <h2>Phiếu Order bếp</h2>
+          <table style="border: 1px solid black;">
+            <tr style="border: 1px solid black;">
+              <th>Tên Hàng</th>
+              <th>Số Lượng</th>
+                <th>Ten ban</th>
+            </tr>
+            <tbody id="invoiceItems">
+              <!-- Dữ liệu hóa đơn sẽ được thêm vào đây sau khi nhấn nút "In Hóa Đơn" -->
+            </tbody>
+          </table>
+        </div>
 
 
         </div>
@@ -1410,6 +1420,103 @@
                 //printDiv_Save();    //toi lam tiep
             });
 
+            $('#orderbepid').click(function () 
+            {
+                var checkbox = document.getElementById('xemlaiHD');
+                if (checkbox.checked == true)
+                {
+                        alert('Ban o che do xem lai hoa don!');                      
+                }
+                else
+                {
+                    var tenphong = $('#nametable').text();
+                    var itemdata = {};
+
+                    $('.themthucdon').each(function () {                        
+                        var mahang = $(this).find('td').eq(0).text() + "," + $(this).find('td').eq(2).text() + "," + $(this).find('td').eq(3).text();
+                        var soluong = $(this).find('td').eq(1).text();                       
+                        if (mahang != "") {                           
+                            itemdata[mahang] = parseInt(soluong);                            
+                        }
+                    });                                       
+                    var data = {                       
+                        tenphong: tenphong,                       
+                        items: JSON.stringify(itemdata)
+                    };
+                    $.ajax({
+                            type: "POST",
+                            contentType: "application/json; charset=utf-8",
+                            url: "Map.aspx/Ordernhabep",
+                            //data: JSON.stringify(data),
+                            data: JSON.stringify(data),
+                            dataType: "json",
+                            success: function (data) {
+                                const objdata = $.parseJSON(data.d);    
+                                //debugger;                      
+                                $('#invoiceItems tr').remove();                                     
+                                for (var i = 0; i < objdata['Table'].length - 1; i++) {
+                                    //console.log(objdata['Table1'].length);
+                                    var tenhang = objdata['Table'][i][0];
+                                    var soluong = objdata['Table'][i][1];
+                                    var banid = objdata['Table'][i][2];
+                                    var solanin = objdata['Table'][i][3];                                                                  
+                                    var newrow = '<tr class="thongtinnhabep">' +
+                                        '<td id="_hanghoad" style="width:250px; border: 1px soild black;">' + tenhang + '</td>' +
+                                        '<td id="_tienhang" style="border: 1px soild black;">' + soluong + '</td>' +
+                                        '<td id="_loaihoadon" style="border: 1px soild black;">' + banid + '</td>' +
+                                        //'<td id="_loaihoadon" style="border: 1px soild black;">' + solanin + '</td>' +                                                                         
+                                        '</tr>';
+                                   $('#invoiceItems').append(newrow);                                                                        
+                                }
+                               
+                                //$("#invoice").show();
+                                // Gọi hàm để in
+                               printElement('invoice');
+                            },
+                            error: function () {
+                                //alert("No Match");
+                            }
+                         });
+                }                 
+                //printDiv_Save();    //toi lam tiep
+            });
+
+            var printWindow = null; // Biến lưu trữ cửa sổ in
+            // Hàm in một phần tử HTML
+            function printElement(elementId) {                            
+             var divContents = document.getElementById("invoice").innerHTML;                 
+                //if (printWindow !== null) {                
+                //        if (printWindow.location.href !== window.location.href) {
+                //            printWindow.close();
+                //        }
+                //}               
+                //printWindow = window.open('', '', 'height=500, width=1000'); 
+                //printWindow.document.write('<html>'); 
+                //printWindow.document.write('<body >'); 
+                //printWindow.document.write(divContents); 
+                //printWindow.document.write('</body></html>'); 
+                //printWindow.document.close(); 
+                // In
+                //printWindow.print(); 
+                // Đợi sự kiện in hoàn tất và đóng cửa sổ in
+                //printWindow.onafterprint = function() {
+                    //printWindow.close();
+                //     if (printWindow.location.href !== window.location.href) {
+                //            printWindow.close();
+                //        }
+                //};
+
+//var content = document.getElementById("contentToPrint").innerHTML;
+    var printWindow = window.open('','','height=500, width=1000', '_blank');
+    printWindow.document.open();
+    printWindow.document.write('<html><head><title>Print</title></head><body onload="window.print(); window.close()">' + divContents + '</body></html>');
+    printWindow.document.close();
+    printWindow.print(); // In trực tiếp từ cửa sổ đã mở
+    printWindow.close(); // Đóng cửa sổ in
+
+            }  
+               
+
             $('.addnew_KH').click(function () {
              $('#myModal').modal('show');
             });
@@ -1505,8 +1612,12 @@
 
                     if (tenphong != "") {
                         $('.themthucdon').each(function () {
-                            //var mahang = $(this).find('td').eq(0).text();
-                            //var soluong = $(this).find('td').eq(1).text();
+                            //var dongia = $(this).find('td').eq(2).text();
+                            //var thanhtien = $(this).find('td').eq(3).text()
+                            //var changedongia = Math.round(parseFloat(dongia.replace(/\./g, '').replace(',', '.')));
+                            //var changethanhtien = Math.round(parseFloat(thanhtien.replace(/\./g, '').replace(',', '.')));
+
+                            //var mahang = $(this).find('td').eq(0).text() + "," + changedongia + "," + changethanhtien;
                             var mahang = $(this).find('td').eq(0).text() + "," + $(this).find('td').eq(2).text() + "," + $(this).find('td').eq(3).text();
                             var soluong = $(this).find('td').eq(1).text();
                             var element = {}, cart = [];
@@ -1524,6 +1635,7 @@
                             items: JSON.stringify(itemdata),
                             userid: userid
                         };
+                        //alert(items);
                         //save hang hoa
                         $.ajax({
                             type: "POST",
@@ -1594,22 +1706,35 @@
                                             
 
                                                 var newrow = '<tr class="themthucdon2">' +
-                                                    '<td id="tenhang">' + mahang + '</td>' +
-                                                    '<td id="soluong">' + soluong + '</td>' +
-                                                    '<td id="giale">' + dongia + '</td>' +
-                                                    '<td id="thanhtien">' + thanhtien + '</td>' +                                               
+                                                    '<td id="tenhang" style="border: 1px soild black;">' + mahang + '</td>' +
+                                                    '<td id="soluong" style="border: 1px soild black;">' + soluong + '</td>' +
+                                                    '<td id="giale" style="border: 1px soild black;">' + parseInt(dongia).toLocaleString('vi-VN') + '</td>' +
+                                                    '<td id="thanhtien" style="border: 1px soild black;">' + parseInt(thanhtien).toLocaleString('vi-VN') + '</td>' +                                               
                                                     '</tr>';
                                                 $('#tbnhaphang_inhoadon').append(newrow);                                                                                           
                                             }
                                             //$('#checkinput1').val(giovao);
                                             //$('#checkinput2').val(giora);                                                                
                                             $("#tenphong2").text(tenphong);
-                                            $('#tongtien2').text(tienhang);
-                                            $('#thantoan2').text(parseInt(tienhang)+parseInt(tongtienhat));
-                                            $('#chietkau2').text(tienck);
+
+                                            var khachTT = parseInt(tienhang) + parseInt(tongtienhat);
+                                            var formattedTienHang = parseInt(tienhang).toLocaleString('vi-VN');
+                                            var formattedkhachTT = khachTT.toLocaleString('vi-VN');
+                                            var formattedtienck = parseInt(tienck).toLocaleString('vi-VN');
+
+                                            $('#tongtien2').text(formattedTienHang);
+                                            $('#thantoan2').text(formattedkhachTT);
+                                            $('#chietkau2').text(formattedtienck);                                                                                    
+                                            var fkhthanhtoan2 = parseInt(khthanhtoan2).toLocaleString('vi-VN');                                            
+                                            var ftienthoi = parseInt(tienthoi).toLocaleString('vi-VN');
                                                                         
-                                            $('#khthanhtoan2').text(khthanhtoan2);
-                                            $('#psno2').text(tienthoi);
+                                            $('#khthanhtoan2').text(fkhthanhtoan2);
+                                            $('#psno2').text(ftienthoi);
+
+                                             //$('#tongtien2').text(tienhang);
+                                            //$('#thantoan2').text(parseInt(tienhang)+parseInt(tongtienhat));
+                                            //$('#chietkau2').text(tienck);   
+
                                             $('#sohoadon_').text(_sohoadon);
                                             $('#ngaytao_').text(ngaytao);
                                         
@@ -1659,10 +1784,18 @@
                 var sohoadon_new = unitnohd[0] + "_" + (parseInt(unitnohd[1]) + 1);
 
                 //debugger;
-                var psco = thantoan2;//$('#thanhtoanid').val();
-                var tongtienhang = tongtien2;//$('#tongtienid').val();
-                var tienck = chietkau2;//$('#chietkhauid').val();
-                var tongtienhat = tienhat;  
+                //var psco = thantoan2;//$('#thanhtoanid').val();
+                //var tongtienhang = tongtien2;//$('#tongtienid').val();
+                //var tienck = chietkau2;//$('#chietkhauid').val();
+                var tongtienhat = tienhat; 
+
+
+                var psco = Math.round(parseFloat(thantoan2.replace(/\./g, '').replace(',', '.')));
+                var tongtienhang = Math.round(parseFloat(tongtien2.replace(/\./g, '').replace(',', '.')));
+                var tienck = Math.round(parseFloat(chietkau2.replace(/\./g, '').replace(',', '.')));
+                //alert(psco);
+                //alert(tongtienhang);
+                //alert(tienck);
 
                 //them tien phong de thanh toan khach san - nha nghi
                 var tongtienphong = 0;
@@ -1684,13 +1817,21 @@
                 var tenphong = tenphong2;//$('#nametable').text();
                 var psno = conlai2;//$('#conlaiid').val();
                 var itemdata = {};               
-                $('.themthucdon2').each(function () {                        
-                        var mahang = $(this).find('td').eq(0).text() + "," + $(this).find('td').eq(2).text() + "," + $(this).find('td').eq(3).text();
+                $('.themthucdon2').each(function () {
+                        var dongia = $(this).find('td').eq(2).text();
+                        var thanhtien = $(this).find('td').eq(3).text() 
+
+                        var changedongia = Math.round(parseFloat(dongia.replace(/\./g, '').replace(',', '.')));
+                        var changethanhtien = Math.round(parseFloat(thanhtien.replace(/\./g, '').replace(',', '.')));    
+                    
+                        var mahang = $(this).find('td').eq(0).text() + "," + changedongia + "," + changethanhtien;
+                        //var mahang = $(this).find('td').eq(0).text() + "," + $(this).find('td').eq(2).text() + "," + $(this).find('td').eq(3).text();
                         var soluong = $(this).find('td').eq(1).text();                       
                         if (mahang != "") {                           
                             itemdata[mahang] = parseInt(soluong);                            
                         }
-                    });                                       
+                });  
+                //alert(itemdata);
                     var data = {
                         idkhachhang:idkhachhang,
                         tenphong: tenphong,
@@ -2468,22 +2609,27 @@
                                             
 
                                             var newrow = '<tr class="themthucdon2">' +
-                                                '<td id="tenhang">' + mahang + '</td>' +
-                                                '<td id="soluong">' + soluong + '</td>' +
-                                                '<td id="giale">' + dongia + '</td>' +
-                                                '<td id="thanhtien">' + thanhtien + '</td>' +                                               
+                                                '<td id="tenhang" style="border: 1px soild black;">' + mahang + '</td>' +
+                                                '<td id="soluong" style="border: 1px soild black;">' + soluong + '</td>' +
+                                                '<td id="giale" style="border: 1px soild black;">' + parseInt(dongia).toLocaleString('vi-VN') + '</td>' +
+                                                '<td id="thanhtien" style="border: 1px soild black;">' + parseInt(thanhtien).toLocaleString('vi-VN') + '</td>' +                                               
                                                 '</tr>';
                                             $('#tbnhaphang_inhoadon').append(newrow);
                                         }
                                         //$('#checkinput1').val(giovao);
                                         //$('#checkinput2').val(giora);                                                                
                                         $("#tenphong2").text(tenphong);
-                                        $('#tongtien2').text(tienhang);
-                                        $('#thantoan2').text(parseInt(tienhang)+parseInt(tongtienhat));
+
+                                        $('#tongtien2').text(tienhang.toLocaleString('vi-VN'));
+                                        var khachTT = parseInt(tienhang) + parseInt(tongtienhat);
+                                        $('#thantoan2').text(khachTT.toLocaleString('vi-VN'));
                                         $('#chietkau2').text(0);
 
-                                        $('#khthanhtoan2').text(khachthanhtoan);
-                                        $('#psno2').text(khachno);
+                                        $('#khthanhtoan2').text(khachthanhtoan.toLocaleString('vi-VN'));
+                                        $('#psno2').text(khachno.toLocaleString('vi-VN'));
+
+
+
                                         $('#sohoadon_').text(_sohoadon);
                                         $('#ngaytao_').text(ngaytao);
 

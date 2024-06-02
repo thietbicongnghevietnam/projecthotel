@@ -147,6 +147,7 @@
                                                 '<%= rows["tiengiohat"].ToString() %>',
                                                 '<%= rows["nhanghi"].ToString() %>',
                                                 '<%= rows["karaoke"].ToString() %>')"><i class="fas fa-pencil-alt"></i>Cài đặt bàn/phòng</a>
+                                           &nbsp;&nbsp; <a href="#" class="btn btn-info btn-sm" title="delete item" onclick="openEditModal4('<%= rows["tenphong"].ToString() %>')"><i class="fas fa-pencil-alt"></i>Xóa</a>
                                         </td> 
                                         
                                     </tr>
@@ -158,6 +159,53 @@
 
 
 
+        </div>
+
+         <div class="modal" id="myModal4">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="row">
+                            <div>
+                                <h4 class="modal-title" id="headerTag" style="float: left">Bạn có chắc muốn xóa phòng?</h4>                                
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="float: right; margin-left: 300px;">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <%-- Modal footer --%>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="ID">Item</label>
+                                        <span style="color: green; font-size: 11px; font-style: italic;">(Read only)</span>
+                                        <asp:TextBox ID="txtphongid" CssClass="form-control" placeholder="" runat="server"></asp:TextBox>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                       <label for="exampleInputEmail1"></label>
+                                       
+                                    </div>
+                                </div>
+                            </div>                                                       
+                            
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times"></i>Close</button>
+                        <button type="button" runat="server" id="Button2" onserverclick="Xoabanphong" class="btn btn-primary">
+                            <i class="fas fa-download"></i>
+                            Xoa
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
 
 
@@ -383,14 +431,16 @@
 
                     });
 
-    function openEditModal2(tenphong) {           
+        function openEditModal2(tenphong) {           
             $("#txttenphong").val(tenphong);
             var fromdate  = $("#Date1").val();
-            var todate  = $("#ngaychiid").val();
-            
-            
-           
+            var todate  = $("#ngaychiid").val();                                  
             $('#myModal2').modal('show');
+         }
+
+         function openEditModal4(tenphong) {           
+            $("#txtphongid").val(tenphong);                                              
+            $('#myModal4').modal('show');
          }
 
          function openEditModal3(maphongid, tiengionghiid, thoigianphutroiid, tiengiophutroiid, tiengiophutroitheophutid, tiennghidemid, tiennghingayid, tiennghithangid, tienkaraokeid,nhanghi,karaoke) {   

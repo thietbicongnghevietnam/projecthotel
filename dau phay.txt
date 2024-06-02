@@ -1,0 +1,19 @@
+$("#tenphong2").text(tenphong);
+
+                                            var khachTT = parseInt(tienhang) + parseInt(tongtienhat);
+                                            var formattedTienHang = parseInt(tienhang).toLocaleString('vi-VN');
+                                            var formattedkhachTT = khachTT.toLocaleString('vi-VN');
+                                            var formattedtienck = parseInt(tienck).toLocaleString('vi-VN');
+
+                                            $('#tongtien2').text(formattedTienHang);
+                                            $('#thantoan2').text(formattedkhachTT);
+                                            $('#chietkau2').text(formattedtienck);                                                                                    
+                                            var fkhthanhtoan2 = parseInt(khthanhtoan2).toLocaleString('vi-VN');                                            
+                                            var ftienthoi = parseInt(tienthoi).toLocaleString('vi-VN');
+                                                                        
+                                            $('#khthanhtoan2').text(fkhthanhtoan2);
+                                            $('#psno2').text(ftienthoi);
+
+
+ parseInt(dongia).toLocaleString('vi-VN')
+parseInt(thanhtien).toLocaleString('vi-VN')

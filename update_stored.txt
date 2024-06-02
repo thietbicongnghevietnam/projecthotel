@@ -3,66 +3,28 @@ code signalr
 https://stackoverflow.com/questions/18143599/can-signalr-be-used-with-asp-net-webforms
 ===========================
 
-static class Program
-    {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
-        [STAThread]
-        static void Main()
-        {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new Form1());
-            // Đường dẫn lưu trữ file sao lưu
-            string backupFilePath = @"D:\Database\backup\DataNhaHang.bak";
-            // Tên cơ sở dữ liệu cần sao lưu
-            string databaseName = "DataNhaHang";
 
-            // Thực hiện sao lưu cơ sở dữ liệu
-            BackupDatabase(databaseName, backupFilePath);
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
 
-        }
+CREATE PROCEDURE NH_xoa_phongban
+	@banphongid as nvarchar(50)
+AS
+BEGIN
+	if exists(select * from htphong where tenphong=@banphongid and trangthai=0)
+	begin
+		delete htphong where tenphong=@banphongid and trangthai=0
+		select 1
+	end
+	else
+	begin
+		select 0
+	end
 
-        private static void BackupDatabase(string databaseName, string backupFilePath)
-        {
-            try
-            {
-                // Tạo chuỗi kết nối đến cơ sở dữ liệu
-                string connectionString = "Data Source=./;Initial Catalog=DataNhaHang;User ID='sa';Password=''"; // Thay thế bằng chuỗi kết nối của bạn
-
-                // Tạo kết nối đến cơ sở dữ liệu
-                using (var connection = new SqlConnection(connectionString))
-                {
-                    // Mở kết nối
-                    connection.Open();
-
-                    // Tạo câu lệnh sao lưu cơ sở dữ liệu
-                    string backupCommand = $"BACKUP DATABASE [{databaseName}] TO DISK = '{backupFilePath}' WITH INIT";
-
-                    // Thực thi câu lệnh
-                    using (var command = new SqlCommand(backupCommand, connection))
-                    {
-                        command.ExecuteNonQuery();
-                    }
-
-                    // Đóng kết nối
-                    connection.Close();
-                }
-
-                // Hiển thị thông báo sau khi sao lưu thành công
-                Console.WriteLine("Backup successful!!");
-            }
-            catch (Exception ex)
-            {
-                // Xử lý các trường hợp lỗi
-                Console.WriteLine($"ERROR: {ex.Message}");
-            }
-        }
-
-
-
-    }
+END
+GO
 
 
 ===============

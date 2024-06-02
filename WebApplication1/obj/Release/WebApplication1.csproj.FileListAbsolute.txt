@@ -91,3 +91,4 @@ C:\Users\ACER\Desktop\Nhahang\projecthotel\WebApplication1\bin\zxing.dll
 C:\Users\ACER\Desktop\Nhahang\projecthotel\WebApplication1\bin\zxing.presentation.dll
 C:\Users\ACER\Desktop\Nhahang\projecthotel\WebApplication1\bin\zxing.xml
 C:\Users\ACER\Desktop\Nhahang\projecthotel\WebApplication1\bin\zxing.presentation.xml
+C:\Users\ACER\Desktop\Nhahang\projecthotel\WebApplication1\obj\Release\WebApplication1.csprojAssemblyReference.cache

@@ -58,6 +58,24 @@ namespace WebApplication1.Danhmuc {
         protected global::System.Web.UI.WebControls.DropDownList dr_filter_cate;
         
         /// <summary>
+        /// txtphongid control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtphongid;
+        
+        /// <summary>
+        /// Button2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton Button2;
+        
+        /// <summary>
         /// txttenphong control.
         /// </summary>
         /// <remarks>

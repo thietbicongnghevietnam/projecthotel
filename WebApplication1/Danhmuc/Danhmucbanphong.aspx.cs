@@ -45,17 +45,24 @@ namespace WebApplication1.Danhmuc
             string tenbanphong = banphongid.Value.ToString();
             string khuvucid = dr_filter_cate.Text;
             DataTable dtupdate = new DataTable();
-            dtupdate = DataConn.StoreFillDS("NH_addnew_phongban", System.Data.CommandType.StoredProcedure, tenbanphong, khuvucid);
-            if (dtupdate.Rows[0][0].ToString() == "1")
-            {
-                dt_banphong = DataConn.StoreFillDS("NH_danhmucbanphong", System.Data.CommandType.StoredProcedure);
-                Page.ClientScript.RegisterStartupScript(Page.GetType(), "Message", "toastr.success('Success!!!');", true);
-            }
-            else
+            if (tenbanphong == "")
             {
                 Page.ClientScript.RegisterStartupScript(Page.GetType(), "Message", "toastr.error('NG, kiểm tra lại thông tin!'); ", true);
             }
-
+            else
+            {
+                dtupdate = DataConn.StoreFillDS("NH_addnew_phongban", System.Data.CommandType.StoredProcedure, tenbanphong, khuvucid);
+                if (dtupdate.Rows[0][0].ToString() == "1")
+                {
+                    dt_banphong = DataConn.StoreFillDS("NH_danhmucbanphong", System.Data.CommandType.StoredProcedure);
+                    Page.ClientScript.RegisterStartupScript(Page.GetType(), "Message", "toastr.success('Success!!!');", true);
+                }
+                else
+                {
+                    Page.ClientScript.RegisterStartupScript(Page.GetType(), "Message", "toastr.error('NG, kiểm tra lại thông tin!'); ", true);
+                }
+            }
+            
         }
         public void updatebanphong(object sender, EventArgs e)
         {
@@ -112,6 +119,25 @@ namespace WebApplication1.Danhmuc
             //}
 
 
+        }
+
+        public void Xoabanphong(object sender, EventArgs e)
+        {
+          
+            string banphongid = txtphongid.Text;
+            
+
+            DataTable dtupdate = new DataTable();
+            dtupdate = DataConn.StoreFillDS("NH_xoa_phongban", System.Data.CommandType.StoredProcedure, banphongid);
+            if (dtupdate.Rows[0][0].ToString() == "1")
+            {
+                dt_banphong = DataConn.StoreFillDS("NH_danhmucbanphong", System.Data.CommandType.StoredProcedure);
+                Page.ClientScript.RegisterStartupScript(Page.GetType(), "Message", "toastr.success('Success!!!');", true);
+            }
+            else
+            {
+                Page.ClientScript.RegisterStartupScript(Page.GetType(), "Message", "toastr.error('NG, kiểm tra lại thông tin!'); ", true);
+            }            
         }
 
         public void settingphongban(object sender, EventArgs e)

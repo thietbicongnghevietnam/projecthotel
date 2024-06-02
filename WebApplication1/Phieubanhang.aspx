@@ -265,14 +265,14 @@
             </div>
         </div>
 
-        <div id="contentToPrint">
+       <%-- <div id="contentToPrint">
         <!-- Nội dung bạn muốn in -->
         <h1>Hello, world!</h1>
         <p>This is the content that you want to print. noi dung in khong can hoi</p>
     </div>
 
     <!-- Nút để kích hoạt chức năng in -->
-    <button onclick="printContent()">Print</button>
+    <button onclick="printContent()">Print</button>--%>
 
 
     </div>
@@ -299,8 +299,6 @@ var content = document.getElementById("contentToPrint").innerHTML;
     printWindow.document.close();
     printWindow.print(); // In trực tiếp từ cửa sổ đã mở
     printWindow.close(); // Đóng cửa sổ in sau khi đã in
-
-
         }
     </script>
 
@@ -309,6 +307,7 @@ var content = document.getElementById("contentToPrint").innerHTML;
             SearchText();   
             //$('#khongid').prop('checked', true);
             $('#bannhanhid').prop('checked', true);
+            $('#soluongnhaphang').val(1);
 
 if (typeof navigator !== 'undefined' && 'printer' in navigator) {
         // Lấy thông tin về máy in
@@ -1326,10 +1325,10 @@ if (typeof navigator !== 'undefined' && 'printer' in navigator) {
                                                 var thanhtien = objdata['Table1'][i][4];
                                                 var newrow = '<tr class="thongtinhoadon">' +
                                                     '<td id="_hanghoad" style="width:250px; border: 1px soild black;">' + tenhang + '</td>' +
-                                                    '<td id="_tienhang" style="border: 1px soild black;">' + dongia + '</td>' +
+                                                    '<td id="_tienhang" style="border: 1px soild black;">' + dongia.toLocaleString('vi-VN') + '</td>' +
                                                     '<td id="_loaihoadon" style="border: 1px soild black;">' + soluong + '</td>' +
                                                     //'<td id="_chietkhau">' + chietkhau + '</td>' +
-                                                    '<td id="_sohoadon" style="border: 1px soild black;">' + thanhtien + '</td>' +
+                                                    '<td id="_sohoadon" style="border: 1px soild black;">' + thanhtien.toLocaleString('vi-VN') + '</td>' +
                                                     '</tr>';
                                                 $('#tbnhaphang_inhoadon').append(newrow);                                                                                        
                                             }                                        
@@ -1341,10 +1340,17 @@ if (typeof navigator !== 'undefined' && 'printer' in navigator) {
                                     //alert(sohoadon);
                                     $('#ngaytaoid').text(ngaytao);
                                     $('#sohoadoid').text(sohoadon);
-                                    $('#thantoan2').text(tongtienhang);
-                                    $('#khthanhtoan2').text(khachthanhtoan);
-                                    $('#chietkau2').text(tongchietkhau);
-                                    $('#psno2').text(khachno);   
+
+                                    //$('#thantoan2').text(tongtienhang);
+                                    //$('#khthanhtoan2').text(khachthanhtoan);
+                                    //$('#chietkau2').text(tongchietkhau);
+                                    //$('#psno2').text(khachno);   
+
+                                      $('#thantoan2').text(parseInt(tongtienhang).toLocaleString('vi-VN'));
+                                      $('#khthanhtoan2').text(parseInt(khachthanhtoan).toLocaleString('vi-VN'));
+                                      $('#chietkau2').text(parseInt(tongchietkhau).toLocaleString('vi-VN'));
+                                      $('#psno2').text(parseInt(khachno).toLocaleString('vi-VN')); 
+
 
                                     const bangchu_hienthi2 = to_vietnamese(tongtienhang);
                                     $('#bangchuid').text(bangchu_hienthi2);
@@ -1370,7 +1376,7 @@ if (typeof navigator !== 'undefined' && 'printer' in navigator) {
                             $('#thanhtoanid').val('0');
                             $('#chietkhauid').val('0');
                             //chietkhauid
-                            $("#soluongnhaphang").val('0');
+                            $("#soluongnhaphang").val('1');
                             $("#conlaiid").val('0');
                             $("#dongiaid").val('0');
                      }  
@@ -1479,10 +1485,10 @@ if (typeof navigator !== 'undefined' && 'printer' in navigator) {
                                                     var thanhtien = objdata['Table1'][i][4];
                                                     var newrow = '<tr class="thongtinhoadon">' +
                                                         '<td id="_hanghoad" style="width:250px; border: 1px soild black;">' + tenhang + '</td>' +
-                                                        '<td id="_tienhang" style="border: 1px soild black;">' + dongia + '</td>' +
+                                                        '<td id="_tienhang" style="border: 1px soild black;">' + parseInt(dongia).toLocaleString('vi-VN') + '</td>' +
                                                         '<td id="_loaihoadon" style="border: 1px soild black;">' + soluong + '</td>' +
                                                         //'<td id="_chietkhau">' + chietkhau + '</td>' +
-                                                        '<td id="_sohoadon" style="border: 1px soild black;">' + thanhtien + '</td>' +
+                                                        '<td id="_sohoadon" style="border: 1px soild black;">' + parseInt(thanhtien).toLocaleString('vi-VN') + '</td>' +
                                                         '</tr>';
                                                     $('#tbnhaphang_inhoadon').append(newrow);                                                                                        
                                                 }                                        
@@ -1494,10 +1500,10 @@ if (typeof navigator !== 'undefined' && 'printer' in navigator) {
                                         //alert(sohoadon);
                                         $('#ngaytaoid').text(ngaytao);
                                         $('#sohoadoid').text(sohoadon);
-                                        $('#thantoan2').text(tongtienhang);
-                                        $('#khthanhtoan2').text(khachthanhtoan);
-                                        $('#chietkau2').text(tongchietkhau);
-                                        $('#psno2').text(khachno); 
+                                        $('#thantoan2').text(parseInt(tongtienhang).toLocaleString('vi-VN'));
+                                        $('#khthanhtoan2').text(parseInt(khachthanhtoan).toLocaleString('vi-VN'));
+                                        $('#chietkau2').text(parseInt(tongchietkhau).toLocaleString('vi-VN'));
+                                        $('#psno2').text(parseInt(khachno).toLocaleString('vi-VN')); 
 
                                         const bangchu_hienthi2 = to_vietnamese(tongtienhang);
                                         $('#bangchuid').text(bangchu_hienthi2);
@@ -1521,7 +1527,7 @@ if (typeof navigator !== 'undefined' && 'printer' in navigator) {
                             $('#thanhtoanid').val('0');
                             $('#chietkhauid').val('0');
                             //chietkhauid
-                            $("#soluongnhaphang").val('0');
+                            $("#soluongnhaphang").val('1');
                             $("#conlaiid").val('0');
                             $("#dongiaid").val('0');
                  }   
@@ -1582,7 +1588,7 @@ if (typeof navigator !== 'undefined' && 'printer' in navigator) {
                                         '<td id="_tienhang" style="border: 1px soild black;">' + dongia + '</td>' +
                                         '<td id="_loaihoadon" style="border: 1px soild black;">' + soluong + '</td>' +
                                         //'<td id="_chietkhau">' + chietkhau + '</td>' +
-                                        '<td id="_sohoadon" style="border: 1px soild black;">' + thanhtien + '</td>' +
+                                        '<td id="_sohoadon" style="border: 1px soild black;">' + parseInt(thanhtien).toLocaleString('vi-VN') + '</td>' +
                                         '</tr>';
                                     $('#tbnhaphang_inhoadon').append(newrow); 
 
@@ -1600,10 +1606,16 @@ if (typeof navigator !== 'undefined' && 'printer' in navigator) {
                                 $('#ngaytaoid').text(ngaytao);
                                 $('#sohoadoid').text(sohoadon);
                                 //alert(khachthanhtoan);
-                                $('#thantoan2').text(tongtienhang);
-                                $('#khthanhtoan2').text(khachthanhtoan);
-                                $('#chietkau2').text(tongchietkhau);
-                                $('#psno2').text(khachno);   
+                                //$('#thantoan2').text(tongtienhang);
+                                //$('#khthanhtoan2').text(khachthanhtoan);
+                                //$('#chietkau2').text(tongchietkhau);
+                                //$('#psno2').text(khachno);  
+
+                                $('#thantoan2').text(parseInt(tongtienhang).toLocaleString('vi-VN'));
+                                $('#khthanhtoan2').text(parseInt(khachthanhtoan).toLocaleString('vi-VN'));
+                                $('#chietkau2').text(parseInt(tongchietkhau).toLocaleString('vi-VN'));
+                                $('#psno2').text(parseInt(khachno).toLocaleString('vi-VN')); 
+                                
 
                                 const bangchu_hienthi2 = to_vietnamese(tongtienhang);
                                 $('#bangchuid').text(bangchu_hienthi2);
