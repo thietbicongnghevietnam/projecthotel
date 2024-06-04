@@ -41,10 +41,13 @@ namespace WebApplication1.TemplateReport
                 {
                     string _fromdate = Request.QueryString["tungay"].Replace("'","");
                     string _todate = Request.QueryString["denngay"].Replace("'", "");
+
+                    string manhanvien = Request.QueryString["nhanvienid"].Replace("'", "");
+
                     tungay = _fromdate;
                     denngay = _todate;
                                         
-                    dt_report = DataConn.StoreFillDS("NH_BaocaoBH_theongay", System.Data.CommandType.StoredProcedure, _fromdate, _todate);
+                    dt_report = DataConn.StoreFillDS("NH_BaocaoBH_theongay", System.Data.CommandType.StoredProcedure, _fromdate, _todate, manhanvien);
                     //Page.ClientScript.RegisterStartupScript(this.GetType(), "CallMyFunction", "search_material2();", true);
                 }
 

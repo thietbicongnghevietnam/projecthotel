@@ -2,3 +2,11 @@
 khi sua hoa don: tu dong cap nhat ton kho, ton dau khi (cap nhat ngay phan sua xoa) ==> neu khong ghi lai du lieu thi se bi sai.!
 ==> truong hop khong ghi du lieu => can tao ra 3 bien tam de rollback tro lai: so luong ton kho, list dau ky, thong tin Items tren hoa don.
 ==========//end //===============
+
+
+===== // co so du lieu theo sql 2010 //=====
+1. loi trang map:
+khu vuc 4 giong khu vuc 3 => sưa stored : NH_select_info_phong4   => where idkhuvuc=4
+
+2. bao cao ban hang theo hoa don => loc theo ngay
+NH_BaocaoBH_theongay

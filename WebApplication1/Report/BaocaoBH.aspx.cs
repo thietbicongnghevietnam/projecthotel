@@ -50,9 +50,18 @@ namespace WebApplication1.Report
                 dtbaocaobanhang = DataConn.StoreFillDS("NH_BaocaoBH_NV", System.Data.CommandType.StoredProcedure, idnhanvien);
             }
             else
-            {               
-
+            {
                 dtbaocaobanhang = DataConn.StoreFillDS("NH_BaocaoBH_theongay_NV", System.Data.CommandType.StoredProcedure, _fromdate, _todate, idnhanvien);
+                if (dtbaocaobanhang.Rows.Count > 1)
+                {
+                    Page.ClientScript.RegisterStartupScript(Page.GetType(), "Message", "toastr.success('Success!!!');", true);
+                }
+                else
+                {
+                    dtbaocaobanhang = DataConn.StoreFillDS("NH_BaocaoBH_NV", System.Data.CommandType.StoredProcedure, idnhanvien);
+                    Page.ClientScript.RegisterStartupScript(Page.GetType(), "Message", "toastr.error('NG, Người dùng không có phiên đăng nhập !'); ", true);
+                }
+                
                 //ngaychiid.Value = ngay + "-" + thang + "-" + nam;
             }
 
@@ -64,9 +73,10 @@ namespace WebApplication1.Report
             //string _itemid = itemid.Value.ToString();
             string tungay = Date2.Value;// Request.Form[txtngaymuon.UniqueID];//txtngaymuon.Text.ToString();
             string denngay = ngaychiid.Value;// Request.Form[txtngaytra.UniqueID];// txtngaytra.Text.ToString();
+            string nhanvienid = dr_nhanvien.Text;
 
             //Response.Redirect("ReportBorrowReturn.aspx?itemid='" + _itemid + "' ");
-            Response.Redirect("/TemplateReport/banhangtheongayhd.aspx?tungay='" + tungay + "'&denngay='" + denngay + "' ");
+            Response.Redirect("/TemplateReport/banhangtheongayhd.aspx?tungay='" + tungay + "'&denngay='" + denngay + "'&nhanvienid='"+ nhanvienid + "' ");
         }
 
         public void BtnOrderItem(object sender, EventArgs e)
@@ -125,9 +135,9 @@ namespace WebApplication1.Report
                     //string _cate = dr_filter_cate.Text;
                     //string typefilter = "all";
 
+                    string manhanvien = dr_nhanvien.Text;
 
-
-                    dtbaocaobanhang = DataConn.StoreFillDS("NH_BaocaoBH_theongay", System.Data.CommandType.StoredProcedure, _fromdate, _todate);
+                    dtbaocaobanhang = DataConn.StoreFillDS("NH_BaocaoBH_theongay", System.Data.CommandType.StoredProcedure, _fromdate, _todate, manhanvien);
                     //ngaychiid.Value = ngay + "-" + thang + "-" + nam;
                 }
             }
@@ -247,7 +257,9 @@ namespace WebApplication1.Report
             string _fromdate = Request.Form[Date2.UniqueID];
             string _todate = Request.Form[ngaychiid.UniqueID];
 
-            dt_dowload = DataConn.StoreFillDS("NH_BaocaoBH_theongay", System.Data.CommandType.StoredProcedure, _fromdate, _todate);
+            string manhanvien = dr_nhanvien.Text;
+
+            dt_dowload = DataConn.StoreFillDS("NH_BaocaoBH_theongay", System.Data.CommandType.StoredProcedure, _fromdate, _todate, manhanvien);
 
 
             System.Web.HttpResponse response = System.Web.HttpContext.Current.Response;

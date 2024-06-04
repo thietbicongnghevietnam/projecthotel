@@ -41,6 +41,9 @@ namespace WebApplication1.TemplateReport
                 {
                     string _fromdate = Request.QueryString["tungay"].Replace("'", "");
                     string _todate = Request.QueryString["denngay"].Replace("'", "");
+
+                    //string manhanvien = Request.QueryString["nhanvienid"].Replace("'", "");
+
                     tungay = _fromdate;
                     denngay = _todate;
 
