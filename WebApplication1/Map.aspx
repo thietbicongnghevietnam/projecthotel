@@ -708,7 +708,12 @@
                            <div style="height:10px;"></div>
                            <div><i style="font-size:22px;color:black;">Bằng chữ:</i> <span id="bangchuid" style="color:black; font-size:26px; padding-left:10px;"></span></div>
                           <%-- <i style="font-size:22px;color:black;">Thanh toán chuyển khoản :</i><img id="barcodeImage" src="<%= barcodeData %>" alt="Barcode" style="width:100px;height:100px;" />--%>
-                        </div>
+                        
+                            <br />
+                          
+                           <div><i style="font-size:28px;color:black; margin-left: 150px; font-family:'Agency FB';">Xin cảm ơn, hẹn gập lại quý khách!</i></div>
+
+                       </div>
                         
                         
                                                                            
