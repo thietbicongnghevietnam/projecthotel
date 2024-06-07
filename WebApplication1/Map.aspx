@@ -3225,16 +3225,13 @@
 
             function printDiv_Save()
             {
-                 var tienhat = $("#MainContent_Button3").parent().parent().parent().find("b").eq(1).text(); 
+                var tienhat = $("#MainContent_Button3").parent().parent().parent().find("b").eq(1).text(); 
                 var tenphong2 = $("#MainContent_Button3").parent().parent().find("b").eq(2).text(); 
                 var tongtien2 = $("#MainContent_Button3").parent().parent().find("b").eq(3).text();
                 //var tongtien2 = $("#MainContent_Button3").parent().parent().find("b").eq(4).text();
                 var chietkau2 = $("#MainContent_Button3").parent().parent().find("b").eq(5).text();
                 var thantoan2 = $("#MainContent_Button3").parent().parent().find("b").eq(6).text();                
-                var conlai2 = $("#MainContent_Button3").parent().parent().find("b").eq(7).text(); 
-
-                //alert(conlai2);
-                    
+                var conlai2 = $("#MainContent_Button3").parent().parent().find("b").eq(7).text();                                   
                 var sohoadon = $("#hoadonid").val();
                 //alert(sohoadon);   
                 
@@ -3251,11 +3248,16 @@
             }
 
             function printDiv(divId) {
-                //debugger;
-                //var delayInMilliseconds = 5000; //1000 = 1 second
-                //setTimeout(function() {
-                //  //your code to be executed after 1 second
-                //}, delayInMilliseconds);
+
+                //var tienhat = $("#MainContent_Button3").parent().parent().parent().find("b").eq(1).text(); 
+                var tenphong2 = $("#MainContent_Button3").parent().parent().find("b").eq(2).text(); 
+                var tongtien2 = $("#MainContent_Button3").parent().parent().find("b").eq(3).text();
+                //var tongtien2 = $("#MainContent_Button3").parent().parent().find("b").eq(4).text();
+                var chietkau2 = $("#MainContent_Button3").parent().parent().find("b").eq(5).text();
+                var thantoan2 = $("#MainContent_Button3").parent().parent().find("b").eq(6).text();                
+                var conlai2 = $("#MainContent_Button3").parent().parent().find("b").eq(7).text();                                   
+                var sohoadon = $("#hoadonid").val();                
+
                try {                                       
                     //kiem tra xem co phai hoa don in lai khong
                     //debugger;
@@ -3278,9 +3280,15 @@
                         }, 1000);   
                     }
                     else
-                    {
-                        //alert('NG');
+                    {                        
                         //truong hop hoa don moi
+                        //alert(tenphong2); 
+                        //alert(sohoadon);                      
+                        //alert(tongtien2);
+                        //alert(chietkau2);                        
+                        //alert(thantoan2); 
+                        var thungan = '<%=Session["username"].ToString()%>';                          
+                                                             
                         var printContents = document.getElementById(divId).innerHTML;
                         var originalContents = document.body.innerHTML;
                         document.body.innerHTML = printContents;
@@ -3290,10 +3298,28 @@
                             // Sau khi in, phục hồi nội dung ban đầu của body
                             document.body.innerHTML = originalContents;
                         }, 1000);    
-                        //debugger; 
-                        thanhtoanhoadon(tenphong2,tongtien2,chietkau2,thantoan2,conlai2,tienhat,sohoadon,idkhachhang);                                                                  
+                        //debugger;                                                 
+                        //khong luu hoa don luon ==> truong hop nay chi tam tinh thoi
+                        //thanhtoanhoadon(tenphong2,tongtien2,chietkau2,thantoan2,conlai2,tienhat,sohoadon,idkhachhang);   //==> khong chay ham luu hoa don luon
+ 
+                        //luu lich su thong tin hoa don tam tinh (so lan in hoa don)
+                        var data = { tenphong2: tenphong2,sohoadon:sohoadon,tongtien2:tongtien2,chietkau2:chietkau2,thantoan2:thantoan2,thungan:thungan };
+                        $.ajax({
+                            type: "POST",
+                            contentType: "application/json; charset=utf-8",
+                            url: "Map.aspx/historyprintbill",
+                            data: JSON.stringify(data),
+                            dataType: "json",
+                            success: function (data) {
+                               //response(data.d);
+                            },
+                            error: function (result) {
+                                //alert("No Match");
+                            }
+                        });
+                                                                                       
                     }          
-                                                                                                                                                       
+                    //in xong thi tat form ==> de load lai                                                                                                                                   
                     setTimeout(function() {
                     location.reload();
                     }, 1000);

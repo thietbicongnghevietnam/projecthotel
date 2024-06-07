@@ -481,6 +481,23 @@ namespace WebApplication1
         }
 
         [WebMethod]
+        public static string historyprintbill(string tenphong2, string sohoadon, string tongtien2, string chietkau2, string thantoan2, string thungan) 
+        {
+            String thongbao = "";
+            DataTable dtbill = new DataTable();
+            dtbill = DataConn.StoreFillDS("NH_insert_hoadon_bill", System.Data.CommandType.StoredProcedure, tenphong2, sohoadon, tongtien2, chietkau2, thantoan2, thungan);
+            if (dtbill.Rows[0][0].ToString() == "1")
+            {
+                thongbao = "OK";
+            }
+            else
+            {
+                thongbao = "NG";
+            }
+            return thongbao;
+        }
+
+        [WebMethod]
         public static string khthantoan(string idkhachhang, string tenphong,string tongtienhang,string tongtienhat,string tongtienphong, string psco, string tienno, string tienck, string items)  //string tenphong, string tienhang  --, 
         {
             if (tenphong == "")

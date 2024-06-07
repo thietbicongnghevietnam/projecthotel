@@ -4,89 +4,45 @@ https://stackoverflow.com/questions/18143599/can-signalr-be-used-with-asp-net-we
 ===========================
 ******- nut sua hoa don: tao mot nut luu lai, bat phai ghi hoa don xong thi moi refresh trang thai sua . ==> neu khong se qua lai ton kho nhu cu
 
-
-============================
-
 ===== // co so du lieu theo sql 2010 //=====
-1. loi trang map:
-khu vuc 4 giong khu vuc 3 => sưa stored : NH_select_info_phong4   => where idkhuvuc=4
+bang moi :
+CREATE TABLE [dbo].[htsocai_bill](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[tenban] [nvarchar](50) NULL,
+	[sohoadon] [nvarchar](50) NULL,
+	[tongtien] [nvarchar](50) NULL,
+	[chietkhau] [nvarchar](50) NULL,
+	[khachTT] [nvarchar](50) NULL,
+	[thungan] [nvarchar](50) NULL,
+	[createtime] [datetime] NULL
+) 
 
-2. bao cao ban hang theo hoa don => loc theo ngay
-NH_BaocaoBH_theongay
 
 
-======
-USE [DataNhaHang]
-GO
-/****** Object:  StoredProcedure [dbo].[NH_BaocaoBH_theongay]    Script Date: 06/05/2024 11:09:54 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-ALTER PROCEDURE [dbo].[NH_BaocaoBH_theongay] -- NH_BaocaoBH_theongay '2024-05-02','2024-05-02','2012757'
-	@_fromdate as nvarchar(50),
-	@_todate as nvarchar(50),
-	@manhanvien as nvarchar(50)
+
+CREATE PROCEDURE NH_insert_hoadon_bill
+	@tenphong2 as nvarchar(50),
+	@sohoadon as nvarchar(50),
+	@tongtien2 as nvarchar(50),
+	@chietkau2 as nvarchar(50),
+	@thantoan2 as nvarchar(50)
 AS
 BEGIN
-
-if(@manhanvien = '==NV==')
-begin
-	select id,sohd,type,ngaygiothue,ngaygiora,tongthoigianthue,tenphong,
-	tienphong,tiengiohat,items,tienhang,tongtien,chietkhau,tiensauchietkhau,hinhthucnghi,mohinh,created,idnhanvien,psco,CONVERT(VARCHAR(5),ngaygiothue,108) as giovao,CONVERT(VARCHAR(5),ngaygiora,108)as giora from htsocai 
-	where convert(varchar,created,23) BETWEEN convert(varchar,@_fromdate,23) AND convert(varchar,@_todate,23)
-	--convert(varchar,created,23) BETWEEN convert(varchar,@_fromdate,23) AND convert(varchar,@_todate,23)
-	union 
-
-	select '1000' as id,'-','-','','','','Tong tien',
-	(select sum(tienphong) from htsocai where convert(varchar,created,23) BETWEEN convert(varchar,@_fromdate,23) AND convert(varchar,@_todate,23)) as tienphong,
-	(select sum(tiengiohat) from htsocai where convert(varchar,created,23) BETWEEN convert(varchar,@_fromdate,23) AND convert(varchar,@_todate,23)) as tiengiohat,
-	'' as items,
-	(select sum(tienhang) from htsocai where convert(varchar,created,23) BETWEEN convert(varchar,@_fromdate,23) AND convert(varchar,@_todate,23)) as tienhang,
-	(select sum(tongtien) from htsocai where convert(varchar,created,23) BETWEEN convert(varchar,@_fromdate,23) AND convert(varchar,@_todate,23)) as tongtien,
-	(select sum(chietkhau) from htsocai where convert(varchar,created,23) BETWEEN convert(varchar,@_fromdate,23) AND convert(varchar,@_todate,23)) as chietkhau,
-	(select sum(tiensauchietkhau) from htsocai where convert(varchar,created,23) BETWEEN convert(varchar,@_fromdate,23) AND convert(varchar,@_todate,23))as tiensauchietkhau,
-	'' as hinhthucnghi,
-	'' as mohinh,
-	'' as created,
-	'' as idnhanvien,
-	'' as psco,
-	'' as giovao,
-	'' as giora
-
-	from htsocai
-end
-else
-begin
-	select id,sohd,type,ngaygiothue,ngaygiora,tongthoigianthue,tenphong,
-	tienphong,tiengiohat,items,tienhang,tongtien,chietkhau,tiensauchietkhau,hinhthucnghi,mohinh,created,idnhanvien,psco,CONVERT(VARCHAR(5),ngaygiothue,108) as giovao,CONVERT(VARCHAR(5),ngaygiora,108)as giora from htsocai 
-	where idnhanvien=@manhanvien and convert(varchar,created,23) BETWEEN convert(varchar,@_fromdate,23) AND convert(varchar,@_todate,23)
-	--convert(varchar,created,23) BETWEEN convert(varchar,@_fromdate,23) AND convert(varchar,@_todate,23)
-	union 
-
-	select '1000' as id,'-','-','','','','Tong tien',
-	(select sum(tienphong) from htsocai where idnhanvien=@manhanvien and convert(varchar,created,23) BETWEEN convert(varchar,@_fromdate,23) AND convert(varchar,@_todate,23)) as tienphong,
-	(select sum(tiengiohat) from htsocai where idnhanvien=@manhanvien and convert(varchar,created,23) BETWEEN convert(varchar,@_fromdate,23) AND convert(varchar,@_todate,23)) as tiengiohat,
-	'' as items,
-	(select sum(tienhang) from htsocai where idnhanvien=@manhanvien and convert(varchar,created,23) BETWEEN convert(varchar,@_fromdate,23) AND convert(varchar,@_todate,23)) as tienhang,
-	(select sum(tongtien) from htsocai where idnhanvien=@manhanvien and convert(varchar,created,23) BETWEEN convert(varchar,@_fromdate,23) AND convert(varchar,@_todate,23)) as tongtien,
-	(select sum(chietkhau) from htsocai where idnhanvien=@manhanvien and convert(varchar,created,23) BETWEEN convert(varchar,@_fromdate,23) AND convert(varchar,@_todate,23)) as chietkhau,
-	(select sum(tiensauchietkhau) from htsocai where idnhanvien=@manhanvien and convert(varchar,created,23) BETWEEN convert(varchar,@_fromdate,23) AND convert(varchar,@_todate,23))as tiensauchietkhau,
-	'' as hinhthucnghi,
-	'' as mohinh,
-	'' as created,
-	'' as idnhanvien,
-	'' as psco,
-	'' as giovao,
-	'' as giora
-
-	from htsocai
-end
-
-
-
-
-
+	if(@tenphong2 <> '' and @tongtien2 <> '')
+	begin
+		insert into htsocai_bill (tenban,sohoadon,tongtien,chietkhau,khachTT,thungan) values (@tenphong2,@sohoadon,@tongtien2,@chietkau2,@thantoan2,@thungan)
+		select 1
+	end
+	else
+	begin
+		select 0
+	end	
+END
+GO
 
 
 END
