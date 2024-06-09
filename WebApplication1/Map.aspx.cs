@@ -480,22 +480,22 @@ namespace WebApplication1
             return thongbao;
         }
 
-        [WebMethod]
-        public static string historyprintbill(string tenphong2, string sohoadon, string tongtien2, string chietkau2, string thantoan2, string thungan) 
-        {
-            String thongbao = "";
-            DataTable dtbill = new DataTable();
-            dtbill = DataConn.StoreFillDS("NH_insert_hoadon_bill", System.Data.CommandType.StoredProcedure, tenphong2, sohoadon, tongtien2, chietkau2, thantoan2, thungan);
-            if (dtbill.Rows[0][0].ToString() == "1")
-            {
-                thongbao = "OK";
-            }
-            else
-            {
-                thongbao = "NG";
-            }
-            return thongbao;
-        }
+        //[WebMethod]
+        //public static string historyprintbill(string tenphong2, string sohoadon, string tongtien2, string chietkau2, string thantoan2, string thungan) 
+        //{
+        //    String thongbao = "";
+        //    DataTable dtbill = new DataTable();
+        //    dtbill = DataConn.StoreFillDS("NH_insert_hoadon_bill", System.Data.CommandType.StoredProcedure, tenphong2, sohoadon, tongtien2, chietkau2, thantoan2, thungan);
+        //    if (dtbill.Rows[0][0].ToString() == "1")
+        //    {
+        //        thongbao = "OK";
+        //    }
+        //    else
+        //    {
+        //        thongbao = "NG";
+        //    }
+        //    return thongbao;
+        //}
 
         [WebMethod]
         public static string khthantoan(string idkhachhang, string tenphong,string tongtienhang,string tongtienhat,string tongtienphong, string psco, string tienno, string tienck, string items)  //string tenphong, string tienhang  --, 
@@ -539,12 +539,15 @@ namespace WebApplication1
                 listtoncuoiky = listtoncuoiky.Substring(0, listtoncuoiky.Length - 1);
                 listtoncuoiky = '{' + listtoncuoiky + '}';
 
-                dtsave = DataConn.StoreFillDS("NH_save_khthanhtoan", System.Data.CommandType.StoredProcedure, idkhachhang, tenphong, tongtienhang, tongtienhat, tongtienphong, psco, tienno, tienck, items, listtoncuoiky);//, 
+                //dtsave = DataConn.StoreFillDS("NH_save_khthanhtoan", System.Data.CommandType.StoredProcedure, idkhachhang, tenphong, tongtienhang, tongtienhat, tongtienphong, psco, tienno, tienck, items, listtoncuoiky);//, 
+
+                //SUA PHIEU TAM TINH  ==> luc tra ra co so hoa don
+                dtsave = DataConn.StoreFillDS("NH_save_khthanhtoan2", System.Data.CommandType.StoredProcedure, idkhachhang, tenphong, tongtienhang, tongtienhat, tongtienphong, psco, tienno, tienck, items, listtoncuoiky);//, 
 
                 if (dtsave.Rows[0][0].ToString() == "1")
                 {
                     //thongbao = "OK" + "," + dtlevel.Rows[0][1].ToString();
-                    thongbao = "OK";
+                    thongbao = "OK" + "," + dtsave.Rows[0][1].ToString(); ;
                 }
                 else
                 {

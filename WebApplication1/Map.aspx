@@ -371,8 +371,7 @@
                                                   <label for="inlaihoadon" style="float: left; margin-top: 5px;">In lại HĐ</label>
                                                 <input type="checkbox" id="inlaiHD" name="inlaiHD">
                                             </td>
-
-                                            
+                                                                                        
                                             <td style="padding-bottom: 10px; padding-right: 10px; padding-left: 10px;">
                                                  <input type="submit" value="Order bếp" id="orderbepid"  class="btn btn-success float-right" style="width:100px;float:left; margin-bottom:5px;">
                                                <%-- <input type="submit" value="Thanh toan" id="khachthanhtoan" class="btn btn-success float-right">  <%--class , id="saveproduct"--%>
@@ -622,15 +621,14 @@
                     <div class="modal-body" id="printableArea" style="height:auto;">
                        
                        <%-- <div class="container-fluid"  style="width:400px;height:auto;float:left;">--%>
-                       <div class="container-fluid"  style="width:700px;height:auto;">
+                       <div class="container-fluid"  style="width:400px;height:auto;float:left;">
                            <%--<span style="font-size:30px; text-align:center;color:black;"><%=tendovi %></span><br />   --%>                        
                           <%--<span hidden> Loại hình: </span><b id="hinhthucnghi2" hidden></b> &nbsp;&nbsp;&nbsp; <span hidden>Tổng tiền hát:</span> <b id="tongtienhat2" hidden></b><br />--%>
                            <%--<i style="color:black; font-size:24px;"> Địa chỉ: <%=diachidonvi %></i><b id="hinhthucnghi2" hidden></b> &nbsp;&nbsp;&nbsp; <span hidden>Tổng tiền hát:</span> <b id="tongtienhat2" hidden></b><br />
                            <i style="font-size:24px;">Số ĐT:</i> <span style="color:black; font-size:26px;"><%=sodtdonvi %></span><br />
                            <i style="font-size:24px;">Số HĐ:</i> <span id="sohoadon_" style="color:black; font-size:26px;"></span> &nbsp;&nbsp;&nbsp;<i style="font-size:24px;"> Ngày tạo :</i> <span id="ngaytao_" style="color:black;font-size:26px;"></span><br />                            
-                           <i style="font-size:24px;">Tên bàn:</i> <b id="tenphong2" style="color:black; font-size:26px;"></b> &nbsp;&nbsp;&nbsp; <span hidden> tiền hàng:</span> <b id="tongtien2" hidden></b>          --%>                                            
-
-                           <table style="width:686px;">
+                           <i style="font-size:24px;">Tên bàn:</i> <b id="tenphong2" style="color:black; font-size:26px;"></b> &nbsp;&nbsp;&nbsp; <span hidden> tiền hàng:</span> <b id="tongtien2" hidden></b>          --%>                                                                      
+                           <table style="width:400px;">
                                 <tr>
                                     <td>
                                          <span style="float:left; margin-left:3px;"> 
@@ -638,15 +636,11 @@
                                               <%--<span hidden> Loại hình: </span><b id="hinhthucnghi2" hidden></b> &nbsp;&nbsp;&nbsp; <span hidden>Tổng tiền hát:</span> <b id="tongtienhat2" hidden></b><br />--%>
                                                <i style="color:black; font-size:24px;"> Địa chỉ: <%=diachidonvi %></i><b id="hinhthucnghi2" hidden></b> &nbsp;&nbsp;&nbsp; <span hidden>Tổng tiền hát:</span> <b id="tongtienhat2" hidden></b><br />
                                                <i style="font-size:24px;">Số ĐT:</i> <span style="color:black; font-size:26px;"><%=sodtdonvi %></span><br />
-                                               <i style="font-size:24px;">Số HĐ:</i> <span id="sohoadon_" style="color:black; font-size:26px;"></span> &nbsp;&nbsp;&nbsp;<i style="font-size:24px;"> Ngày tạo :</i> <span id="ngaytao_" style="color:black;font-size:26px;"></span><br />                            
+                                               <i style="font-size:28px;" id="tieudein">PHIẾU TẠM TÍNH</i><br />
+                                               <i style="font-size:24px;">Số HĐ:</i> <span id="sohoadon_" style="color:black; font-size:26px;"></span> &nbsp;&nbsp;&nbsp;<i style="font-size:24px;"> Ngày:</i> <span id="ngaytao_" style="color:black;font-size:24px;"></span><br />                            
                                                <i style="font-size:24px;">Tên bàn:</i> <b id="tenphong2" style="color:black; font-size:26px;"></b> &nbsp;&nbsp;&nbsp; <span hidden> tiền hàng:</span> <b id="tongtien2" hidden></b>    
                                          </span>
-                                    </td>
-                                    <td style="border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
-                                        <span style="margin-left:25px;">
-                                                 <i style="font-size:22px;color:black; text-align:center;">QRcode</i><br /><img id="barcodeImage" src="<%= barcodeData %>" alt="Barcode" style="width:100px;height:100px; margin-left:20px;" />
-                                        </span>
-                                    </td>                                    
+                                    </td>                                                                     
                                 </tr>                               
                             </table>
                            <div style="height:10px;"></div>
@@ -655,7 +649,7 @@
                                         <thead>
                                             <tr>
                                                 <th>Tên hàng</th>
-                                                <th>Số lượng</th>
+                                                <th>S.lượng</th>
                                                 <th>Đơn giá</th>
                                                 <th>Thành tiền</th>                                                
                                             </tr>
@@ -671,48 +665,50 @@
                            <%--<span style="float:left; margin-left:370px; width:650px;color:black;font-size:22px;">KH thanh toán: <b id="khthanhtoan2" style="margin-left:12px;color:black;font-size:22px;"></b></span>--%>
                             <%--<span style="float:left; margin-left:420px; width:650px;color:black;font-size:22px;">Còn lại: <b id="psno2" style="margin-left:15px;color:black;font-size:22px;"></b>  </span> --%>
 
-                            <table style="width:686px;">
+                            <table style="width:400px;">
                                 <tr>
                                     <td style="border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
-                                         <span style="float:left; margin-left:250px; color:black;font-size:26px;">Tổng tiền: <br /> </span>
+                                         <span style="float:left; margin-left:0px; color:black;font-size:24px;">Tổng tiền: <br /> </span>
                                     </td>
                                     <td style="border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
-                                        <b id="thantoan2" style="margin-left:8px;color:black;font-size:26px;"></b> &nbsp;&nbsp;&nbsp;
+                                        <b id="thantoan2" style="margin-left:100px;color:black;font-size:24px;"></b> &nbsp;&nbsp;&nbsp;
                                     </td>                                    
                                 </tr>
+                              <%--  <tr>
+                                    <td style="border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+                                         <span style="float:left; margin-left:0px; color:black;font-size:24px;">C/K: </span>
+                                    </td>
+                                    <td style="border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+                                        <b id="chietkau2" style="margin-left:8px;color:black;font-size:24px;"></b>
+                                    </td>                                    
+                                </tr>--%>
                                 <tr>
                                     <td style="border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
-                                         <span style="float:left; margin-left:250px; color:black;font-size:22px;">C/K: </span>
+                                         <span style="float:left; margin-left:0px; color:black;font-size:22px;">KH thanh toán: </span>
                                     </td>
                                     <td style="border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
-                                        <b id="chietkau2" style="margin-left:8px;color:black;font-size:22px;"></b>
+                                        <b id="khthanhtoan2" style="margin-left:100px;color:black;font-size:24px;"></b>
                                     </td>                                    
                                 </tr>
-                                <tr>
+                               <%-- <tr>
                                     <td style="border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
-                                         <span style="float:left; margin-left:250px; color:black;font-size:22px;">KH thanh toán: </span>
+                                         <span style="float:left; margin-left:0px;color:black;font-size:24px;">Còn lại:</span>
                                     </td>
                                     <td style="border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
-                                        <b id="khthanhtoan2" style="margin-left:8px;color:black;font-size:22px;"></b>
+                                        <b id="psno2" style="margin-left:8px;color:black;font-size:24px;"></b>
                                     </td>                                    
-                                </tr>
-                                <tr>
-                                    <td style="border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
-                                         <span style="float:left; margin-left:250px;color:black;font-size:22px;">Còn lại:</span>
-                                    </td>
-                                    <td style="border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
-                                        <b id="psno2" style="margin-left:8px;color:black;font-size:22px;"></b>
-                                    </td>                                    
-                                </tr>
+                                </tr>--%>
                             </table>
                            <div style="height:10px;"></div>
                            <div><i style="font-size:22px;color:black;">Bằng chữ:</i> <span id="bangchuid" style="color:black; font-size:26px; padding-left:10px;"></span></div>
                           <%-- <i style="font-size:22px;color:black;">Thanh toán chuyển khoản :</i><img id="barcodeImage" src="<%= barcodeData %>" alt="Barcode" style="width:100px;height:100px;" />--%>
                         
-                            <br />
-                          
-                           <div><i style="font-size:28px;color:black; margin-left: 150px; font-family:'Agency FB';">Xin cảm ơn, hẹn gập lại quý khách!</i></div>
+                             Ngân hàng: .......  Số TK: .... CTK: ....                                                   
+                            <span style="margin-left:25px; text-align:center;">
+                                <img id="barcodeImage" src="<%= barcodeData %>" alt="Barcode" style="width:150px;height:150px; margin-left:80px;" />
+                            </span>
 
+                           <div><i style="font-size:28px;color:black; margin-left: 0px; font-family:'Agency FB';">Xin cảm ơn, hẹn gập lại quý khách!</i></div>
                        </div>
                         
                         
@@ -725,7 +721,7 @@
                         <button type="button" runat="server" id="Button1"  class="btn btn-primary" onclick="printDiv_Save()" >Thanh toán</button>
                         <button type="button" runat="server" id="Button3"  class="btn btn-primary" onclick="printDiv('printableArea')" > 
                             <i class="fas fa-download"></i>
-                            In hóa đơn
+                            In HĐ
                         </button>                       
                         
                         
@@ -733,15 +729,19 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>                      
 
         <div id="invoice" style="display: none; height:auto;"> 
-          <h2>Phiếu Order bếp</h2>
+          <%--<h2>Phiếu Order bếp</h2>--%>
+            <h2>Phiếu chế biến</h2>
+            <span>Ngày giờ: </span><i id="ngayorder" style="font-size:24px;"></i><br />
+            <span>Số bàn: </span><i id="banorder" style="font-size:24px;"></i>
           <table style="border: 1px solid black;">
             <tr style="border: 1px solid black;">
+                <th>STT</th>
               <th>Tên Hàng</th>
-              <th>Số Lượng</th>
-                <th>Tên Bàn</th>
+              <th>ĐVT</th>
+                <th>Số lượng</th>
             </tr>
             <tbody id="invoiceItems">
               <!-- Dữ liệu hóa đơn sẽ được thêm vào đây sau khi nhấn nút "In Hóa Đơn" -->
@@ -1514,22 +1514,33 @@
                             dataType: "json",
                             success: function (data) {
                                 const objdata = $.parseJSON(data.d);    
-                                //debugger;                      
-                                $('#invoiceItems tr').remove();                                     
+                                //debugger;  
+                                var tenban = "";
+                                //var ngahientai = new Date();
+                                var ngayGioHienTai = new Date();
+                                var formattedDateTime = ngayGioHienTai.toLocaleString('vi-VN');
+                                $('#invoiceItems tr').remove();    
+                                var unitno = 0;
                                 for (var i = 0; i < objdata['Table'].length - 1; i++) {
+                                    unitno = unitno + 1;
                                     //console.log(objdata['Table1'].length);
                                     var tenhang = objdata['Table'][i][0];
                                     var soluong = objdata['Table'][i][1];
                                     var banid = objdata['Table'][i][2];
-                                    var solanin = objdata['Table'][i][3];                                                                  
+                                    var solanin = objdata['Table'][i][3];
+                                    var dvt = objdata['Table'][i][4];
+                                    tenban = banid;
                                     var newrow = '<tr class="thongtinnhabep">' +
-                                        '<td id="_hanghoad" style="width:250px; border-top-style:solid;border-top-width:1pt;">' + tenhang + '</td>' +
-                                        '<td id="_tienhang" style="border-top-style:solid;border-top-width:1pt;">' + soluong + '</td>' +
-                                        '<td id="_loaihoadon" style="border-top-style:solid;border-top-width:1pt;">' + banid + '</td>' +
+                                         '<td id="stt" style="border-top-style:solid;border-top-width:1pt;height:50px;">' + unitno + '</td>' +
+                                        '<td id="_hanghoad" style="width:250px; border-top-style:solid;border-top-width:1pt;height:50px;">' + tenhang + '</td>' +
+                                        '<td id="_tienhang" style="border-top-style:solid;border-top-width:1pt;">' + dvt + '</td>' +
+                                        '<td id="_loaihoadon" style="border-top-style:solid;border-top-width:1pt;">' + soluong + '</td>' +
                                         //'<td id="_loaihoadon" style="border: 1px soild black;">' + solanin + '</td>' +                                                                         
                                         '</tr>';
                                    $('#invoiceItems').append(newrow);                                                                        
                                 }
+                                $('#banorder').text(tenban);
+                                $('#ngayorder').text(formattedDateTime);
                                
                                 //$("#invoice").show();
                                 // Gọi hàm để in
@@ -1833,6 +1844,7 @@
                     {
                             alert('Bạn chưa chọn phòng thuê!')
                     }
+                   
                     $('#myModal6').modal('show');
                 }
                 
@@ -2180,7 +2192,7 @@
                         success: function (data) {
                             //debugger;
                             if (data.d != "NG") {
-                                alert('Hoa don them thành công!');
+                                //alert('Hoa don them thành công!');
                                 $('#tbnhaphang tr').remove();
                                 $('#tongtienid').val(0);                                        
                                 $('#thanhtoanid').val(0);
@@ -2194,10 +2206,7 @@
                                 
                                 //$('#hoadonid').val(parseInt(sohoadon) + 1);
                                 $('#hoadonid').val(sohoadon);
-                                
-
                                 //pending -> doi trang thai khi thanh cong -> khong co kach
-
                                 $("#myList UL LI").each(function () {
                                         var nameroom = $(this).find('#tenphong').text();
                                         if (nameroom == tenphong) {
@@ -2205,6 +2214,14 @@
                                         }
                                 })
                                 $('#bangchuid2').text('');
+
+                                //lay so hoa don => IN HOA DON
+                                 var idsohd = data.d.split(',');
+                                 //var trangthai = idop[0];
+                                var idsohdin = idsohd[1];
+                                var tieudein = "PHIẾU THANH TOÁN";
+                                //in hoa don tinh tien
+                                hoadon_printting(idsohdin,tieudein);                                                                
 
                                 //load lai trang khi thanh cong
                                 //setTimeout(function() {
@@ -2609,11 +2626,8 @@
                 }
             });
 
-            $("#hoadonid").on('keyup', function (e) {
-                if ((e.key === 'Enter' || e.keyCode === 13)) {
-                    //alert('hoadon inlai');
-                    var sohoadon = $("#hoadonid").val();
-                    //alert(sohoadon);
+            function hoadon_printting(sohoadon,tieudeid)
+            {                 
                     var data = { sohoadon: sohoadon };
 
                     // lay thong tin hoang hoa
@@ -2694,7 +2708,7 @@
                                         $('#khthanhtoan2').text(khachthanhtoan.toLocaleString('vi-VN'));
                                         $('#psno2').text(khachno.toLocaleString('vi-VN'));
 
-
+                                        $('#tieudein').text(tieudeid);
 
                                         $('#sohoadon_').text(_sohoadon);
                                         $('#ngaytao_').text(ngaytao);
@@ -2726,7 +2740,15 @@
 
 
                         $('#myModal6').modal('show');
-                    
+            }
+
+            $("#hoadonid").on('keyup', function (e) {
+                if ((e.key === 'Enter' || e.keyCode === 13)) {  
+                    //alert('hoadon inlai');
+                    var sohoadon = $("#hoadonid").val();
+                    var tieudeid = "Phiếu thanh toán (in lại)";
+                    //alert(sohoadon);
+                    hoadon_printting(sohoadon,tieudeid);
                 }
             });
       
@@ -3250,13 +3272,13 @@
             function printDiv(divId) {
 
                 //var tienhat = $("#MainContent_Button3").parent().parent().parent().find("b").eq(1).text(); 
-                var tenphong2 = $("#MainContent_Button3").parent().parent().find("b").eq(2).text(); 
-                var tongtien2 = $("#MainContent_Button3").parent().parent().find("b").eq(3).text();
+                //var tenphong2 = $("#MainContent_Button3").parent().parent().find("b").eq(2).text(); 
+                //var tongtien2 = $("#MainContent_Button3").parent().parent().find("b").eq(3).text();
                 //var tongtien2 = $("#MainContent_Button3").parent().parent().find("b").eq(4).text();
-                var chietkau2 = $("#MainContent_Button3").parent().parent().find("b").eq(5).text();
-                var thantoan2 = $("#MainContent_Button3").parent().parent().find("b").eq(6).text();                
-                var conlai2 = $("#MainContent_Button3").parent().parent().find("b").eq(7).text();                                   
-                var sohoadon = $("#hoadonid").val();                
+                //var chietkau2 = $("#MainContent_Button3").parent().parent().find("b").eq(5).text();
+                //var thantoan2 = $("#MainContent_Button3").parent().parent().find("b").eq(6).text();                
+                //var conlai2 = $("#MainContent_Button3").parent().parent().find("b").eq(7).text();                                   
+                //var sohoadon = $("#hoadonid").val();                
 
                try {                                       
                     //kiem tra xem co phai hoa don in lai khong
@@ -3287,8 +3309,7 @@
                         //alert(tongtien2);
                         //alert(chietkau2);                        
                         //alert(thantoan2); 
-                        var thungan = '<%=Session["username"].ToString()%>';                          
-                                                             
+                        //var thungan = '';                                                                                       
                         var printContents = document.getElementById(divId).innerHTML;
                         var originalContents = document.body.innerHTML;
                         document.body.innerHTML = printContents;
@@ -3303,20 +3324,20 @@
                         //thanhtoanhoadon(tenphong2,tongtien2,chietkau2,thantoan2,conlai2,tienhat,sohoadon,idkhachhang);   //==> khong chay ham luu hoa don luon
  
                         //luu lich su thong tin hoa don tam tinh (so lan in hoa don)
-                        var data = { tenphong2: tenphong2,sohoadon:sohoadon,tongtien2:tongtien2,chietkau2:chietkau2,thantoan2:thantoan2,thungan:thungan };
-                        $.ajax({
-                            type: "POST",
-                            contentType: "application/json; charset=utf-8",
-                            url: "Map.aspx/historyprintbill",
-                            data: JSON.stringify(data),
-                            dataType: "json",
-                            success: function (data) {
-                               //response(data.d);
-                            },
-                            error: function (result) {
-                                //alert("No Match");
-                            }
-                        });
+                        //var data = { tenphong2: tenphong2,sohoadon:sohoadon,tongtien2:tongtien2,chietkau2:chietkau2,thantoan2:thantoan2,thungan:thungan };
+                        //$.ajax({
+                        //    type: "POST",
+                        //    contentType: "application/json; charset=utf-8",
+                        //    url: "Map.aspx/historyprintbill",
+                        //    data: JSON.stringify(data),
+                        //    dataType: "json",
+                        //    success: function (data) {
+                        //       //response(data.d);
+                        //    },
+                        //    error: function (result) {
+                        //        //alert("No Match");
+                        //    }
+                        //});
                                                                                        
                     }          
                     //in xong thi tat form ==> de load lai                                                                                                                                   

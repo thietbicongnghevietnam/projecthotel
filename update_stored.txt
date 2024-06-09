@@ -5,83 +5,27 @@ https://stackoverflow.com/questions/18143599/can-signalr-be-used-with-asp-net-we
 ******- nut sua hoa don: tao mot nut luu lai, bat phai ghi hoa don xong thi moi refresh trang thai sua . ==> neu khong se qua lai ton kho nhu cu
 
 ===== // co so du lieu theo sql 2010 //=====
-bang moi :
-CREATE TABLE [dbo].[htsocai_bill](
-	[id] [int] IDENTITY(1,1) NOT NULL,
-	[tenban] [nvarchar](50) NULL,
-	[sohoadon] [nvarchar](50) NULL,
-	[tongtien] [nvarchar](50) NULL,
-	[chietkhau] [nvarchar](50) NULL,
-	[khachTT] [nvarchar](50) NULL,
-	[thungan] [nvarchar](50) NULL,
-	[createtime] [datetime] NULL
-) 
+them moi stored:
+NH_save_khthanhtoan2
+    ==> SUA PHIEU TAM TINH
 
-
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
-CREATE PROCEDURE NH_insert_hoadon_bill
-	@tenphong2 as nvarchar(50),
-	@sohoadon as nvarchar(50),
-	@tongtien2 as nvarchar(50),
-	@chietkau2 as nvarchar(50),
-	@thantoan2 as nvarchar(50)
+edit:
+NH_thongtinbep  ==> them don vitinh
+ALTER PROCEDURE [dbo].[NH_thongtinbep] 
+	@tenphong as nvarchar(50)
 AS
 BEGIN
-	if(@tenphong2 <> '' and @tongtien2 <> '')
-	begin
-		insert into htsocai_bill (tenban,sohoadon,tongtien,chietkhau,khachTT,thungan) values (@tenphong2,@sohoadon,@tongtien2,@chietkau2,@thantoan2,@thungan)
-		select 1
-	end
-	else
-	begin
-		select 0
-	end	
-END
-GO
-
+	
+select a.tenhang,a.soluong,a.banid,a.Solanin,
+(select dvt from hthanghoa b where a.tenhang=b.tenhang ) as dvt
+ from htOrderMonan a where banid=@tenphong
 
 END
+
+
 
 ==== loi nut sua hoa don ===
 $('.editproduct').click(function () {
-                        var tenphong = $('#name_room').text();
-                        //var tongtienhang = parseInt($('#tongtienhang').val());
-                        //loi1
-                        var tongtienhang = parseInt($('#tongtienid').val());
-                        $('.checkinput').each(function () {
-                            var chk = $(this).is(':checked');
-                            if (chk == true) {
-                                var mahangid = $(this).parent().parent().find('td').eq(0).text();
-                                var soluong = $(this).parent().parent().find('td').eq(1).text();
-                                var price = $(this).parent().parent().find('td').eq(3).text();
-                                tongtienhang = tongtienhang - price;
-                                $(this).parent().parent().remove();                                
-                                //$('#tongtienhang').val(tongtienhang);
-                                //loi1
-                                $('#tongtienid').val(tongtienhang);
-                                $('#thanhtoanid').val(tongtienhang);
-
-                                $('#soluong').val(soluong);
-                                $('.ajax').val(mahangid);
-                                
-                                $('#soluong').focus();
-                                $('#soluong').select();
-
-                                //dj.getJSON('/modules/hotel/xulysuathucdon', {'tenphong': tenphong, 'mahang': mahangid, 'giaban': price}, function (rs) {
-                                //    if (rs.err === 0) {
-                                //        dj('#tongtienhang').val(rs.tienhang);
-                                //        dj('#soluong').val(soluong);
-                                //        dj('#ajax').val(mahangid);
-                                //   }
-                                //});
-                            }
-                        })
-                    });
 
 =============
 
