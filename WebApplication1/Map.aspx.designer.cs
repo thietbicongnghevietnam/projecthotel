@@ -49,30 +49,30 @@ namespace WebApplication1 {
         protected global::System.Web.UI.HtmlControls.HtmlButton Button4;
         
         /// <summary>
-        /// Button5 control.
+        /// Button2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton Button5;
+        protected global::System.Web.UI.HtmlControls.HtmlButton Button2;
         
         /// <summary>
-        /// Button6 control.
+        /// Button1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton Button6;
+        protected global::System.Web.UI.HtmlControls.HtmlButton Button1;
         
         /// <summary>
-        /// Button7 control.
+        /// Button3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton Button7;
+        protected global::System.Web.UI.HtmlControls.HtmlButton Button3;
     }
 }

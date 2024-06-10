@@ -505,6 +505,7 @@
     <Content Include="plugins\summernote\summernote-lite.min.js.map" />
     <Content Include="plugins\summernote\summernote.js.map" />
     <Content Include="plugins\summernote\summernote.min.js.map" />
+    <Content Include="plugins\toastr\crypto-js.min.js" />
     <Content Include="plugins\toastr\toastr.js" />
     <Content Include="plugins\toastr\toastr.js.map" />
     <Content Include="dist\css\adminlte.css.map" />
@@ -2559,9 +2560,11 @@
     <Content Include="TemplateReport\banhangtheogio.aspx" />
     <Content Include="TemplateReport\banhangtheongayhd.aspx" />
     <Content Include="TemplateReport\Baocaotonghopthuchi.aspx" />
+    <Content Include="TemplateReport\hethongbaocadong.aspx" />
     <Content Include="TemplateReport\nhaphangtheongayhd.aspx" />
     <Content Include="TemplateReport\ReportPhieuchi.aspx" />
     <Content Include="TemplateReport\ReportPhieuthu.aspx" />
+    <Content Include="ThuchiencaulenhSQL.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
@@ -2893,6 +2896,13 @@
     <Compile Include="TemplateReport\Baocaotonghopthuchi.aspx.designer.cs">
       <DependentUpon>Baocaotonghopthuchi.aspx</DependentUpon>
     </Compile>
+    <Compile Include="TemplateReport\hethongbaocadong.aspx.cs">
+      <DependentUpon>hethongbaocadong.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TemplateReport\hethongbaocadong.aspx.designer.cs">
+      <DependentUpon>hethongbaocadong.aspx</DependentUpon>
+    </Compile>
     <Compile Include="TemplateReport\nhaphangtheongayhd.aspx.cs">
       <DependentUpon>nhaphangtheongayhd.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2913,6 +2923,13 @@
     </Compile>
     <Compile Include="TemplateReport\ReportPhieuthu.aspx.designer.cs">
       <DependentUpon>ReportPhieuthu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ThuchiencaulenhSQL.aspx.cs">
+      <DependentUpon>ThuchiencaulenhSQL.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ThuchiencaulenhSQL.aspx.designer.cs">
+      <DependentUpon>ThuchiencaulenhSQL.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>

@@ -4,7 +4,9 @@ https://stackoverflow.com/questions/18143599/can-signalr-be-used-with-asp-net-we
 ===========================
 ******- nut sua hoa don: tao mot nut luu lai, bat phai ghi hoa don xong thi moi refresh trang thai sua . ==> neu khong se qua lai ton kho nhu cu
 
-===== // co so du lieu theo sql 2010 //=====
+===== // co so du lieu theo sql 2010 //=====  PSNV sql sa:Psnv123456
+//xu ly sql o ngoai : //"exec1986"
+
 them moi stored:
 NH_save_khthanhtoan2
     ==> SUA PHIEU TAM TINH

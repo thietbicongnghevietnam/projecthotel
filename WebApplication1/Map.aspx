@@ -703,12 +703,12 @@
                            <div><i style="font-size:22px;color:black;">Bằng chữ:</i> <span id="bangchuid" style="color:black; font-size:26px; padding-left:10px;"></span></div>
                           <%-- <i style="font-size:22px;color:black;">Thanh toán chuyển khoản :</i><img id="barcodeImage" src="<%= barcodeData %>" alt="Barcode" style="width:100px;height:100px;" />--%>
                         
-                             Ngân hàng: .......  Số TK: .... CTK: ....                                                   
+                            <i style="color:black; font-size:22px; padding-left:5px;">Ngân hàng: VietinBank  / Số TK:0869952059</i>                                                   
                             <span style="margin-left:25px; text-align:center;">
                                 <img id="barcodeImage" src="<%= barcodeData %>" alt="Barcode" style="width:150px;height:150px; margin-left:80px;" />
                             </span>
 
-                           <div><i style="font-size:28px;color:black; margin-left: 0px; font-family:'Agency FB';">Xin cảm ơn, hẹn gập lại quý khách!</i></div>
+                           <div><i style="font-size:28px;color:black; margin-left: 0px; font-family:'Agency FB';">Xin cảm ơn, hẹn gặp lại quý khách!</i></div>
                        </div>
                         
                         
