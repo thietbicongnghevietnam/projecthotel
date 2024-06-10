@@ -7,22 +7,32 @@ https://stackoverflow.com/questions/18143599/can-signalr-be-used-with-asp-net-we
 ===== // co so du lieu theo sql 2010 //=====  PSNV sql sa:Psnv123456
 //xu ly sql o ngoai : //"exec1986"
 
-them moi stored:
-NH_save_khthanhtoan2
-    ==> SUA PHIEU TAM TINH
-
-edit:
-NH_thongtinbep  ==> them don vitinh
-ALTER PROCEDURE [dbo].[NH_thongtinbep] 
-	@tenphong as nvarchar(50)
+===============
+1. fix loi hoa don dau tien click view hoa don khong update trang thai phong
+NH_save_thongtinhanghoa
+....update htphong set trangthai='1' where tenphong=@tenphong
+=================
+2. fix loi sua truc tiep tren bang
+CREATE TRIGGER PreventUpdate
+ON [Tên_Bảng]
+INSTEAD OF UPDATE
 AS
 BEGIN
-	
-select a.tenhang,a.soluong,a.banid,a.Solanin,
-(select dvt from hthanghoa b where a.tenhang=b.tenhang ) as dvt
- from htOrderMonan a where banid=@tenphong
+    -- Kiểm tra xem có phải là một thủ tục lưu trữ không
+    IF OBJECTPROPERTY(OBJECT_ID('TRIGGER_NESTLEVEL'), 'ExecIsAnsiNullsOn') = 0
+    BEGIN
+        -- Nếu không phải là một thủ tục lưu trữ, phát sinh lỗi
+        RAISERROR ('Không được phép cập nhật trực tiếp bảng này.', 16, 1)
+    END
+    ELSE
+    BEGIN
+        -- Nếu là một thủ tục lưu trữ, cho phép thực hiện thay đổi
+        UPDATE [Tên_Bảng]
+        SET ... -- Cập nhật các cột cần thiết
+    END
+END;
+=====================
 
-END
 
 
 

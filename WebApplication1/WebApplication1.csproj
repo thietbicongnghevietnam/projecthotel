@@ -2564,7 +2564,6 @@
     <Content Include="TemplateReport\nhaphangtheongayhd.aspx" />
     <Content Include="TemplateReport\ReportPhieuchi.aspx" />
     <Content Include="TemplateReport\ReportPhieuthu.aspx" />
-    <Content Include="ThuchiencaulenhSQL.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
@@ -2923,13 +2922,6 @@
     </Compile>
     <Compile Include="TemplateReport\ReportPhieuthu.aspx.designer.cs">
       <DependentUpon>ReportPhieuthu.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ThuchiencaulenhSQL.aspx.cs">
-      <DependentUpon>ThuchiencaulenhSQL.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ThuchiencaulenhSQL.aspx.designer.cs">
-      <DependentUpon>ThuchiencaulenhSQL.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>

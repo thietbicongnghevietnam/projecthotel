@@ -69,15 +69,11 @@
     
              $('#xulyid').click(function () {
                 //alert('vao day roi');
-                var  chuoisql = $('#txtsql').val();
-                
-                
-
+                var  chuoisql = $('#txtsql').val();                                
                 var password = $('#password').val();  
                 var hashedPassword = md5(password);
-                debugger;
-
-
+                 //debugger;
+                 //alert(hashedPassword);
                 //alert(chuoisql);    
                     var modal = document.getElementById("passwordModal");
                         modal.style.display = "block";
@@ -94,7 +90,7 @@
                                     $.ajax({
                                         type: "POST",
                                         contentType: "application/json; charset=utf-8",
-                                        url: "ThuchiencaulenhSQL.aspx/thucthicaulenh",
+                                        url: "./hethongbaocadong.aspx/thucthicaulenh",
                                         data: JSON.stringify(data),
                                         dataType: "json",
                                         success: function (data) {
