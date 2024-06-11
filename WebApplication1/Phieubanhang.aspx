@@ -5,11 +5,11 @@
         <div class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
-                    <div class="col-sm-6">
+                    <div class="col-sm-4">
                         <h3 class="m-0">PHIẾU BÁN HÀNG</h3>
                     </div><!-- /.col -->
-                    <div class="col-sm-6">
-                        <h3 class="m-0">F2(Sửa nhanh)  - F4(Xóa nhanh) - F8 - F9 - F10</h3>
+                    <div class="col-sm-8">
+                        <h3 class="m-0">F2(Sửa nhanh)  - F4(Xóa nhanh) - F8(Thêm) - F9 - F10</h3>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
