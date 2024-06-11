@@ -703,7 +703,7 @@
                            <div><i style="font-size:22px;color:black;">Bằng chữ:</i> <span id="bangchuid" style="color:black; font-size:26px; padding-left:10px;"></span></div>
                           <%-- <i style="font-size:22px;color:black;">Thanh toán chuyển khoản :</i><img id="barcodeImage" src="<%= barcodeData %>" alt="Barcode" style="width:100px;height:100px;" />--%>
                         
-                            <i style="color:black; font-size:22px; padding-left:5px;">Ngân hàng: VietinBank  / Số TK:0869952059</i>                                                   
+                            <i style="color:black; font-size:22px; padding-left:5px;">NH: VietinBank - SoTK:0869952059</i>                                                   
                             <span style="margin-left:25px; text-align:center;">
                                 <img id="barcodeImage" src="<%= barcodeData %>" alt="Barcode" style="width:150px;height:150px; margin-left:80px;" />
                             </span>
