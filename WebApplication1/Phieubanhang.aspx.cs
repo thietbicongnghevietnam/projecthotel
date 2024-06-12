@@ -246,65 +246,76 @@ namespace WebApplication1
             String thongbao = "";
             DataTable dtsave = new DataTable();
             DataTable dtupdatekho = new DataTable();
-
-            JavaScriptSerializer jss = new JavaScriptSerializer();
-            var jsonObj = jss.Deserialize<dynamic>(items);
-            string type_act = "banhang";
-
-            //{"bia ha noi":1,"Bò khô":2}
-            //them moi mot cot ton dau ky trong bang socai
-            string listtoncuoiky = "";            
-            if (suahoadon == "1")
+            try
             {
-                //truong hop sua hoa don, khong update ton kho
-                //ton kho se duoc update o thao tac sua xoa.
-                //da chon vao sua hoa don thi bat phai luu lai hoa don  ==> truong hop nay phai bat chat o client
-                foreach (var item in jsonObj)
+                JavaScriptSerializer jss = new JavaScriptSerializer();
+                var jsonObj = jss.Deserialize<dynamic>(items);
+                string type_act = "banhang";
+
+                //{"bia ha noi":1,"Bò khô":2}
+                //them moi mot cot ton dau ky trong bang socai
+                string listtoncuoiky = "";
+                if (suahoadon == "1")
                 {
-                    string[] numbersArray = item.Key.Split(',');
-                    var mahang = numbersArray.FirstOrDefault();
-                    var soluong = item.Value;
-                    //Console.WriteLine($"Key: {key}, Value: {value}");
-                    dtupdatekho = DataConn.StoreFillDS("NH_updatekho_BH_suaHD", System.Data.CommandType.StoredProcedure, mahang, soluong, type_act);
-                    var sltoncuoiky = dtupdatekho.Rows[0][1].ToString();
-                    listtoncuoiky = listtoncuoiky + '"' + mahang + '"' + ':' + sltoncuoiky + ',';
+                    //truong hop sua hoa don, khong update ton kho
+                    //ton kho se duoc update o thao tac sua xoa.
+                    //da chon vao sua hoa don thi bat phai luu lai hoa don  ==> truong hop nay phai bat chat o client
+                    foreach (var item in jsonObj)
+                    {
+                        string[] numbersArray = item.Key.Split(',');
+                        var mahang = numbersArray.FirstOrDefault();
+                        var soluong = item.Value;
+                        //Console.WriteLine($"Key: {key}, Value: {value}");
+                        dtupdatekho = DataConn.StoreFillDS("NH_updatekho_BH_suaHD", System.Data.CommandType.StoredProcedure, mahang, soluong, type_act);
+                        var sltoncuoiky = dtupdatekho.Rows[0][1].ToString();
+                        listtoncuoiky = listtoncuoiky + '"' + mahang + '"' + ':' + sltoncuoiky + ',';
+                    }
+
+                }
+                else
+                {
+                    //van update ton kho binh thuong
+                    foreach (var item in jsonObj)
+                    {
+                        string[] numbersArray = item.Key.Split(',');
+                        var mahang = numbersArray.FirstOrDefault();
+                        var soluong = item.Value;
+                        //Console.WriteLine($"Key: {key}, Value: {value}");
+                        dtupdatekho = DataConn.StoreFillDS("NH_updatekho_BH", System.Data.CommandType.StoredProcedure, mahang, soluong, type_act);
+                        var sltoncuoiky = dtupdatekho.Rows[0][1].ToString();
+                        listtoncuoiky = listtoncuoiky + '"' + mahang + '"' + ':' + sltoncuoiky + ',';
+                    }
                 }
 
-            }
-            else
-            {
-                //van update ton kho binh thuong
-                foreach (var item in jsonObj)
+                listtoncuoiky = listtoncuoiky.Substring(0, listtoncuoiky.Length - 1);
+                listtoncuoiky = '{' + listtoncuoiky + '}';
+                //check xem hoa don ton tai chua
+                //update *** neu hoa don ton tai roi
+                //lay so hoa don truyen len de update
+                dtsave = DataConn.StoreFillDS("addthongtinhanghoa_PBH", System.Data.CommandType.StoredProcedure, suahoadon, sohoadon, thanhtoantien, psno, chieukhau, nhacungcap, tienhang, items, listtoncuoiky);
+
+                if (dtsave.Rows[0][0].ToString() == "1")
                 {
-                    string[] numbersArray = item.Key.Split(',');
-                    var mahang = numbersArray.FirstOrDefault();
-                    var soluong = item.Value;
-                    //Console.WriteLine($"Key: {key}, Value: {value}");
-                    dtupdatekho = DataConn.StoreFillDS("NH_updatekho_BH", System.Data.CommandType.StoredProcedure, mahang, soluong, type_act);
-                    var sltoncuoiky = dtupdatekho.Rows[0][1].ToString();
-                    listtoncuoiky = listtoncuoiky + '"' + mahang + '"' + ':' + sltoncuoiky + ',';
+                    //thongbao = "OK" + "," + dtlevel.Rows[0][1].ToString();
+
+                    //thongbao = "OK" + "," + dtsave.Rows[0][1].ToString();
+                    thongbao = dtsave.Rows[0][1].ToString();
                 }
+                else
+                {
+                    thongbao = "NG";
+                }
+                return thongbao;
             }
-            
-            listtoncuoiky = listtoncuoiky.Substring(0, listtoncuoiky.Length - 1);
-            listtoncuoiky = '{' + listtoncuoiky + '}';
-            //check xem hoa don ton tai chua
-            //update *** neu hoa don ton tai roi
-            //lay so hoa don truyen len de update
-            dtsave = DataConn.StoreFillDS("addthongtinhanghoa_PBH", System.Data.CommandType.StoredProcedure, suahoadon, sohoadon, thanhtoantien, psno, chieukhau, nhacungcap, tienhang, items, listtoncuoiky);
-
-            if (dtsave.Rows[0][0].ToString() == "1")
-            {
-                //thongbao = "OK" + "," + dtlevel.Rows[0][1].ToString();
-
-                //thongbao = "OK" + "," + dtsave.Rows[0][1].ToString();
-                thongbao = dtsave.Rows[0][1].ToString();
-            }
-            else
+            catch (Exception)
             {
                 thongbao = "NG";
+                return thongbao;
+                //throw;
             }
-            return thongbao;
+            
+
+            
         }
 
 
@@ -462,6 +473,7 @@ namespace WebApplication1
             DataTable dtmahang = new DataTable();
 
             dtmahang = DataConn.StoreFillDS("NH_laymahang_tk_chuan", System.Data.CommandType.StoredProcedure, mahang);//tenphong, data, tienhang
+           
 
             if (dtmahang.Rows[0][0].ToString() != "0")
             {
@@ -502,14 +514,15 @@ namespace WebApplication1
         {
             String thongbao = "";
             DataTable dtmahang = new DataTable();
+            DataTable dtdvt2 = new DataTable();
 
-            dtmahang = DataConn.StoreFillDS("NH_laydungmahang", System.Data.CommandType.StoredProcedure, tenhangid);//tenphong, data, tienhang
+            dtmahang = DataConn.StoreFillDS("NH_laydungmahang", System.Data.CommandType.StoredProcedure, tenhangid);//tenphong, data, tienhang          
 
             if (dtmahang.Rows[0][0].ToString() != "0")
             {
                 //thongbao = "OK" + "," + dtlevel.Rows[0][1].ToString();
                 //thongbao = dtmahang.Rows[0][0].ToString();
-                thongbao = dtmahang.Rows[0][0].ToString();
+                thongbao = dtmahang.Rows[0][0].ToString() + "," + dtmahang.Rows[0][1].ToString();
             }
             else
             {

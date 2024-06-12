@@ -13,6 +13,9 @@ https://stackoverflow.com/questions/18143599/can-signalr-be-used-with-asp-net-we
 3. loi dang o cac nut sua nhanh   (if(checkfisrt == 1))
 
 
+===== sua stored
+NH_laydungmahang
+==> select mahang,dvt from hthanghoa where tenhang=@tenhangid
 
 
 
