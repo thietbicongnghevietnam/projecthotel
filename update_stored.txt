@@ -6,6 +6,15 @@ https://stackoverflow.com/questions/18143599/can-signalr-be-used-with-asp-net-we
 
 ===== // co so du lieu theo sql 2010 //=====  PSNV sql sa:Psnv123456
 //xu ly sql o ngoai : //"exec1986"
+====banhang theo nhieu don vi tinh
+1.dang trang thai ban hang theo goi, sua thi loi  => don vi tinh khong thay doi...
+2. khi bam F2 sua nhan ==> tong cong tien bi sai
+
+3. loi dang o cac nut sua nhanh   (if(checkfisrt == 1))
+
+
+
+
 
 ===============
 1. fix loi hoa don dau tien click view hoa don khong update trang thai phong

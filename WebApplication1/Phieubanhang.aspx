@@ -597,8 +597,75 @@ if (typeof navigator !== 'undefined' && 'printer' in navigator) {
              $('#myModal').modal('show');
          });
 
+function nutthemhanghoa()
+{
+                if($("#MainContent_phieunhaphang").val() == '')
+                    {                       
+                          //alert('ban chua nhap ma hang!');
+                          $("#MainContent_phieunhaphang").focus();
+                    }
+                    else
+                    {
+                        var soluong_dvt = 1;
+                        var ktdvt = $('#MainContent_dr_dvt').val();
+                         var tongtienhang = parseInt($('#tongtiennhap').val());
+                        //==DVT==           
+                        if(ktdvt == "==DVT==")
+                        {
+                            soluong_dvt = 1;
+                            handledonvitinh(ktdvt,soluong_dvt,tongtienhang);
+                        }
+                        else
+                        {
+                            //lay ra so luong cau thanh don vi tinh
+                            var donvinhonhat = $('#dvtnhonhat').val();
+                            var kiemtramahang = $('#mahanghoa').text();
+                            var donvilonhon = $('#MainContent_dr_dvt').val();
+                
+                            var data = {donvinhonhat:donvinhonhat, kiemtramahang:kiemtramahang, donvilonhon:donvilonhon}
+
+                            $.ajax({
+                                type: "POST",
+                                contentType: "application/json; charset=utf-8",
+                                url: "Phieubanhang.aspx/laysoluongdvt",
+                                data: JSON.stringify(data),
+                                dataType: "json",
+                                success: function (data) {
+                                    if(data.d == "NG")
+                                    {
+                                        //alert('mat hang khong co cau thanh don vi tinh');
+                                        soluong_dvt = 1;
+                                        handledonvitinh(ktdvt,soluong_dvt,tongtienhang);
+                                    }
+                                    else
+                                    {
+                                        //alert(data.d);
+                                        soluong_dvt = data.d;
+                                        handledonvitinh(ktdvt,soluong_dvt,tongtienhang);
+                                    }                                                      
+                                },
+                                error: function ()
+                                {
+                                    //alert("No Match");
+                                }
+                            });                
+                            //soluong_dvt = 1;
+                            //alert(soluong_dvt);
+                        }                                                                    
+                  }
+
+};
+
+ document.addEventListener('keydown', function(event) { 
+    if (event.key === 'F8') {   
+            //nut them hang hoa nhanh
+            nutthemhanghoa(); 
+    }
+});
+
          $('.add_hanghoa').each(function () {
                 $(this).click(function () {                     
+                        //nutthemhanghoa(); 
                     if($("#MainContent_phieunhaphang").val() == '')
                     {                       
                           //alert('ban chua nhap ma hang!');
@@ -652,7 +719,8 @@ if (typeof navigator !== 'undefined' && 'printer' in navigator) {
                             //soluong_dvt = 1;
                             //alert(soluong_dvt);
                         }                                                                    
-                    }                                                                         
+                  }
+                                                                    
                 });               
          });
 
@@ -856,10 +924,10 @@ if (typeof navigator !== 'undefined' && 'printer' in navigator) {
                             
                         });
                         //alert(checkfisrt);
-                        if(checkfisrt == 1)
-                        {                             
-                            suahoadonfirst();
-                        }
+                        //if(checkfisrt == 1)
+                        //{                             
+                       //     suahoadonfirst();
+                       // }
                         
 
                     });
@@ -1385,7 +1453,7 @@ $('#thanhtoanid').val(tongtienhang);
                      var chk = $(this).is(':checked');
                      if (chk == true) {
                          var tenhang = $(this).parent().parent().find('td').eq(0).text();
-                         var soluongxoa = $(this).parent().parent().find('td').eq(0).text();
+                         var soluongxoa = $(this).parent().parent().find('td').eq(1).text();
                          var price = parseInt($(this).parent().parent().find('td').eq(3).text());
                          tongtienhang = tongtienhang - price;
                          //djLog(tongtienhang);
