@@ -1,5 +1,39 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Phieubanhang.aspx.cs" Inherits="WebApplication1.Phieubanhang" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+
+    <style>
+    .thongtinhoadon2 {
+        border: 1px solid black;
+    }
+
+    @media print {
+    #tbnhaphang_inhoadon2 {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    #tbnhaphang_inhoadon2 td {
+        border: 1px solid black;
+        padding: 8px;
+    }
+
+    /* Xác định kiểu của các dòng trong bảng */
+    .thongtinhoadon2 {
+        border: 1px solid black;
+    }
+}
+</style>
+
+    <style>
+@media print {
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+}
+</style>
+
     <div class="wrapper">
 
         <div class="content-header">
@@ -40,11 +74,12 @@
 
 
                 <td style="padding-bottom: 10px; padding-right: 10px;">                        
-                        <asp:DropDownList ID="dr_dvt" runat="server" AppendDataBoundItems="true" 
+                       <%-- <asp:DropDownList ID="dr_dvt" runat="server" AppendDataBoundItems="true" 
                             DataTextField="dvtto" 
                             DataValueField="dvtto" 
                             CssClass="form-control input-sm">
-                        </asp:DropDownList>
+                        </asp:DropDownList>--%>
+                    <select name="donvitinh" id="dvtid" Class="form-control input-sm"></select>
                 </td> 
 
                 <td style="padding-bottom: 10px; padding-right: 10px;">     
@@ -81,7 +116,7 @@
                         <input type="checkbox" id="inHD" name="inHD">                        
                     </td>
                      <td>                       
-                        <label for="inhoadon" style="float: left; margin-top: 5px;  padding-left:10px;">SHĐ</label>
+                        <label for="shdinhoadon" style="float: left; margin-top: 5px;  padding-left:10px;">SHĐ</label>
                         <input id="soHD" name="soHD" class="form-control input-sm" value="<%=sohoadon %>"" style="width:80px;"/>                 
                     </td>
                     <td>
@@ -268,21 +303,56 @@
             </div>
         </div>
 
-       <%-- <div id="contentToPrint">
+        <div id="contentToPrint" style="display:none;">
         <!-- Nội dung bạn muốn in -->
-        <h1>Hello, world!</h1>
-        <p>This is the content that you want to print. noi dung in khong can hoi</p>
+         <div class="container-fluid" style="width:400px;height:auto; "><%--float:left--mau may in nho --%>
+                         <%--   Hinh thuc: <b id="hinhthucnghi2"></b>
+                            &nbsp;&nbsp;&nbsp; tongtienhat: <b id="tongtienhat2"></b><br />
+                           Ten phong: <b id="tenphong2"></b>
+                           &nbsp;&nbsp;&nbsp; Tong tien hang: <b id="tongtien2"></b>
+                             --%>                             
+                           <span><i style="font-size:22px; text-align:center;"><%=tendovi %></i></span><br />  
+                           <span> Địa chỉ: <%=diachidonvi %></span><br />
+                           <span> Số ĐT: <%=sodtdonvi %></span><br />
+                           Số HĐ: <b id="sohoadoid2"></b> &nbsp;&nbsp;&nbsp; Ngày tạo: <b id="ngaytaoid2"></b>
+
+                                <div style="width: 100%; height: auto; float: left;">  
+                                    <table> <%--class="display table table-bordered dataTable no-footer"--%>
+                                        <thead>
+                                            <tr>
+                                                <th>Tên Hàng</th>
+                                                <th>Số lượng</th>
+                                                <th>Đơn giá</th>
+                                               <%-- <th>Chiết khấu</th>--%>
+                                                <th>Thành tiền</th>                                                 
+                                            </tr>
+                                            <tbody id="tbnhaphang_inhoadon2">
+                                            </tbody>
+
+
+                                    </table>
+                                </div>
+                            
+                           <br /> 
+                           Tổng tiền: <b id="thantoan22"></b> &nbsp;&nbsp;&nbsp;  C/K: <b id="chietkau22"></b> <br />
+                           KH thanh toán: <b id="khthanhtoan22"></b> &nbsp;&nbsp;&nbsp; Còn lại: <b id="psno22"></b>     
+                           <div>Bằng chữ: <span id="bangchuid22" style="font-weight:300; color:red; font-size:20px; padding-left:10px;"></span></div>
+                          <%-- Thanh toán chuyển khoản :<img id="barcodeImage" src="<%= barcodeData %>" alt="Barcode" /> --%>
+                        </div>
+
+
+
     </div>
 
     <!-- Nút để kích hoạt chức năng in -->
-    <button onclick="printContent()">Print</button>--%>
+    <button onclick="printContent()">Print</button>
 
 
     </div>
 
     <script>
         function printContent() {
-alert('toi dang thu');
+//alert('toi dang thu');
             //var content = document.getElementById("contentToPrint").innerHTML;
             //var printWindow = window.open('', '_blank');
             //printWindow.document.open();
@@ -295,22 +365,119 @@ alert('toi dang thu');
             //printWindow.document.open();
             //printWindow.document.write('<html><head><title>Print</title></head><body onload="window.print(); window.close()">' + content + '</body></html>');
             //printWindow.document.close();
-var content = document.getElementById("contentToPrint").innerHTML;
-    var printWindow = window.open('', '_blank');
-    printWindow.document.open();
-    printWindow.document.write('<html><head><title>Print</title></head><body onload="window.print(); window.close()">' + content + '</body></html>');
-    printWindow.document.close();
-    printWindow.print(); // In trực tiếp từ cửa sổ đã mở
-    printWindow.close(); // Đóng cửa sổ in sau khi đã in
+var idhoadon = $('#soHD').val();
+ var data1 = {idhoadon:idhoadon};
+$.ajax({
+                                type: "POST",
+                                contentType: "application/json; charset=utf-8",
+                                url: "Phieubanhang.aspx/thongtinhanghoa",
+                                //data: JSON.stringify(data),
+                                data: JSON.stringify(data1),
+                                dataType: "json",
+                                success: function (data) {
+                                    const objdata = $.parseJSON(data.d);
+                                                                                                      
+                                    $('#tbnhaphang_inhoadon2 tr').remove();   
+
+                                        if (objdata['Table1'] != "")
+                                        {                                                                                                                                               
+                                            for (var i = 0; i < objdata['Table1'].length - 1; i++) {
+                                                var tenhang = objdata['Table1'][i][0];
+                                                var dongia = objdata['Table1'][i][1];
+                                                var soluong = objdata['Table1'][i][2];
+                                                var chietkhau = "";//objdata['Table1'][i][3];
+                                                var thanhtien = objdata['Table1'][i][4];
+                                                var newrow = '<tr class="thongtinhoadon2">' +
+                                                    '<td id="_hanghoad" style="width:250px; ">' + tenhang + '</td>' +
+                                                    '<td id="_tienhang" >' + dongia.toLocaleString('vi-VN') + '</td>' +
+                                                    '<td id="_loaihoadon" >' + soluong + '</td>' +
+                                                    //'<td id="_chietkhau">' + chietkhau + '</td>' +
+                                                    '<td id="_sohoadon" >' + thanhtien.toLocaleString('vi-VN') + '</td>' +
+                                                    '</tr>';
+                                                $('#tbnhaphang_inhoadon2').append(newrow);                                                                                        
+                                            }                                        
+                                        }
+                                        else
+                                        {
+                                            //$('#tbnhaphang_inhoadon').append(newrow); 
+                                        } 
+                                         // Gọi hàm in ở đây, sau khi AJAX kết thúc và dữ liệu đã được cập nhật
+                                        printData();
+                                  
+                                },
+                                error: function () {
+                                    //alert("No Match");
+                                }
+                                }); 
+
         }
+
+function printData() {
+    //var content = document.getElementById("contentToPrint").innerHTML;
+    //var printWindow = window.open('', '_blank');
+    //printWindow.document.open();
+    //printWindow.document.write('<html><head><title>Print</title></head><body onload="window.print(); window.close()">' + content + '</body></html>');
+    //printWindow.document.close();
+    //printWindow.print();
+    //printWindow.close();
+
+var content = document.getElementById("contentToPrint").innerHTML;
+var printWindow = window.open('', '_blank');
+printWindow.document.open();
+printWindow.document.write('<html><head><title>Print</title><style>@media print { /* Thêm các kiểu CSS cho in */ }</style></head><body onload="window.print(); window.close()">' + content + '</body></html>');
+printWindow.document.close();
+
+}
     </script>
 
      <script type="text/javascript">
+
+function getdonvitinh(hanghoa,typefill)
+{
+    var data = {hanghoa:hanghoa,typefill:typefill}
+    $.ajax({
+            type: "POST",
+            url: "Phieubanhang.aspx/GetDVT", 
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(data),
+            dataType: "json",
+            success: function (response) {
+                var data = JSON.parse(response.d);
+                var ddl = document.getElementById("dvtid");
+                
+                // Xóa toàn bộ dữ liệu cũ
+                ddl.innerHTML = "";
+
+                // Thêm giá trị mặc định
+                var defaultOption = document.createElement("option");
+                defaultOption.text = "==DVT==";
+                defaultOption.value = "==DVT==";
+                ddl.insertBefore(defaultOption, ddl.firstChild);
+
+                for (var i = 0; i < data.length; i++) {
+                    var option = document.createElement("option");
+                    option.text = data[i].dvtto;
+                    option.value = data[i].dvtto;
+                    ddl.add(option);
+                }
+                
+            },
+            error: function (xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+}
+
+
         $(document).ready(function () {
             SearchText();   
             //$('#khongid').prop('checked', true);
             $('#bannhanhid').prop('checked', true);
             $('#soluongnhaphang').val(1);
+            
+            getdonvitinh("","all");
+
+        
 
 if (typeof navigator !== 'undefined' && 'printer' in navigator) {
         // Lấy thông tin về máy in
@@ -535,7 +702,7 @@ if (typeof navigator !== 'undefined' && 'printer' in navigator) {
                                 $("#mahanghoa").text(chuoihang[0]);
                                 $("#dvtnhonhat").val(chuoihang[1]);   
                                 $("#dongiaid").val(chuoihang[2]); 
-                                $("#MainContent_dr_dvt").val('==DVT==');
+                                //$("#MainContent_dr_dvt").val('==DVT==');
 
                                 soluong_keyenter();
                             } 
@@ -573,7 +740,7 @@ if (typeof navigator !== 'undefined' && 'printer' in navigator) {
                                 $("#mahanghoa").text(chuoihang[0]);
                                 $("#dvtnhonhat").val(chuoihang[1]); 
                                 $("#dongiaid").val(chuoihang[2]);   
-                                $("#MainContent_dr_dvt").val('==DVT==');
+                                //$("#MainContent_dr_dvt").val('==DVT==');
                             } 
                             else 
                             {
@@ -606,7 +773,7 @@ if (typeof navigator !== 'undefined' && 'printer' in navigator) {
                             else
                             {
                                 var soluong_dvt = 1;
-                                var ktdvt = $('#MainContent_dr_dvt').val();
+                                var ktdvt = $('#dvtid').val();//$('#MainContent_dr_dvt').val();
                                  var tongtienhang = parseInt($('#tongtiennhap').val());
                                 //==DVT==           
                                 if(ktdvt == "==DVT==")
@@ -619,7 +786,7 @@ if (typeof navigator !== 'undefined' && 'printer' in navigator) {
                                     //lay ra so luong cau thanh don vi tinh
                                     var donvinhonhat = $('#dvtnhonhat').val();
                                     var kiemtramahang = $('#mahanghoa').text();
-                                    var donvilonhon = $('#MainContent_dr_dvt').val();
+                                    var donvilonhon = $('#dvtid').val();//$('#MainContent_dr_dvt').val();
                 
                                     var data = {donvinhonhat:donvinhonhat, kiemtramahang:kiemtramahang, donvilonhon:donvilonhon}
 
@@ -672,7 +839,7 @@ if (typeof navigator !== 'undefined' && 'printer' in navigator) {
                     else
                     {
                         var soluong_dvt = 1;
-                        var ktdvt = $('#MainContent_dr_dvt').val();
+                        var ktdvt = $('#dvtid').val();// $('#MainContent_dr_dvt').val();
                          var tongtienhang = parseInt($('#tongtiennhap').val());
                         //==DVT==           
                         if(ktdvt == "==DVT==")
@@ -685,8 +852,8 @@ if (typeof navigator !== 'undefined' && 'printer' in navigator) {
                             //lay ra so luong cau thanh don vi tinh
                             var donvinhonhat = $('#dvtnhonhat').val();
                             var kiemtramahang = $('#mahanghoa').text();
-                            var donvilonhon = $('#MainContent_dr_dvt').val();
-                
+                            var donvilonhon = $('#dvtid').val();//$('#MainContent_dr_dvt').val();
+                            //alert(donvilonhon);
                             var data = {donvinhonhat:donvinhonhat, kiemtramahang:kiemtramahang, donvilonhon:donvilonhon}
 
                             $.ajax({
@@ -757,8 +924,19 @@ if (typeof navigator !== 'undefined' && 'printer' in navigator) {
                                             success: function (data) {
                                                 if(data.d != "NG")
                                                 {
-                                                    $('#MainContent_phieunhaphang').val(data.d);
+                                                    //$('#MainContent_phieunhaphang').val(data.d);
+                                                    //$('#suahd_soluongcu').val(soluong);
+                                                    var chuoihang = data.d.split(',');                                                                                                                                                                                        
+                                                    $('#MainContent_phieunhaphang').val(chuoihang[0]);
+                                                    $("#dvtnhonhat").val(chuoihang[1]); 
                                                     $('#suahd_soluongcu').val(soluong);
+
+                                                    $('#mahanghoa').text(chuoihang[0]);
+                                                    
+                                                    var hanghoa =  $('#MainContent_phieunhaphang').val();//chuoihang[0].tostring();
+                                                    var typefill = "mahang";
+                                                    //alert('vao nut sua o day');
+                                                    getdonvitinh(hanghoa,typefill);
                                                 }
                                                 else
                                                 {
@@ -788,11 +966,15 @@ if (typeof navigator !== 'undefined' && 'printer' in navigator) {
                                                 var chuoihang = data.d.split(',');                                
                                                 $("#mahanghoa").text(chuoihang[0]);
                                                 $("#dvtnhonhat").val(chuoihang[1]);    
-                                                $("#MainContent_dr_dvt").val('==DVT==');
-
+                                                //$("#MainContent_dr_dvt").val('==DVT==');
                                                 $('#MainContent_phieunhaphang').val(tenhangid);
-
                                                 $('#suahd_soluongcu').val(soluong);
+
+                                                //$('#mahanghoa').text(chuoihang[0]);
+
+                                                var hanghoa =  $('#MainContent_phieunhaphang').val();
+                                                var typefill = "tenhang";                                                
+                                                getdonvitinh(hanghoa,typefill);
                                             } 
                                             else 
                                             {
@@ -829,13 +1011,12 @@ if (typeof navigator !== 'undefined' && 'printer' in navigator) {
          // nut sua hoa don
          $('.editproduct').click(function () {   
              var ckQRcode = document.getElementById("bannhanhid");
-             var tongtienhang = parseInt($('#tongtiennhap').val());
-                
+             var tongtienhang = parseInt($('#tongtiennhap').val());                
                var checkfisrt = 1;
-
                         $('.checknhaphang').each(function () {
                             var chk = $(this).is(':checked');
                             if (chk == true) {
+                                //alert('vao day khong');
                                 checkfisrt = checkfisrt+1;
                                 var tenhangid = $(this).parent().parent().find('td').eq(0).text();
                                 var soluong = $(this).parent().parent().find('td').eq(1).text();
@@ -844,9 +1025,7 @@ if (typeof navigator !== 'undefined' && 'printer' in navigator) {
                                 tongtienhang = tongtienhang - price;
                                 $(this).parent().parent().remove();
                                 $('#tongtiennhap').val(tongtienhang);
-                                $('#thanhtoanid').val(tongtienhang);
-                                
-
+                                $('#thanhtoanid').val(tongtienhang);                                
                                 $('#dongiaid').val(giabanra);
 
                                 $('#soluongnhaphang').val(soluong);
@@ -866,8 +1045,14 @@ if (typeof navigator !== 'undefined' && 'printer' in navigator) {
                                                     //$('#MainContent_phieunhaphang').val(data.d);
                                                     $('#MainContent_phieunhaphang').val(chuoihang[0]);
                                                     $("#dvtnhonhat").val(chuoihang[1]); 
-
                                                     $('#suahd_soluongcu').val(soluong);
+
+                                                    $('#mahanghoa').text(chuoihang[0]);
+                                                    
+                                                    var hanghoa =  $('#MainContent_phieunhaphang').val();//chuoihang[0].tostring();
+                                                    var typefill = "mahang";
+                                                    //alert('vao nut sua o day');
+                                                    getdonvitinh(hanghoa,typefill);
                                                 }
                                                 else
                                                 {
@@ -897,11 +1082,16 @@ if (typeof navigator !== 'undefined' && 'printer' in navigator) {
                                                 var chuoihang = data.d.split(',');                                
                                                 $("#mahanghoa").text(chuoihang[0]);
                                                 $("#dvtnhonhat").val(chuoihang[1]);    
-                                                $("#MainContent_dr_dvt").val('==DVT==');
-
+                                                //$("#MainContent_dr_dvt").val('==DVT==');
                                                 $('#MainContent_phieunhaphang').val(tenhangid);
-
                                                 $('#suahd_soluongcu').val(soluong);
+
+                                                //$('#mahanghoa').text(chuoihang[0]);
+
+                                                 var hanghoa =  $('#MainContent_phieunhaphang').val();
+                                                 var typefill = "tenhang";
+                                                //alert('vao 111');
+                                                 getdonvitinh(hanghoa,typefill);
                                             } 
                                             else 
                                             {
@@ -935,6 +1125,7 @@ if (typeof navigator !== 'undefined' && 'printer' in navigator) {
 
         function suahoadonfirst ()
         {
+            //alert('vao dau tien');
             var ckQRcode = document.getElementById("bannhanhid");
             var tongtienhang = parseInt($('#tongtiennhap').val());
              //truong hop khong click ma nao thi lay gia tri dau tien
@@ -1001,7 +1192,7 @@ if (typeof navigator !== 'undefined' && 'printer' in navigator) {
                             var chuoihang = data.d.split(',');                                
                             $("#mahanghoa").text(chuoihang[0]);
                             $("#dvtnhonhat").val(chuoihang[1]);    
-                            $("#MainContent_dr_dvt").val('==DVT==');
+                            //$("#MainContent_dr_dvt").val('==DVT==');
 
                             $('#MainContent_phieunhaphang').val(tenhangid);
 
@@ -1047,7 +1238,8 @@ if (typeof navigator !== 'undefined' && 'printer' in navigator) {
          function soluong_keyenter()
          {
             var soluong_dvt = 1;
-             var ktdvt = $('#MainContent_dr_dvt').val();
+             //var ktdvt = $('#MainContent_dr_dvt').val();
+             var ktdvt = $('#dvtid').val();
              var tongtienhang = parseInt($('#tongtiennhap').val());     
 
             //==DVT==           
@@ -1061,7 +1253,7 @@ if (typeof navigator !== 'undefined' && 'printer' in navigator) {
                 //lay ra so luong cau thanh don vi tinh
                 var donvinhonhat = $('#dvtnhonhat').val();
                 var kiemtramahang = $('#mahanghoa').text();
-                var donvilonhon = $('#MainContent_dr_dvt').val();
+                var donvilonhon = $('#dvtid').val();//$('#MainContent_dr_dvt').val();
                 
                 var data2 = {donvinhonhat:donvinhonhat, kiemtramahang:kiemtramahang, donvilonhon:donvilonhon}
 
@@ -1675,7 +1867,7 @@ if (typeof navigator !== 'undefined' && 'printer' in navigator) {
                                     var sohoadon = $('#soHD').val();
                                     //alert(khachthanhtoan);
                                     //alert(sohoadon);
-                                    $('#tbnhaphang_inhoadon tr').remove();   
+                                    $('#tbnhaphang_inhoadon2 tr').remove();   
 
                                         if (objdata['Table1'] != "")
                                         {                                                                                                                                               
@@ -1692,7 +1884,7 @@ if (typeof navigator !== 'undefined' && 'printer' in navigator) {
                                                     //'<td id="_chietkhau">' + chietkhau + '</td>' +
                                                     '<td id="_sohoadon" style="border: 1px soild black;">' + thanhtien.toLocaleString('vi-VN') + '</td>' +
                                                     '</tr>';
-                                                $('#tbnhaphang_inhoadon').append(newrow);                                                                                        
+                                                $('#tbnhaphang_inhoadon2').append(newrow);                                                                                        
                                             }                                        
                                         }
                                         else
@@ -1700,29 +1892,32 @@ if (typeof navigator !== 'undefined' && 'printer' in navigator) {
                                             //$('#tbnhaphang_inhoadon').append(newrow); 
                                         } 
                                     //alert(sohoadon);
-                                    $('#ngaytaoid').text(ngaytao);
-                                    $('#sohoadoid').text(sohoadon);
+                                    $('#ngaytaoid2').text(ngaytao);
+                                    $('#sohoadoid2').text(sohoadon);
 
                                     //$('#thantoan2').text(tongtienhang);
                                     //$('#khthanhtoan2').text(khachthanhtoan);
                                     //$('#chietkau2').text(tongchietkhau);
                                     //$('#psno2').text(khachno);   
 
-                                      $('#thantoan2').text(parseInt(tongtienhang).toLocaleString('vi-VN'));
-                                      $('#khthanhtoan2').text(parseInt(khachthanhtoan).toLocaleString('vi-VN'));
-                                      $('#chietkau2').text(parseInt(tongchietkhau).toLocaleString('vi-VN'));
-                                      $('#psno2').text(parseInt(khachno).toLocaleString('vi-VN')); 
+                                      $('#thantoan22').text(parseInt(tongtienhang).toLocaleString('vi-VN'));
+                                      $('#khthanhtoan22').text(parseInt(khachthanhtoan).toLocaleString('vi-VN'));
+                                      $('#chietkau22').text(parseInt(tongchietkhau).toLocaleString('vi-VN'));
+                                      $('#psno22').text(parseInt(khachno).toLocaleString('vi-VN')); 
 
 
                                     const bangchu_hienthi2 = to_vietnamese(tongtienhang);
-                                    $('#bangchuid').text(bangchu_hienthi2);
+                                    $('#bangchuid22').text(bangchu_hienthi2);
+
+                                 //hien thi form in 
+                                 printData();
 
                                 },
                                 error: function () {
                                     //alert("No Match");
                                 }
                                 });   
-                                $('#myModal6').modal('show');
+                                //$('#myModal6').modal('show');
 
                             }
                             
@@ -1835,7 +2030,7 @@ if (typeof navigator !== 'undefined' && 'printer' in navigator) {
                                         var sohoadon = $('#soHD').val();
                                         //alert(khachthanhtoan);
                                         //alert(sohoadon);
-                                        $('#tbnhaphang_inhoadon tr').remove();   
+                                        $('#tbnhaphang_inhoadon2 tr').remove();   
 
                                             if (objdata['Table1'] != "")
                                             {                                                                                                                                               
@@ -1852,7 +2047,7 @@ if (typeof navigator !== 'undefined' && 'printer' in navigator) {
                                                         //'<td id="_chietkhau">' + chietkhau + '</td>' +
                                                         '<td id="_sohoadon" style="border: 1px soild black;">' + parseInt(thanhtien).toLocaleString('vi-VN') + '</td>' +
                                                         '</tr>';
-                                                    $('#tbnhaphang_inhoadon').append(newrow);                                                                                        
+                                                    $('#tbnhaphang_inhoadon2').append(newrow);                                                                                        
                                                 }                                        
                                             }
                                             else
@@ -1860,21 +2055,25 @@ if (typeof navigator !== 'undefined' && 'printer' in navigator) {
                                                 //$('#tbnhaphang_inhoadon').append(newrow); 
                                             } 
                                         //alert(sohoadon);
-                                        $('#ngaytaoid').text(ngaytao);
-                                        $('#sohoadoid').text(sohoadon);
-                                        $('#thantoan2').text(parseInt(tongtienhang).toLocaleString('vi-VN'));
-                                        $('#khthanhtoan2').text(parseInt(khachthanhtoan).toLocaleString('vi-VN'));
-                                        $('#chietkau2').text(parseInt(tongchietkhau).toLocaleString('vi-VN'));
-                                        $('#psno2').text(parseInt(khachno).toLocaleString('vi-VN')); 
+                                        $('#ngaytaoid2').text(ngaytao);
+                                        $('#sohoadoid2').text(sohoadon);
+                                        $('#thantoan22').text(parseInt(tongtienhang).toLocaleString('vi-VN'));
+                                        $('#khthanhtoan22').text(parseInt(khachthanhtoan).toLocaleString('vi-VN'));
+                                        $('#chietkau22').text(parseInt(tongchietkhau).toLocaleString('vi-VN'));
+                                        $('#psno22').text(parseInt(khachno).toLocaleString('vi-VN')); 
 
                                         const bangchu_hienthi2 = to_vietnamese(tongtienhang);
-                                        $('#bangchuid').text(bangchu_hienthi2);
+                                        $('#bangchuid22').text(bangchu_hienthi2);
+
+
+                                        //hien thi form in 
+                                         printData();
                                     },
                                     error: function () {
                                         //alert("No Match");
                                     }
                                     });   
-                                $('#myModal6').modal('show');
+                                //$('#myModal6').modal('show');
 
                             }
                            

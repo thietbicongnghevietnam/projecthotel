@@ -60,12 +60,12 @@ namespace WebApplication1
                 dr_nhacungcap.DataSource = dtncc;
                 dr_nhacungcap.DataBind();
 
-                dtdvt = DataConn.StoreFillDS("NH_Get_DVT", System.Data.CommandType.StoredProcedure);
-                DataRow newRow3 = dtdvt.NewRow();
-                newRow3["dvtto"] = "==DVT==";
-                dtdvt.Rows.InsertAt(newRow3, 0);
-                dr_dvt.DataSource = dtdvt;
-                dr_dvt.DataBind();
+                //dtdvt = DataConn.StoreFillDS("NH_Get_DVT", System.Data.CommandType.StoredProcedure);
+                //DataRow newRow3 = dtdvt.NewRow();
+                //newRow3["dvtto"] = "==DVT==";
+                //dtdvt.Rows.InsertAt(newRow3, 0);
+                //dr_dvt.DataSource = dtdvt;
+                //dr_dvt.DataBind();
 
                 dt_getSohd = DataConn.StoreFillDS("NH_getsohoadon_BH", System.Data.CommandType.StoredProcedure);
                 sohoadon = dt_getSohd.Rows[0][0].ToString();
@@ -218,6 +218,45 @@ namespace WebApplication1
             ds.Tables.Add(dt2);
             daresult = DataSetToJSON(ds);
             return daresult;
+        }
+
+        [WebMethod]
+        public static string GetDVT(string hanghoa, string typefill)
+        {
+            string ckhanghoa = hanghoa;
+            string cktypefill = typefill;
+
+
+            DataTable dt = new DataTable();
+
+            dt = DataConn.StoreFillDS("NH_select_dvt", System.Data.CommandType.StoredProcedure, ckhanghoa, cktypefill);
+
+            return DataTableToJson(dt);
+
+            //DataTable dt2 = new DataTable();
+            //dt2 = dt.Copy();
+
+            //String daresult = null;
+            //DataSet ds = new DataSet();
+            //ds.Tables.Add(dt2);
+            //daresult = DataSetToJSON(ds);
+            //return daresult;
+        }
+
+        private static string DataTableToJson(DataTable dt)
+        {
+            System.Web.Script.Serialization.JavaScriptSerializer serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+            System.Collections.Generic.List<System.Collections.Generic.Dictionary<string, object>> rows = new System.Collections.Generic.List<System.Collections.Generic.Dictionary<string, object>>();
+            foreach (DataRow dr in dt.Rows)
+            {
+                System.Collections.Generic.Dictionary<string, object> row = new System.Collections.Generic.Dictionary<string, object>();
+                foreach (DataColumn col in dt.Columns)
+                {
+                    row.Add(col.ColumnName, dr[col]);
+                }
+                rows.Add(row);
+            }
+            return serializer.Serialize(rows);
         }
 
         public static string DataSetToJSON(DataSet ds)

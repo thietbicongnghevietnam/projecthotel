@@ -18,6 +18,35 @@ NH_laydungmahang
 ==> select mahang,dvt from hthanghoa where tenhang=@tenhangid
 
 
+===== them moi stored
+ALTER PROCEDURE [dbo].[NH_select_dvt]
+	@ckhanghoa as nvarchar(50),
+	@cktypefill as nvarchar(50)
+AS
+BEGIN
+	if(@cktypefill = 'all')
+	begin
+		select distinct dvtto from htdonvitinh
+	end
+	else if(@cktypefill = 'mahang')
+	begin
+		select distinct dvtto from htdonvitinh where mahang=@ckhanghoa
+	end
+	else
+	begin
+		--@cktypefill = 'tenhang'
+		declare @_mhang as nvarchar(50)
+		set @_mhang = (select mahang from hthanghoa where tenhang=@ckhanghoa)
+		select distinct dvtto from htdonvitinh where mahang=@_mhang
+	end
+	
+	
+
+END
+	
+	
+
+
 
 ===============
 1. fix loi hoa don dau tien click view hoa don khong update trang thai phong
