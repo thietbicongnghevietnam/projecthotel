@@ -2,38 +2,6 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-    <style>
-    .thongtinhoadon2 {
-        border: 1px solid black;
-    }
-
-    @media print {
-    #tbnhaphang_inhoadon2 {
-        border-collapse: collapse;
-        width: 100%;
-    }
-
-    #tbnhaphang_inhoadon2 td {
-        border: 1px solid black;
-        padding: 8px;
-    }
-
-    /* Xác định kiểu của các dòng trong bảng */
-    .thongtinhoadon2 {
-        border: 1px solid black;
-    }
-}
-</style>
-
-    <style>
-@media print {
-    table, th, td {
-        border: 1px solid black;
-        border-collapse: collapse;
-    }
-}
-</style>
-
     <div class="wrapper">
 
         <div class="content-header">
@@ -303,9 +271,9 @@
             </div>
         </div>
 
-        <div id="contentToPrint" style="display:none;">
+        <div id="contentToPrint" style="display:none;" >  <%--style="display:none;"--%>
         <!-- Nội dung bạn muốn in -->
-         <div class="container-fluid" style="width:400px;height:auto; "><%--float:left--mau may in nho --%>
+         <div style="width:400px;height:auto; "><%--float:left--mau may in nho --%>
                          <%--   Hinh thuc: <b id="hinhthucnghi2"></b>
                             &nbsp;&nbsp;&nbsp; tongtienhat: <b id="tongtienhat2"></b><br />
                            Ten phong: <b id="tenphong2"></b>
@@ -326,7 +294,7 @@
                                                <%-- <th>Chiết khấu</th>--%>
                                                 <th>Thành tiền</th>                                                 
                                             </tr>
-                                            <tbody id="tbnhaphang_inhoadon2">
+                                            <tbody id="tbnhaphang_inhoadon22">
                                             </tbody>
 
 
@@ -334,10 +302,12 @@
                                 </div>
                             
                            <br /> 
-                           Tổng tiền: <b id="thantoan22"></b> &nbsp;&nbsp;&nbsp;  C/K: <b id="chietkau22"></b> <br />
-                           KH thanh toán: <b id="khthanhtoan22"></b> &nbsp;&nbsp;&nbsp; Còn lại: <b id="psno22"></b>     
-                           <div>Bằng chữ: <span id="bangchuid22" style="font-weight:300; color:red; font-size:20px; padding-left:10px;"></span></div>
-                          <%-- Thanh toán chuyển khoản :<img id="barcodeImage" src="<%= barcodeData %>" alt="Barcode" /> --%>
+                           <i style="margin-left:180px; font-size:20px;">Tổng tiền:</i> <b id="thantoan22" style="font-size:20px; padding-left:40px;"></b> <br />
+                           <i style="margin-left:180px; font-size:20px;">C/K:</i> <b id="chietkau22" style="font-size:20px; padding-left:50px;"></b> <br />
+                           <i style="margin-left:180px; font-size:20px;">KH thanh toán:</i> <b id="khthanhtoan22" style="font-size:20px; padding-left:5px;"></b> <br />
+                           <i style="margin-left:180px; font-size:20px;">Còn lại:</i> <b id="psno22" style="font-size:20px; padding-left:25px;"></b>     
+                           <div style="font-size:20px;">Bằng chữ: <span id="bangchuid22" style="font-size:20px; padding-left:5px;"></span></div>
+                           <i style="margin-left:50px; margin-top:20px ; font-size:20px;">CK :</i><img id="barcodeImage" src="<%= barcodeData %>" alt="Barcode" style="width:80px;height:80px;" /> 
                         </div>
 
 
@@ -345,26 +315,13 @@
     </div>
 
     <!-- Nút để kích hoạt chức năng in -->
-    <button onclick="printContent()">Print</button>
+    <%--<button onclick="printContent()">Print</button>--%>
 
 
     </div>
 
     <script>
         function printContent() {
-//alert('toi dang thu');
-            //var content = document.getElementById("contentToPrint").innerHTML;
-            //var printWindow = window.open('', '_blank');
-            //printWindow.document.open();
-            //printWindow.document.write('<html><head><title>Print</title></head><body>' + content + '</body></html>');
-            //printWindow.document.close();
-            //printWindow.print();
-
-            //var content = document.getElementById("contentToPrint").innerHTML;
-            //var printWindow = window.open('', '_blank');
-            //printWindow.document.open();
-            //printWindow.document.write('<html><head><title>Print</title></head><body onload="window.print(); window.close()">' + content + '</body></html>');
-            //printWindow.document.close();
 var idhoadon = $('#soHD').val();
  var data1 = {idhoadon:idhoadon};
 $.ajax({
@@ -377,7 +334,7 @@ $.ajax({
                                 success: function (data) {
                                     const objdata = $.parseJSON(data.d);
                                                                                                       
-                                    $('#tbnhaphang_inhoadon2 tr').remove();   
+                                    $('#tbnhaphang_inhoadon22 tr').remove();   
 
                                         if (objdata['Table1'] != "")
                                         {                                                                                                                                               
@@ -387,14 +344,14 @@ $.ajax({
                                                 var soluong = objdata['Table1'][i][2];
                                                 var chietkhau = "";//objdata['Table1'][i][3];
                                                 var thanhtien = objdata['Table1'][i][4];
-                                                var newrow = '<tr class="thongtinhoadon2">' +
+                                                var newrow = '<tr class="thongtinhoadon22">' +
                                                     '<td id="_hanghoad" style="width:250px; ">' + tenhang + '</td>' +
-                                                    '<td id="_tienhang" >' + dongia.toLocaleString('vi-VN') + '</td>' +
-                                                    '<td id="_loaihoadon" >' + soluong + '</td>' +
+                                                    '<td id="_tienhang">' + dongia.toLocaleString('vi-VN') + '</td>' +
+                                                    '<td id="_loaihoadon">' + soluong + '</td>' +
                                                     //'<td id="_chietkhau">' + chietkhau + '</td>' +
-                                                    '<td id="_sohoadon" >' + thanhtien.toLocaleString('vi-VN') + '</td>' +
+                                                    '<td id="_sohoadon">' + thanhtien.toLocaleString('vi-VN') + '</td>' +
                                                     '</tr>';
-                                                $('#tbnhaphang_inhoadon2').append(newrow);                                                                                        
+                                                $('#tbnhaphang_inhoadon22').append(newrow);                                                                                        
                                             }                                        
                                         }
                                         else
@@ -1878,13 +1835,13 @@ if (typeof navigator !== 'undefined' && 'printer' in navigator) {
                                                 var chietkhau = "";//objdata['Table1'][i][3];
                                                 var thanhtien = objdata['Table1'][i][4];
                                                 var newrow = '<tr class="thongtinhoadon">' +
-                                                    '<td id="_hanghoad" style="width:250px; border: 1px soild black;">' + tenhang + '</td>' +
-                                                    '<td id="_tienhang" style="border: 1px soild black;">' + dongia.toLocaleString('vi-VN') + '</td>' +
-                                                    '<td id="_loaihoadon" style="border: 1px soild black;">' + soluong + '</td>' +
+                                                    '<td id="_hanghoad" style="width:250px; border-bottom-style:dotted;border-bottom-width:1pt;">' + tenhang + '</td>' +
+                                                    '<td id="_tienhang" style="border-bottom-style:dotted;border-bottom-width:1pt;">' + dongia.toLocaleString('vi-VN') + '</td>' +
+                                                    '<td id="_loaihoadon" style="border-bottom-style:dotted;border-bottom-width:1pt;">' + soluong + '</td>' +
                                                     //'<td id="_chietkhau">' + chietkhau + '</td>' +
-                                                    '<td id="_sohoadon" style="border: 1px soild black;">' + thanhtien.toLocaleString('vi-VN') + '</td>' +
+                                                    '<td id="_sohoadon" style="border-bottom-style:dotted;border-bottom-width:1pt;">' + thanhtien.toLocaleString('vi-VN') + '</td>' +
                                                     '</tr>';
-                                                $('#tbnhaphang_inhoadon2').append(newrow);                                                                                        
+                                                $('#tbnhaphang_inhoadon22').append(newrow);                                                                                        
                                             }                                        
                                         }
                                         else
@@ -2041,13 +1998,13 @@ if (typeof navigator !== 'undefined' && 'printer' in navigator) {
                                                     var chietkhau = "";//objdata['Table1'][i][3];
                                                     var thanhtien = objdata['Table1'][i][4];
                                                     var newrow = '<tr class="thongtinhoadon">' +
-                                                        '<td id="_hanghoad" style="width:250px; border: 1px soild black;">' + tenhang + '</td>' +
-                                                        '<td id="_tienhang" style="border: 1px soild black;">' + parseInt(dongia).toLocaleString('vi-VN') + '</td>' +
-                                                        '<td id="_loaihoadon" style="border: 1px soild black;">' + soluong + '</td>' +
+                                                        '<td id="_hanghoad" style="width:250px; border-bottom-style:dotted;border-bottom-width:1pt;" >' + tenhang + '</td>' +
+                                                        '<td id="_tienhang" style="border-bottom-style:dotted;border-bottom-width:1pt;">' + parseInt(dongia).toLocaleString('vi-VN') + '</td>' +
+                                                        '<td id="_loaihoadon" style="border-bottom-style:dotted;border-bottom-width:1pt;">' + soluong + '</td>' +
                                                         //'<td id="_chietkhau">' + chietkhau + '</td>' +
-                                                        '<td id="_sohoadon" style="border: 1px soild black;">' + parseInt(thanhtien).toLocaleString('vi-VN') + '</td>' +
+                                                        '<td id="_sohoadon" style="border-bottom-style:dotted;border-bottom-width:1pt;">' + parseInt(thanhtien).toLocaleString('vi-VN') + '</td>' +
                                                         '</tr>';
-                                                    $('#tbnhaphang_inhoadon2').append(newrow);                                                                                        
+                                                    $('#tbnhaphang_inhoadon22').append(newrow);                                                                                        
                                                 }                                        
                                             }
                                             else
@@ -2144,11 +2101,11 @@ if (typeof navigator !== 'undefined' && 'printer' in navigator) {
                                     var chietkhau = "";//objdata['Table1'][i][3];
                                     var thanhtien = objdata['Table1'][i][4];
                                     var newrow = '<tr class="thongtinhoadon">' +
-                                        '<td id="_hanghoad" style="width:250px; border: 1px soild black;">' + tenhang + '</td>' +
-                                        '<td id="_tienhang" style="border: 1px soild black;">' + dongia + '</td>' +
-                                        '<td id="_loaihoadon" style="border: 1px soild black;">' + soluong + '</td>' +
+                                        '<td id="_hanghoad" style="width:250px; border: 1px solid black;">' + tenhang + '</td>' +
+                                        '<td id="_tienhang" style="border: 1px solid black;">' + dongia + '</td>' +
+                                        '<td id="_loaihoadon" style="border: 1px solid black;">' + soluong + '</td>' +
                                         //'<td id="_chietkhau">' + chietkhau + '</td>' +
-                                        '<td id="_sohoadon" style="border: 1px soild black;">' + parseInt(thanhtien).toLocaleString('vi-VN') + '</td>' +
+                                        '<td id="_sohoadon" style="border: 1px solid black;">' + parseInt(thanhtien).toLocaleString('vi-VN') + '</td>' +
                                         '</tr>';
                                     $('#tbnhaphang_inhoadon').append(newrow); 
 
