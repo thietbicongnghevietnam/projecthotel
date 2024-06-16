@@ -674,14 +674,14 @@
                                         <b id="thantoan2" style="margin-left:100px;color:black;font-size:24px;"></b> &nbsp;&nbsp;&nbsp;
                                     </td>                                    
                                 </tr>
-                              <%--  <tr>
+                                <tr>
                                     <td style="border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
                                          <span style="float:left; margin-left:0px; color:black;font-size:24px;">C/K: </span>
                                     </td>
                                     <td style="border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
-                                        <b id="chietkau2" style="margin-left:8px;color:black;font-size:24px;"></b>
+                                        <b id="chietkau2" style="margin-left:100px;color:black;font-size:24px;"></b>
                                     </td>                                    
-                                </tr>--%>
+                                </tr>
                                 <tr>
                                     <td style="border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
                                          <span style="float:left; margin-left:0px; color:black;font-size:22px;">KH thanh toán: </span>
@@ -690,14 +690,14 @@
                                         <b id="khthanhtoan2" style="margin-left:100px;color:black;font-size:24px;"></b>
                                     </td>                                    
                                 </tr>
-                               <%-- <tr>
+                                <tr>
                                     <td style="border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
                                          <span style="float:left; margin-left:0px;color:black;font-size:24px;">Còn lại:</span>
                                     </td>
                                     <td style="border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
-                                        <b id="psno2" style="margin-left:8px;color:black;font-size:24px;"></b>
+                                        <b id="psno2" style="margin-left:100px;color:black;font-size:24px;"></b>
                                     </td>                                    
-                                </tr>--%>
+                                </tr>
                             </table>
                            <div style="height:10px;"></div>
                            <div><i style="font-size:22px;color:black;">Bằng chữ:</i> <span id="bangchuid" style="color:black; font-size:26px; padding-left:10px;"></span></div>
@@ -2100,8 +2100,7 @@
 
             function thanhtoanhoadon2()
             {
-               //debugger;
-               
+               //debugger;               
                 var psco = $('#thanhtoanid').val();
                 var tongtienhang = $('#tongtienid').val();
                 var tienck = $('#chietkhauid').val();

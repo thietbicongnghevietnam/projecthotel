@@ -482,6 +482,23 @@ namespace WebApplication1
         }
 
         [WebMethod]
+        public static string danhsachhanghoacantim(string mahangtk)  
+        {         
+            DataTable dt = new DataTable();            
+            dt = DataConn.StoreFillDS("NH_timkiemhanghoa", System.Data.CommandType.StoredProcedure, mahangtk);
+
+            DataTable dt2 = new DataTable();
+            // dt2 = dt.Copy();
+            dt2 = dt.Copy();
+
+            String daresult = null;
+            DataSet ds = new DataSet();
+            ds.Tables.Add(dt2);
+            daresult = DataSetToJSON(ds);
+            return daresult;
+        }
+
+        [WebMethod]
         public static string updatetonkhoxoahang(string tenhang, string soluongxoa) 
         {
             String thongbao = "";
