@@ -1375,7 +1375,7 @@ if (typeof navigator !== 'undefined' && 'printer' in navigator) {
                                                 var dongia = objdata['Table'][i][3];
                                                 var soluong = 1;                                                                                              
                                                 var newrow = '<tr class="abc">' +
-                                                    '<td id="_1">' + mahang + '</td>' +
+                                                    '<td id="_1" style="height:50px;" >' + mahang + '</td>' +
                                                     '<td id="_2" >' + dongia + '</td>' +
                                                     '<td id="_3" >' + soluong + '</td>' +   
                                                     '<td id="_4" >' + dvt + '</td>' +
