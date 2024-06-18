@@ -47,7 +47,16 @@ namespace WebApplication1.Accounts
                     Session["username"] = User;
                     Session["password"] = Pass;
                     Session["role"] = Role;
-                    Response.Redirect("~/Default.aspx");
+                    if (Role == "order")
+                    {
+                        //Response.Redirect("~/PhieuOrder.aspx");
+                        Response.Redirect("~/OrderNhanVien.aspx");
+                    }
+                    else
+                    {
+                        Response.Redirect("~/Default.aspx");
+                    }
+                    //Response.Redirect("~/Default.aspx");
                 }
                 else
                 {
