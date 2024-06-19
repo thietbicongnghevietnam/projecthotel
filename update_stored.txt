@@ -12,62 +12,6 @@ https://stackoverflow.com/questions/18143599/can-signalr-be-used-with-asp-net-we
 
 3. loi dang o cac nut sua nhanh   (if(checkfisrt == 1))
 
-===them moi stored
-NH_timkiemhanghoa
-
-===== sua stored
-1. addthongtinhanghoa_PBH
---truong hop khong sua hoa don
-		if(cast(@thanhtoantien as float) > cast(@tienhang as float))
-		begin
-			set @tongtiensauchietkhau = cast(@tienhang as float)
-		end
-		else
-		begin
-			set @tongtiensauchietkhau = @thanhtoantien   --(so tien khach thanh toan)
-			--cast(@thanhtoantien as float)	
-		end
-
-2. NH_save_khthanhtoan2
-
-
-1=====them moi stored
-NH_select_banorder
-
-ALTER PROCEDURE [dbo].[NH_select_banorder]   --NH_select_banorder ''
-	@tenkhuvuc as nvarchar(50)
-AS
-BEGIN
-	
-	if(@tenkhuvuc <> '' or @tenkhuvuc <> '==ChonKV==')
-	begin
-		select tenphong from htphong where khuvucid = @tenkhuvuc
-	end
-	else
-	begin
-		select tenphong from htphong
-	end
-
-
-2=================
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
-CREATE PROCEDURE NH_select_khuvucorder
-	
-AS
-BEGIN
-	
-	select makhuvuc,tenkhuvuc from htkhuvuc
-
-END
-GO
-
-
-	
-	
 
 
 
