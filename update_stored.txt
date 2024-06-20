@@ -17,6 +17,9 @@ them moi khu vuc order
 *****NH_select_banorder2
 
 
+NH_select_khuvuc_order
+
+
 
 ===============
 1. fix loi hoa don dau tien click view hoa don khong update trang thai phong

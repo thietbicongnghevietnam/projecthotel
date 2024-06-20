@@ -621,14 +621,14 @@
                     <div class="modal-body" id="printableArea" style="height:auto;">
                        
                        <%-- <div class="container-fluid"  style="width:400px;height:auto;float:left;">--%>
-                       <div class="container-fluid"  style="width:700px;height:auto;">
+                       <div class="container-fluid"  style="width:400px;height:auto;float:left;">
                            <%--<span style="font-size:30px; text-align:center;color:black;"><%=tendovi %></span><br />   --%>                        
                           <%--<span hidden> Loại hình: </span><b id="hinhthucnghi2" hidden></b> &nbsp;&nbsp;&nbsp; <span hidden>Tổng tiền hát:</span> <b id="tongtienhat2" hidden></b><br />--%>
                            <%--<i style="color:black; font-size:24px;"> Địa chỉ: <%=diachidonvi %></i><b id="hinhthucnghi2" hidden></b> &nbsp;&nbsp;&nbsp; <span hidden>Tổng tiền hát:</span> <b id="tongtienhat2" hidden></b><br />
                            <i style="font-size:24px;">Số ĐT:</i> <span style="color:black; font-size:26px;"><%=sodtdonvi %></span><br />
                            <i style="font-size:24px;">Số HĐ:</i> <span id="sohoadon_" style="color:black; font-size:26px;"></span> &nbsp;&nbsp;&nbsp;<i style="font-size:24px;"> Ngày tạo :</i> <span id="ngaytao_" style="color:black;font-size:26px;"></span><br />                            
                            <i style="font-size:24px;">Tên bàn:</i> <b id="tenphong2" style="color:black; font-size:26px;"></b> &nbsp;&nbsp;&nbsp; <span hidden> tiền hàng:</span> <b id="tongtien2" hidden></b>          --%>                                                                      
-                           <table style="width:686px;">
+                           <table style="width:400px;">
                                 <tr>
                                     <td>
                                          <span style="float:left; margin-left:3px;"> 
@@ -637,15 +637,10 @@
                                                <i style="color:black; font-size:24px;"> Địa chỉ: <%=diachidonvi %></i><b id="hinhthucnghi2" hidden></b> &nbsp;&nbsp;&nbsp; <span hidden>Tổng tiền hát:</span> <b id="tongtienhat2" hidden></b><br />
                                                <i style="font-size:24px;">Số ĐT:</i> <span style="color:black; font-size:26px;"><%=sodtdonvi %></span><br />
                                                <i style="font-size:28px;" id="tieudein">PHIẾU TẠM TÍNH</i><br />
-                                               <i style="font-size:24px;">Số HĐ:</i> <span id="sohoadon_" style="color:black; font-size:26px;"></span> &nbsp;&nbsp;&nbsp;<i style="font-size:24px;"> Ngày tạo :</i> <span id="ngaytao_" style="color:black;font-size:26px;"></span><br />                            
+                                               <i style="font-size:24px;">Số HĐ:</i> <span id="sohoadon_" style="color:black; font-size:26px;"></span> &nbsp;&nbsp;&nbsp;<i style="font-size:24px;"> Ngày:</i> <span id="ngaytao_" style="color:black;font-size:24px;"></span><br />                            
                                                <i style="font-size:24px;">Tên bàn:</i> <b id="tenphong2" style="color:black; font-size:26px;"></b> &nbsp;&nbsp;&nbsp; <span hidden> tiền hàng:</span> <b id="tongtien2" hidden></b>    
                                          </span>
-                                    </td>
-                                    <td>
-                                        <span style="margin-left:25px;">
-                                                 <i style="font-size:22px;color:black; text-align:center;">QRcode</i><br /><img id="barcodeImage" src="<%= barcodeData %>" alt="Barcode" style="width:100px;height:100px; margin-left:20px;" />
-                                        </span>
-                                    </td>                                    
+                                    </td>                                                                     
                                 </tr>                               
                             </table>
                            <div style="height:10px;"></div>
@@ -654,7 +649,7 @@
                                         <thead>
                                             <tr>
                                                 <th>Tên hàng</th>
-                                                <th>Số lượng</th>
+                                                <th>S.lượng</th>
                                                 <th>Đơn giá</th>
                                                 <th>Thành tiền</th>                                                
                                             </tr>
@@ -670,37 +665,37 @@
                            <%--<span style="float:left; margin-left:370px; width:650px;color:black;font-size:22px;">KH thanh toán: <b id="khthanhtoan2" style="margin-left:12px;color:black;font-size:22px;"></b></span>--%>
                             <%--<span style="float:left; margin-left:420px; width:650px;color:black;font-size:22px;">Còn lại: <b id="psno2" style="margin-left:15px;color:black;font-size:22px;"></b>  </span> --%>
 
-                            <table style="width:686px;">
+                            <table style="width:400px;">
                                 <tr>
                                     <td style="border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
-                                         <span style="float:left; margin-left:250px; color:black;font-size:26px;">Tổng tiền: <br /> </span>
+                                         <span style="float:left; margin-left:0px; color:black;font-size:24px;">Tổng tiền: <br /> </span>
                                     </td>
                                     <td style="border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
-                                        <b id="thantoan2" style="margin-left:8px;color:black;font-size:26px;"></b> &nbsp;&nbsp;&nbsp;
+                                        <b id="thantoan2" style="margin-left:100px;color:black;font-size:24px;"></b> &nbsp;&nbsp;&nbsp;
                                     </td>                                    
                                 </tr>
                                 <tr>
                                     <td style="border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
-                                         <span style="float:left; margin-left:250px; color:black;font-size:22px;">C/K: </span>
+                                         <span style="float:left; margin-left:0px; color:black;font-size:24px;">C/K: </span>
                                     </td>
                                     <td style="border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
-                                        <b id="chietkau2" style="margin-left:8px;color:black;font-size:22px;"></b>
+                                        <b id="chietkau2" style="margin-left:100px;color:black;font-size:24px;"></b>
                                     </td>                                    
                                 </tr>
                                 <tr>
                                     <td style="border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
-                                         <span style="float:left; margin-left:250px; color:black;font-size:22px;">KH thanh toán: </span>
+                                         <span style="float:left; margin-left:0px; color:black;font-size:22px;">KH thanh toán: </span>
                                     </td>
                                     <td style="border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
-                                        <b id="khthanhtoan2" style="margin-left:8px;color:black;font-size:22px;"></b>
+                                        <b id="khthanhtoan2" style="margin-left:100px;color:black;font-size:24px;"></b>
                                     </td>                                    
                                 </tr>
                                 <tr>
                                     <td style="border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
-                                         <span style="float:left; margin-left:250px;color:black;font-size:22px;">Còn lại:</span>
+                                         <span style="float:left; margin-left:0px;color:black;font-size:24px;">Còn lại:</span>
                                     </td>
                                     <td style="border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
-                                        <b id="psno2" style="margin-left:8px;color:black;font-size:22px;"></b>
+                                        <b id="psno2" style="margin-left:100px;color:black;font-size:24px;"></b>
                                     </td>                                    
                                 </tr>
                             </table>
@@ -708,10 +703,12 @@
                            <div><i style="font-size:22px;color:black;">Bằng chữ:</i> <span id="bangchuid" style="color:black; font-size:26px; padding-left:10px;"></span></div>
                           <%-- <i style="font-size:22px;color:black;">Thanh toán chuyển khoản :</i><img id="barcodeImage" src="<%= barcodeData %>" alt="Barcode" style="width:100px;height:100px;" />--%>
                         
-                            <br />
-                          
-                           <div><i style="font-size:28px;color:black; margin-left: 150px; font-family:'Agency FB';">Xin cảm ơn, hẹn gập lại quý khách!</i></div>
+                            <i style="color:black; font-size:22px; padding-left:5px;">NH: VietinBank - SoTK:0869952059</i>                                                   
+                            <span style="margin-left:25px; text-align:center;">
+                                <img id="barcodeImage" src="<%= barcodeData %>" alt="Barcode" style="width:150px;height:150px; margin-left:80px;" />
+                            </span>
 
+                           <div><i style="font-size:28px;color:black; margin-left: 0px; font-family:'Agency FB';">Xin cảm ơn, hẹn gặp lại quý khách!</i></div>
                        </div>
                         
                         
@@ -720,9 +717,9 @@
 
                     <div class="modal-footer">
                        <%-- <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times"></i>Close</button>--%>
-                         <button type="button" runat="server" id="Button5"  class="btn btn-primary" onclick="printDiv_Close()" >Đóng</button>
-                        <button type="button" runat="server" id="Button6"  class="btn btn-primary" onclick="printDiv_Save()" >Thanh toán</button>
-                        <button type="button" runat="server" id="Button7"  class="btn btn-primary" onclick="printDiv('printableArea')" > 
+                         <button type="button" runat="server" id="Button2"  class="btn btn-primary" onclick="printDiv_Close()" >Đóng</button>
+                        <button type="button" runat="server" id="Button1"  class="btn btn-primary" onclick="printDiv_Save()" >Thanh toán</button>
+                        <button type="button" runat="server" id="Button3"  class="btn btn-primary" onclick="printDiv('printableArea')" > 
                             <i class="fas fa-download"></i>
                             In HĐ
                         </button>                       
@@ -732,7 +729,7 @@
                     </div>
                 </div>
             </div>
-        </div>                              
+        </div>                      
 
         <div id="invoice" style="display: none; height:auto;"> 
           <%--<h2>Phiếu Order bếp</h2>--%>
@@ -2103,8 +2100,7 @@
 
             function thanhtoanhoadon2()
             {
-               //debugger;
-               
+               //debugger;               
                 var psco = $('#thanhtoanid').val();
                 var tongtienhang = $('#tongtienid').val();
                 var tienck = $('#chietkhauid').val();

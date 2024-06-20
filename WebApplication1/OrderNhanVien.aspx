@@ -90,7 +90,7 @@
                 <div class="card-body pt-0">
                   <div class="row">
                     <div class="col-7">
-                      <h2 class="lead"><b><mh><%=rows1["tenhang"].ToString() %></mh></b></h2>                      
+                      <h2 class="ml-4 mb-0 fa-ul text-muted"><b><mh><%=rows1["tenhang"].ToString() %></mh></b></h2>                      
                       <ul class="ml-4 mb-0 fa-ul text-muted">
                         <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span><dg><%=rows1["giaban"].ToString() %></dg>  /VNĐ</li>                        
                       </ul>
