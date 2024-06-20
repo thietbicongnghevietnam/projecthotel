@@ -1,18 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
-using System.Drawing;
-
-
-using System.Web.Script.Serialization;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
-using System.IO;
-using QRCoder;
 using System.Data;
 using WebApplication1.App_Code;
 using System.Web.Services;
@@ -26,24 +13,22 @@ namespace WebApplication1
 
         public DataTable dt_khuvuc = new DataTable();
         public DataTable dt_ban = new DataTable();
+        //public String tenkhuvuc = "";
         protected void Page_Load(object sender, EventArgs e)
         {
             dt_nhomhang = DataConn.StoreFillDS("NH_select_nhomhang", CommandType.StoredProcedure);            
-            string tenkhuvuc = "";
+            //tenkhuvuc = "";
+            //dt_ban = DataConn.StoreFillDS("NH_select_banorder", System.Data.CommandType.StoredProcedure, tenkhuvuc);          
+            //DataRow newRow2 = dt_ban.NewRow();
+            //newRow2["tenphong"] = "==ChonBan==";
+            //dt_ban.Rows.InsertAt(newRow2, 0);
+            //dr_banphong.DataSource = dt_ban;
+            //dr_banphong.DataBind();
+
 
             if (!IsPostBack)
             {
-                string nhomhangid = Request.QueryString["nhomhangid"];
-
-                dt_ban = DataConn.StoreFillDS("NH_select_banorder", System.Data.CommandType.StoredProcedure, tenkhuvuc);
-                //dt_khuvuc = DataConn.StoreFillDS("NH_select_khuvucorder", System.Data.CommandType.StoredProcedure);
-
-                DataRow newRow2 = dt_ban.NewRow();
-                newRow2["tenphong"] = "==ChonBan==";
-                dt_ban.Rows.InsertAt(newRow2, 0);
-                dr_banphong.DataSource = dt_ban;
-                dr_banphong.DataBind();
-
+                string nhomhangid = Request.QueryString["nhomhangid"];               
                 //DataRow newRow3 = dt_khuvuc.NewRow();
                 //newRow3["tenkhuvuc"] = "==ChonKV==";
                 //dt_khuvuc.Rows.InsertAt(newRow3, 0);
@@ -64,13 +49,52 @@ namespace WebApplication1
 
         }
 
+        [WebMethod]
+        public static string GetKhuvuc()
+        {            
+            DataTable dt = new DataTable();
+
+
+            dt = DataConn.StoreFillDS("NH_select_khuvuc_order", System.Data.CommandType.StoredProcedure);
+
+            return DataTableToJson(dt);
+        }
+
+        [WebMethod]
+        public static string Getdanhsachban()
+        {
+            DataTable dt = new DataTable();
+            string tenkhuvuc = "";
+            dt = DataConn.StoreFillDS("NH_select_banorder", System.Data.CommandType.StoredProcedure, tenkhuvuc);
+            return DataTableToJson(dt);
+        }
+
+        [WebMethod]
+        public static string Gettenbanorder(string _tenban123)
+        {
+            DataTable dt = new DataTable();
+            string tenkhuvuc = "";
+            if (_tenban123 == "" || _tenban123 == "==KhuVuc==")
+            {
+                tenkhuvuc = "";
+            }
+            else
+            {
+                tenkhuvuc = _tenban123;
+            }
+
+            dt = DataConn.StoreFillDS("NH_select_banorder2", System.Data.CommandType.StoredProcedure, tenkhuvuc);
+
+            return DataTableToJson(dt);
+        }
+
         //protected void dr_khuvuc_SelectedIndexChanged(object sender, EventArgs e)
         //{
         //    // Lấy giá trị được chọn từ DropDownList
-            
+
         //    string tenkhuvuc = dr_khuvuc.SelectedValue;
         //    dt_ban.Clear();
-        
+
         //    dt_ban = DataConn.StoreFillDS("NH_select_banorder", System.Data.CommandType.StoredProcedure,tenkhuvuc);            
         //    dr_banphong.DataSource = dt_ban;
         //    dr_banphong.DataTextField = "tenphong"; 

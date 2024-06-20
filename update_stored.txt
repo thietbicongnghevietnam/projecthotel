@@ -12,6 +12,9 @@ https://stackoverflow.com/questions/18143599/can-signalr-be-used-with-asp-net-we
 
 3. loi dang o cac nut sua nhanh   (if(checkfisrt == 1))
 
+them moi khu vuc order
+*****NH_select_khuvuc_order
+*****NH_select_banorder2
 
 
 

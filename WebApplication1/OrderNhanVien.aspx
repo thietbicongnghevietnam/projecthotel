@@ -49,27 +49,22 @@
       </div><!-- /.container-fluid -->
     </section>
 
-
    <section class="content">
       <!-- Default box -->
        <div class="card card-solid">
-          <%-- <b style="float:left; margin-left:10px;">Ten Khu Vuc :</b> --%>
-           <%-- <select name="khuvucid" id="khuvucid" Class="form-control input-sm" style="float:left; margin-left:10px; width:150px;"></select>--%>
-         <%--  <asp:DropDownList ID="dr_khuvuc" runat="server" AppendDataBoundItems="true" OnSelectedIndexChanged="dr_khuvuc_SelectedIndexChanged" AutoPostBack="true"
-                            DataTextField="tenkhuvuc" 
-                            DataValueField="makhuvuc" 
-                            CssClass="form-control input-sm">
-                        </asp:DropDownList>
-           --%>
+                                 
            <div class="row">
                <div class="col-6">
-                    <b style="float:left; margin-left:10px;">Ten ban :<i id="tenbanid"></i></b> 
-                    <%--<select name="tenbanid" id="tenbanid" Class="form-control input-sm" style="float:left; margin-left:10px;width:150px;"></select>--%>
-                   <asp:DropDownList ID="dr_banphong" runat="server" AppendDataBoundItems="true" Class="form-control input-sm"
+                    <%--<b style="float:left; margin-left:10px;">Tên bàn :<i id="tenbanid"></i></b>                    
+                   <asp:DropDownList ID="dr_banphong" runat="server" AppendDataBoundItems="true" Class="form-control input-sm" AutoPostBack="true"
                                     DataTextField="tenphong" 
                                     DataValueField="tenphong" 
                                     CssClass="form-control input-sm">
-                                </asp:DropDownList>
+                                </asp:DropDownList>--%>
+                   <b style="float:left; margin-left:10px;">Tên Khu vuc :<i id="tenbanid"></i></b> 
+                   <select name="khuvucid1" id="khuvucid" Class="form-control input-sm khuvucid" style="float:left; margin-left:10px; width:150px;"></select>      
+                    <b style="float:left; margin-left:10px;">Tên bàn :<i id="tenbanid"></i></b> 
+                    <select name="tenban123" id="tenban123" Class="form-control input-sm" style="float:left; margin-left:10px;width:150px;"></select>
                </div>
                <div class="col-6">
                    <i class="fa fa-save" style="font-size: 24px;color:black; padding-left: 10px;"></i><b class="saveproduct" style="color: black; padding-left: 5px;">Ghi Thực đơn</b>
@@ -181,7 +176,8 @@
  $('.saveproduct').click(function () {
                 //alert("ádfsa");
                 var itemdata = {};
-                var tenphong = $('#dr_banphong').val();
+                var tenphong = $('#tenban123').val();
+                //var tenphong = $('#dr_banphong').val();
                 var tienhang = $('#tongtienid').val();
                 var kieunghi = "1";//$('#MainContent_dr_hinhthucnghi').val();
                 var userid = '<%=Session["username"].ToString()%>';
@@ -376,9 +372,103 @@
                 })
             });
 
+
+
+
 $(document).ready(function () {
 
-    $('#<%= dr_banphong.ClientID %>').change(function () {
+ $.ajax({
+            type: "POST",
+            url: "OrderNhanVien.aspx/Getdanhsachban", 
+            contentType: "application/json; charset=utf-8",
+            //data: JSON.stringify(data),
+            dataType: "json",
+            success: function (response) {
+                var data = JSON.parse(response.d);
+                var ddl = document.getElementById("tenban123");                
+                // Xóa toàn bộ dữ liệu cũ
+                ddl.innerHTML = "";
+                // Thêm giá trị mặc định
+                var defaultOption = document.createElement("option");
+                defaultOption.text = "==ChonBan==";
+                defaultOption.value = "==ChonBan==";
+                ddl.insertBefore(defaultOption, ddl.firstChild);
+                for (var i = 0; i < data.length; i++) {
+                    var option = document.createElement("option");
+                    option.text = data[i].tenphong;
+                    option.value = data[i].tenphong;
+                    ddl.add(option);
+                }                
+            },
+            error: function (xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+
+ $.ajax({
+            type: "POST",
+            url: "OrderNhanVien.aspx/GetKhuvuc", 
+            contentType: "application/json; charset=utf-8",
+            //data: JSON.stringify(data),
+            dataType: "json",
+            success: function (response) {
+                var data = JSON.parse(response.d);
+                var ddl = document.getElementById("khuvucid");                
+                // Xóa toàn bộ dữ liệu cũ
+                ddl.innerHTML = "";
+                // Thêm giá trị mặc định
+                var defaultOption = document.createElement("option");
+                defaultOption.text = "==KhuVuc==";
+                defaultOption.value = "==KhuVuc==";
+                ddl.insertBefore(defaultOption, ddl.firstChild);
+                for (var i = 0; i < data.length; i++) {
+                    var option = document.createElement("option");
+                    option.text = data[i].tenkhuvuc;
+                    option.value = data[i].tenkhuvuc;
+                    ddl.add(option);
+                }                
+            },
+            error: function (xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+  
+$('.khuvucid').change(function() {     
+      var selectedOption = $(this).val(); // Lấy giá trị của option được chọn               
+        var _tenban123 =    selectedOption;
+        var data = {_tenban123 : _tenban123}     
+                $.ajax({
+                    type: "POST",
+                    url: "OrderNhanVien.aspx/Gettenbanorder", 
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(data),
+                    dataType: "json",
+                    success: function (response) {
+                        var data = JSON.parse(response.d);
+                        var ddl = document.getElementById("tenban123");                                       
+                        // Xóa toàn bộ dữ liệu cũ
+                        ddl.innerHTML = "";
+                        // Thêm giá trị mặc định
+                        var defaultOption = document.createElement("option");
+                        defaultOption.text = "==ChonBan==";
+                        defaultOption.value = "==ChonBan==";
+                        ddl.insertBefore(defaultOption, ddl.firstChild);
+
+                        for (var i = 0; i < data.length; i++) {
+                            var option = document.createElement("option");
+                            option.text = data[i].tenphong;
+                            option.value = data[i].tenphong;
+                            ddl.add(option);
+                        }                
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
+            });
+ 
+ $('#tenban123').change(function () {
+    //$('#<dr_banphong.ClientID %>').change(function () {
             var tenphong1 = $(this).val();
             $('#tenbanid').text(tenphong1);
             var tenphong = $('#tenbanid').text();
@@ -450,50 +540,9 @@ $(document).ready(function () {
                                             //alert("No Match");
                                         }
             });
-
      });
 
-    //var selectElement = document.getElementById("khuvucid");
 
-    //selectElement.addEventListener("change", function() {
-    //    var selectedValue = selectElement.value;
-    //    console.log("Giá trị đã chọn là: " + selectedValue);
-    //});
-    
-    //alert(selectElement);
-
-   // var data = {khuvucid:selectElement}
-   //     $.ajax({
-   //             type: "POST",
-   //             url: "OrderNhanVien.aspx/Gettenbanorder", 
-   //             contentType: "application/json; charset=utf-8",
-   //             data: JSON.stringify(data),
-   //             dataType: "json",
-  //              success: function (response) {
-  //                  var data = JSON.parse(response.d);
-  //                  var ddl = document.getElementById("dvtid");
-  //              
-  //                  // Xóa toàn bộ dữ liệu cũ
-  //                  ddl.innerHTML = "";
-
-                    // Thêm giá trị mặc định
-//                    var defaultOption = document.createElement("option");
- //                   defaultOption.text = "==CHONBAN==";
-  //                  defaultOption.value = "==CHONBAN==";
-   //                 ddl.insertBefore(defaultOption, ddl.firstChild);
-
-//                    for (var i = 0; i < data.length; i++) {
- //                       var option = document.createElement("option");
-  //                      option.text = data[i].dvtto;
-   //                     option.value = data[i].dvtto;
-    //                    ddl.add(option);
-     //               }
-                
-       //         },
-        //        error: function (xhr, status, error) {
-         //           console.error(xhr.responseText);
-          //      }
-       // });
 });
 
     
