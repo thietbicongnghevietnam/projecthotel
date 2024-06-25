@@ -14,16 +14,25 @@ CREATE TABLE [dbo].[htdonvitinh](
 	[soluongqudoi] [int] NULL,
 	[dvtnho] [nvarchar](50) NULL,
 	[gianhap] [float] NULL,
+	[giaban] [float] NULL,
 	[giabuon] [float] NULL,
 	[giaban2] [float] NULL,
 	[createdate] [datetime] NULL
 
-  $("#dvtid").change(function() {
-             var giatrindvt = $(this).val(); // Lấy giá trị đã chọn của combobox
-             var mahang = $('#MainContent_phieunhaphang').val();
-             //lay ra don gia cua cau thanh don vi tinh
-             var data = {mahang : mahang , giatrindvt: giatrindvt};
+===== stored
 
+NH_dongia_cauthanh_dvt
+NH_insert_cauthanhdvt
+NH_update_cauthanhdvt
+NH_getdongia_cauthanh
+
+========
+$("#dvtid").change(function() {
+             var dvtto = $(this).val(); // Lấy giá trị đã chọn của combobox
+             var mahang = $('#MainContent_phieunhaphang').val();
+            
+             //lay ra don gia cua cau thanh don vi tinh
+             var data = {mahang : mahang , dvtto: dvtto};
                 $.ajax({
                         type: "POST",
                         contentType: "application/json; charset=utf-8",
@@ -31,9 +40,17 @@ CREATE TABLE [dbo].[htdonvitinh](
                         data: JSON.stringify(data),
                         dataType: "json",
                         success: function (data) {
-                            const objdata = $.parseJSON(data.d);
-                                     
-                                                                                                   
+                            //const objdata = $.parseJSON(data.d);
+                            //alert(data.d); 
+                             $('#dongiaid').val(data.d);  
+                             $('#soluongnhaphang').select();
+                            //if (data.d != "NG")
+                            //{                               
+                            //}
+                            //else
+                            //{
+                            //}
+                            
                         },
                         error: function () {
                             //alert("No Match");

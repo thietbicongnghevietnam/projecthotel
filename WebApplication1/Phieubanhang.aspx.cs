@@ -351,10 +351,7 @@ namespace WebApplication1
                 thongbao = "NG";
                 return thongbao;
                 //throw;
-            }
-            
-
-            
+            }                       
         }
 
 
@@ -579,6 +576,27 @@ namespace WebApplication1
                 //thongbao = "OK" + "," + dtlevel.Rows[0][1].ToString();
                 //thongbao = dtmahang.Rows[0][0].ToString();
                 thongbao = dtmahang.Rows[0][0].ToString() + "," + dtmahang.Rows[0][1].ToString();
+            }
+            else
+            {
+                thongbao = "NG";
+            }
+            return thongbao;
+        }
+
+        [WebMethod]
+        public static string dongiacauthanhdvt(string mahang, string dvtto)  //string tenphong, string tienhang
+        {
+            String thongbao = "";           
+            DataTable dtdvt = new DataTable();
+
+            dtdvt = DataConn.StoreFillDS("NH_dongia_cauthanh_dvt", System.Data.CommandType.StoredProcedure, mahang, dvtto);          
+
+            if (dtdvt.Rows[0][0].ToString() == "1")
+            {
+                //thongbao = "OK" + "," + dtlevel.Rows[0][1].ToString();
+                //thongbao = dtmahang.Rows[0][0].ToString();
+                thongbao =  dtdvt.Rows[0][1].ToString();
             }
             else
             {

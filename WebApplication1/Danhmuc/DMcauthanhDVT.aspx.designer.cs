@@ -85,6 +85,42 @@ namespace WebApplication1.Danhmuc {
         protected global::System.Web.UI.WebControls.TextBox txtnho;
         
         /// <summary>
+        /// suagianhap control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox suagianhap;
+        
+        /// <summary>
+        /// suagiasi control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox suagiasi;
+        
+        /// <summary>
+        /// suagiaban control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox suagiaban;
+        
+        /// <summary>
+        /// suagiadvto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox suagiadvto;
+        
+        /// <summary>
         /// btnOrder control.
         /// </summary>
         /// <remarks>
@@ -128,5 +164,41 @@ namespace WebApplication1.Danhmuc {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox dvnhoid;
+        
+        /// <summary>
+        /// txtgianhap control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtgianhap;
+        
+        /// <summary>
+        /// txtgiasi control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtgiasi;
+        
+        /// <summary>
+        /// txtgiaban control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtgiaban;
+        
+        /// <summary>
+        /// txtgiadonvito control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtgiadonvito;
     }
 }

@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using WebApplication1.App_Code;
+using System.Web.Services;
 
 namespace WebApplication1.Danhmuc
 {
@@ -29,8 +30,14 @@ namespace WebApplication1.Danhmuc
             string soluongquydoi = slquydoiid.Text;
             string donvinho = dvnhoid.Text;
 
+            string gianhap = txtgianhap.Text;
+            string giasi = txtgiasi.Text;
+            string giaban = txtgiaban.Text;
+            string giacauthanh = txtgiadonvito.Text;
+
+
             DataTable dtinsert = new DataTable();
-            dtinsert = DataConn.StoreFillDS("NH_insert_cauthanhdvt", System.Data.CommandType.StoredProcedure, mahang, donvito, soluongquydoi, donvinho);
+            dtinsert = DataConn.StoreFillDS("NH_insert_cauthanhdvt", System.Data.CommandType.StoredProcedure, mahang, donvito, soluongquydoi, donvinho, gianhap, giasi, giaban, giacauthanh);
             if (dtinsert.Rows[0][0].ToString() == "1")
             {
                 dt_dvt = DataConn.StoreFillDS("NH_DMCauthanhDVT", System.Data.CommandType.StoredProcedure);
@@ -51,8 +58,13 @@ namespace WebApplication1.Danhmuc
             string soluongquydoi = txtquydoi.Text;
             string donvinho = txtnho.Text;
 
+            string gianhap = suagianhap.Text;
+            string giasi = suagiasi.Text;
+            string giaban = suagiaban.Text;
+            string giacauthanh = suagiadvto.Text;
+
             DataTable dtupdate = new DataTable();
-            dtupdate = DataConn.StoreFillDS("NH_update_cauthanhdvt", System.Data.CommandType.StoredProcedure, id, mahang, donvito, soluongquydoi, donvinho);
+            dtupdate = DataConn.StoreFillDS("NH_update_cauthanhdvt", System.Data.CommandType.StoredProcedure, id, mahang, donvito, soluongquydoi, donvinho, gianhap, giasi, giaban, giacauthanh);
             if (dtupdate.Rows[0][0].ToString() == "1")
             {
                 dt_dvt = DataConn.StoreFillDS("NH_DMCauthanhDVT", System.Data.CommandType.StoredProcedure);
@@ -63,6 +75,48 @@ namespace WebApplication1.Danhmuc
                 Page.ClientScript.RegisterStartupScript(Page.GetType(), "Message", "toastr.error('NG, kiểm tra lại thông tin!'); ", true);
             }
 
+        }
+
+        [WebMethod]
+        public static string getdongia(string mahang)  //string tenphong, string tienhang
+        {
+            String thongbao = "";
+            DataTable dtdvt = new DataTable();
+
+            dtdvt = DataConn.StoreFillDS("NH_getdongia_cauthanh", System.Data.CommandType.StoredProcedure, mahang);
+
+            if (dtdvt.Rows[0][0].ToString() == "1")
+            {
+                //thongbao = "OK" + "," + dtlevel.Rows[0][1].ToString();
+                //thongbao = dtmahang.Rows[0][0].ToString();
+                thongbao = dtdvt.Rows[0][1].ToString();
+            }
+            else
+            {
+                thongbao = "NG";
+            }
+            return thongbao;
+        }
+
+        [WebMethod]
+        public static string getdongiacauthanh(string mahang)  //string tenphong, string tienhang
+        {
+            String thongbao = "";
+            DataTable dtdvt = new DataTable();
+
+            dtdvt = DataConn.StoreFillDS("NH_getdongia_cauthanh", System.Data.CommandType.StoredProcedure, mahang);
+
+            if (dtdvt.Rows[0][0].ToString() == "1")
+            {
+                //thongbao = "OK" + "," + dtlevel.Rows[0][1].ToString();
+                //thongbao = dtmahang.Rows[0][0].ToString();
+                thongbao = dtdvt.Rows[0][1].ToString();
+            }
+            else
+            {
+                thongbao = "NG";
+            }
+            return thongbao;
         }
 
         public void Download_Click(object sender, EventArgs e)
