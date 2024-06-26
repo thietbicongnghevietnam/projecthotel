@@ -6,18 +6,6 @@ https://stackoverflow.com/questions/18143599/can-signalr-be-used-with-asp-net-we
 
 ===== // co so du lieu theo sql 2010 //=====  PSNV sql sa:Psnv123456
 //xu ly sql o ngoai : //"exec1986"
-====banhang theo nhieu don vi tinh
-CREATE TABLE [dbo].[htdonvitinh](
-	[id] [int] IDENTITY(1,1) NOT NULL,
-	[mahang] [nvarchar](50) NULL,
-	[dvtto] [nvarchar](50) NULL,
-	[soluongqudoi] [int] NULL,
-	[dvtnho] [nvarchar](50) NULL,
-	[gianhap] [float] NULL,
-	[giaban] [float] NULL,
-	[giabuon] [float] NULL,
-	[giaban2] [float] NULL,
-	[createdate] [datetime] NULL
 
 ===== stored
 
@@ -27,36 +15,29 @@ NH_update_cauthanhdvt
 NH_getdongia_cauthanh
 
 ========
-$("#dvtid").change(function() {
-             var dvtto = $(this).val(); // Lấy giá trị đã chọn của combobox
-             var mahang = $('#MainContent_phieunhaphang').val();
-            
-             //lay ra don gia cua cau thanh don vi tinh
-             var data = {mahang : mahang , dvtto: dvtto};
-                $.ajax({
-                        type: "POST",
-                        contentType: "application/json; charset=utf-8",
-                        url: "Phieubanhang.aspx/dongiacauthanhdvt",
-                        data: JSON.stringify(data),
-                        dataType: "json",
-                        success: function (data) {
-                            //const objdata = $.parseJSON(data.d);
-                            //alert(data.d); 
-                             $('#dongiaid').val(data.d);  
-                             $('#soluongnhaphang').select();
-                            //if (data.d != "NG")
-                            //{                               
-                            //}
-                            //else
-                            //{
-                            //}
-                            
-                        },
-                        error: function () {
-                            //alert("No Match");
-                        }
-                });
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
 
+CREATE PROCEDURE NH_check_cauthanh_dvt
+	@mahang as nvarchar(500)
+AS
+BEGIN
+
+	if exists(select id from hthanghoa where tenhang = @mahang)
+	begin
+		-- co cau thanh san pham
+		select 1
+	end
+	else
+	begin
+		-- khong co cau thanh san pham
+		select 0
+	end	
+
+END
+GO
 
 
 ===============

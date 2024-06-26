@@ -150,6 +150,7 @@ namespace WebApplication1
         public static string thongtinhanghoa2(string sohoadon)
         {
             DataTable dt = new DataTable();
+            DataTable dtcheck = new DataTable();
             string idhoadon = sohoadon;
 
             DataTable dt_new = new DataTable();
@@ -161,7 +162,11 @@ namespace WebApplication1
             dt_new.Columns.Add("khachthanhtoan", typeof(String));
             dt_new.Columns.Add("psco", typeof(String));
             dt_new.Columns.Add("ngaytao", typeof(String));
-            dt_new.Columns.Add("sohodon", typeof(String));            
+            dt_new.Columns.Add("sohodon", typeof(String));
+
+            dt_new.Columns.Add("dvt", typeof(String));
+            dt_new.Columns.Add("soluong2", typeof(String));
+            dt_new.Columns.Add("dongia2", typeof(String));
 
             dt = DataConn.StoreFillDS("NH_infor_thongtinhanghoa2_inlai", System.Data.CommandType.StoredProcedure, idhoadon);
 
@@ -179,9 +184,29 @@ namespace WebApplication1
                 var dongia1 = numbersArray[1];
                 var thanhtien1 = numbersArray[2];
 
+                var dvt = numbersArray[3];
+                var soluong2 = 1;
+                var dongia2 = 0;
+                //check xem mahang co cau thanh hay khong?
+                dtcheck = DataConn.StoreFillDS("NH_check_cauthanh_dvt", System.Data.CommandType.StoredProcedure, mahang);
+                if (dtcheck.Rows[0][0].ToString() == "1")
+                {
+                    //co cau thanh
+                    soluong2 = Int32.Parse(numbersArray[4]);
+                    dongia2 = Int32.Parse(thanhtien1) / soluong2;
+                }
+                else
+                {
+                    //khong co cau thanh
+                    soluong2 = item.Value;
+                    dongia2 = Int32.Parse(dongia1);
+                }
+
                 var soluong = item.Value;
 
-                dt_new.Rows.Add(mahang, soluong, dongia1, "", thanhtien1, "", "", "", "");
+
+                dt_new.Rows.Add(mahang, soluong, dongia1, "", thanhtien1, "", "", "", "", dvt, soluong2, dongia2);
+                //dt_new.Rows.Add(mahang, soluong, dongia1, "", thanhtien1, "", "", "", "");
             }
 
             string chietkhau = dt.Rows[0]["chietkhau"].ToString();
@@ -359,6 +384,7 @@ namespace WebApplication1
         public static string Xemlaihoadon(string sohoadon)
         {
             DataTable dt = new DataTable();
+            DataTable dtcheck = new DataTable();
             string idhoadon = sohoadon;
 
             DataTable dt_new = new DataTable();
@@ -371,6 +397,11 @@ namespace WebApplication1
             dt_new.Columns.Add("tongtienhang", typeof(String));
             dt_new.Columns.Add("khachthanhtoan", typeof(String));
             dt_new.Columns.Add("psco", typeof(String));
+
+            dt_new.Columns.Add("dvt", typeof(String));
+            dt_new.Columns.Add("soluong2", typeof(String));
+            dt_new.Columns.Add("dongia2", typeof(String));
+
 
             dt = DataConn.StoreFillDS("NH_Xemlaihoadon2", System.Data.CommandType.StoredProcedure, idhoadon);
 
@@ -388,9 +419,14 @@ namespace WebApplication1
                 var dongia1 = numbersArray[1];
                 var thanhtien1 = numbersArray[2];
 
+                var dvt = numbersArray[3];
+                var soluong2 = Int32.Parse(numbersArray[4]);
+                var dongia2 = 0;// Int32.Parse(thanhtien1) / soluong2;  //ben client khong lay gia tri nay
+
                 var soluong = item.Value;
 
-                dt_new.Rows.Add(tenhang, soluong, dongia1, thanhtien1, "", "", "", "");
+                //dt_new.Rows.Add(tenhang, soluong, dongia1, thanhtien1, "", "", "", "");
+                dt_new.Rows.Add(tenhang, soluong, dongia1, thanhtien1, "", "", "", "", dvt, soluong2, dongia2);
             }
             //tongtienhang = dt.Rows[0]["tienhang"].ToString();
             //chietkhau = dt.Rows[0]["chietkhau"].ToString();
@@ -418,6 +454,7 @@ namespace WebApplication1
             //update *** neu hoa don ton tai roi
             //lay so hoa don truyen len de update            
             DataTable dt = new DataTable();
+            DataTable dtcheck = new DataTable();
 
             DataTable dt_new = new DataTable();
             dt_new.Columns.Add("tenhang", typeof(String));
@@ -429,6 +466,10 @@ namespace WebApplication1
             dt_new.Columns.Add("psco", typeof(String));
             dt_new.Columns.Add("ngaytao", typeof(String));
             dt_new.Columns.Add("sohodon", typeof(String));
+
+            dt_new.Columns.Add("dvt", typeof(String));
+            dt_new.Columns.Add("soluong2", typeof(String));
+            dt_new.Columns.Add("dongia2", typeof(String));
 
 
             dt = DataConn.StoreFillDS("NH_infor_thongtinhanghoa2", System.Data.CommandType.StoredProcedure, idhoadon);
@@ -447,6 +488,27 @@ namespace WebApplication1
                 var dongia1 = numbersArray[1];
                 var thanhtien1 = numbersArray[2];
 
+                var dvt = numbersArray[3];
+                var soluong2 = 1;
+                var dongia2 =0;
+                //check xem mahang co cau thanh hay khong?
+                dtcheck = DataConn.StoreFillDS("NH_check_cauthanh_dvt", System.Data.CommandType.StoredProcedure, mahang);
+                if (dtcheck.Rows[0][0].ToString() == "1")
+                {
+                    //co cau thanh
+                    soluong2 = Int32.Parse(numbersArray[4]);
+                    dongia2 = Int32.Parse(thanhtien1) / soluong2;
+                }
+                else
+                {
+                    //khong co cau thanh
+                    soluong2 = item.Value;
+                    dongia2 = Int32.Parse(dongia1);
+                }
+
+                //var soluong2 = numbersArray[4];
+                //var dongia2 = Int32.Parse(thanhtien1) / Int32.Parse(soluong2);
+
                 var soluong = item.Value;
                 //Console.WriteLine($"Key: {key}, Value: {value}");
 
@@ -455,7 +517,8 @@ namespace WebApplication1
                //string _dongia = dongia1;
                 //string _thanhtien = thanhtien1;
 
-                dt_new.Rows.Add(mahang, soluong, dongia1,"", thanhtien1,"","","","");
+                //dt_new.Rows.Add(mahang, soluong, dongia1,"", thanhtien1,"","","","");
+                dt_new.Rows.Add(mahang, soluong, dongia1, "", thanhtien1, "", "", "", "", dvt, soluong2, dongia2);
             }
 
             //string chietkhau = dt.Rows[0]["chietkhau"].ToString();
