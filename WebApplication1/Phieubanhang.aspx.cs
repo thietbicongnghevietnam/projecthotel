@@ -188,7 +188,7 @@ namespace WebApplication1
                 var soluong2 = 1;
                 var dongia2 = 0;
                 //check xem mahang co cau thanh hay khong?
-                dtcheck = DataConn.StoreFillDS("NH_check_cauthanh_dvt", System.Data.CommandType.StoredProcedure, mahang);
+                dtcheck = DataConn.StoreFillDS("NH_check_cauthanh_dvt", System.Data.CommandType.StoredProcedure, mahang, dvt);
                 if (dtcheck.Rows[0][0].ToString() == "1")
                 {
                     //co cau thanh
@@ -492,7 +492,7 @@ namespace WebApplication1
                 var soluong2 = 1;
                 var dongia2 =0;
                 //check xem mahang co cau thanh hay khong?
-                dtcheck = DataConn.StoreFillDS("NH_check_cauthanh_dvt", System.Data.CommandType.StoredProcedure, mahang);
+                dtcheck = DataConn.StoreFillDS("NH_check_cauthanh_dvt", System.Data.CommandType.StoredProcedure, mahang, dvt);
                 if (dtcheck.Rows[0][0].ToString() == "1")
                 {
                     //co cau thanh

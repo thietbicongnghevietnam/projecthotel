@@ -14,21 +14,35 @@ NH_insert_cauthanhdvt
 NH_update_cauthanhdvt
 NH_getdongia_cauthanh
 
-========
+============================
+
+USE [DataBanHang]
+GO
+/****** Object:  StoredProcedure [dbo].[NH_check_cauthanh_dvt]    Script Date: 07/06/2024 23:28:59 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE NH_check_cauthanh_dvt
-	@mahang as nvarchar(500)
+ALTER PROCEDURE [dbo].[NH_check_cauthanh_dvt]--NH_check_cauthanh_dvt N'Bột Soda baking'
+	@mahang as nvarchar(500),
+	@dvt as nvarchar(50)
 AS
 BEGIN
 
-	if exists(select id from hthanghoa where tenhang = @mahang)
+	if exists(select id from hthanghoa where tenhang = @mahang and cauthanhsanpham=1)
 	begin
 		-- co cau thanh san pham
-		select 1
+		if exists(select id from hthanghoa where tenhang = @mahang and dvt=@dvt)
+		begin
+			--co cau thanh -> nhung van ban theo don vi tinh nho
+			select 0
+		end
+		else
+		begin
+			-- don vi tinh da bi thay doi
+			select 1
+		end		
 	end
 	else
 	begin
@@ -37,7 +51,46 @@ BEGIN
 	end	
 
 END
+
+==================
+USE [DataNhaHang]
 GO
+/****** Object:  StoredProcedure [dbo].[NH_DMCauthanhDVT]    Script Date: 07/06/2024 21:46:02 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create PROCEDURE [dbo].[NH_DMCauthanhDVT_timkiem]
+	@tenhang as nvarchar(50)
+AS
+BEGIN
+	
+declare @mahang as nvarchar(50)
+set @mahang = (select mahang from hthanghoa where tenhang=@tenhang)
+
+select top 100 a.id,a.mahang,a.dvtto,a.soluongqudoi,a.dvtnho,a.gianhap,a.giaban,a.giabuon,a.giaban2,
+(select b.tenhang from hthanghoa b where b.mahang = a.mahang ) as tenhang from htdonvitinh a where a.mahang = @mahang
+
+
+END
+
+========
+USE [DataNhaHang]
+GO
+/****** Object:  StoredProcedure [dbo].[NH_DMCauthanhDVT]    Script Date: 07/06/2024 21:46:36 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [dbo].[NH_DMCauthanhDVT]
+
+AS
+BEGIN
+	--select * from htdonvitinh
+select top 200 a.id,a.mahang,a.dvtto,a.soluongqudoi,a.dvtnho,a.gianhap,a.giaban,a.giabuon,a.giaban2,
+(select b.tenhang from hthanghoa b where b.mahang = a.mahang ) as tenhang from htdonvitinh a order by a.createdate desc
+END
+
 
 
 ===============
