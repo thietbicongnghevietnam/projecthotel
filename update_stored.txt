@@ -91,6 +91,25 @@ select top 200 a.id,a.mahang,a.dvtto,a.soluongqudoi,a.dvtnho,a.gianhap,a.giaban,
 (select b.tenhang from hthanghoa b where b.mahang = a.mahang ) as tenhang from htdonvitinh a order by a.createdate desc
 END
 
+==================
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE NH_danhmuchanghoa_locnhomhang
+	@manhomhang as nvarchar(50)
+AS
+BEGIN
+
+	select top 500 a.id,a.mahang,a.tenhang,a.dvt,a.soluongton,a.gianhap,a.giaban,a.anh,a.Orderid,
+(select b.manhomhang from htnhomhang b where b.manhomhang =a.nhomhangid ) as tennhomhang 
+from hthanghoa a where a.nhomhangid=@manhomhang order by a.id desc 
+
+END
+GO
+
+
 
 
 ===============

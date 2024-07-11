@@ -123,7 +123,7 @@
                                         <td><%=rows["soluongxuat"].ToString()%></td>
 
                                         <td><%=String.Format("{0:N0}", Int32.Parse(rows["giaban"].ToString()))%></td>
-                                        <td><%=String.Format("{0:N0}", Int32.Parse(rows["gianhap"].ToString()))%></td>
+                                        <td><%=String.Format("{0:N0}", float.Parse(rows["gianhap"].ToString()))%></td>
                                         <td><%=String.Format("{0:N0}", Int32.Parse(rows["doanhso"].ToString())) %></td>
                                          <td><%=String.Format("{0:N0}", Int32.Parse(rows["giavon"].ToString())) %></td> 
                                         <%--<td><%=rows["nhomhangid"].ToString()%></td>--%>

@@ -113,7 +113,8 @@ namespace WebApplication1.TemplateReport
                     //tong doanh so sau phat sinh = tong doanh so ban hang + tong thu - tong chi
                     doanhsosauchietkhau = (Int32.Parse(tongdoanhsoBH) + Int32.Parse(tongthutheongay) - Int32.Parse(tongchitheongay)).ToString();
 
-                    dt_report = DataConn.StoreFillDS("NH_BaocaoBH_theongay", System.Data.CommandType.StoredProcedure, _fromdate, _todate);
+		     string manhanvien = "==NV==";
+                    dt_report = DataConn.StoreFillDS("NH_BaocaoBH_theongay", System.Data.CommandType.StoredProcedure, _fromdate, _todate,manhanvien );
                     //Page.ClientScript.RegisterStartupScript(this.GetType(), "CallMyFunction", "search_material2();", true);
                 }
 
