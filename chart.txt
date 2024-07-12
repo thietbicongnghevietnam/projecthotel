@@ -1,0 +1,264 @@
+ 
+    <script src="../js/canvasjs.min.js.js"></script>
+
+    <script type="text/javascript">
+        window.onload = function () {
+
+            $.ajax({
+                type: "POST",
+                url: "MenuForm.aspx/GetChart_line",
+                data: "{}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (r) {
+                    var chart = new CanvasJS.Chart("chartLine");
+
+                    //chart.options.axisY = { prefix: "$", suffix: "K" };
+                    chart.options.title = {
+                        text: "Số lượng phân ca từng bộ phận theo tuần",
+                        //fontWeight: "bolder",
+                        fontColor: "#000080",
+                        fontfamily: "Tahoma",
+                        fontSize: 20,
+                        padding: 10
+                    };
+
+                    var series1 = { //dataSeries - first quarter
+                        type: "line",
+                        name: "Paln Quantity",
+                        showInLegend: true
+                    };
+
+                    var series2 = { //dataSeries - second quarter
+                        type: "line",
+                        name: "Actual Quantity",
+                        showInLegend: true
+                    };
+
+                    chart.options.data = [];
+                    chart.options.data.push(series1);
+                    chart.options.data.push(series2);
+                    //debugger;
+                    var stringData = eval(r.d);
+                    //console.log(stringData);
+
+                    series1.dataPoints = stringData[0].data;
+                    series2.dataPoints = stringData[0].data1;
+
+                    chart.render();
+
+
+                },
+                failure: function (response) {
+                    alert('There was an error.');
+                }
+            });
+
+            //$.ajax({
+            //    type: "POST",
+            //    url: "MenuForm.aspx/GetChart",
+            //    data: "{}",
+            //    contentType: "application/json; charset=utf-8",
+            //    dataType: "json",
+            //    success: function (r) {
+            //        var chart = new CanvasJS.Chart("chartContainer");
+
+                   
+            //        //chart.options.axisY = { prefix: "$", suffix: "K" };
+
+            //        chart.options.axisX = { title: "Model Name", titleFontFamily: "comic sans ms",titleFontColor : "steelBlue",tickColor: "red",tickLength: 5,tickThickness: 2 };
+            //        chart.options.axisY = {title:"Quantity",titleFontFamily: "comic sans ms",titleFontColor : "steelBlue",tickColor: "DarkSlateBlue" ,tickLength: 15,tickThickness: 2,interlacedColor: "Azure",interval: 100,tickColor: "navy",gridColor: "navy",tickLength: 3};
+
+            //        chart.options.title = {
+            //            text: "Production line Month 24-10-2020 Categogy DP",
+            //            //fontWeight: "bolder",
+            //            fontColor: "#990000",
+            //            fontfamily: "Arial",
+            //            fontSize: 20,
+            //            padding: 10                   
+            //        };
+
+            //        var series1 = { //dataSeries - first quarter
+            //            type: "column",
+            //            name: "Paln Quantity",
+            //            showInLegend: true
+            //        };
+
+            //        var series2 = { //dataSeries - second quarter
+            //            type: "column",
+            //            name: "Actual Quantity",
+            //            showInLegend: true
+            //        };
+
+            //        chart.options.data = [];
+            //        chart.options.data.push(series1);
+            //        chart.options.data.push(series2);
+            //        //debugger;
+            //        var stringData = eval(r.d);
+            //        //console.log(stringData);
+
+            //        series1.dataPoints = stringData[0].data;
+            //        series2.dataPoints = stringData[0].data1;
+
+            //        chart.render();
+
+
+            //    },
+            //    failure: function (response) {
+            //        alert('There was an error.');
+            //    }
+            //});
+
+
+           
+        }
+    </script>
+
+
+     <div>
+
+            <%--<div id="chartContainer" style="height: 300px; width: 100%; margin-top:10px;"></div>--%>
+
+            <div id="chartLine" style="height: 300px; width: 100%; margin-top:20px;"></div>
+
+
+            <div id="chartPie" style="height: 300px; width: 100%; margin-top:20px;"></div>
+
+
+        </div>
+
+
+
+===============
+
+
+using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Web;
+using System.Web.Services;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace EleavePsnv
+{
+    public partial class MenuForm : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        //[WebMethod]
+        //public static string GetChart()
+        //{
+        //    string values = string.Empty;
+        //    string dataplan = string.Empty;
+        //    string dataact = string.Empty;
+        //    string constr = "Data Source=192.168.128.1;Persist Security Info=False;" +
+        //                    "Initial Catalog=HR_Digital_System;User Id=sa;Password=Psnvdb2013;" +
+        //                    "Connect Timeout=30;";
+
+        //    using (SqlConnection con = new SqlConnection(constr))
+        //    {
+        //        //string query = string.Format("SELECT ModelName, Qty1,Act1 FROM tblFreeLocation_Production_result");
+        //        string query = string.Format("select Section, count(CodeEmp) as soluong FROM [HR_Digital_System].[dbo].[PhanCa] where  DateStart='2024-08-01' and DateEnd='2024-08-04'  group by Section");
+        //        using (SqlCommand cmd = new SqlCommand())
+        //        {
+        //            cmd.CommandText = query;
+        //            cmd.CommandType = CommandType.Text;
+        //            cmd.Connection = con;
+        //            con.Open();
+        //            using (SqlDataReader sdr = cmd.ExecuteReader())
+        //            {
+        //                StringBuilder sb = new StringBuilder();
+        //                sb.Append("[");
+        //                sb.Append("{");
+
+        //                while (sdr.Read())
+        //                {
+        //                    //dataplan += (string.Format("{0},", "{label:" + '"' + sdr[0] + '"' + ", y:" + sdr[1] + "}"));
+        //                    //dataact += (string.Format("{0},", "{label:" + '"' + sdr[0] + '"' + ", y:" + sdr[2] + "}"));
+
+        //                    dataplan += (string.Format("{0},", "{label:" + '"' + sdr[0] + '"' + ", y:" + sdr[1] + "}"));
+        //                    dataact += (string.Format("{0},", "{label:" + '"' + sdr[0] + '"' + ", y:" + sdr[1] + "}"));
+        //                }
+        //                dataplan = dataplan.Substring(0, dataplan.Length - 1);
+        //                dataact = dataact.Substring(0, dataact.Length - 1);
+        //                sb.Append("data:[");
+        //                sb.Append(dataplan);
+        //                sb.Append("]");
+        //                sb.Append(",");
+        //                sb.Append("data1:[");
+        //                sb.Append(dataact);
+        //                sb.Append("]");
+
+        //                sb.Append("}");
+        //                sb.Append("]");
+
+        //                con.Close();
+        //                return sb.ToString();
+        //            }
+
+
+        //        }
+        //    }
+        //}
+
+        [WebMethod]
+        public static string GetChart_line()
+        {
+            string values = string.Empty;
+            string dataplan = string.Empty;
+            string dataact = string.Empty;
+            string constr = "Data Source=192.168.128.1;Persist Security Info=False;" +
+                            "Initial Catalog=HR_Digital_System;User Id=sa;Password=Psnvdb2013;" +
+                            "Connect Timeout=30;";
+
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                string query = string.Format("select Section, count(CodeEmp) as soluong FROM [HR_Digital_System].[dbo].[PhanCa] where  DateStart='2024-08-01' and DateEnd='2024-08-04'  group by Section");
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.CommandText = query;
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Connection = con;
+                    con.Open();
+                    using (SqlDataReader sdr = cmd.ExecuteReader())
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        sb.Append("[");
+                        sb.Append("{");
+
+                        while (sdr.Read())
+                        {
+                            dataplan += (string.Format("{0},", "{label:" + '"' + sdr[0] + '"' + ", y:" + sdr[1] + "}"));
+                            dataact += (string.Format("{0},", "{label:" + '"' + sdr[0] + '"' + ", y:" + sdr[1] + "}"));
+                            //dataact += (string.Format("{0},", "{label:" + '"' + sdr[0] + '"' + ", y:" + sdr[2] + "}"));
+                        }
+                        dataplan = dataplan.Substring(0, dataplan.Length - 1);
+                        dataact = dataact.Substring(0, dataact.Length - 1);
+                        sb.Append("data:[");
+                        sb.Append(dataplan);
+                        sb.Append("]");
+                        sb.Append(",");
+                        sb.Append("data1:[");
+                        sb.Append(dataact);
+                        sb.Append("]");
+
+                        sb.Append("}");
+                        sb.Append("]");
+
+                        con.Close();
+                        return sb.ToString();
+                    }
+
+
+                }
+            }
+        }
+    }
+}
