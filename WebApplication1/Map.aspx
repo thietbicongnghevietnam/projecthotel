@@ -1579,7 +1579,7 @@
                 //        }
                 //};
 
-//var content = document.getElementById("contentToPrint").innerHTML;
+    // in truc tiep luon ra ma khong can hien hoa don  ==> code nay dung cho phan ban hang ==> OK  03.09.2024
     var printWindow = window.open('','','height=500, width=1000', '_blank');
     printWindow.document.open();
     printWindow.document.write('<html><head><title>Print</title></head><body onload="window.print(); window.close()">' + divContents + '</body></html>');
