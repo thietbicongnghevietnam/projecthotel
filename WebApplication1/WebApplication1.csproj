@@ -201,6 +201,7 @@
     <Content Include="dist\css\fontawesome.css" />
     <Content Include="dist\css\font_google.css" />
     <Content Include="dist\css\Ionicons.css" />
+    <Content Include="dist\css\select2.min.css" />
     <Content Include="dist\img\AdminLTELogo.png" />
     <Content Include="dist\img\avatar.png" />
     <Content Include="dist\img\avatar2.png" />
@@ -243,6 +244,7 @@
     <Content Include="dist\js\pages\dashboard.js" />
     <Content Include="dist\js\pages\dashboard2.js" />
     <Content Include="dist\js\pages\dashboard3.js" />
+    <Content Include="dist\js\select2.min.js" />
     <Content Include="dist\js\sweetalert2%4011.js" />
     <Content Include="dist\js\xlsx.full.min.js" />
     <Content Include="docs\404.html" />
@@ -385,6 +387,8 @@
     <Content Include="index.html" />
     <Content Include="index2.html" />
     <Content Include="invoice.html" />
+    <Content Include="konvaltest.aspx" />
+    <Content Include="konvatest2.aspx" />
     <Content Include="MakeQR.aspx" />
     <Content Include="MakeQRcode.aspx" />
     <Content Include="Map.aspx" />
@@ -2712,6 +2716,20 @@
     </Compile>
     <Compile Include="Index.aspx.designer.cs">
       <DependentUpon>Index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="konvaltest.aspx.cs">
+      <DependentUpon>konvaltest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="konvaltest.aspx.designer.cs">
+      <DependentUpon>konvaltest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="konvatest2.aspx.cs">
+      <DependentUpon>konvatest2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="konvatest2.aspx.designer.cs">
+      <DependentUpon>konvatest2.aspx</DependentUpon>
     </Compile>
     <Compile Include="MakeQR.aspx.cs">
       <DependentUpon>MakeQR.aspx</DependentUpon>

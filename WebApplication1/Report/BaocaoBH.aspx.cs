@@ -10,6 +10,8 @@ using System.Data.SqlClient;
 using System.Web.Services;
 using WebApplication1.App_Code;
 using System.Web.Script.Serialization;
+using System.Web.Configuration;
+using System.IO;
 
 namespace WebApplication1.Report
 {
@@ -35,7 +37,50 @@ namespace WebApplication1.Report
                 dtnv.Rows.InsertAt(newRow2, 0);
                 dr_nhanvien.DataSource = dtnv;
                 dr_nhanvien.DataBind();
+
+                BindDropDownList();
+
+
             }               
+        }
+
+        public static string GetConnectStringFromFile()
+        {
+            string filePath = HttpContext.Current.Server.MapPath("~/scnn.ini");
+            string line;
+            try
+            {
+                using (StreamReader sr = new StreamReader(filePath))
+                {
+                    line = sr.ReadToEnd();
+                }
+            }
+            catch
+            {
+                line = "";
+            }
+            return line;
+        }
+
+        private void BindDropDownList()
+        {           
+            //string connectionString = "Data Source=./;Initial Catalog=DataNhaHang;User ID='sa';Password=''";
+            //using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = new SqlConnection(GetConnectStringFromFile()))
+            {
+                string query = "select U_ID,U_NAME from  TBL_USER2";
+                SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+
+                selectPage.DataTextField = "U_NAME";
+                selectPage.DataValueField = "U_ID";
+                selectPage.DataSource = dt;
+                selectPage.DataBind();
+
+                // Optionally add a default item
+                selectPage.Items.Insert(0, new ListItem("Select a id...", ""));
+            }
         }
 
         protected void dr_nhanvien_SelectedIndexChanged(object sender, EventArgs e)

@@ -35,7 +35,7 @@
                         <div class="card">
                             <div class="card-header border-0">
                                 <div class="d-flex justify-content-between">
-                                    <h3 class="card-title">Online Store Visitors</h3>
+                                    <h3 class="card-title">Báo cáo bán hàng theo ngày</h3>
                                     <a href="javascript:void(0);">View Report</a>
                                 </div>
                             </div>
@@ -43,7 +43,7 @@
                                 <div class="d-flex">
                                     <p class="d-flex flex-column">
                                         <span class="text-bold text-lg">820</span>
-                                        <span>Visitors Over Time</span>
+                                        <span>Tổng doanh thu ngày hiện tại</span>
                                     </p>
                                     <p class="ml-auto d-flex flex-column text-right">
                                         <span class="text-success">
@@ -55,7 +55,9 @@
                                 <!-- /.d-flex -->
 
                                 <div class="position-relative mb-4">
-                                    <canvas id="visitors-chart" height="200"></canvas>
+                                   <%-- <canvas id="visitors-chart" height="200"></canvas>--%>
+                                    <canvas id="myChart1" style="width:100%;max-width:800px"></canvas>
+
                                 </div>
 
                                 <div class="d-flex flex-row justify-content-end">
@@ -182,7 +184,7 @@
                         <div class="card">
                             <div class="card-header border-0">
                                 <div class="d-flex justify-content-between">
-                                    <h3 class="card-title">Sales</h3>
+                                    <h3 class="card-title">Báo cáo bán hàng theo tháng</h3>
                                     <a href="javascript:void(0);">View Report</a>
                                 </div>
                             </div>
@@ -190,7 +192,7 @@
                                 <div class="d-flex">
                                     <p class="d-flex flex-column">
                                         <span class="text-bold text-lg">$18,230.00</span>
-                                        <span>Tong doanh so theo nam</span>
+                                        <span>Tổng doanh thu theo quý</span>
                                     </p>
                                     <p class="ml-auto d-flex flex-column text-right">
                                         <span class="text-success">
@@ -282,6 +284,57 @@
         </div>
         <!-- /.content -->
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Dữ liệu từ code-behind
+            const data = chartData;
+
+            // Xử lý dữ liệu
+            const labels = data.map(item => item.DayName);
+            const revenue = data.map(item => item.Revenue);
+
+            // Tạo biểu đồ
+            new Chart("myChart1", {
+                type: "line",
+                data: {
+                    labels: labels,
+                    datasets: [{ 
+                        data: revenue,
+                        borderColor: "blue",
+                        fill: false
+                    }]
+                },
+                options: {
+                    //responsive: true,
+                    legend: { display: false },
+                        title: {
+                            display: true,
+                            text: 'Doanh số daily thang hien tai'
+                        },
+                    
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Date'
+                            },
+                            ticks: {
+                                autoSkip: true,
+                                maxTicksLimit: 10
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Revenue'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
 
     <script>
         //var xValues = ["Thang 1", "Thang 2", "Thang 3", "Thang 4", "Thang 5", "Thang 6","Thang 7","Thang 8","Thang 9","Thang 10","Thang 11","Thang 12"];

@@ -180,6 +180,8 @@
                 <li><a href="Danhmuc/DMcauthanhDVT.aspx" target="_blank" class="dropdown-item">Danh mục cấu thành ĐVT</a></li>
                 <li><a href="Danhmuc/DMcauthanhsanpham.aspx" target="_blank" class="dropdown-item">Danh mục cấu thành sản phẩm</a></li>
               <li><a href="Danhmuc/Danhmucnhanvien.aspx" target="_blank" class="dropdown-item">Danh mục nhân viên</a></li>
+                <li><a href="konvaltest.aspx" target="_blank" class="dropdown-item">tets konva</a></li>
+                <li><a href="konvatest2.aspx" target="_blank" class="dropdown-item">tets konva2</a></li>
             </ul>
           </li>
              <%} %>

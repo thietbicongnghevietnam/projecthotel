@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
@@ -13,14 +15,50 @@ namespace WebApplication1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                string connectionString = "Data Source=./;Initial Catalog=DataNhaHang;User ID='sa';Password=''";
+                string query = "SELECT DayName, Revenue FROM View_daily_revenue ORDER BY DayName";
 
+                DataTable dt = new DataTable();
+
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
+                    adapter.Fill(dt);
+                }
+
+                // Chuyển đổi DataTable thành JSON và gán vào JavaScript
+                string json = Newtonsoft.Json.JsonConvert.SerializeObject(dt);
+                ClientScript.RegisterStartupScript(this.GetType(), "data", $"var chartData = {json};", true);
+            }
+        }
+
+        public static string GetConnectStringFromFile()
+        {
+            string filePath = HttpContext.Current.Server.MapPath("~/scnn.ini");
+            string line;
+            try
+            {
+                using (StreamReader sr = new StreamReader(filePath))
+                {
+                    line = sr.ReadToEnd();
+                }
+            }
+            catch
+            {
+                line = "";
+            }
+            return line;
         }
 
         public string GetMonthData()
         {
+            //source = @"Data Source=./;Initial Catalog=DataNhaHang;User ID='sa';Password=''";
             List<string> months = new List<string>();
             // Kết nối và truy vấn dữ liệu
-            using (SqlConnection conn = new SqlConnection("Data Source=./;Initial Catalog=DataNhaHang;User ID='sa';Password=''"))
+            //using (SqlConnection conn = new SqlConnection("Data Source=./;Initial Catalog=DataNhaHang;User ID='sa';Password=''"))
+            using (SqlConnection conn = new SqlConnection(GetConnectStringFromFile()))
             {
                 conn.Open();
                 string query = "SELECT MonthName FROM View_Doanhthutheothang"; // Thay đổi câu truy vấn theo cơ sở dữ liệu của bạn
@@ -43,7 +81,7 @@ namespace WebApplication1
         {
             List<string> revenues = new List<string>();
             // Kết nối và truy vấn dữ liệu
-            using (SqlConnection conn = new SqlConnection("Data Source=./;Initial Catalog=DataNhaHang;User ID='sa';Password=''"))
+            using (SqlConnection conn = new SqlConnection(GetConnectStringFromFile()))
             {
                 conn.Open();
                 string query = "SELECT Revenue FROM View_Doanhthutheothang"; // Thay đổi câu truy vấn theo cơ sở dữ liệu của bạn

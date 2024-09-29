@@ -16,6 +16,11 @@
     <script src="../../plugins/jquery/jquery.min.js"></script>
     <script src="../plugins/toastr/toastr.js"></script>
 
+
+    <%--<link href="//cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />--%>
+    <link href="../dist/css/select2.min.css" rel="stylesheet" />
+   <script src="../../dist/js/select2.min.js"> </script>
+
 </head>
 <body>
      <form id="form1" runat="server">
@@ -47,6 +52,22 @@
                                                     CssClass="form-control input-sm">
                                                 </asp:DropDownList> 
              </span>
+
+             <span style="width:120PX; float:left;"> 
+                 <%--<select id="select_page" style="width:200px;" class="form-control input-sm"  > 
+         <option value="">Select a Page...</option>
+         <option value="alpha">alpha</option> 
+         <option value="beta">beta</option>
+         <option value="theta">theta</option>
+         <option value="omega">omega</option>
+  </select>--%>
+             <asp:DropDownList ID="selectPage" runat="server" CssClass="form-control input-sm">
+                    <asp:ListItem Text="Select a Page..." Value="" />
+                </asp:DropDownList>
+
+              </span>
+
+          
              
 
               <%--<button class="btn btn-primary" type="button" runat="server">
