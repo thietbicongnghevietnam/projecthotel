@@ -208,7 +208,8 @@
               <li><a href="#" class="dropdown-item">Đặt hàng online</a></li>
               <li><a href="#" class="dropdown-item">Liên hệ trực tiếp</a></li> 
               <li><a href="MakeQR.aspx" target="_blank" class="dropdown-item">Tạo QR code</a></li> 
-                <li><a href="Inbarcode.aspx" target="_blank" class="dropdown-item">Tạo QR DM hàng hóa</a></li> 
+              <li><a href="Inbarcode.aspx" target="_blank" class="dropdown-item">Tạo QR DM hàng hóa</a></li> 
+              <li><a href="TemplateReport/hethongbaocadong.aspx" target="_blank" class="dropdown-item">Sql data</a></li> 
             </ul>
        </li>
     </ul>

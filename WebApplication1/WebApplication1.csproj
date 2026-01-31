@@ -385,9 +385,12 @@
     <Content Include="index.html" />
     <Content Include="index2.html" />
     <Content Include="invoice.html" />
+    <Content Include="konvaltest.aspx" />
+    <Content Include="konvatest2.aspx" />
     <Content Include="MakeQR.aspx" />
     <Content Include="MakeQRcode.aspx" />
     <Content Include="Map.aspx" />
+    <Content Include="OrderNhanVien.aspx" />
     <Content Include="pages\calendar.html" />
     <Content Include="pages\charts\chartjs.html" />
     <Content Include="pages\charts\flot.html" />
@@ -2712,6 +2715,20 @@
     <Compile Include="Index.aspx.designer.cs">
       <DependentUpon>Index.aspx</DependentUpon>
     </Compile>
+    <Compile Include="konvaltest.aspx.cs">
+      <DependentUpon>konvaltest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="konvaltest.aspx.designer.cs">
+      <DependentUpon>konvaltest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="konvatest2.aspx.cs">
+      <DependentUpon>konvatest2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="konvatest2.aspx.designer.cs">
+      <DependentUpon>konvatest2.aspx</DependentUpon>
+    </Compile>
     <Compile Include="MakeQR.aspx.cs">
       <DependentUpon>MakeQR.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2732,6 +2749,13 @@
     </Compile>
     <Compile Include="Map.aspx.designer.cs">
       <DependentUpon>Map.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OrderNhanVien.aspx.cs">
+      <DependentUpon>OrderNhanVien.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrderNhanVien.aspx.designer.cs">
+      <DependentUpon>OrderNhanVien.aspx</DependentUpon>
     </Compile>
     <Compile Include="Phieubanhang.aspx.cs">
       <DependentUpon>Phieubanhang.aspx</DependentUpon>

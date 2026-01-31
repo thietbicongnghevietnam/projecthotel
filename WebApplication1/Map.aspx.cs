@@ -27,7 +27,7 @@ namespace WebApplication1
         public DataTable dt_listhanghoa = new DataTable();
         public DataTable dt_getinfo_phong = new DataTable();
         public DataTable dt_get_khuvuc0 = new DataTable();
-      
+
         public DataTable dt_get_khuvuc1 = new DataTable();
         public DataTable dt_getinfo_phong1 = new DataTable();
         public DataTable dt_get_khuvuc3 = new DataTable();
@@ -46,6 +46,8 @@ namespace WebApplication1
         public string tendovi = "";
         public string diachidonvi = "";
         public string sodtdonvi = "";
+        public string sodtdonvi2 = "";
+        public string sodtdonvi3 = "";
         public string ghichu = "";
         public DataTable dtdonvi = new DataTable();
 
@@ -64,9 +66,9 @@ namespace WebApplication1
             else
             {
                 tenkhuvuc3 = "setup3";
-            }            
+            }
             dt_getinfo_phong3 = DataConn.StoreFillDS("NH_select_info_phong3", CommandType.StoredProcedure);
-            dt_get_khuvuc4 = DataConn.StoreFillDS("NH_select_khuvuc4", CommandType.StoredProcedure);            
+            dt_get_khuvuc4 = DataConn.StoreFillDS("NH_select_khuvuc4", CommandType.StoredProcedure);
             if (dt_get_khuvuc4.Rows.Count > 0)
             {
                 tenkhuvuc4 = dt_get_khuvuc4.Rows[0][0].ToString();
@@ -87,7 +89,7 @@ namespace WebApplication1
             }
             dt_getinfo_phong1 = DataConn.StoreFillDS("NH_select_info_phong1", CommandType.StoredProcedure);
 
-                        
+
 
             if (!IsPostBack)
             {
@@ -122,7 +124,9 @@ namespace WebApplication1
                 tendovi = dtdonvi.Rows[0][1].ToString();
                 diachidonvi = dtdonvi.Rows[0][5].ToString();
                 sodtdonvi = dtdonvi.Rows[0][7].ToString();
-                ghichu = dtdonvi.Rows[0][9].ToString();
+                sodtdonvi2 = dtdonvi.Rows[0][8].ToString();
+                sodtdonvi3 = dtdonvi.Rows[0][9].ToString();
+                ghichu = dtdonvi.Rows[0][10].ToString();
 
                 GenerateAndConvertQRCode(ghichu);
             }
@@ -148,11 +152,11 @@ namespace WebApplication1
         }
 
         public static string GetConnectStringFromFile()
-        {           
+        {
             string filePath = HttpContext.Current.Server.MapPath("~/scnn.ini");
             string line;
             try
-            {                
+            {
                 using (StreamReader sr = new StreamReader(filePath))
                 {
                     line = sr.ReadToEnd();
@@ -169,7 +173,7 @@ namespace WebApplication1
         public static List<string> searchmahang(string _mahang)
         {
             //source = @"Data Source=10.92.186.30;Initial Catalog=Warehouse_BPS;User ID=sa;Password=Psnvdb2013";
-           List<string> docResult = new List<string>();
+            List<string> docResult = new List<string>();
             //using (SqlConnection con = new SqlConnection(DataConn.source))
             using (SqlConnection con = new SqlConnection(GetConnectStringFromFile()))
             {
@@ -192,7 +196,7 @@ namespace WebApplication1
                 }
             }
         }
-    
+
 
         [WebMethod]
         public static string getthongtinmahang(string _mahang)
@@ -249,21 +253,21 @@ namespace WebApplication1
         }
 
         [WebMethod]
-        public static string addthongtinhanghoa(string kieunghi, string tenphong , string tienhang, string items, string userid)  //string tenphong, string tienhang
+        public static string addthongtinhanghoa(string kieunghi, string tenphong, string tienhang, string items, string userid)  //string tenphong, string tienhang
         {
             String thongbao = "";
-            DataTable dtsave = new DataTable();            
+            DataTable dtsave = new DataTable();
 
             //check xem hoa don ton tai chua
             //update *** neu hoa don ton tai roi
             //lay so hoa don truyen len de update
 
-            dtsave = DataConn.StoreFillDS("NH_save_thongtinhanghoa", System.Data.CommandType.StoredProcedure, kieunghi, tenphong,tienhang,items, userid);//tenphong, data, tienhang
+            dtsave = DataConn.StoreFillDS("NH_save_thongtinhanghoa", System.Data.CommandType.StoredProcedure, kieunghi, tenphong, tienhang, items, userid);//tenphong, data, tienhang
 
             if (dtsave.Rows[0][0].ToString() == "1")
             {
                 //thongbao = "OK" + "," + dtlevel.Rows[0][1].ToString();
-                
+
                 thongbao = "OK";
             }
             else
@@ -276,7 +280,7 @@ namespace WebApplication1
 
         [WebMethod]
         public static string Ordernhabep(string tenphong, string items)  //string tenphong, string tienhang
-        {           
+        {
             DataTable dtsave = new DataTable();
             DataTable dtorder = new DataTable();
 
@@ -289,7 +293,7 @@ namespace WebApplication1
                 var soluong = item.Value;
                 //Console.WriteLine($"Key: {key}, Value: {value}");
                 //kiem tra ma hang xem co phai cau thanh don vi tinh khong? neu co se tru cac nguyen vat lieu!!!!
-                dtorder = DataConn.StoreFillDS("NH_check_order", System.Data.CommandType.StoredProcedure, tenhang, soluong, tenphong);                
+                dtorder = DataConn.StoreFillDS("NH_check_order", System.Data.CommandType.StoredProcedure, tenhang, soluong, tenphong);
             }
 
             //show data de in hoa don ra nha bep
@@ -306,7 +310,7 @@ namespace WebApplication1
         }
 
         [WebMethod]
-        public static string timer_thongtintrangthaiphong(string nameroom)  
+        public static string timer_thongtintrangthaiphong(string nameroom)
         {
             String thongbao = "";
             DataTable dttrangthai = new DataTable();
@@ -359,7 +363,7 @@ namespace WebApplication1
             //check xem hoa don ton tai chua
             //update *** neu hoa don ton tai roi
             //lay so hoa don truyen len de update
-            
+
             dtupdate = DataConn.StoreFillDS("NH_delete_phongban", System.Data.CommandType.StoredProcedure, nameitem, userid);
 
             if (dtupdate.Rows[0][0].ToString() == "1")
@@ -372,7 +376,7 @@ namespace WebApplication1
             {
                 thongbao = "NG";
             }
-            return thongbao;                       
+            return thongbao;
         }
 
         [WebMethod]
@@ -447,7 +451,7 @@ namespace WebApplication1
             dt2 = DataConn.StoreFillDS("NH_gop_phongban2", System.Data.CommandType.StoredProcedure, newroom);
             string jsonString1 = dt1.Rows[0][0].ToString();
             string jsonString2 = dt2.Rows[0][0].ToString();
-        
+
             string chuoighep = "";
 
             string json1 = jsonString1;
@@ -458,14 +462,14 @@ namespace WebApplication1
             // In ra mảng mới đã gộp
             foreach (var item in mergedItems)
             {
-                chuoighep = chuoighep+ '"'+ item.Key+'"'+':'+ item.Value+',';
+                chuoighep = chuoighep + '"' + item.Key + '"' + ':' + item.Value + ',';
                 //Console.WriteLine($"{item.Key}:{item.Value}");
             }
             chuoighep = chuoighep.Substring(0, chuoighep.Length - 1);
             chuoighep = '{' + chuoighep + '}';
 
 
-            dtupdate = DataConn.StoreFillDS("NH_gop_phongban", System.Data.CommandType.StoredProcedure, nameitem, newroom,chuoighep);
+            dtupdate = DataConn.StoreFillDS("NH_gop_phongban", System.Data.CommandType.StoredProcedure, nameitem, newroom, chuoighep);
 
             if (dtupdate.Rows[0][0].ToString() == "1")
             {
@@ -498,70 +502,89 @@ namespace WebApplication1
         //}
 
         [WebMethod]
-        public static string khthantoan(string idkhachhang, string tenphong,string tongtienhang,string tongtienhat,string tongtienphong, string psco, string tienno, string tienck, string items)  //string tenphong, string tienhang  --, 
+        public static string khthantoan(string idkhachhang, string tenphong, string tongtienhang, string tongtienhat, string tongtienphong, string psco, string tienno, string tienck, string items, string vat2, string dongiahatphut, string soluonghatphut)
         {
-            if (tenphong == "")
+            try
             {
-                String thongbao = "NG";
-                return thongbao;
-            }
-            else
-            {
-                String thongbao = "";
-                DataTable dtsave = new DataTable();
-                DataTable dtupdatekho = new DataTable();
-
-                JavaScriptSerializer jss = new JavaScriptSerializer();
-                var jsonObj = jss.Deserialize<dynamic>(items);
-                string type_act = "banhang";
-
-                DataTable dt_cauthanh = new DataTable();
-                string listtoncuoiky = "";
-
-                foreach (var item in jsonObj)
+                if (tenphong == "")
                 {
-                    string[] numbersArray = item.Key.Split(',');
-                    var mahang = numbersArray.FirstOrDefault();
-                    var soluong = item.Value;
-                    //Console.WriteLine($"Key: {key}, Value: {value}");
-                    //kiem tra ma hang xem co phai cau thanh don vi tinh khong? neu co se tru cac nguyen vat lieu!!!!
-                    dt_cauthanh = DataConn.StoreFillDS("NH_check_cauthanh", System.Data.CommandType.StoredProcedure, mahang, soluong);
-                    //if (dt_cauthanh.Rows[0][0].ToString() == "1")
-                    //{
-                    //    //tru ton kho thanh cong
-                    //}
-                    // xoa danh sach mon an da duoc order o bep sau khi thanh toan xong
-                    dtupdatekho = DataConn.StoreFillDS("NH_updatekho", System.Data.CommandType.StoredProcedure, mahang, soluong, type_act, tenphong);
-
-                    var sltoncuoiky = dtupdatekho.Rows[0][1].ToString();
-                    listtoncuoiky = listtoncuoiky + '"' + mahang + '"' + ':' + sltoncuoiky + ',';
-                }
-                listtoncuoiky = listtoncuoiky.Substring(0, listtoncuoiky.Length - 1);
-                listtoncuoiky = '{' + listtoncuoiky + '}';
-
-                //dtsave = DataConn.StoreFillDS("NH_save_khthanhtoan", System.Data.CommandType.StoredProcedure, idkhachhang, tenphong, tongtienhang, tongtienhat, tongtienphong, psco, tienno, tienck, items, listtoncuoiky);//, 
-
-                //SUA PHIEU TAM TINH  ==> luc tra ra co so hoa don
-                dtsave = DataConn.StoreFillDS("NH_save_khthanhtoan2", System.Data.CommandType.StoredProcedure, idkhachhang, tenphong, tongtienhang, tongtienhat, tongtienphong, psco, tienno, tienck, items, listtoncuoiky);//, 
-
-                if (dtsave.Rows[0][0].ToString() == "1")
-                {
-                    //thongbao = "OK" + "," + dtlevel.Rows[0][1].ToString();
-                    thongbao = "OK" + "," + dtsave.Rows[0][1].ToString(); ;
+                    String thongbao = "NG";
+                    return thongbao;
                 }
                 else
                 {
-                    thongbao = "NG";
-                }
+                    String thongbao = "";
+                    DataTable dtsave = new DataTable();
+                    DataTable dtupdatekho = new DataTable();
 
-                return thongbao;
+                    JavaScriptSerializer jss = new JavaScriptSerializer();
+                    var jsonObj = jss.Deserialize<dynamic>(items);
+                    string type_act = "banhang";
+
+                    DataTable dt_cauthanh = new DataTable();
+                    string listtoncuoiky = "";
+
+                    foreach (var item in jsonObj)
+                    {
+                        string[] numbersArray = item.Key.Split(',');
+                        var mahang = numbersArray.FirstOrDefault();
+                        var soluong = item.Value;
+                        //Console.WriteLine($"Key: {key}, Value: {value}");
+                        //kiem tra ma hang xem co phai cau thanh don vi tinh khong? neu co se tru cac nguyen vat lieu!!!!
+                        dt_cauthanh = DataConn.StoreFillDS("NH_check_cauthanh", System.Data.CommandType.StoredProcedure, mahang, soluong);
+                        //if (dt_cauthanh.Rows[0][0].ToString() == "1")
+                        //{
+                        //    //tru ton kho thanh cong
+                        //}
+                        // xoa danh sach mon an da duoc order o bep sau khi thanh toan xong
+                        dtupdatekho = DataConn.StoreFillDS("NH_updatekho", System.Data.CommandType.StoredProcedure, mahang, soluong, type_act, tenphong);
+
+                        var sltoncuoiky = dtupdatekho.Rows[0][1].ToString();
+                        listtoncuoiky = listtoncuoiky + '"' + mahang + '"' + ':' + sltoncuoiky + ',';
+                    }
+
+
+                    //truong hop khach vao nghi gio nhung khong lay do an, do uong
+                    //karaoke cung co truong hop tuong tu
+                    if (items == "{}")
+                    {
+                        //nothing
+                    }
+                    else
+                    {
+                        listtoncuoiky = listtoncuoiky.Substring(0, listtoncuoiky.Length - 1);
+                        listtoncuoiky = '{' + listtoncuoiky + '}';
+                    }
+
+                    //dtsave = DataConn.StoreFillDS("NH_save_khthanhtoan", System.Data.CommandType.StoredProcedure, idkhachhang, tenphong, tongtienhang, tongtienhat, tongtienphong, psco, tienno, tienck, items, listtoncuoiky);//, 
+
+                    //SUA PHIEU TAM TINH  ==> luc tra ra co so hoa don
+                    dtsave = DataConn.StoreFillDS("NH_save_khthanhtoan2", System.Data.CommandType.StoredProcedure, idkhachhang, tenphong, tongtienhang, tongtienhat, tongtienphong, psco, tienno, tienck, items, listtoncuoiky, vat2, dongiahatphut, soluonghatphut);//, 
+
+                    if (dtsave.Rows[0][0].ToString() == "1")
+                    {
+                        //thongbao = "OK" + "," + dtlevel.Rows[0][1].ToString();
+                        thongbao = "OK" + "," + dtsave.Rows[0][1].ToString();
+                    }
+                    else
+                    {
+                        thongbao = "NG";
+                    }
+
+                    return thongbao;
+                }
             }
-            
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
         }
 
         [WebMethod]
         public static string thongtinhanghoa(string tenphong)  //string tenphong, string tienhang
-        {            
+        {
             //check xem hoa don ton tai chua
             //update *** neu hoa don ton tai roi
             //lay so hoa don truyen len de update            
@@ -583,57 +606,74 @@ namespace WebApplication1
         [WebMethod]
         public static string Xemlaihoadon(string sohoadon)
         {
-            DataTable dt = new DataTable();
-            string idhoadon = sohoadon;
-
-            DataTable dt_new = new DataTable();
-            dt_new.Columns.Add("tenhang", typeof(String));
-            dt_new.Columns.Add("soluong", typeof(String));
-            dt_new.Columns.Add("dongia", typeof(String));            
-            dt_new.Columns.Add("thanhtien", typeof(String));
-
-            dt_new.Columns.Add("chietkhau", typeof(String));
-            dt_new.Columns.Add("tongtienhang", typeof(String));
-            dt_new.Columns.Add("khachthanhtoan", typeof(String));
-            dt_new.Columns.Add("psco", typeof(String));
-
-            dt = DataConn.StoreFillDS("NH_Xemlaihoadon", System.Data.CommandType.StoredProcedure, idhoadon);
-
-            string items = dt.Rows[0][0].ToString();
-
-            JavaScriptSerializer jss = new JavaScriptSerializer();
-            var jsonObj = jss.Deserialize<dynamic>(items);
-
-            foreach (var item in jsonObj)
+            try
             {
-                string[] numbersArray = item.Key.Split(',');
-                var tenhang = numbersArray.FirstOrDefault();
-                //string[] strArray = mahang.Split(',');
-                var mahang1 = numbersArray[0];
-                var dongia1 = numbersArray[1];
-                var thanhtien1 = numbersArray[2];
+                DataTable dt = new DataTable();
+                string idhoadon = sohoadon;
 
-                var soluong = item.Value;
+                DataTable dt_new = new DataTable();
+                dt_new.Columns.Add("tenhang", typeof(String));
+                dt_new.Columns.Add("soluong", typeof(String));
+                dt_new.Columns.Add("dongia", typeof(String));
+                dt_new.Columns.Add("thanhtien", typeof(String));
 
-                dt_new.Rows.Add(tenhang, soluong, dongia1, thanhtien1,"","","","");
+                dt_new.Columns.Add("chietkhau", typeof(String));
+                dt_new.Columns.Add("tongtienhang", typeof(String));
+                dt_new.Columns.Add("khachthanhtoan", typeof(String));
+                dt_new.Columns.Add("psco", typeof(String));
+
+                dt = DataConn.StoreFillDS("NH_Xemlaihoadon", System.Data.CommandType.StoredProcedure, idhoadon);
+
+                if (dt.Rows.Count == 0)
+                {
+                    dt_new = null;
+                }
+                else
+                {
+                    string items = dt.Rows[0][0].ToString();
+
+                    JavaScriptSerializer jss = new JavaScriptSerializer();
+                    var jsonObj = jss.Deserialize<dynamic>(items);
+
+                    foreach (var item in jsonObj)
+                    {
+                        string[] numbersArray = item.Key.Split(',');
+                        var tenhang = numbersArray.FirstOrDefault();
+                        //string[] strArray = mahang.Split(',');
+                        var mahang1 = numbersArray[0];
+                        var dongia1 = numbersArray[1];
+                        var thanhtien1 = numbersArray[2];
+
+                        var soluong = item.Value;
+
+                        dt_new.Rows.Add(tenhang, soluong, dongia1, thanhtien1, "", "", "", "");
+                    }
+                    string tongtienhang = dt.Rows[0]["tienhang"].ToString();
+                    string chietkhau = dt.Rows[0]["chietkhau"].ToString();
+                    string khachthanhtoan = dt.Rows[0]["tiensauchietkhau"].ToString();
+                    string khachno = dt.Rows[0]["psco"].ToString();
+
+                    //string hoadonid = dt.Rows[0]["sohoadon"].ToString();
+                    dt_new.Rows.Add("", "0", "0", "0", chietkhau, tongtienhang, khachthanhtoan, khachno);
+
+
+                }
+
+                DataTable dt2 = new DataTable();
+                // dt2 = dt.Copy();
+                dt2 = dt_new.Copy();
+
+                String daresult = null;
+                DataSet ds = new DataSet();
+                ds.Tables.Add(dt2);
+                daresult = DataSetToJSON(ds);
+                return daresult;
             }
-            string tongtienhang = dt.Rows[0]["tienhang"].ToString();
-            string chietkhau = dt.Rows[0]["chietkhau"].ToString();     
-            string khachthanhtoan = dt.Rows[0]["tiensauchietkhau"].ToString();
-            string khachno = dt.Rows[0]["psco"].ToString();
-          
-            //string hoadonid = dt.Rows[0]["sohoadon"].ToString();
-            dt_new.Rows.Add("", "0", "0", "0", chietkhau, tongtienhang, khachthanhtoan, khachno);
+            catch (Exception ex)
+            {
 
-            DataTable dt2 = new DataTable();
-            // dt2 = dt.Copy();
-            dt2 = dt_new.Copy();
-
-            String daresult = null;
-            DataSet ds = new DataSet();
-            ds.Tables.Add(dt2);
-            daresult = DataSetToJSON(ds);
-            return daresult;
+                throw ex;
+            }
         }
 
         [WebMethod]
@@ -660,7 +700,7 @@ namespace WebApplication1
         [WebMethod]
         public static string getsohoadon()  //string tenphong, string tienhang
         {
-            String kq = ""; 
+            String kq = "";
             DataTable dt = new DataTable();
 
             dt = DataConn.StoreFillDS("NH_getsohoadon", System.Data.CommandType.StoredProcedure);

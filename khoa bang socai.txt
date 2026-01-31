@@ -1,0 +1,95 @@
+USE [DataNhaHang]
+GO
+/****** Object:  Trigger [dbo].[PreventUpdate]    Script Date: 01/31/2026 16:30:27 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER TRIGGER [dbo].[PreventUpdate]
+   ON  [dbo].[htsocai]
+   INSTEAD OF UPDATE
+AS 
+BEGIN
+	declare @sohd nvarchar(50)
+	declare @type tinyint
+	declare @ngaygiothue datetime
+	declare @ngaygiora datetime
+	declare @tongthoigianthue as nvarchar(50)
+	declare @tenkhachhang as nvarchar(50)
+	declare @tenphong as nvarchar(50)
+	declare @giaphong as float
+	declare @tiencoc as float
+	declare @tienphong as float
+	declare @tiengiohat as float
+	declare @tienhang as float
+	declare @tongtien as float
+	declare @chietkhau as float
+	declare @ckthoigian as float
+	declare @tiensauchietkhau as float
+	declare @psco as float
+	declare @psno as float
+	declare @hinhthucnghi as int
+	declare @mohinh as int
+	declare @items as nvarchar(500)
+	declare @listtoncuoiky as nvarchar(500)
+	declare @songuoio int
+	declare @ghichu as nvarchar(50)
+	declare @idnhanvien as nvarchar(50)
+	declare @idncc as int
+	declare @Flag as nvarchar(10)
+	declare @userid as nvarchar(50)
+	declare @created as datetime
+	declare @modified as datetime
+IF OBJECTPROPERTY(OBJECT_ID('TRIGGER_NESTLEVEL'), 'ExecIsAnsiNullsOn') = 0
+    BEGIN      
+--print 'tam thoi rao de test' 
+        RAISERROR ('Không được phép cập nhật trực tiếp bảng này.', 16, 1)
+    END
+    ELSE
+    BEGIN 	
+--print 'tam thoi rao de test'
+						SELECT @sohd = sohd, @type = [type],@ngaygiothue=ngaygiothue,@ngaygiora=ngaygiora,@tongthoigianthue=tongthoigianthue,@tenkhachhang=@tenkhachhang,@tenphong=tenphong,@giaphong=giaphong,
+						@tiencoc=tiencoc,@tienphong=tienphong,@tiengiohat=tiengiohat,@tienhang=tienhang,@tongtien=tongtien,@chietkhau=chietkhau,@ckthoigian=ckthoigian,@tiensauchietkhau=tiensauchietkhau,
+						@psco=psco,@psno=psno,@hinhthucnghi=hinhthucnghi,@mohinh=mohinh,@items=items,@listtoncuoiky=listtoncuoiky,@songuoio=songuoio,@ghichu=ghichu,@idnhanvien=idnhanvien,@idncc=idncc,
+						@Flag=Flag,@userid=userid,@created=created
+					FROM Inserted
+
+					--SELECT @sohd = sohd FROM Inserted
+
+						UPDATE htsocai
+						SET 
+							sohd = @sohd,
+							[type] = @type,
+							ngaygiothue = @ngaygiothue,
+							ngaygiora = (SELECT ngaygiora FROM Inserted),
+							tongthoigianthue = (SELECT tongthoigianthue FROM Inserted),
+							tenkhachhang = @tenkhachhang,
+							tenphong = @tenphong,
+							giaphong = @giaphong,
+							tiencoc = (SELECT tiencoc FROM Inserted),
+							tienphong = (SELECT tienphong FROM Inserted),
+							tiengiohat =(SELECT tiengiohat FROM Inserted),
+							tienhang = (SELECT tienhang FROM Inserted),
+							tongtien = (SELECT tongtien FROM Inserted),
+							chietkhau = (SELECT chietkhau FROM Inserted),
+							ckthoigian = (SELECT ckthoigian FROM Inserted),
+							tiensauchietkhau = (SELECT tiensauchietkhau FROM Inserted),
+							psco = (SELECT psco FROM Inserted),
+							psno = (SELECT psno FROM Inserted),
+							hinhthucnghi = (SELECT hinhthucnghi FROM Inserted),
+							mohinh = (SELECT mohinh FROM Inserted),
+							items = (SELECT items FROM Inserted), 
+							listtoncuoiky = (SELECT listtoncuoiky FROM Inserted), 
+							songuoio = @songuoio,
+							ghichu = @ghichu,
+							idnhanvien = (SELECT idnhanvien FROM Inserted),
+							idncc = @idncc,
+							Flag = (SELECT Flag FROM Inserted),
+							userid = @userid,
+							created = @created
+							WHERE sohd=@sohd
+	END
+
+
+END

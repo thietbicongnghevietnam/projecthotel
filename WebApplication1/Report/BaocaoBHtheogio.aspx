@@ -82,6 +82,7 @@
                       <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">tienhang</th>
                       <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">tongtien</th>
                       <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">chietkhau</th>
+                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">VAT</th>
                       <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">tiensauchietkhau</th>
                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">Congno</th>
                       <%--<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">hinhthucnghi</th>
@@ -111,6 +112,7 @@
                       <td><%=String.Format("{0:N0}", Int32.Parse(rows["tienhang"].ToString()))%></td>
                       <td><%=String.Format("{0:N0}", Int32.Parse(rows["tongtien"].ToString()))%></td>
                       <td><%=String.Format("{0:N0}", Int32.Parse(rows["chietkhau"].ToString()))%></td>
+                      <td><%=rows["VAT"].ToString()%></td>
                       <td><%=String.Format("{0:N0}", Int32.Parse(rows["tiensauchietkhau"].ToString()))%></td>
                         <td><%=rows["psco"].ToString()%></td>
                       <%--<td><%=rows["hinhthucnghi"].ToString()%></td>
