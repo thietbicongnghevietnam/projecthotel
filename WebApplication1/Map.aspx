@@ -1843,7 +1843,10 @@
                     if (hinhthucnghi == 'Karaoke') {
                         giohat = $('#ticketid').val();
                     }
-                    var tienhat1phut = parseInt(giohat) / 60;
+                    //var tienhat1phut = parseInt(giohat) / 60;
+                    //truong hop bi loi 13,333 == 13 ==> se chuyen dung kieu du lieu ****
+
+                    var tienhat1phut = parseFloat(giohat.replace(/[.,]/g, '')) / 60;
                     var tongtienhat = Math.round(tongsophutdung * tienhat1phut);
                     //console.log(tongsophutdung)    
                     //console.log(tongsophutdung)
@@ -2375,7 +2378,13 @@
                     giohat = $('#ticketid').val();
                 }
 
-                var tienhat1phut = parseInt(giohat) / 60;
+                //var tienhat1phut = parseInt(giohat) / 60;  //loi sai kieu ==> 	13,333  trong co so du lieu lai chi lay 13
+                //truong hop bi loi 13,333 == 13 ==> se chuyen dung kieu du lieu ****
+
+                //13.333 → thường được hiểu là mười ba phẩy ba ba ba
+                //Nhưng bạn đang muốn là mười ba nghìn ba trăm ba mươi ba (13333)
+
+                var tienhat1phut = parseFloat(giohat.replace(/[.,]/g, '')) / 60;
                 var tongtienhat = Math.round(tongsophutdung * tienhat1phut);
 
                 var dongiahatphut = tienhat1phut;
@@ -2981,6 +2990,10 @@
                                         '</tr>';
                                     $('#tbnhaphang_inhoadon').append(newrow);
                                 }
+
+                                var formattedtienck = parseInt(tienchietkhau).toLocaleString('vi-VN');
+                                var formattedvat = parseInt(tienvat).toLocaleString('vi-VN');
+
                                 //$('#checkinput1').val(giovao);
                                 //$('#checkinput2').val(giora);                                                                
                                 $("#tenphong2").text(tenphong);
@@ -2990,8 +3003,8 @@
                                 $('#thantoan2').text(khachTT.toLocaleString('vi-VN'));
 
                                 //$('#chietkau2').text(0); 
-                                $('#chietkau2').text(tienchietkhau); 
-                                $('#VAT2').text(tienvat);
+                                $('#chietkau2').text(formattedtienck); 
+                                $('#VAT2').text(formattedvat);
 
                                 //$('#khthanhtoan2').text(khachthanhtoan.toLocaleString('vi-VN')); *** //chua cong tien hat +VAT - chietkhau      
                                 var tienphaithanhtoan = parseInt(tienhang) + parseInt(tongtienhat) + parseInt(tienvat) - parseInt(tienchietkhau) ;

@@ -60,10 +60,10 @@
             <tr>
                  <tr role="row">
                                         <th>NO</th>                                       
-                                        <th>Tenhang</th>                                       
-                                        <th>so luong</th> 
-                                        <th>don gia</th> 
-                                         <th>thanhtien</th>                                                                                                                        
+                                        <th>Tên hàng</th>                                       
+                                        <th>Số lượng</th> 
+                                        <th>Đơn giá</th> 
+                                         <th>Thành tiền</th>                                                                                                                        
                                         <th>Action</th>
                                     </tr>
             </tr>
@@ -123,10 +123,10 @@
                                         <thead>
                                             <tr>
                                                 <th>Số HĐ</th>
-                                                <th>Hang Hóa</th>  
-                                                <th>So luong</th>  
+                                                <th>Hàng Hóa</th>  
+                                                <th>Số lượng</th>  
                                                 <th>Ngày tạo</th>
-                                                <th>Loai HD</th>
+                                                <th>Loại HD</th>
                                             </tr>
                                         </thead>
                                             <tbody id="tblthekho">

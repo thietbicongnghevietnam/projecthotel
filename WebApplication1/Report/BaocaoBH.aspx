@@ -75,24 +75,25 @@
                   <thead>
                   <tr role="row">
                       <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">STT</th>
-                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">sohd</th>
+                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">SốHĐ</th>
                       <%--<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">type</th>--%>
                      <%-- <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">ngaygiothue</th>
                       <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">ngaygiora</th>--%>
                      <%-- <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">tongthoigianthue</th>--%>
-                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">tenphong</th>
-                    <%--  <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">tienphong</th>
-                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">tiengiohat</th>--%>
+                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">Tên Phòng</th>
+                    <%--  <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">tienphong</th>--%>
+                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">Tiền Hát</th>
                      <%-- <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">Hanghoa</th>--%>
-                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">tienhang</th>
-                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">tongtien</th>
-                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">chietkhau</th>
+                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">Tiền Hàng</th>
+                      
+                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">Chiết Khấu</th>
                       <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">VAT</th>
-                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">tiensauchietkhau</th>
-                       <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">Congno</th>
+                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">Tổng tiền</th>
+                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">Tiền sau CK</th>
+                       <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">Công nợ</th>
                       <%--<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">hinhthucnghi</th>
                       <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">mohinh</th>--%>
-                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">created</th>                      
+                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">Ngày tạo</th>                      
                       <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">Action</th>
                       
 
@@ -122,16 +123,18 @@
                       <td><%=rows["ngaygiora"].ToString()%></td>--%>
                     <%--  <td><%=rows["tongthoigianthue"].ToString()%></td>--%>
                       <td><%=rows["tenphong"].ToString()%></td>
-                     <%-- <td><%=rows["tienphong"].ToString()%></td>
-                      <td><%=rows["tiengiohat"].ToString()%></td>--%>
+                     <%-- <td><%=rows["tienphong"].ToString()%></td> --%>
+                      <td><%=String.Format("{0:N0}", float.Parse(rows["tiengiohat"].ToString()))%></td>
                      <%-- <td><%=rows["items"].ToString()%></td>--%>
                       <td><%=String.Format("{0:N0}", Int32.Parse(rows["tienhang"].ToString()))%></td>
-                      <td><%=String.Format("{0:N0}", Int32.Parse(rows["tongtien"].ToString()))%></td>
+                      
                       <td><%=String.Format("{0:N0}", Int32.Parse(rows["chietkhau"].ToString()))%></td>
                       <td>
-                        <%=rows["VAT"].ToString()%>
+                       <%-- <%=rows["VAT"].ToString()%>--%>
+                          <%=String.Format("{0:N0}", float.Parse(rows["VAT"].ToString()))%>
                       </td>
-                      <td><%=String.Format("{0:N0}", Int32.Parse(rows["tiensauchietkhau"].ToString()))%></td>
+                      <td><%=String.Format("{0:N0}", float.Parse(rows["tongtien"].ToString()))%></td>
+                      <td><%=String.Format("{0:N0}", float.Parse(rows["tiensauchietkhau"].ToString()))%></td>
                       <td><%=rows["psco"].ToString()%></td>
                       <%--<td><%=rows["hinhthucnghi"].ToString()%></td>
                       <td><%=rows["mohinh"].ToString()%></td>--%>
