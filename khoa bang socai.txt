@@ -93,3 +93,21 @@ IF OBJECTPROPERTY(OBJECT_ID('TRIGGER_NESTLEVEL'), 'ExecIsAnsiNullsOn') = 0
 
 
 END
+
+=========================== // delete socai // ================================
+USE [DataNhaHang]
+GO
+/****** Object:  Trigger [dbo].[PreventDelete]    Script Date: 02/19/2026 16:55:40 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER TRIGGER [dbo].[PreventDelete]
+   ON  [dbo].[htsocai]
+   INSTEAD OF DELETE
+AS 
+BEGIN
+--print 'ham khong cho sua xoa du lieu'
+	RAISERROR ('ERR D', 16, 1)
+
+END

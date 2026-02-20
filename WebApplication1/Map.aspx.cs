@@ -319,8 +319,13 @@ namespace WebApplication1
             //update *** neu hoa don ton tai roi
             //lay so hoa don truyen len de update
 
+            
             dttrangthai = DataConn.StoreFillDS("NH_get_trangthaiphong", System.Data.CommandType.StoredProcedure, nameroom);
 
+            //if (nameroom == "Ban1" &&  dttrangthai.Rows[0][0].ToString() == "0")
+            //{
+
+            //}
             if (dttrangthai.Rows[0][0].ToString() == "1")
             {
                 //thongbao = "OK" + "," + dtlevel.Rows[0][1].ToString();
@@ -329,7 +334,10 @@ namespace WebApplication1
             }
             else
             {
-                thongbao = "NG";
+                //bat truong hop nhan vien order thanh toan  : 19.02.2026 
+                //trang thai dttrangthai.Rows[0][1].ToString() = 1 (co khach) = 0 (o co khach)
+                thongbao = dttrangthai.Rows[0][1].ToString() + "," + dttrangthai.Rows[0][2].ToString();
+                //thongbao = "NG";
             }
             return thongbao;
         }

@@ -28,25 +28,96 @@ namespace WebApplication1
 
             if (!IsPostBack)
             {
-                string nhomhangid = Request.QueryString["nhomhangid"];               
-                //DataRow newRow3 = dt_khuvuc.NewRow();
-                //newRow3["tenkhuvuc"] = "==ChonKV==";
-                //dt_khuvuc.Rows.InsertAt(newRow3, 0);
-                //dr_khuvuc.DataSource = dt_khuvuc;
-                //dr_khuvuc.DataBind();
-
-                if (nhomhangid != null)
-                {
-                    dt_listhanghoa = DataConn.StoreFillDS("NH_select_hanghoa", CommandType.StoredProcedure, nhomhangid);
-                }
-                else
-                {
-                    //all nhom hang
-                    string _nhomhangid = "";
-                    dt_listhanghoa = DataConn.StoreFillDS("NH_select_hanghoa", CommandType.StoredProcedure, _nhomhangid);
-                }
+                //LoadKhuVuc();
+                //LoadBan();
+                //string nhomhangid = Request.QueryString["nhomhangid"];
+                //if (nhomhangid != null)
+                //{
+                //    dt_listhanghoa = DataConn.StoreFillDS("NH_select_hanghoa", CommandType.StoredProcedure, nhomhangid);   
+                //}
+                //else
+                //{
+                //    //all nhom hang
+                //    string _nhomhangid = "";
+                //    dt_listhanghoa = DataConn.StoreFillDS("NH_select_hanghoa", CommandType.StoredProcedure, _nhomhangid);
+                //}
             }
 
+        }
+
+        //private void LoadKhuVuc()
+        //{
+        //    DataTable dt = DataConn.StoreFillDS("SP_LoadKhuVuc",CommandType.StoredProcedure);
+
+        //    khuvucid.DataSource = dt;
+        //    khuvucid.DataTextField = "tenkhuvuc";
+        //    khuvucid.DataValueField = "makhuvuc"; // hoặc id tùy bạn
+        //    khuvucid.DataBind();
+        //}
+
+        //private void LoadBan()
+        //{
+        //    DataTable dt = DataConn.StoreFillDS("SP_LoadBan",CommandType.StoredProcedure);
+
+        //    tenban123.DataSource = dt;
+        //    tenban123.DataTextField = "tenphong";
+        //    tenban123.DataValueField = "id";
+        //    tenban123.DataBind();
+        //}
+
+        [System.Web.Services.WebMethod]
+        public static string GetHangHoa(string nhomhangid)
+        {
+            System.Data.DataTable dt;
+
+            if (!string.IsNullOrEmpty(nhomhangid))
+            {
+                dt = DataConn.StoreFillDS("NH_select_hanghoa",CommandType.StoredProcedure, nhomhangid);
+            }
+            else
+            {
+                dt = DataConn.StoreFillDS("NH_select_hanghoa",CommandType.StoredProcedure,"");
+            }
+
+            string html = "";
+
+            foreach (System.Data.DataRow rows1 in dt.Rows)
+            {
+                html += @"
+                <div class='col-6 col-sm-4 col-md-3 mb-3 d-flex'>
+                    <div class='card menu-card w-100'>
+                        <div class='card-body'>
+                            <div class='row'>
+                                <div class='col-8'>
+                                    <div class='menu-title'>
+                                        <mh>" + rows1["tenhang"] + @"</mh>
+                                    </div>
+                                    <div class='text-muted'>
+                                        <dg>" + rows1["giaban"] + @"</dg> VNĐ
+                                    </div>
+                                </div>
+                                <div class='col-4 text-center'>
+                                    <img src='" + rows1["anh"] + @"' />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class='card-footer text-center'>
+                            <input type='number' name='quantity' id='quantity'
+                                   class='quantity form-control text-center'
+                                   value='1'
+                                   min='1'
+                                   style='width:60px;height:30px;float:left;' />
+                            
+                            <a href='#'class='btn btn-sm btn-primary button_addmenu'>
+                                 <i class='fa fa-plus - square'></i>Add
+                              </a>
+                        </div>
+                    </div>
+                </div>";
+            }
+
+            return html;
         }
 
         [WebMethod]
@@ -84,6 +155,15 @@ namespace WebApplication1
             }
 
             dt = DataConn.StoreFillDS("NH_select_banorder2", System.Data.CommandType.StoredProcedure, tenkhuvuc);
+
+            return DataTableToJson(dt);
+        }
+
+        [WebMethod]
+        public static string GetAllTrangThai()
+        {
+            DataTable dt = DataConn.StoreFillDS("SP_GetAllTrangThaiBan",
+                CommandType.StoredProcedure);
 
             return DataTableToJson(dt);
         }

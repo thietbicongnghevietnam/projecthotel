@@ -124,7 +124,13 @@
                     <%--  <td><%=rows["tongthoigianthue"].ToString()%></td>--%>
                       <td><%=rows["tenphong"].ToString()%></td>
                      <%-- <td><%=rows["tienphong"].ToString()%></td> --%>
-                      <td><%=String.Format("{0:N0}", float.Parse(rows["tiengiohat"].ToString()))%></td>
+                      <td>
+                          <%--<%=String.Format("{0:N0}", float.Parse(rows["tiengiohat"].ToString()))%>--%>
+                          <%=
+    String.Format("{0:N0}",
+        rows["tiengiohat"] == DBNull.Value ? 0 : rows["tiengiohat"])
+%>
+                      </td>
                      <%-- <td><%=rows["items"].ToString()%></td>--%>
                       <td><%=String.Format("{0:N0}", Int32.Parse(rows["tienhang"].ToString()))%></td>
                       
