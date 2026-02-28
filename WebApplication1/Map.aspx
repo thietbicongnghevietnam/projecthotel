@@ -879,24 +879,36 @@
                         <table style="width:100%;">
                             <tr>
                                 <td>Tổng tiền:</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>                                
                                 <td style="text-align:right;"><b id="thantoan2"></b></td>
                             </tr>
-                            <tr>                                
+                            <tr>   
+                                <td>VAT:</td>
+                                <td style="text-align:right;"><b id="VAT2"></b></td>
+                                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
                                 <td>Chiết khấu:</td>
                                 <td style="text-align:right;"><b id="chietkau2"></b></td>
                             </tr>                           
                             <tr>
                                 <td>KH thanh toán:</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>                                
                                 <td style="text-align:right;"><b id="khthanhtoan2"></b></td>
                             </tr>
                             <tr>
                                 <td>Còn lại:</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>                                
                                 <td style="text-align:right;"><b id="psno2"></b></td>
                             </tr>
-                            <tr>
+                            <%--<tr>
                                 <td>VAT:</td>
                                 <td style="text-align:right;"><b id="VAT2"></b></td>
-                            </tr>
+                            </tr>--%>
                         </table>
 
                         <p>
@@ -2083,6 +2095,7 @@
                 //pending123
                 var tongtienhat = tienhat;
 
+                //format tien  de khong bi sai *****
 
                 var psco = Math.round(parseFloat(thantoan2.replace(/\./g, '').replace(',', '.')));
                 var tongtienhang = Math.round(parseFloat(tongtien2.replace(/\./g, '').replace(',', '.')));
@@ -2140,9 +2153,9 @@
                     tienno: psno,
                     tienck: tienck,
                     items: JSON.stringify(itemdata),
-                    vat2,
-                    dongiahatphut,
-                    soluonghatphut
+                    vat2: vat2,
+                    dongiahatphut: dongiahatphut,
+                    soluonghatphut: soluonghatphut
                 };
 
                 if (psno < 0) {
@@ -2204,7 +2217,6 @@
                     }
                 }
                 else {
-
                     //alert("khong co cong no");
                     $.ajax({
                         type: "POST",
@@ -2361,7 +2373,9 @@
                 var tongtienhang = $('#tongtienid').val();
                 var tienck = $('#chietkhauid').val();
 
-                var vat2 = $("#VATid").val();
+                var vat2b = $("#VATid").val();
+                //truong hop bi loi 13,333 == 13 ==> se chuyen dung kieu du lieu ****
+                var vat2 = parseFloat(vat2b.replace(/[.,]/g, ''));
 
                 var idkhachhang = $('#MainContent_dr_nhacungcap').val();
                 //alert(idkhachhang); 
@@ -2446,9 +2460,9 @@
                     tienno: psno,
                     tienck: tienck,                    
                     items: JSON.stringify(itemdata),
-                    vat2,
-                    dongiahatphut,
-                    soluonghatphut
+                    vat2: vat2,
+                    dongiahatphut: dongiahatphut,
+                    soluonghatphut: soluonghatphut
                 };
 
                 // setInterval(function () {
@@ -3567,10 +3581,12 @@
                 var soluonghatphut = $("#soluonghatphut").text().trim();
                 var tenphong2   = $("#tenphong2").text().trim();
                 var tongtien2   = $("#thantoan2").text().trim();
-                var chietkau2   = $("#chietkau2").text().trim();
+                var chietkau2 = $("#chietkau2").text().trim();
                 var conlai2     = $("#psno2").text().trim();
                 var sohoadon = $("#sohoadon_").text().trim();
-                var VAT2 = $("#VAT2").text().trim();
+                //var VAT2 = $("#VAT2").text().trim();
+                var VAT2 = parseInt($("#VAT2").text().replace(/\./g, ''));
+
                 var thantoan2 = $("#khthanhtoan2").text().trim();
                 var idkhachhang = $('#MainContent_dr_nhacungcap').val();
                 //console.log("tien hát:", tienhat);
