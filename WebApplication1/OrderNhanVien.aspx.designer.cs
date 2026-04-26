@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebApplication1 {
-    
-    
-    public partial class OrderNhanVien {
-        
+namespace WebApplication1
+{
+
+
+    public partial class OrderNhanVien
+    {
+
         /// <summary>
         /// form1 control.
         /// </summary>

@@ -1,8 +1,11 @@
-﻿using System;
-
+﻿using QRCoder;
+using System;
 using System.Data;
-using WebApplication1.App_Code;
+using System.Data.SqlClient;
+using System.Drawing;
+using System.IO;
 using System.Web.Services;
+using WebApplication1.App_Code;
 
 namespace WebApplication1
 {
@@ -14,6 +17,16 @@ namespace WebApplication1
         public DataTable dt_khuvuc = new DataTable();
         public DataTable dt_ban = new DataTable();
         //public String tenkhuvuc = "";
+
+        //thong tin don vi
+        public string tendovi = "";
+        public string diachidonvi = "";
+        public string sodtdonvi = "";
+        public string sodtdonvi2 = "";
+        public string sodtdonvi3 = "";
+        public string ghichu = "";
+        public DataTable dtdonvi = new DataTable();
+        public string barcodeData = "";
         protected void Page_Load(object sender, EventArgs e)
         {
             dt_nhomhang = DataConn.StoreFillDS("NH_select_nhomhang", CommandType.StoredProcedure);            
@@ -28,21 +41,34 @@ namespace WebApplication1
 
             if (!IsPostBack)
             {
-                //LoadKhuVuc();
-                //LoadBan();
-                //string nhomhangid = Request.QueryString["nhomhangid"];
-                //if (nhomhangid != null)
-                //{
-                //    dt_listhanghoa = DataConn.StoreFillDS("NH_select_hanghoa", CommandType.StoredProcedure, nhomhangid);   
-                //}
-                //else
-                //{
-                //    //all nhom hang
-                //    string _nhomhangid = "";
-                //    dt_listhanghoa = DataConn.StoreFillDS("NH_select_hanghoa", CommandType.StoredProcedure, _nhomhangid);
-                //}
-            }
+                dtdonvi = DataConn.StoreFillDS("NH_thongtin_doanhnghiep", System.Data.CommandType.StoredProcedure);
+                tendovi = dtdonvi.Rows[0][1].ToString();
+                diachidonvi = dtdonvi.Rows[0][5].ToString();
+                sodtdonvi = dtdonvi.Rows[0][7].ToString();
+                sodtdonvi2 = dtdonvi.Rows[0][8].ToString();
+                sodtdonvi3 = dtdonvi.Rows[0][9].ToString();
+                ghichu = dtdonvi.Rows[0][10].ToString();
 
+                GenerateAndConvertQRCode(ghichu);
+            }
+        }
+
+        private void GenerateAndConvertQRCode(string data)
+        {
+            // Tạo mã QR từ dữ liệu được chuyển đến
+            QRCodeGenerator qrGenerator = new QRCodeGenerator();
+            //QRCodeData qrCodeData = qrGenerator.CreateQrCode(data, QRCodeGenerator.ECCLevel.Q);
+            QRCodeData qrCodeData = qrGenerator.CreateQrCode(data, QRCodeGenerator.ECCLevel.L);
+            QRCode qrCode = new QRCode(qrCodeData);
+            Bitmap qrCodeImage = qrCode.GetGraphic(2); // Điều chỉnh kích thước ở đây nếu cần
+
+            // Chuyển đổi hình ảnh Bitmap thành một dạng dữ liệu base64
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                qrCodeImage.Save(memoryStream, System.Drawing.Imaging.ImageFormat.Png);
+                byte[] byteImage = memoryStream.ToArray();
+                barcodeData = "data:image/png;base64," + Convert.ToBase64String(byteImage);
+            }
         }
 
         //private void LoadKhuVuc()
@@ -166,6 +192,27 @@ namespace WebApplication1
                 CommandType.StoredProcedure);
 
             return DataTableToJson(dt);
+        }
+
+        [WebMethod]
+        public static string UpdateIsPrinted(string tenphong)
+        {
+            try
+            {
+                string sql = "UPDATE htsocai SET IsPrinted = 1 WHERE tenphong = @TenPhong AND IsPrinted = 0 and Flag = 0";
+
+                SqlParameter[] pr = new SqlParameter[]
+                {
+            new SqlParameter("@TenPhong", tenphong)
+                };
+
+                DataConn.ExecuteNonQuery(sql, pr);
+                return "OK";
+            }
+            catch (Exception ex)
+            {
+                return "ERROR: " + ex.Message;
+            }
         }
 
         //protected void dr_khuvuc_SelectedIndexChanged(object sender, EventArgs e)

@@ -1,0 +1,10 @@
+========= // 26.04.2026 //==========
+bang: 
+htsocai them cot : IsPrinted 	(in qua ipad)
+service pos:
+cai dat: Windows Service .NET 6 / .NET 7 / .NET 8
+Install-Package System.Drawing.Common
+Install-Package System.Drawing.Primitives
+
+****Windows Service không chạy trực tiếp như WinForms/Console App.
+****Nó phải được cài vào Services của Windows rồi mới Start được.

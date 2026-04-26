@@ -22,7 +22,10 @@ namespace WebApplication1.App_Code
 
             //local
             //source = @"Data Source=./;Initial Catalog=Warehouse_BPS;User ID='sa';Password=''";
-            source = @"Data Source=./;Initial Catalog=DataNhaHang;User ID='sa';Password=''";
+            //source = @"Data Source=./;Initial Catalog=DataNhaHang;User ID='sa';Password=''";
+            source = @"Data Source=LT-DE2302026;Initial Catalog=DataNhaHang;Integrated Security=True";
+
+            //Data Source=LT-DE2302026;Initial Catalog=DataNhaHang;Integrated Security=True
 
             con = new SqlConnection(source);
             try
@@ -114,6 +117,37 @@ namespace WebApplication1.App_Code
             //    var _ex = new Exception(ex.Message + "Chỗ này sai rồi... : '" + sql + "'");
             //    throw _ex;
             //}
+        }
+
+        public static int ExecuteNonQuery(string sql, SqlParameter[] parameters)
+        {
+            int result = 0;
+
+            using (SqlConnection conn = new SqlConnection(source))
+            {
+                conn.Open();
+
+                using (SqlTransaction tran = conn.BeginTransaction())
+                {
+                    try
+                    {
+                        using (SqlCommand cmd = new SqlCommand(sql, conn, tran))
+                        {
+                            cmd.Parameters.AddRange(parameters);
+                            result = cmd.ExecuteNonQuery();
+                        }
+
+                        tran.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        tran.Rollback();
+                        throw new Exception(ex.Message);
+                    }
+                }
+            }
+
+            return result;
         }
 
         public static DataTable StoreFillDS(string query_object, CommandType type, params object[] obj)

@@ -224,6 +224,38 @@
             .toggle-btn i {
                 font-size: 14px;
             }
+
+/* ================= Nút TẠM TÍNH giống 2 nút còn lại ==================== */
+.btn-temp-pos {
+    background: linear-gradient(135deg, #17a2b8, #138496);
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 8px 18px;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+    transition: all 0.2s ease;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+/* icon */
+.btn-temp-pos i {
+    margin-right: 6px;
+}
+
+/* hover */
+.btn-temp-pos:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(0,0,0,0.25);
+}
+
+/* click */
+.btn-temp-pos:active {
+    transform: scale(0.96);
+}
+
     </style>
 
 </head>
@@ -289,6 +321,12 @@
                         <button type="button" class="btn-save-pos saveproduct">
                             <i class="fa fa-save"></i>GHI THỰC ĐƠN
                         </button>
+
+                         <!-- Nút Tạm tính -->
+                        <button type="button" class="btn-temp-pos tamtinh">
+                            <i class="fa fa-calculator"></i> TẠM TÍNH
+                        </button>
+
                         <button type="button" class="btn-pay-pos thanhtoan">
                             <i class="fa fa-cash-register"></i>THANH TOÁN
                         </button>
@@ -308,42 +346,7 @@
                     <div class="card card-solid">
                         <div class="card-body pb-0">
                             <div class="row d-flex align-items-stretch" style="overflow-y: scroll; height: 700px;" id="hanghoa-container">
-
-                                <%--<%foreach (System.Data.DataRow rows1 in dt_listhanghoa.Rows)
-                                    {%>
-
-                                <div class="col-6 col-sm-4 col-md-3 mb-3 d-flex">
-                                    <div class="card menu-card w-100">
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <div class="col-8">
-                                                    <div class="menu-title">
-                                                        <mh><%=rows1["tenhang"].ToString() %></mh>
-                                                    </div>
-                                                    <div class="text-muted">
-                                                        <dg><%=rows1["giaban"].ToString() %></dg>
-                                                        VNĐ
-                                                    </div>
-                                                </div>
-                                                <div class="col-4 text-center">
-                                                    <img src="<%=rows1["anh"].ToString() %>" />
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="card-footer text-center">
-
-                                            <input type="number" class="quantity form-control text-center" title="Số lượng" value="1" min="1" id="quantity" name="quantity" style="width: 60px; height: 30px; float: left;" />
-
-                                            <a href="#" class="btn btn-sm btn-primary button_addmenu" id="add_sanpham">
-                                                <i class="fa fa-plus-square"></i>Add
-                                            </a>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <%} %>--%>
+   
                             </div>
                         </div>
 
@@ -356,14 +359,6 @@
             </div>
 
 
-
-<%--            <div class="row">
-                <div class="col-2">
-                    <label for="tongtien" style="float: left; margin-top: 5px;">Tiền hàng</label>
-                    <input type="text" id="tongtienid" disabled class="form-control input-sm" name="fname" style="float: left; margin-left: 10px; font-size: 22px;" value="0">
-                    <span style="float: left; padding-left: 20px; padding-top: 10px;"></span>
-                </div>
-            </div>--%>
             <div class="row align-items-center">
                 <div class="col-md-12 d-flex align-items-center">
 
@@ -409,6 +404,87 @@
 
         </div>
     </form>
+
+    
+   <!-- POPUP TẠM TÍNH POS -->
+<div id="popupTamTinh" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%;
+background:rgba(0,0,0,0.55); z-index:9999;">
+
+    <div style="width:420px; background:#fff; margin:30px auto; border-radius:12px;
+    overflow:hidden; box-shadow:0 0 20px rgba(0,0,0,0.3); font-family:Arial;">
+
+        <!-- Header -->
+        <div style="background:linear-gradient(135deg,#00c6ff,#3ad6ff); color:white; padding:15px; text-align:center;">
+            <h3 style="margin:0;">PHIẾU TẠM TÍNH</h3>
+            <div style="font-size:14px; margin-top:5px;">
+                Bàn: <b id="sobanTamTinh"></b>
+            </div>
+            <div style="font-size:13px;" id="gioTamTinh"></div>
+        </div>
+
+        <!-- Body -->
+        <div style="padding:15px; max-height:450px; overflow-y:auto;">
+
+            <table style="width:100%; font-size:14px;">
+                <thead>
+                    <tr style="border-bottom:1px dashed #999;">
+                        <th align="left">Món</th>
+                        <th align="center">SL</th>
+                        <th align="right">Tiền</th>
+                    </tr>
+                </thead>
+                <tbody id="bodyTamTinh"></tbody>
+            </table>
+
+            <hr />
+
+            <div style="text-align:right; font-size:20px; font-weight:bold; color:red;">
+                Tổng: <span id="tongTamTinh">0</span>
+            </div>
+           
+            <hr />
+
+            <div style="text-align:center; margin-top:15px;">
+                <!-- lưu dữ liệu -->
+                <input type="hidden" id="imgQRBase64" value="<%=barcodeData %>" />
+
+                <!-- hiển thị QR -->
+                <img id="imgQRThanhToan"
+                     style="width:180px; height:180px; border:1px solid #ddd; padding:6px; border-radius:10px;" />
+
+                <div style="margin-top:10px; font-size:15px; font-weight:bold; color:#007bff;">
+                    Quét mã để thanh toán
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <div style="padding:15px; text-align:center; background:#f1f1f1;">
+            <!-- In phiếu -->
+            <%--<button onclick="window.print()" class="btn-save-pos" style="margin-right:10px;">
+                <i class="fa fa-print"></i> In Phiếu
+            </button>--%>
+
+            <button onclick="inPhieu()" class="btn-save-pos" style="margin-right:10px;">
+                <i class="fa fa-print"></i> In Phiếu
+            </button>
+
+            <!-- Thanh toán -->
+            <button class="btn-pay-pos" onclick="thanhToanTamTinh()" style="margin-right:10px;">
+                <i class="fa fa-cash-register"></i> Thanh Toán
+            </button>
+
+            <!-- Đóng -->
+            <button onclick="dongTamTinh()" class="btn-save-pos" style="background:#dc3545;">
+                <i class="fa fa-times"></i> Đóng
+            </button>
+
+        </div>
+
+    </div>
+</div>
 
     <script>
 
@@ -494,14 +570,6 @@
             tinhLaiTongTien();
         });
 
-        //function tinhLaiTongTien() {
-        //    var tong = 0;
-        //    $("#tbnhaphang tr").each(function () {
-        //        var thanhtien = parseInt($(this).find("td").eq(3).text()) || 0;
-        //        tong += thanhtien;
-        //    });
-        //    $("#tongtienid").val(tong);
-        //}
         function tinhLaiTongTien() {
             var tong = 0;
             $("#tbnhaphang tr").each(function () {
@@ -511,9 +579,84 @@
             $("#tongtienid").val(tong);
         }
 
+        $(document).on("click", ".tamtinh", function () {
+
+            var html = "";
+            var tong = 0;
+
+            $("#tbnhaphang tr").each(function () {
+
+                var tenhang = $(this).find("td").eq(0).text();
+                var soluong = $(this).find("td").eq(1).text();
+                var thanhtien = $(this).find("td").eq(3).text();
+
+                tong += parseInt(thanhtien) || 0;
+
+                html += `
+            <tr style="border-bottom:1px dotted #ddd;">
+                <td>${tenhang}</td>
+                <td align="center">${soluong}</td>
+                <td align="right">${parseInt(thanhtien).toLocaleString()}</td>
+            </tr>
+        `;
+            });
+
+            if (html == "") {
+                alert("Chưa có món!");
+                return;
+            }
+
+            // số bàn
+            var soban = $("#tenban123").val();
+
+            // giờ hiện tại
+            var now = new Date();
+            var time = now.toLocaleString();
+
+            var qr = $("#imgQRBase64").val();
+            $("#imgQRThanhToan").attr("src", qr);
+
+            $("#sobanTamTinh").text(soban);
+            $("#gioTamTinh").text(time);
+            $("#bodyTamTinh").html(html);
+            $("#tongTamTinh").text(tong.toLocaleString());
+            $("#popupTamTinh").fadeIn();
+
+        });
+
+        function dongTamTinh() {
+            $("#popupTamTinh").fadeOut();
+        }
+
     </script>
 
     <script type="text/javascript">
+
+        function inPhieu() {
+            var tenphong = $("#tenban123").val();
+            if (!tenphong || tenphong == "==ChonBan==") {
+                alert("Chưa chọn bàn!");
+                return;
+            }
+            $.ajax({
+                type: "POST",
+                //url: "Map.aspx/UpdateIsPrinted",
+                url: "OrderNhanVien.aspx/UpdateIsPrinted",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({ tenphong: tenphong }),
+                dataType: "json",
+                success: function (res) {
+
+                    alert("Đã gửi lệnh in vào quầy!");
+
+                    // optional: reload lại bàn / trạng thái
+                    // location.reload();
+                },
+                error: function () {
+                    alert("Lỗi cập nhật in!");
+                }
+            });
+        }
 
         $('.saveproduct').click(function () {
             //alert("ádfsa");
@@ -719,6 +862,9 @@
         });
         // });
 
+        function thanhToanTamTinh() {
+            $(".thanhtoan").trigger("click");
+        }
 
         $('.thanhtoan').click(function () {
 
@@ -743,25 +889,6 @@
 
             if (confirm("Xác nhận thanh toán bàn " + tenphong + " ?")) {
                 thanhtoanhoadon2(tenphong, tongtien);
-
-                //$.ajax({
-                //    type: "POST",
-                //    contentType: "application/json; charset=utf-8",
-                //    url: "Map.aspx/thanhtoanban",
-                //    data: JSON.stringify({ tenphong: tenphong }),
-                //    dataType: "json",
-                //    success: function (data) {
-                //        alert("Thanh toán thành công!");
-
-                //        // Reset lại bàn
-                //        $('#tbnhaphang').empty();
-                //        $('#tongtienid').val(0);
-                //    },
-                //    error: function () {
-                //        alert("Có lỗi xảy ra!");
-                //    }
-                //});
-
             }
 
         });
@@ -1075,11 +1202,8 @@
 
         // 1 giây
         setInterval(doSomethingTimer, 60000);
-
-
         // Thực hiện hàm doSomething() sau mỗi 1000ms (1 giây)
         //var intervalId = setInterval(doSomethingTimer, 60000);
-
 
     </script>
 
