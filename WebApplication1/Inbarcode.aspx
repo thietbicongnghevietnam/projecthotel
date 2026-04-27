@@ -87,13 +87,13 @@
             <table id="example" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
-                 <tr role="row">
+                <%-- <tr role="row">--%>
                                         <th>NO</th>
                                         <th>Ma hang</th>
                                         <th>Ten hang</th>                                                                                                                      
                                         <th>Gia ban</th>                                                                                                                      
                                        
-                                    </tr>
+                                   <%-- </tr>--%>
             </tr>
         </thead>
         <tbody>

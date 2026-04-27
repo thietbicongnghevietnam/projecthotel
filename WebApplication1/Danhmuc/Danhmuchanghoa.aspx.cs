@@ -30,9 +30,16 @@ namespace WebApplication1.Danhmuc
                 dt_hanghoa = DataConn.StoreFillDS("NH_danhmuchanghoa", System.Data.CommandType.StoredProcedure);
 
                 dt_nhomhang = DataConn.StoreFillDS("NH_Get_nhomhang", System.Data.CommandType.StoredProcedure);
-                DataRow newRow2 = dt_nhomhang.NewRow();
-                newRow2["manhomhang"] = "==chon nhom hang==";
-                dt_nhomhang.Rows.InsertAt(newRow2, 0);
+                DataRow newRow3 = dt_nhomhang.NewRow();
+                newRow3["manhomhang"] = "==chon nhom hang==";
+                dt_nhomhang.Rows.InsertAt(newRow3, 0);
+                dr_nhomhang3.DataSource = dt_nhomhang;
+                dr_nhomhang3.DataBind();
+
+               
+                //DataRow newRow2 = dt_nhomhang.NewRow();
+                //newRow2["manhomhang"] = "==chon nhom hang==";
+                //dt_nhomhang.Rows.InsertAt(newRow2, 0);
                 dr_nhomhang.DataSource = dt_nhomhang;
                 dr_nhomhang.DataBind();
 
@@ -44,6 +51,34 @@ namespace WebApplication1.Danhmuc
                 dr_nhomhang2.DataBind();
             }
                
+        }
+
+        protected void Search_Date_Click2(object sender, EventArgs e)
+        {                       
+            string _partno = partno_search.Value.ToString();
+            //filter_type.Text = "";
+            if (_partno == "")
+            {
+                dt_hanghoa = DataConn.StoreFillDS("NH_danhmuchanghoa", System.Data.CommandType.StoredProcedure);
+            }
+            else
+            {
+                dt_hanghoa = DataConn.StoreFillDS("NH_danhmuchanghoa_locmahang", System.Data.CommandType.StoredProcedure, _partno);
+            }
+            
+        }
+
+        protected void dr_nhomhang_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Lấy giá trị đã chọn từ DropDownList
+            string manhomhang = dr_nhomhang3.SelectedValue;
+            //string _fromdate = Request.Form[Date2.UniqueID];
+            //string _todate = Request.Form[ngaychiid.UniqueID];
+
+            dt_hanghoa = DataConn.StoreFillDS("NH_danhmuchanghoa_locnhomhang", System.Data.CommandType.StoredProcedure, manhomhang);
+            //Page.ClientScript.RegisterStartupScript(Page.GetType(), "Message", "toastr.error('NG, Người dùng không có phiên đăng nhập !'); ", true);
+
+
         }
 
         protected void UploadButton_Click(object sender, EventArgs e)
@@ -391,6 +426,7 @@ namespace WebApplication1.Danhmuc
             if (dtupdate.Rows[0][0].ToString() == "1")
             {
                 dt_hanghoa = DataConn.StoreFillDS("NH_danhmuchanghoa", System.Data.CommandType.StoredProcedure);
+                partno_search.Value = "";
                 Page.ClientScript.RegisterStartupScript(Page.GetType(), "Message", "toastr.success('Success!!!');", true);
             }
             else

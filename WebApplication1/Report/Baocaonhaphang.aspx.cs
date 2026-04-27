@@ -48,11 +48,8 @@ namespace WebApplication1.Report
                 Page.ClientScript.RegisterStartupScript(Page.GetType(), "Message", "toastr.error('NG, user does not input infor!'); ", true);
             }
             else
-            {
-               
+            {               
             }
-
-
         }
 
         public void Download_Click2(object sender, EventArgs e)
@@ -193,33 +190,39 @@ namespace WebApplication1.Report
 
             dt = DataConn.StoreFillDS("NH_infor_thongtincongnoNCC", System.Data.CommandType.StoredProcedure, idhoadon, _fromdate, _todate);
 
-            string items = dt.Rows[0][0].ToString();
-
-            JavaScriptSerializer jss = new JavaScriptSerializer();
-            var jsonObj = jss.Deserialize<dynamic>(items);
-
-            foreach (var item in jsonObj)
+            if (dt.Rows.Count > 0)
             {
-                string[] numbersArray = item.Key.Split(',');
-                var mahang = numbersArray.FirstOrDefault();
-                //string[] strArray = mahang.Split(',');
-                var mahang1 = numbersArray[0];
-                var dongia1 = numbersArray[1];
-                var thanhtien1 = numbersArray[2];
+                string items = dt.Rows[0][0].ToString();
 
-                var soluong = item.Value;
+                JavaScriptSerializer jss = new JavaScriptSerializer();
+                var jsonObj = jss.Deserialize<dynamic>(items);
 
-                dt_new.Rows.Add(mahang, soluong, dongia1, "", thanhtien1, "", "", "", "");
+                foreach (var item in jsonObj)
+                {
+                    string[] numbersArray = item.Key.Split(',');
+                    var mahang = numbersArray.FirstOrDefault();
+                    //string[] strArray = mahang.Split(',');
+                    var mahang1 = numbersArray[0];
+                    var dongia1 = numbersArray[1];
+                    var thanhtien1 = numbersArray[2];
+
+                    var soluong = item.Value;
+
+                    dt_new.Rows.Add(mahang, soluong, dongia1, "", thanhtien1, "", "", "", "");
+                }
+                string chietkhau = dt.Rows[0]["chietkhau"].ToString();
+                string tongtien = dt.Rows[0]["tongtien"].ToString();
+                string khachthanhtoan = "0";// dt.Rows[0]["tiensauchietkhau"].ToString();
+                string khachno = "0"; //dt.Rows[0]["psco"].ToString();
+                string ngaytao = dt.Rows[0]["created"].ToString();
+                string hoadonid = dt.Rows[0]["sohoadon"].ToString();
+                dt_new.Rows.Add("", "", "", chietkhau, tongtien, khachthanhtoan, khachno, ngaytao, hoadonid);
             }
-            string chietkhau = dt.Rows[0]["chietkhau"].ToString();
-            string tongtien = dt.Rows[0]["tongtien"].ToString();
-            string khachthanhtoan = "0";// dt.Rows[0]["tiensauchietkhau"].ToString();
-            string khachno = "0"; //dt.Rows[0]["psco"].ToString();
-            string ngaytao = dt.Rows[0]["created"].ToString();
-            string hoadonid = dt.Rows[0]["sohoadon"].ToString();
-            dt_new.Rows.Add("", "", "", chietkhau, tongtien, khachthanhtoan, khachno, ngaytao, hoadonid);
-
-
+            else
+            {
+                dt_new.Rows.Add("", "", "", "0", "0", "0", "0", "0", "0");
+            }
+           
             DataTable dt2 = new DataTable();
             //dt2 = dt.Copy();
             dt2 = dt_new.Copy();

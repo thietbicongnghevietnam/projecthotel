@@ -48,7 +48,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">      
-    <a href="#"><b>Restaurant - Hotel - Cafe</b></a>
+    <a href="#"><b>Supermarket Software</b></a>
   </div>
      <form id="form1" runat="server">
          <!-- /.login-logo -->
@@ -70,10 +70,12 @@
                                          <div class="form-group">
                                              <div class="custom-control custom-checkbox">
                                                  <input class="custom-control-input" id="rememberPasswordCheck" type="checkbox" />
-                                                 <label class="custom-control-label" for="rememberPasswordCheck">forgot password <i style="color:blue;">(Call: 0979 479 007)</i></label>
-                                             </div>
+                                                 <label class="custom-control-label" for="rememberPasswordCheck">forgot password <i style="color:blue;">(Call: 0979 479 007)</i></label>                                                 
+                                             </div>                                            
                                          </div>
-                                       
+                                        <div style="text-align:center">
+                                            <i>Ver 01 - 30112025</i> 
+                                        </div>
                                          <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
                                              <a class="small" href="#">Forgot Password? </a>                                            
                                             <%-- <a class="small" href="#" target="_blank" id="openModalBtn">Contact Admin</a> --%>

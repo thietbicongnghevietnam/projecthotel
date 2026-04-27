@@ -94,6 +94,11 @@
                                         <th>DVT T0</th>                                                                                                                      
                                         <th>So luong quy doi</th>  
                                         <th>DVT nho</th>  
+                     <th>Giá nhập</th>
+                     <th>Giá bán</th>
+                     <th>Giá sỉ</th>
+                     <th>Giá cấu thành</th>
+
                                         <th>Action</th>
                                     </tr>
             </tr>
@@ -108,10 +113,24 @@
                                         <td><%=rows["mahang"].ToString()%></td>
                                         <td><%=rows["dvtto"].ToString()%></td>
                                         <td><%=rows["soluongqudoi"].ToString()%></td>
-                                        <td><%=rows["dvtnho"].ToString()%></td>                                        
+                                        <td><%=rows["dvtnho"].ToString()%></td> 
+                                        
+                                        <td><%=rows["gianhap"].ToString()%></td>
+                                        <td><%=rows["giaban"].ToString()%></td>
+                                        <td><%=rows["giabuon"].ToString()%></td>
+                                        <td><%=rows["giaban2"].ToString()%></td>
                                         
                                         <td>
-                                            <a href="#" class="btn btn-info btn-sm" title="delete item" onclick="openEditModal2('<%= rows["id"].ToString() %>','<%= rows["mahang"].ToString() %>','<%= rows["dvtto"].ToString() %>','<%= rows["soluongqudoi"].ToString() %>','<%= rows["dvtnho"].ToString() %>')"><i class="fas fa-pencil-alt"></i>Sửa</a>
+                                            <a href="#" class="btn btn-info btn-sm" title="delete item" onclick="openEditModal2('<%= rows["id"].ToString() %>',
+                                                '<%= rows["mahang"].ToString() %>',
+                                                '<%= rows["dvtto"].ToString() %>',
+                                                '<%= rows["soluongqudoi"].ToString() %>',
+                                                '<%= rows["dvtnho"].ToString() %>',
+                                                '<%=rows["gianhap"].ToString()%>',
+                                                '<%=rows["giaban"].ToString()%>',
+                                                '<%=rows["giabuon"].ToString()%>',
+                                                '<%=rows["giaban2"].ToString()%>'
+                                                )"><i class="fas fa-pencil-alt"></i>Sửa</a>
                                         </td> 
                                         
                                     </tr>
@@ -195,6 +214,37 @@
                             </div>                                                                                   
                         </div>
 
+                         <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="ID">Giá nhập</label>                                        
+                                        <asp:TextBox ID="suagianhap" CssClass="form-control" placeholder="0" Text="0" runat="server"></asp:TextBox>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                            <label for="exampleInputEmail1">Giá sỉ</label>                                       
+                                        <asp:TextBox ID="suagiasi" CssClass="form-control" placeholder="0" Text="0" runat="server"></asp:TextBox>                                          
+                                    </div>
+                                </div>
+                            </div>
+
+                    <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="ID">Giá bán</label>                                        
+                                        <asp:TextBox ID="suagiaban" CssClass="form-control" placeholder="0" runat="server"></asp:TextBox>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                            <label for="exampleInputEmail1">Giá đã cấu thành</label>                                       
+                                        <asp:TextBox ID="suagiadvto" CssClass="form-control" placeholder="0" runat="server"></asp:TextBox>                                          
+                                    </div>
+                                </div>
+                           </div>
+
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times"></i>Đóng</button>
@@ -250,6 +300,37 @@
                                     </div>
                                 </div>
                             </div>
+                        <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="ID">Giá nhập</label>                                        
+                                        <asp:TextBox ID="txtgianhap" CssClass="form-control" placeholder="0" Text="0" runat="server"></asp:TextBox>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                            <label for="exampleInputEmail1">Giá sỉ</label>                                       
+                                        <asp:TextBox ID="txtgiasi" CssClass="form-control" placeholder="0" Text="0" runat="server"></asp:TextBox>                                          
+                                    </div>
+                                </div>
+                            </div>
+
+                    <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="ID">Giá bán</label>                                        
+                                        <asp:TextBox ID="txtgiaban" CssClass="form-control" placeholder="0" runat="server"></asp:TextBox>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                            <label for="exampleInputEmail1">Giá đã cấu thành</label>                                       
+                                        <asp:TextBox ID="txtgiadonvito" CssClass="form-control" placeholder="0" runat="server"></asp:TextBox>                                          
+                                    </div>
+                                </div>
+                           </div>
+
+
 
       </div>
       <div class="modal-footer">
@@ -292,19 +373,57 @@
 
          });
 
-         $('#myModal').modal(options)
+         //$('#myModal').modal(options)
+         $('#myModal').modal()
 
-    function openEditModal2(id,mahang,dvtto,soluongqudoi,dvtnho) {           
+    function openEditModal2(id,mahang,dvtto,soluongqudoi,dvtnho,gianhap,giaban,giasi,giacauthanh) {           
         $("#txtid").val(id);
         $("#txtmahang").val(mahang);
         $("#txtto").val(dvtto);
         $("#txtquydoi").val(soluongqudoi);
-        $("#txtnho").val(dvtnho);   
+        $("#txtnho").val(dvtnho);  
+
+        $("#suagianhap").val(gianhap);
+        $("#suagiasi").val(giasi);
+        $("#suagiaban").val(giaban);
+        $("#suagiadvto").val(giacauthanh);
           
         $('#myModal2').modal('show');
 
         }
 
+
+         $('#<%= mahangid.ClientID %>').change(function() {
+            var mahang = $(this).val();                    
+             //alert(newValue);
+             $.ajax({
+                type: "POST",
+                url: "DMcauthanhDVT.aspx/getdongia", // Điều hướng đến phương thức xử lý dữ liệu trên máy chủ
+                data: JSON.stringify({ mahang: mahang }), // Truyền dữ liệu cần xử lý
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    // Xử lý kết quả trả về từ máy chủ nếu cần
+                    //console.log('Phản hồi từ máy chủ: ' + response.d);
+                    $('#txtgiaban').val(data.d);
+                    $('#dvtoid').focus();
+                },
+                error: function (error) {
+                    //console.log('Lỗi khi gửi dữ liệu: ' + error);
+                }
+             });
+         });
+
+
+         //slquydoiid
+         $('#<%= slquydoiid.ClientID %>').change(function() {
+            var soluong = $(this).val();                    
+             //alert(newValue);
+             var dongia = $('#txtgiaban').val();
+             var dongiacauthanh = soluong * dongia;
+             //alert(dongiacauthanh);
+             $('#txtgiadonvito').val(dongiacauthanh);
+         });
         
     </script>
 

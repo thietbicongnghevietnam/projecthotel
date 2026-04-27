@@ -22,7 +22,8 @@ namespace WebApplication1.App_Code
 
             //local
             //source = @"Data Source=./;Initial Catalog=Warehouse_BPS;User ID='sa';Password=''";
-            source = @"Data Source=./;Initial Catalog=DataNhaHang;User ID='sa';Password=''";
+            //source = @"Data Source=./;Initial Catalog=DataNhaHang;User ID='sa';Password=''";
+            source = @"Data Source=./;Initial Catalog=DataBanHang;User ID='sa';Password=''";
 
             con = new SqlConnection(source);
             try
@@ -116,6 +117,77 @@ namespace WebApplication1.App_Code
             //}
         }
 
+        public static int Execute_NonSQL2(string sql, List<SqlParameter> parameters = null)
+        {
+            SqlTransaction sqltran = null;
+            SqlConnection conn = null;
+            SqlCommand cmd = null;
+            int row = 0;
+
+            try
+            {
+                // Tạo kết nối mới
+                conn = new SqlConnection(source);
+                conn.Open();
+
+                // Bắt đầu giao dịch
+                sqltran = conn.BeginTransaction();
+
+                // Tạo đối tượng SqlCommand
+                cmd = new SqlCommand(sql, conn, sqltran);
+                cmd.CommandType = CommandType.Text;
+
+                // Nếu có tham số, thêm vào SqlCommand
+                if (parameters != null)
+                {
+                    cmd.Parameters.AddRange(parameters.ToArray());
+                }
+
+                // Thực thi câu lệnh SQL
+                row = cmd.ExecuteNonQuery();
+
+                // Commit giao dịch nếu không có lỗi
+                sqltran.Commit();
+            }
+            catch (Exception ex)
+            {
+                // Nếu có lỗi, rollback giao dịch
+                if (sqltran != null)
+                {
+                    sqltran.Rollback();
+                }
+
+                // Đảm bảo kết nối và các tài nguyên được giải phóng
+                if (conn != null)
+                {
+                    conn.Close();
+                    conn.Dispose();
+                }
+
+                // Thông báo lỗi chi tiết
+                throw new Exception("Lỗi khi thực thi SQL: " + ex.Message + "\nSQL: " + sql);
+            }
+            finally
+            {
+                // Giải phóng tài nguyên
+                if (conn != null && conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                    conn.Dispose();
+                }
+                if (sqltran != null)
+                {
+                    sqltran.Dispose();
+                }
+                if (cmd != null)
+                {
+                    cmd.Dispose();
+                }
+            }
+
+            return row;
+        }
+
         public static DataTable StoreFillDS(string query_object, CommandType type, params object[] obj)
         {
             using (SqlConnection conn = new SqlConnection(GetConnectStringFromFile()))
@@ -141,6 +213,60 @@ namespace WebApplication1.App_Code
                     return ds.Tables[0];
                 }
             }
+        }
+
+        public static DataTable Execute_StoredProcedure(string storedProcedure, List<SqlParameter> parameters = null)
+        {
+            SqlConnection conn = null;
+            SqlCommand cmd = null;
+            SqlDataAdapter dataAdapter = null;
+            DataTable resultTable = new DataTable();
+
+            try
+            {
+                // Tạo kết nối mới
+                conn = new SqlConnection(source);
+                conn.Open();
+
+                // Tạo SqlCommand để gọi stored procedure
+                cmd = new SqlCommand(storedProcedure, conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                // Nếu có tham số, thêm vào SqlCommand
+                if (parameters != null)
+                {
+                    cmd.Parameters.AddRange(parameters.ToArray());
+                }
+
+                // Tạo SqlDataAdapter để thực thi câu lệnh SQL và điền vào DataTable
+                dataAdapter = new SqlDataAdapter(cmd);
+                dataAdapter.Fill(resultTable);  // Điền dữ liệu vào DataTable
+
+            }
+            catch (Exception ex)
+            {
+                // Thông báo lỗi chi tiết nếu có lỗi xảy ra
+                throw new Exception("Lỗi khi thực thi Stored Procedure: " + ex.Message + "\nStored Procedure: " + storedProcedure);
+            }
+            finally
+            {
+                // Giải phóng tài nguyên
+                if (conn != null && conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                    conn.Dispose();
+                }
+                if (cmd != null)
+                {
+                    cmd.Dispose();
+                }
+                if (dataAdapter != null)
+                {
+                    dataAdapter.Dispose();
+                }
+            }
+
+            return resultTable;  // Trả về DataTable chứa kết quả
         }
 
         //public static DataTable StoreFillDS(string query_object, CommandType type, params object[] obj)

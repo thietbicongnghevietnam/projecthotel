@@ -23,16 +23,22 @@ namespace WebApplication1.Report
         {
             if (!IsPostBack)
             {
-                dt_BCTonkho = DataConn.StoreFillDS("NH_Baocaotonkho_lolai", System.Data.CommandType.StoredProcedure);
-                //dt_new.Columns.Add("mahang", typeof(String));
-                //dt_new.Columns.Add("tenhang", typeof(String));
-                //dt_new.Columns.Add("dvt", typeof(String));
-                //dt_new.Columns.Add("soluongxuat", typeof(int));
-                //dt_new.Columns.Add("giaban", typeof(int));
-                //dt_new.Columns.Add("doanhso", typeof(int));
-                //dt_new.Columns.Add("giavon", typeof(int));
-                //dt_new.Columns.Add("laigop", typeof(int));
-                //dt_new.Rows.Add("", "", "", 0, 0, 0, 0, 0);
+                dt_new.Columns.Add("sohd", typeof(String));
+                dt_new.Columns.Add("mahang", typeof(String));
+                dt_new.Columns.Add("tenhang", typeof(String));
+                dt_new.Columns.Add("dvt", typeof(String));
+                dt_new.Columns.Add("soluongxuat", typeof(float));
+                dt_new.Columns.Add("giaban", typeof(float));
+                dt_new.Columns.Add("gianhap", typeof(float));
+                dt_new.Columns.Add("doanhso", typeof(float));
+                dt_new.Columns.Add("giavon", typeof(float));
+                dt_new.Columns.Add("laigop", typeof(float));
+
+                dt_new.Rows.Add("", "", "", "", 0, 0, 0, 0, 0, 0);
+
+                //dt_BCTonkho = DataConn.StoreFillDS("NH_Baocaotonkho_lolai", System.Data.CommandType.StoredProcedure);
+                dt_BCTonkho = dt_new.Copy();
+
             }
         }
 
@@ -46,12 +52,12 @@ namespace WebApplication1.Report
             dt_new.Columns.Add("mahang", typeof(String));
             dt_new.Columns.Add("tenhang", typeof(String));
             dt_new.Columns.Add("dvt", typeof(String));
-            dt_new.Columns.Add("soluongxuat", typeof(int));
-            dt_new.Columns.Add("giaban", typeof(int));
-            dt_new.Columns.Add("gianhap", typeof(int));
-            dt_new.Columns.Add("doanhso", typeof(int));
-            dt_new.Columns.Add("giavon", typeof(int));
-            dt_new.Columns.Add("laigop", typeof(int));
+            dt_new.Columns.Add("soluongxuat", typeof(float));
+            dt_new.Columns.Add("giaban", typeof(float));
+            dt_new.Columns.Add("gianhap", typeof(float));
+            dt_new.Columns.Add("doanhso", typeof(float));
+            dt_new.Columns.Add("giavon", typeof(float));
+            dt_new.Columns.Add("laigop", typeof(float));
 
             //string _todate = Request.Form[ngaychiid.UniqueID];
 
@@ -85,22 +91,29 @@ namespace WebApplication1.Report
                     dt_danhsachhh = DataConn.StoreFillDS("NH_Baocaotonkho_lolai", System.Data.CommandType.StoredProcedure);
                     dt_items = DataConn.StoreFillDS("NH_Baocaotonkho_lolai2", System.Data.CommandType.StoredProcedure, _fromdate, _todate);
 
-                    int _soluongxuat = 0;
-                    int _doanhso = 0;
-                    int _tonggiavon = 0;
-                    int _laigop = 0;
+                    float _soluongxuat = 0;
+                    float _doanhso = 0;
+                    float _tonggiavon = 0;
+                    float _laigop = 0;
 
                     for (int i = 0; i < dt_danhsachhh.Rows.Count; i++)
                     {                        
-                        string mahang = dt_danhsachhh.Rows[i]["mahang"].ToString();
-                        string tenhang = dt_danhsachhh.Rows[i]["tenhang"].ToString();
-                        string dvt = dt_danhsachhh.Rows[i]["dvt"].ToString();
-                        string giaban = dt_danhsachhh.Rows[i]["giaban"].ToString();
-                        string giavon = dt_danhsachhh.Rows[i]["gianhap"].ToString();
+                        //string mahang = dt_danhsachhh.Rows[i]["mahang"].ToString();
+                        //string tenhang = dt_danhsachhh.Rows[i]["tenhang"].ToString();
+                        //string dvt = dt_danhsachhh.Rows[i]["dvt"].ToString();
+                        //string giaban = dt_danhsachhh.Rows[i]["giaban"].ToString();
 
-                       
+                        string mahang = dt_danhsachhh.Rows[i]["mahang"] != DBNull.Value ? dt_danhsachhh.Rows[i]["mahang"].ToString() : "";
+                        string tenhang = dt_danhsachhh.Rows[i]["tenhang"] != DBNull.Value ? dt_danhsachhh.Rows[i]["tenhang"].ToString() : "";
+                        string dvt = dt_danhsachhh.Rows[i]["dvt"] != DBNull.Value ? dt_danhsachhh.Rows[i]["dvt"].ToString() : "";
+                        string giaban = dt_danhsachhh.Rows[i]["giaban"] != DBNull.Value ? dt_danhsachhh.Rows[i]["giaban"].ToString() : "0";                        
 
-                       
+                        //string giavon = dt_danhsachhh.Rows[i]["gianhap"].ToString();
+                        string giavon = dt_danhsachhh.Rows[i]["gianhap"] != DBNull.Value ? dt_danhsachhh.Rows[i]["gianhap"].ToString() : "0";
+
+
+
+
                         for (int j = 0; j < dt_items.Rows.Count; j++)
                         {                           
                             string jsonString = dt_items.Rows[j][0].ToString();
@@ -112,10 +125,10 @@ namespace WebApplication1.Report
                             }
                             else
                             {
-                                int soluongxuat = 0;
-                                int doanhso = 0;
-                                int tonggiavon = 0;
-                                int laigop = 0;
+                                float soluongxuat = 0;
+                                float doanhso = 0;
+                                float tonggiavon = 0;
+                                float laigop = 0;
 
                                 // Phân tích chuỗi JSON
                                 JObject json = JObject.Parse(jsonString);
@@ -142,8 +155,8 @@ namespace WebApplication1.Report
                                         
                                     }
                                     soluongxuat = soluongxuat + Convert.ToInt32(quantity);
-                                    doanhso = soluongxuat * Int32.Parse(giaban);
-                                    tonggiavon = soluongxuat * Int32.Parse(giavon);
+                                    doanhso = soluongxuat * float.Parse(giaban);
+                                    tonggiavon = soluongxuat * float.Parse(giavon);
                                     laigop = doanhso - tonggiavon;
 
                                     //Console.WriteLine($"Phần tử '{searchTerm}' tồn tại trong danh sách.");

@@ -13,15 +13,6 @@ namespace WebApplication1 {
     public partial class Phieubanhang {
         
         /// <summary>
-        /// phieunhaphang control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox phieunhaphang;
-        
-        /// <summary>
         /// dr_nhacungcap control.
         /// </summary>
         /// <remarks>
@@ -29,6 +20,15 @@ namespace WebApplication1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList dr_nhacungcap;
+        
+        /// <summary>
+        /// phieunhaphang control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox phieunhaphang;
         
         /// <summary>
         /// Button4 control.

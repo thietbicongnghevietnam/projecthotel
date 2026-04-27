@@ -31,22 +31,22 @@ namespace WebApplication1.Danhmuc {
         protected global::System.Web.UI.WebControls.Label lblConfirm;
         
         /// <summary>
-        /// Date1 control.
+        /// dr_nhomhang3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl Date1;
+        protected global::System.Web.UI.WebControls.DropDownList dr_nhomhang3;
         
         /// <summary>
-        /// ngaychiid control.
+        /// partno_search control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl ngaychiid;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText partno_search;
         
         /// <summary>
         /// FileUpload control.

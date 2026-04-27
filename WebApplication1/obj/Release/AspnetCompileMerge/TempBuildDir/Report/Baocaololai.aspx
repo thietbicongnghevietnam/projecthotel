@@ -122,12 +122,12 @@
                                        <%-- <td><%=rows["soluongnhap"].ToString()%></td>--%>
                                         <td><%=rows["soluongxuat"].ToString()%></td>
 
-                                        <td><%=String.Format("{0:N0}", Int32.Parse(rows["giaban"].ToString()))%></td>
-                                        <td><%=String.Format("{0:N0}", Int32.Parse(rows["gianhap"].ToString()))%></td>
-                                        <td><%=String.Format("{0:N0}", Int32.Parse(rows["doanhso"].ToString())) %></td>
-                                         <td><%=String.Format("{0:N0}", Int32.Parse(rows["giavon"].ToString())) %></td> 
+                                        <td><%=String.Format("{0:N0}", float.Parse(rows["giaban"].ToString()))%></td>
+                                        <td><%=String.Format("{0:N0}", float.Parse(rows["gianhap"].ToString()))%></td>
+                                        <td><%=String.Format("{0:N0}", float.Parse(rows["doanhso"].ToString())) %></td>
+                                         <td><%=String.Format("{0:N0}", float.Parse(rows["giavon"].ToString())) %></td> 
                                         <%--<td><%=rows["nhomhangid"].ToString()%></td>--%>
-                                        <td><%=String.Format("{0:N0}", Int32.Parse(rows["laigop"].ToString())) %></td>
+                                        <td><%=String.Format("{0:N0}", float.Parse(rows["laigop"].ToString())) %></td>
                                        
                                         <td>
                                            <%-- <a href="#" class="btn btn-info btn-sm" title="delete item" onclick="openEditModal2('<%= rows["mahang"].ToString() %>')"><i class="fas fa-pencil-alt"></i>Thekho</a>--%>

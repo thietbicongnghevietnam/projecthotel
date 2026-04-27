@@ -172,6 +172,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="danhmuccauthanhdvt.aspx" />
     <Content Include="Danhmuc\Danhmucbanphong.aspx" />
     <Content Include="Danhmuc\Danhmucdonvi.aspx" />
     <Content Include="Danhmuc\Danhmuchanghoa.aspx" />
@@ -2597,6 +2598,13 @@
     </Compile>
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="danhmuccauthanhdvt.aspx.cs">
+      <DependentUpon>danhmuccauthanhdvt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="danhmuccauthanhdvt.aspx.designer.cs">
+      <DependentUpon>danhmuccauthanhdvt.aspx</DependentUpon>
     </Compile>
     <Compile Include="Danhmuc\Danhmucbanphong.aspx.cs">
       <DependentUpon>Danhmucbanphong.aspx</DependentUpon>

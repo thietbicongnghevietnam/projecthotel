@@ -1,0 +1,29 @@
+[dbo].[NH_Baocaotonkho_lolai]
+select 100000  bang hang hoa
+
+=====24.07.2025 ======
+NH_danhmuchanghoa_locmahang	
+NH_danhsachinbarcode
+
+=====================
+USE [DataBanHang]
+GO
+/****** Object:  StoredProcedure [dbo].[NH_danhmuchanghoa_locmahang]    Script Date: 07/27/2025 18:25:30 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER PROCEDURE [dbo].[NH_danhmuchanghoa_locmahang] 
+	@_partno as nvarchar(50)
+AS
+BEGIN
+	
+select top 1000 a.id,a.mahang,a.tenhang,a.dvt,a.soluongton,a.gianhap,a.giaban,a.anh,a.Orderid,
+(select b.manhomhang from htnhomhang b where b.manhomhang =a.nhomhangid ) as tennhomhang 
+from hthanghoa a where a.mahang=@_partno 
+
+END
+
+=====
+select top 100 mahang,tenhang,giaban from hthanghoa

@@ -43,20 +43,38 @@
                 </p>
                 <%--class="card-title"--%>
                 <div class="col-sm-12">
-                    <div style="float:left;">
+                    <%--<div style="float:left;">
                         Từ ngày:
                                     <%--<input type="text" id="datepicker" runat="server">--%>
-                                    <input type="date" id="Date1" name="date" runat="server">
-                    Đến ngày:                                    
-                                    <input type="date" id="ngaychiid" name="date" runat="server">
+                                   <%-- <input type="date" id="Date1" name="date" runat="server">--%>
+                   <%-- Đến ngày:    --%>                                
+                                  <%--  <input type="date" id="ngaychiid" name="date" runat="server">--%>
                                     
 
                     <%--<input type="checkbox" id="check_partno_search" style="width: 20px; height: 20px;" name="check_partno_search">--%>
                    <%-- Bàn / Phòng:                                    
                                     <input type="text" id="banphongid" runat="server">--%>
-                    </div>
+                    <%--</div>--%>
+
+
+                    <span style="width:200px; float:left;padding-left:20px;"> 
+                  <asp:DropDownList ID="dr_nhomhang3" runat="server" AppendDataBoundItems="true"  AutoPostBack="true" OnSelectedIndexChanged="dr_nhomhang_SelectedIndexChanged"
+                                                    DataTextField="manhomhang" 
+                                                    DataValueField="manhomhang" 
+                                                    CssClass="form-control input-sm">
+                                                </asp:DropDownList> 
+             </span> 
+
+                    <%--<input type="checkbox" id="check_partno_search" style="width: 20px; height: 20px;" name="check_partno_search" />--%>
+                    &nbsp;&nbsp;&nbsp;&nbsp;Mã hàng:                                    
+                                    <input type="text" id="partno_search" runat="server" />
+            
+             <button class="btn btn-primary" type="button" runat="server" onserverclick="Search_Date_Click2" >                 
+
+                        <i class="fa fa-fw fa-lg fa-search"></i>Lọc</button>
+             </span>
                     
-                  
+                 
                     <span style="padding-left:20px;"></span>
                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                      Thêm mới
@@ -216,7 +234,7 @@
                                        <label for="exampleInputEmail1">Nhóm hàng</label>
                                        <asp:DropDownList ID="dr_nhomhang2" runat="server" AppendDataBoundItems="true" 
                                                     DataTextField="manhomhang" 
-                                                    DataValueField="id" 
+                                                    DataValueField="manhomhang" 
                                                     CssClass="form-control input-sm">
                                      </asp:DropDownList>                                      
                                     </div>
@@ -308,7 +326,7 @@
                                        <label for="exampleInputEmail1">Nhóm hàng</label>
                                        <asp:DropDownList ID="dr_nhomhang" runat="server" AppendDataBoundItems="true" 
                                                     DataTextField="manhomhang" 
-                                                    DataValueField="id" 
+                                                    DataValueField="manhomhang" 
                                                     CssClass="form-control input-sm">
                                      </asp:DropDownList>                                      
                                     </div>
