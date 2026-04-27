@@ -22,8 +22,9 @@ namespace WebApplication1.App_Code
 
             //local
             //source = @"Data Source=./;Initial Catalog=Warehouse_BPS;User ID='sa';Password=''";
-            //source = @"Data Source=./;Initial Catalog=DataNhaHang;User ID='sa';Password=''";
-            source = @"Data Source=LT-DE2302026;Initial Catalog=DataNhaHang;Integrated Security=True";
+            source = @"Data Source=./;Initial Catalog=DataNhaHang;User ID='sa';Password=''";
+
+            //source = @"Data Source=LT-DE2302026;Initial Catalog=DataNhaHang;Integrated Security=True";
 
             //Data Source=LT-DE2302026;Initial Catalog=DataNhaHang;Integrated Security=True
 
