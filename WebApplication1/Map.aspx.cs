@@ -18,6 +18,7 @@ using Newtonsoft.Json;
 using System.IO;
 using QRCoder;
 
+
 namespace WebApplication1
 {
     public partial class Map : System.Web.UI.Page
@@ -261,19 +262,34 @@ namespace WebApplication1
             //check xem hoa don ton tai chua
             //update *** neu hoa don ton tai roi
             //lay so hoa don truyen len de update
-
-            dtsave = DataConn.StoreFillDS("NH_save_thongtinhanghoa", System.Data.CommandType.StoredProcedure, kieunghi, tenphong, tienhang, items, userid);//tenphong, data, tienhang
-
-            if (dtsave.Rows[0][0].ToString() == "1")
+            try
             {
-                //thongbao = "OK" + "," + dtlevel.Rows[0][1].ToString();
+                dtsave = DataConn.StoreFillDS("NH_save_thongtinhanghoa", System.Data.CommandType.StoredProcedure, kieunghi, tenphong, tienhang, items, userid);//tenphong, data, tienhang
 
-                thongbao = "OK";
+                if (dtsave.Rows[0][0].ToString() == "1")
+                {
+                    //thongbao = "OK" + "," + dtlevel.Rows[0][1].ToString();
+                    thongbao = "OK";
+
+                    // ====================== THÊM SIGNALR TẠI ĐÂY ====================== ****minh signalR
+                    if (!string.IsNullOrWhiteSpace(tenphong))
+                    {
+                        TableHub.UpdateTableStatus(tenphong.Trim(), "1");  // "1" = Có khách
+                    }
+                    // =================================================================
+                }
+                else
+                {
+                    thongbao = "NG";
+                }
             }
-            else
+            catch (Exception ex)
             {
                 thongbao = "NG";
+                // Nên log lỗi để debug sau này
+                System.Diagnostics.Debug.WriteLine("Lỗi addthongtinhanghoa: " + ex.Message);
             }
+
             return thongbao;
         }
 
@@ -573,6 +589,15 @@ namespace WebApplication1
                     {
                         //thongbao = "OK" + "," + dtlevel.Rows[0][1].ToString();
                         thongbao = "OK" + "," + dtsave.Rows[0][1].ToString();
+
+                        // ================= SIGNALR =================
+                        if (!string.IsNullOrWhiteSpace(tenphong))
+                        {
+                            TableHub.UpdateTableStatus(tenphong.Trim(), "0");
+                            // "0" = phòng trống sau thanh toán
+                        }
+                        // ===========================================
+
                     }
                     else
                     {
@@ -584,8 +609,9 @@ namespace WebApplication1
             }
             catch (Exception ex)
             {
-
-                throw;
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                return "NG";
+                //throw ex;
             }
 
         }

@@ -1172,6 +1172,8 @@ background:rgba(0,0,0,0.55); z-index:9999;">
         });
 
         function doSomethingTimer() {
+            // Thực hiện các công việc bạn muốn thực hiện sau mỗi khoảng thời gian
+            console.log("Doing something...");
 
             $.ajax({
                 type: "POST",

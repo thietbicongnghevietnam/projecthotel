@@ -1,3 +1,26 @@
+========= // 30.05.2026 //==========OrderNhanVien.aspx
+***hinh thuc nghi: mater ***
+phong dat truoc: 
+	$(this).find("img").attr('src', '/static/images/phongdattruoc.png');
+trang thai don phong:
+	$(this).find("img").attr('src', '/static/images/chuadonphong.png');
+
+ // ====================== THÊM SIGNALR TẠI ĐÂY ====================== ****minh signalR
+ if (!string.IsNullOrWhiteSpace(tenphong))
+ {
+     TableHub.UpdateTableStatus(tenphong.Trim(), "1");  // "1" = Có khách
+ }
+ // =================================================================
+
+ //use SIGNALR 100% 
+ //pending -> doi trang thai khi thanh cong -> khong co kach
+ //$("#myList UL LI").each(function () {
+ //    var nameroom = $(this).find('#tenphong').text();
+ //    if (nameroom == tenphong) {
+ //        $(this).find("img").attr('src', '/static/images/phongtrong.png');
+ //    }
+ //})
+
 ========= // 26.04.2026 //==========
 bang: 
 htsocai them cot : IsPrinted 	(in qua ipad)
@@ -8,3 +31,5 @@ Install-Package System.Drawing.Primitives
 
 ****Windows Service không chạy trực tiếp như WinForms/Console App.
 ****Nó phải được cài vào Services của Windows rồi mới Start được.
+
+https://github.com/thietbicongnghevietnam/BanHang.git

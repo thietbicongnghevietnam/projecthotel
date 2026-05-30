@@ -14,11 +14,8 @@
 
    <%-- <webopt:bundlereference runat="server" path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />--%>
-
-    
   <meta name="viewport" content="width=device-width, initial-scale=1">
  
-
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome Icons -->
@@ -51,7 +48,6 @@
     <script src="../Scripts/jquery.table2excel.min.js"></script>--%>
     
 <%-- <link href="../Content/bootstrap.min.css" rel="stylesheet">--%>
-   
 
 </head>
 <body class="hold-transition sidebar-mini">
@@ -967,10 +963,10 @@
 
 
 
-    <script src="../plugins/jquery/jquery.min.js"></script>
+   <%-- <script src="../plugins/jquery/jquery.min.js"></script>--%>
     <script src="../plugins/jquery-ui/jquery-ui.min.js"></script>
     <%--<script src="../plugins/popper/esm/popper.min.js"></script>  --%>
-    <script src="../Scripts/bootstrap.js"></script>  
+   <%-- <script src="../Scripts/bootstrap.js"></script>  --%>
    <%-- <script src="../plugins/toastr/toastr.js"></script>--%>
 
 

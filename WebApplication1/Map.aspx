@@ -206,6 +206,7 @@
     </style>
 
 
+
    <%-- <link rel="stylesheet" href="../dist/contextmenu.css">
     <script src="../dist/contextmenu.js"></script>--%>
    
@@ -430,7 +431,7 @@
                                         <%int f = 0; %>
                                         <%foreach (System.Data.DataRow rows in dt_getinfo_phong4.Rows)
                                             {%>
-                                        <%h++;%>
+                                        <%f++;%>
                                         <li class="item" id="nametable_<%=f %>">
                                              <img src="/static/images/phongtrong.png" style="float:left; margin-left:3px; margin-top:3px;width:50px; height: 50px;">
                                             <p id="tenphong" style="float:left; margin-left: 5px; margin-top:3px;"><%=rows["tenphong"].ToString() %></p> 
@@ -815,7 +816,7 @@
                                 <span style="font-size:24px;color:black;"><%=tendovi %></span><br />
                                 <i style="font-size:20px;">Địa chỉ: <%=diachidonvi %></i><br />
                                 <i style="font-size:18px;">SĐT:</i>
-                                <span style="font-size:18px;"><%=sodtdonvi %> - <%=sodtdonvi2 %> - <%=sodtdonvi3 %></span>
+                                <span style="font-size:18px;"><%=sodtdonvi %>  <%=sodtdonvi2 %>  <%=sodtdonvi3 %></span>
                                 <br />
 
                                 <i style="font-size:24px;" id="tieudein">HÓA ĐƠN THANH TOÁN (PHIẾU TẠM TÍNH)</i><br />
@@ -1086,15 +1087,11 @@
 
                 //$('#txtid').prop("readonly", true);
                 //$('#txtmaterial').prop("readonly", true);
-
                 //$('#TOOLING_NO_ID').prop("readonly", true);
                 //$('#CustomTooling_ID').prop("readonly", true);
                 //$('#txt_ID').prop("readonly", true);
 
-                //lay so hoa don lon nhat
-
                 //check trang thai ban phong co khach hay khong?
-
                 $.ajax({
                     type: "POST",
                     contentType: "application/json; charset=utf-8",
@@ -2189,14 +2186,15 @@
                                     $('#conlaiid').val('0');
                                     $('#tiengioid').val('0');
 
+                                    //use SIGNALR 100% 
                                     //pending -> doi trang thai khi thanh cong -> khong co kach
+                                    //$("#myList UL LI").each(function () {
+                                    //    var nameroom = $(this).find('#tenphong').text();
+                                    //    if (nameroom == tenphong) {
+                                    //        $(this).find("img").attr('src', '/static/images/phongtrong.png');
+                                    //    }
+                                    //});
 
-                                    $("#myList UL LI").each(function () {
-                                        var nameroom = $(this).find('#tenphong').text();
-                                        if (nameroom == tenphong) {
-                                            $(this).find("img").attr('src', '/static/images/phongtrong.png');
-                                        }
-                                    });
                                     $('#bangchuid2').text('');
 
                                     //load lai trang khi thanh cong
@@ -2240,13 +2238,14 @@
                                 //$('#hoadonid').val(parseInt(sohoadon)+1);
                                 $('#hoadonid').val(sohoadon_new);
 
+                                //use SIGNALR 100% 
                                 //pending -> doi trang thai khi thanh cong -> khong co kach
-                                $("#myList UL LI").each(function () {
-                                    var nameroom = $(this).find('#tenphong').text();
-                                    if (nameroom == tenphong) {
-                                        $(this).find("img").attr('src', '/static/images/phongtrong.png');
-                                    }
-                                });
+                                //$("#myList UL LI").each(function () {
+                                //    var nameroom = $(this).find('#tenphong').text();
+                                //    if (nameroom == tenphong) {
+                                //        $(this).find("img").attr('src', '/static/images/phongtrong.png');
+                                //    }
+                                //});
 
                                 $('#bangchuid2').text('');
 
@@ -2495,13 +2494,16 @@
 
                             //$('#hoadonid').val(parseInt(sohoadon) + 1);
                             $('#hoadonid').val(sohoadon);
+
+                            //use SIGNALR 100% 
                             //pending -> doi trang thai khi thanh cong -> khong co kach
-                            $("#myList UL LI").each(function () {
-                                var nameroom = $(this).find('#tenphong').text();
-                                if (nameroom == tenphong) {
-                                    $(this).find("img").attr('src', '/static/images/phongtrong.png');
-                                }
-                            })
+                            //$("#myList UL LI").each(function () {
+                            //    var nameroom = $(this).find('#tenphong').text();
+                            //    if (nameroom == tenphong) {
+                            //        $(this).find("img").attr('src', '/static/images/phongtrong.png');
+                            //    }
+                            //})
+
                             $('#bangchuid2').text('');
 
                             //lay so hoa don => IN HOA DON
@@ -2529,6 +2531,8 @@
                 });
             };
 
+
+            //cach 1: dung thu cong
             function doSomethingTimer() {
                 // Thực hiện các công việc bạn muốn thực hiện sau mỗi khoảng thời gian
                 console.log("Doing something...");
@@ -2580,9 +2584,10 @@
 
             }
 
-            // Thực hiện hàm doSomething() sau mỗi 1000ms (1 giây)
-            var intervalId = setInterval(doSomethingTimer, 60000);
+            //// Thực hiện hàm doSomething() sau mỗi 1000ms (1 giây)
+            //var intervalId = setInterval(doSomethingTimer, 60000);  //*** tam rao dong nay
 
+            //======================= // end cach 1 //=================
 
             // nut ghi lai danh sach thuc don
             $('.saveproduct').click(function () {
@@ -2634,12 +2639,15 @@
                             dataType: "json",
                             success: function (data) {
                                 alert('Hàng hóa đã được thêm thành công!');
-                                $("#myList UL LI").each(function () {
-                                    var nameroom = $(this).find('#tenphong').text();
-                                    if (nameroom == tenphong) {
-                                        $(this).find("img").attr('src', '/static/images/cokhach.png');
-                                    }
-                                })
+
+                                ////*** signalR  ==> xoa phan duoi***
+                                //$("#myList UL LI").each(function () {
+                                //    var nameroom = $(this).find('#tenphong').text();
+                                //    if (nameroom == tenphong) {
+                                //        $(this).find("img").attr('src', '/static/images/cokhach.png');
+                                //    }
+                                //})
+
                             },
                             error: function () {
                                 //alert("No Match");
@@ -2700,12 +2708,14 @@
                             dataType: "json",
                             success: function (data) {
                                 alert('Hàng hóa đã được thêm thành công!');
-                                $("#myList UL LI").each(function () {
-                                    var nameroom = $(this).find('#tenphong').text();
-                                    if (nameroom == tenphong) {
-                                        $(this).find("img").attr('src', '/static/images/cokhach.png');
-                                    }
-                                })
+                                ////*** signalR  ==> xoa phan duoi***
+                                //$("#myList UL LI").each(function () {
+                                //    var nameroom = $(this).find('#tenphong').text();
+                                //    if (nameroom == tenphong) {
+                                //        $(this).find("img").attr('src', '/static/images/cokhach.png');
+                                //    }
+                                //})
+
                             },
                             error: function () {
                                 //alert("No Match");
@@ -3736,210 +3746,59 @@
                 }
             }
 
-
-
         </script>
 
-       
+      
+<!-- cach 2 ==================== SIGNALR ==================== -->
+<%--<script src="../Scripts/jquery.signalR-2.4.3.min.js"></script>--%>
+<%--<script src="<%= ResolveUrl("~/Scripts/jquery.signalR-2.4.3.min.js") %>"></script>
+<script src="<%= ResolveUrl("~/signalr/hubs") %>"></script>--%>
+<script src="../Scripts/jquery.signalR-2.4.3.js"></script>
+<script src="../signalr/hubs"></script>
+  <%--  <script src='<%: ResolveClientUrl("~/Scripts/jquery.signalR-2.4.3.js") %>'></script>
+<script src='<%: ResolveClientUrl("~/signalr/hubs") %>'></script>--%>
 
-       <%-- <script>
-            var str = '';
-            var tenphong = '';
-            var menu = new Contextmenu({
-                name: "menu",
-                wrapper: ".wrapper",
-                trigger: ".item",
-                item: [{
-                    "name": "Thông tin phòng",
-                    "func": "setText()",
-                    "link": null,
-                    "disable": false
-                },
-                {
-                    "name": "Dọn Phòng",
-                    "link": "#",
-                    "disable": false
-                },
-                {
-                    "name": "Đặt Phòng",
-                    "disable": false
-                },
-                {
-                    "name": "-"
-                },                
-                {
-                    "name": "Chuyển ban",
-                    "func": "updateItem()"
-                },                
-                {
-                    "name": "Ghep ban",
-                    "func": "ghepban()"
-                },
-                {
-                    "name": "Hủy Phòng",
-                    "func": "delItem()"
-                },
-                {
-                    "name": "-"
-                },
-                {
-                    "name": "Remove Method",
-                    "func": "removeMenu()"
-                },
-                {
-                    "name": "Đóng Menu"
-                }
-                ],
-                target: "_blank",
-                beforeFunc: function (ele) {
-                    str = $(ele).text();
-                    //tenphong123 = $("#tenphong").text();               
+<script type="text/javascript">
+    $(document).ready(function () {
+        console.log("Đang khởi tạo SignalR...");
+
+        if (typeof $.connection === 'undefined') {
+            console.error("❌ jQuery SignalR chưa load");
+            return;
+        }
+
+        $.connection.hub.logging = true;
+        var tableHub = $.connection.tableHub;
+
+        if (!tableHub) {
+            console.error("❌ TableHub không tồn tại. Kiểm tra route MapHubs()");
+            return;
+        }
+
+        tableHub.client.updateTable = function (tenphong, trangthai) {
+            console.log("SignalR nhận:", tenphong, trangthai);
+
+            $("#myList UL LI").each(function () {
+                var nameroom = $(this).find('#tenphong').text().trim();
+                if (nameroom === tenphong) {
+                    if (trangthai === '1' || trangthai === 1) {
+                        $(this).find("img").attr('src', '/static/images/cokhach.png');
+                    } else {
+                        $(this).find("img").attr('src', '/static/images/phongtrong.png');
+                    }
                 }
             });
+        };
 
-            function setText() {
-                alert(str);
-                //var tenphong = $("#tenphong").val();
-                //alert(tenphong);
-            }
+        $.connection.hub.start()
+            .done(function () {
+                console.log("✅ SignalR Connected thành công!");
+            })
+            .fail(function (err) {
+                console.error("❌ SignalR connect thất bại:", err);
+            });
+    });
+</script>
 
-            function ghepban() {
-                alert("chuc nang ghep ban!");
-                // addItem()
-                //menu.add({
-                //    index: 0,
-                //    name: "New Item",
-                //    func: 'alert("New Item")',
-                //    link: null,
-                //    disable: false
-                //});
-            }
 
-            function delItem() {
-                //menu.del(4);
-                //debugger;
-                var tenphong1 = $("#nametable").text();
-                //alert(tenphong1);
-                var nameitem = tenphong1;                            
-                var data = { nameitem: nameitem };
-                $.ajax({
-                            type: "POST",
-                            contentType: "application/json; charset=utf-8",
-                            url: "Map.aspx/huyphongban",
-                            data: JSON.stringify(data),
-                            dataType: "json",
-                            success: function (data) {
-                                //response(data.d);
-                                //alert(data.d);
-                                if(data.d != "NG")
-                                {
-                                    alert('Huy ban thành công!');
-                                    $("#myList UL LI").each(function () {
-                                        var nameroom = $(this).find('#tenphong').text();
-                                        if (nameroom == tenphong) {
-                                            $(this).find("img").attr('src','/static/images/phongtrong.png');
-                                        }
-                                    })
-
-                                }
-                                else
-                                {
-                                    alert('NG!!!');
-                                }
-                            },
-                            error: function (result) {
-                                //alert("No Match");
-                            }
-                        });                
-            }
-
-            function removeMenu() {
-                menu.destroy();
-            }
-
-            function updateItem() {
-                //let newroom;
-                //debugger;
-                var tenphong1 = $("#nametable").text();
-                //alert(tenphong1);
-                let notice = prompt("Vui long nhap ban/phong can chuyen!");
-                if (notice == null || notice == "") 
-                {
-                    newroom = "Phong/ban null!"; 
-                    alert(newroom);               
-                } 
-                else 
-                {
-                    //newroom = "Phong moi chuyen: " + notice;
-                    document.getElementById("thongbao").innerHTML = notice;
-                    var newroom = notice;
-
-                    //alert(tenphong1);                
-                    if(tenphong1 == "")
-                    {
-                        alert("ban can chon phong can chuyen!");
-                    }
-                    else
-                    {
-                        var nameitem = tenphong1;            
-                        var data = { nameitem: nameitem, newroom:newroom };
-                        $.ajax({
-                                type: "POST",
-                                contentType: "application/json; charset=utf-8",
-                                url: "Map.aspx/chuyenphongban",
-                                data: JSON.stringify(data),
-                                dataType: "json",
-                                success: function (data) {
-                                    //response(data.d);
-                                    //alert(data.d);
-                                    if(data.d != "NG")
-                                    {
-                                        alert('Chuyen ban thành công!');
-                                        $("#myList UL LI").each(function () {
-                                            var nameroom = $(this).find('#tenphong').text();
-                                            if (nameroom == nameitem) {
-                                                $(this).find("img").attr('src','/static/images/phongtrong.png');
-                                            }
-                                            if (nameroom == newroom) {
-                                                $(this).find("img").attr('src','/static/images/cokhach.png');
-                                            }
-                                        })                                        
-                                    }
-                                    else
-                                    {
-                                        alert('Chuyen ban/phong NG!!!');
-                                    }
-                                },
-                                error: function (result) {
-                                    //alert("No Match");
-                                }
-                          }); 
-                    }                   
-                }
-               
-                 
- 
-                //menu.update({
-                //    index: 5,
-                //    name: "github",
-                //    func: "",
-                //    link: "https://www.jqueryscript.net",
-                //    disable: false
-                //});
-            }
-</script>--%>
-        <%--<script type="text/javascript">
-
-            var _gaq = _gaq || [];
-            _gaq.push(['_setAccount', 'UA-36251023-1']);
-            _gaq.push(['_setDomainName', 'jqueryscript.net']);
-            _gaq.push(['_trackPageview']);
-
-            (function () {
-                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-            })();
-
-</script>--%>
 </asp:Content>
