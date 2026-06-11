@@ -207,6 +207,22 @@ namespace WebApplication1
                 };
 
                 DataConn.ExecuteNonQuery(sql, pr);
+
+                SqlParameter[] pr2 = new SqlParameter[]
+                {
+                    new SqlParameter("@TenPhong", tenphong)
+                };
+                // lấy số hóa đơn
+                string sql2 = @"SELECT TOP 1 sohd FROM htsocai WHERE tenphong = @TenPhong AND IsPrinted = 1 ORDER BY ID DESC";
+               
+                object obj = DataConn.ExecuteScalar1(sql2, pr2);
+                if (obj != null)
+                {
+                    string sohoadon = obj.ToString();
+                    // gửi realtime tới máy in
+                    TableHub.PrintInvoice(sohoadon);
+                }
+
                 return "OK";
             }
             catch (Exception ex)

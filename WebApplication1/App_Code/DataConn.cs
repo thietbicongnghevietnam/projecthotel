@@ -151,6 +151,57 @@ namespace WebApplication1.App_Code
             return result;
         }
 
+        public static object ExecuteScalar1(string sql, SqlParameter[] parameters)
+        {
+            using (SqlConnection conn = new SqlConnection(source))
+            {
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    if (parameters != null)
+                        cmd.Parameters.AddRange(parameters);
+
+                    return cmd.ExecuteScalar();
+                }
+            }
+        }
+
+        public static DataSet ExecuteDataset(string sql)
+        {
+            DataSet ds = new DataSet();
+
+            using (SqlConnection conn = new SqlConnection(source))
+            {
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    cmd.CommandType = CommandType.Text;
+
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    {
+                        da.Fill(ds);
+                    }
+                }
+            }
+
+            return ds;
+        }
+
+        public static object ExecuteScalar(string sql)
+        {
+            using (SqlConnection conn = new SqlConnection(source))
+            {
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    return cmd.ExecuteScalar();
+                }
+            }
+        }
+
         public static DataTable StoreFillDS(string query_object, CommandType type, params object[] obj)
         {
             using (SqlConnection conn = new SqlConnection(GetConnectStringFromFile()))

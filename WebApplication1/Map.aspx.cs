@@ -771,7 +771,44 @@ namespace WebApplication1
                 thongbao = "NG";
             }
             return thongbao;
+        }
+        //in hoa don tu dong cho IPad
+        [WebMethod]
+        public static string KiemTraHoaDonCanIn()
+        {
+            string sohoadon = "";
 
+            string sql = @"SELECT TOP 1 sohd FROM htsocai WHERE IsPrinted = 1 ORDER BY ID ASC";
+
+            //DataTable dt = DataConn.ExecuteDataset(sql).Tables[0];
+            //if (dt.Rows.Count > 0)
+            //{
+            //    string sohoadon = dt.Rows[0]["sohd"].ToString();
+            //}
+            object obj = DataConn.ExecuteScalar(sql);
+            if (obj != null)
+            {
+                sohoadon = obj.ToString();
+            }
+            return sohoadon;
+        }
+        //cap nhat hoa don tu dong cho IPad
+        [WebMethod]
+        public static void CapNhatDaIn(string sohoadon)
+        {
+            string sql = @"UPDATE htsocai SET IsPrinted = 2 WHERE sohd = @SoHoaDon";
+
+            //SqlConnection con = new SqlConnection(ConnectionString);
+            SqlConnection con = new SqlConnection(GetConnectStringFromFile());
+            //GetConnectStringFromFile()
+
+            SqlCommand cmd = new SqlCommand(sql, con);
+
+            cmd.Parameters.AddWithValue("@SoHoaDon", sohoadon);
+
+            con.Open();
+            cmd.ExecuteNonQuery();
+            con.Close();
         }
 
 

@@ -2588,6 +2588,45 @@
             //var intervalId = setInterval(doSomethingTimer, 60000);  //*** tam rao dong nay
 
             //======================= // end cach 1 //=================
+            // in hoa don tu dong ********************
+
+            //setInterval(function () {
+            //    $.ajax({
+            //        type: "POST",
+            //        url: "Map.aspx/KiemTraHoaDonCanIn",
+            //        contentType: "application/json; charset=utf-8",
+            //        dataType: "json",
+            //        success: function (res) {
+            //            var sohoadon = res.d;
+
+            //            console.log("Server trả về:", res);
+            //            console.log("Số hóa đơn:", sohoadon);
+
+            //            if (sohoadon != "") {
+            //                hoadon_printting(sohoadon,"Phiếu order (tự động)");
+            //                // cập nhật đã in
+            //                DanhDauDaIn(sohoadon);
+            //            }
+            //        }
+            //    });
+
+            //}, 5000);
+
+            function DanhDauDaIn(sohoadon) {
+
+                $.ajax({
+                    type: "POST",
+                    url: "Map.aspx/CapNhatDaIn",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify({
+                        sohoadon: sohoadon
+                    }),
+                    dataType: "json"
+                });
+            }
+            //======================= // tu dong in hoa don tu ipad //=================
+
+            //======================= // end //=================
 
             // nut ghi lai danh sach thuc don
             $('.saveproduct').click(function () {
@@ -2920,8 +2959,7 @@
                 var hinhthucnghi = $('#stylerender').val();
                 //pending inlai                      
                 //var giohat = $('#ticketid').val();
-                //alert(giohat);
-
+                
                 // lay thong tin hoang hoa
                 $.ajax({
                     type: "POST",
@@ -3788,6 +3826,14 @@
                     }
                 }
             });
+        };
+
+        tableHub.client.printInvoice = function (sohd) {
+            console.log("🖨 Nhận lệnh in:", sohd);
+            //hoadon_printting(sohd, "Phiếu thanh toán");
+            hoadon_printting(sohd, "Phiếu order (tự động)");
+            // cập nhật đã in
+            DanhDauDaIn(sohd);
         };
 
         $.connection.hub.start()

@@ -7,4 +7,13 @@ public class TableHub : Hub
         var context = GlobalHost.ConnectionManager.GetHubContext<TableHub>();
         context.Clients.All.updateTable(tenphong, trangthai);
     }
+
+    public static void PrintInvoice(string sohd)
+    {
+        var context = GlobalHost.ConnectionManager.GetHubContext<TableHub>();
+
+        context.Clients.All.printInvoice(sohd);
+    }
+
+
 }
