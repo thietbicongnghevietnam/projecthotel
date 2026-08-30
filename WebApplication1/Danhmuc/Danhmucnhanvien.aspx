@@ -108,7 +108,7 @@
                                         <td></td>
                                         
                                         <td>
-                                            <a href="#" class="btn btn-info btn-sm" title="delete item" onclick="openEditModal2('<%= rows["U_NAME"].ToString() %>','<%= rows["U_FULLNAME"].ToString() %>')"><i class="fas fa-pencil-alt"></i>Sửa</a>
+                                            <a href="#" class="btn btn-info btn-sm" title="delete item" onclick="openEditModal2('<%= rows["U_NAME"].ToString() %>','<%= rows["U_FULLNAME"].ToString() %>','<%= rows["U_PASSWORD"].ToString() %>')"><i class="fas fa-pencil-alt"></i>Sửa</a>
                                         </td> 
                                         
                                     </tr>
@@ -157,7 +157,19 @@
                                         <asp:TextBox ID="txttenkhuvuc" CssClass="form-control" placeholder="" runat="server"></asp:TextBox>                                        
                                     </div>
                                 </div>
-                            </div>                                                       
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="ID">Mật Khẩu</label>
+                                        <span style="color: green; font-size: 11px; font-style: italic;"></span>
+                                        <asp:TextBox ID="txtmatkhau" CssClass="form-control" placeholder="" runat="server"></asp:TextBox>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                   
+                                </div>
+                            </div>    
                             
                         </div>
                     </div>

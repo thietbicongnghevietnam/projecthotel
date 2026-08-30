@@ -215,70 +215,148 @@
         <div class="wrapper">
             <!-- Content Header (Page header) -->
             <section class="content-header">
-                <div class="container-fluid">
-                    <div class="row mb-2">
-                        <div class="col-sm-8">
-                            <i style="font-size:16px; padding-top: 5px; color: black;">Chi tiết bàn/phòng : </i> <b style="font-size:22px; padding-top:5px; color:red" class="td_menu"></b> / Time:
-                            <%--Day : <b style="font-size: 14px; color: blue" class="songaydung"></b>--%>
-                            &nbsp;&nbsp;Gio : <b style="font-size: 14px; color: blue" class="sogiodung"></b>
-                            &nbsp;&nbsp;Phut : <b style="font-size: 14px; color: blue" class="sophutdung"></b>
-                            <b style="padding-right: 10px; margin-left: 10px; margin-top: 5px;">Giờ vào:</b>
-                            <input id="checkinput1" style="width: 150px; margin-top: 10px;" name="checkinput1" value=""/>
-                            <b style="padding-right: 10px; margin-left: 10px; margin-top: 5px;">Giờ ra:</b>
-                            <input id="checkinput2" style="width: 150px; margin-top: 10px;" name="checkinput2" value=""/>
-                            <b style="padding-right: 12px; margin-left: 10px;">Hình thức nghỉ:</b>
-                            <input id="stylerender" style="width: 80px; background-color:aqua; " name="stylerender" value="" />
-                            <div style="width:150px; float:right; margin-left:10px;">
-                            <asp:DropDownList ID="dr_hinhthucnghi" runat="server" AppendDataBoundItems="true" 
-                            DataTextField="hinhthucnghi" 
-                            DataValueField="id" 
-                            CssClass="form-control input-sm">
-                            </asp:DropDownList>
-                                </div>
-                           
-                            <br />
+    <div class="container-fluid">
+        <div class="row align-items-center mb-2">
+            <!-- Cột thông tin chính -->
+            <div class="col-lg-8 col-md-12">
+                <div class="d-flex flex-wrap align-items-center">
+                    <!-- Tiêu đề bàn/phòng -->
+                    <div class="mr-3 mb-2 mb-md-0">
+                        <span style="font-size:15px; color:#495057;">
+                            <i class="fas fa-utensils mr-1"></i> Chi tiết bàn/phòng:
+                        </span>
+                        <b style="font-size:22px; color:#dc3545;" class="td_menu ml-1"></b>
+                    </div>
 
-                            <b style="padding-right: 10px; margin-left: 10px;">Loại phòng:</b>
-                            <input id="styleroom" style="width: 50px; " name="styleroom" value=""/>
-                            <b style="padding-right: 10px; margin-left: 10px;">Ticket:</b>
-                            <input  style="width: 80px;margin-left: 30px;" id="ticketid" name="ticket" />
-
-                            <b style="padding-right: 10px; margin-left: 10px;">Gộp/chuyển:</b>
-                            <b style="font-size: 14px; color: blue" id="thongbao"></b>
-
-                            <b style="padding-right: 10px; margin-left: 10px;">kieu nghi:</b>
-                            <b style="font-size: 14px; color: blue" id="kieunghiid"></b>
-
-                            
-                        </div>
-
-                        <div class="col-sm-4">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active"> <a href="#" onclick="updateItem()">Chuyển bàn</a></li>
-                                <li class="breadcrumb-item active"><a href="#" onclick="gopban()">Gộp bàn</a></li>
-                                <li class="breadcrumb-item active"><a href="#" onclick="delItem()">Hủy bàn</a></li>
-                                <li class="breadcrumb-item active"><a href="Danhmuc/DanhmucOrder.aspx" target="_blank" >Danh sách Order</a></li>
-                            </ol>
-                            <br />
-                             <div style="float: right;">
-                                 <b class="addnew_KH" style="color: blue; padding-left: 5px;">| Thêm KH</b>
-                                 <b style="color: blue; padding-left: 5px;">| Xem lại HĐ</b>
-                                <input type="checkbox" id="xemlaiHD" name="xemlaiHD">
-                                  <b style="color: blue; padding-left: 5px;">| In lại HĐ</b>
-                                                <input type="checkbox" id="inlaiHD" name="inlaiHD">
-
-                                 
-
-                            </div>
-                            
-
-                        </div>
-                        
+                    <!-- Thời gian sử dụng -->
+                    <div class="mr-3 mb-2 mb-md-0 d-flex align-items-center">
+                        <span class="text-muted mr-2">Thời gian:</span>
+                        <span class="badge badge-info px-2 py-1 mr-1">
+                            Giờ: <b class="sogiodung"></b>
+                        </span>
+                        <span class="badge badge-info px-2 py-1">
+                            Phút: <b class="sophutdung"></b>
+                        </span>
                     </div>
                 </div>
-                <!-- /.container-fluid -->
-            </section>
+
+                <!-- Hàng thông tin chi tiết -->
+                <div class="d-flex flex-wrap align-items-center mt-2">
+                    <!-- Giờ vào / Giờ ra -->
+                    <div class="form-group mb-2 mr-3 d-flex align-items-center">
+                        <label class="mb-0 mr-2 font-weight-bold text-secondary" style="min-width:60px;">Giờ vào:</label>
+                        <input id="checkinput1" name="checkinput1" 
+                               class="form-control form-control-sm" 
+                               style="width:160px;" value="" />
+                    </div>
+
+                    <div class="form-group mb-2 mr-3 d-flex align-items-center">
+                        <label class="mb-0 mr-2 font-weight-bold text-secondary" style="min-width:55px;">Giờ ra:</label>
+                        <input id="checkinput2" name="checkinput2" 
+                               class="form-control form-control-sm" 
+                               style="width:160px;" value="" />
+                    </div>
+
+                    <!-- Hình thức nghỉ -->
+                    <div class="form-group mb-2 mr-3 d-flex align-items-center">
+                        <label class="mb-0 mr-2 font-weight-bold text-secondary">Hình thức nghỉ:</label>
+                        <input id="stylerender" name="stylerender" 
+                               class="form-control form-control-sm text-center" 
+                               style="width:90px; background-color:#e0f7fa; font-weight:600;" value="" />
+                        
+                        <div style="width:150px; margin-left:8px;">
+                            <asp:DropDownList ID="dr_hinhthucnghi" runat="server" 
+                                AppendDataBoundItems="true"
+                                DataTextField="hinhthucnghi"
+                                DataValueField="id"
+                                CssClass="form-control form-control-sm">
+                            </asp:DropDownList>
+                        </div>
+                    </div>
+
+                    <!-- Loại phòng + Ticket -->
+                    <div class="form-group mb-2 mr-3 d-flex align-items-center">
+                        <label class="mb-0 mr-2 font-weight-bold text-secondary">Loại phòng:</label>
+                        <input id="styleroom" name="styleroom" 
+                               class="form-control form-control-sm text-center" 
+                               style="width:55px;" value="" />
+                    </div>
+
+                    <div class="form-group mb-2 mr-3 d-flex align-items-center">
+                        <label class="mb-0 mr-2 font-weight-bold text-secondary">Ticket:</label>
+                        <input id="ticketid" name="ticket" 
+                               class="form-control form-control-sm" 
+                               style="width:90px;" />
+                    </div>
+
+                    <!-- Gộp/chuyển + Kiểu nghỉ -->
+                    <div class="form-group mb-2 mr-3 d-flex align-items-center">
+                        <label class="mb-0 mr-2 font-weight-bold text-secondary">Gộp/chuyển:</label>
+                        <b style="font-size:14px; color:#007bff;" id="thongbao"></b>
+                    </div>
+
+                    <div class="form-group mb-2 d-flex align-items-center">
+                        <label class="mb-0 mr-2 font-weight-bold text-secondary">Kiểu nghỉ:</label>
+                        <b style="font-size:14px; color:#007bff;" id="kieunghiid"></b>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cột action bên phải -->
+            <div class="col-lg-4 col-md-12">
+                <div class="d-flex flex-column align-items-lg-end">
+                    <!-- Breadcrumb actions -->
+                    <ol class="breadcrumb float-sm-right mb-2 bg-transparent p-0">
+                        <li class="breadcrumb-item">
+                            <a href="#"><i class="fas fa-home"></i> Home</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="#" onclick="updateItem()" class="text-primary font-weight-bold">
+                                <i class="fas fa-exchange-alt"></i> Chuyển bàn
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="#" onclick="gopban()" class="text-success font-weight-bold">
+                                <i class="fas fa-object-group"></i> Gộp bàn
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="#" onclick="delItem()" class="text-danger font-weight-bold">
+                                <i class="fas fa-trash-alt"></i> Hủy bàn
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="Danhmuc/DanhmucOrder.aspx" target="_blank" class="text-info">
+                                <i class="fas fa-list"></i> Danh sách Order
+                            </a>
+                        </li>
+                    </ol>
+
+                    <!-- Các checkbox tiện ích -->
+                    <div class="d-flex align-items-center flex-wrap justify-content-lg-end">
+                        <b class="addnew_KH text-primary mr-3" style="cursor:pointer;">
+                            <i class="fas fa-user-plus"></i> Thêm KH
+                        </b>
+
+                        <div class="custom-control custom-checkbox mr-3">
+                            <input type="checkbox" class="custom-control-input" id="xemlaiHD" name="xemlaiHD">
+                            <label class="custom-control-label text-primary" for="xemlaiHD" style="cursor:pointer;">
+                                Xem lại HĐ
+                            </label>
+                        </div>
+
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="inlaiHD" name="inlaiHD">
+                            <label class="custom-control-label text-primary" for="inlaiHD" style="cursor:pointer;">
+                                In lại HĐ
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
             <!-- Main content -->
             <section class="content">

@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebApplication1.Danhmuc {
-    
-    
-    public partial class Danhmucnhanvien {
-        
+namespace WebApplication1.Danhmuc
+{
+
+
+    public partial class Danhmucnhanvien
+    {
+
         /// <summary>
         /// form1 control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace WebApplication1.Danhmuc {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-        
+
         /// <summary>
         /// Date1 control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace WebApplication1.Danhmuc {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl Date1;
-        
+
         /// <summary>
         /// ngaychiid control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace WebApplication1.Danhmuc {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl ngaychiid;
-        
+
         /// <summary>
         /// txtmakhuvuc control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace WebApplication1.Danhmuc {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtmakhuvuc;
-        
+
         /// <summary>
         /// txttenkhuvuc control.
         /// </summary>
@@ -56,7 +58,16 @@ namespace WebApplication1.Danhmuc {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txttenkhuvuc;
-        
+
+        /// <summary>
+        /// txtmatkhau control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtmatkhau;
+
         /// <summary>
         /// btnOrder control.
         /// </summary>
@@ -65,7 +76,7 @@ namespace WebApplication1.Danhmuc {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlButton btnOrder;
-        
+
         /// <summary>
         /// khuvucid control.
         /// </summary>
@@ -74,7 +85,7 @@ namespace WebApplication1.Danhmuc {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox khuvucid;
-        
+
         /// <summary>
         /// tenkhuvucid control.
         /// </summary>
@@ -83,7 +94,7 @@ namespace WebApplication1.Danhmuc {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox tenkhuvucid;
-        
+
         /// <summary>
         /// matkhauid control.
         /// </summary>

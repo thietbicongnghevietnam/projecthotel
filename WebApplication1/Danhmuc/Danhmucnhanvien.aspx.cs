@@ -45,9 +45,11 @@ namespace WebApplication1.Danhmuc
         {
             string tenkhuvuc = txttenkhuvuc.Text;
             string makhuvuc = txtmakhuvuc.Text;
+            string matkhau = txtmatkhau.Text;
+            string userid = Session["username"].ToString();
 
             DataTable dtupdate = new DataTable();
-            dtupdate = DataConn.StoreFillDS("NH_Update_nhanvien", System.Data.CommandType.StoredProcedure, makhuvuc, tenkhuvuc);
+            dtupdate = DataConn.StoreFillDS("NH_Update_nhanvien", System.Data.CommandType.StoredProcedure, makhuvuc, tenkhuvuc, matkhau, userid);
             if (dtupdate.Rows[0][0].ToString() == "1")
             {
                 dt_nhanvien = DataConn.StoreFillDS("NH_danhmucnhanvien", System.Data.CommandType.StoredProcedure);

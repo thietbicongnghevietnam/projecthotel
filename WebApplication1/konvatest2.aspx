@@ -135,7 +135,7 @@
 
             // Nếu bạn muốn xử lý lỗi khi không tải được ảnh
             imageObj.onerror = function() {
-                console.error('Failed to load image:', item.Src);
+                console.error('Failed to load image:', item.src);
             };
 
         });
