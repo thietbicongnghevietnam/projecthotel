@@ -225,36 +225,95 @@
                 font-size: 14px;
             }
 
-/* ================= Nút TẠM TÍNH giống 2 nút còn lại ==================== */
-.btn-temp-pos {
-    background: linear-gradient(135deg, #17a2b8, #138496);
-    color: white;
-    font-size: 14px;
-    font-weight: 600;
-    padding: 8px 18px;
+        /* ================= Nút TẠM TÍNH giống 2 nút còn lại ==================== */
+        .btn-temp-pos {
+            background: linear-gradient(135deg, #17a2b8, #138496);
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 8px 18px;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+            transition: all 0.2s ease;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+            /* icon */
+            .btn-temp-pos i {
+                margin-right: 6px;
+            }
+
+            /* hover */
+            .btn-temp-pos:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 5px 12px rgba(0,0,0,0.25);
+            }
+
+            /* click */
+            .btn-temp-pos:active {
+                transform: scale(0.96);
+            }
+
+
+ /* minh2026 tim kien theo ten hang */
+        .an-mon { display: none !important; }
+        .pos-search-bar {
+    display: flex !important;
+    align-items: stretch;
+    width: 100%;
+    height: 45px;
+    border: 1px solid #ced4da;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+}
+
+.pos-search-icon {
+    display: flex;
+    align-items: center;
+    padding: 0 18px;
+    background: linear-gradient(135deg, #4e73df, #1cc88a);
+    color: #fff;
+    flex: 0 0 auto;
+}
+
+.pos-search-input {
+    flex: 1 1 auto;
+    min-width: 0;
     border: none;
-    border-radius: 8px;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
-    transition: all 0.2s ease;
+    outline: none;
+    padding: 0 15px;
+    font-size: 16px;
+    height: 100%;
+    box-shadow: none;
+}
+
+.pos-search-result {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    min-width: 110px;
+    padding: 0 12px;
+    font-size: 13px;
+    color: #6c757d;
+    border-left: 1px solid #eee;
+    white-space: nowrap;
+}
+
+.pos-search-clear {
+    flex: 0 0 auto;
+    border: none;
+    background: #6c757d;
+    color: #fff;
+    padding: 0 18px;
     cursor: pointer;
-    margin-left: 10px;
 }
 
-/* icon */
-.btn-temp-pos i {
-    margin-right: 6px;
-}
-
-/* hover */
-.btn-temp-pos:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 12px rgba(0,0,0,0.25);
-}
-
-/* click */
-.btn-temp-pos:active {
-    transform: scale(0.96);
-}
+.pos-search-clear:hover { background: #5a6268; }
 
     </style>
 
@@ -266,39 +325,51 @@
 
             <section class="content-header">
                 <div class="container-fluid">
-                    <div class="row mb-2">
-                        <div class="col-sm-1">
-                            <div class="pos-menu-label">
-                                <i class="fas fa-utensils"></i>MENU
-                            </div>
-                        </div>
+                    <!-- Row 1: MENU + nhóm hàng (giữ nguyên) -->
+        <div class="row mb-2">
+            <div class="col-sm-1">
+                <div class="pos-menu-label">
+                    <i class="fas fa-utensils"></i>MENU
+                </div>
+            </div>
+            <div class="col-sm-11">
+                <ol class="breadcrumb custom-breadcrumb">
+                    <li class="breadcrumb-item active">
+                        <a href="#" class="nhomhang-item" data-id="">
+                            <b style="color: blue; font-size: 20px;">All</b>
+                        </a>
+                    </li>
+                    <%foreach (System.Data.DataRow rows in dt_nhomhang.Rows)
+                        {%>
+                    <li class="breadcrumb-item">
+                        <a href="#" class="nhomhang-item" data-id="<%=rows["id"].ToString() %>">
+                            <%=rows["manhomhang"].ToString() %>
+                        </a>
+                    </li>
+                    <%} %>
+                </ol>
+            </div>
+        </div>
 
-                        <div class="col-sm-11">
-                            <ol class="breadcrumb custom-breadcrumb">
-                                <%--<li class="breadcrumb-item active">
-                                    <a href="/OrderNhanVien.aspx"><b style="color: blue; font-size: 20px;"></b>All </a>
-                                </li>--%>
-                                <li class="breadcrumb-item active">
-                                    <a href="#"
-                                        class="nhomhang-item"
-                                        data-id="">
-                                        <b style="color: blue; font-size: 20px;">All</b>
-                                    </a>
-                                </li>
-                                <%foreach (System.Data.DataRow rows in dt_nhomhang.Rows)
-                                    {%>
-                                <li class="breadcrumb-item">
-                                    <%-- <a href="/OrderNhanVien.aspx?nhomhangid=<%=rows["id"].ToString() %>"><%=rows["manhomhang"].ToString() %></a>--%>
-                                    <a href="#"
-                                        class="nhomhang-item"
-                                        data-id="<%=rows["id"].ToString() %>">
-                                        <%=rows["manhomhang"].ToString() %>
-                                    </a>
-                                </li>
-                                <%} %>
-                            </ol>
-                        </div>
-                    </div>
+        <!-- Row 2: ô tìm món, kéo dài hết chiều ngang -->
+       <div class="row mb-2">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-11">
+        <div class="pos-search-bar">
+            <span class="pos-search-icon"><i class="fa fa-search"></i></span>
+
+            <input type="text" id="txt_timmon" class="pos-search-input"
+                   placeholder="Nhập tên món cần tìm..." autocomplete="off" />
+
+            <span class="pos-search-result" id="ketqua_timmon"></span>
+
+            <button type="button" class="pos-search-clear" id="btnXoaTimMon" title="Xóa">
+                <i class="fa fa-times"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
                 </div>
                 <!-- /.container-fluid -->
             </section>
@@ -322,9 +393,9 @@
                             <i class="fa fa-save"></i>GHI THỰC ĐƠN
                         </button>
 
-                         <!-- Nút Tạm tính -->
+                        <!-- Nút Tạm tính -->
                         <button type="button" class="btn-temp-pos tamtinh">
-                            <i class="fa fa-calculator"></i> TẠM TÍNH
+                            <i class="fa fa-calculator"></i>TẠM TÍNH
                         </button>
 
                         <button type="button" class="btn-pay-pos thanhtoan">
@@ -344,9 +415,14 @@
                     <!-- Default box -->
                     <br />
                     <div class="card card-solid">
-                        <div class="card-body pb-0">
+                        <%--<div class="card-body pb-0">
                             <div class="row d-flex align-items-stretch" style="overflow-y: scroll; height: 700px;" id="hanghoa-container">
    
+                            </div>
+                        </div>--%>
+                        <div class="card-body pb-0">
+
+                            <div class="row d-flex align-items-stretch" style="overflow-y: scroll; height: 700px;" id="hanghoa-container">
                             </div>
                         </div>
 
@@ -363,22 +439,22 @@
                 <div class="col-md-12 d-flex align-items-center">
 
                     <!-- Tiền hàng -->
-                    <label class="me-2 mt-1" style="margin-left:15px; margin-right:15px;">Tiền hàng</label>
+                    <label class="me-2 mt-1" style="margin-left: 15px; margin-right: 15px;">Tiền hàng</label>
 
                     <input type="text" id="tongtienid" disabled class="form-control me-3" style="font-size: 22px; width: 150px;" value="0" />
 
                     <!-- Ô số lượng chỉnh sửa -->
-                    <label class="me-2" style="margin-left:15px; margin-right:15px;">Số lượng</label>
+                    <label class="me-2" style="margin-left: 15px; margin-right: 15px;">Số lượng</label>
 
                     <input type="number" id="soluong" name="soluong" class="soluong form-control me-3" value="1" min="1" style="width: 80px;" />
 
                     <!-- Nút sửa -->
-                    <button type="button" class="btn btn-warning btn-sm me-2" id="btnSua" style="margin-left:15px; margin-right:15px;">
+                    <button type="button" class="btn btn-warning btn-sm me-2" id="btnSua" style="margin-left: 15px; margin-right: 15px;">
                         <i class="fa fa-edit"></i>Sửa
                     </button>
 
                     <!-- Nút xóa -->
-                    <button type="button" class="btn btn-danger btn-sm" id="btnXoa" style="margin-left:15px; margin-right:15px;">
+                    <button type="button" class="btn btn-danger btn-sm" id="btnXoa" style="margin-left: 15px; margin-right: 15px;">
                         <i class="fa fa-trash"></i>Xóa
                     </button>
 
@@ -405,91 +481,93 @@
         </div>
     </form>
 
-    
-   <!-- POPUP TẠM TÍNH POS -->
-<div id="popupTamTinh" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%;
-background:rgba(0,0,0,0.55); z-index:9999;">
 
-    <div style="width:420px; background:#fff; margin:30px auto; border-radius:12px;
-    overflow:hidden; box-shadow:0 0 20px rgba(0,0,0,0.3); font-family:Arial;">
+    <!-- POPUP TẠM TÍNH POS -->
+    <div id="popupTamTinh" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.55); z-index: 9999;">
 
-        <!-- Header -->
-        <div style="background:linear-gradient(135deg,#00c6ff,#3ad6ff); color:white; padding:15px; text-align:center;">
-            <h3 style="margin:0;">PHIẾU TẠM TÍNH</h3>
-            <div style="font-size:14px; margin-top:5px;">
-                Bàn: <b id="sobanTamTinh"></b>
+        <div style="width: 420px; background: #fff; margin: 30px auto; border-radius: 12px; overflow: hidden; box-shadow: 0 0 20px rgba(0,0,0,0.3); font-family: Arial;">
+
+            <!-- Header -->
+            <div style="background: linear-gradient(135deg,#00c6ff,#3ad6ff); color: white; padding: 15px; text-align: center;">
+                <h3 style="margin: 0;">PHIẾU TẠM TÍNH</h3>
+                <div style="font-size: 14px; margin-top: 5px;">
+                    Bàn: <b id="sobanTamTinh"></b>
+                </div>
+                <div style="font-size: 13px;" id="gioTamTinh"></div>
             </div>
-            <div style="font-size:13px;" id="gioTamTinh"></div>
-        </div>
 
-        <!-- Body -->
-        <div style="padding:15px; max-height:450px; overflow-y:auto;">
+            <!-- Body -->
+            <div style="padding: 15px; max-height: 450px; overflow-y: auto;">
 
-            <table style="width:100%; font-size:14px;">
-                <thead>
-                    <tr style="border-bottom:1px dashed #999;">
-                        <th align="left">Món</th>
-                        <th align="center">SL</th>
-                        <th align="right">Tiền</th>
-                    </tr>
-                </thead>
-                <tbody id="bodyTamTinh"></tbody>
-            </table>
+                <table style="width: 100%; font-size: 14px;">
+                    <thead>
+                        <tr style="border-bottom: 1px dashed #999;">
+                            <th align="left">Món</th>
+                            <th align="center">SL</th>
+                            <th align="right">Tiền</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bodyTamTinh"></tbody>
+                </table>
 
-            <hr />
+                <hr />
 
-            <div style="text-align:right; font-size:20px; font-weight:bold; color:red;">
-                Tổng: <span id="tongTamTinh">0</span>
-            </div>
-           
-            <hr />
+                <div style="text-align: right; font-size: 20px; font-weight: bold; color: red;">
+                    Tổng: <span id="tongTamTinh">0</span>
+                </div>
 
-            <div style="text-align:center; margin-top:15px;">
-                <!-- lưu dữ liệu -->
-                <input type="hidden" id="imgQRBase64" value="<%=barcodeData %>" />
+                <hr />
 
-                <!-- hiển thị QR -->
-                <img id="imgQRThanhToan"
-                     style="width:180px; height:180px; border:1px solid #ddd; padding:6px; border-radius:10px;" />
+                <div style="text-align: center; margin-top: 15px;">
+                    <!-- lưu dữ liệu -->
+                    <input type="hidden" id="imgQRBase64" value="<%=barcodeData %>" />
 
-                <div style="margin-top:10px; font-size:15px; font-weight:bold; color:#007bff;">
-                    Quét mã để thanh toán
+                    <!-- hiển thị QR -->
+                    <img id="imgQRThanhToan"
+                        style="width: 180px; height: 180px; border: 1px solid #ddd; padding: 6px; border-radius: 10px;" />
+
+                    <div style="margin-top: 10px; font-size: 15px; font-weight: bold; color: #007bff;">
+                        Quét mã để thanh toán
+                    </div>
+
                 </div>
 
             </div>
 
-        </div>
-
-        <!-- Footer -->
-        <div style="padding:15px; text-align:center; background:#f1f1f1;">
-            <!-- In phiếu -->
-            <%--<button onclick="window.print()" class="btn-save-pos" style="margin-right:10px;">
+            <!-- Footer -->
+            <div style="padding: 15px; text-align: center; background: #f1f1f1;">
+                <!-- In phiếu -->
+                <%--<button onclick="window.print()" class="btn-save-pos" style="margin-right:10px;">
                 <i class="fa fa-print"></i> In Phiếu
             </button>--%>
 
-            <button onclick="inPhieu()" class="btn-save-pos" style="margin-right:10px;">
-                <i class="fa fa-print"></i> In Phiếu
-            </button>
+                <button onclick="inPhieu()" class="btn-save-pos" style="margin-right: 10px;">
+                    <i class="fa fa-print"></i>In Phiếu
+                </button>
 
-            <!-- Thanh toán -->
-            <button class="btn-pay-pos" onclick="thanhToanTamTinh()" style="margin-right:10px;">
-                <i class="fa fa-cash-register"></i> Thanh Toán
-            </button>
+                <!-- Thanh toán -->
+                <button class="btn-pay-pos" onclick="thanhToanTamTinh()" style="margin-right: 10px;">
+                    <i class="fa fa-cash-register"></i>Thanh Toán
+                </button>
 
-            <!-- Đóng -->
-            <button onclick="dongTamTinh()" class="btn-save-pos" style="background:#dc3545;">
-                <i class="fa fa-times"></i> Đóng
-            </button>
+                <!-- Đóng -->
+                <button onclick="dongTamTinh()" class="btn-save-pos" style="background: #dc3545;">
+                    <i class="fa fa-times"></i>Đóng
+                </button>
+
+            </div>
 
         </div>
-
     </div>
-</div>
 
     <script>
 
         $(document).on("click", ".nhomhang-item", function (e) {
             e.preventDefault();
+            //minh2026
+            $('#txt_timmon').val('');
+            $('#ketqua_timmon').text('');
+            //end
             var nhomhangid = $(this).data("id") || "";
             loadHangHoa(nhomhangid);
         });
@@ -510,6 +588,9 @@ background:rgba(0,0,0,0.55); z-index:9999;">
 
                 success: function (response) {
                     $("#hanghoa-container").html(response.d);
+                    //minh2026
+                    ganDuLieuTimKiem();
+                    locMonTheoTen();   // giữ nguyên từ khóa đang gõ nếu có
                 },
 
                 error: function () {
@@ -517,6 +598,62 @@ background:rgba(0,0,0,0.55); z-index:9999;">
                 }
             });
         }
+
+        //minh2026 tim kien ten hang
+        // Bỏ dấu tiếng Việt: gõ "pho ga" vẫn ra "Phở Gà"
+        function boDau(str) {
+            return String(str || '')
+                .normalize('NFD')
+                .replace(/[\u0300-\u036f]/g, '')
+                .replace(/đ/g, 'd').replace(/Đ/g, 'D')
+                .toLowerCase().trim();
+        }
+
+        // Gán data-ten cho từng ô món sau khi AJAX đổ HTML về
+        function ganDuLieuTimKiem() {
+            $('#hanghoa-container').children('div').each(function () {
+                var ten = $(this).find('mh').text();
+                if (ten) $(this).attr('data-ten', boDau(ten));
+            });
+        }
+
+        function locMonTheoTen() {
+            var kw = boDau($('#txt_timmon').val());
+            var $items = $('#hanghoa-container').children('div[data-ten]');
+
+            if (kw === '') {
+                $items.removeClass('an-mon');
+                $('#ketqua_timmon').text($items.length + ' món');
+                return;
+            }
+
+            $items.addClass('an-mon').filter(function () {
+                return $(this).attr('data-ten').indexOf(kw) >= 0;
+            }).removeClass('an-mon');
+
+            var soHien = $items.not('.an-mon').length;
+            $('#ketqua_timmon').text(soHien === 0 ? 'Không có món' : soHien + ' món');
+        }
+
+        // Gõ tới đâu lọc tới đó, có debounce cho đỡ giật
+        var timerTimMon = null;
+        $(document).on('keyup', '#txt_timmon', function (e) {
+            if (e.keyCode === 13) { e.preventDefault(); return; }
+            clearTimeout(timerTimMon);
+            timerTimMon = setTimeout(locMonTheoTen, 200);
+        });
+
+        // Chặn Enter gây postback (ô input nằm trong form runat="server")
+        $(document).on('keydown', '#txt_timmon', function (e) {
+            if (e.keyCode === 13) { e.preventDefault(); return false; }
+        });
+
+        $(document).on('click', '#btnXoaTimMon', function () {
+            $('#txt_timmon').val('').focus();
+            locMonTheoTen();
+        });
+
+        //end
 
         $(document).ready(function () {
             loadHangHoa("");   // load tất cả món
@@ -537,19 +674,19 @@ background:rgba(0,0,0,0.55); z-index:9999;">
         });
 
         $(document).on("click", "#btnSua", function () {
-                var soluongmoi = parseInt($("#soluong").val());
-                var dongdangchon = $("#tbnhaphang input.checkinput:checked").closest("tr");
-                if (dongdangchon.length == 0) {
-                    alert("Vui lòng chọn món cần sửa");
-                    return;
-                }
-                var dongia = parseInt(dongdangchon.find("td").eq(2).text());
-                var thanhtienmoi = soluongmoi * dongia;
-                // cập nhật số lượng
-                dongdangchon.find("td").eq(1).text(soluongmoi);
-                // cập nhật thành tiền
-                dongdangchon.find("td").eq(3).text(thanhtienmoi);
-                tinhLaiTongTien();
+            var soluongmoi = parseInt($("#soluong").val());
+            var dongdangchon = $("#tbnhaphang input.checkinput:checked").closest("tr");
+            if (dongdangchon.length == 0) {
+                alert("Vui lòng chọn món cần sửa");
+                return;
+            }
+            var dongia = parseInt(dongdangchon.find("td").eq(2).text());
+            var thanhtienmoi = soluongmoi * dongia;
+            // cập nhật số lượng
+            dongdangchon.find("td").eq(1).text(soluongmoi);
+            // cập nhật thành tiền
+            dongdangchon.find("td").eq(3).text(thanhtienmoi);
+            tinhLaiTongTien();
         });
 
         $(document).on("click", "#btnXoa", function () {

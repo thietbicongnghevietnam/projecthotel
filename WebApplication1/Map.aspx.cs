@@ -56,7 +56,10 @@ namespace WebApplication1
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            //minh2026 load all de loc nhom hang ben client
+            dt_listhanghoa = DataConn.StoreFillDS("NH_select_hanghoa", CommandType.StoredProcedure, "");
             dt_nhomhang = DataConn.StoreFillDS("NH_select_nhomhang", CommandType.StoredProcedure);
+
             dt_getinfo_phong = DataConn.StoreFillDS("NH_select_info_phong", CommandType.StoredProcedure);
             dt_get_khuvuc0 = DataConn.StoreFillDS("NH_select_khuvuc", CommandType.StoredProcedure);
             dt_get_khuvuc3 = DataConn.StoreFillDS("NH_select_khuvuc3", CommandType.StoredProcedure);
@@ -94,17 +97,20 @@ namespace WebApplication1
 
             if (!IsPostBack)
             {
-                string nhomhangid = Request.QueryString["nhomhangid"];
-                if (nhomhangid != null)
-                {
-                    dt_listhanghoa = DataConn.StoreFillDS("NH_select_hanghoa", CommandType.StoredProcedure, nhomhangid);
-                }
-                else
-                {
-                    //all nhom hang
-                    string _nhomhangid = "";
-                    dt_listhanghoa = DataConn.StoreFillDS("NH_select_hanghoa", CommandType.StoredProcedure, _nhomhangid);
-                }
+                //minh2026 load all de loc nhom hang ben client
+                //string nhomhangid = Request.QueryString["nhomhangid"];
+                //if (nhomhangid != null)
+                //{
+                //    dt_listhanghoa = DataConn.StoreFillDS("NH_select_hanghoa", CommandType.StoredProcedure, nhomhangid);
+                //}
+                //else
+                //{
+                //    //all nhom hang
+                //    string _nhomhangid = "";
+                //    dt_listhanghoa = DataConn.StoreFillDS("NH_select_hanghoa", CommandType.StoredProcedure, _nhomhangid);
+                //}
+                // dt_listhanghoa phải load ở MỌI lần request, kể cả postback,
+                // nếu không popup sẽ rỗng sau khi bấm nút bất kỳ trên trang.
 
                 //BindStockCode();
                 dtncc = DataConn.StoreFillDS("NH_Get_KH", System.Data.CommandType.StoredProcedure);

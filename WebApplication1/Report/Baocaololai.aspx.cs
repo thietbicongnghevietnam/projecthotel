@@ -23,6 +23,10 @@ namespace WebApplication1.Report
         {
             if (!IsPostBack)
             {
+                string today = DateTime.Now.ToString("yyyy-MM-dd");
+                Date1.Value = today;          // Từ ngày
+                ngaychiid.Value = today;      // Đến ngày
+
                 dt_BCTonkho = DataConn.StoreFillDS("NH_Baocaotonkho_lolai", System.Data.CommandType.StoredProcedure);
                 //dt_new.Columns.Add("mahang", typeof(String));
                 //dt_new.Columns.Add("tenhang", typeof(String));

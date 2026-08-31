@@ -1,5 +1,13 @@
 ========== // 30.08.2026 //==============
 NH_Update_nhanvien
+NH_Baocaotonkho
+
+Phan chuc nang nha nghi: 
+	+ hoa don nha nghi chua cong them tien gio (moi chi cong tien hang)
+	+ neu nghi theo gio > 12 tieng se tinh theo ngay
+	+ hinh thuc nghi tinh dong=> theo mater (****)
+	+ tien sau chiet khau dang khong duoc tinh vao (tien sau ck tach voi tien hang). chi co tien phong.BH_34, BH_32
+
 
 ========= // 30.05.2026 //==========OrderNhanVien.aspx
 ***hinh thuc nghi: mater ***

@@ -189,20 +189,26 @@
 
         /* ===== Chỉ áp dụng khi in ===== */
         /* Chỉ in #printableArea */
-@media print {
-    body * {
-        visibility: hidden;
-    }
-    #printableArea,
-    #printableArea * {
-        visibility: visible;
-    }
-    #printableArea {
-        position: absolute;
-        left: 0;
-        top: 0;
-    }
-}
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+
+            #printableArea,
+            #printableArea * {
+                visibility: visible;
+            }
+
+            #printableArea {
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
+        }
+
+         /* minh2026 ==> click loc nhom theo menu */
+        .an-mon { display: none !important; }
+
     </style>
 
 
@@ -238,6 +244,19 @@
                             Phút: <b class="sophutdung"></b>
                         </span>
                     </div>
+
+                    <!-- Gộp/chuyển + Kiểu nghỉ -->
+                    <div class="form-group mb-2 mr-3 d-flex align-items-center" style="margin-left:50px;">
+                        <label class="mb-0 mr-2 font-weight-bold text-secondary">Gộp/chuyển:</label>
+                        <b style="font-size:14px; color:#007bff;" id="thongbao"></b>
+                    </div>
+
+                    <div class="form-group mb-2 d-flex align-items-center" style="margin-right:10px;">
+                        <label class="mb-0 mr-2 font-weight-bold text-secondary">Kiểu nghỉ:</label>
+                        <b style="font-size:14px; color:#007bff;" id="kieunghiid"></b>
+                    </div>
+
+
                 </div>
 
                 <!-- Hàng thông tin chi tiết -->
@@ -288,17 +307,6 @@
                                class="form-control form-control-sm" 
                                style="width:90px;" />
                     </div>
-
-                    <!-- Gộp/chuyển + Kiểu nghỉ -->
-                    <div class="form-group mb-2 mr-3 d-flex align-items-center">
-                        <label class="mb-0 mr-2 font-weight-bold text-secondary">Gộp/chuyển:</label>
-                        <b style="font-size:14px; color:#007bff;" id="thongbao"></b>
-                    </div>
-
-                    <div class="form-group mb-2 d-flex align-items-center">
-                        <label class="mb-0 mr-2 font-weight-bold text-secondary">Kiểu nghỉ:</label>
-                        <b style="font-size:14px; color:#007bff;" id="kieunghiid"></b>
-                    </div>
                 </div>
             </div>
 
@@ -333,7 +341,7 @@
                     </ol>
 
                     <!-- Các checkbox tiện ích -->
-                    <div class="d-flex align-items-center flex-wrap justify-content-lg-end">
+                    <div class="d-flex align-items-center flex-wrap justify-content-lg-end">                    
                         <b class="addnew_KH text-primary mr-3" style="cursor:pointer;">
                             <i class="fas fa-user-plus"></i> Thêm KH
                         </b>
@@ -577,11 +585,10 @@
                                     Order bếp
                                 </button>
                                
-                               <%-- <b class="addnew_KH" style="color: yellow; padding-left: 5px;">| Thêm KH</b>
-
-                                <b style="color: yellow; padding-left: 5px;">| Xem lại HĐ</b>
-                                <input type="checkbox" id="xemlaiHD" name="xemlaiHD">--%>
-                                
+                               <%-- Menu--%>
+                                <button type="button" id="btnMenu" class="btn btn-success" style="width:100px; margin-left:8px;">
+                                    Menu
+                                </button>
                                 
                                
 
@@ -748,7 +755,7 @@
                                 </div>                               
                             </div>--%>
 
-                            <section class="content-header">
+                            <%--<section class="content-header">
                                 <div class="container-fluid">
                                     <div class="row mb-2">
 
@@ -764,9 +771,9 @@
                                     </div>
                                 </div>
                                 <!-- /.container-fluid -->
-                            </section>
+                            </section>--%>
 
-                            <section class="content">
+                            <%--<section class="content">
 
                                 <!-- Default box -->
                               
@@ -777,8 +784,7 @@
                                             <div class="col col-lg-2 d-flex align-items-stretch">
                                                 <div class="row" style="border: 1px solid grey;">
                                                     <div class="col-12 text-center">
-                                                       <%-- <img src="../../dist/img/user1-128x128.jpg" alt="user-avatar" class="img-circle img-fluid">--%>
-                                                       <%-- <img src="../../dist/img/monan.JPG" alt="user-avatar" class="img-circle img-fluid" style="width:60px;height:50px;">--%>
+                                                      
                                                         <img src="<%=rows1["anh"].ToString() %>" alt="user-avatar" class="img-circle img-fluid" style="width:60px;height:50px;">
 
                                                         <div class="text-center" style="margin-bottom: 10px; margin-top: 3px;">
@@ -802,7 +808,7 @@
                               
                                 <!-- /.card -->
 
-                            </section>
+                            </section>--%>
 
                         </div>
                     </div>
@@ -1049,6 +1055,69 @@
             </tbody>
           </table>
         </div>
+
+
+            <div class="modal fade" id="modalMenu" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-primary">
+        <h4 class="modal-title"><i class="fa fa-cutlery"></i> Thực đơn</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <!-- Lọc nhóm hàng: KHÔNG dùng href reload trang nữa, lọc bằng jQuery -->
+        <ol class="breadcrumb float-sm-left" id="olNhomHang" style="background:transparent;">
+            <li class="breadcrumb-item active">
+                <a href="javascript:;" class="filter_nhomhang" data-nhomid="all">
+                    <b style="color:blue; font-size:20px;">Menu :</b> All
+                </a>
+            </li>
+            <%foreach (System.Data.DataRow rows in dt_nhomhang.Rows)
+                {%>
+            <li class="breadcrumb-item">
+                <a href="javascript:;" class="filter_nhomhang" data-nhomid="<%=rows["id"].ToString() %>">
+                    <%=rows["manhomhang"].ToString() %>
+                </a>
+            </li>
+            <%} %>
+        </ol>
+
+        <input type="text" id="txt_timmon" class="form-control input-sm mb-2" placeholder="Tìm món..." />
+
+        <div style="overflow-y:auto; height:520px;">
+          <div class="row d-flex align-items-stretch">
+            <%foreach (System.Data.DataRow rows1 in dt_listhanghoa.Rows)
+                {%>
+            <div class="col col-lg-2 d-flex align-items-stretch item_monan"
+                 data-nhomid="<%=rows1["nhomhangid"].ToString() %>"
+                 data-ten="<%=rows1["tenhang"].ToString().ToLower() %>">
+              <div class="row" style="border:1px solid grey;">
+                <div class="col-12 text-center">
+                  <img src="<%=rows1["anh"].ToString() %>" alt="mon-an" class="img-circle img-fluid" style="width:60px;height:50px;" />
+                  <div class="text-center" style="margin-bottom:10px; margin-top:3px;">
+                    <mh><%=rows1["tenhang"].ToString() %></mh><br />
+                    <dg><%=rows1["giaban"].ToString() %></dg> /VNĐ
+                    <input type="number" class="quantity form-control text-center" title="Số lượng"
+                           value="1" min="1" name="quantity" style="width:60px;height:30px;float:left;" />
+                    <a href="#" class="button_addmenu" style="float:left;">
+                      <i class="fa fa-plus-square" style="font-size:24px; padding-left:20px;"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <%} %>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer justify-content-between">
+        <span>Tiền hàng: <b id="tongtien_modal">0</b></span>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
         </div>
@@ -1925,7 +1994,7 @@
                     var giohat = '0';//$('#ticketid').val();
                     var giovao = $('#checkinput1').val();
                     var giora = $('#checkinput2').val();
-                   
+
 
                     if (hinhthucnghi == 'Karaoke') {
                         giohat = $('#ticketid').val();
@@ -2038,7 +2107,7 @@
                                         //var aaa = blkstr[0];
                                         //var bbb = blkstr[1];
                                         if (hinhthucnghi == 'Karaoke') {
-                                             var newrow_header = '<tr class="themthucdon_head">' +
+                                            var newrow_header = '<tr class="themthucdon_head">' +
                                                 '<td id="stt" style="border: 1px soild black;">#</td>' +
                                                 '<td id="tenhanghat" style="border: 1px soild black;">Giờ hát/(Phút)</td>' +
                                                 '<td id="soluonghatphut" style="border: 1px soild black;">' + tongsophutdung + '</td>' +
@@ -2115,7 +2184,7 @@
                                         //updateTotalAmount(tienck);
                                         //updateTotalAmount(tienthoi);
 
-                                        
+
 
                                         $('#bangchuid').text(hienthi_bangchu);
                                     }
@@ -2397,7 +2466,7 @@
                     {
                         var tienVAT = parseFloat(removeKytu) * parseFloat(tongtienhang) / 100;
                         //alert(tienVAT);
-                        
+
                         var tongtienthanhtoan = (parseFloat(tongtienhang) + parseFloat(tongtiengio) - parseFloat(tienchietkhau) + parseFloat(tienVAT));
 
                         $("#VATid").val(tienVAT);
@@ -2428,7 +2497,7 @@
                 var tienck = $("#chietkhauid").val();
                 var tienVAT = $("#VATid").val();
                 var tongtienthanhtoan = $("#thanhtoanid").val();
-                var conlai = (parseFloat(tongtienthanhtoan) - (parseFloat(tongtienhang) + parseFloat(tongtiengio) - parseFloat(tienck) + parseFloat(tienVAT)) )
+                var conlai = (parseFloat(tongtienthanhtoan) - (parseFloat(tongtienhang) + parseFloat(tongtiengio) - parseFloat(tienck) + parseFloat(tienVAT)))
                 //var tienthoi = (parseFloat(psco) - parseFloat(tongtienhang)) 
                 var psno = '';
                 if (conlai < 0) {
@@ -2535,7 +2604,7 @@
                     tongtienphong: tongtienphong,
                     psco: psco,
                     tienno: psno,
-                    tienck: tienck,                    
+                    tienck: tienck,
                     items: JSON.stringify(itemdata),
                     vat2: vat2,
                     dongiahatphut: dongiahatphut,
@@ -3037,7 +3106,7 @@
                 var hinhthucnghi = $('#stylerender').val();
                 //pending inlai                      
                 //var giohat = $('#ticketid').val();
-                
+
                 // lay thong tin hoang hoa
                 $.ajax({
                     type: "POST",
@@ -3099,18 +3168,17 @@
                                 //'<td id="soluong" style="border: 1px soild black;">' + tongsophutdung + '(Phút)</td>' +
                                 // '<td id="giale" style="border: 1px soild black;">' + parseInt(tienhat1phut).toLocaleString('vi-VN') + '</td>' +
                                 //'<td id="thanhtien" style="border: 1px soild black;">' + parseInt(tongtienhat).toLocaleString('vi-VN') + '</td>' +
-                                if (hinhthucnghi == 'Karaoke')
-                                {
+                                if (hinhthucnghi == 'Karaoke') {
                                     var newrow_header = '<tr class="themthucdon_head">' +
-                                                '<td id="stt" style="border: 1px soild black;">#</td>' +
-                                                '<td id="tenhanghat" style="border: 1px soild black;">Giờ hát/(Phút)</td>' +
-                                                '<td id="soluonghatphut" style="border: 1px soild black;">' + tongsophutdung + '</td>' +
-                                                '<td id="giohatphut" style="border: 1px soild black;">' + parseInt(tienhat1phut).toLocaleString('vi-VN') + '</td>' +
-                                                '<td id="thanhtienhat" style="border: 1px soild black;">' + parseInt(tongtienhat).toLocaleString('vi-VN') + '</td>' +
-                                                '</tr>';
+                                        '<td id="stt" style="border: 1px soild black;">#</td>' +
+                                        '<td id="tenhanghat" style="border: 1px soild black;">Giờ hát/(Phút)</td>' +
+                                        '<td id="soluonghatphut" style="border: 1px soild black;">' + tongsophutdung + '</td>' +
+                                        '<td id="giohatphut" style="border: 1px soild black;">' + parseInt(tienhat1phut).toLocaleString('vi-VN') + '</td>' +
+                                        '<td id="thanhtienhat" style="border: 1px soild black;">' + parseInt(tongtienhat).toLocaleString('vi-VN') + '</td>' +
+                                        '</tr>';
                                     $('#tbnhaphang_inhoadon').append(newrow_header);
                                 }
-                                
+
                                 for (var i = 0; i < blkstr.length; i++) {
                                     const chars = blkstr[i].split(':');
                                     const info_mahang = chars[0].split(',');
@@ -3139,15 +3207,15 @@
                                 $("#tenphong2").text(tenphong);
 
                                 $('#tongtien2').text(tienhang.toLocaleString('vi-VN'));
-                                var khachTT = parseInt(tienhang) + parseInt(tongtienhat) ;
+                                var khachTT = parseInt(tienhang) + parseInt(tongtienhat);
                                 $('#thantoan2').text(khachTT.toLocaleString('vi-VN'));
 
                                 //$('#chietkau2').text(0); 
-                                $('#chietkau2').text(formattedtienck); 
+                                $('#chietkau2').text(formattedtienck);
                                 $('#VAT2').text(formattedvat);
 
                                 //$('#khthanhtoan2').text(khachthanhtoan.toLocaleString('vi-VN')); *** //chua cong tien hat +VAT - chietkhau      
-                                var tienphaithanhtoan = parseInt(tienhang) + parseInt(tongtienhat) + parseInt(tienvat) - parseInt(tienchietkhau) ;
+                                var tienphaithanhtoan = parseInt(tienhang) + parseInt(tongtienhat) + parseInt(tienvat) - parseInt(tienchietkhau);
                                 $('#khthanhtoan2').text(tienphaithanhtoan.toLocaleString('vi-VN'));
                                 $('#giovao').text(giovao);
                                 $('#giora').text(giora);
@@ -3202,7 +3270,117 @@
                 }
             });
 
-            $('.button_addmenu').each(function () {
+            // ===== Mở popup menu =====
+            $(document).on('click', '#btnMenu', function (e) {
+                e.preventDefault();
+                $('#modalMenu').modal('show');
+                setTimeout(function () { $('#txt_timmon').val('').focus(); }, 400);
+            });
+
+            // ===== Tìm món theo tên =====
+            $(document).on('keyup', '#txt_timmon', function () {
+                var kw = $.trim($(this).val()).toLowerCase();
+                var nhom = $.trim(String($('#olNhomHang li.active a').attr('data-nhomid'))).toLowerCase();
+
+                $('.item_monan').each(function () {
+                    var $t = $(this);
+                    var khopNhom = (nhom === 'all') ||
+                        ($.trim(String($t.attr('data-nhomid'))).toLowerCase() === nhom);
+                    var khopTen = String($t.attr('data-ten')).indexOf(kw) >= 0;
+
+                    $t.toggleClass('an-mon', !(khopNhom && khopTen));
+                });
+            });
+
+            // ===== Click thêm món (delegation — chạy được cả trong popup) =====  ***minh2026
+            $(document).on('click', '#olNhomHang .filter_nhomhang', function (e) {
+                e.preventDefault();
+
+                var id = $.trim(String($(this).attr('data-nhomid'))).toLowerCase();
+                //console.log('Nhóm click:', id, '| thẻ:', this.outerHTML);
+
+                $('#olNhomHang li').removeClass('active');
+                $(this).closest('li').addClass('active');
+                $('#txt_timmon').val('');
+
+                var $items = $('.item_monan');
+                if (id === 'all') {
+                    $items.removeClass('an-mon');
+                } else {
+                    $items.addClass('an-mon').filter(function () {
+                        return $.trim(String($(this).attr('data-nhomid'))) === id;
+                    }).removeClass('an-mon');
+                }
+            });
+
+            $(document).on('click', '.button_addmenu', function (e) {
+                e.preventDefault();
+                var $box = $(this).parent();
+                var mahang = $box.find('mh').text().trim();
+                var dongia = parseFloat($box.find('dg').text().replace(/[^\d.-]/g, '')) || 0;
+                var soluong = parseInt($box.find("input[name='quantity']").val()) || 1;
+
+                themMonVaoBang(mahang, soluong, dongia);
+            });
+
+            function themMonVaoBang(mahang, soluong, dongia) {
+                // Nếu món đã có trong bảng thì chỉ cộng dồn số lượng
+                var $rowCu = $('#tbnhaphang tr').filter(function () {
+                    return $(this).find('td').eq(0).text().trim() === mahang;
+                }).first();
+
+                if ($rowCu.length) {
+                    var slMoi = (parseInt($rowCu.find('td').eq(1).text()) || 0) + soluong;
+                    $rowCu.find('td').eq(1).text(slMoi);
+                    $rowCu.find('td').eq(3).text(slMoi * dongia);
+                    tinhLaiTongTien();
+                    return;
+                }
+
+                // Món mới -> lấy thông tin từ server rồi append
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    url: "Map.aspx/getthongtinmahang",
+                    data: JSON.stringify({ _mahang: mahang }),
+                    dataType: "json",
+                    success: function (data) {
+                        var objdata = $.parseJSON(data.d);
+                        var tenhang = objdata['Table'][0][2];
+                        var thanhtien = soluong * dongia;
+
+                        $('#tbnhaphang').append(
+                            '<tr class="themthucdon">' +
+                            '<td id="tenhang">' + tenhang + '</td>' +
+                            '<td id="soluong">' + soluong + '</td>' +
+                            '<td id="giale">' + dongia + '</td>' +
+                            '<td id="thanhtien">' + thanhtien + '</td>' +
+                            '<td><input name="checkinput" class="checkinput" type="checkbox" value="" /></td>' +
+                            '</tr>');
+
+                        tinhLaiTongTien();
+                    },
+                    error: function () {
+                        alert('Không lấy được thông tin mặt hàng: ' + mahang);
+                    }
+                });
+            }
+
+            // Tính lại tổng từ bảng -> tránh sai số dồn khi xóa/sửa dòng
+            function tinhLaiTongTien() {
+                var tong = 0;
+                $('#tbnhaphang tr').each(function () {
+                    tong += parseFloat($(this).find('td').eq(3).text()) || 0;
+                });
+                $('#tongtienid').val(tong);
+                $('#thanhtoanid').val(tong);
+                $('#tongtien_modal').text(tong.toLocaleString('vi-VN'));
+                $('#bangchuid2').text(to_vietnamese(tong));
+            }
+
+            // ===== end =====  ***minh2026
+
+            $('.button_addmenu_old').each(function () {
                 $(this).click(function () {
                     var _mahang = $(this).parent().find('mh').text();
                     //alert(_mahang);
@@ -3705,10 +3883,10 @@
                 var dongiahatphut = $("#giohatphut").text().trim();
                 var dongiahatgio = $("#giohat_").text().trim();
                 var soluonghatphut = $("#soluonghatphut").text().trim();
-                var tenphong2   = $("#tenphong2").text().trim();
-                var tongtien2   = $("#thantoan2").text().trim();
+                var tenphong2 = $("#tenphong2").text().trim();
+                var tongtien2 = $("#thantoan2").text().trim();
                 var chietkau2 = $("#chietkau2").text().trim();
-                var conlai2     = $("#psno2").text().trim();
+                var conlai2 = $("#psno2").text().trim();
                 var sohoadon = $("#sohoadon_").text().trim();
                 //var VAT2 = $("#VAT2").text().trim();
                 var VAT2 = parseInt($("#VAT2").text().replace(/\./g, ''));
@@ -3842,8 +4020,7 @@
                         }, 1000);
 
                     }
-                    else
-                    {
+                    else {
                         // In mới / tạm tính
                         console.log("In hóa đơn mới");
 

@@ -31,6 +31,12 @@ namespace WebApplication1.Report
         {
             if (!IsPostBack)
             {
+                // Gán ngày hiện tại (định dạng yyyy-MM-dd để input type="date" nhận được)
+                string today = DateTime.Now.ToString("yyyy-MM-dd");
+
+                Date1.Value = today;          // Từ ngày
+                ngaychiid.Value = today;      // Đến ngày
+
                 loaddata();
 
             }

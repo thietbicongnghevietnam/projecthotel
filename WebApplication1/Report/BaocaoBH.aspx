@@ -132,15 +132,15 @@
 %>
                       </td>
                      <%-- <td><%=rows["items"].ToString()%></td>--%>
-                      <td><%=String.Format("{0:N0}", Int32.Parse(rows["tienhang"].ToString()))%></td>
+                      <td><%= String.Format("{0:N0}", rows["tienhang"] == DBNull.Value ? 0 : rows["tienhang"]) %></td>
                       
-                      <td><%=String.Format("{0:N0}", Int32.Parse(rows["chietkhau"].ToString()))%></td>
+                      <td><%= String.Format("{0:N0}", rows["chietkhau"] == DBNull.Value ? 0 : rows["chietkhau"]) %></td>
                       <td>
                        <%-- <%=rows["VAT"].ToString()%>--%>
-                          <%=String.Format("{0:N0}", float.Parse(rows["VAT"].ToString()))%>
+                          <%= String.Format("{0:N0}", rows["VAT"] == DBNull.Value ? 0 : rows["VAT"]) %>
                       </td>
-                      <td><%=String.Format("{0:N0}", float.Parse(rows["tongtien"].ToString()))%></td>
-                      <td><%=String.Format("{0:N0}", float.Parse(rows["tiensauchietkhau"].ToString()))%></td>
+                      <td><%= String.Format("{0:N0}", rows["tongtien"] == DBNull.Value ? 0 : rows["tongtien"]) %></td>
+                      <td><%= String.Format("{0:N0}", rows["tiensauchietkhau"] == DBNull.Value ? 0 : rows["tiensauchietkhau"]) %></td>
                       <td><%=rows["psco"].ToString()%></td>
                       <%--<td><%=rows["hinhthucnghi"].ToString()%></td>
                       <td><%=rows["mohinh"].ToString()%></td>--%>

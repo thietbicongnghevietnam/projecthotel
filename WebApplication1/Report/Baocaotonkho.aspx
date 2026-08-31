@@ -47,7 +47,7 @@
                                     <input type="text" id="partno_search" runat="server">
 
                     <button class="btn btn-primary" type="button" runat="server" onserverclick="Search_Date_Click" >
-                        <i class="fa fa-fw fa-lg fa-search"></i>Filter</button>
+                        <i class="fa fa-fw fa-lg fa-search"></i>Lọc</button>
 
                     
 
@@ -56,7 +56,7 @@
                     </button>--%>
                   
                           
-                    <button class="btn btn-primary" type="button" runat="server" style="margin-left:20px;" onserverclick="Download_Click" ><i class="fa fa-download"></i>Export</button>
+                    <button class="btn btn-primary" type="button" runat="server" style="margin-left:20px;" onserverclick="Download_Click" ><i class="fa fa-download"></i>Xuất báo cáo</button>
 
                     <%--<button class="btn btn-success" type="button" runat="server" style="margin-left:50px;" ><i class="fa fa-download"></i><a href="ReportBorrowReturn.aspx" target="_blank" style="color:blue">Report Item</a></button>--%>
                   <%--  <button class="btn btn-success" type="button" runat="server" style="margin-left:50px;" onserverclick="Download_Click2" ><i class="fa fa-download">Report Item</i></button>

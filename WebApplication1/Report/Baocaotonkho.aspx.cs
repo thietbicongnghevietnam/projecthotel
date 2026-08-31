@@ -21,6 +21,10 @@ namespace WebApplication1.Report
         {
             if (!IsPostBack)
             {
+                string today = DateTime.Now.ToString("yyyy-MM-dd");
+                Date1.Value = today;          // Từ ngày
+                ngaychiid.Value = today;      // Đến ngày
+
                 dt_BCTonkho = DataConn.StoreFillDS("NH_Baocaotonkho", System.Data.CommandType.StoredProcedure);
             }
             
@@ -203,7 +207,7 @@ namespace WebApplication1.Report
             System.Web.HttpResponse response = System.Web.HttpContext.Current.Response;
             Response.Clear();
             Response.Buffer = true;
-            Response.AddHeader("content-disposition", "attachment;filename=Baocao_lichsu_muon.xls");
+            Response.AddHeader("content-disposition", "attachment;filename=Baocao_tonkho.xls");
             Response.Charset = "";
             Response.ContentType = "application/ms-excel";
 

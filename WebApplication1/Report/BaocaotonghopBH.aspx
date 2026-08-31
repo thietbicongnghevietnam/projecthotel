@@ -42,9 +42,9 @@
                                     <input type="date" id="ngaychiid" name="date" runat="server">                                                        
 
                     <button class="btn btn-primary" type="button" runat="server" onserverclick="Search_Date_Click" >
-                        <i class="fa fa-fw fa-lg fa-search"></i>Filter</button>
+                        <i class="fa fa-fw fa-lg fa-search"></i>Lọc</button>
                   
-                    <button class="btn btn-primary" type="button" style="margin-left:20px;" id="exportBtn">Export to Excel</button>
+                    <button class="btn btn-primary" type="button" style="margin-left:20px;" id="exportBtn">Xuất Excel</button>
                    
 
                 </div>
