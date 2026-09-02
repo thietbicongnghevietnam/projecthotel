@@ -31,24 +31,6 @@ namespace WebApplication1.Danhmuc {
         protected global::System.Web.UI.WebControls.Label lblConfirm;
         
         /// <summary>
-        /// Date1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl Date1;
-        
-        /// <summary>
-        /// ngaychiid control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl ngaychiid;
-        
-        /// <summary>
         /// FileUpload control.
         /// </summary>
         /// <remarks>

@@ -35,11 +35,11 @@
                 <%--class="card-title"--%>
                 <div class="col-sm-12">
                     <div style="float:left;">
-                        Từ ngày:
+                      <%--  Từ ngày:--%>
                                     <%--<input type="text" id="datepicker" runat="server">--%>
-                                    <input type="date" id="Date1" name="date" runat="server">
-                    Đến ngày:                                    
-                                    <input type="date" id="ngaychiid" name="date" runat="server">
+                                  <%--  <input type="date" id="Date1" name="date" runat="server">--%>
+                   <%-- Đến ngày:       --%>                             
+                                   <%-- <input type="date" id="ngaychiid" name="date" runat="server">--%>
                                     
 
                     <%--<input type="checkbox" id="check_partno_search" style="width: 20px; height: 20px;" name="check_partno_search">--%>

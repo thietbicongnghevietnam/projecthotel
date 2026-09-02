@@ -18,7 +18,16 @@ namespace WebApplication1.Report
         public DataTable dt_soquy = new DataTable();
         protected void Page_Load(object sender, EventArgs e)
         {
-            dt_soquy = DataConn.StoreFillDS("NH_Baocaosoquy", System.Data.CommandType.StoredProcedure);
+            if (!IsPostBack)
+            {
+                // Gán ngày hiện tại (định dạng yyyy-MM-dd để input type="date" nhận được)
+                string today = DateTime.Now.ToString("yyyy-MM-dd");
+                Date1.Value = today;          // Từ ngày
+                ngaychiid.Value = today;      // Đến ngày
+
+                dt_soquy = DataConn.StoreFillDS("NH_Baocaosoquy", System.Data.CommandType.StoredProcedure);
+            }
+               
         }
 
         protected void Search_Date_Click(object sender, EventArgs e)
