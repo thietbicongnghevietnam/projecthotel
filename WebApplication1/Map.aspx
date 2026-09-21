@@ -3831,6 +3831,31 @@
                 }
             }
 
+            //function printDiv(divId) {
+            //    try {
+            //        var area = document.getElementById('printableArea');
+            //        if (!area) return;
+
+            //        area.classList.remove('print-a5', 'print-80');
+            //        if (document.getElementById('chkBill80')?.checked) {
+            //            area.classList.add('print-80');
+            //        } else {
+            //            area.classList.add('print-a5');
+            //        }
+
+            //        // Đợi CSS áp dụng rồi mới in
+            //        setTimeout(function () {
+            //            window.print();
+            //        }, 250);
+
+            //        // Chỉ reload SAU KHI người dùng đóng dialog in (nếu muốn)
+            //        // window.onafterprint = function () { location.reload(); };
+            //    } catch (err) {
+            //        console.error(err);
+            //        alert(err.toString());
+            //    }
+            //}
+
         </script>
 
       
