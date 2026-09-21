@@ -1259,20 +1259,58 @@ button, input, select, textarea {
 
 @page {
     size: auto;
+    margin: 6mm;
 }
 
 @media print {
-    body {
+    html, body,
+    body.modal-open {
         background: #fff !important;
+        height: auto !important;
+        overflow: visible !important;
     }
 
-    .printableArea {
-        display: block !important;
+        body * {
+            visibility: hidden;
+        }
+
+    .modal-backdrop {
+        display: none !important;
     }
 
-    body * {
-        visibility: hidden;
+    /* Đưa modal hóa đơn lên đầu trang */
+    #myModal6 {
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: auto !important;
+        overflow: visible !important;
+        padding: 0 !important;
     }
+
+        /* Gỡ mọi thứ có thể cắt/xê dịch nội dung */
+        #myModal6 .modal-dialog,
+        #myModal6 .modal-content,
+        #myModal6 .modal-body {
+            position: static !important;
+            overflow: visible !important;
+            transform: none !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            max-width: none !important;
+            width: auto !important;
+            height: auto !important;
+            border: 0 !important;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+            background: #fff !important;
+        }
+
+        #myModal6 .modal-header,
+        #myModal6 .modal-footer {
+            display: none !important;
+        }
 
     #printableArea,
     #printableArea * {
@@ -1280,10 +1318,11 @@ button, input, select, textarea {
     }
 
     #printableArea {
-        position: absolute;
-        left: 0;
-        top: 0;
-        padding: 0;
-        box-shadow: none;
+        position: static !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        background: #fff !important;
     }
 }

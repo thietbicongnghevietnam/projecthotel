@@ -3781,80 +3781,74 @@
                 }
             }
 
+            //function printDiv(divId) {
+            //    try {
+
+            //        // ====== CHỌN KIỂU IN ======
+            //        var area = document.getElementById('printableArea');
+            //        area.classList.remove('print-a5', 'print-80');
+
+            //        if (document.getElementById('chkBill80')?.checked) {
+            //            area.classList.add('print-80'); // bill 80
+            //            console.log("Chọn bill 80");
+            //        } else {
+            //            area.classList.add('print-a5'); // mặc định A5
+            //            console.log("Chọn A5");
+            //        }
+
+            //        // ====== CHECK IN LẠI ======
+            //        var checkboxInLai = document.getElementById("inlaiHD");
+
+            //        if (checkboxInLai && checkboxInLai.checked === true) {
+            //            // In lại
+            //            console.log("In lại hóa đơn");
+
+            //            setTimeout(function () {
+            //                window.print();
+            //            }, 300);
+
+            //            setTimeout(function () {
+            //                location.reload();
+            //            }, 1000);
+
+            //        }
+            //        else {
+            //            // In mới / tạm tính
+            //            console.log("In hóa đơn mới");
+
+            //            setTimeout(function () {
+            //                window.print();
+            //            }, 300);
+
+            //            setTimeout(function () {
+            //                location.reload();
+            //            }, 1000);
+            //        }
+
+            //    } catch (err) {
+            //        console.log(err);
+            //        alert(err.toString());
+            //    }
+            //}
+
             function printDiv(divId) {
                 try {
-
-                    // ====== CHỌN KIỂU IN ======
                     var area = document.getElementById('printableArea');
                     area.classList.remove('print-a5', 'print-80');
+                    area.classList.add(document.getElementById('chkBill80')?.checked ? 'print-80' : 'print-a5');
 
-                    if (document.getElementById('chkBill80')?.checked) {
-                        area.classList.add('print-80'); // bill 80
-                        console.log("Chọn bill 80");
-                    } else {
-                        area.classList.add('print-a5'); // mặc định A5
-                        console.log("Chọn A5");
-                    }
+                    // Chỉ reload sau khi đóng hộp thoại in
+                    window.onafterprint = function () {
+                        window.onafterprint = null;
+                        location.reload();
+                    };
 
-                    // ====== CHECK IN LẠI ======
-                    var checkboxInLai = document.getElementById("inlaiHD");
-
-                    if (checkboxInLai && checkboxInLai.checked === true) {
-                        // In lại
-                        console.log("In lại hóa đơn");
-
-                        setTimeout(function () {
-                            window.print();
-                        }, 300);
-
-                        setTimeout(function () {
-                            location.reload();
-                        }, 1000);
-
-                    }
-                    else {
-                        // In mới / tạm tính
-                        console.log("In hóa đơn mới");
-
-                        setTimeout(function () {
-                            window.print();
-                        }, 300);
-
-                        setTimeout(function () {
-                            location.reload();
-                        }, 1000);
-                    }
-
+                    setTimeout(function () { window.print(); }, 300);
                 } catch (err) {
                     console.log(err);
                     alert(err.toString());
                 }
             }
-
-            //function printDiv(divId) {
-            //    try {
-            //        var area = document.getElementById('printableArea');
-            //        if (!area) return;
-
-            //        area.classList.remove('print-a5', 'print-80');
-            //        if (document.getElementById('chkBill80')?.checked) {
-            //            area.classList.add('print-80');
-            //        } else {
-            //            area.classList.add('print-a5');
-            //        }
-
-            //        // Đợi CSS áp dụng rồi mới in
-            //        setTimeout(function () {
-            //            window.print();
-            //        }, 250);
-
-            //        // Chỉ reload SAU KHI người dùng đóng dialog in (nếu muốn)
-            //        // window.onafterprint = function () { location.reload(); };
-            //    } catch (err) {
-            //        console.error(err);
-            //        alert(err.toString());
-            //    }
-            //}
 
         </script>
 
