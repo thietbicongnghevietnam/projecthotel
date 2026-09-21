@@ -20,29 +20,7 @@
     <script src="../../plugins/jquery/jquery.min.js"></script>
     <script src="../plugins/toastr/toastr.js"></script>
 
-    <style>
-        .popup {
-                display: inline-block; 
-                padding-top:20px;
-            }
-            .popup .popuptext {
-                visibility: hidden;
-                width: 200px;                
-                background-color:white;
-                color:red;
-                text-align: center;
-                border-radius: 6px;
-                padding: 20px;
-                position:relative;
-                top:5px;
-                right:150px;               
-            }
-            .popup .show {
-                visibility: visible;
-                -webkit-animation: fadeIn 1s;
-                animation: fadeIn 1s;
-            }
-    </style>
+   <link rel="stylesheet" href="../Content/login-restaurant.css" />
 
 </head>
 <body class="hold-transition login-page">

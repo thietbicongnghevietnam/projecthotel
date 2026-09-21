@@ -1,0 +1,307 @@
+﻿@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap');
+
+/* =====================================================================
+   LOGINNEW.ASPX – GIAO DIỆN NHÀ HÀNG
+   Chỉ CSS: giữ nguyên bố cục, ID, class và toàn bộ chức năng
+   ===================================================================== */
+
+:root {
+    --lg-forest: #1f3a33;
+    --lg-forest-2: #2c5046;
+    --lg-brass: #c89b3c;
+    --lg-brass-soft: #f6ecd6;
+    --lg-ink: #1d2622;
+    --lg-muted: #6b7770;
+    --lg-line: #dde2dc;
+    --lg-surface-2: #f6f7f4;
+    --lg-busy: #cf4a36;
+}
+
+/* ---------- Nền trang ---------- */
+body.login-page {
+    font-family: 'Be Vietnam Pro', 'Segoe UI', Arial, sans-serif;
+    color: var(--lg-ink);
+    background: radial-gradient(circle at 12% 18%, rgba(200,155,60,.20), transparent 38%), radial-gradient(circle at 88% 85%, rgba(63,143,99,.28), transparent 45%), var(--lg-forest);
+}
+
+.login-box {
+    width: 400px;
+    max-width: 92vw;
+}
+
+/* ---------- Tiêu đề trên cùng ---------- */
+.login-logo {
+    margin-bottom: 22px;
+    text-align: center;
+}
+
+    .login-logo a,
+    .login-logo a b {
+        color: #fff;
+        font-size: 26px;
+        font-weight: 700;
+        letter-spacing: .02em;
+        text-decoration: none;
+    }
+
+    .login-logo::after {
+        content: "";
+        display: block;
+        width: 56px;
+        height: 3px;
+        margin: 12px auto 0;
+        border-radius: 3px;
+        background: var(--lg-brass);
+    }
+
+/* ---------- Thẻ đăng nhập ---------- */
+.login-box .card {
+    border: 0;
+    border-top: 4px solid var(--lg-brass);
+    border-radius: 18px;
+    overflow: visible; /* để popup Contact không bị cắt */
+    box-shadow: 0 24px 60px rgba(10,20,16,.45);
+}
+
+.login-card-body {
+    padding: 28px 28px 24px;
+    border-radius: 18px;
+    background: #fff;
+}
+
+    .login-card-body > .card-body {
+        padding: 0;
+    }
+
+    /* Logo + tên phần mềm (p có height:50px inline làm ảnh bị tràn) */
+    .login-card-body > p {
+        height: auto !important;
+        margin-bottom: 22px;
+    }
+
+        .login-card-body > p img {
+            display: block;
+            width: 92px !important;
+            height: 92px !important;
+            margin: 0 auto 10px;
+            object-fit: cover;
+            border: 3px solid #fff;
+            box-shadow: 0 0 0 2px var(--lg-brass), 0 8px 20px rgba(0,0,0,.15);
+        }
+
+        .login-card-body > p a {
+            color: var(--lg-forest);
+            font-size: 18px;
+            text-decoration: none;
+        }
+
+            .login-card-body > p a i {
+                color: var(--lg-brass);
+                font-weight: 600;
+            }
+
+    /* ---------- Ô nhập ---------- */
+    .login-card-body label.small {
+        margin-bottom: 6px !important;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--lg-muted);
+    }
+
+    .login-card-body .form-group {
+        margin-bottom: 16px;
+    }
+
+#inputUser,
+#inputPassword {
+    height: 46px;
+    padding-left: 42px;
+    font-size: 15px;
+    color: var(--lg-ink);
+    border: 1px solid var(--lg-line);
+    border-radius: 12px;
+    background-color: var(--lg-surface-2);
+    background-repeat: no-repeat;
+    background-position: 14px center;
+    background-size: 18px;
+    transition: border-color .15s, box-shadow .15s, background-color .15s;
+}
+
+#inputUser {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b7770' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='12' cy='8' r='4'/%3E%3Cpath d='M4 21c0-4 3.6-7 8-7s8 3 8 7'/%3E%3C/svg%3E");
+}
+
+#inputPassword {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b7770' stroke-width='2' stroke-linecap='round'%3E%3Crect x='4' y='11' width='16' height='10' rx='2'/%3E%3Cpath d='M8 11V7a4 4 0 0 1 8 0v4'/%3E%3C/svg%3E");
+}
+
+    #inputUser:focus,
+    #inputPassword:focus {
+        background-color: #fff;
+        border-color: var(--lg-brass);
+        box-shadow: 0 0 0 3px rgba(200,155,60,.22);
+        outline: none;
+    }
+
+    #inputUser::placeholder,
+    #inputPassword::placeholder {
+        color: #a3aca6;
+    }
+
+/* Checkbox */
+.login-card-body .custom-control-label {
+    font-size: 13px;
+    color: var(--lg-muted);
+    cursor: pointer;
+}
+
+    .login-card-body .custom-control-label i {
+        color: var(--lg-forest) !important;
+        font-style: normal;
+        font-weight: 600;
+    }
+
+.custom-control-input:checked ~ .custom-control-label::before {
+    background-color: var(--lg-forest);
+    border-color: var(--lg-forest);
+}
+
+.custom-control-input:focus ~ .custom-control-label::before {
+    box-shadow: 0 0 0 3px rgba(31,58,51,.2);
+}
+
+/* ---------- Hàng liên kết + nút Login ---------- */
+.login-card-body .form-group.d-flex {
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 22px !important;
+}
+
+    .login-card-body a.small,
+    .login-card-body .form-group.d-flex a {
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--lg-forest);
+        text-decoration: none;
+    }
+
+        .login-card-body .form-group.d-flex a:hover {
+            color: var(--lg-brass);
+            text-decoration: underline;
+        }
+
+#dangnhapid {
+    flex: 1 1 100%;
+    height: 48px;
+    margin-top: 6px;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: .02em;
+    color: #fff;
+    background: var(--lg-forest);
+    border: 0;
+    border-radius: 12px;
+    box-shadow: 0 8px 18px rgba(31,58,51,.3);
+    transition: background .15s, transform .1s;
+}
+
+    #dangnhapid:hover {
+        background: var(--lg-forest-2);
+    }
+
+    #dangnhapid:focus {
+        box-shadow: 0 0 0 3px rgba(200,155,60,.4);
+    }
+
+    #dangnhapid:active {
+        transform: scale(.98);
+    }
+
+/* ---------- Popup Contact (giữ nguyên cơ chế ẩn/hiện của JS) ---------- */
+.popup {
+    position: relative;
+    z-index: 10;
+    display: inline-block;
+    padding-top: 20px;
+}
+
+    .popup .popuptext {
+        visibility: hidden;
+        position: relative;
+        top: 5px;
+        right: 150px;
+        display: block;
+        width: 220px;
+        padding: 14px;
+        text-align: center;
+        color: var(--lg-busy);
+        background: #fff;
+        border: 1px solid var(--lg-line);
+        border-radius: 12px;
+        box-shadow: 0 14px 30px rgba(10,20,16,.25);
+    }
+
+    .popup .show {
+        visibility: visible;
+        -webkit-animation: fadeIn .25s;
+        animation: fadeIn .25s;
+    }
+
+#addminid {
+    width: 100%;
+    height: 38px;
+    padding: 0 10px;
+    font-family: inherit;
+    font-size: 14px;
+    color: var(--lg-ink);
+    border: 1px solid var(--lg-line);
+    border-radius: 9px;
+    background: var(--lg-surface-2);
+}
+
+    #addminid:focus {
+        border-color: var(--lg-brass);
+        box-shadow: 0 0 0 3px rgba(200,155,60,.22);
+        outline: none;
+    }
+
+@-webkit-keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-4px);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* ---------- Màn hình nhỏ ---------- */
+@media (max-width: 480px) {
+    .login-card-body {
+        padding: 22px 18px 18px;
+    }
+
+    .login-logo a, .login-logo a b {
+        font-size: 21px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+        animation: none !important;
+    }
+}

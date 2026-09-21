@@ -3,20 +3,24 @@
   "WorkspaceRootPath": "C:\\TBCNVN\\NhaHang\\projecthotel\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|c:\\tbcnvn\\nhahang\\projecthotel\\webapplication1\\map.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
-      "RelativeMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\map.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|C:\\TBCNVN\\NhaHang\\projecthotel\\webapplication1\\map.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\map.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|C:\\TBCNVN\\NhaHang\\projecthotel\\webapplication1\\report\\baocaololai.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\report\\baocaololai.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|C:\\TBCNVN\\NhaHang\\projecthotel\\webapplication1\\report\\baocaololai.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
       "RelativeMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\report\\baocaololai.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|C:\\TBCNVN\\NhaHang\\projecthotel\\webapplication1\\site.master||{B30AFBFF-D992-43B7-B62D-2642580A2883}",
+      "RelativeMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\site.master||{B30AFBFF-D992-43B7-B62D-2642580A2883}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|c:\\tbcnvn\\nhahang\\projecthotel\\webapplication1\\map.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\map.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|C:\\TBCNVN\\NhaHang\\projecthotel\\webapplication1\\report\\baocaololai.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\report\\baocaololai.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|C:\\TBCNVN\\NhaHang\\projecthotel\\webapplication1\\ordernhanvien.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
@@ -33,10 +37,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|C:\\TBCNVN\\NhaHang\\projecthotel\\webapplication1\\report\\baocaobh.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
       "RelativeMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\report\\baocaobh.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|C:\\TBCNVN\\NhaHang\\projecthotel\\webapplication1\\site.master||{B30AFBFF-D992-43B7-B62D-2642580A2883}",
-      "RelativeMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\site.master||{B30AFBFF-D992-43B7-B62D-2642580A2883}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|C:\\TBCNVN\\NhaHang\\projecthotel\\webapplication1\\build\\config\\rollup.config.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
@@ -126,11 +126,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 28,
+          "SelectedChildIndex": 27,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "Baocaololai.aspx",
               "DocumentMoniker": "C:\\TBCNVN\\NhaHang\\projecthotel\\WebApplication1\\Report\\Baocaololai.aspx",
               "RelativeDocumentMoniker": "WebApplication1\\Report\\Baocaololai.aspx",
@@ -138,7 +138,8 @@
               "RelativeToolTip": "WebApplication1\\Report\\Baocaololai.aspx",
               "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2026-09-20T04:13:20.195Z"
+              "WhenOpened": "2026-09-20T04:13:20.195Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -154,7 +155,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 2,
               "Title": "Site.Master",
               "DocumentMoniker": "C:\\TBCNVN\\NhaHang\\projecthotel\\WebApplication1\\Site.Master",
               "RelativeDocumentMoniker": "WebApplication1\\Site.Master",
@@ -191,7 +192,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "Baocaololai.aspx.cs",
               "DocumentMoniker": "C:\\TBCNVN\\NhaHang\\projecthotel\\WebApplication1\\Report\\Baocaololai.aspx.cs",
               "RelativeDocumentMoniker": "WebApplication1\\Report\\Baocaololai.aspx.cs",
@@ -323,7 +324,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "BaocaoBH.aspx.cs",
               "DocumentMoniker": "C:\\TBCNVN\\NhaHang\\projecthotel\\WebApplication1\\Report\\BaocaoBH.aspx.cs",
               "RelativeDocumentMoniker": "WebApplication1\\Report\\BaocaoBH.aspx.cs",
@@ -383,7 +384,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "BaocaoBH.aspx",
               "DocumentMoniker": "C:\\TBCNVN\\NhaHang\\projecthotel\\WebApplication1\\Report\\BaocaoBH.aspx",
               "RelativeDocumentMoniker": "WebApplication1\\Report\\BaocaoBH.aspx",
@@ -431,7 +432,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "OrderNhanVien.aspx.cs",
               "DocumentMoniker": "C:\\TBCNVN\\NhaHang\\projecthotel\\WebApplication1\\OrderNhanVien.aspx.cs",
               "RelativeDocumentMoniker": "WebApplication1\\OrderNhanVien.aspx.cs",
@@ -443,7 +444,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "OrderNhanVien.aspx",
               "DocumentMoniker": "C:\\TBCNVN\\NhaHang\\projecthotel\\WebApplication1\\OrderNhanVien.aspx",
               "RelativeDocumentMoniker": "WebApplication1\\OrderNhanVien.aspx",
@@ -455,19 +456,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Map.aspx.cs",
               "DocumentMoniker": "C:\\TBCNVN\\NhaHang\\projecthotel\\WebApplication1\\Map.aspx.cs",
               "RelativeDocumentMoniker": "WebApplication1\\Map.aspx.cs",
               "ToolTip": "C:\\TBCNVN\\NhaHang\\projecthotel\\WebApplication1\\Map.aspx.cs",
               "RelativeToolTip": "WebApplication1\\Map.aspx.cs",
-              "ViewState": "AgIAACoAAAAAAAAAAAAawDAAAAAlAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-30T06:40:31.423Z"
+              "WhenOpened": "2026-05-30T06:40:31.423Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "Map.aspx",
               "DocumentMoniker": "C:\\TBCNVN\\NhaHang\\projecthotel\\WebApplication1\\Map.aspx",
               "RelativeDocumentMoniker": "WebApplication1\\Map.aspx",

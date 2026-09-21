@@ -1,0 +1,296 @@
+﻿@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap');
+
+/* =====================================================================
+   NAVBAR – GIAO DIỆN NHÀ HÀNG (chỉ CSS, giữ nguyên HTML/ID/class)
+   Đặt trong <head> của Site.Master, SAU file CSS của AdminLTE
+   ===================================================================== */
+
+:root {
+    --nv-forest: #1f3a33;
+    --nv-forest-2: #2c5046;
+    --nv-brass: #c89b3c;
+    --nv-brass-soft: #f6ecd6;
+    --nv-ink: #1d2622;
+    --nv-muted: #6b7770;
+    --nv-line: #dde2dc;
+    --nv-hover: #eef4f0;
+}
+
+/* ---------- Thanh chính ---------- */
+.navbar.navbar-white.navbar-light {
+    min-height: 58px;
+    padding: 0 16px;
+    background: var(--nv-forest);
+    border-bottom: 3px solid var(--nv-brass);
+    box-shadow: 0 4px 14px rgba(20,30,26,.18);
+    font-family: 'Be Vietnam Pro', 'Segoe UI', Arial, sans-serif;
+    flex-wrap: nowrap;
+}
+
+/* ---------- Link cấp 1 ---------- */
+.navbar.navbar-light .navbar-nav > .nav-item > .nav-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 58px;
+    width: auto !important; /* bỏ width cố định inline */
+    padding: 0 14px !important;
+    color: rgba(255,255,255,.78);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .03em;
+    white-space: nowrap;
+    transition: color .15s, background .15s;
+}
+
+    .navbar.navbar-light .navbar-nav > .nav-item > .nav-link:hover,
+    .navbar.navbar-light .navbar-nav > .nav-item.show > .nav-link {
+        color: #fff;
+        background: rgba(255,255,255,.06);
+    }
+
+    /* gạch chân vàng đồng khi hover / mở dropdown */
+    .navbar.navbar-light .navbar-nav > .nav-item > .nav-link::after {
+        content: "";
+        position: absolute;
+        left: 14px;
+        right: 14px;
+        bottom: 0;
+        height: 3px;
+        border: 0;
+        margin: 0;
+        border-radius: 3px 3px 0 0;
+        background: var(--nv-brass);
+        transform: scaleX(0);
+        transition: transform .2s;
+    }
+
+    .navbar.navbar-light .navbar-nav > .nav-item > .nav-link:hover::after,
+    .navbar.navbar-light .navbar-nav > .nav-item.show > .nav-link::after {
+        transform: scaleX(1);
+    }
+
+/* mũi tên dropdown: dùng lại ::after cũ không được nên vẽ bằng ::before */
+.navbar.navbar-light .navbar-nav > .nav-item > .dropdown-toggle {
+    padding-right: 28px !important;
+}
+
+    .navbar.navbar-light .navbar-nav > .nav-item > .dropdown-toggle::before {
+        content: "";
+        position: absolute;
+        right: 13px;
+        top: 50%;
+        width: 6px;
+        height: 6px;
+        margin-top: -5px;
+        border-right: 2px solid currentColor;
+        border-bottom: 2px solid currentColor;
+        transform: rotate(45deg);
+        opacity: .7;
+        transition: transform .2s;
+    }
+
+.navbar.navbar-light .navbar-nav > .nav-item.show > .dropdown-toggle::before {
+    transform: rotate(225deg);
+    margin-top: -1px;
+}
+
+/* nút ☰ thu gọn sidebar */
+.navbar.navbar-light .navbar-nav > .nav-item > .nav-link[data-widget="pushmenu"] {
+    width: 42px !important;
+    height: 42px;
+    margin: 8px 8px 8px 0;
+    padding: 0 !important;
+    justify-content: center;
+    border-radius: 10px;
+    background: rgba(255,255,255,.08);
+    color: #fff;
+}
+
+    .navbar.navbar-light .navbar-nav > .nav-item > .nav-link[data-widget="pushmenu"]::after {
+        display: none;
+    }
+
+    .navbar.navbar-light .navbar-nav > .nav-item > .nav-link[data-widget="pushmenu"]:hover {
+        background: var(--nv-brass);
+        color: var(--nv-forest);
+    }
+
+/* ---------- Dropdown ---------- */
+.navbar .dropdown-menu {
+    min-width: 230px;
+    margin-top: 0;
+    padding: 6px;
+    border: 1px solid var(--nv-line) !important;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 16px 36px rgba(20,30,26,.18) !important;
+    font-family: 'Be Vietnam Pro', 'Segoe UI', Arial, sans-serif;
+}
+
+    .navbar .dropdown-menu.show {
+        animation: nv-drop .16s ease-out;
+    }
+
+@keyframes nv-drop {
+    from {
+        opacity: 0;
+        transform: translateY(-4px);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+.navbar .dropdown-item,
+.navbar ul.nav.navbar-nav .dropdown-menu > li > a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 12px;
+    border-radius: 8px;
+    color: var(--nv-ink);
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background .12s, color .12s;
+}
+
+    .navbar .dropdown-item:hover,
+    .navbar .dropdown-item:focus,
+    .navbar ul.nav.navbar-nav .dropdown-menu > li > a:hover {
+        background: var(--nv-hover);
+        color: var(--nv-forest);
+    }
+
+    .navbar .dropdown-item:active {
+        background: var(--nv-forest);
+        color: #fff;
+    }
+
+.navbar .dropdown-divider {
+    margin: 6px 8px;
+    border-top-color: var(--nv-line);
+}
+
+/* submenu cấp 2 (BC công nợ) */
+.navbar .dropdown-submenu > .dropdown-menu {
+    margin-left: 6px;
+    margin-top: -7px;
+}
+
+.navbar .dropdown-submenu > .dropdown-toggle::after {
+    margin-left: auto;
+    border-left-color: var(--nv-muted);
+}
+
+/* ---------- Hotline hỗ trợ ---------- */
+.navbar .form-inline .input-group b {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 34px;
+    padding: 0 14px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(200,155,60,.45);
+    color: var(--nv-brass-soft) !important;
+    font-family: inherit !important;
+    font-size: 13px !important;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+    .navbar .form-inline .input-group b::before {
+        content: "\f095";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        font-size: 12px;
+        color: var(--nv-brass);
+    }
+
+    .navbar .form-inline .input-group b i {
+        font-style: normal;
+    }
+
+/* ---------- Khối User bên phải ---------- */
+.navbar > ul.nav.navbar-nav {
+    margin-left: auto;
+    float: none !important;
+    font-size: 14px !important;
+}
+
+    .navbar > ul.nav.navbar-nav > li > a {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        height: 40px;
+        padding: 0 14px 0 6px;
+        border-radius: 999px;
+        background: rgba(255,255,255,.08);
+        color: #fff;
+        font-weight: 600;
+        text-decoration: none;
+        transition: background .15s;
+    }
+
+        .navbar > ul.nav.navbar-nav > li > a:hover,
+        .navbar > ul.nav.navbar-nav > li.show > a {
+            background: rgba(255,255,255,.16);
+        }
+
+        .navbar > ul.nav.navbar-nav > li > a > .fa-user {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--nv-brass);
+            color: var(--nv-forest);
+            font-size: 13px;
+        }
+
+    .navbar > ul.nav.navbar-nav .dropdown-menu {
+        position: absolute;
+        right: 0;
+        left: auto;
+        top: calc(100% + 8px);
+    }
+
+        .navbar > ul.nav.navbar-nav .dropdown-menu #btn_logout {
+            color: #cf4a36;
+        }
+
+            .navbar > ul.nav.navbar-nav .dropdown-menu #btn_logout:hover {
+                background: #fbebe8;
+                color: #cf4a36;
+            }
+
+/* ---------- Màn hình nhỏ ---------- */
+@media (max-width: 1399.98px) {
+    .navbar .form-inline {
+        display: none !important;
+    }
+}
+
+@media (max-width: 1199.98px) {
+    .navbar.navbar-light .navbar-nav > .nav-item > .nav-link {
+        padding: 0 10px !important;
+        font-size: 12px;
+    }
+
+    .navbar.navbar-light .navbar-nav > .nav-item > .dropdown-toggle {
+        padding-right: 24px !important;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .navbar *, .navbar .dropdown-menu.show {
+        transition: none !important;
+        animation: none !important;
+    }
+}

@@ -168,6 +168,9 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\login-restaurant.css" />
+    <Content Include="Content\map-restaurant.css" />
+    <Content Include="Content\navbar-restaurant.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Danhmuc\Danhmucbanphong.aspx" />
     <Content Include="Danhmuc\Danhmucdonvi.aspx" />
