@@ -1,6 +1,10 @@
-========== // 20.09.2026 //==============
-
-
+========== // 27.09.2026 //==============
+NH_Update_phongban 'P01','3'	(bo dieu kien: --and karaoke=0 and nhanghi=0)
+[dbo].[NH_danhmucbanphong]	them tenkhuvuc
+NH_BaocaoBH			them cot: soluonghatPhut
+NH_BaocaoBH_theogio		them cot: soluonghatPhut
+NH_BaocaoBH_theongay		them cot: soluonghatPhut
+NH_BaocaoBH_theongay_NV		them cot: soluonghatPhut
 
 ========== // 30.08.2026 //==============
 NH_Update_nhanvien

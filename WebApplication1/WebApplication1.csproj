@@ -328,6 +328,7 @@
     <Content Include="docs\_layouts\page.html" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="GiaodienWeb\ChiTietNganhHang.aspx" />
     <Content Include="GiaodienWeb\Giaodienphanmem\ALINA.jpg" />
     <Content Include="GiaodienWeb\Giaodienphanmem\banchay.png" />
     <Content Include="GiaodienWeb\Giaodienphanmem\C2030.jpg" />
@@ -2683,6 +2684,11 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="GiaodienWeb\ChiTietNganhHang.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>ChiTietNganhHang.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GiaodienWeb\ChiTietNganhHang.aspx.designer.cs" />
     <Compile Include="GiaodienWeb\index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

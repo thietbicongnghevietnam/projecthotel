@@ -98,6 +98,7 @@
                  <tr role="row">
                                         <th>NO</th>
                                         <th>tenphong</th>
+                                        <th>tenkhuvuc</th>
                                         <th>khuvucid</th>
                                        <%-- <th>giophutroi</th>
                                         <th>giophutroitheophut</th> 
@@ -122,7 +123,9 @@
                                     <tr role="row">                                        
                                         <td><%=i %></td>
                                         <td><%=rows["tenphong"].ToString()%></td>
+                                        <td><%=rows["tenkhuvuc"].ToString()%></td>
                                         <td><%=rows["khuvucid"].ToString()%></td>
+
                                        <%-- <td><%=rows["giophutroi"].ToString()%></td>
                                         <td><%=rows["giophutroitheophut"].ToString()%></td>
                                         <td><%=rows["timephutroi"].ToString()%></td>

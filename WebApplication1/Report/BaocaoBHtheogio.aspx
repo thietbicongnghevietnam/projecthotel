@@ -104,7 +104,9 @@
                      <%-- <td><%=rows["type"].ToString()%></td>--%>
                       <td><%=rows["ngaygiothue"].ToString()%></td>
                       <td><%=rows["ngaygiora"].ToString()%></td>
-                      <td><%=rows["tongthoigianthue"].ToString()%></td>
+                      <%--<td><%=rows["tongthoigianthue"].ToString()%></td>--%>
+                      <td><%=rows["soluonghatPhut"].ToString()%></td>
+                      
                       <td><%=rows["tenphong"].ToString()%></td>
 
                      <%-- <td><%=rows["tienphong"].ToString()%></td>--%>
