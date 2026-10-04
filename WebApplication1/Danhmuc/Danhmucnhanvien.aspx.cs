@@ -15,10 +15,21 @@ namespace WebApplication1.Danhmuc
         public DataTable dt_nhanvien = new DataTable();
         protected void Page_Load(object sender, EventArgs e)
         {
+            // MỚI: chỉ admin được vào trang này (chặn cả khi gõ thẳng địa chỉ và khi bấm Ghi lại)
+            SiteMaster.ChiChoAdmin(this);
+
             if (!IsPostBack)
             {
                 dt_nhanvien = DataConn.StoreFillDS("NH_danhmucnhanvien", System.Data.CommandType.StoredProcedure);
             }
+        }
+
+        // MỚI: lấy quyền của 1 dòng để hiển thị trên bảng.
+        // Nếu store NH_danhmucnhanvien chưa trả về cột ROLE thì trả về rỗng chứ không báo lỗi trang.
+        public string GetRole(DataRow row)
+        {
+            if (!row.Table.Columns.Contains("ROLE")) return "";
+            return row["ROLE"].ToString().Trim();
         }
 
         public void themkhuvuc(object sender, EventArgs e)
@@ -26,9 +37,10 @@ namespace WebApplication1.Danhmuc
             string makhuvuc = khuvucid.Text;
             string tenkhuvuc = tenkhuvucid.Text;
             string maukhau = matkhauid.Text;
+            string role = ddlRoleAdd.SelectedValue;   // MỚI: "admin" hoặc "NV"
 
             DataTable dtinsert = new DataTable();
-            dtinsert = DataConn.StoreFillDS("NH_insert_DMnhanvien", System.Data.CommandType.StoredProcedure, makhuvuc, tenkhuvuc, maukhau);
+            dtinsert = DataConn.StoreFillDS("NH_insert_DMnhanvien", System.Data.CommandType.StoredProcedure, makhuvuc, tenkhuvuc, maukhau, role);
             if (dtinsert.Rows[0][0].ToString() == "1")
             {
                 dt_nhanvien = DataConn.StoreFillDS("NH_danhmucnhanvien", System.Data.CommandType.StoredProcedure);
@@ -47,9 +59,10 @@ namespace WebApplication1.Danhmuc
             string makhuvuc = txtmakhuvuc.Text;
             string matkhau = txtmatkhau.Text;
             string userid = Session["username"].ToString();
+            string role = ddlRoleEdit.SelectedValue;  // MỚI: "admin" hoặc "NV"
 
             DataTable dtupdate = new DataTable();
-            dtupdate = DataConn.StoreFillDS("NH_Update_nhanvien", System.Data.CommandType.StoredProcedure, makhuvuc, tenkhuvuc, matkhau, userid);
+            dtupdate = DataConn.StoreFillDS("NH_Update_nhanvien", System.Data.CommandType.StoredProcedure, makhuvuc, tenkhuvuc, matkhau, userid, role);
             if (dtupdate.Rows[0][0].ToString() == "1")
             {
                 dt_nhanvien = DataConn.StoreFillDS("NH_danhmucnhanvien", System.Data.CommandType.StoredProcedure);

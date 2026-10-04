@@ -109,19 +109,25 @@
                       
                       <td><%=rows["tenphong"].ToString()%></td>
 
-                     <%-- <td><%=rows["tienphong"].ToString()%></td>--%>
-                      <td><%=String.Format("{0:N0}", float.Parse(rows["tienphong"].ToString()))%></td>
+                     <td><%= Tien(rows["tienphong"]) %></td>
+                      <%--<td><%=String.Format("{0:N0}", float.Parse(rows["tienphong"].ToString()))%></td>--%>
                       <%--<td><%=rows["tiengiohat"].ToString()%></td>--%>
-                       <td><%=String.Format("{0:N0}", float.Parse(rows["tiengiohat"].ToString()))%></td>
+                       <%--<td><%=String.Format("{0:N0}", float.Parse(rows["tiengiohat"].ToString()))%></td>--%>
+                       <td><%= Tien(rows["tiengiohat"]) %></td>
 
                      <%-- <td><%=rows["items"].ToString()%></td>--%>
-                      <td><%=String.Format("{0:N0}", Int32.Parse(rows["tienhang"].ToString()))%></td>
+                      <%--<td><%=String.Format("{0:N0}", Int32.Parse(rows["tienhang"].ToString()))%></td>--%>
+                      <td><%= Tien(rows["tienhang"]) %></td>
                     
-                      <td><%=String.Format("{0:N0}", float.Parse(rows["chietkhau"].ToString()))%></td>
-                       <td><%=String.Format("{0:N0}", float.Parse(rows["VAT"].ToString()))%></td>
+                    <%--  <td><%=String.Format("{0:N0}", float.Parse(rows["chietkhau"].ToString()))%></td>--%>
+                       <td><%= Tien(rows["chietkhau"]) %></td>
+                       <%--<td><%=String.Format("{0:N0}", float.Parse(rows["VAT"].ToString()))%></td>--%>
+                      <td><%= Tien(rows["VAT"]) %></td>
                       <%--<td><%=rows["VAT"].ToString()%></td>--%>
-                        <td><%=String.Format("{0:N0}", float.Parse(rows["tongtien"].ToString()))%></td>
-                      <td><%=String.Format("{0:N0}", float.Parse(rows["tiensauchietkhau"].ToString()))%></td>
+                       <%-- <td><%=String.Format("{0:N0}", float.Parse(rows["tongtien"].ToString()))%></td>--%>
+                       <td><%= Tien(rows["tongtien"]) %></td>
+                     <%-- <td><%=String.Format("{0:N0}", float.Parse(rows["tiensauchietkhau"].ToString()))%></td>--%>
+                       <td><%= Tien(rows["tiensauchietkhau"]) %></td>
                         <td><%=rows["psco"].ToString()%></td>
                       <%--<td><%=rows["hinhthucnghi"].ToString()%></td>
                       <td><%=rows["mohinh"].ToString()%></td>--%>
@@ -317,7 +323,7 @@
     <script src="../../dist/js/demo.js"></script>
     <script>
          $(document).ready(function () {            
-            //$('#txtdevice').prop("readonly", true);
+             //$('#txtdevice').prop("readonly", true);
         });
 
        
@@ -479,7 +485,7 @@ for (var minute = 0; minute <= 59; minute++) {
         }
 
 
-</script>
+    </script>
 
 
 </body>

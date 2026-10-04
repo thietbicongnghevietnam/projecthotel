@@ -183,16 +183,24 @@ namespace WebApplication1.Report
             }
             else
             {
-                dt = DataConn.StoreFillDS("NH_infor_thongtincongnoKH", System.Data.CommandType.StoredProcedure, idhoadon, _fromdate, _todate);
+                try
+                {
+                    dt = DataConn.StoreFillDS("NH_infor_thongtincongnoKH", System.Data.CommandType.StoredProcedure, idhoadon, _fromdate, _todate);
 
-                if (dt.Rows[0][0].ToString() == "0")
-                {
-                    //truong hop nha hang va hotel , hoa don chua duoc thanh toan Flag =0 
-                    String daresult = null;
-                    return daresult;
-                }
-                else
-                {
+                    // MỚI: dt null hoặc không có dòng nào -> trả về bảng rỗng
+                    if (dt == null || dt.Rows.Count == 0)
+                    {
+                        DataSet dsRong = new DataSet();
+                        dsRong.Tables.Add(dt_new.Clone());
+                        return DataSetToJSON(dsRong);
+                    }
+
+                    if (dt.Rows[0][0].ToString() == "0")
+                    {
+                        //truong hop nha hang va hotel , hoa don chua duoc thanh toan Flag =0 
+                        return null;
+                    }
+
                     string items = dt.Rows[0][0].ToString();
 
                     JavaScriptSerializer jss = new JavaScriptSerializer();
@@ -201,16 +209,14 @@ namespace WebApplication1.Report
                     foreach (var item in jsonObj)
                     {
                         string[] numbersArray = item.Key.Split(',');
-                        var mahang = numbersArray.FirstOrDefault();
-                        //string[] strArray = mahang.Split(',');
-                        var mahang1 = numbersArray[0];
+                        var mahang = numbersArray[0];
                         var dongia1 = numbersArray[1];
                         var thanhtien1 = numbersArray[2];
-
                         var soluong = item.Value;
 
                         dt_new.Rows.Add(mahang, soluong, dongia1, "", thanhtien1, "", "", "", "");
                     }
+
                     string chietkhau = dt.Rows[0]["chietkhau"].ToString();
                     string tongtien = dt.Rows[0]["tienhang"].ToString();
                     string khachthanhtoan = "0";// dt.Rows[0]["tiensauchietkhau"].ToString();
@@ -219,21 +225,18 @@ namespace WebApplication1.Report
                     string hoadonid = dt.Rows[0]["sohoadon2"].ToString();
                     dt_new.Rows.Add("", "", "", chietkhau, tongtien, khachthanhtoan, khachno, ngaytao, hoadonid);
 
-                    DataTable dt2 = new DataTable();
-                    //dt2 = dt.Copy();
-                    dt2 = dt_new.Copy();
-
-                    String daresult = null;
                     DataSet ds = new DataSet();
-                    ds.Tables.Add(dt2);
-                    daresult = DataSetToJSON(ds);
-                    return daresult;
+                    ds.Tables.Add(dt_new.Copy());
+                    return DataSetToJSON(ds);
                 }
-
+                catch (Exception ex)
+                {
+                    // MỚI: có lỗi bất kỳ -> trả về bảng rỗng thay vì vỡ trang
+                    DataSet dsLoi = new DataSet();
+                    dsLoi.Tables.Add(dt_new.Clone());
+                    return DataSetToJSON(dsLoi);
+                }
             }
-
-
-
         }
 
         public static string DataSetToJSON(DataSet ds)

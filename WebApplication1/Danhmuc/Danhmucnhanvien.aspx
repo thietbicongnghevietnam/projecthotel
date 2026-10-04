@@ -86,15 +86,14 @@
              <div>
             <table id="example" class="table table-striped table-bordered" style="width:100%">
         <thead>
-            <tr>
                  <tr role="row">
                                         <th>NO</th>
                                         <th>U_NAME</th>
                                         <th>U_FULLNAME</th>                                                                                                                      
                                         <th>U_PASSWORD</th>                                                                                                                      
+                                        <th>ROLE</th>
                                         <th>Action</th>
                                     </tr>
-            </tr>
         </thead>
         <tbody>
                                 <%int i = 0; %>
@@ -106,9 +105,10 @@
                                         <td><%=rows["U_NAME"].ToString()%></td>
                                         <td><%=rows["U_FULLNAME"].ToString()%></td>
                                         <td></td>
+                                        <td><%=GetRole(rows)%></td>
                                         
                                         <td>
-                                            <a href="#" class="btn btn-info btn-sm" title="delete item" onclick="openEditModal2('<%= rows["U_NAME"].ToString() %>','<%= rows["U_FULLNAME"].ToString() %>','<%= rows["U_PASSWORD"].ToString() %>')"><i class="fas fa-pencil-alt"></i>Sửa</a>
+                                            <a href="#" class="btn btn-info btn-sm" title="Sửa" onclick="openEditModal2('<%= rows["U_NAME"].ToString() %>','<%= rows["U_FULLNAME"].ToString() %>','<%= rows["U_PASSWORD"].ToString() %>','<%= GetRole(rows) %>')"><i class="fas fa-pencil-alt"></i>Sửa</a>
                                         </td> 
                                         
                                     </tr>
@@ -163,11 +163,19 @@
                                     <div class="form-group">
                                         <label for="ID">Mật Khẩu</label>
                                         <span style="color: green; font-size: 11px; font-style: italic;"></span>
-                                        <asp:TextBox ID="txtmatkhau" CssClass="form-control" placeholder="" runat="server"></asp:TextBox>
+                                        <asp:TextBox ID="txtmatkhau" CssClass="form-control" placeholder="" TextMode="Password" autocomplete="new-password" runat="server"></asp:TextBox>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                   
+                                    <%-- MỚI: chọn quyền khi sửa --%>
+                                    <div class="form-group">
+                                        <label for="ddlRoleEdit">Quyền</label>
+                                        <asp:DropDownList ID="ddlRoleEdit" CssClass="form-control" runat="server">
+                                            <asp:ListItem Value="NV" Text="NV"></asp:ListItem>
+                                            <asp:ListItem Value="admin" Text="admin"></asp:ListItem>
+                                            <asp:ListItem Value="order" Text="order"></asp:ListItem>
+                                        </asp:DropDownList>
+                                    </div>
                                 </div>
                             </div>    
                             
@@ -220,8 +228,15 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
+                                    <%-- MỚI: chọn quyền khi thêm mới --%>
                                     <div class="form-group">
-                                                                              
+                                        <label for="ddlRoleAdd">Quyền</label>
+                                        <span style="color: red; font-size: 11px; font-style: italic;">You must input!(*)</span>
+                                        <asp:DropDownList ID="ddlRoleAdd" CssClass="form-control" runat="server">
+                                            <asp:ListItem Value="NV" Text="NV"></asp:ListItem>
+                                            <asp:ListItem Value="admin" Text="admin"></asp:ListItem>
+                                            <asp:ListItem Value="order" Text="order"></asp:ListItem>
+                                        </asp:DropDownList>
                                     </div>
                                 </div>
                             </div>
@@ -267,11 +282,21 @@
 
          });
 
-         $('#myModal').modal(options)
+    // ĐÃ BỎ dòng $('#myModal').modal(options) vì biến options không tồn tại -> gây lỗi JS
 
-    function openEditModal2(makhuvuc,tenkhuvuc) {           
+    function openEditModal2(makhuvuc, tenkhuvuc, matkhau, role) {           
         $("#txtmakhuvuc").val(makhuvuc);
         $("#txttenkhuvuc").val(tenkhuvuc);
+        $("#txtmatkhau").val(matkhau);
+
+        // MỚI: chọn sẵn quyền hiện tại của nhân viên (không phân biệt hoa/thường).
+        // Nếu DB để trống hoặc giá trị lạ thì mặc định về NV, tránh vô tình cấp admin.
+        var r = (role || "").trim().toLowerCase();
+        var chon = "NV";
+        $("#ddlRoleEdit option").each(function () {
+            if (this.value.toLowerCase() === r) { chon = this.value; }
+        });
+        $("#ddlRoleEdit").val(chon);
              
         $('#myModal2').modal('show');
 
@@ -310,11 +335,11 @@
             //dateNewFormat = today.getFullYear() + '-';
 
             //$('#datepicker').val(dateNewFormat);
-           
+
 
             //$("#datepicker").datepicker({ dateFormat: 'dd-mm-yy' });
- $("#txtngaymuon").datepicker({ dateFormat: 'dd-mm-yy' });
- $("#txtngaytra").datepicker({ dateFormat: 'dd-mm-yy' });
+            $("#txtngaymuon").datepicker({ dateFormat: 'dd-mm-yy' });
+            $("#txtngaytra").datepicker({ dateFormat: 'dd-mm-yy' });
         });
 
 

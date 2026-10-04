@@ -3,7 +3,23 @@
   "WorkspaceRootPath": "C:\\TBCNVN\\NhaHang\\projecthotel\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|C:\\TBCNVN\\NhaHang\\projecthotel\\webapplication1\\report\\baocaobhtheogio.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "AbsoluteMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|C:\\TBCNVN\\NhaHang\\projecthotel\\webapplication1\\content\\map-restaurant.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\content\\map-restaurant.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|C:\\TBCNVN\\NhaHang\\projecthotel\\webapplication1\\map.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\map.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|C:\\TBCNVN\\NhaHang\\projecthotel\\webapplication1\\map.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\map.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|C:\\TBCNVN\\NhaHang\\projecthotel\\webapplication1\\report\\baocaobh.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\report\\baocaobh.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|c:\\tbcnvn\\nhahang\\projecthotel\\webapplication1\\report\\baocaobhtheogio.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
       "RelativeMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\report\\baocaobhtheogio.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
     },
     {
@@ -11,28 +27,36 @@
       "RelativeMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\report\\baocaobhtheogio.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|c:\\tbcnvn\\nhahang\\projecthotel\\webapplication1\\site.master.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\site.master.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|C:\\TBCNVN\\NhaHang\\projecthotel\\webapplication1\\site.master||{B30AFBFF-D992-43B7-B62D-2642580A2883}",
       "RelativeMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\site.master||{B30AFBFF-D992-43B7-B62D-2642580A2883}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|c:\\tbcnvn\\nhahang\\projecthotel\\webapplication1\\danhmuc\\danhmucbanphong.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|C:\\TBCNVN\\NhaHang\\projecthotel\\webapplication1\\danhmuc\\danhmucnhanvien.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\danhmuc\\danhmucnhanvien.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|C:\\TBCNVN\\NhaHang\\projecthotel\\webapplication1\\danhmuc\\danhmucnhanvien.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\danhmuc\\danhmucnhanvien.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|c:\\tbcnvn\\nhahang\\projecthotel\\webapplication1\\default.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\default.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|C:\\TBCNVN\\NhaHang\\projecthotel\\webapplication1\\accounts\\loginnew.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\accounts\\loginnew.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|C:\\TBCNVN\\NhaHang\\projecthotel\\webapplication1\\danhmuc\\danhmucbanphong.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\danhmuc\\danhmucbanphong.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|c:\\tbcnvn\\nhahang\\projecthotel\\webapplication1\\danhmuc\\danhmucbanphong.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "AbsoluteMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|C:\\TBCNVN\\NhaHang\\projecthotel\\webapplication1\\danhmuc\\danhmucbanphong.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
       "RelativeMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\danhmuc\\danhmucbanphong.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|c:\\tbcnvn\\nhahang\\projecthotel\\webapplication1\\map.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
-      "RelativeMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\map.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|C:\\TBCNVN\\NhaHang\\projecthotel\\webapplication1\\content\\map-restaurant.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\content\\map-restaurant.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|C:\\TBCNVN\\NhaHang\\projecthotel\\webapplication1\\map.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\map.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|C:\\TBCNVN\\NhaHang\\projecthotel\\webapplication1\\report\\baocaololai.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
@@ -49,10 +73,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|C:\\TBCNVN\\NhaHang\\projecthotel\\webapplication1\\ordernhanvien.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\ordernhanvien.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|C:\\TBCNVN\\NhaHang\\projecthotel\\webapplication1\\report\\baocaobh.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\report\\baocaobh.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|C:\\TBCNVN\\NhaHang\\projecthotel\\webapplication1\\report\\baocaobh.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
@@ -107,18 +127,6 @@
       "RelativeMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\report\\baocaotonghopbh.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|C:\\TBCNVN\\NhaHang\\projecthotel\\webapplication1\\danhmuc\\danhmucnhanvien.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\danhmuc\\danhmucnhanvien.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|C:\\TBCNVN\\NhaHang\\projecthotel\\webapplication1\\accounts\\loginnew.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\accounts\\loginnew.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|C:\\TBCNVN\\NhaHang\\projecthotel\\webapplication1\\danhmuc\\danhmucnhanvien.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
-      "RelativeMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\danhmuc\\danhmucnhanvien.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|C:\\TBCNVN\\NhaHang\\projecthotel\\webapplication1\\app_code\\dataconn.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CF9FB13A-43F6-41DD-BA59-932C730642D9}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\app_code\\dataconn.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -138,11 +146,37 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 23,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 6,
+              "Title": "Site.Master.cs",
+              "DocumentMoniker": "C:\\TBCNVN\\NhaHang\\projecthotel\\WebApplication1\\Site.Master.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Site.Master.cs",
+              "ToolTip": "C:\\TBCNVN\\NhaHang\\projecthotel\\WebApplication1\\Site.Master.cs",
+              "RelativeToolTip": "WebApplication1\\Site.Master.cs",
+              "ViewState": "AgIAACwAAAAAAAAAAAAqwA4AAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-04T03:52:36.435Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Default.aspx",
+              "DocumentMoniker": "C:\\TBCNVN\\NhaHang\\projecthotel\\WebApplication1\\Default.aspx",
+              "RelativeDocumentMoniker": "WebApplication1\\Default.aspx",
+              "ToolTip": "C:\\TBCNVN\\NhaHang\\projecthotel\\WebApplication1\\Default.aspx",
+              "RelativeToolTip": "WebApplication1\\Default.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2026-10-04T03:26:42.071Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
               "Title": "Danhmucbanphong.aspx.cs",
               "DocumentMoniker": "C:\\TBCNVN\\NhaHang\\projecthotel\\WebApplication1\\Danhmuc\\Danhmucbanphong.aspx.cs",
               "RelativeDocumentMoniker": "WebApplication1\\Danhmuc\\Danhmucbanphong.aspx.cs",
@@ -155,7 +189,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 13,
               "Title": "Danhmucbanphong.aspx",
               "DocumentMoniker": "C:\\TBCNVN\\NhaHang\\projecthotel\\WebApplication1\\Danhmuc\\Danhmucbanphong.aspx",
               "RelativeDocumentMoniker": "WebApplication1\\Danhmuc\\Danhmucbanphong.aspx",
@@ -163,24 +197,24 @@
               "RelativeToolTip": "WebApplication1\\Danhmuc\\Danhmucbanphong.aspx",
               "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2026-09-27T01:28:00.277Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-09-27T01:28:00.277Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 0,
               "Title": "map-restaurant.css",
               "DocumentMoniker": "C:\\TBCNVN\\NhaHang\\projecthotel\\WebApplication1\\Content\\map-restaurant.css",
               "RelativeDocumentMoniker": "WebApplication1\\Content\\map-restaurant.css",
               "ToolTip": "C:\\TBCNVN\\NhaHang\\projecthotel\\WebApplication1\\Content\\map-restaurant.css",
               "RelativeToolTip": "WebApplication1\\Content\\map-restaurant.css",
-              "ViewState": "AgIAAOIEAAAAAAAAAADwv+8EAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAPwEAAAAAAAAAAAiwAcFAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2026-09-21T15:19:47.26Z"
+              "WhenOpened": "2026-09-21T15:19:47.26Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 14,
               "Title": "Baocaololai.aspx",
               "DocumentMoniker": "C:\\TBCNVN\\NhaHang\\projecthotel\\WebApplication1\\Report\\Baocaololai.aspx",
               "RelativeDocumentMoniker": "WebApplication1\\Report\\Baocaololai.aspx",
@@ -192,7 +226,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 19,
               "Title": "rollup.config.js",
               "DocumentMoniker": "C:\\TBCNVN\\NhaHang\\projecthotel\\WebApplication1\\build\\config\\rollup.config.js",
               "RelativeDocumentMoniker": "WebApplication1\\build\\config\\rollup.config.js",
@@ -204,7 +238,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 7,
               "Title": "Site.Master",
               "DocumentMoniker": "C:\\TBCNVN\\NhaHang\\projecthotel\\WebApplication1\\Site.Master",
               "RelativeDocumentMoniker": "WebApplication1\\Site.Master",
@@ -217,7 +251,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 20,
               "Title": "Baocaotonkho.aspx",
               "DocumentMoniker": "C:\\TBCNVN\\NhaHang\\projecthotel\\WebApplication1\\Report\\Baocaotonkho.aspx",
               "RelativeDocumentMoniker": "WebApplication1\\Report\\Baocaotonkho.aspx",
@@ -229,7 +263,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 22,
               "Title": "BaocaotonghopNH.aspx",
               "DocumentMoniker": "C:\\TBCNVN\\NhaHang\\projecthotel\\WebApplication1\\Report\\BaocaotonghopNH.aspx",
               "RelativeDocumentMoniker": "WebApplication1\\Report\\BaocaotonghopNH.aspx",
@@ -241,7 +275,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 15,
               "Title": "Baocaololai.aspx.cs",
               "DocumentMoniker": "C:\\TBCNVN\\NhaHang\\projecthotel\\WebApplication1\\Report\\Baocaololai.aspx.cs",
               "RelativeDocumentMoniker": "WebApplication1\\Report\\Baocaololai.aspx.cs",
@@ -253,7 +287,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 27,
               "Title": "BaocaocongnoNCC.aspx.cs",
               "DocumentMoniker": "C:\\TBCNVN\\NhaHang\\projecthotel\\WebApplication1\\Report\\BaocaocongnoNCC.aspx.cs",
               "RelativeDocumentMoniker": "WebApplication1\\Report\\BaocaocongnoNCC.aspx.cs",
@@ -265,7 +299,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 28,
               "Title": "BaocaocongnoKH.aspx.cs",
               "DocumentMoniker": "C:\\TBCNVN\\NhaHang\\projecthotel\\WebApplication1\\Report\\BaocaocongnoKH.aspx.cs",
               "RelativeDocumentMoniker": "WebApplication1\\Report\\BaocaocongnoKH.aspx.cs",
@@ -277,7 +311,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 29,
               "Title": "Phieucandoitonkho.aspx.cs",
               "DocumentMoniker": "C:\\TBCNVN\\NhaHang\\projecthotel\\WebApplication1\\Report\\Phieucandoitonkho.aspx.cs",
               "RelativeDocumentMoniker": "WebApplication1\\Report\\Phieucandoitonkho.aspx.cs",
@@ -289,7 +323,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 21,
               "Title": "Baocaotonkho.aspx.cs",
               "DocumentMoniker": "C:\\TBCNVN\\NhaHang\\projecthotel\\WebApplication1\\Report\\Baocaotonkho.aspx.cs",
               "RelativeDocumentMoniker": "WebApplication1\\Report\\Baocaotonkho.aspx.cs",
@@ -301,7 +335,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 23,
               "Title": "BaocaotonghopNH.aspx.cs",
               "DocumentMoniker": "C:\\TBCNVN\\NhaHang\\projecthotel\\WebApplication1\\Report\\BaocaotonghopNH.aspx.cs",
               "RelativeDocumentMoniker": "WebApplication1\\Report\\BaocaotonghopNH.aspx.cs",
@@ -313,7 +347,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 24,
               "Title": "Baocaonhaphang.aspx",
               "DocumentMoniker": "C:\\TBCNVN\\NhaHang\\projecthotel\\WebApplication1\\Report\\Baocaonhaphang.aspx",
               "RelativeDocumentMoniker": "WebApplication1\\Report\\Baocaonhaphang.aspx",
@@ -325,7 +359,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 25,
               "Title": "Baocaonhaphang.aspx.cs",
               "DocumentMoniker": "C:\\TBCNVN\\NhaHang\\projecthotel\\WebApplication1\\Report\\Baocaonhaphang.aspx.cs",
               "RelativeDocumentMoniker": "WebApplication1\\Report\\Baocaonhaphang.aspx.cs",
@@ -337,7 +371,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 26,
               "Title": "BaocaotonghopBH.aspx",
               "DocumentMoniker": "C:\\TBCNVN\\NhaHang\\projecthotel\\WebApplication1\\Report\\BaocaotonghopBH.aspx",
               "RelativeDocumentMoniker": "WebApplication1\\Report\\BaocaotonghopBH.aspx",
@@ -349,7 +383,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 30,
               "Title": "BaocaotonghopBH.aspx.cs",
               "DocumentMoniker": "C:\\TBCNVN\\NhaHang\\projecthotel\\WebApplication1\\Report\\BaocaotonghopBH.aspx.cs",
               "RelativeDocumentMoniker": "WebApplication1\\Report\\BaocaotonghopBH.aspx.cs",
@@ -361,56 +395,59 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 5,
               "Title": "BaocaoBHtheogio.aspx.cs",
               "DocumentMoniker": "C:\\TBCNVN\\NhaHang\\projecthotel\\WebApplication1\\Report\\BaocaoBHtheogio.aspx.cs",
               "RelativeDocumentMoniker": "WebApplication1\\Report\\BaocaoBHtheogio.aspx.cs",
               "ToolTip": "C:\\TBCNVN\\NhaHang\\projecthotel\\WebApplication1\\Report\\BaocaoBHtheogio.aspx.cs",
               "RelativeToolTip": "WebApplication1\\Report\\BaocaoBHtheogio.aspx.cs",
-              "ViewState": "AgIAAIsAAAAAAAAAAAAkwJ0AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABoAAAAAAAAAAAAjwCkAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-08-31T14:57:02.136Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 3,
               "Title": "BaocaoBH.aspx.cs",
               "DocumentMoniker": "C:\\TBCNVN\\NhaHang\\projecthotel\\WebApplication1\\Report\\BaocaoBH.aspx.cs",
               "RelativeDocumentMoniker": "WebApplication1\\Report\\BaocaoBH.aspx.cs",
               "ToolTip": "C:\\TBCNVN\\NhaHang\\projecthotel\\WebApplication1\\Report\\BaocaoBH.aspx.cs",
               "RelativeToolTip": "WebApplication1\\Report\\BaocaoBH.aspx.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAABkAAAAMAAAAAAAAAA==",
+              "ViewState": "AgIAAMwAAAAAAAAAAAAYwNkAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-31T14:54:52.042Z"
+              "WhenOpened": "2026-08-31T14:54:52.042Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 11,
               "Title": "Loginnew.aspx.cs",
               "DocumentMoniker": "C:\\TBCNVN\\NhaHang\\projecthotel\\WebApplication1\\Accounts\\Loginnew.aspx.cs",
               "RelativeDocumentMoniker": "WebApplication1\\Accounts\\Loginnew.aspx.cs",
               "ToolTip": "C:\\TBCNVN\\NhaHang\\projecthotel\\WebApplication1\\Accounts\\Loginnew.aspx.cs",
               "RelativeToolTip": "WebApplication1\\Accounts\\Loginnew.aspx.cs",
-              "ViewState": "AgIAAD0AAAAAAAAAAAAuwEgAAAAlAAAAAAAAAA==",
+              "ViewState": "AgIAAJkAAAAAAAAAAAAswKsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-30T03:05:11.109Z"
+              "WhenOpened": "2026-08-30T03:05:11.109Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 9,
               "Title": "Danhmucnhanvien.aspx.cs",
               "DocumentMoniker": "C:\\TBCNVN\\NhaHang\\projecthotel\\WebApplication1\\Danhmuc\\Danhmucnhanvien.aspx.cs",
               "RelativeDocumentMoniker": "WebApplication1\\Danhmuc\\Danhmucnhanvien.aspx.cs",
               "ToolTip": "C:\\TBCNVN\\NhaHang\\projecthotel\\WebApplication1\\Danhmuc\\Danhmucnhanvien.aspx.cs",
               "RelativeToolTip": "WebApplication1\\Danhmuc\\Danhmucnhanvien.aspx.cs",
-              "ViewState": "AgIAACgAAAAAAAAAAAAmwC8AAAAtAAAAAAAAAA==",
+              "ViewState": "AgIAAFkAAAAAAAAAAAAowBwAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-30T03:00:34.373Z"
+              "WhenOpened": "2026-08-30T03:00:34.373Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 8,
               "Title": "Danhmucnhanvien.aspx",
               "DocumentMoniker": "C:\\TBCNVN\\NhaHang\\projecthotel\\WebApplication1\\Danhmuc\\Danhmucnhanvien.aspx",
               "RelativeDocumentMoniker": "WebApplication1\\Danhmuc\\Danhmucnhanvien.aspx",
@@ -418,11 +455,12 @@
               "RelativeToolTip": "WebApplication1\\Danhmuc\\Danhmucnhanvien.aspx",
               "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2026-08-30T03:00:33.64Z"
+              "WhenOpened": "2026-08-30T03:00:33.64Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
               "Title": "BaocaoBHtheogio.aspx",
               "DocumentMoniker": "C:\\TBCNVN\\NhaHang\\projecthotel\\WebApplication1\\Report\\BaocaoBHtheogio.aspx",
               "RelativeDocumentMoniker": "WebApplication1\\Report\\BaocaoBHtheogio.aspx",
@@ -435,7 +473,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 18,
               "Title": "BaocaoBH.aspx",
               "DocumentMoniker": "C:\\TBCNVN\\NhaHang\\projecthotel\\WebApplication1\\Report\\BaocaoBH.aspx",
               "RelativeDocumentMoniker": "WebApplication1\\Report\\BaocaoBH.aspx",
@@ -447,7 +485,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 32,
               "Title": "Danhmuchanghoa.aspx.cs",
               "DocumentMoniker": "C:\\TBCNVN\\NhaHang\\projecthotel\\WebApplication1\\Danhmuc\\Danhmuchanghoa.aspx.cs",
               "RelativeDocumentMoniker": "WebApplication1\\Danhmuc\\Danhmuchanghoa.aspx.cs",
@@ -459,7 +497,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 33,
               "Title": "Danhmuchanghoa.aspx",
               "DocumentMoniker": "C:\\TBCNVN\\NhaHang\\projecthotel\\WebApplication1\\Danhmuc\\Danhmuchanghoa.aspx",
               "RelativeDocumentMoniker": "WebApplication1\\Danhmuc\\Danhmuchanghoa.aspx",
@@ -471,7 +509,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 31,
               "Title": "DataConn.cs",
               "DocumentMoniker": "C:\\TBCNVN\\NhaHang\\projecthotel\\WebApplication1\\App_Code\\DataConn.cs",
               "RelativeDocumentMoniker": "WebApplication1\\App_Code\\DataConn.cs",
@@ -483,7 +521,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 17,
               "Title": "OrderNhanVien.aspx.cs",
               "DocumentMoniker": "C:\\TBCNVN\\NhaHang\\projecthotel\\WebApplication1\\OrderNhanVien.aspx.cs",
               "RelativeDocumentMoniker": "WebApplication1\\OrderNhanVien.aspx.cs",
@@ -495,7 +533,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 16,
               "Title": "OrderNhanVien.aspx",
               "DocumentMoniker": "C:\\TBCNVN\\NhaHang\\projecthotel\\WebApplication1\\OrderNhanVien.aspx",
               "RelativeDocumentMoniker": "WebApplication1\\OrderNhanVien.aspx",
@@ -507,7 +545,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 2,
               "Title": "Map.aspx.cs",
               "DocumentMoniker": "C:\\TBCNVN\\NhaHang\\projecthotel\\WebApplication1\\Map.aspx.cs",
               "RelativeDocumentMoniker": "WebApplication1\\Map.aspx.cs",
@@ -515,11 +553,12 @@
               "RelativeToolTip": "WebApplication1\\Map.aspx.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-30T06:40:31.423Z"
+              "WhenOpened": "2026-05-30T06:40:31.423Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 1,
               "Title": "Map.aspx",
               "DocumentMoniker": "C:\\TBCNVN\\NhaHang\\projecthotel\\WebApplication1\\Map.aspx",
               "RelativeDocumentMoniker": "WebApplication1\\Map.aspx",

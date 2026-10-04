@@ -39,6 +39,13 @@ namespace WebApplication1.Report
             }
         }
 
+        public string Tien(object v)
+        {
+            if (v == null || v == DBNull.Value) return "0";
+            try { return Convert.ToDecimal(v).ToString("N0"); }
+            catch { return "0"; }
+        }
+
         public void Download_Click2(object sender, EventArgs e)
         {
             //string _itemid = itemid.Value.ToString();

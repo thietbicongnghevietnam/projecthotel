@@ -1274,6 +1274,45 @@ button, input, select, textarea {
             visibility: hidden;
         }
 
+        /* MỚI: ẩn hẳn (không chiếm chỗ) các khối ngoài hóa đơn -> hết trang trắng */
+        nav.navbar,
+        .content-header,
+        section.content,
+        .main-footer,
+        .control-sidebar,
+        body > hr,
+        form > hr,
+        #myModal,
+        #modalMenu,
+        #invoice {
+            display: none !important;
+        }
+
+    /* MỚI: thu gọn khoảng trống để hóa đơn vừa một trang */
+    #printableArea hr {
+        margin: 6px 0 !important;
+    }
+
+    #printableArea .table {
+        margin-bottom: 6px !important;
+    }
+
+        #printableArea .table th,
+        #printableArea .table td {
+            padding: 4px 6px !important;
+        }
+
+    #printableArea p:last-child,
+    #printableArea .container-fluid > :last-child {
+        margin-bottom: 0 !important;
+    }
+
+    html, body, .wrapper {
+        min-height: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
     .modal-backdrop {
         display: none !important;
     }

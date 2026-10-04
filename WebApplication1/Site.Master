@@ -121,7 +121,9 @@
         <li class="nav-item">
             <a href="Phieubanhang.aspx" target="_blank" class="nav-link" style="width:180px; text-align:center;">PHIẾU BÁN HÀNG</a>
           </li>
-        <%if (Role_ == "admin") {%>
+
+        <%-- ===== CHỈ ADMIN: SỔ QUỸ + BÁO CÁO ===== --%>
+        <% if (IsAdmin) { %>
          <li class="nav-item dropdown">
             <a id="dropdownSubMenu11" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">SỔ QUỸ</a>
             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
@@ -163,7 +165,10 @@
                <li><a href="Report/Baocaololai.aspx" target="_blank" class="dropdown-item">BC lỗ lãi</a></li>
             </ul>
           </li>
+        <% } %>
 
+        <%-- ===== ADMIN + NV: DANH MỤC (chỉ viết 1 lần, dùng chung) ===== --%>
+        <% if (IsAdmin || IsNV) { %>
         <li class="nav-item dropdown">
             <a id="dropdownSubMenu6" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">DANH MỤC</a>
             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
@@ -177,28 +182,14 @@
                 <li class="dropdown-divider"></li>
                 <li><a href="Danhmuc/DMcauthanhDVT.aspx" target="_blank" class="dropdown-item">Danh mục cấu thành ĐVT</a></li>
                 <li><a href="Danhmuc/DMcauthanhsanpham.aspx" target="_blank" class="dropdown-item">Danh mục cấu thành sản phẩm</a></li>
+              <%-- Danh mục nhân viên: chỉ admin thấy --%>
+              <% if (IsAdmin) { %>
               <li><a href="Danhmuc/Danhmucnhanvien.aspx" target="_blank" class="dropdown-item">Danh mục nhân viên</a></li>
+              <% } %>
             </ul>
           </li>
-             <%} %>
-        <%if (Role_ == "NV") {%>
-         <li class="nav-item dropdown">
-            <a id="dropdownSubMenu4" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">DANH MỤC</a>
-            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-              <li><a href="Danhmuc/Danhmuchanghoa.aspx" target="_blank" class="dropdown-item">Danh mục hàng hóa</a></li>
-              <li><a href="Danhmuc/Danhmuckhachhang.aspx" target="_blank" class="dropdown-item">Danh mục khách hàng</a></li>
-              <li><a href="Danhmuc/Danhmucbanphong.aspx" target="_blank" class="dropdown-item">Danh mục bàn/phòng</a></li>
-              <li class="dropdown-divider"></li>
-              <li><a href="Danhmuc/DMKhuvuc.aspx" target="_blank" class="dropdown-item">Danh mục khu vực</a></li>
-              <li><a href="Danhmuc/Danhmucnhomhang.aspx" target="_blank" class="dropdown-item">Danh mục nhóm hàng</a></li> 
-              <li><a href="Danhmuc/Danhmucnhacungcap.aspx" target="_blank" class="dropdown-item">Danh mục NCC</a></li>
-                <li class="dropdown-divider"></li>
-                <li><a href="Danhmuc/DMcauthanhDVT.aspx" target="_blank" class="dropdown-item">Danh mục cấu thành ĐVT</a></li>
-                <li><a href="Danhmuc/DMcauthanhsanpham.aspx" target="_blank" class="dropdown-item">Danh mục cấu thành sản phẩm</a></li>
-              <li><a href="Danhmuc/Danhmucnhanvien.aspx" target="_blank" class="dropdown-item">Danh mục nhân viên</a></li>
-            </ul>
-          </li>
-         <%} %>
+        <% } %>
+
       <li class="nav-item dropdown">
             <a id="dropdownSubMenu5" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">LIÊN HỆ</a>
            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
@@ -216,7 +207,7 @@
     <!-- SEARCH FORM -->
     <form class="form-inline ml-3">
       <div class="input-group input-group-sm">
-          <b style="font-size:14px; font-family:Tahoma; color:blue;"><i>Hỗ trợ khách hàng 24/24 : 0979 479 007 </i></b>          
+          <b style="font-size:16px; font-family:Tahoma; color:white;"><i>Hỗ trợ khách hàng 24/24 : 0979 479 007 </i></b>          
        <%-- <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
         <div class="input-group-append">
           <button class="btn btn-navbar" type="submit">
