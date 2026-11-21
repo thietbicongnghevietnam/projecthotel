@@ -8,52 +8,45 @@
     <%--<meta name="viewport" content="width=device-width, initial-scale=1.0" />--%>
     <title><%: Page.Title %> - Hệ thống phần mềm quản lý</title>
 
-<%--    <asp:PlaceHolder runat="server">
-        <%: Scripts.Render("~/bundles/modernizr") %>
-    </asp:PlaceHolder>--%>
-
-   <%-- <webopt:bundlereference runat="server" path="~/Content/css" />
-    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />--%>
   <meta name="viewport" content="width=device-width, initial-scale=1">
- 
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome Icons -->
+
+
+  <%--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <%--<link rel="stylesheet" href="../dist/css/fontawesome.css">--%>
-  <!-- IonIcons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
- <%--   <link rel="stylesheet" href="../dist/css/Ionicons.css">--%>
-  <!-- Theme style -->
   <link rel="stylesheet" href="../dist/css/adminlte.min.css">
-
-    <%-- <link href="../Content/buttons.dataTables.min.css" rel="stylesheet" />--%>
-    <%--<link href="../Content/jquery.dataTables.min.css" rel="stylesheet" />   --%>
     <link href="../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" />     
     <link href="../plugins/toastr/toastr.css" rel="stylesheet" /> 
     <link href="../plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet" />  
     <link href="../plugins/jquery-ui/jquery-ui.css" rel="stylesheet" />
-    
     <script src="../plugins/jquery/jquery.min.js"></script>
     <script src="../plugins/jquery-ui/jquery-ui.min.js"></script>
-    <%--<script src="../Scripts/all.min.js"></script>   --%>
-    <%--<script src="../plugins/popper/esm/popper.min.js"></script>  --%>
-    <script src="../Scripts/bootstrap.js"></script>  
-   <%-- <script src="../Scripts/bootbox.min.js"></script>--%>
-    <%--<script src="../Scripts/bootbox.locales.min.js"></script>--%>
-  <%--  <script src="../plugins/toastr/toastr.js"></script>--%>
-<%--    <script src="../Scripts/jquery.datetimepicker.js"></script>      
-    <script src="../Scripts/jquery.table2excel.min.js"></script>--%>
-    
-<%-- <link href="../Content/bootstrap.min.css" rel="stylesheet">--%>
+    <script src="../Scripts/bootstrap.js"></script>  --%>
 
-    <link rel="stylesheet" href="<%= ResolveUrl("~/Content/navbar-restaurant.css") %>" />
+     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+
+    <link rel="stylesheet" href="~/plugins/fontawesome-free/css/all.min.css" />
+    <link rel="stylesheet" href="~/dist/css/adminlte.min.css" />
+    <link rel="stylesheet" href="~/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css" />
+    <link rel="stylesheet" href="~/plugins/toastr/toastr.css" />
+    <link rel="stylesheet" href="~/plugins/jquery-ui/jquery-ui.min.css" />
+    <link rel="stylesheet" href="~/plugins/jquery-ui/jquery-ui.css" />
+    <link rel="stylesheet" href="~/Content/navbar-restaurant.css" />
+
+    <script src="<%= ResolveUrl("~/plugins/jquery/jquery.min.js") %>"></script>
+    <script src="<%= ResolveUrl("~/plugins/jquery-ui/jquery-ui.min.js") %>"></script>
+    <script src="<%= ResolveUrl("~/Scripts/bootstrap.js") %>"></script>
+
+
+     <link rel="stylesheet" href="~/Content/navbar-restaurant.css" />
 
 </head>
 <body class="hold-transition sidebar-mini">
-     <%  string user = Session["username"].ToString(); %>
+     <%--<%  string user = Session["username"].ToString(); %>--%>
+    <% string user = Session["username"] as string ?? ""; %>
 
     <form runat="server">
         <asp:ScriptManager runat="server">
@@ -111,26 +104,32 @@
           </li>
 
        <li class="nav-item">
-            <a href="Map.aspx" target="_blank" class="nav-link" style="width:120px; text-align:center;">NHÀ HÀNG</a>
+            <%--<a href="Map.aspx" target="_blank" class="nav-link" style="width:120px; text-align:center;">NHÀ HÀNG</a>--%>
+            <a href="<%= ResolveUrl("~/Map.aspx") %>" target="_blank" class="nav-link" style="width:120px; text-align:center;">NHÀ HÀNG</a>
           </li>
        
          <li class="nav-item">
-            <a href="Phieunhaphang.aspx" target="_blank" class="nav-link" style="width:180px; text-align:center;">PHIẾU NHẬP HÀNG</a>
+            <%--<a href="Phieunhaphang.aspx" target="_blank" class="nav-link" style="width:180px; text-align:center;">PHIẾU NHẬP HÀNG</a>--%>
+            <a href="<%= ResolveUrl("~/Phieunhaphang.aspx") %>" target="_blank" class="nav-link" style="width:180px; text-align:center;">PHIẾU NHẬP HÀNG</a>
           </li>
 
         <li class="nav-item">
-            <a href="Phieubanhang.aspx" target="_blank" class="nav-link" style="width:180px; text-align:center;">PHIẾU BÁN HÀNG</a>
+            <%--<a href="Phieubanhang.aspx" target="_blank" class="nav-link" style="width:180px; text-align:center;">PHIẾU BÁN HÀNG</a>--%>
+            <a href="<%= ResolveUrl("~/Phieubanhang.aspx") %>" target="_blank" class="nav-link" style="width:180px; text-align:center;">PHIẾU BÁN HÀNG</a>
           </li>
 
         <%-- ===== CHỈ ADMIN: SỔ QUỸ + BÁO CÁO ===== --%>
         <% if (IsAdmin) { %>
          <li class="nav-item dropdown">
             <a id="dropdownSubMenu11" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">SỔ QUỸ</a>
-            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-              <li><a href="Phieuchi.aspx" target="_blank" class="dropdown-item">Phiếu chi</a></li>
-              <li><a href="Phieuthu.aspx" target="_blank" class="dropdown-item">Phiếu thu</a></li>
+            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow"> 
+             <%-- <li><a href="Phieuchi.aspx" target="_blank" class="dropdown-item">Phiếu chi</a></li>--%>
+              <li><a href="<%= ResolveUrl("~/Phieuchi.aspx") %>" target="_blank" class="dropdown-item">Phiếu chi</a></li>
+              <%--<li><a href="Phieuthu.aspx" target="_blank" class="dropdown-item">Phiếu thu</a></li>--%>
+              <li><a href="<%= ResolveUrl("~/Phieuthu.aspx") %>" target="_blank" class="dropdown-item">Phiếu thu</a></li>
                 <li class="dropdown-divider"></li>
-              <li><a href="Report/Baocaosoquy.aspx" target="_blank" class="dropdown-item">BC tổng hợp thu chi</a></li>
+            <%--  <li><a href="Report/Baocaosoquy.aspx" target="_blank" class="dropdown-item">BC tổng hợp thu chi</a></li>--%>
+              <li><a href="<%= ResolveUrl("~/Report/Baocaosoquy.aspx") %>" target="_blank" class="dropdown-item">BC tổng hợp thu chi</a></li>
                <%-- <li><a href="Report/Baocaotonghopthuchi.aspx" target="_blank" class="dropdown-item">BC tổng hợp thu chi</a></li>--%>
               <!-- End Level two -->
             </ul>
@@ -138,31 +137,44 @@
         <li class="nav-item dropdown">
             <a id="dropdownSubMenu2" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">BÁO CÁO</a>
             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+              <%--<li><a href="Report/BaocaoBH.aspx" target="_blank" class="dropdown-item">BC bán hàng theo HĐ</a></li>--%>
               <li><a href="Report/BaocaoBH.aspx" target="_blank" class="dropdown-item">BC bán hàng theo HĐ</a></li>
-              <li><a href="Report/BaocaoBHtheogio.aspx" target="_blank" class="dropdown-item">BC bán hàng theo giờ</a></li>
-              <li><a href="Report/BaocaotonghopBH.aspx" target="_blank" class="dropdown-item">BC tổng hợp bán hàng</a></li>
+              <li><a href="<%= ResolveUrl("~/Report/BaocaoBH.aspx") %>" target="_blank" class="dropdown-item">BC bán hàng theo giờ</a></li>
+              <%--<li><a href="Report/BaocaotonghopBH.aspx" target="_blank" class="dropdown-item">BC tổng hợp bán hàng</a></li>--%>
+              <li><a href="<%= ResolveUrl("~/Report/BaocaotonghopBH.aspx") %>" target="_blank" class="dropdown-item">BC tổng hợp bán hàng</a></li>
+
               <li class="dropdown-divider"></li>
-              <li><a href="Report/Baocaonhaphang.aspx" target="_blank" class="dropdown-item">BC nhập hàng theo HĐ</a></li>
-              <li><a href="Report/BaocaotonghopNH.aspx" target="_blank" class="dropdown-item">BC tổng hợp nhập hàng</a></li>
+             <%-- <li><a href="Report/Baocaonhaphang.aspx" target="_blank" class="dropdown-item">BC nhập hàng theo HĐ</a></li>--%>
+              <li><a href="<%= ResolveUrl("~/Report/Baocaonhaphang.aspx") %>" target="_blank" class="dropdown-item">BC nhập hàng theo HĐ</a></li>
+             <%-- <li><a href="Report/BaocaotonghopNH.aspx" target="_blank" class="dropdown-item">BC tổng hợp nhập hàng</a></li>--%>
+              <li><a href="<%= ResolveUrl("~/Report/BaocaotonghopNH.aspx") %>" target="_blank" class="dropdown-item">BC tổng hợp nhập hàng</a></li>
+
               <li class="dropdown-divider"></li>
-              <li><a href="Report/Baocaotonkho.aspx" target="_blank" class="dropdown-item">BC tồn kho</a></li>
-                <li><a href="Report/Phieucandoitonkho.aspx" target="_blank" class="dropdown-item">Cân đối tồn kho</a></li>
+              <%--<li><a href="Report/Baocaotonkho.aspx" target="_blank" class="dropdown-item">BC tồn kho</a></li>--%>
+              <li><a href="<%= ResolveUrl("~/Report/Baocaotonkho.aspx") %>" target="_blank" class="dropdown-item">BC tồn kho</a></li>
+              <%--<li><a href="Report/Phieucandoitonkho.aspx" target="_blank" class="dropdown-item">Cân đối tồn kho</a></li>--%>
+              <li><a href="<%= ResolveUrl("~/Report/Phieucandoitonkho.aspx") %>" target="_blank" class="dropdown-item">Cân đối tồn kho</a></li>
+
               <li class="dropdown-divider"></li>
               <!-- Level two dropdown-->
               <li class="dropdown-submenu dropdown-hover">
                 <a id="dropdownSubMenu3" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">BC công nợ</a>
                 <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
                   <li>
-                    <a tabindex="-1" href="Report/BaocaocongnoKH.aspx" target="_blank" class="dropdown-item">Công nợ KH</a>
+                    <%--<a tabindex="-1" href="Report/BaocaocongnoKH.aspx" target="_blank" class="dropdown-item">Công nợ KH</a>--%>
+                    <a tabindex="-1" href="<%= ResolveUrl("~/Report/BaocaocongnoKH.aspx") %>" target="_blank" class="dropdown-item">Công nợ KH</a>
                   </li>
                     <li>
-                    <a tabindex="-1" href="Report/BaocaocongnoNCC.aspx" target="_blank" class="dropdown-item">Công nợ NCC</a>
+                    <%--<a tabindex="-1" href="Report/BaocaocongnoNCC.aspx" target="_blank" class="dropdown-item">Công nợ NCC</a>--%>
+                    <a tabindex="-1" href="<%= ResolveUrl("~/Report/BaocaocongnoNCC.aspx") %>" target="_blank" class="dropdown-item">Công nợ NCC</a>
                   </li>                 
                 </ul>
               </li>
+
               <!-- End Level two -->
                 <li class="dropdown-divider"></li>
-               <li><a href="Report/Baocaololai.aspx" target="_blank" class="dropdown-item">BC lỗ lãi</a></li>
+               <%--<li><a href="Report/Baocaololai.aspx" target="_blank" class="dropdown-item">BC lỗ lãi</a></li>--%>
+               <li><a href="<%= ResolveUrl("~/Report/Baocaololai.aspx") %>" target="_blank" class="dropdown-item">BC lỗ lãi</a></li>
             </ul>
           </li>
         <% } %>
@@ -172,57 +184,80 @@
         <li class="nav-item dropdown">
             <a id="dropdownSubMenu6" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">DANH MỤC</a>
             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-              <li><a href="Danhmuc/Danhmuchanghoa.aspx" target="_blank" class="dropdown-item">Danh mục hàng hóa</a></li>
-              <li><a href="Danhmuc/Danhmuckhachhang.aspx" target="_blank" class="dropdown-item">Danh mục khách hàng</a></li>
-              <li><a href="Danhmuc/Danhmucbanphong.aspx" target="_blank" class="dropdown-item">Danh mục bàn/phòng</a></li>
+             <%-- <li><a href="Danhmuc/Danhmuchanghoa.aspx" target="_blank" class="dropdown-item">Danh mục hàng hóa</a></li>--%>
+              <li><a href="<%= ResolveUrl("~/Danhmuc/Danhmuchanghoa.aspx") %>" target="_blank" class="dropdown-item">Danh mục hàng hóa</a></li>
+              <%--<li><a href="Danhmuc/Danhmuckhachhang.aspx" target="_blank" class="dropdown-item">Danh mục khách hàng</a></li>--%>
+              <li><a href="<%= ResolveUrl("~/Danhmuc/Danhmuckhachhang.aspx") %>" target="_blank" class="dropdown-item">Danh mục khách hàng</a></li>
+             <%-- <li><a href="Danhmuc/Danhmucbanphong.aspx" target="_blank" class="dropdown-item">Danh mục bàn/phòng</a></li>--%>
+              <li><a href="<%= ResolveUrl("~/Danhmuc/Danhmucbanphong.aspx") %>" target="_blank" class="dropdown-item">Danh mục bàn/phòng</a></li>
               <li class="dropdown-divider"></li>
-              <li><a href="Danhmuc/DMKhuvuc.aspx" target="_blank" class="dropdown-item">Danh mục khu vực</a></li>
-              <li><a href="Danhmuc/Danhmucnhomhang.aspx" target="_blank" class="dropdown-item">Danh mục nhóm hàng</a></li> 
-              <li><a href="Danhmuc/Danhmucnhacungcap.aspx" target="_blank" class="dropdown-item">Danh mục NCC</a></li>
+             <%-- <li><a href="Danhmuc/DMKhuvuc.aspx" target="_blank" class="dropdown-item">Danh mục khu vực</a></li>--%>
+              <li><a href="<%= ResolveUrl("~/Danhmuc/DMKhuvuc.aspx") %>" target="_blank" class="dropdown-item">Danh mục khu vực</a></li>
+              <%--<li><a href="Danhmuc/Danhmucnhomhang.aspx" target="_blank" class="dropdown-item">Danh mục nhóm hàng</a></li> --%>
+              <li><a href="<%= ResolveUrl("~/Danhmuc/Danhmucnhomhang.aspx") %>" target="_blank" class="dropdown-item">Danh mục nhóm hàng</a></li> 
+              <%--<li><a href="Danhmuc/Danhmucnhacungcap.aspx" target="_blank" class="dropdown-item">Danh mục NCC</a></li>--%>
+              <li><a href="<%= ResolveUrl("~/Danhmuc/Danhmucnhacungcap.aspx") %>" target="_blank" class="dropdown-item">Danh mục NCC</a></li>
                 <li class="dropdown-divider"></li>
-                <li><a href="Danhmuc/DMcauthanhDVT.aspx" target="_blank" class="dropdown-item">Danh mục cấu thành ĐVT</a></li>
-                <li><a href="Danhmuc/DMcauthanhsanpham.aspx" target="_blank" class="dropdown-item">Danh mục cấu thành sản phẩm</a></li>
+                <%--<li><a href="Danhmuc/DMcauthanhDVT.aspx" target="_blank" class="dropdown-item">Danh mục cấu thành ĐVT</a></li>--%>
+                <li><a href="<%= ResolveUrl("~/Danhmuc/DMcauthanhDVT.aspx") %>" target="_blank" class="dropdown-item">Danh mục cấu thành ĐVT</a></li>
+                <%--<li><a href="Danhmuc/DMcauthanhsanpham.aspx" target="_blank" class="dropdown-item">Danh mục cấu thành sản phẩm</a></li>--%>
+                <li><a href="<%= ResolveUrl("~/Danhmuc/DMcauthanhsanpham.aspx") %>" target="_blank" class="dropdown-item">Danh mục cấu thành sản phẩm</a></li>
               <%-- Danh mục nhân viên: chỉ admin thấy --%>
               <% if (IsAdmin) { %>
-              <li><a href="Danhmuc/Danhmucnhanvien.aspx" target="_blank" class="dropdown-item">Danh mục nhân viên</a></li>
+             <%-- <li><a href="Danhmuc/Danhmucnhanvien.aspx" target="_blank" class="dropdown-item">Danh mục nhân viên</a></li>--%>
+                <li><a href="<%= ResolveUrl("~/Hethong/Nguoidung.aspx") %>" target="_blank" class="dropdown-item">Người dùng</a></li>
+                <li><a href="<%= ResolveUrl("~/Hethong/Phanquyen.aspx") %>" target="_blank" class="dropdown-item">Phân quyền</a></li>
               <% } %>
             </ul>
           </li>
         <% } %>
 
+
+
+       
+
       <li class="nav-item dropdown">
             <a id="dropdownSubMenu5" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">LIÊN HỆ</a>
            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-               <li><a href="Danhmuc/Danhmucdonvi.aspx" target="_blank" class="dropdown-item">Thông tin doanh nghiệp</a></li>
+              <%-- <li><a href="Danhmuc/Danhmucdonvi.aspx" target="_blank" class="dropdown-item">Thông tin doanh nghiệp</a></li>--%>
+               <li><a href="<%= ResolveUrl("~/Danhmuc/Danhmucdonvi.aspx") %>" target="_blank" class="dropdown-item">Thông tin doanh nghiệp</a></li>
               <li><a href="#" class="dropdown-item">Đặt hàng online</a></li>
               <li><a href="#" class="dropdown-item">Liên hệ trực tiếp</a></li> 
               <li><a href="MakeQR.aspx" target="_blank" class="dropdown-item">Tạo QR code</a></li> 
               <li><a href="Inbarcode.aspx" target="_blank" class="dropdown-item">Tạo QR DM hàng hóa</a></li> 
-              <li><a href="TemplateReport/hethongbaocadong.aspx" target="_blank" class="dropdown-item">Sql data</a></li> 
+              <%--<li><a href="TemplateReport/hethongbaocadong.aspx" target="_blank" class="dropdown-item">Sql data</a></li> --%>
+              <li><a href="<%= ResolveUrl("~/TemplateReport/hethongbaocadong.aspx") %>" target="_blank" class="dropdown-item">Sql data</a></li> 
             </ul>
        </li>
+
+
     </ul>
 
                   
     <!-- SEARCH FORM -->
     <form class="form-inline ml-3">
+     
       <div class="input-group input-group-sm">
           <b style="font-size:16px; font-family:Tahoma; color:white;"><i>Hỗ trợ khách hàng 24/24 : 0979 479 007 </i></b>          
-       <%-- <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-        <div class="input-group-append">
-          <button class="btn btn-navbar" type="submit">
-            <i class="fas fa-search"></i>
-          </button>
-        </div>--%>
       </div>
+         
     </form>
 
      <ul class="nav navbar-nav" style="font-size: 17px;float: right;"> 
                              <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-user"></i> User <span class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#"><i class="far fa-id-badge"></i> Profile - <%=Session["username"].ToString() %>  </a></li>
-                                    <li><a href="Accounts/Loginnew.aspx" id="btn_logout"onserverclick="bttLogout_Click" ><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                                    <li><a href="#"><i class="far fa-id-badge"></i> 
+                                        <%--Profile - <%=Session["username"].ToString() %> --%> 
+                                        Profile - <%= HttpUtility.HtmlEncode(Session["username"] as string ?? "") %>
+                                        </a></li>
+                                    <li>
+                                        <%--<a href="Accounts/Loginnew.aspx" id="btn_logout"onserverclick="bttLogout_Click" >--%>
+                                        <a href="<%= ResolveUrl("~/Accounts/Loginnew.aspx") %>" id="btn_logout"onserverclick="bttLogout_Click" >
+                                        <i class="fas fa-sign-out-alt"></i> Logout
+                                        </a>
+
+                                    </li>
                                 </ul>
                             </li>
                         </ul>

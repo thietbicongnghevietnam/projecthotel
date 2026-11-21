@@ -13,8 +13,10 @@ using WebApplication1.App_Code;
 
 namespace WebApplication1
 {
-    public partial class Phieuchi : System.Web.UI.Page
+    public partial class Phieuchi : System.Web.UI.Page       // trước đây là : Phieuchi : System.Web.UI.Page  // Phieuchi : BasePage 
     {
+        //protected override string RequiredPermission { get { return "PHIEUCHI.VIEW"; } }  //phan quyen theo role
+
         public DataTable dtncc = new DataTable();
         public DataTable dt_getSohd = new DataTable();
         public string sohoadon = "";
@@ -22,7 +24,14 @@ namespace WebApplication1
         {
             if (!IsPostBack)
             {
-                
+
+                //btnXoa.Visible = Auth.Has("PHIEUCHI.DELETE");  //phan quyen theo role
+                // Ẩn/hiện nút theo quyền
+                //btnThem.Visible = Auth.Has("PHIEUCHI.ADD");
+                //btnSua.Visible = Auth.Has("PHIEUCHI.EDIT");
+                //btnXoa.Visible = Auth.Has("PHIEUCHI.DELETE");
+                //btnExcel.Visible = Auth.Has("PHIEUCHI.EXPORT");
+
                 dtncc = DataConn.StoreFillDS("NH_Get_NCC", System.Data.CommandType.StoredProcedure);
                 DataRow newRow2 = dtncc.NewRow();
                 newRow2["mancc"] = "==NCC==";

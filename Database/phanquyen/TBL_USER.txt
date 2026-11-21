@@ -1,0 +1,121 @@
+TBL_USER2 ──< TBL_USER_ROLE >── TBL_ROLE ──< TBL_ROLE_PERMISSION >── TBL_PERMISSION >── TBL_MODULE
+     └──────< TBL_USER_PERMISSION (ngoại lệ riêng từng user, tùy chọn) >──┘
+
+cách phổ biến là RBAC (Role-Based Access Control)
+Nguyên tắc chính: code không hỏi “user có phải admin không”, mà hỏi “user có quyền PHIEUCHI.XOA không”.
+Admin chỉ là một nhóm được gán nhiều quyền.
+
+-- Nhóm quyền: admin, thu ngân, phục vụ, kho...
+CREATE TABLE TBL_ROLE (
+    ROLE_ID    INT IDENTITY PRIMARY KEY,
+    ROLE_CODE  VARCHAR(50)  NOT NULL UNIQUE,   -- 'ADMIN', 'NV', 'ORDER', 'KHO'
+    ROLE_NAME  NVARCHAR(100) NOT NULL,
+    IS_ACTIVE  BIT NOT NULL DEFAULT 1
+);
+
+
+-- Module = trang / chức năng lớn (cũng dùng để dựng menu động)
+CREATE TABLE TBL_MODULE (
+    MODULE_ID   INT IDENTITY PRIMARY KEY,
+    MODULE_CODE VARCHAR(50)  NOT NULL UNIQUE,  -- 'PHIEUCHI', 'BC_LOLAI', 'DM_HANGHOA'
+    MODULE_NAME NVARCHAR(100) NOT NULL,        -- N'Phiếu chi'
+    PARENT_ID   INT NULL REFERENCES TBL_MODULE(MODULE_ID), -- nhóm menu: SỔ QUỸ, BÁO CÁO...
+    URL         VARCHAR(200) NULL,             -- 'Phieuchi.aspx'
+    SORT_ORDER  INT NOT NULL DEFAULT 0,
+    IS_MENU     BIT NOT NULL DEFAULT 1
+);
+
+-- Quyền chi tiết = Module + Hành động
+CREATE TABLE TBL_PERMISSION (
+    PERM_ID     INT IDENTITY PRIMARY KEY,
+    MODULE_ID   INT NOT NULL REFERENCES TBL_MODULE(MODULE_ID),
+    ACTION_CODE VARCHAR(30) NOT NULL,          -- VIEW, ADD, EDIT, DELETE, PRINT, EXPORT, APPROVE
+    PERM_CODE   VARCHAR(100) NOT NULL UNIQUE,  -- 'PHIEUCHI.DELETE'
+    PERM_NAME   NVARCHAR(150) NOT NULL         -- N'Xóa phiếu chi'
+);
+
+CREATE TABLE TBL_ROLE_PERMISSION (
+    ROLE_ID INT NOT NULL REFERENCES TBL_ROLE(ROLE_ID),
+    PERM_ID INT NOT NULL REFERENCES TBL_PERMISSION(PERM_ID),
+    PRIMARY KEY (ROLE_ID, PERM_ID)
+);
+
+-- Một user có thể thuộc nhiều nhóm
+CREATE TABLE TBL_USER_ROLE (
+    U_ID    INT NOT NULL,   -- FK tới TBL_USER2.U_ID
+    ROLE_ID INT NOT NULL REFERENCES TBL_ROLE(ROLE_ID),
+    PRIMARY KEY (U_ID, ROLE_ID)
+);
+
+-- (Tùy chọn) cấp thêm / thu hồi riêng 1 quyền cho 1 user
+CREATE TABLE TBL_USER_PERMISSION (
+    U_ID     INT NOT NULL,
+    PERM_ID  INT NOT NULL REFERENCES TBL_PERMISSION(PERM_ID),
+    IS_GRANT BIT NOT NULL,  -- 1 = cấp thêm, 0 = cấm (ưu tiên hơn quyền của nhóm)
+    PRIMARY KEY (U_ID, PERM_ID)
+);
+
+
+=============== // Store lấy toàn bộ quyền của một user: //=========
+CREATE PROCEDURE pro_user_get_permissions @U_ID INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+    SELECT p.PERM_CODE
+    FROM TBL_USER_ROLE ur
+    JOIN TBL_ROLE r             ON r.ROLE_ID = ur.ROLE_ID AND r.IS_ACTIVE = 1
+    JOIN TBL_ROLE_PERMISSION rp ON rp.ROLE_ID = ur.ROLE_ID
+    JOIN TBL_PERMISSION p       ON p.PERM_ID = rp.PERM_ID
+    WHERE ur.U_ID = @U_ID
+      AND NOT EXISTS (SELECT 1 FROM TBL_USER_PERMISSION up
+                      WHERE up.U_ID = @U_ID AND up.PERM_ID = p.PERM_ID AND up.IS_GRANT = 0)
+    UNION
+    SELECT p.PERM_CODE
+    FROM TBL_USER_PERMISSION up
+    JOIN TBL_PERMISSION p ON p.PERM_ID = up.PERM_ID
+    WHERE up.U_ID = @U_ID AND up.IS_GRANT = 1;
+END
+
+
+=========== tao 2 trang moi trong App_code
+Tạo file BasePage.cs ở cùng thư mục với Auth.cs (nhớ đặt Build Action = Compile như lần trước):
+BasePage.cs
+Auth.cs
+
+Site.Master vẫn giữ việc ẩn/hiện menu theo quyền. 
+BasePage lo việc chặn truy cập trang, 			********thừa BasePage
+còn Auth.Require trong từng nút lo việc chặn thao tác.
+
+=============Cách dùng trong từng trang
+Chỉ sửa một dòng trong file .aspx.cs, phần .aspx giữ nguyên, vẫn dùng Site.Master như cũ:
+using WebApplication1.App_Code;
+public partial class Phieuchi : BasePage          // trước đây là : System.Web.UI.Page    ********thừa BasePage
+{
+    protected override string RequiredPermission => "PHIEUCHI.VIEW";
+
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        // Ẩn/hiện nút theo quyền
+        btnThem.Visible  = Auth.Has("PHIEUCHI.ADD");
+        btnSua.Visible   = Auth.Has("PHIEUCHI.EDIT");
+        btnXoa.Visible   = Auth.Has("PHIEUCHI.DELETE");
+        btnExcel.Visible = Auth.Has("PHIEUCHI.EXPORT");
+    }
+
+    protected void btnXoa_Click(object sender, EventArgs e)
+    {
+        Auth.Require("PHIEUCHI.DELETE");   // BẮT BUỘC kiểm tra lại ở server
+        // ... xóa
+    }
+
+    [WebMethod(EnableSession = true)]       // WebMethod phải bật Session mới đọc được quyền
+    public static string XoaPhieu(int id)
+    {
+        if (!Auth.Has("PHIEUCHI.DELETE")) return "NOPERM";
+        // ... xóa
+        return "OK";
+    }
+}
+
+
+

@@ -382,10 +382,13 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Hethong\Nguoidung.aspx" />
+    <Content Include="Hethong\Phanquyen.aspx" />
     <Content Include="Inbarcode.aspx" />
     <Content Include="index.html" />
     <Content Include="index2.html" />
     <Content Include="invoice.html" />
+    <Content Include="KhongCoQuyen.aspx" />
     <Content Include="konvaltest.aspx" />
     <Content Include="konvatest2.aspx" />
     <Content Include="MakeQR.aspx" />
@@ -2580,6 +2583,10 @@
     <Compile Include="Accounts\Loginnew.aspx.designer.cs">
       <DependentUpon>Loginnew.aspx</DependentUpon>
     </Compile>
+    <Compile Include="App_Code\Auth.cs" />
+    <Compile Include="App_Code\BasePage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="App_Code\DataConn.cs" />
     <Content Include="App_Code\Dataconnect.cs" />
     <Content Include="App_Data\DataConn.cs" />
@@ -2706,6 +2713,20 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Hethong\Nguoidung.aspx.cs">
+      <DependentUpon>Nguoidung.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Hethong\Nguoidung.aspx.designer.cs">
+      <DependentUpon>Nguoidung.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Hethong\Phanquyen.aspx.cs">
+      <DependentUpon>Phanquyen.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Hethong\Phanquyen.aspx.designer.cs">
+      <DependentUpon>Phanquyen.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Inbarcode.aspx.cs">
       <DependentUpon>Inbarcode.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2719,6 +2740,13 @@
     </Compile>
     <Compile Include="Index.aspx.designer.cs">
       <DependentUpon>Index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="KhongCoQuyen.aspx.cs">
+      <DependentUpon>KhongCoQuyen.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KhongCoQuyen.aspx.designer.cs">
+      <DependentUpon>KhongCoQuyen.aspx</DependentUpon>
     </Compile>
     <Compile Include="konvaltest.aspx.cs">
       <DependentUpon>konvaltest.aspx</DependentUpon>

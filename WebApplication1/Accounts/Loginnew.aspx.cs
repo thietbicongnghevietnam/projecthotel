@@ -17,9 +17,9 @@ namespace WebApplication1.Accounts
         {
             if (!IsPostBack)
             {
-                Session["username"] = null;
-                Session["password"] = null;
-                
+                //Session["username"] = null;
+                //Session["password"] = null;
+                Session.Clear();
             }
         }
         
@@ -41,12 +41,21 @@ namespace WebApplication1.Accounts
                 string User = null; string Role = null; string Pass = null;
                 if (dt.Rows.Count > 0)
                 {
+
+                    int userId = Convert.ToInt32(dt.Rows[0]["U_ID"]);
+
+                    Session["userid"] = userId;      // <-- THIẾU DÒNG NÀY  => truong hop clikc vao trang BasePage.cs (int) *** sẽ  bi logout
                     User = dt.Rows[0]["U_NAME"].ToString();
                     Pass = dt.Rows[0]["U_PASSWORD"].ToString();
                     Role = dt.Rows[0]["ROLE"].ToString();
                     Session["username"] = User;
                     Session["password"] = Pass;
                     Session["role"] = Role;
+
+
+                    Auth.LoadPermissions(userId);
+                    // Không lưu password vào Session nữa
+
                     if (Role == "order")
                     {
                         //Response.Redirect("~/PhieuOrder.aspx");

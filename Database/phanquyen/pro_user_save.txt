@@ -1,0 +1,84 @@
+USE DataNhaHang;
+GO
+IF OBJECT_ID('dbo.pro_user_save') IS NOT NULL
+    DROP PROCEDURE dbo.pro_user_save;
+GO
+CREATE PROCEDURE dbo.pro_user_save
+    @U_ID       INT,
+    @U_NAME     NVARCHAR(100),
+    @U_PASSWORD NVARCHAR(200),
+    @U_FULLNAME NVARCHAR(200),
+    @U_EMAIL    NVARCHAR(200),
+    @U_ACTIVE   CHAR(1),
+    @ROLE_IDS   VARCHAR(500)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    SET XACT_ABORT ON;
+
+    /* Trùng tên đăng nhập */
+    IF EXISTS (SELECT 1 FROM dbo.TBL_USER2 WHERE U_NAME = @U_NAME AND U_ID <> @U_ID)
+    BEGIN
+        SELECT 'DUP' AS RESULT, @U_ID AS U_ID;
+        RETURN;
+    END
+
+    /* Danh sách nhóm quyền được chọn */
+    DECLARE @roles TABLE (ROLE_ID INT PRIMARY KEY, ROLE_CODE VARCHAR(50));
+    INSERT @roles (ROLE_ID, ROLE_CODE)
+    SELECT r.ROLE_ID, r.ROLE_CODE
+    FROM dbo.TBL_ROLE r
+    WHERE CHARINDEX(',' + CAST(r.ROLE_ID AS VARCHAR(10)) + ',',
+                    ',' + REPLACE(ISNULL(@ROLE_IDS, ''), ' ', '') + ',') > 0;
+
+    /* Suy ra cột ROLE cũ (trang login vẫn dùng) */
+    DECLARE @LEGACY_ROLE VARCHAR(20);
+    SET @LEGACY_ROLE =
+        CASE WHEN EXISTS (SELECT 1 FROM @roles WHERE ROLE_CODE = 'ADMIN') THEN 'admin'
+             WHEN EXISTS (SELECT 1 FROM @roles WHERE ROLE_CODE = 'NV')    THEN 'NV'
+             WHEN EXISTS (SELECT 1 FROM @roles WHERE ROLE_CODE = 'ORDER') THEN 'order'
+             ELSE 'NV' END;
+
+    BEGIN TRAN;
+
+    IF @U_ID = 0
+    BEGIN
+        INSERT dbo.TBL_USER2 (U_NAME, U_PASSWORD, U_FULLNAME, U_EMAIL, U_ACTIVE, ROLE)
+        VALUES (@U_NAME, @U_PASSWORD, @U_FULLNAME, @U_EMAIL, @U_ACTIVE, @LEGACY_ROLE);
+
+        SET @U_ID = SCOPE_IDENTITY();
+    END
+    ELSE
+    BEGIN
+        UPDATE dbo.TBL_USER2
+        SET U_NAME     = @U_NAME,
+            U_PASSWORD = CASE WHEN ISNULL(@U_PASSWORD, '') = '' THEN U_PASSWORD ELSE @U_PASSWORD END,
+            U_FULLNAME = @U_FULLNAME,
+            U_EMAIL    = @U_EMAIL,
+            U_ACTIVE   = @U_ACTIVE,
+            ROLE       = @LEGACY_ROLE
+        WHERE U_ID = @U_ID;
+    END
+
+    /* Ghi lại nhóm quyền */
+    DELETE dbo.TBL_USER_ROLE WHERE U_ID = @U_ID;
+    INSERT dbo.TBL_USER_ROLE (U_ID, ROLE_ID)
+    SELECT @U_ID, ROLE_ID FROM @roles;
+
+    /* Phải còn ít nhất 1 ADMIN đang hoạt động */
+    IF NOT EXISTS (
+        SELECT 1
+        FROM dbo.TBL_USER2 u
+        JOIN dbo.TBL_USER_ROLE ur ON ur.U_ID = u.U_ID
+        JOIN dbo.TBL_ROLE r       ON r.ROLE_ID = ur.ROLE_ID
+        WHERE r.ROLE_CODE = 'ADMIN' AND r.IS_ACTIVE = 1 AND u.U_ACTIVE = 'Y')
+    BEGIN
+        ROLLBACK;
+        SELECT 'NOADMIN' AS RESULT, @U_ID AS U_ID;
+        RETURN;
+    END
+
+    COMMIT;
+    SELECT 'OK' AS RESULT, @U_ID AS U_ID;
+END
+GO
